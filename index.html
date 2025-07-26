@@ -1,259 +1,1061 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Animated Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>RSMK - Creative Developer</title>
+    <!-- Google Fonts: Inter for clean body, Orbitron for bold headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        /* Basic Reset & Global Styles */
+        :root {
+            --bg-primary: #0d1117; /* Deep dark blue-grey */
+            --bg-secondary: #161b22; /* Slightly lighter dark for cards/sections */
+            --text-primary: #f0f6fc; /* Off-white */
+            --text-muted: #8b949e; /* Grey for secondary text */
+            --accent-color: #00bcd4; /* Vibrant Cyan */
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0f172a; /* slate-900 */
-            color: #e2e8f0; /* slate-200 */
-            overflow-x: hidden;
-            position: relative;
+            font-family: var(--font-body);
+            background-color: var(--bg-primary); /* Fallback/initial background */
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            position: relative; /* For canvas z-index context */
+            cursor: none; /* Hide default cursor */
+        }
+
+        /* Full-screen Canvas for Dynamic Background */
+        #full-background-canvas {
+            position: fixed; /* Fixed to viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind all content */
+            pointer-events: none; /* Allow clicks to pass through */
         }
 
         .container {
             max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative; /* For z-index context of content */
+            z-index: 1; /* Ensure content is above canvas */
         }
 
-        /* Hero Section Specifics */
-        .hero-bg {
-            background-image: linear-gradient(to right top, #0f172a, #1a2035, #222940, #2a334c, #323d59);
+        section {
+            padding: 100px 20px; /* More generous padding */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background-color: transparent; /* Make transparent to show canvas */
+            margin-bottom: 0; /* No margin between sections */
+            border-radius: 0; /* No border radius for sections */
+            box-shadow: none; /* No shadow for sections */
         }
 
-        .animated-text {
-            display: inline-block;
+        /* Ensure sections don't have alternating backgrounds */
+        section:nth-child(even) {
+            background-color: transparent;
         }
 
-        /* Project Card Styling */
-        .project-card {
-            background-color: #1e293b; /* slate-800 */
-            transition: all 0.3s ease-in-out;
-            border-radius: 0.75rem; /* rounded-xl */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 4.5em; /* Larger headline */
+            margin-bottom: 25px;
+            line-height: 1.1;
+            font-weight: 900; /* Extra bold */
+        }
+
+        h2 {
+            font-size: 3em;
+            margin-bottom: 50px; /* More spacing */
+            font-weight: 700;
+            color: var(--text-primary); /* Section titles in primary text color */
+        }
+
+        h3 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: var(--text-muted); /* Muted text for paragraphs */
+        }
+
+        /* Accent Button Styling */
+        .accent-button {
+            background: none;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 14px 30px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth easing */
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            cursor: none; /* Hide default cursor on button */
+        }
+
+        .accent-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.3), transparent);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .accent-button:hover {
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px var(--accent-color), 0 0 40px rgba(0, 188, 212, 0.5);
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .accent-button:hover::before {
+            left: 100%;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(13, 17, 23, 0.9); /* Slightly transparent */
+            padding: 18px 0; /* More padding */
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-family: var(--font-heading);
+            font-size: 2em;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+            cursor: none; /* Hide default cursor on logo */
+        }
+
+        .navbar .logo:hover {
+            color: var(--text-primary);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 40px; /* More spacing */
+        }
+
+        .navbar ul li a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 400;
+            position: relative;
+            transition: color 0.3s ease;
+            cursor: none; /* Hide default cursor on nav links */
+        }
+
+        .navbar ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .navbar ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .navbar ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background-color: transparent; /* Let canvas handle background */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            box-shadow: none; /* No shadow for hero section */
+            margin-bottom: 0; /* No margin for hero section */
+        }
+
+        #hero .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #hero h1 {
+            font-size: 5em; /* Even larger */
+            line-height: 1;
+            margin-bottom: 20px;
+            color: var(--text-primary); /* White for headline */
+            font-weight: 900;
+            text-shadow: 0 0 15px rgba(0, 188, 212, 0.3); /* Subtle accent glow */
+        }
+
+        #hero h1 span {
+            display: inline-block; /* For character animation */
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        #hero .subtitle {
+            font-size: 1.6em;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(20px);
+        }
+
+        /* Section Content Backgrounds (to make them semi-transparent) */
+        #about .about-content,
+        .project-card,
+        .skill-item,
+        #contact .contact-form {
+            background: rgba(22, 27, 34, 0.7); /* Slightly transparent secondary background */
+            border-radius: 15px; /* Maintain rounded corners */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Maintain shadow */
+            border: 1px solid rgba(0, 188, 212, 0.1); /* Maintain subtle accent border */
+        }
+
+        #about .about-image {
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #about .about-image img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 15px; /* Softer corners */
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 30px rgba(0, 188, 212, 0.4); /* Accent color glow */
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        #about .about-image img:hover {
+            transform: scale(1.03);
+        }
+
+        #about .about-content {
+            flex: 2;
+            min-width: 320px;
+            max-width: 700px;
+            text-align: left;
+            padding: 40px; /* Added padding to content box */
+        }
+
+        #about .about-content p {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+
+        #about .about-content ul {
+            list-style: none;
+            padding-left: 0; /* Remove default padding */
+        }
+
+        #about .about-content ul li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 30px;
+            color: var(--text-primary);
+            font-size: 1.05em;
+        }
+
+        #about .about-content ul li::before {
+            content: '\2022'; /* Bullet point */
+            color: var(--accent-color);
+            font-size: 1.5em; /* Larger bullet */
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+
+        /* Projects Section */
+        #projects .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px; /* More gap */
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .project-card {
+            padding: 30px; /* More padding */
+            text-align: left;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
         }
 
         .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 20px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 188, 212, 0.5); /* Stronger shadow and accent glow */
         }
 
         .project-card img {
             width: 100%;
-            height: 200px;
+            height: 220px; /* Slightly taller */
             object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 188, 212, 0.2);
         }
 
-        /* Button Styling */
-        .btn-primary {
-            background-color: #3b82f6; /* blue-500 */
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px; /* rounded-full */
-            transition: all 0.3s ease-in-out;
+        .project-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 12px;
         }
 
-        .btn-primary:hover {
-            background-color: #2563eb; /* blue-600 */
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        .project-card p {
+            font-size: 1em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
         }
 
-        /* Navbar active state (for smooth scroll) */
-        .nav-link.active {
-            color: #3b82f6; /* blue-500 */
-            font-weight: 600;
+        .project-card .tools-used {
+            font-style: normal; /* Not italic */
+            font-size: 0.9em;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            font-weight: 500;
         }
 
-        /* Scroll indicator (optional, if you want to add it later) */
-        #scroll-progress {
+        .project-card .accent-button {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        /* Skills Section */
+        #skills .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px; /* More gap */
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .skill-item {
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 188, 212, 0.3);
+        }
+
+        .skill-item h3 {
+            font-size: 1.6em;
+            color: var(--text-primary); /* Skill title in primary text color */
+            margin-bottom: 15px;
+        }
+
+        .skill-item p {
+            font-size: 1em;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .skill-item .progress-bar {
+            background-color: #333;
+            border-radius: 5px;
+            height: 12px; /* Thinner progress bar */
+            overflow: hidden;
+            margin-top: 10px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-item .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #007bff, var(--accent-color)); /* Blue to Cyan gradient */
+            border-radius: 5px;
+            width: 0%;
+            animation: fillProgress 1.5s ease-out forwards;
+        }
+
+        /* Example progress bar widths (adjust as needed) */
+        .skill-item[data-progress="90"] .progress { width: 90%; }
+        .skill-item[data-progress="85"] .progress { width: 85%; }
+        .skill-item[data-progress="80"] .progress { width: 80%; }
+        .skill-item[data-progress="75"] .progress { width: 75%; }
+        .skill-item[data-progress="70"] .progress { width: 70%; }
+        .skill-item[data-progress="60"] .progress { width: 60%; }
+
+        @keyframes fillProgress {
+            from { width: 0%; }
+            to { width: var(--progress-width); }
+        }
+
+        /* Contact Me Section */
+        #contact .contact-content {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        #contact .social-icons {
+            margin-top: 40px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 40px; /* More gap */
+        }
+
+        #contact .social-icons a {
+            color: var(--text-muted); /* Muted initial color */
+            font-size: 3em; /* Larger icons */
+            transition: color 0.3s ease, transform 0.3s ease;
+            cursor: none; /* Hide default cursor on social icons */
+        }
+
+        #contact .social-icons a:hover {
+            color: var(--accent-color);
+            transform: scale(1.15);
+        }
+
+        #contact .contact-form {
+            padding: 50px; /* More padding */
+        }
+
+        #contact .contact-form input,
+        #contact .contact-form textarea {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 18px; /* More padding */
+            font-size: 1.05em;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: none; /* Hide default cursor on form inputs */
+        }
+
+        #contact .contact-form input:focus,
+        #contact .contact-form textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+        #contact .contact-form textarea {
+            resize: vertical;
+            min-height: 150px; /* Taller textarea */
+        }
+
+        #contact .contact-form .accent-button {
+            align-self: center;
+            margin-top: 30px;
+        }
+
+        /* Pre-loader */
+        #preloader {
             position: fixed;
             top: 0;
             left: 0;
-            width: 0%;
-            height: 4px;
-            background-color: #3b82f6; /* blue-500 */
-            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader {
+            border: 8px solid #333;
+            border-top: 8px solid var(--accent-color);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* New Scroll Animation for Section Titles */
+        .section-title-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .section-title-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 4em;
+            }
+            h2 {
+                font-size: 2.5em;
+            }
+            #hero .subtitle {
+                font-size: 1.4em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.2em;
+            }
+
+            h2 {
+                font-size: 2.2em;
+            }
+
+            section {
+                padding: 80px 15px;
+            }
+
+            .navbar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 15px;
+            }
+
+            .navbar ul li {
+                margin-left: 0;
+            }
+
+            #hero h1 {
+                font-size: 3.5em;
+            }
+
+            #hero .subtitle {
+                font-size: 1.2em;
+            }
+
+            #about {
+                flex-direction: column;
+                text-align: center;
+                gap: 50px;
+            }
+
+            #about .about-content {
+                text-align: center;
+            }
+
+            #about .about-content ul li {
+                text-align: left;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 90%;
+            }
+
+            .project-card, .skill-item {
+                padding: 25px;
+            }
+
+            #contact .social-icons {
+                gap: 30px;
+            }
+
+            #contact .contact-form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            section {
+                padding: 60px 10px;
+            }
+
+            #hero h1 {
+                font-size: 2.8em;
+            }
+
+            #hero .subtitle {
+                font-size: 1em;
+            }
+
+            .accent-button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .project-card img {
+                height: 180px;
+            }
+
+            #contact .social-icons a {
+                font-size: 2.2em;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-200">
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
 
-    <div id="scroll-progress"></div>
+    <!-- Full-screen Canvas for Dynamic Background -->
+    <canvas id="full-background-canvas"></canvas>
 
-    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900 bg-opacity-90 backdrop-filter backdrop-blur-sm shadow-lg py-4">
-        <nav class="container mx-auto flex justify-between items-center px-6">
-            <a href="#hero" class="text-2xl font-bold text-blue-500 hover:text-blue-400 transition duration-300">Your Name</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="nav-link text-lg text-slate-200 hover:text-blue-400 transition duration-300">About Me</a>
-                <a href="#projects" class="nav-link text-lg text-slate-200 hover:text-blue-400 transition duration-300">Projects</a>
-                <a href="#contact" class="nav-link text-lg text-slate-200 hover:text-blue-400 transition duration-300">Contact</a>
-                <a href="https://example.com/your-resume.pdf" target="_blank" class="nav-link text-lg text-blue-500 hover:text-blue-400 transition duration-300">Resume <i class="fas fa-download ml-1"></i></a>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden text-slate-200 text-2xl focus:outline-none">
-                <i class="fas fa-bars"></i>
-            </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 pt-4 pb-2 text-center">
-            <a href="#about" class="nav-link block py-2 text-lg text-slate-200 hover:bg-slate-700 transition duration-300">About Me</a>
-            <a href="#projects" class="nav-link block py-2 text-lg text-slate-200 hover:bg-slate-700 transition duration-300">Projects</a>
-            <a href="#contact" class="nav-link block py-2 text-lg text-slate-200 hover:bg-slate-700 transition duration-300">Contact</a>
-            <a href="https://example.com/your-resume.pdf" target="_blank" class="nav-link block py-2 text-lg text-blue-500 hover:bg-slate-700 transition duration-300">Resume <i class="fas fa-download ml-1"></i></a>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#hero" class="logo">RSMK</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
-    <section id="hero" class="hero-bg min-h-screen flex items-center justify-center text-center px-6 pt-24 pb-12">
-        <div class="container mx-auto">
-            <p class="text-xl text-slate-300 mb-4 animate__animated animate__fadeInUp animate__delay-0.5s">Hello, I'm</p>
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4">
-                <span class="animated-text">Your Name.</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-300 mb-8 animate__animated animate__fadeInUp animate__delay-1s">
-                A passionate Electrical & Electronics Engineer specializing in
-                <br><span id="typed-text" class="text-blue-400 font-semibold"></span>
-            </p>
-            <a href="#projects" class="btn-primary inline-block animate__animated animate__fadeInUp animate__delay-1.5s">View My Work</a>
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1 id="hero-headline">Creative Developer</h1>
+            <p class="subtitle" id="hero-subtitle">Building captivating web experiences with code and creativity.</p>
+            <a href="#projects" class="accent-button" data-aos="fade-up" data-aos-delay="1500">View My Work</a>
         </div>
     </section>
 
-    <section id="about" class="py-16 md:py-24 bg-slate-900 px-6">
-        <div class="container mx-auto opacity-0 translate-y-8 section-reveal">
-            <h2 class="text-4xl font-bold text-center text-blue-500 mb-12">About Me</h2>
-            <div class="flex flex-col md:flex-row items-center md:space-x-12">
-                <div class="md:w-1/3 mb-8 md:mb-0">
-                    <img src="https://placehold.co/400x400/1e293b/e2e8f0?text=Your+Photo" alt="Your Name" class="rounded-full w-64 h-64 mx-auto object-cover border-4 border-blue-500 shadow-lg">
-                </div>
-                <div class="md:w-2/3 text-lg leading-relaxed text-slate-300">
-                    <p class="mb-4">
-                        I am an enthusiastic Electrical & Electronics Engineer with a strong foundation in **Green Energy, Smart Systems, IoT, and Embedded Systems**. I graduated from [Your College Name] in [Your Graduation Year or Current Year] with a degree in Electrical & Electronics Engineering.
-                    </p>
-                    <p class="mb-4">
-                        My journey into EEE was driven by a fascination with how technology can interact with the physical world and create intelligent solutions. I'm particularly passionate about designing and implementing systems that are both innovative and sustainable.
-                    </p>
-                    <p class="mb-4">
-                        I thrive on hands-on projects, from prototyping with Arduino and ESP8266 to delving into C and Python for software development. I am constantly learning and exploring new technologies to build efficient and impactful systems.
-                    </p>
-                    <ul class="list-disc list-inside text-slate-300">
-                        <li>**Education:** [Your College Name], [Branch], [Year]</li>
-                        <li>**Interests:** Green Energy, Smart Systems, IoT, Embedded Systems</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- About Me Section -->
+    <section id="about">
+        <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
+            <img src="https://placehold.co/350x350/00bcd4/161b22?text=Your+Avatar" alt="RSMK's Avatar">
+        </div>
+        <div class="about-content"> <!-- Removed data-aos from content wrapper, now handled by inner elements -->
+            <h2 class="section-title">About Me</h2>
+            <p data-aos="fade-up" data-aos-delay="100">I am currently pursuing my B.Tech in Electrical and Electronics Engineering at Andhra Loyola Institute of Engineering and Technology. My academic journey is driven by a deep curiosity for how technology can solve real-world problems.</p>
+            <p data-aos="fade-up" data-aos-delay="200">My interests include:</p>
+            <ul data-aos="fade-up" data-aos-delay="300">
+                <li>Green Technology & Smart Energy</li>
+                <li>Embedded Systems and IoT</li>
+                <li>Automation & Control</li>
+                <li>AI-based Telegram Bots</li>
+                <li>Simulation tools like MATLAB/Simulink</li>
+                <li>3D Design using Blender</li>
+            </ul>
+            <p data-aos="fade-up" data-aos-delay="400">I thrive on learning new technologies and applying them to build innovative solutions, constantly pushing the boundaries of what's possible in the EEE domain and beyond.</p>
         </div>
     </section>
 
-    <section id="projects" class="py-16 md:py-24 bg-slate-800 px-6">
-        <div class="container mx-auto opacity-0 translate-y-8 section-reveal">
-            <h2 class="text-4xl font-bold text-center text-blue-500 mb-12">My Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="project-card">
-                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=Smart+Exhaust" alt="Smart Exhaust System">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-blue-300 mb-3">Smart Exhaust System using MQ2</h3>
-                        <p class="text-slate-400 mb-4">An intelligent system designed to monitor and control vehicle exhaust emissions, ensuring cleaner air and compliance.</p>
-                        <div class="flex flex-wrap gap-2 text-sm text-slate-500 mb-4">
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">Arduino UNO</span>
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">MQ2 Sensor</span>
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">Relay</span>
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">Servo Motor</span>
-                        </div>
-                        <div class="flex justify-between items-center mt-4">
-                            <a href="https://github.com/YourUsername/smart-exhaust" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fab fa-github mr-1"></i> GitHub</a>
-                            <a href="https://example.com/smart-exhaust-demo.mp4" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fas fa-video mr-1"></i> Demo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=Smart+Home" alt="IoT Smart Home Automation">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-blue-300 mb-3">IoT-based Smart Home Automation</h3>
-                        <p class="text-slate-400 mb-4">Automate home appliances with a user-friendly interface, enhancing convenience and energy efficiency.</p>
-                        <div class="flex flex-wrap gap-2 text-sm text-slate-500 mb-4">
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">ESP8266</span>
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">Relays</span>
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">Blynk App</span>
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">Sensors</span>
-                        </div>
-                        <div class="flex justify-between items-center mt-4">
-                            <a href="https://github.com/YourUsername/smart-home-iot" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fab fa-github mr-1"></i> GitHub</a>
-                            <a href="https://example.com/smart-home-demo.mp4" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fas fa-video mr-1"></i> Demo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=Solar+Monitoring" alt="Solar Power Monitoring">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-blue-300 mb-3">Solar Power Monitoring System</h3>
-                        <p class="text-slate-400 mb-4">Real-time monitoring of solar panel performance and energy generation for optimal efficiency.</p>
-                        <div class="flex flex-wrap gap-2 text-sm text-slate-500 mb-4">
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">Arduino Mega</span>
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">Voltage/Current Sensors</span>
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">LCD Display</span>
-                            <span class="px-3 py-1 bg-slate-700 rounded-full">Data Logging</span>
-                        </div>
-                        <div class="flex justify-between items-center mt-4">
-                            <a href="https://github.com/YourUsername/solar-monitoring" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fab fa-github mr-1"></i> GitHub</a>
-                            <a href="https://example.com/solar-monitoring-demo.mp4" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fas fa-video mr-1"></i> Demo</a>
-                        </div>
-                    </div>
-                </div>
-
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="project-grid">
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Exhaust+Fan" alt="Autonomous Exhaust Fan">
+                <h3>Autonomous Exhaust Fan</h3>
+                <p>An intelligent exhaust fan system designed to automatically detect air quality and activate, ensuring a healthier environment.</p>
+                <p class="tools-used">Arduino, MQ-2 Gas Sensor, Timer Module</p>
+                <a href="#" class="accent-button">View Project</a>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Traffic+Light" alt="Traffic Light Simulation">
+                <h3>Traffic Light Simulation</h3>
+                <p>A hands-on simulation demonstrating the sequential operation of traffic lights using basic electronic components.</p>
+                <p class="tools-used">Breadboard, LEDs, Resistors, Manual Control</p>
+                <a href="#" class="accent-button">View Project</a>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Smart+Grid" alt="Smart Energy Grid Concept">
+                <h3>Smart Energy Grid Concept</h3>
+                <p>A conceptual research project exploring the principles and benefits of a decentralized, efficient smart energy distribution system.</p>
+                <p class="tools-used">Simulation/Research, Conceptual Design</p>
+                <a href="#" class="accent-button">View Project</a>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Telegram+Bots" alt="Telegram Bots">
+                <h3>Telegram Bots</h3>
+                <p>Developed various utility bots for Telegram, including a reminder bot, a language translator, and a basic conversational chatbot.</p>
+                <p class="tools-used">Python, Telegram Bot API, APIs</p>
+                <a href="#" class="accent-button">View Project</a>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="500">
+                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Community+Work" alt="Community Service Work">
+                <h3>Community Service Work</h3>
+                <p>Conducted surveys and implemented practical solutions for local issues in Murapaka village as part of community outreach.</p>
+                <p class="tools-used">Survey Methodology, Problem Solving, Community Engagement</p>
+                <a href="#" class="accent-button">View Project</a>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="600">
+                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Blender+Designs" alt="Blender Designs">
+                <h3>Blender Designs</h3>
+                <p>A collection of 3D models and renders created using Blender, showcasing skills in digital design and visualization.</p>
+                <p class="tools-used">Blender (3D Modeling, Rendering)</p>
+                <a href="#" class="accent-button">View Project</a>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-16 md:py-24 bg-slate-900 px-6">
-        <div class="container mx-auto opacity-0 translate-y-8 section-reveal">
-            <h2 class="text-4xl font-bold text-center text-blue-500 mb-12">Get in Touch</h2>
-            <div class="max-w-xl mx-auto bg-slate-800 p-8 rounded-xl shadow-lg">
-                <p class="text-lg text-slate-300 text-center mb-6">
-                    Have a question or want to collaborate? Feel free to reach out!
-                </p>
-                <form action="https://formspree.io/f/YourFormspreeEndpoint" method="POST" class="space-y-6">
-                    <div>
-                        <label for="name" class="block text-slate-300 text-sm font-bold mb-2">Name</label>
-                        <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-3 px-4 text-slate-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-700 border-slate-600 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-slate-300 text-sm font-bold mb-2">Email</label>
-                        <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-3 px-4 text-slate-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-700 border-slate-600 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="message" class="block text-slate-300 text-sm font-bold mb-2">Message</label>
-                        <textarea id="message" name="message" rows="6" required class="shadow appearance-none border rounded w-full py-3 px-4 text-slate-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-700 border-slate-600 focus:border-blue-500"></textarea>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn-primary">Send Message</button>
-                    </div>
-                </form>
-                <div class="flex justify-center space-x-6 mt-8">
-                    <a href="https://linkedin.com/in/YourLinkedIn" target="_blank" class="text-blue-400 hover:text-blue-300 text-3xl transition duration-300" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/YourGitHub" target="_blank" class="text-blue-400 hover:text-blue-300 text-3xl transition duration-300" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="mailto:your.email@example.com" class="text-blue-400 hover:text-blue-300 text-3xl transition duration-300" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                    <a href="https://t.me/YourTelegram" target="_blank" class="text-blue-400 hover:text-blue-300 text-3xl transition duration-300" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
-                </div>
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-item" data-aos="fade-right" data-aos-delay="100" data-progress="90">
+                <h3>Embedded Systems & Programming</h3>
+                <p>Arduino, ESP8266, Python, C</p>
+                <div class="progress-bar"><div class="progress"></div></div>
+            </div>
+            <div class="skill-item" data-aos="fade-right" data-aos-delay="200" data-progress="85">
+                <h3>Simulation & Design</h3>
+                <p>MATLAB, Simulink, Fritzing, Tinkercad</p>
+                <div class="progress-bar"><div class="progress"></div></div>
+            </div>
+            <div class="skill-item" data-aos="fade-right" data-aos-delay="300" data-progress="80">
+                <h3>Web Technologies</h3>
+                <p>HTML, CSS, JavaScript</p>
+                <div class="progress-bar"><div class="progress"></div></div>
+            </div>
+            <div class="skill-item" data-aos="fade-left" data-aos-delay="400" data-progress="75">
+                <h3>AI & Automation</h3>
+                <p>APIs, IoT, Telegram Bot API</p>
+                <div class="progress-bar"><div class="progress"></div></div>
+            </div>
+            <div class="skill-item" data-aos="fade-left" data-aos-delay="500" data-progress="70">
+                <h3>3D Modeling</h3>
+                <p>Blender</p>
+                <div class="progress-bar"><div class="progress"></div></div>
+            </div>
+            <div class="skill-item" data-aos="fade-left" data-aos-delay="600" data-progress="60">
+                <h3>Problem Solving</h3>
+                <p>Analytical Thinking, Troubleshooting</p>
+                <div class="progress-bar"><div class="progress"></div></div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-950 py-8 text-center text-slate-400 text-sm">
-        <div class="container mx-auto px-6">
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
-            <p class="mt-2">Designed with <i class="fas fa-heart text-red-500"></i> by Your Name</p>
+    <!-- Contact Me Section -->
+    <section id="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-content">
+            <p data-aos="fade-up" data-aos-delay="100">Feel free to reach out for collaborations, project discussions, or just to say hello!</p>
+            <div class="social-icons" data-aos="fade-up" data-aos-delay="200">
+                <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://t.me/yourtelegram" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                <a href="mailto:your.email@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <form class="contact-form" action="#" method="POST" data-aos="fade-up" data-aos-delay="300">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="accent-button">Send Message</button>
+            </form>
         </div>
+    </section>
+
+    <!-- Footer (simple) -->
+    <footer style="background-color: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9em; border-top: 1px solid rgba(0, 188, 212, 0.1);">
+        <p>&copy; 2025 RSMK. All rights reserved.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <!-- AOS JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Smooth scrolling for navigation links
+        // Initialize AOS
+        AOS.init({
+            once: true, // animations once
+            duration: 900, // animation duration
+            easing: 'ease-out-cubic', // easing for animations
+            delay: 100, // global delay
+        });
+
+        // Preloader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500); // Hide after fade out
+            }
+
+            // Animate skill progress bars on load
+            document.querySelectorAll('.skill-item').forEach(item => {
+                const progressElement = item.querySelector('.progress');
+                const progressValue = item.getAttribute('data-progress');
+                if (progressElement && progressValue) {
+                    progressElement.style.setProperty('--progress-width', progressValue + '%');
+                }
+            });
+
+            // Start hero text animations after preloader
+            setTimeout(() => {
+                animateHeroText();
+                animateHeroSubtitle();
+            }, 700); // Delay slightly after preloader is gone
+        });
+
+        // Hero Headline Character Animation (Staggered)
+        function animateHeroText() {
+            const headlineElement = document.getElementById('hero-headline');
+            const text = headlineElement.textContent;
+            headlineElement.innerHTML = ''; // Clear content
+
+            let delay = 0;
+            for (let i = 0; i < text.length; i++) {
+                const charSpan = document.createElement('span');
+                charSpan.textContent = text[i];
+                charSpan.style.transition = `opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) ${delay}ms, transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) ${delay}ms`;
+                headlineElement.appendChild(charSpan);
+
+                // Trigger animation
+                setTimeout(() => {
+                    charSpan.style.opacity = '1';
+                    charSpan.style.transform = 'translateY(0)';
+                }, delay);
+
+                delay += 70; // Stagger delay for each character
+            }
+        }
+
+        // Hero Subtitle Staggered Reveal
+        function animateHeroSubtitle() {
+            const subtitleElement = document.getElementById('hero-subtitle');
+            subtitleElement.style.transition = `opacity 1s cubic-bezier(0.25, 0.8, 0.25, 1) 1000ms, transform 1s cubic-bezier(0.25, 0.8, 0.25, 1) 1000ms`; // Delay after headline
+            setTimeout(() => {
+                subtitleElement.style.opacity = '1';
+                subtitleElement.style.transform = 'translateY(0)';
+            }, 1000); // Start after headline animation begins
+        }
+
+
+        // Canvas Background Animation (Geometric Shapes) and Cursor Animation
+        const canvas = document.getElementById('full-background-canvas');
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+        let shapes = [];
+        const numShapes = 80; // Increased number of animated background shapes for more dynamism
+
+        let cursorParticles = []; // Array to store cursor trail particles
+        let mouse = { x: 0, y: 0 }; // Mouse position
+
+        // Resize canvas to fill window
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // Initial resize
+
+        // Shape class for background animation
+        class Shape {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 2; // Increased size range (2 to 7)
+                this.dx = (Math.random() - 0.5) * 0.8; // Slightly faster movement
+                this.dy = (Math.random() - 0.5) * 0.8;
+                this.opacity = Math.random() * 0.15 + 0.08; // Slightly more visible opacity
+                this.color = `rgba(0, 188, 212, ${this.opacity})`; // Accent color with varying opacity
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.01; // Slightly faster rotation
+                this.type = Math.floor(Math.random() * 3); // 0: circle, 1: square, 2: triangle
+            }
+
+            update() {
+                this.x += this.dx;
+                this.y += this.dy;
+                this.rotation += this.rotationSpeed;
+
+                // Wrap around edges
+                if (this.x < -this.size) this.x = canvas.width + this.size;
+                if (this.x > canvas.width + this.size) this.x = -this.size;
+                if (this.y < -this.size) this.y = canvas.height + this.size;
+                if (this.y > canvas.height + this.size) this.y = -this.size;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 1;
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+
+                switch (this.type) {
+                    case 0: // Circle
+                        ctx.beginPath();
+                        ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                        break;
+                    case 1: // Square
+                        ctx.fillRect(-this.size, -this.size, this.size * 2, this.size * 2);
+                        break;
+                    case 2: // Triangle
+                        ctx.beginPath();
+                        ctx.moveTo(0, -this.size * 1.2);
+                        ctx.lineTo(-this.size * 1.2, this.size * 0.8);
+                        ctx.lineTo(this.size * 1.2, this.size * 0.8);
+                        ctx.closePath();
+                        ctx.fill();
+                        break;
+                }
+                ctx.restore();
+            }
+        }
+
+        // Initialize background shapes
+        function initShapes() {
+            shapes = [];
+            for (let i = 0; i < numShapes; i++) {
+                shapes.push(new Shape());
+            }
+        }
+
+        // Mouse move event listener for cursor animation
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            // Add a new particle to the cursor trail
+            cursorParticles.push({
+                x: mouse.x,
+                y: mouse.y,
+                size: Math.random() * 3 + 2, // Larger initial size (2 to 5)
+                opacity: 1,
+                life: 90 // Longer particle lifespan in frames
+            });
+            // Limit the number of particles to prevent performance issues
+            if (cursorParticles.length > 200) { // Increased limit for more visible trail
+                cursorParticles.shift(); // Remove the oldest particle
+            }
+        });
+
+        // Animation loop for both background and cursor effects
+        function animateCanvas() {
+            // Clear canvas with a slight fade effect to create trails for background shapes
+            ctx.fillStyle = 'rgba(13, 17, 23, 0.03)'; // Even more subtle fade for background to make trails longer
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Update and draw background shapes
+            shapes.forEach(shape => {
+                shape.update();
+                shape.draw();
+            });
+
+            // Update and draw cursor particles
+            for (let i = 0; i < cursorParticles.length; i++) {
+                let p = cursorParticles[i];
+                p.life--;
+                p.opacity -= 1 / p.life; // Fade out based on remaining life
+                p.size *= 0.97; // Shrink slightly slower
+
+                if (p.life <= 0 || p.opacity <= 0 || p.size <= 0.1) {
+                    cursorParticles.splice(i, 1); // Remove dead particles
+                    i--; // Adjust index after removal
+                    continue;
+                }
+
+                ctx.fillStyle = `rgba(0, 188, 212, ${p.opacity})`; // Accent color for cursor particles
+                ctx.shadowBlur = p.size * 2; // Add glow effect based on size
+                ctx.shadowColor = `rgba(0, 188, 212, ${p.opacity * 0.8})`; // Glow color
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0; // Reset shadow for next draws
+            }
+
+            animationFrameId = requestAnimationFrame(animateCanvas);
+        }
+
+        // Start canvas animation when window loads
+        window.addEventListener('load', () => {
+            initShapes();
+            animateCanvas();
+        });
+
+        // Smooth scroll for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -261,175 +1063,35 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
-
-                // Close mobile menu if open
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
             });
         });
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Scroll-triggered animation for section titles (h2)
+        const sectionTitles = document.querySelectorAll('section h2');
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        const observerOptions = {
+            root: null, // viewport as root
+            rootMargin: '0px',
+            threshold: 0.3 // Trigger when 30% of the element is visible
+        };
 
-        // Hero Section Text Animation
-        anime.set('.animated-text', { opacity: 0 }); // Hide initially
-        anime.set('#typed-text', { opacity: 0 }); // Hide initially
-
-        anime.timeline({
-            easing: 'easeInOutQuad',
-            duration: 1200
-        })
-        .add({
-            targets: '.animated-text',
-            opacity: [0, 1],
-            translateX: [-50, 0],
-            delay: anime.stagger(100) // Stagger characters or words if needed
-        })
-        .add({
-            targets: '#typed-text',
-            opacity: [0, 1],
-            translateY: [20, 0],
-            duration: 800,
-            offset: '-=600' // Starts 600ms before previous animation ends
-        })
-        .add({
-            targets: '.btn-primary',
-            opacity: [0, 1],
-            translateY: [20, 0],
-            duration: 800,
-            offset: '-=400'
-        });
-
-        // Typed.js like effect for the subtitle
-        const typedTextElement = document.getElementById('typed-text');
-        const phrases = [
-            "Smart Systems",
-            "IoT Solutions",
-            "Embedded Systems",
-            "Green Energy Innovations"
-        ];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 100;
-
-        function typeWriter() {
-            const currentPhrase = phrases[phraseIndex];
-            if (isDeleting) {
-                typedTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typedTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let currentTypingSpeed = typingSpeed;
-            if (isDeleting) {
-                currentTypingSpeed /= 2; // Faster deletion
-            }
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                currentTypingSpeed = 1500; // Pause at end of phrase
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                currentTypingSpeed = 500; // Pause before typing next phrase
-            }
-
-            setTimeout(typeWriter, currentTypingSpeed);
-        }
-
-        // Start typewriter effect after hero section animation
-        setTimeout(() => {
-            typeWriter();
-        }, 1500); // Adjust delay to match hero animation
-
-        // Intersection Observer for section reveal animations
-        const sectionObserver = new IntersectionObserver((entries, observer) => {
+        const sectionTitleObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    anime({
-                        targets: entry.target,
-                        opacity: [0, 1],
-                        translateY: [50, 0],
-                        duration: 1000,
-                        easing: 'easeOutQuad',
-                        delay: 200 // Slightly delay the animation for each section
-                    });
-                    observer.unobserve(entry.target); // Unobserve once animated
+                    entry.target.classList.add('section-title-visible');
+                    entry.target.classList.remove('section-title-hidden'); // Ensure it's removed if present
+                } else {
+                    // Optional: remove class when out of view to re-animate on scroll back
+                    // entry.target.classList.remove('section-title-visible');
+                    // entry.target.classList.add('section-title-hidden');
                 }
             });
-        }, {
-            threshold: 0.2 // Trigger when 20% of the section is visible
+        }, observerOptions);
+
+        sectionTitles.forEach(title => {
+            title.classList.add('section-title-hidden'); // Add initial hidden class
+            sectionTitleObserver.observe(title);
         });
-
-        document.querySelectorAll('.section-reveal').forEach(section => {
-            sectionObserver.observe(section);
-        });
-
-        // Project Card Hover Animation
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                anime({
-                    targets: card,
-                    scale: 1.02,
-                    translateY: -8,
-                    boxShadow: '0 10px 15px rgba(0,0,0,0.2), 0 20px 25px rgba(0,0,0,0.3)',
-                    duration: 300,
-                    easing: 'easeOutQuad'
-                });
-            });
-
-            card.addEventListener('mouseleave', () => {
-                anime({
-                    targets: card,
-                    scale: 1,
-                    translateY: 0,
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1), 0 10px 15px rgba(0,0,0,0.2)',
-                    duration: 300,
-                    easing: 'easeOutQuad'
-                });
-            });
-        });
-
-        // Optional: Scroll progress bar
-        // window.addEventListener('scroll', () => {
-        //     const scrollTop = document.documentElement.scrollTop;
-        //     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        //     const scrolled = (scrollTop / scrollHeight) * 100;
-        //     document.getElementById('scroll-progress').style.width = scrolled + '%';
-        // });
-
-        // Navbar active link on scroll
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 100) { // Adjust offset as needed
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.href.includes(current)) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
     </script>
 </body>
 </html>
