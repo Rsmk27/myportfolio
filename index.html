@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSMK - Creative Developer</title>
+    <title>RSMK | Electrical & Electronics Engineering Student</title>
+    
     <meta name="description" content="RSMK's modern, minimalist portfolio showcasing creative development, electrical engineering projects, and AI innovations.">
     <meta name="keywords" content="RSMK, portfolio, web developer, electrical engineering, electronics, AI, embedded systems, green tech, smart energy, Python, HTML, CSS, JavaScript, Blender">
     <meta name="author" content="RSMK">
@@ -11,46 +12,54 @@
     <!-- Favicon -->
     <link rel="icon" href="https://placehold.co/32x32/00BFFF/0d1117?text=R" type="image/x-icon">
 
-    <!-- Google Fonts: Inter for clean body, Orbitron for bold headings -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- AOS for scroll animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <style>
-        /* Basic Reset & Global Styles */
+        /* Define CSS Variables for Theming */
         :root {
             --bg-primary: #0d1117; /* Deep dark blue-grey */
             --bg-secondary: #161b22; /* Slightly lighter dark for cards/sections */
             --text-primary: #f0f6fc; /* Off-white */
             --text-muted: #8b949e; /* Grey for secondary text */
             --accent-color: #00BFFF; /* Deep Sky Blue for dark mode */
-            --font-heading: 'Orbitron', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --section-bg-alpha: 0.7; /* Transparency for section content backgrounds */
+
+            /* RGB components for rgba() */
+            --bg-primary-rgb: 13, 17, 23;
+            --bg-secondary-rgb: 22, 27, 34;
+            --text-primary-rgb: 240, 246, 252;
+            --text-muted-rgb: 139, 148, 158;
+            --accent-color-rgb: 0, 191, 255;
+
+            --section-bg-alpha: 0.9; /* Decreased transparency */
         }
 
-        /* Light Mode Variables */
+        /* Light Mode Variables - Define alternative colors */
         body.light-mode {
             --bg-primary: #f0f6fc;
             --bg-secondary: #ffffff;
             --text-primary: #0d1117;
             --text-muted: #586069;
             --accent-color: #FF4500; /* Orange-Red for light mode */
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+            /* RGB components for rgba() */
+            --bg-primary-rgb: 240, 246, 252;
+            --bg-secondary-rgb: 255, 255, 255;
+            --text-primary-rgb: 13, 17, 23;
+            --text-muted-rgb: 88, 96, 105;
+            --accent-color-rgb: 255, 69, 0;
 
-        html {
-            scroll-behavior: smooth;
+            --section-bg-alpha: 0.95; /* Decreased transparency for light mode */
         }
 
         body {
-            font-family: var(--font-body);
+            font-family: 'Poppins', sans-serif;
             background-color: var(--bg-primary); /* Fallback/initial background */
             color: var(--text-primary);
             line-height: 1.6;
@@ -58,6 +67,9 @@
             position: relative; /* For canvas z-index context */
             cursor: none; /* Hide default cursor */
             transition: background-color 0.5s ease; /* Smooth theme transition */
+        }
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
         }
 
         /* Full-screen Canvas for Dynamic Background */
@@ -80,7 +92,7 @@
         }
 
         section {
-            padding: 100px 20px; /* More generous padding */
+            padding: 100px 20px; /* Generous padding for content inside */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -88,19 +100,15 @@
             align-items: center;
             text-align: center;
             position: relative;
-            background-color: transparent; /* Make transparent to show canvas */
+            background-color: transparent; /* Make section itself transparent */
             margin-bottom: 0; /* No margin between sections */
             border-radius: 0; /* No border radius for sections */
             box-shadow: none; /* No shadow for sections */
-        }
-
-        /* Ensure sections don't have alternating backgrounds */
-        section:nth-child(even) {
-            background-color: transparent;
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
         }
 
         h1, h2, h3 {
-            font-family: var(--font-heading);
+            font-family: var(--font-orbitron);
             color: var(--accent-color);
             margin-bottom: 20px;
             letter-spacing: 1px;
@@ -160,17 +168,13 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.3), transparent); /* Dark mode gradient */
+            background: linear-gradient(90deg, transparent, rgba(var(--accent-color-rgb), 0.3), transparent); /* Dynamic gradient */
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        body.light-mode .accent-button::before {
-            background: linear-gradient(90deg, transparent, rgba(255, 69, 0, 0.3), transparent); /* Light mode gradient */
         }
 
         .accent-button:hover {
             color: var(--bg-primary);
-            box-shadow: 0 0 20px var(--accent-color), 0 0 40px rgba(0, 191, 255, 0.5);
+            box-shadow: 0 0 20px var(--accent-color), 0 0 40px rgba(var(--accent-color-rgb), 0.5);
             background-color: var(--accent-color);
             border-color: var(--accent-color);
         }
@@ -181,7 +185,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(13, 17, 23, 0.9); /* Slightly transparent */
+            background-color: rgba(var(--bg-primary-rgb), 0.9); /* Slightly transparent */
             padding: 18px 0; /* More padding */
             z-index: 1000;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -189,7 +193,7 @@
         }
 
         body.light-mode .navbar {
-            background-color: rgba(240, 246, 252, 0.9);
+            background-color: rgba(var(--bg-primary-rgb), 0.9);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
@@ -200,7 +204,7 @@
         }
 
         .navbar .logo {
-            font-family: var(--font-heading);
+            font-family: var(--font-orbitron);
             font-size: 2em;
             color: var(--accent-color);
             text-decoration: none;
@@ -279,11 +283,7 @@
             margin-bottom: 20px;
             color: var(--text-primary); /* White for headline */
             font-weight: 900;
-            text-shadow: 0 0 15px rgba(0, 191, 255, 0.3); /* Subtle accent glow */
-        }
-
-        body.light-mode #hero h1 {
-            text-shadow: 0 0 15px rgba(255, 69, 0, 0.3);
+            text-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.3); /* Subtle accent glow */
         }
 
         #hero h1 span {
@@ -303,26 +303,56 @@
             transform: translateY(20px);
         }
 
-        /* Section Content Backgrounds (to make them semi-transparent) */
-        #about .about-content,
-        .project-card,
-        .skill-item,
-        #contact .contact-form {
-            background: rgba(22, 27, 34, var(--section-bg-alpha)); /* Slightly transparent secondary background */
-            border-radius: 15px; /* Maintain rounded corners */
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Maintain shadow */
-            border: 1px solid rgba(0, 191, 255, 0.1); /* Maintain subtle accent border */
+        /* Section Content Backgrounds (applied to inner containers) */
+        #about .about-content {
+            background: rgba(var(--bg-secondary-rgb), var(--section-bg-alpha)); /* Semi-transparent secondary background */
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--accent-color-rgb), 0.1); /* Subtle accent border */
             transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+            padding: 40px; /* Added padding to content box */
         }
 
-        body.light-mode #about .about-content,
+        .project-card {
+            background: rgba(var(--bg-primary-rgb), var(--section-bg-alpha)); /* Semi-transparent primary background */
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--accent-color-rgb), 0.1);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.5s ease, border-color 0.5s ease;
+            padding: 30px; /* Ensure padding is here */
+        }
+
+        .skill-item {
+            background: rgba(var(--bg-primary-rgb), var(--section-bg-alpha)); /* Semi-transparent primary background */
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--accent-color-rgb), 0.1);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.5s ease, border-color 0.5s ease;
+            padding: 30px; /* Ensure padding is here */
+        }
+
+        #contact .contact-form {
+            background: rgba(var(--bg-primary-rgb), var(--section-bg-alpha)); /* Semi-transparent primary background */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--accent-color-rgb), 0.1);
+            transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+            padding: 50px; /* More padding */
+        }
+
+        /* Light mode adjustments for inner content backgrounds */
+        body.light-mode #about .about-content {
+            background: rgba(var(--bg-secondary-rgb), var(--section-bg-alpha));
+            border: 1px solid rgba(var(--accent-color-rgb), 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
         body.light-mode .project-card,
         body.light-mode .skill-item,
         body.light-mode #contact .contact-form {
-            background: rgba(255, 255, 255, var(--section-bg-alpha));
-            border: 1px solid rgba(255, 69, 0, 0.1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            background: rgba(var(--bg-secondary-rgb), var(--section-bg-alpha));
+            border: 1px solid rgba(var(--accent-color-rgb), 0.1);
         }
+
 
         #about .about-image {
             flex: 1;
@@ -339,13 +369,8 @@
             height: auto;
             border-radius: 15px; /* Softer corners */
             border: 3px solid var(--accent-color);
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.4); /* Accent color glow */
+            box-shadow: 0 0 30px rgba(var(--accent-color-rgb), 0.4); /* Accent color glow */
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.5s ease, box-shadow 0.5s ease;
-        }
-
-        body.light-mode #about .about-image img {
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 0 30px rgba(255, 69, 0, 0.4);
         }
 
         #about .about-image img:hover {
@@ -357,7 +382,6 @@
             min-width: 320px;
             max-width: 700px;
             text-align: left;
-            padding: 40px; /* Added padding to content box */
         }
 
         #about .about-content p {
@@ -398,23 +422,12 @@
             max-width: 1100px;
         }
 
-        .project-card {
-            padding: 30px; /* More padding */
-            text-align: left;
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
-        }
-
         .project-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 191, 255, 0.5); /* Stronger shadow and accent glow */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(var(--accent-color-rgb), 0.5); /* Stronger shadow and accent glow */
         }
 
         body.light-mode .project-card:hover {
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2), 0 0 30px rgba(255, 69, 0, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2), 0 0 30px rgba(var(--accent-color-rgb), 0.5);
         }
 
         .project-card img {
@@ -423,12 +436,8 @@
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 20px;
-            border: 1px solid rgba(0, 191, 255, 0.2);
+            border: 1px solid rgba(var(--accent-color-rgb), 0.2);
             transition: border-color 0.5s ease;
-        }
-
-        body.light-mode .project-card img {
-            border: 1px solid rgba(255, 69, 0, 0.2);
         }
 
         .project-card h3 {
@@ -466,19 +475,12 @@
             max-width: 1000px;
         }
 
-        .skill-item {
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
         .skill-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 191, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(var(--accent-color-rgb), 0.3);
         }
 
         body.light-mode .skill-item:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 69, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(var(--accent-color-rgb), 0.3);
         }
 
         .skill-item h3 {
@@ -572,12 +574,7 @@
         #contact .contact-form input:focus,
         #contact .contact-form textarea:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-        }
-
-        body.light-mode #contact .contact-form input:focus,
-        body.light-mode #contact .contact-form textarea:focus {
-            box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+            box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
         }
 
         #contact .contact-form textarea {
@@ -849,9 +846,10 @@
     </style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="loader"></div>
+
+    <!-- Pre-loader -->
+    <div id="preloader" class="fixed top-0 left-0 w-full h-full bg-black flex justify-center items-center z-50">
+        <div class="w-16 h-16 border-4 border-t-4 border-gray-700 rounded-full animate-spin loader"></div>
     </div>
 
     <!-- Full-screen Canvas for Dynamic Background -->
@@ -866,157 +864,274 @@
         <span id="theme-text">Dark Mode</span>
     </div>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="#hero" class="logo">RSMK</a>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <!-- Header & Navigation -->
+    <header class="bg-black/30 backdrop-blur-sm fixed top-0 left-0 right-0 z-40">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="font-orbitron text-2xl font-bold tracking-widest neon-glow-text-blue">RSMK</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-lg">About</a>
+                <a href="#projects" class="nav-link text-lg">Projects</a>
+                <a href="#skills" class="nav-link text-lg">Skills</a>
+                <a href="#contact" class="nav-link text-lg">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none text-2xl text-white">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-black/50">
+            <a href="#about" class="block text-center py-2 text-lg text-white hover:bg-white/10">About</a>
+            <a href="#projects" class="block text-center py-2 text-lg text-white hover:bg-white/10">Projects</a>
+            <a href="#skills" class="block text-center py-2 text-lg text-white hover:bg-white/10">Skills</a>
+            <a href="#contact" class="block text-center py-2 text-lg text-white hover:bg-white/10">Contact</a>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section id="hero">
-        <div class="hero-content">
-            <h1 id="hero-headline">Creative Developer</h1>
-            <p class="subtitle" id="hero-subtitle">Building captivating web experiences with code and creativity.</p>
-            <a href="#projects" class="accent-button" data-aos="fade-up" data-aos-delay="1500">View My Work</a>
+    <section id="hero" class="min-h-screen flex items-center justify-center text-center px-4">
+        <div class="relative z-10">
+            <h1 class="font-orbitron text-4xl md:text-6xl lg:text-7xl font-bold mb-4 neon-glow-text-blue" data-aos="fade-down">Hi, I’m RSMK</h1>
+            <p class="text-xl md:text-2xl lg:text-3xl font-orbitron mb-6" data-aos="fade-up" data-aos-delay="200">An Electrical and Electronics Engineering Student</p>
+            <p class="max-w-3xl mx-auto text-md md:text-lg text-white" data-aos="fade-up" data-aos-delay="400">
+                Passionately exploring <span id="typed-output" class="font-semibold neon-glow-text-blue"></span>. Always building, always learning.
+            </p>
         </div>
     </section>
 
     <!-- About Me Section -->
     <section id="about">
-        <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
-            <img src="https://placehold.co/350x350/00BFFF/161b22?text=Your+Avatar" alt="RSMK's Avatar">
-        </div>
-        <div class="about-content">
-            <h2 class="section-title">About Me</h2>
-            <p data-aos="fade-up" data-aos-delay="100">I am currently pursuing my B.Tech in Electrical and Electronics Engineering at Andhra Loyola Institute of Engineering and Technology. My academic journey is driven by a deep curiosity for how technology can solve real-world problems.</p>
-            <p data-aos="fade-up" data-aos-delay="200">My interests include:</p>
-            <ul data-aos="fade-up" data-aos-delay="300">
-                <li>Green Technology & Smart Energy</li>
-                <li>Embedded Systems and IoT</li>
-                <li>Automation & Control</li>
-                <li>AI-based Telegram Bots</li>
-                <li>Simulation tools like MATLAB/Simulink</li>
-                <li>3D Design using Blender</li>
-            </ul>
-            <p data-aos="fade-up" data-aos-delay="400">I thrive on learning new technologies and applying them to build innovative solutions, constantly pushing the boundaries of what's possible in the EEE domain and beyond.</p>
+        <div class="container mx-auto px-6 py-20 md:py-32">
+            <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-green" data-aos="fade-up">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+                <div class="md:w-1/3" data-aos="fade-right">
+                    <img src="https://placehold.co/400x400/222222/00FFFF?text=RSMK" alt="A professional image of RSMK" class="rounded-full w-64 h-64 md:w-80 md:h-80 mx-auto border-4 border-accent-cyan shadow-[0_0_25px_rgba(0,255,255,0.4)] transition-transform duration-300 hover:scale-105">
+                </div>
+                <div class="md:w-2/3 text-center md:text-left about-content">
+                    <p class="text-lg md:text-xl mb-6">Pursuing B.Tech in EEE at Andhra Loyola Institute of Engineering and Technology.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-accent-cyan">My Interests</h3>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                        <span class="bg-accent-magenta/20 border border-accent-magenta/50 text-text-primary px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-accent-magenta hover:text-black">Green Technology & Smart Energy</span>
+                        <span class="bg-accent-magenta/20 border border-accent-magenta/50 text-text-primary px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-accent-magenta hover:text-black">Embedded Systems and IoT</span>
+                        <span class="bg-accent-magenta/20 border border-accent-magenta/50 text-text-primary px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-accent-magenta hover:text-black">Automation & Control</span>
+                        <span class="bg-accent-magenta/20 border border-accent-magenta/50 text-text-primary px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-accent-magenta hover:text-black">AI-based Telegram Bots</span>
+                        <span class="bg-accent-magenta/20 border border-accent-magenta/50 text-text-primary px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-accent-magenta hover:text-black">MATLAB/Simulink</span>
+                        <span class="bg-accent-magenta/20 border border-accent-magenta/50 text-text-primary px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-accent-magenta hover:text-black">3D Design using Blender</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="project-grid">
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Exhaust+Fan" alt="Autonomous Exhaust Fan">
-                <h3>Autonomous Exhaust Fan</h3>
-                <p>An intelligent exhaust fan system designed to automatically detect air quality and activate, ensuring a healthier environment.</p>
-                <p class="tools-used">Arduino, MQ-2 Gas Sensor, Timer Module</p>
-                <a href="#" class="accent-button">View Project</a>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Traffic+Light" alt="Traffic Light Simulation">
-                <h3>Traffic Light Simulation</h3>
-                <p>A hands-on simulation demonstrating the sequential operation of traffic lights using basic electronic components.</p>
-                <p class="tools-used">Breadboard, LEDs, Resistors, Manual Control</p>
-                <a href="#" class="accent-button">View Project</a>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Smart+Grid" alt="Smart Energy Grid Concept">
-                <h3>Smart Energy Grid Concept</h3>
-                <p>A conceptual research project exploring the principles and benefits of a decentralized, efficient smart energy distribution system.</p>
-                <p class="tools-used">Simulation/Research, Conceptual Design</p>
-                <a href="#" class="accent-button">View Project</a>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="400">
-                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Telegram+Bots" alt="Telegram Bots">
-                <h3>Telegram Bots</h3>
-                <p>Developed various utility bots for Telegram, including a reminder bot, a language translator, and a basic conversational chatbot.</p>
-                <p class="tools-used">Python, Telegram Bot API, APIs</p>
-                <a href="#" class="accent-button">View Project</a>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="500">
-                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Community+Work" alt="Community Service Work">
-                <h3>Community Service Work</h3>
-                <p>Conducted surveys and implemented practical solutions for local issues in Murapaka village as part of community outreach.</p>
-                <p class="tools-used">Survey Methodology, Problem Solving, Community Engagement</p>
-                <a href="#" class="accent-button">View Project</a>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="600">
-                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Blender+Designs" alt="Blender Designs">
-                <h3>Blender Designs</h3>
-                <p>A collection of 3D models and renders created using Blender, showcasing skills in digital design and visualization.</p>
-                <p class="tools-used">Blender (3D Modeling, Rendering)</p>
-                <a href="#" class="accent-button">View Project</a>
+        <div class="container mx-auto px-6 py-20 md:py-32">
+            <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-blue" data-aos="fade-up">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in">
+                    <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+1" alt="Autonomous Exhaust Fan Project" class="rounded-md mb-4 h-48 object-cover">
+                    <h3 class="font-orbitron text-xl font-bold text-accent-cyan mb-2">Automatic Exhaust Fan</h3>
+                    <p class="text-text-primary text-sm flex-grow mb-4">An automated system detecting poor air quality via an MQ-2 sensor to activate a fan, ensuring a healthy environment.</p>
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20">Arduino</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">MQ-2</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">C++</span>
+                    </div>
+                    <a href="https://rsmk27.github.io/Autoexhaustfan/" class="mt-auto text-center bg-accent-cyan text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-accent-magenta hover:text-white submit-button">View Project</a>
+                </div>
+
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+2" alt="Traffic Light Simulation" class="rounded-md mb-4 h-48 object-cover">
+                    <h3 class="font-orbitron text-xl font-bold text-accent-cyan mb-2">Traffic Light Simulation</h3>
+                    <p class="text-text-primary text-sm flex-grow mb-4">A hands-on breadboard project simulating traffic light sequences with manual override controls using basic electronic components.</p>
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20">Breadboard</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">LEDs</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">Electronics</span>
+                    </div>
+                    <a href="#" class="mt-auto text-center bg-accent-cyan text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-accent-magenta hover:text-white submit-button">View Project</a>
+                </div>
+
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+3" alt="Smart Energy Grid Concept" class="rounded-md mb-4 h-48 object-cover">
+                    <h3 class="font-orbitron text-xl font-bold text-accent-cyan mb-2">Smart Energy Grid Concept</h3>
+                    <p class="text-text-primary text-sm flex-grow mb-4">A research and simulation project exploring dynamic load balancing and renewable energy integration in a modern smart grid.</p>
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20">MATLAB</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">Simulink</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">Research</span>
+                    </div>
+                    <a href="#" class="mt-auto text-center bg-accent-cyan text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-accent-magenta hover:text-white submit-button">View Project</a>
+                </div>
+
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in">
+                    <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+4" alt="Telegram Bots" class="rounded-md mb-4 h-48 object-cover">
+                    <h3 class="font-orbitron text-xl font-bold text-accent-cyan mb-2">Telegram Bots</h3>
+                    <p class="text-text-primary text-sm flex-grow mb-4">Developed various AI-powered bots, including a reminder bot, a language translator, and a conversational chatbot using the Telegram Bot API.</p>
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20">Python</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">Telegram API</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">AI</span>
+                    </div>
+                    <a href="#" class="mt-auto text-center bg-accent-cyan text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-accent-magenta hover:text-white submit-button">View Project</a>
+                </div>
+
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+5" alt="Community Service Work" class="rounded-md mb-4 h-48 object-cover">
+                    <h3 class="font-orbitron text-xl font-bold text-accent-cyan mb-2">Community Service Work</h3>
+                    <p class="text-text-primary text-sm flex-grow mb-4">Conducted a survey and proposed engineering-based solutions for local issues in Murapaka village, focusing on practical problem-solving.</p>
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20">Surveying</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">Problem-Solving</span>
+                    </div>
+                    <a href="#" class="mt-auto text-center bg-accent-cyan text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-accent-magenta hover:text-white submit-button">View Project</a>
+                </div>
+
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+6" alt="Blender Designs" class="rounded-md mb-4 h-48 object-cover">
+                    <h3 class="font-orbitron text-xl font-bold text-accent-cyan mb-2">Blender Designs</h3>
+                    <p class="text-text-primary text-sm flex-grow mb-4">A collection of 3D modeling experiments, creating various objects and scenes to explore design principles and visualization techniques.</p>
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20">Blender</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-accent-magenta bg-accent-magenta/20 ml-1">3D Modeling</span>
+                    </div>
+                    <a href="#" class="mt-auto text-center bg-accent-cyan text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-accent-magenta hover:text-white submit-button">View Project</a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills">
-        <h2 class="section-title">My Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-item" data-aos="fade-right" data-aos-delay="100" data-progress="90">
-                <h3>Embedded Systems & Programming</h3>
-                <p>Arduino, ESP8266, Python, C</p>
-                <div class="progress-bar"><div class="progress"></div></div>
+        <div class="container mx-auto px-6 py-20 md:py-32">
+            <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-green" data-aos="fade-up">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                
+                <div data-aos="fade-right">
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-text-primary">Arduino / ESP8266</span>
+                            <span class="text-sm font-medium text-text-primary">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="progress-bar-inner h-2.5 rounded-full" data-progress="90"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-text-primary">Python</span>
+                            <span class="text-sm font-medium text-text-primary">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="progress-bar-inner h-2.5 rounded-full" data-progress="85"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-text-primary">C Language</span>
+                            <span class="text-sm font-medium text-text-primary">75%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="progress-bar-inner h-2.5 rounded-full" data-progress="75"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-left">
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-text-primary">MATLAB / Simulink</span>
+                            <span class="text-sm font-medium text-text-primary">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="progress-bar-inner h-2.5 rounded-full" data-progress="80"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-text-primary">HTML / CSS / JavaScript</span>
+                            <span class="text-sm font-medium text-text-primary">70%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="progress-bar-inner h-2.5 rounded-full" data-progress="70"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-text-primary">Blender / Fritzing / Tinkercad</span>
+                            <span class="text-sm font-medium text-text-primary">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="progress-bar-inner h-2.5 rounded-full" data-progress="85"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="skill-item" data-aos="fade-right" data-aos-delay="200" data-progress="85">
-                <h3>Simulation & Design</h3>
-                <p>MATLAB, Simulink, Fritzing, Tinkercad</p>
-                <div class="progress-bar"><div class="progress"></div></div>
-            </div>
-            <div class="skill-item" data-aos="fade-right" data-aos-delay="300" data-progress="80">
-                <h3>Web Technologies</h3>
-                <p>HTML, CSS, JavaScript</p>
-                <div class="progress-bar"><div class="progress"></div></div>
-            </div>
-            <div class="skill-item" data-aos="fade-left" data-aos-delay="400" data-progress="75">
-                <h3>AI & Automation</h3>
-                <p>APIs, IoT, Telegram Bot API</p>
-                <div class="progress-bar"><div class="progress"></div></div>
-            </div>
-            <div class="skill-item" data-aos="fade-left" data-aos-delay="500" data-progress="70">
-                <h3>3D Modeling</h3>
-                <p>Blender</p>
-                <div class="progress-bar"><div class="progress"></div></div>
-            </div>
-            <div class="skill-item" data-aos="fade-left" data-aos-delay="600" data-progress="60">
-                <h3>Problem Solving</h3>
-                <p>Analytical Thinking, Troubleshooting</p>
-                <div class="progress-bar"><div class="progress"></div></div>
+            <div class="mt-12 text-center" data-aos="fade-up">
+                <h3 class="text-2xl font-bold mb-6 text-accent-cyan">Concepts & APIs</h3>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <div class="text-center transition-transform duration-300 hover:scale-110">
+                        <i class="fas fa-robot text-4xl text-accent-magenta mb-2"></i>
+                        <p>APIs</p>
+                    </div>
+                    <div class="text-center transition-transform duration-300 hover:scale-110">
+                        <i class="fas fa-wifi text-4xl text-accent-magenta mb-2"></i>
+                        <p>IoT</p>
+                    </div>
+                    <div class="text-center transition-transform duration-300 hover:scale-110">
+                        <i class="fab fa-telegram-plane text-4xl text-accent-magenta mb-2"></i>
+                        <p>Telegram Bot API</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Me Section -->
+    <!-- Contact Section -->
     <section id="contact">
-        <h2 class="section-title">Contact Me</h2>
-        <div class="contact-content">
-            <p data-aos="fade-up" data-aos-delay="100">Feel free to reach out for collaborations, project discussions, or just to say hello!</p>
-            <div class="social-icons" data-aos="fade-up" data-aos-delay="200">
-                <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://t.me/yourtelegram" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
-                <a href="mailto:your.email@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <div class="container mx-auto px-6 py-20 md:py-32">
+            <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-12 neon-glow-text-blue" data-aos="fade-up">Get In Touch</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="flex justify-center gap-8 mb-12" data-aos="fade-up">
+                    <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" class="social-icon text-4xl transition-colors duration-300"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/rsmk27" target="_blank" aria-label="Telegram" class="social-icon text-4xl transition-colors duration-300"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="mailto:srinivasmanikantarajapantula@gmail.com" aria-label="Email" class="social-icon text-4xl transition-colors duration-300"><i class="fas fa-envelope"></i></a>
+                </div>
+
+                <form id="contactForm" class="glass-card rounded-lg p-8" data-aos="zoom-in">
+                    <div id="form-feedback" class="text-center mb-4"></div>
+                    <div class="mb-6">
+                        <label for="name" class="block mb-2 text-sm font-medium text-accent-cyan">Name</label>
+                        <input type="text" id="name" name="name" class="form-input text-sm rounded-lg block w-full p-2.5" required>
+                        <span class="text-red-500 text-xs mt-1 hidden" id="nameError">Name is required.</span>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block mb-2 text-sm font-medium text-accent-cyan">Email</label>
+                        <input type="email" id="email" name="email" class="form-input text-sm rounded-lg block w-full p-2.5" required>
+                        <span class="text-red-500 text-xs mt-1 hidden" id="emailError">Please enter a valid email.</span>
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block mb-2 text-sm font-medium text-accent-cyan">Message</label>
+                        <textarea id="message" name="message" rows="4" class="form-input text-sm rounded-lg block w-full p-2.5" required></textarea>
+                        <span class="text-red-500 text-xs mt-1 hidden" id="messageError">Message cannot be empty.</span>
+                    </div>
+                    <button type="submit" class="submit-button w-full font-bold py-3 px-5 rounded-lg">Send Message</button>
+                </form>
+                
+                <div class="text-center mt-12" data-aos="fade-up">
+                    <a href="#" download="RSMK-Resume.pdf" class="inline-block bg-accent-cyan text-black font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:bg-accent-magenta hover:text-white hover:scale-105">
+                        Get Connected <i class="fas fa-download ml-2"></i>
+                    </a>
+                </div>
             </div>
-            <form class="contact-form" action="#" method="POST" data-aos="fade-up" data-aos-delay="300">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" required></textarea>
-                <button type="submit" class="accent-button">Send Message</button>
-            </form>
         </div>
     </section>
 
-    <!-- Footer (simple) -->
-    <footer style="background-color: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9em; border-top: 1px solid rgba(0, 191, 255, 0.1); transition: background-color 0.5s ease, border-color 0.5s ease;">
-        <p>&copy; 2025 RSMK. All rights reserved.</p>
+    <!-- Footer -->
+    <footer class="bg-black py-6">
+        <div class="container mx-auto px-6 text-center text-text-primary">
+            <p>&copy; 2025 RSMK. All Rights Reserved.</p>
+            <p>Designed with <i class="fas fa-heart text-red-500"></i> and a lot of <i class="fas fa-coffee text-yellow-600"></i></p>
+        </div>
     </footer>
 
     <!-- Back to Top Button -->
@@ -1024,355 +1139,402 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- AOS JavaScript -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS
-        AOS.init({
-            once: true, // animations once
-            duration: 900, // animation duration
-            easing: 'ease-out-cubic', // easing for animations
-            delay: 100, // global delay
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                offset: 50
+            });
 
-        // Preloader
-        window.addEventListener('load', () => {
+            // Pre-loader
             const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 500); // Hide after fade out
+            window.addEventListener('load', () => {
+                preloader.classList.add('opacity-0', 'invisible');
+            });
+            
+            // Mobile Menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Typed.js
+            if (document.getElementById('typed-output')) {
+                new Typed('#typed-output', {
+                    strings: ["Green Tech", "Smart Energy", "Embedded Systems", "Innovative AI Projects"],
+                    typeSpeed: 70,
+                    backSpeed: 40,
+                    loop: true,
+                    cursorChar: '_',
+                });
             }
 
-            // Animate skill progress bars on load
-            document.querySelectorAll('.skill-item').forEach(item => {
-                const progressElement = item.querySelector('.progress');
-                const progressValue = item.getAttribute('data-progress');
-                if (progressElement && progressValue) {
-                    progressElement.style.setProperty('--progress-width', progressValue + '%');
+            // Skill bars animation
+            const skillBars = document.querySelectorAll('.progress-bar-inner');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        const progress = bar.getAttribute('data-progress');
+                        bar.style.width = progress + '%';
+                        bar.style.transition = 'width 1.5s ease-out';
+                        observer.unobserve(bar);
+                    }
+                });
+            }, {
+                threshold: 0.8
+            });
+            skillBars.forEach(bar => {
+                observer.observe(bar);
+            });
+
+            // Contact Form Validation
+            const contactForm = document.getElementById('contactForm');
+            const formFeedback = document.getElementById('form-feedback');
+            
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                let isValid = true;
+                
+                const name = document.getElementById('name');
+                const email = document.getElementById('email');
+                const message = document.getElementById('message');
+                
+                const nameError = document.getElementById('nameError');
+                const emailError = document.getElementById('emailError');
+                const messageError = document.getElementById('messageError');
+
+                [nameError, emailError, messageError].forEach(e => e.classList.add('hidden'));
+
+                if (name.value.trim() === '') {
+                    nameError.classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email.value.trim())) {
+                    emailError.classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                if (message.value.trim() === '') {
+                    messageError.classList.remove('hidden');
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    formFeedback.textContent = "Thank you! Your message has been sent. (Demo)";
+                    formFeedback.className = "text-center mb-4 text-green-400";
+                    contactForm.reset();
+                    setTimeout(() => {
+                        formFeedback.textContent = "";
+                    }, 5000);
+                } else {
+                    formFeedback.textContent = "Please correct the errors below.";
+                    formFeedback.className = "text-center mb-4 text-red-500";
                 }
             });
 
-            // Start hero text animations after preloader
-            setTimeout(() => {
-                animateHeroText();
-                animateHeroSubtitle();
-            }, 700); // Delay slightly after preloader is gone
-        });
+            // Canvas Background Animation (Connecting Dots) and Cursor Animation
+            const canvas = document.getElementById('full-background-canvas');
+            const ctx = canvas.getContext('2d');
+            let animationFrameId;
 
-        // Hero Headline Character Animation (Staggered)
-        function animateHeroText() {
-            const headlineElement = document.getElementById('hero-headline');
-            const text = headlineElement.textContent;
-            headlineElement.innerHTML = ''; // Clear content
-
-            let delay = 0;
-            for (let i = 0; i < text.length; i++) {
-                const charSpan = document.createElement('span');
-                charSpan.textContent = text[i];
-                charSpan.style.transition = `opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) ${delay}ms, transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) ${delay}ms`;
-                headlineElement.appendChild(charSpan);
-
-                // Trigger animation
-                setTimeout(() => {
-                    charSpan.style.opacity = '1';
-                    charSpan.style.transform = 'translateY(0)';
-                }, delay);
-
-                delay += 70; // Stagger delay for each character
-            }
-        }
-
-        // Hero Subtitle Staggered Reveal
-        function animateHeroSubtitle() {
-            const subtitleElement = document.getElementById('hero-subtitle');
-            subtitleElement.style.transition = `opacity 1s cubic-bezier(0.25, 0.8, 0.25, 1) 1000ms, transform 1s cubic-bezier(0.25, 0.8, 0.25, 1) 1000ms`; // Delay after headline
-            setTimeout(() => {
-                subtitleElement.style.opacity = '1';
-                subtitleElement.style.transform = 'translateY(0)';
-            }, 1000); // Start after headline animation begins
-        }
-
-
-        // Canvas Background Animation (Connecting Dots) and Cursor Animation
-        const canvas = document.getElementById('full-background-canvas');
-        const ctx = canvas.getContext('2d');
-        let animationFrameId;
-
-        // Moved Particle and Ripple class definitions to the top of the script
-        // to resolve "Cannot access 'Particle' before initialization" error.
-
-        // Particle class for background animation
-        class Particle {
-            constructor(x, y) {
-                this.x = x || Math.random() * canvas.width;
-                this.y = y || Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1; // 1 to 3
-                this.baseOpacity = Math.random() * 0.1 + 0.05; // Base opacity for subtle particles
-                this.opacity = this.baseOpacity;
-                this.dx = (Math.random() - 0.5) * 0.4; // Slower movement
-                this.dy = (Math.random() - 0.5) * 0.4;
-            }
-
-            update() {
-                this.x += this.dx;
-                this.y += this.dy;
-
-                // Wrap around edges
-                if (this.x < 0) this.x = canvas.width;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.y < 0) this.y = canvas.height;
-                if (this.y > canvas.height) this.y = 0;
-
-                // Mouse interaction: increase opacity/size slightly
-                let distance = Math.sqrt(
-                    (this.x - mouse.x) ** 2 + (this.y - mouse.y) ** 2
-                );
-                if (distance < mouseInteractionRadius) {
-                    this.opacity = Math.min(
-                        this.baseOpacity + (1 - distance / mouseInteractionRadius) * 0.3,
-                        0.8
-                    );
-                    this.size = Math.min(
-                        (Math.random() * 2 + 1) + (1 - distance / mouseInteractionRadius) * 2,
-                        5
-                    );
-                } else {
+            // Particle class for background animation
+            class Particle {
+                constructor(x, y) {
+                    this.x = x || Math.random() * canvas.width;
+                    this.y = y || Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1; // 1 to 3
+                    this.baseOpacity = Math.random() * 0.1 + 0.05; // Base opacity for subtle particles
                     this.opacity = this.baseOpacity;
-                    this.size = Math.random() * 2 + 1;
+                    this.dx = (Math.random() - 0.5) * 0.4; // Slower movement
+                    this.dy = (Math.random() - 0.5) * 0.4;
+                }
+
+                update() {
+                    this.x += this.dx;
+                    this.y += this.dy;
+
+                    // Wrap around edges
+                    if (this.x < 0) this.x = canvas.width;
+                    if (this.x > canvas.width) this.x = 0;
+                    if (this.y < 0) this.y = canvas.height;
+                    if (this.y > canvas.height) this.y = 0;
+
+                    // Mouse interaction: increase opacity/size slightly
+                    let distance = Math.sqrt(
+                        (this.x - mouse.x) ** 2 + (this.y - mouse.y) ** 2
+                    );
+                    if (distance < mouseInteractionRadius) {
+                        this.opacity = Math.min(
+                            this.baseOpacity + (1 - distance / mouseInteractionRadius) * 0.3,
+                            0.8
+                        );
+                        this.size = Math.min(
+                            (Math.random() * 2 + 1) + (1 - distance / mouseInteractionRadius) * 2,
+                            5
+                        );
+                    } else {
+                        this.opacity = this.baseOpacity;
+                        this.size = Math.random() * 2 + 1;
+                    }
+                }
+
+                draw() {
+                    const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
+                    ctx.fillStyle = `rgba(${parseInt(accentColor.slice(1,3), 16)}, ${parseInt(accentColor.slice(3,5), 16)}, ${parseInt(accentColor.slice(5,7), 16)}, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
                 }
             }
 
-            draw() {
+            // Cursor Ring Class (for futuristic cursor)
+            class CursorRing {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.radius = 0;
+                    this.maxRadius = 25; // Max size of the ring
+                    this.opacity = 0.5;
+                    this.speed = 1.5; // How fast the ring expands
+                    this.lineWidth = 2;
+                }
+
+                update() {
+                    this.radius += this.speed;
+                    this.opacity -= 0.02; // Fade out
+                    if (this.radius > this.maxRadius) {
+                        this.opacity = 0; // Ensure it fully fades
+                    }
+                }
+
+                draw() {
+                    const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
+                    ctx.strokeStyle = `rgba(${parseInt(accentColor.slice(1,3), 16)}, ${parseInt(accentColor.slice(3,5), 16)}, ${parseInt(accentColor.slice(5,7), 16)}, ${this.opacity})`;
+                    ctx.lineWidth = this.lineWidth;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+            }
+
+            let particles = [];
+            const numParticles = 100;
+            const maxLineDistance = 150;
+            const mouseInteractionRadius = 100;
+
+            let cursorRings = []; // Array to store cursor rings
+            let mouse = { x: 0, y: 0, radius: 1 }; // Mouse position for particle interaction
+
+            // Resize canvas to fill window
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initParticles(); // Re-initialize particles on resize
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas(); // Initial resize
+
+            // Initialize particles
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < numParticles; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            // Draw lines between nearby particles
+            function connectParticles() {
                 const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
-                ctx.fillStyle = `rgba(${parseInt(accentColor.slice(1,3), 16)}, ${parseInt(accentColor.slice(3,5), 16)}, ${parseInt(accentColor.slice(5,7), 16)}, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+                for (let a = 0; a < particles.length; a++) {
+                    for (let b = a; b < particles.length; b++) {
+                        let distance = Math.sqrt(
+                            (particles[a].x - particles[b].x) ** 2 +
+                            (particles[a].y - particles[b].y) ** 2
+                        );
 
-        // Cursor Ripple Class
-        class Ripple {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.radius = 0;
-                this.maxRadius = 50; // Max size of the ripple
-                this.opacity = 1;
-                this.speed = 2; // How fast the ripple expands
-            }
-
-            update() {
-                this.radius += this.speed;
-                this.opacity -= 0.02; // Fade out
-            }
-
-            draw() {
-                const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
-                ctx.strokeStyle = `rgba(${parseInt(accentColor.slice(1,3), 16)}, ${parseInt(accentColor.slice(3,5), 16)}, ${parseInt(accentColor.slice(5,7), 16)}, ${this.opacity})`;
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.stroke();
-            }
-        }
-
-        let particles = [];
-        const numParticles = 100;
-        const maxLineDistance = 150;
-        const mouseInteractionRadius = 100;
-
-        let ripples = [];
-        let mouse = { x: 0, y: 0, radius: 1 };
-
-        // Resize canvas to fill window
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles(); // Re-initialize particles on resize
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas(); // Initial resize
-
-        // Initialize particles
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < numParticles; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        // Draw lines between nearby particles
-        function connectParticles() {
-            const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    let distance = Math.sqrt(
-                        (particles[a].x - particles[b].x) ** 2 +
-                        (particles[a].y - particles[b].y) ** 2
-                    );
-
-                    if (distance < maxLineDistance) {
-                        let lineOpacity = 1 - (distance / maxLineDistance);
-                        ctx.strokeStyle = `rgba(${parseInt(accentColor.slice(1,3), 16)}, ${parseInt(accentColor.slice(3,5), 16)}, ${parseInt(accentColor.slice(5,7), 16)}, ${lineOpacity * 0.5})`; // Subtle lines
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
+                        if (distance < maxLineDistance) {
+                            let lineOpacity = 1 - (distance / maxLineDistance);
+                            ctx.strokeStyle = `rgba(${parseInt(accentColor.slice(1,3), 16)}, ${parseInt(accentColor.slice(3,5), 16)}, ${parseInt(accentColor.slice(5,7), 16)}, ${lineOpacity * 0.5})`; // Subtle lines
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.stroke();
+                        }
                     }
                 }
             }
-        }
 
-        // Mouse move event listener for cursor animation
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-            // Add a new ripple
-            ripples.push(new Ripple(e.clientX, e.clientY));
-        });
-
-        // Animation loop for both background and cursor effects
-        function animateCanvas() {
-            // Clear canvas with a slight fade effect to create trails for background shapes
-            ctx.fillStyle = `rgba(${parseInt(getComputedStyle(document.body).getPropertyValue('--bg-primary').slice(1,3), 16)}, ${parseInt(getComputedStyle(document.body).getPropertyValue('--bg-primary').slice(3,5), 16)}, ${parseInt(getComputedStyle(document.body).getPropertyValue('--bg-primary').slice(5,7), 16)}, 0.05)`; // Use current theme's primary background color for fade
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Update and draw background particles
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
+            // Mouse move event listener for cursor animation and particle interaction
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+                // Add a new ring to the cursor trail
+                cursorRings.push(new CursorRing(e.clientX, e.clientY));
             });
 
-            // Draw lines between particles
-            connectParticles();
+            // Animation loop for background effects and cursor
+            function animateCanvas() {
+                // Clear canvas with a slight fade effect to create trails for background shapes
+                ctx.fillStyle = `rgba(${parseInt(getComputedStyle(document.body).getPropertyValue('--bg-primary').slice(1,3), 16)}, ${parseInt(getComputedStyle(document.body).getPropertyValue('--bg-primary').slice(3,5), 16)}, ${parseInt(getComputedStyle(document.body).getPropertyValue('--bg-primary').slice(5,7), 16)}, 0.05)`; // Use current theme's primary background color for fade
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Update and draw cursor ripples
-            for (let i = 0; i < ripples.length; i++) {
-                let r = ripples[i];
-                r.update();
-                r.draw();
+                // Update and draw background particles
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
 
-                if (r.opacity <= 0 || r.radius > r.maxRadius) {
-                    ripples.splice(i, 1); // Remove dead ripples
-                    i--; // Adjust index after removal
+                // Draw lines between particles
+                connectParticles();
+
+                // Draw the central static dot for the cursor
+                const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
+                ctx.fillStyle = accentColor;
+                ctx.beginPath();
+                ctx.arc(mouse.x, mouse.y, 5, 0, Math.PI * 2); // Small solid circle for the cursor
+                ctx.fill();
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = accentColor;
+
+                // Update and draw cursor rings
+                for (let i = 0; i < cursorRings.length; i++) {
+                    let ring = cursorRings[i];
+                    ring.update();
+                    ring.draw();
+
+                    if (ring.opacity <= 0 || ring.radius > ring.maxRadius) {
+                        cursorRings.splice(i, 1); // Remove dead rings
+                        i--; // Adjust index after removal
+                    }
                 }
+                ctx.shadowBlur = 0; // Reset shadow
+
+                animationFrameId = requestAnimationFrame(animateCanvas);
             }
 
-            animationFrameId = requestAnimationFrame(animateCanvas);
-        }
+            // Start canvas animation when window loads
+            window.addEventListener('load', () => {
+                initParticles();
+                animateCanvas();
+            });
 
-        // Start canvas animation when window loads
-        window.addEventListener('load', () => {
-            initParticles();
-            animateCanvas();
-        });
+            // Smooth scroll for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
 
-        // Smooth scroll for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
 
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+            // Scroll-triggered animation for section titles (h2)
+            const sectionTitles = document.querySelectorAll('section h2');
+
+            const observerOptions = {
+                root: null, // viewport as root
+                rootMargin: '0px',
+                threshold: 0.3 // Trigger when 30% of the element is visible
+            };
+
+            const sectionTitleObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-title-visible');
+                        entry.target.classList.remove('section-title-hidden'); // Ensure it's removed if present
+                    } else {
+                        // Optional: remove class when out of view to re-animate on scroll back
+                        // entry.target.classList.remove('section-title-visible');
+                        // entry.target.classList.add('section-title-hidden');
+                    }
+                });
+            }, observerOptions);
+
+            sectionTitles.forEach(title => {
+                title.classList.add('section-title-hidden'); // Add initial hidden class
+                sectionTitleObserver.observe(title);
+            });
+
+            // Back to Top Button Logic
+            const backToTopButton = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { // Show button after scrolling 300px
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
                     behavior: 'smooth'
                 });
             });
-        });
 
-        // Scroll-triggered animation for section titles (h2)
-        const sectionTitles = document.querySelectorAll('section h2');
+            // Dark/Light Mode Toggle Logic
+            const themeToggle = document.getElementById('checkbox');
+            const themeText = document.getElementById('theme-text');
 
-        const observerOptions = {
-            root: null, // viewport as root
-            rootMargin: '0px',
-            threshold: 0.3 // Trigger when 30% of the element is visible
-        };
+            // Function to update canvas background clear color based on theme
+            function updateCanvasClearColor() {
+                const bgColor = getComputedStyle(document.body).getPropertyValue('--bg-primary');
+                // Convert hex to rgba for the fade effect
+                const r = parseInt(bgColor.slice(1,3), 16);
+                const g = parseInt(bgColor.slice(3,5), 16);
+                const b = parseInt(bgColor.slice(5,7), 16);
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.05)`; // Update the clear color
+            }
 
-        const sectionTitleObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('section-title-visible');
-                    entry.target.classList.remove('section-title-hidden'); // Ensure it's removed if present
+            // Function to apply theme
+            function applyTheme(theme) {
+                document.body.classList.remove('dark-mode', 'light-mode');
+                document.body.classList.add(theme);
+                localStorage.setItem('theme', theme);
+                themeText.textContent = theme === 'dark-mode' ? 'Dark Mode' : 'Light Mode';
+                
+                updateCanvasClearColor(); // Update canvas clear color on theme change
+            }
+
+            // Check for saved theme preference
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                applyTheme(currentTheme);
+                if (currentTheme === 'light-mode') {
+                    themeToggle.checked = true;
                 } else {
-                    // Optional: remove class when out of view to re-animate on scroll back
-                    // entry.target.classList.remove('section-title-visible');
-                    // entry.target.classList.add('section-title-hidden');
+                    themeToggle.checked = false;
+                }
+            } else {
+                // Default to dark mode if no preference saved
+                applyTheme('dark-mode');
+                themeToggle.checked = false;
+            }
+            // Initial update of canvas clear color
+            updateCanvasClearColor();
+
+
+            themeToggle.addEventListener('change', () => {
+                if (themeToggle.checked) {
+                    applyTheme('light-mode');
+                } else {
+                    applyTheme('dark-mode');
                 }
             });
-        }, observerOptions);
-
-        sectionTitles.forEach(title => {
-            title.classList.add('section-title-hidden'); // Add initial hidden class
-            sectionTitleObserver.observe(title);
-        });
-
-        // Back to Top Button Logic
-        const backToTopButton = document.getElementById('back-to-top');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) { // Show button after scrolling 300px
-                backToTopButton.classList.add('show');
-            } else {
-                backToTopButton.classList.remove('show');
-            }
-        });
-
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Dark/Light Mode Toggle Logic
-        const themeToggle = document.getElementById('checkbox');
-        const themeText = document.getElementById('theme-text');
-
-        // Function to update canvas background clear color based on theme
-        function updateCanvasClearColor() {
-            const bgColor = getComputedStyle(document.body).getPropertyValue('--bg-primary');
-            // Convert hex to rgba for the fade effect
-            const r = parseInt(bgColor.slice(1,3), 16);
-            const g = parseInt(bgColor.slice(3,5), 16);
-            const b = parseInt(bgColor.slice(5,7), 16);
-            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.05)`; // Update the clear color
-        }
-
-        // Check for saved theme preference
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme) {
-            document.body.classList.add(currentTheme);
-            if (currentTheme === 'light-mode') {
-                themeToggle.checked = true;
-                themeText.textContent = 'Light Mode';
-            } else {
-                themeText.textContent = 'Dark Mode';
-            }
-        } else {
-            // Default to dark mode if no preference saved
-            document.body.classList.add('dark-mode');
-            themeText.textContent = 'Dark Mode';
-        }
-        // Initial update of canvas clear color
-        updateCanvasClearColor();
-
-
-        themeToggle.addEventListener('change', () => {
-            if (themeToggle.checked) {
-                document.body.classList.remove('dark-mode');
-                document.body.classList.add('light-mode');
-                localStorage.setItem('theme', 'light-mode');
-                themeText.textContent = 'Light Mode';
-            } else {
-                document.body.classList.remove('light-mode');
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark-mode');
-                themeText.textContent = 'Dark Mode';
-            }
-            updateCanvasClearColor(); // Update canvas clear color on theme change
         });
     </script>
 </body>
