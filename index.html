@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Animated Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #e2e8f0; /* slate-200 */
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        /* Hero Section Specifics */
+        .hero-bg {
+            background-image: linear-gradient(to right top, #0f172a, #1a2035, #222940, #2a334c, #323d59);
+        }
+
+        .animated-text {
+            display: inline-block;
+        }
+
+        /* Project Card Styling */
+        .project-card {
+            background-color: #1e293b; /* slate-800 */
+            transition: all 0.3s ease-in-out;
+            border-radius: 0.75rem; /* rounded-xl */
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 20px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background-color: #3b82f6; /* blue-500 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* rounded-full */
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb; /* blue-600 */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Navbar active state (for smooth scroll) */
+        .nav-link.active {
+            color: #3b82f6; /* blue-500 */
+            font-weight: 600;
+        }
+
+        /* Scroll indicator (optional, if you want to add it later) */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background-color: #3b82f6; /* blue-500 */
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+    <div id="scroll-progress"></div>
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900 bg-opacity-90 backdrop-filter backdrop-blur-sm shadow-lg py-4">
+        <nav class="container mx-auto flex justify-between items-center px-6">
+            <a href="#hero" class="text-2xl font-bold text-blue-500 hover:text-blue-400 transition duration-300">Your Name</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-lg text-slate-200 hover:text-blue-400 transition duration-300">About Me</a>
+                <a href="#projects" class="nav-link text-lg text-slate-200 hover:text-blue-400 transition duration-300">Projects</a>
+                <a href="#contact" class="nav-link text-lg text-slate-200 hover:text-blue-400 transition duration-300">Contact</a>
+                <a href="https://example.com/your-resume.pdf" target="_blank" class="nav-link text-lg text-blue-500 hover:text-blue-400 transition duration-300">Resume <i class="fas fa-download ml-1"></i></a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-slate-200 text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 pt-4 pb-2 text-center">
+            <a href="#about" class="nav-link block py-2 text-lg text-slate-200 hover:bg-slate-700 transition duration-300">About Me</a>
+            <a href="#projects" class="nav-link block py-2 text-lg text-slate-200 hover:bg-slate-700 transition duration-300">Projects</a>
+            <a href="#contact" class="nav-link block py-2 text-lg text-slate-200 hover:bg-slate-700 transition duration-300">Contact</a>
+            <a href="https://example.com/your-resume.pdf" target="_blank" class="nav-link block py-2 text-lg text-blue-500 hover:bg-slate-700 transition duration-300">Resume <i class="fas fa-download ml-1"></i></a>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-bg min-h-screen flex items-center justify-center text-center px-6 pt-24 pb-12">
+        <div class="container mx-auto">
+            <p class="text-xl text-slate-300 mb-4 animate__animated animate__fadeInUp animate__delay-0.5s">Hello, I'm</p>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4">
+                <span class="animated-text">Your Name.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 mb-8 animate__animated animate__fadeInUp animate__delay-1s">
+                A passionate Electrical & Electronics Engineer specializing in
+                <br><span id="typed-text" class="text-blue-400 font-semibold"></span>
+            </p>
+            <a href="#projects" class="btn-primary inline-block animate__animated animate__fadeInUp animate__delay-1.5s">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-24 bg-slate-900 px-6">
+        <div class="container mx-auto opacity-0 translate-y-8 section-reveal">
+            <h2 class="text-4xl font-bold text-center text-blue-500 mb-12">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-12">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <img src="https://placehold.co/400x400/1e293b/e2e8f0?text=Your+Photo" alt="Your Name" class="rounded-full w-64 h-64 mx-auto object-cover border-4 border-blue-500 shadow-lg">
+                </div>
+                <div class="md:w-2/3 text-lg leading-relaxed text-slate-300">
+                    <p class="mb-4">
+                        I am an enthusiastic Electrical & Electronics Engineer with a strong foundation in **Green Energy, Smart Systems, IoT, and Embedded Systems**. I graduated from [Your College Name] in [Your Graduation Year or Current Year] with a degree in Electrical & Electronics Engineering.
+                    </p>
+                    <p class="mb-4">
+                        My journey into EEE was driven by a fascination with how technology can interact with the physical world and create intelligent solutions. I'm particularly passionate about designing and implementing systems that are both innovative and sustainable.
+                    </p>
+                    <p class="mb-4">
+                        I thrive on hands-on projects, from prototyping with Arduino and ESP8266 to delving into C and Python for software development. I am constantly learning and exploring new technologies to build efficient and impactful systems.
+                    </p>
+                    <ul class="list-disc list-inside text-slate-300">
+                        <li>**Education:** [Your College Name], [Branch], [Year]</li>
+                        <li>**Interests:** Green Energy, Smart Systems, IoT, Embedded Systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-16 md:py-24 bg-slate-800 px-6">
+        <div class="container mx-auto opacity-0 translate-y-8 section-reveal">
+            <h2 class="text-4xl font-bold text-center text-blue-500 mb-12">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=Smart+Exhaust" alt="Smart Exhaust System">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-blue-300 mb-3">Smart Exhaust System using MQ2</h3>
+                        <p class="text-slate-400 mb-4">An intelligent system designed to monitor and control vehicle exhaust emissions, ensuring cleaner air and compliance.</p>
+                        <div class="flex flex-wrap gap-2 text-sm text-slate-500 mb-4">
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">Arduino UNO</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">MQ2 Sensor</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">Relay</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">Servo Motor</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <a href="https://github.com/YourUsername/smart-exhaust" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fab fa-github mr-1"></i> GitHub</a>
+                            <a href="https://example.com/smart-exhaust-demo.mp4" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fas fa-video mr-1"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=Smart+Home" alt="IoT Smart Home Automation">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-blue-300 mb-3">IoT-based Smart Home Automation</h3>
+                        <p class="text-slate-400 mb-4">Automate home appliances with a user-friendly interface, enhancing convenience and energy efficiency.</p>
+                        <div class="flex flex-wrap gap-2 text-sm text-slate-500 mb-4">
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">ESP8266</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">Relays</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">Blynk App</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">Sensors</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <a href="https://github.com/YourUsername/smart-home-iot" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fab fa-github mr-1"></i> GitHub</a>
+                            <a href="https://example.com/smart-home-demo.mp4" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fas fa-video mr-1"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=Solar+Monitoring" alt="Solar Power Monitoring">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-blue-300 mb-3">Solar Power Monitoring System</h3>
+                        <p class="text-slate-400 mb-4">Real-time monitoring of solar panel performance and energy generation for optimal efficiency.</p>
+                        <div class="flex flex-wrap gap-2 text-sm text-slate-500 mb-4">
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">Arduino Mega</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">Voltage/Current Sensors</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">LCD Display</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full">Data Logging</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <a href="https://github.com/YourUsername/solar-monitoring" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fab fa-github mr-1"></i> GitHub</a>
+                            <a href="https://example.com/solar-monitoring-demo.mp4" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300"><i class="fas fa-video mr-1"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 md:py-24 bg-slate-900 px-6">
+        <div class="container mx-auto opacity-0 translate-y-8 section-reveal">
+            <h2 class="text-4xl font-bold text-center text-blue-500 mb-12">Get in Touch</h2>
+            <div class="max-w-xl mx-auto bg-slate-800 p-8 rounded-xl shadow-lg">
+                <p class="text-lg text-slate-300 text-center mb-6">
+                    Have a question or want to collaborate? Feel free to reach out!
+                </p>
+                <form action="https://formspree.io/f/YourFormspreeEndpoint" method="POST" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-slate-300 text-sm font-bold mb-2">Name</label>
+                        <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-3 px-4 text-slate-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-700 border-slate-600 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-slate-300 text-sm font-bold mb-2">Email</label>
+                        <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-3 px-4 text-slate-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-700 border-slate-600 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-slate-300 text-sm font-bold mb-2">Message</label>
+                        <textarea id="message" name="message" rows="6" required class="shadow appearance-none border rounded w-full py-3 px-4 text-slate-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-700 border-slate-600 focus:border-blue-500"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </div>
+                </form>
+                <div class="flex justify-center space-x-6 mt-8">
+                    <a href="https://linkedin.com/in/YourLinkedIn" target="_blank" class="text-blue-400 hover:text-blue-300 text-3xl transition duration-300" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/YourGitHub" target="_blank" class="text-blue-400 hover:text-blue-300 text-3xl transition duration-300" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:your.email@example.com" class="text-blue-400 hover:text-blue-300 text-3xl transition duration-300" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://t.me/YourTelegram" target="_blank" class="text-blue-400 hover:text-blue-300 text-3xl transition duration-300" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 py-8 text-center text-slate-400 text-sm">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Your Name. All rights reserved.</p>
+            <p class="mt-2">Designed with <i class="fas fa-heart text-red-500"></i> by Your Name</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hero Section Text Animation
+        anime.set('.animated-text', { opacity: 0 }); // Hide initially
+        anime.set('#typed-text', { opacity: 0 }); // Hide initially
+
+        anime.timeline({
+            easing: 'easeInOutQuad',
+            duration: 1200
+        })
+        .add({
+            targets: '.animated-text',
+            opacity: [0, 1],
+            translateX: [-50, 0],
+            delay: anime.stagger(100) // Stagger characters or words if needed
+        })
+        .add({
+            targets: '#typed-text',
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 800,
+            offset: '-=600' // Starts 600ms before previous animation ends
+        })
+        .add({
+            targets: '.btn-primary',
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 800,
+            offset: '-=400'
+        });
+
+        // Typed.js like effect for the subtitle
+        const typedTextElement = document.getElementById('typed-text');
+        const phrases = [
+            "Smart Systems",
+            "IoT Solutions",
+            "Embedded Systems",
+            "Green Energy Innovations"
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function typeWriter() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                typedTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let currentTypingSpeed = typingSpeed;
+            if (isDeleting) {
+                currentTypingSpeed /= 2; // Faster deletion
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                currentTypingSpeed = 1500; // Pause at end of phrase
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                currentTypingSpeed = 500; // Pause before typing next phrase
+            }
+
+            setTimeout(typeWriter, currentTypingSpeed);
+        }
+
+        // Start typewriter effect after hero section animation
+        setTimeout(() => {
+            typeWriter();
+        }, 1500); // Adjust delay to match hero animation
+
+        // Intersection Observer for section reveal animations
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: entry.target,
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 1000,
+                        easing: 'easeOutQuad',
+                        delay: 200 // Slightly delay the animation for each section
+                    });
+                    observer.unobserve(entry.target); // Unobserve once animated
+                }
+            });
+        }, {
+            threshold: 0.2 // Trigger when 20% of the section is visible
+        });
+
+        document.querySelectorAll('.section-reveal').forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Project Card Hover Animation
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                anime({
+                    targets: card,
+                    scale: 1.02,
+                    translateY: -8,
+                    boxShadow: '0 10px 15px rgba(0,0,0,0.2), 0 20px 25px rgba(0,0,0,0.3)',
+                    duration: 300,
+                    easing: 'easeOutQuad'
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                anime({
+                    targets: card,
+                    scale: 1,
+                    translateY: 0,
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1), 0 10px 15px rgba(0,0,0,0.2)',
+                    duration: 300,
+                    easing: 'easeOutQuad'
+                });
+            });
+        });
+
+        // Optional: Scroll progress bar
+        // window.addEventListener('scroll', () => {
+        //     const scrollTop = document.documentElement.scrollTop;
+        //     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        //     const scrolled = (scrollTop / scrollHeight) * 100;
+        //     document.getElementById('scroll-progress').style.width = scrolled + '%';
+        // });
+
+        // Navbar active link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) { // Adjust offset as needed
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.href.includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
