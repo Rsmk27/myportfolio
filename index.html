@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RSMK - Creative Developer</title>
+    <meta name="description" content="RSMK's modern, minimalist portfolio showcasing creative development, electrical engineering projects, and AI innovations.">
+    <meta name="keywords" content="RSMK, portfolio, web developer, electrical engineering, electronics, AI, embedded systems, green tech, smart energy, Python, HTML, CSS, JavaScript, Blender">
+    <meta name="author" content="RSMK">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://placehold.co/32x32/00BFFF/0d1117?text=R" type="image/x-icon">
+
     <!-- Google Fonts: Inter for clean body, Orbitron for bold headings -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
@@ -17,9 +24,19 @@
             --bg-secondary: #161b22; /* Slightly lighter dark for cards/sections */
             --text-primary: #f0f6fc; /* Off-white */
             --text-muted: #8b949e; /* Grey for secondary text */
-            --accent-color: #00bcd4; /* Vibrant Cyan */
+            --accent-color: #00BFFF; /* Deep Sky Blue for dark mode */
             --font-heading: 'Orbitron', sans-serif;
             --font-body: 'Inter', sans-serif;
+            --section-bg-alpha: 0.7; /* Transparency for section content backgrounds */
+        }
+
+        /* Light Mode Variables */
+        body.light-mode {
+            --bg-primary: #f0f6fc;
+            --bg-secondary: #ffffff;
+            --text-primary: #0d1117;
+            --text-muted: #586069;
+            --accent-color: #FF4500; /* Orange-Red for light mode */
         }
 
         * {
@@ -40,6 +57,7 @@
             overflow-x: hidden; /* Prevent horizontal scroll */
             position: relative; /* For canvas z-index context */
             cursor: none; /* Hide default cursor */
+            transition: background-color 0.5s ease; /* Smooth theme transition */
         }
 
         /* Full-screen Canvas for Dynamic Background */
@@ -93,6 +111,7 @@
             margin-bottom: 25px;
             line-height: 1.1;
             font-weight: 900; /* Extra bold */
+            color: var(--text-primary); /* Hero H1 should be primary text color */
         }
 
         h2 {
@@ -141,19 +160,19 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.3), transparent); /* Dark mode gradient */
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body.light-mode .accent-button::before {
+            background: linear-gradient(90deg, transparent, rgba(255, 69, 0, 0.3), transparent); /* Light mode gradient */
         }
 
         .accent-button:hover {
             color: var(--bg-primary);
-            box-shadow: 0 0 20px var(--accent-color), 0 0 40px rgba(0, 188, 212, 0.5);
+            box-shadow: 0 0 20px var(--accent-color), 0 0 40px rgba(0, 191, 255, 0.5);
             background-color: var(--accent-color);
             border-color: var(--accent-color);
-        }
-
-        .accent-button:hover::before {
-            left: 100%;
         }
 
         /* Navbar */
@@ -166,6 +185,12 @@
             padding: 18px 0; /* More padding */
             z-index: 1000;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        body.light-mode .navbar {
+            background-color: rgba(240, 246, 252, 0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .navbar .container {
@@ -254,7 +279,11 @@
             margin-bottom: 20px;
             color: var(--text-primary); /* White for headline */
             font-weight: 900;
-            text-shadow: 0 0 15px rgba(0, 188, 212, 0.3); /* Subtle accent glow */
+            text-shadow: 0 0 15px rgba(0, 191, 255, 0.3); /* Subtle accent glow */
+        }
+
+        body.light-mode #hero h1 {
+            text-shadow: 0 0 15px rgba(255, 69, 0, 0.3);
         }
 
         #hero h1 span {
@@ -279,10 +308,20 @@
         .project-card,
         .skill-item,
         #contact .contact-form {
-            background: rgba(22, 27, 34, 0.7); /* Slightly transparent secondary background */
+            background: rgba(22, 27, 34, var(--section-bg-alpha)); /* Slightly transparent secondary background */
             border-radius: 15px; /* Maintain rounded corners */
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Maintain shadow */
-            border: 1px solid rgba(0, 188, 212, 0.1); /* Maintain subtle accent border */
+            border: 1px solid rgba(0, 191, 255, 0.1); /* Maintain subtle accent border */
+            transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        body.light-mode #about .about-content,
+        body.light-mode .project-card,
+        body.light-mode .skill-item,
+        body.light-mode #contact .contact-form {
+            background: rgba(255, 255, 255, var(--section-bg-alpha));
+            border: 1px solid rgba(255, 69, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
         #about .about-image {
@@ -300,8 +339,13 @@
             height: auto;
             border-radius: 15px; /* Softer corners */
             border: 3px solid var(--accent-color);
-            box-shadow: 0 0 30px rgba(0, 188, 212, 0.4); /* Accent color glow */
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.4); /* Accent color glow */
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        body.light-mode #about .about-image img {
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.4);
         }
 
         #about .about-image img:hover {
@@ -341,6 +385,7 @@
             position: absolute;
             left: 0;
             top: -2px;
+            transition: color 0.5s ease;
         }
 
 
@@ -365,7 +410,11 @@
 
         .project-card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 188, 212, 0.5); /* Stronger shadow and accent glow */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 191, 255, 0.5); /* Stronger shadow and accent glow */
+        }
+
+        body.light-mode .project-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2), 0 0 30px rgba(255, 69, 0, 0.5);
         }
 
         .project-card img {
@@ -374,12 +423,18 @@
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 20px;
-            border: 1px solid rgba(0, 188, 212, 0.2);
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            transition: border-color 0.5s ease;
+        }
+
+        body.light-mode .project-card img {
+            border: 1px solid rgba(255, 69, 0, 0.2);
         }
 
         .project-card h3 {
             color: var(--accent-color);
             margin-bottom: 12px;
+            transition: color 0.5s ease;
         }
 
         .project-card p {
@@ -394,6 +449,7 @@
             color: var(--accent-color);
             margin-bottom: 25px;
             font-weight: 500;
+            transition: color 0.5s ease;
         }
 
         .project-card .accent-button {
@@ -418,7 +474,11 @@
 
         .skill-item:hover {
             transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 188, 212, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 191, 255, 0.3);
+        }
+
+        body.light-mode .skill-item:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 69, 0, 0.3);
         }
 
         .skill-item h3 {
@@ -442,25 +502,21 @@
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
+        body.light-mode .skill-item .progress-bar {
+            background-color: #e0e0e0;
+        }
+
         .skill-item .progress {
             height: 100%;
             background: linear-gradient(90deg, #007bff, var(--accent-color)); /* Blue to Cyan gradient */
             border-radius: 5px;
             width: 0%;
             animation: fillProgress 1.5s ease-out forwards;
+            transition: background 0.5s ease;
         }
 
-        /* Example progress bar widths (adjust as needed) */
-        .skill-item[data-progress="90"] .progress { width: 90%; }
-        .skill-item[data-progress="85"] .progress { width: 85%; }
-        .skill-item[data-progress="80"] .progress { width: 80%; }
-        .skill-item[data-progress="75"] .progress { width: 75%; }
-        .skill-item[data-progress="70"] .progress { width: 70%; }
-        .skill-item[data-progress="60"] .progress { width: 60%; }
-
-        @keyframes fillProgress {
-            from { width: 0%; }
-            to { width: var(--progress-width); }
+        body.light-mode .skill-item .progress {
+            background: linear-gradient(90deg, #ff5722, var(--accent-color)); /* Orange to Pink gradient */
         }
 
         /* Contact Me Section */
@@ -502,14 +558,26 @@
             font-size: 1.05em;
             color: var(--text-primary);
             outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease;
             cursor: none; /* Hide default cursor on form inputs */
+        }
+
+        body.light-mode #contact .contact-form input,
+        body.light-mode #contact .contact-form textarea {
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            color: var(--text-primary);
         }
 
         #contact .contact-form input:focus,
         #contact .contact-form textarea:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+
+        body.light-mode #contact .contact-form input:focus,
+        body.light-mode #contact .contact-form textarea:focus {
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
         }
 
         #contact .contact-form textarea {
@@ -544,6 +612,7 @@
             width: 60px;
             height: 60px;
             animation: spin 1s linear infinite;
+            transition: border-top-color 0.5s ease;
         }
 
         @keyframes spin {
@@ -561,6 +630,96 @@
         .section-title-visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-color);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.5s ease, color 0.5s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Dark/Light Mode Toggle */
+        .theme-switch-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            font-size: 1.1em;
+            transition: color 0.5s ease;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+        }
+
+        .theme-switch input {
+            display: none;
+        }
+
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            width: 26px;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
         }
 
         /* Responsive Design */
@@ -640,6 +799,17 @@
             #contact .contact-form {
                 padding: 30px;
             }
+
+            .theme-switch-wrapper {
+                top: initial;
+                bottom: 20px;
+                left: 20px;
+                right: initial;
+            }
+
+            #back-to-top {
+                bottom: 80px; /* Adjust position to avoid overlap with theme switch */
+            }
         }
 
         @media (max-width: 480px) {
@@ -687,6 +857,15 @@
     <!-- Full-screen Canvas for Dynamic Background -->
     <canvas id="full-background-canvas"></canvas>
 
+    <!-- Theme Switch Toggle -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round"></div>
+        </label>
+        <span id="theme-text">Dark Mode</span>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
@@ -712,9 +891,9 @@
     <!-- About Me Section -->
     <section id="about">
         <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
-            <img src="https://placehold.co/350x350/00bcd4/161b22?text=Your+Avatar" alt="RSMK's Avatar">
+            <img src="https://placehold.co/350x350/00BFFF/161b22?text=Your+Avatar" alt="RSMK's Avatar">
         </div>
-        <div class="about-content"> <!-- Removed data-aos from content wrapper, now handled by inner elements -->
+        <div class="about-content">
             <h2 class="section-title">About Me</h2>
             <p data-aos="fade-up" data-aos-delay="100">I am currently pursuing my B.Tech in Electrical and Electronics Engineering at Andhra Loyola Institute of Engineering and Technology. My academic journey is driven by a deep curiosity for how technology can solve real-world problems.</p>
             <p data-aos="fade-up" data-aos-delay="200">My interests include:</p>
@@ -735,42 +914,42 @@
         <h2 class="section-title">Featured Projects</h2>
         <div class="project-grid">
             <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Exhaust+Fan" alt="Autonomous Exhaust Fan">
+                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Exhaust+Fan" alt="Autonomous Exhaust Fan">
                 <h3>Autonomous Exhaust Fan</h3>
                 <p>An intelligent exhaust fan system designed to automatically detect air quality and activate, ensuring a healthier environment.</p>
                 <p class="tools-used">Arduino, MQ-2 Gas Sensor, Timer Module</p>
                 <a href="#" class="accent-button">View Project</a>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Traffic+Light" alt="Traffic Light Simulation">
+                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Traffic+Light" alt="Traffic Light Simulation">
                 <h3>Traffic Light Simulation</h3>
                 <p>A hands-on simulation demonstrating the sequential operation of traffic lights using basic electronic components.</p>
                 <p class="tools-used">Breadboard, LEDs, Resistors, Manual Control</p>
                 <a href="#" class="accent-button">View Project</a>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Smart+Grid" alt="Smart Energy Grid Concept">
+                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Smart+Grid" alt="Smart Energy Grid Concept">
                 <h3>Smart Energy Grid Concept</h3>
                 <p>A conceptual research project exploring the principles and benefits of a decentralized, efficient smart energy distribution system.</p>
                 <p class="tools-used">Simulation/Research, Conceptual Design</p>
                 <a href="#" class="accent-button">View Project</a>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="400">
-                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Telegram+Bots" alt="Telegram Bots">
+                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Telegram+Bots" alt="Telegram Bots">
                 <h3>Telegram Bots</h3>
                 <p>Developed various utility bots for Telegram, including a reminder bot, a language translator, and a basic conversational chatbot.</p>
                 <p class="tools-used">Python, Telegram Bot API, APIs</p>
                 <a href="#" class="accent-button">View Project</a>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="500">
-                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Community+Work" alt="Community Service Work">
+                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Community+Work" alt="Community Service Work">
                 <h3>Community Service Work</h3>
                 <p>Conducted surveys and implemented practical solutions for local issues in Murapaka village as part of community outreach.</p>
                 <p class="tools-used">Survey Methodology, Problem Solving, Community Engagement</p>
                 <a href="#" class="accent-button">View Project</a>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="600">
-                <img src="https://placehold.co/400x220/00bcd4/161b22?text=Blender+Designs" alt="Blender Designs">
+                <img src="https://placehold.co/400x220/00BFFF/161b22?text=Blender+Designs" alt="Blender Designs">
                 <h3>Blender Designs</h3>
                 <p>A collection of 3D models and renders created using Blender, showcasing skills in digital design and visualization.</p>
                 <p class="tools-used">Blender (3D Modeling, Rendering)</p>
@@ -836,9 +1015,14 @@
     </section>
 
     <!-- Footer (simple) -->
-    <footer style="background-color: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9em; border-top: 1px solid rgba(0, 188, 212, 0.1);">
+    <footer style="background-color: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9em; border-top: 1px solid rgba(0, 191, 255, 0.1); transition: background-color 0.5s ease, border-color 0.5s ease;">
         <p>&copy; 2025 RSMK. All rights reserved.</p>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- AOS JavaScript -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -911,86 +1095,135 @@
         }
 
 
-        // Canvas Background Animation (Geometric Shapes) and Cursor Animation
+        // Canvas Background Animation (Connecting Dots) and Cursor Animation
         const canvas = document.getElementById('full-background-canvas');
         const ctx = canvas.getContext('2d');
         let animationFrameId;
-        let shapes = [];
-        const numShapes = 80; // Increased number of animated background shapes for more dynamism
 
-        let cursorParticles = []; // Array to store cursor trail particles
-        let mouse = { x: 0, y: 0 }; // Mouse position
+        // Moved Particle and Ripple class definitions to the top of the script
+        // to resolve "Cannot access 'Particle' before initialization" error.
 
-        // Resize canvas to fill window
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas(); // Initial resize
-
-        // Shape class for background animation
-        class Shape {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 5 + 2; // Increased size range (2 to 7)
-                this.dx = (Math.random() - 0.5) * 0.8; // Slightly faster movement
-                this.dy = (Math.random() - 0.5) * 0.8;
-                this.opacity = Math.random() * 0.15 + 0.08; // Slightly more visible opacity
-                this.color = `rgba(0, 188, 212, ${this.opacity})`; // Accent color with varying opacity
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.01; // Slightly faster rotation
-                this.type = Math.floor(Math.random() * 3); // 0: circle, 1: square, 2: triangle
+        // Particle class for background animation
+        class Particle {
+            constructor(x, y) {
+                this.x = x || Math.random() * canvas.width;
+                this.y = y || Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1; // 1 to 3
+                this.baseOpacity = Math.random() * 0.1 + 0.05; // Base opacity for subtle particles
+                this.opacity = this.baseOpacity;
+                this.dx = (Math.random() - 0.5) * 0.4; // Slower movement
+                this.dy = (Math.random() - 0.5) * 0.4;
             }
 
             update() {
                 this.x += this.dx;
                 this.y += this.dy;
-                this.rotation += this.rotationSpeed;
 
                 // Wrap around edges
-                if (this.x < -this.size) this.x = canvas.width + this.size;
-                if (this.x > canvas.width + this.size) this.x = -this.size;
-                if (this.y < -this.size) this.y = canvas.height + this.size;
-                if (this.y > canvas.height + this.size) this.y = -this.size;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+
+                // Mouse interaction: increase opacity/size slightly
+                let distance = Math.sqrt(
+                    (this.x - mouse.x) ** 2 + (this.y - mouse.y) ** 2
+                );
+                if (distance < mouseInteractionRadius) {
+                    this.opacity = Math.min(
+                        this.baseOpacity + (1 - distance / mouseInteractionRadius) * 0.3,
+                        0.8
+                    );
+                    this.size = Math.min(
+                        (Math.random() * 2 + 1) + (1 - distance / mouseInteractionRadius) * 2,
+                        5
+                    );
+                } else {
+                    this.opacity = this.baseOpacity;
+                    this.size = Math.random() * 2 + 1;
+                }
             }
 
             draw() {
-                ctx.fillStyle = this.color;
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = 1;
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
-
-                switch (this.type) {
-                    case 0: // Circle
-                        ctx.beginPath();
-                        ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                        ctx.fill();
-                        break;
-                    case 1: // Square
-                        ctx.fillRect(-this.size, -this.size, this.size * 2, this.size * 2);
-                        break;
-                    case 2: // Triangle
-                        ctx.beginPath();
-                        ctx.moveTo(0, -this.size * 1.2);
-                        ctx.lineTo(-this.size * 1.2, this.size * 0.8);
-                        ctx.lineTo(this.size * 1.2, this.size * 0.8);
-                        ctx.closePath();
-                        ctx.fill();
-                        break;
-                }
-                ctx.restore();
+                const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
+                ctx.fillStyle = `rgba(${parseInt(accentColor.slice(1,3), 16)}, ${parseInt(accentColor.slice(3,5), 16)}, ${parseInt(accentColor.slice(5,7), 16)}, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
 
-        // Initialize background shapes
-        function initShapes() {
-            shapes = [];
-            for (let i = 0; i < numShapes; i++) {
-                shapes.push(new Shape());
+        // Cursor Ripple Class
+        class Ripple {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = 0;
+                this.maxRadius = 50; // Max size of the ripple
+                this.opacity = 1;
+                this.speed = 2; // How fast the ripple expands
+            }
+
+            update() {
+                this.radius += this.speed;
+                this.opacity -= 0.02; // Fade out
+            }
+
+            draw() {
+                const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
+                ctx.strokeStyle = `rgba(${parseInt(accentColor.slice(1,3), 16)}, ${parseInt(accentColor.slice(3,5), 16)}, ${parseInt(accentColor.slice(5,7), 16)}, ${this.opacity})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        let particles = [];
+        const numParticles = 100;
+        const maxLineDistance = 150;
+        const mouseInteractionRadius = 100;
+
+        let ripples = [];
+        let mouse = { x: 0, y: 0, radius: 1 };
+
+        // Resize canvas to fill window
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles(); // Re-initialize particles on resize
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // Initial resize
+
+        // Initialize particles
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Draw lines between nearby particles
+        function connectParticles() {
+            const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let distance = Math.sqrt(
+                        (particles[a].x - particles[b].x) ** 2 +
+                        (particles[a].y - particles[b].y) ** 2
+                    );
+
+                    if (distance < maxLineDistance) {
+                        let lineOpacity = 1 - (distance / maxLineDistance);
+                        ctx.strokeStyle = `rgba(${parseInt(accentColor.slice(1,3), 16)}, ${parseInt(accentColor.slice(3,5), 16)}, ${parseInt(accentColor.slice(5,7), 16)}, ${lineOpacity * 0.5})`; // Subtle lines
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
             }
         }
 
@@ -998,52 +1231,35 @@
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.clientX;
             mouse.y = e.clientY;
-            // Add a new particle to the cursor trail
-            cursorParticles.push({
-                x: mouse.x,
-                y: mouse.y,
-                size: Math.random() * 3 + 2, // Larger initial size (2 to 5)
-                opacity: 1,
-                life: 90 // Longer particle lifespan in frames
-            });
-            // Limit the number of particles to prevent performance issues
-            if (cursorParticles.length > 200) { // Increased limit for more visible trail
-                cursorParticles.shift(); // Remove the oldest particle
-            }
+            // Add a new ripple
+            ripples.push(new Ripple(e.clientX, e.clientY));
         });
 
         // Animation loop for both background and cursor effects
         function animateCanvas() {
             // Clear canvas with a slight fade effect to create trails for background shapes
-            ctx.fillStyle = 'rgba(13, 17, 23, 0.03)'; // Even more subtle fade for background to make trails longer
+            ctx.fillStyle = `rgba(${parseInt(getComputedStyle(document.body).getPropertyValue('--bg-primary').slice(1,3), 16)}, ${parseInt(getComputedStyle(document.body).getPropertyValue('--bg-primary').slice(3,5), 16)}, ${parseInt(getComputedStyle(document.body).getPropertyValue('--bg-primary').slice(5,7), 16)}, 0.05)`; // Use current theme's primary background color for fade
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Update and draw background shapes
-            shapes.forEach(shape => {
-                shape.update();
-                shape.draw();
+            // Update and draw background particles
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
             });
 
-            // Update and draw cursor particles
-            for (let i = 0; i < cursorParticles.length; i++) {
-                let p = cursorParticles[i];
-                p.life--;
-                p.opacity -= 1 / p.life; // Fade out based on remaining life
-                p.size *= 0.97; // Shrink slightly slower
+            // Draw lines between particles
+            connectParticles();
 
-                if (p.life <= 0 || p.opacity <= 0 || p.size <= 0.1) {
-                    cursorParticles.splice(i, 1); // Remove dead particles
+            // Update and draw cursor ripples
+            for (let i = 0; i < ripples.length; i++) {
+                let r = ripples[i];
+                r.update();
+                r.draw();
+
+                if (r.opacity <= 0 || r.radius > r.maxRadius) {
+                    ripples.splice(i, 1); // Remove dead ripples
                     i--; // Adjust index after removal
-                    continue;
                 }
-
-                ctx.fillStyle = `rgba(0, 188, 212, ${p.opacity})`; // Accent color for cursor particles
-                ctx.shadowBlur = p.size * 2; // Add glow effect based on size
-                ctx.shadowColor = `rgba(0, 188, 212, ${p.opacity * 0.8})`; // Glow color
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.shadowBlur = 0; // Reset shadow for next draws
             }
 
             animationFrameId = requestAnimationFrame(animateCanvas);
@@ -1051,7 +1267,7 @@
 
         // Start canvas animation when window loads
         window.addEventListener('load', () => {
-            initShapes();
+            initParticles();
             animateCanvas();
         });
 
@@ -1091,6 +1307,72 @@
         sectionTitles.forEach(title => {
             title.classList.add('section-title-hidden'); // Add initial hidden class
             sectionTitleObserver.observe(title);
+        });
+
+        // Back to Top Button Logic
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling 300px
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Dark/Light Mode Toggle Logic
+        const themeToggle = document.getElementById('checkbox');
+        const themeText = document.getElementById('theme-text');
+
+        // Function to update canvas background clear color based on theme
+        function updateCanvasClearColor() {
+            const bgColor = getComputedStyle(document.body).getPropertyValue('--bg-primary');
+            // Convert hex to rgba for the fade effect
+            const r = parseInt(bgColor.slice(1,3), 16);
+            const g = parseInt(bgColor.slice(3,5), 16);
+            const b = parseInt(bgColor.slice(5,7), 16);
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.05)`; // Update the clear color
+        }
+
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.body.classList.add(currentTheme);
+            if (currentTheme === 'light-mode') {
+                themeToggle.checked = true;
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeText.textContent = 'Dark Mode';
+            }
+        } else {
+            // Default to dark mode if no preference saved
+            document.body.classList.add('dark-mode');
+            themeText.textContent = 'Dark Mode';
+        }
+        // Initial update of canvas clear color
+        updateCanvasClearColor();
+
+
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light-mode');
+                themeText.textContent = 'Light Mode';
+            } else {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+                themeText.textContent = 'Dark Mode';
+            }
+            updateCanvasClearColor(); // Update canvas clear color on theme change
         });
     </script>
 </body>
