@@ -30,44 +30,50 @@
         .font-orbitron {
             font-family: 'Orbitron', sans-serif;
         }
-        /* The previous body::before background animation is removed to make way for particles.js */
 
         .glass-card {
-            background: rgba(34, 34, 34, 0.6); /* Dim Gray with transparency */
+            background: rgba(34, 34, 34, 0.8); /* Increased opacity for better readability */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 255, 0.2); /* Neon Cyan */
-            box-shadow: 0 0 20px 5px rgba(0, 255, 255, 0.1); /* Neon Cyan */
+            border: 1px solid rgba(0, 255, 255, 0.3); /* Neon Cyan */
+            box-shadow: 0 0 30px 8px rgba(0, 255, 255, 0.15); /* Enhanced glow */
+            transition: all 0.3s ease;
         }
         .glass-card:hover {
-            box-shadow: 0 0 30px 8px rgba(0, 255, 255, 0.3); /* Neon Cyan */
+            box-shadow: 0 0 40px 12px rgba(0, 255, 255, 0.4); /* Stronger hover glow */
             border-color: #00FFFF; /* Neon Cyan */
+            transform: translateY(-5px);
         }
         .neon-glow-text-blue { /* Now Neon Cyan */
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 255, 255, 0.6); /* Neon Cyan */
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.4); /* Enhanced glow */
         }
         .neon-glow-text-green { /* Now Magenta Glow */
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.8), 0 0 10px rgba(255, 0, 255, 0.6); /* Magenta Glow */
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.6), 0 0 30px rgba(255, 0, 255, 0.4); /* Enhanced glow */
         }
         .progress-bar-inner {
             background: linear-gradient(to right, #00FFFF, #FF00FF); /* Neon Cyan, Magenta Glow */
-            box-shadow: 0 0 8px rgba(255, 0, 255, 0.5); /* Magenta Glow */
+            box-shadow: 0 0 12px rgba(255, 0, 255, 0.6); /* Enhanced glow */
+            border-radius: 10px;
         }
         .form-input:focus {
             outline: none;
             border-color: #00FFFF; /* Neon Cyan */
-            box-shadow: 0 0 10px #00FFFF; /* Neon Cyan */
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Enhanced focus glow */
         }
         .social-icon:hover {
             color: #FF00FF; /* Magenta Glow */
-            text-shadow: 0 0 15px #FF00FF; /* Magenta Glow */
+            text-shadow: 0 0 20px #FF00FF; /* Enhanced hover glow */
+            transform: scale(1.2);
+            transition: all 0.3s ease;
         }
         .submit-button {
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Neon Cyan */
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6); /* Enhanced glow */
+            transition: all 0.3s ease;
         }
         .submit-button:hover {
             background-color: #FF00FF; /* Magenta Glow */
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.7); /* Magenta Glow */
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8); /* Enhanced hover glow */
+            transform: translateY(-2px);
         }
         .typed-cursor {
             color: #00FFFF; /* Neon Cyan */
@@ -76,6 +82,8 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
+        
+        /* Enhanced Navigation */
         .nav-link::after {
             content: '';
             display: block;
@@ -83,10 +91,53 @@
             height: 2px;
             background: #00FFFF; /* Neon Cyan */
             transition: width .3s;
+            box-shadow: 0 0 5px #00FFFF;
         }
         .nav-link:hover::after {
             width: 100%;
         }
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #00FFFF;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+        
+        /* Enhanced buttons */
+        .btn-primary {
+            background: linear-gradient(45deg, #00FFFF, #0080FF);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #FF00FF, #FF0080);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+        }
+        
+        /* Improved section spacing */
+        .section-padding {
+            padding: 120px 0;
+        }
+        
+        /* Enhanced hero section */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
         /* Cursor animation dot */
         .cursor-dot {
             position: fixed;
@@ -98,6 +149,21 @@
             z-index: 9999; /* Ensure it's above particles */
             opacity: 0; /* Start hidden */
         }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #00FFFF, #FF00FF);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        
         /* Style for particles.js container */
         #particles-js {
             position: fixed;
@@ -108,19 +174,34 @@
             background-color: #0D0D0D; /* Jet Black, base for particles */
             z-index: 0; /* Ensures it's behind all content */
         }
+        
+        /* Improved mobile responsiveness */
+        @media (max-width: 768px) {
+            .hero-gradient {
+                padding: 20px;
+                margin: 0 10px;
+            }
+            .section-padding {
+                padding: 80px 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Scroll progress indicator -->
+    <div class="scroll-indicator" id="scroll-indicator"></div>
+    
     <!-- Particles.js container - this will hold the animated background -->
     <div id="particles-js" class="fixed top-0 left-0 w-full h-full z-0"></div>
 
     <!-- Pre-loader -->
-    <div id="preloader" class="fixed top-0 left-0 w-full h-full bg-[#0D0D0D] flex justify-center items-center z-50 transition-opacity duration-500">
-        <div class="w-16 h-16 border-4 border-t-4 border-gray-700 border-t-[#00FFFF] rounded-full animate-spin"></div>
+    <div id="preloader" class="fixed top-0 left-0 w-full h-full bg-[#0D0D0D] flex flex-col justify-center items-center z-50 transition-opacity duration-500">
+        <div class="w-20 h-20 border-4 border-t-4 border-gray-700 border-t-[#00FFFF] rounded-full animate-spin mb-4"></div>
+        <p class="text-[#00FFFF] font-orbitron text-lg">Loading Portfolio...</p>
     </div>
 
     <!-- Header & Navigation -->
-    <header class="bg-black/30 backdrop-blur-sm fixed top-0 left-0 right-0 z-40">
+    <header class="bg-black/40 backdrop-blur-md fixed top-0 left-0 right-0 z-40 border-b border-[#00FFFF]/20">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#hero" class="font-orbitron text-2xl font-bold tracking-widest neon-glow-text-green">RSMK</a>
             <div class="hidden md:flex space-x-8">
@@ -129,11 +210,11 @@
                 <a href="#skills" class="nav-link text-lg">Skills</a>
                 <a href="#contact" class="nav-link text-lg">Contact</a>
             </div>
-            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none text-[#00FFFF] hover:text-[#FF00FF] transition-colors duration-300">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-black/50">
+        <div id="mobile-menu" class="hidden md:hidden bg-black/80 backdrop-blur-md">
             <a href="#about" class="block text-center py-2 text-lg">About</a>
             <a href="#projects" class="block text-center py-2 text-lg">Projects</a>
             <a href="#skills" class="block text-center py-2 text-lg">Skills</a>
@@ -143,34 +224,40 @@
 
     <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center justify-center text-center px-4 relative z-10">
-        <div class="relative z-10">
+        <div class="relative z-10 hero-gradient max-w-4xl">
             <h1 class="font-orbitron text-4xl md:text-6xl lg:text-7xl font-bold mb-4 neon-glow-text-blue" data-aos="fade-down">Hi, I’m RSMK</h1>
             <p class="text-xl md:text-2xl lg:text-3xl font-orbitron mb-6" data-aos="fade-up" data-aos-delay="200">An Electrical and Electronics Engineering Student</p>
             <p class="max-w-3xl mx-auto text-md md:text-lg text-[#F5F5F5]" data-aos="fade-up" data-aos-delay="400">
                 Passionately exploring <span id="typed-output" class="font-semibold text-[#00FFFF]"></span>. Always building, always learning.
             </p>
+            <div class="mt-8" data-aos="fade-up" data-aos-delay="600">
+                <a href="#projects" class="btn-primary mr-4">View My Work</a>
+                <a href="#contact" class="btn-primary">Get In Touch</a>
+            </div>
         </div>
     </section>
 
     <!-- About Me Section -->
-    <section id="about" class="py-20 md:py-32 bg-[#222222]/0 relative z-10">
+    <section id="about" class="section-padding bg-[#222222]/0 relative z-10">
         <div class="container mx-auto px-6">
             <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-green" data-aos="fade-up">About Me</h2>
             <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
                 <div class="md:w-1/3" data-aos="fade-right">
-                    <img src="Create a modern and professional logo featuring the name _RSMK_. Use dark colors like black, navy blue, or charcoal as the primary theme with metallic or electric blue highlights. Integrate elements like a circuit,.jpg"  alt="A professional image of RSMK" class="rounded-full w-64 h-64 md:w-80 md:h-80 mx-auto border-4 border-[#00FFFF] shadow-[0_0_25px_rgba(0,255,255,0.4)] transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="Create a modern and professional logo featuring the name _RSMK_. Use dark colors like black, navy blue, or charcoal as the primary theme with metallic or electric blue highlights. Integrate elements like a circuit,.jpg"  alt="A professional image of RSMK" class="rounded-full w-64 h-64 md:w-80 md:h-80 mx-auto border-4 border-[#00FFFF] shadow-[0_0_35px_rgba(0,255,255,0.5)] transition-all duration-500 hover:scale-105 hover:shadow-[0_0_50px_rgba(0,255,255,0.7)]">
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#00FFFF]/20 to-[#FF00FF]/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
                  </div>
                 <div class="md:w-2/3 text-center md:text-left" data-aos="fade-left">
-                    <p class="text-lg md:text-xl mb-6">I’m an Electrical and Electronics Engineering student who loves building things and solving real-world problems. I enjoy working on hands-on projects, especially anything to do with automation or smart tech. I’m always curious and like learning by trying things out myself. In my free time, I mess around with websites, explore new tools, and share what I learn. I’m just trying to grow step by step and do something meaningful with what I know.
-</p>
+                    <p class="text-lg md:text-xl mb-6 leading-relaxed">I'm an Electrical and Electronics Engineering student who loves building things and solving real-world problems. I enjoy working on hands-on projects, especially anything to do with automation or smart tech. I'm always curious and like learning by trying things out myself. In my free time, I mess around with websites, explore new tools, and share what I learn. I'm just trying to grow step by step and do something meaningful with what I know.</p>
                     <h3 class="text-2xl font-bold mb-4 text-[#00FFFF]">My Interests</h3>
                     <div class="flex flex-wrap justify-center md:justify-start gap-3">
-                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black">Green Technology & Smart Energy</span>
-                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black">Embedded Systems and IoT</span>
-                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black">Automation & Control</span>
-                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black">AI-based Telegram Bots</span>
-                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black">MATLAB/Simulink</span>
-                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black">3D Design using Blender</span>
+                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">Green Technology & Smart Energy</span>
+                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">Embedded Systems and IoT</span>
+                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">Automation & Control</span>
+                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">AI-based Telegram Bots</span>
+                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">MATLAB/Simulink</span>
+                        <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">3D Design using Blender</span>
                     </div>
                 </div>
             </div>
@@ -178,86 +265,86 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 md:py-32 bg-[#0D0D0D]/0 relative z-10">
+    <section id="projects" class="section-padding bg-[#0D0D0D]/0 relative z-10">
         <div class="container mx-auto px-6">
             <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-blue" data-aos="fade-up">Featured Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in">
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in">
                     <img src="https://placehold.co/600x400/222222/00FFFF?text=Auto Exhaust Fan" alt="Autonomous Exhaust Fan Project" class="rounded-md mb-4 h-48 object-cover">
                     <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Automatic Exhaust Fan</h3>
                     <p class="text-[#F5F5F5] text-sm flex-grow mb-4">An automated system detecting poor air quality via an MQ-2 sensor to activate a fan, ensuring a healthy environment.</p>
                     <div class="mb-4">
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20">Arduino</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">MQ-2</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">C++</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">Arduino</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">MQ-2</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">C++</span>
                     </div>
-                    <a href="https://rsmk27.github.io/Autoexhaustfan/" class="mt-auto text-center bg-[#00FFFF] text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-[#FF00FF] hover:text-white">View Project</a>
+                    <a href="https://rsmk27.github.io/Autoexhaustfan/" class="mt-auto btn-primary text-center">View Project</a>
                 </div>
 
-                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="100">
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in" data-aos-delay="100">
                     <img src="https://placehold.co/600x400/222222/00FFFF?text=Color+Ohm" alt="Color Ohm" class="rounded-md mb-4 h-48 object-cover">
                     <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Resistor Color Code Calculator</h3>
                     <p class="text-[#F5F5F5] text-sm flex-grow mb-4">OhmDecoder is a sleek and accurate web tool that instantly decodes resistor color bands into their precise resistance values. Designed for Students</p>
                     <div class="mb-4">
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20">HTML</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">js</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">CSS</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">HTML</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">js</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">CSS</span>
                     </div>
-                    <a href="https://rsmk27.github.io/colorohm/" class="mt-auto text-center bg-[#00FFFF] text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-[#FF00FF] hover:text-white">View Project</a>
+                    <a href="https://rsmk27.github.io/colorohm/" class="mt-auto btn-primary text-center">View Project</a>
                 </div>
 
-                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="200">
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in" data-aos-delay="200">
                     <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+3" alt="Smart Energy Grid Concept" class="rounded-md mb-4 h-48 object-cover">
                     <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Smart Energy Grid Concept</h3>
                     <p class="text-[#F5F5F5] text-sm flex-grow mb-4">A research and simulation project exploring dynamic load balancing and renewable energy integration in a modern smart grid.</p>
                     <div class="mb-4">
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20">MATLAB</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">Simulink</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">Research</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">MATLAB</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">Simulink</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">Research</span>
                     </div>
-                    <a href="#" class="mt-auto text-center bg-[#00FFFF] text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-[#FF00FF] hover:text-white">View Project</a>
+                    <a href="#" class="mt-auto btn-primary text-center">View Project</a>
                 </div>
 
-                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in">
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in">
                     <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+4" alt="Telegram Bots" class="rounded-md mb-4 h-48 object-cover">
                     <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Telegram Bots</h3>
                     <p class="text-[#F5F5F5] text-sm flex-grow mb-4">Developed various AI-powered bots, including a reminder bot, a language translator, and a conversational chatbot using the Telegram Bot API.</p>
                     <div class="mb-4">
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20">Python</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">Telegram API</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">AI</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">Python</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">Telegram API</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">AI</span>
                     </div>
-                    <a href="#" class="mt-auto text-center bg-[#00FFFF] text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-[#FF00FF] hover:text-white">View Project</a>
+                    <a href="#" class="mt-auto btn-primary text-center">View Project</a>
                 </div>
 
-                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="100">
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in" data-aos-delay="100">
                     <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+5" alt="Community Service Work" class="rounded-md mb-4 h-48 object-cover">
                     <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Community Service Work</h3>
                     <p class="text-[#F5F5F5] text-sm flex-grow mb-4">Conducted a survey and proposed engineering-based solutions for local issues in Murapaka village, focusing on practical problem-solving.</p>
                     <div class="mb-4">
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20">Surveying</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">Problem-Solving</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">Surveying</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">Problem-Solving</span>
                     </div>
-                    <a href="#" class="mt-auto text-center bg-[#00FFFF] text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-[#FF00FF] hover:text-white">View Project</a>
+                    <a href="#" class="mt-auto btn-primary text-center">View Project</a>
                 </div>
 
-                <div class="glass-card rounded-lg p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="200">
+                <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in" data-aos-delay="200">
                     <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+6" alt="Blender Designs" class="rounded-md mb-4 h-48 object-cover">
                     <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Blender Designs</h3>
                     <p class="text-[#F5F5F5] text-sm flex-grow mb-4">A collection of 3D modeling experiments, creating various objects and scenes to explore design principles and visualization techniques.</p>
                     <div class="mb-4">
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20">Blender</span>
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 ml-1">3D Modeling</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">Blender</span>
+                        <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">3D Modeling</span>
                     </div>
-                    <a href="#" class="mt-auto text-center bg-[#00FFFF] text-black font-bold py-2 px-4 rounded-md transition-colors duration-300 hover:bg-[#FF00FF] hover:text-white">View Project</a>
+                    <a href="#" class="mt-auto btn-primary text-center">View Project</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 md:py-32 bg-[#222222]/0 relative z-10">
+    <section id="skills" class="section-padding bg-[#222222]/0 relative z-10">
         <div class="container mx-auto px-6">
             <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-green" data-aos="fade-up">Technical Skills</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
@@ -268,7 +355,7 @@
                             <span class="text-base font-medium text-[#F5F5F5]">Arduino / ESP8266</span>
                             <span class="text-sm font-medium text-[#F5F5F5]">90%</span>
                         </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                        <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
                             <div class="progress-bar-inner h-2.5 rounded-full" data-progress="90"></div>
                         </div>
                     </div>
@@ -277,7 +364,7 @@
                             <span class="text-base font-medium text-[#F5F5F5]">Python</span>
                             <span class="text-sm font-medium text-[#F5F5F5]">85%</span>
                         </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                        <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
                             <div class="progress-bar-inner h-2.5 rounded-full" data-progress="85"></div>
                         </div>
                     </div>
@@ -286,7 +373,7 @@
                             <span class="text-base font-medium text-[#F5F5F5]">C Language</span>
                             <span class="text-sm font-medium text-[#F5F5F5]">75%</span>
                         </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                        <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
                             <div class="progress-bar-inner h-2.5 rounded-full" data-progress="75"></div>
                         </div>
                     </div>
@@ -298,7 +385,7 @@
                             <span class="text-base font-medium text-[#F5F5F5]">MATLAB / Simulink</span>
                             <span class="text-sm font-medium text-[#F5F5F5]">80%</span>
                         </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                        <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
                             <div class="progress-bar-inner h-2.5 rounded-full" data-progress="80"></div>
                         </div>
                     </div>
@@ -307,7 +394,7 @@
                             <span class="text-base font-medium text-[#F5F5F5]">HTML / CSS / JavaScript</span>
                             <span class="text-sm font-medium text-[#F5F5F5]">70%</span>
                         </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                        <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
                             <div class="progress-bar-inner h-2.5 rounded-full" data-progress="70"></div>
                         </div>
                     </div>
@@ -316,7 +403,7 @@
                             <span class="text-base font-medium text-[#F5F5F5]">Blender / Fritzing / Tinkercad</span>
                             <span class="text-sm font-medium text-[#F5F5F5]">85%</span>
                         </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                        <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
                             <div class="progress-bar-inner h-2.5 rounded-full" data-progress="85"></div>
                         </div>
                     </div>
@@ -325,15 +412,15 @@
             <div class="mt-12 text-center" data-aos="fade-up">
                 <h3 class="text-2xl font-bold mb-6 text-[#00FFFF]">Concepts & APIs</h3>
                 <div class="flex flex-wrap justify-center gap-6">
-                    <div class="text-center transition-transform duration-300 hover:scale-110">
+                    <div class="text-center transition-all duration-300 hover:scale-110 hover:text-[#00FFFF] p-4 rounded-lg hover:bg-[#00FFFF]/10">
                         <i class="fas fa-robot text-4xl text-[#FF00FF] mb-2"></i>
                         <p>APIs</p>
                     </div>
-                    <div class="text-center transition-transform duration-300 hover:scale-110">
+                    <div class="text-center transition-all duration-300 hover:scale-110 hover:text-[#00FFFF] p-4 rounded-lg hover:bg-[#00FFFF]/10">
                         <i class="fas fa-wifi text-4xl text-[#FF00FF] mb-2"></i>
                         <p>IoT</p>
                     </div>
-                    <div class="text-center transition-transform duration-300 hover:scale-110">
+                    <div class="text-center transition-all duration-300 hover:scale-110 hover:text-[#00FFFF] p-4 rounded-lg hover:bg-[#00FFFF]/10">
                         <i class="fab fa-telegram-plane text-4xl text-[#FF00FF] mb-2"></i>
                         <p>Telegram Bot API</p>
                     </div>
@@ -343,38 +430,38 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 md:py-32 bg-[#0D0D0D]/0 relative z-10">
+    <section id="contact" class="section-padding bg-[#0D0D0D]/0 relative z-10">
         <div class="container mx-auto px-6">
             <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-12 neon-glow-text-blue" data-aos="fade-up">Get In Touch</h2>
             <div class="max-w-3xl mx-auto">
                 <div class="flex justify-center gap-8 mb-12" data-aos="fade-up">
-                    <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" class="social-icon text-4xl text-[#F5F5F5] transition-colors duration-300"><i class="fab fa-github"></i></a>
-                    <a href="https://t.me/rsmk27" target="_blank" aria-label="Telegram" class="social-icon text-4xl text-[#F5F5F5] transition-colors duration-300"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="mailto:srinivasmanikantarajapantula@gmail.com" aria-label="Email" class="social-icon text-4xl text-[#F5F5F5] transition-colors duration-300"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" class="social-icon text-5xl text-[#F5F5F5] transition-all duration-300 p-3 rounded-full hover:bg-[#FF00FF]/20"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/rsmk27" target="_blank" aria-label="Telegram" class="social-icon text-5xl text-[#F5F5F5] transition-all duration-300 p-3 rounded-full hover:bg-[#FF00FF]/20"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="mailto:srinivasmanikantarajapantula@gmail.com" aria-label="Email" class="social-icon text-5xl text-[#F5F5F5] transition-all duration-300 p-3 rounded-full hover:bg-[#FF00FF]/20"><i class="fas fa-envelope"></i></a>
                 </div>
 
                 <form id="contactForm" class="glass-card rounded-lg p-8" data-aos="zoom-in">
                     <div id="form-feedback" class="text-center mb-4"></div>
                     <div class="mb-6">
                         <label for="name" class="block mb-2 text-sm font-medium text-[#00FFFF]">Name</label>
-                        <input type="text" id="name" name="name" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-2.5 transition-colors duration-300" required>
+                        <input type="text" id="name" name="name" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-3 transition-all duration-300" required>
                         <span class="text-red-500 text-xs mt-1 hidden" id="nameError">Name is required.</span>
                     </div>
                     <div class="mb-6">
                         <label for="email" class="block mb-2 text-sm font-medium text-[#00FFFF]">Email</label>
-                        <input type="email" id="email" name="email" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-2.5 transition-colors duration-300" required>
+                        <input type="email" id="email" name="email" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-3 transition-all duration-300" required>
                         <span class="text-red-500 text-xs mt-1 hidden" id="emailError">Please enter a valid email.</span>
                     </div>
                     <div class="mb-6">
                         <label for="message" class="block mb-2 text-sm font-medium text-[#00FFFF]">Message</label>
-                        <textarea id="message" name="message" rows="4" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-2.5 transition-colors duration-300" required></textarea>
+                        <textarea id="message" name="message" rows="4" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-3 transition-all duration-300" required></textarea>
                         <span class="text-red-500 text-xs mt-1 hidden" id="messageError">Message cannot be empty.</span>
                     </div>
-                    <button type="submit" class="submit-button w-full bg-[#00FFFF] text-black font-bold py-3 px-5 rounded-lg transition-all duration-300 hover:scale-105">Send Message</button>
+                    <button type="submit" class="submit-button w-full btn-primary">Send Message</button>
                 </form>
                 
                 <div class="text-center mt-12" data-aos="fade-up">
-                    <a href="#" download="RSMK-Resume.pdf" class="inline-block bg-[#00FFFF] text-black font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:bg-[#FF00FF] hover:text-white hover:scale-105">
+                    <a href="#" download="RSMK-Resume.pdf" class="btn-primary">
                         Get Connected <i class="fas fa-download ml-2"></i>
                     </a>
                 </div>
@@ -383,10 +470,10 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black py-6">
+    <footer class="bg-black/80 backdrop-blur-md py-8 border-t border-[#00FFFF]/20">
         <div class="container mx-auto px-6 text-center text-[#F5F5F5]">
             <p>&copy; 2025 RSMK. All Rights Reserved.</p>
-            <p>Designed with <i class="fas fa-heart text-red-500"></i> and a lot of <i class="fas fa-coffee text-yellow-600"></i></p>
+            <p class="mt-2">Designed with <i class="fas fa-heart text-red-500 animate-pulse"></i> and a lot of <i class="fas fa-coffee text-yellow-600"></i></p>
         </div>
     </footer>
 
@@ -402,10 +489,21 @@
                 offset: 50
             });
 
+            // Scroll progress indicator
+            const scrollIndicator = document.getElementById('scroll-indicator');
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.body.offsetHeight - window.innerHeight;
+                const scrollPercent = scrollTop / docHeight;
+                scrollIndicator.style.transform = `scaleX(${scrollPercent})`;
+            });
+
             // Pre-loader
             const preloader = document.getElementById('preloader');
             window.addEventListener('load', () => {
-                preloader.classList.add('opacity-0', 'invisible');
+                setTimeout(() => {
+                    preloader.classList.add('opacity-0', 'invisible');
+                }, 1000);
             });
             
             // Mobile Menu
@@ -413,10 +511,30 @@
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
             });
             document.querySelectorAll('#mobile-menu a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 });
             });
 
@@ -438,8 +556,10 @@
                     if (entry.isIntersecting) {
                         const bar = entry.target;
                         const progress = bar.getAttribute('data-progress');
-                        bar.style.width = progress + '%';
-                        bar.style.transition = 'width 1.5s ease-out';
+                        setTimeout(() => {
+                            bar.style.width = progress + '%';
+                            bar.style.transition = 'width 2s ease-out';
+                        }, 200);
                         observer.unobserve(bar);
                     }
                 });
@@ -524,18 +644,17 @@
             });
 
             // Particles.js configuration
-            // This initializes the particle background for the entire page.
             particlesJS('particles-js', {
                 "particles": {
                     "number": {
-                        "value": 80, // Number of particles
+                        "value": 100,
                         "density": {
                             "enable": true,
                             "value_area": 800
                         }
                     },
                     "color": {
-                        "value": ["#00FFFF", "#FF00FF"] // Neon Cyan and Magenta Glow
+                        "value": ["#00FFFF", "#FF00FF"]
                     },
                     "shape": {
                         "type": "circle",
@@ -548,7 +667,7 @@
                         }
                     },
                     "opacity": {
-                        "value": 0.5,
+                        "value": 0.6,
                         "random": false,
                         "anim": {
                             "enable": false,
@@ -558,7 +677,7 @@
                         }
                     },
                     "size": {
-                        "value": 3,
+                        "value": 4,
                         "random": true,
                         "anim": {
                             "enable": false,
@@ -570,13 +689,13 @@
                     "line_linked": {
                         "enable": true,
                         "distance": 150,
-                        "color": "#00FFFF", // Neon Cyan for lines
-                        "opacity": 0.4,
-                        "width": 1
+                        "color": "#00FFFF",
+                        "opacity": 0.5,
+                        "width": 1.5
                     },
                     "move": {
                         "enable": true,
-                        "speed": 3, // Slower movement for a calmer effect
+                        "speed": 2,
                         "direction": "none",
                         "random": false,
                         "straight": false,
@@ -594,17 +713,17 @@
                     "events": {
                         "onhover": {
                             "enable": true,
-                            "mode": "grab" // "grab" for connecting lines, "bubble" for size/opacity, "repulse" for pushing away
+                            "mode": "grab"
                         },
                         "onclick": {
                             "enable": true,
-                            "mode": "push" // "push" to add particles, "remove" to remove
+                            "mode": "push"
                         },
                         "resize": true
                     },
                     "modes": {
                         "grab": {
-                            "distance": 140,
+                            "distance": 160,
                             "line_linked": {
                                 "opacity": 1
                             }
