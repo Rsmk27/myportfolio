@@ -185,6 +185,53 @@
                 padding: 80px 0;
             }
         }
+        
+        /* Signature Animation Styles */
+        .signature-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        @media (min-width: 768px) {
+            .signature-container {
+                justify-content: flex-start;
+            }
+        }
+        
+        .signature-svg {
+            opacity: 0;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.3));
+        }
+        
+        .signature-svg path {
+            fill: none;
+            stroke: #00FFFF;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+        }
+        
+        .signature-svg.animate path {
+            animation: signature-draw 3s ease-in-out forwards;
+        }
+        
+        .signature-svg.fade-in {
+            animation: signature-fade-in 0.5s ease-in-out forwards;
+        }
+        
+        @keyframes signature-fade-in {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes signature-draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -250,6 +297,14 @@
                  </div>
                 <div class="md:w-2/3 text-center md:text-left" data-aos="fade-left">
                     <p class="text-lg md:text-xl mb-6 leading-relaxed">I'm an Electrical and Electronics Engineering student who loves building things and solving real-world problems. I enjoy working on hands-on projects, especially anything to do with automation or smart tech. I'm always curious and like learning by trying things out myself. In my free time, I mess around with websites, explore new tools, and share what I learn. I'm just trying to grow step by step and do something meaningful with what I know.</p>
+                    
+                    <!-- Signature Animation -->
+                    <div class="signature-container mb-8" data-aos="fade-up" data-aos-delay="800">
+                        <svg id="signature-svg" width="200" height="80" viewBox="0 0 200 80" class="signature-svg">
+                            <!-- This will be populated with the actual signature path -->
+                        </svg>
+                    </div>
+                    
                     <h3 class="text-2xl font-bold mb-4 text-[#00FFFF]">My Interests</h3>
                     <div class="flex flex-wrap justify-center md:justify-start gap-3">
                         <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">Green Technology & Smart Energy</span>
@@ -642,6 +697,74 @@
                     cursorDot.remove();
                 };
             });
+
+            // Signature Animation
+            const signatureSvg = document.getElementById('signature-svg');
+            
+            // Load and animate signature
+            fetch('./assets/signature.svg')
+                .then(response => response.text())
+                .then(svgContent => {
+                    // Parse the SVG content
+                    const parser = new DOMParser();
+                    const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
+                    const paths = svgDoc.querySelectorAll('path');
+                    
+                    // Clear existing content and add paths
+                    signatureSvg.innerHTML = '';
+                    paths.forEach(path => {
+                        const newPath = path.cloneNode(true);
+                        signatureSvg.appendChild(newPath);
+                    });
+                    
+                    // Set up intersection observer for animation trigger
+                    const signatureObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                // Start with fade-in
+                                signatureSvg.classList.add('fade-in');
+                                
+                                // Then start drawing animation after fade-in completes
+                                setTimeout(() => {
+                                    signatureSvg.classList.add('animate');
+                                }, 500);
+                                
+                                // Disconnect observer after animation starts (one-time only)
+                                signatureObserver.unobserve(entry.target);
+                            }
+                        });
+                    }, {
+                        threshold: 0.5
+                    });
+                    
+                    signatureObserver.observe(signatureSvg);
+                })
+                .catch(error => {
+                    console.log('Signature SVG not found, using fallback text');
+                    // Fallback: create a simple text signature
+                    signatureSvg.innerHTML = `
+                        <text x="10" y="50" font-family="'Orbitron', sans-serif" font-size="24" fill="#00FFFF" opacity="0">
+                            - RSMK
+                        </text>
+                    `;
+                    
+                    const textElement = signatureSvg.querySelector('text');
+                    const signatureObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                signatureSvg.classList.add('fade-in');
+                                setTimeout(() => {
+                                    textElement.style.animation = 'signature-fade-in 2s ease-in-out forwards';
+                                }, 500);
+                                signatureObserver.unobserve(entry.target);
+                            }
+                        });
+                    }, {
+                        threshold: 0.5
+                    });
+                    
+                    signatureObserver.observe(signatureSvg);
+                });
 
             // Particles.js configuration
             particlesJS('particles-js', {
