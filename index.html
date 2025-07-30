@@ -243,9 +243,11 @@
         }
 
         .loading-screen .signature-svg {
-            width: 300px;
-            height: 120px;
+            width: 400px; /* Increased width */
+            height: 150px; /* Increased height */
             filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.6)); /* Neon Cyan glow */
+            display: block; /* Ensures margin auto works for centering */
+            margin: 0 auto; /* Explicitly center the SVG */
         }
 
         /* Signature Animation Styles for Loading Screen */
@@ -421,7 +423,7 @@
             <!-- Signature SVG Container -->
             <div class="signature-container">
                 <!-- SVG paths will be loaded dynamically by JavaScript -->
-                <svg class="signature-svg" viewBox="0 0 300 120">
+                <svg class="signature-svg" viewBox="0 0 400 150">
                     <!-- Placeholder for dynamically loaded signature paths -->
                 </svg>
             </div>
@@ -728,132 +730,6 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="section-padding bg-[#222222]/0 relative z-10">
-            <div class="container mx-auto px-6">
-                <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-green" data-aos="fade-up">Technical Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                    
-                    <div data-aos="fade-right">
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">Arduino / ESP8266</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">90%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="90"></div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">Python</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">85%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="85"></div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">C Language</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">75%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="75"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div data-aos="fade-left">
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">MATLAB / Simulink</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">80%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="80"></div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">HTML / CSS / JavaScript</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">70%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="70"></div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">Blender / Fritzing / Tinkercad</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">85%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="85"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-12 text-center" data-aos="fade-up">
-                    <h3 class="text-2xl font-bold mb-6 text-[#00FFFF]">Concepts & APIs</h3>
-                    <div class="flex flex-wrap justify-center gap-6">
-                        <div class="text-center transition-all duration-300 hover:scale-110 hover:text-[#00FFFF] p-4 rounded-lg hover:bg-[#00FFFF]/10">
-                            <i class="fas fa-robot text-4xl text-[#FF00FF] mb-2"></i>
-                            <p>APIs</p>
-                        </div>
-                        <div class="text-center transition-all duration-300 hover:scale-110 hover:text-[#00FFFF] p-4 rounded-lg hover:bg-[#00FFFF]/10">
-                            <i class="fas fa-wifi text-4xl text-[#FF00FF] mb-2"></i>
-                            <p>IoT</p>
-                        </div>
-                        <div class="text-center transition-all duration-300 hover:scale-110 hover:text-[#00FFFF] p-4 rounded-lg hover:bg-[#00FFFF]/10">
-                            <i class="fab fa-telegram-plane text-4xl text-[#FF00FF] mb-2"></i>
-                            <p>Telegram Bot API</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section-padding bg-[#0D0D0D]/0 relative z-10">
-            <div class="container mx-auto px-6">
-                <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-12 neon-glow-text-blue" data-aos="fade-up">Get In Touch</h2>
-                <div class="max-w-3xl mx-auto">
-                    <div class="flex justify-center gap-8 mb-12" data-aos="fade-up">
-                        <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" class="social-icon text-5xl text-[#F5F5F5] transition-all duration-300 p-3 rounded-full hover:bg-[#FF00FF]/20"><i class="fab fa-github"></i></a>
-                        <a href="https://t.me/rsmk27" target="_blank" aria-label="Telegram" class="social-icon text-5xl text-[#F5F5F5] transition-all duration-300 p-3 rounded-full hover:bg-[#FF00FF]/20"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="mailto:srinivasmanikantarajapantula@gmail.com" aria-label="Email" class="social-icon text-5xl text-[#F5F5F5] transition-all duration-300 p-3 rounded-full hover:bg-[#FF00FF]/20"><i class="fas fa-envelope"></i></a>
-                    </div>
-
-                    <form id="contactForm" class="glass-card rounded-lg p-8" data-aos="zoom-in">
-                        <div id="form-feedback" class="text-center mb-4"></div>
-                        <div class="mb-6">
-                            <label for="name" class="block mb-2 text-sm font-medium text-[#00FFFF]">Name</label>
-                            <input type="text" id="name" name="name" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-3 transition-all duration-300" required>
-                            <span class="text-red-500 text-xs mt-1 hidden" id="nameError">Name is required.</span>
-                        </div>
-                        <div class="mb-6">
-                            <label for="email" class="block mb-2 text-sm font-medium text-[#00FFFF]">Email</label>
-                            <input type="email" id="email" name="email" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-3 transition-all duration-300" required>
-                            <span class="text-red-500 text-xs mt-1 hidden" id="emailError">Please enter a valid email.</span>
-                        </div>
-                        <div class="mb-6">
-                            <label for="message" class="block mb-2 text-sm font-medium text-[#00FFFF]">Message</label>
-                            <textarea id="message" name="message" rows="4" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-3 transition-all duration-300" required></textarea>
-                            <span class="text-red-500 text-xs mt-1 hidden" id="messageError">Message cannot be empty.</span>
-                        </div>
-                        <button type="submit" class="submit-button w-full btn-primary">Send Message</button>
-                    </form>
-                    
-                    <div class="text-center mt-12" data-aos="fade-up">
-                        <a href="#" download="RSMK-Resume.pdf" class="btn-primary">
-                            Get Connected <i class="fas fa-download ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Footer -->
         <footer class="bg-black/80 backdrop-blur-md py-8 border-t border-[#00FFFF]/20">
             <div class="container mx-auto px-6 text-center text-[#F5F5F5]">
@@ -878,7 +754,7 @@
                 this.progressText = document.getElementById('progressText');
                 this.skipButton = document.getElementById('skipButton');
                 
-                this.duration = 7000; // Overall duration for the loading screen and progress bar
+                this.duration = 8000; // Overall duration for the loading screen and progress bar
                 this.startTime = null;
                 this.animationFrame = null;
                 this.isCompleting = false; // Flag to prevent multiple completions
@@ -927,19 +803,28 @@
                     const svgContent = await response.text();
                     const parser = new DOMParser();
                     const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
-                    const paths = svgDoc.querySelectorAll('path, circle'); // Select both paths and circles
+                    const paths = svgDoc.querySelectorAll('path, circle, polyline, line, rect, ellipse, polygon'); // Select all common SVG shapes
 
                     // Clear existing content and add loaded paths
                     this.signatureSvgContainer.innerHTML = '';
                     let animationDelay = 0.5; // Initial delay for the first path
-                    const animationDurationPerPath = 3.5; // Increased duration for each path's drawing
+                    const animationDurationPerPath = 4.5; // Increased duration for each path's drawing
 
                     paths.forEach((path, index) => {
                         const newPath = path.cloneNode(true);
                         newPath.classList.add('signature-path'); // Add base class for styling
 
-                        // Set custom properties for animation
-                        const totalLength = newPath.getTotalLength();
+                        // Calculate total length for path animation
+                        let totalLength;
+                        try {
+                            totalLength = newPath.getTotalLength();
+                        } catch (e) {
+                            // Fallback for elements without getTotalLength (e.g., some circles/rects before rendering)
+                            // Or if SVG is not yet rendered. Set a default large value.
+                            totalLength = 1000; 
+                            console.warn("Could not get total length for SVG path, using fallback. Element:", newPath);
+                        }
+                        
                         newPath.style.setProperty('--total-length', `${totalLength}px`);
                         newPath.style.strokeDasharray = totalLength;
                         newPath.style.strokeDashoffset = totalLength;
@@ -954,6 +839,9 @@
                     const loadedSvg = svgDoc.querySelector('svg');
                     if (loadedSvg && loadedSvg.getAttribute('viewBox')) {
                         this.signatureSvgContainer.setAttribute('viewBox', loadedSvg.getAttribute('viewBox'));
+                    } else {
+                        // Fallback viewBox if the loaded SVG doesn't have one
+                        this.signatureSvgContainer.setAttribute('viewBox', '0 0 400 150');
                     }
 
                 } catch (error) {
