@@ -230,7 +230,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            max-width: 400px;
+            max-width: 700px; /* Increased max-width for content container */
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -243,8 +243,8 @@
         }
 
         .loading-screen .signature-svg {
-            width: 400px; /* Increased width */
-            height: 150px; /* Increased height */
+            width: 600px; /* Increased width */
+            height: 250px; /* Increased height */
             filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.6)); /* Neon Cyan glow */
             display: block; /* Ensures margin auto works for centering */
             margin: 0 auto; /* Explicitly center the SVG */
@@ -423,7 +423,7 @@
             <!-- Signature SVG Container -->
             <div class="signature-container">
                 <!-- SVG paths will be loaded dynamically by JavaScript -->
-                <svg class="signature-svg" viewBox="0 0 400 150">
+                <svg class="signature-svg" viewBox="0 0 600 250">
                     <!-- Placeholder for dynamically loaded signature paths -->
                 </svg>
             </div>
@@ -841,7 +841,9 @@
                         this.signatureSvgContainer.setAttribute('viewBox', loadedSvg.getAttribute('viewBox'));
                     } else {
                         // Fallback viewBox if the loaded SVG doesn't have one
-                        this.signatureSvgContainer.setAttribute('viewBox', '0 0 400 150');
+                        // This should ideally match the content's actual bounds if no viewBox is provided in the SVG file itself.
+                        // For now, matching the CSS dimensions as a safe default.
+                        this.signatureSvgContainer.setAttribute('viewBox', '0 0 600 250');
                     }
 
                 } catch (error) {
