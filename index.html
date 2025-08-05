@@ -165,9 +165,9 @@
                     <div class="w-full md:w-1/2">
                         <h1 class="text-5xl md:text-7xl font-orbitron text-white">Hi, I'm <span class="text-teal-400">RSMK</span></h1>
                         <h2 class="text-xl md:text-2xl font-poppins text-gray-300 mt-4">An Electrical and Electronics Engineering Student</h2>
-                        <div class="mt-6 text-xl md:text-3xl font-poppins text-cyan-400">
+                        <div class="mt-6 text-xl md:text-3xl font-poppins text-white">
                             <span class="mr-2">I build things related to</span>
-                            <span id="typewriter-text" class="block md:inline-block h-8"></span>
+                            <span id="typewriter-text" class="block md:inline-block h-8 text-cyan-400"></span>
                         </div>
                         <div class="mt-10 flex space-x-4 justify-center md:justify-start">
                             <a href="#projects" class="px-6 py-3 bg-teal-500 text-gray-900 rounded-full font-bold hover:bg-teal-400 transition-colors" data-aos="fade-up" data-aos-delay="200">View My Work</a>
@@ -463,6 +463,98 @@
                     preloader.style.display = 'none';
                     mainContent.style.display = 'block';
                     AOS.init({ once: true });
+                    // Initialize Particles.js here
+                    particlesJS("particles-js", {
+                        "particles": {
+                            "number": {
+                                "value": 80,
+                                "density": {
+                                    "enable": true,
+                                    "value_area": 800
+                                }
+                            },
+                            "color": {
+                                "value": "#22d3ee"
+                            },
+                            "shape": {
+                                "type": "circle",
+                                "stroke": {
+                                    "width": 0,
+                                    "color": "#000000"
+                                },
+                            },
+                            "opacity": {
+                                "value": 0.5,
+                                "random": false,
+                                "anim": {
+                                    "enable": false
+                                }
+                            },
+                            "size": {
+                                "value": 3,
+                                "random": true,
+                                "anim": {
+                                    "enable": false
+                                }
+                            },
+                            "line_linked": {
+                                "enable": true,
+                                "distance": 150,
+                                "color": "#22d3ee",
+                                "opacity": 0.4,
+                                "width": 1
+                            },
+                            "move": {
+                                "enable": true,
+                                "speed": 6,
+                                "direction": "none",
+                                "random": false,
+                                "straight": false,
+                                "out_mode": "out",
+                                "bounce": false,
+                            }
+                        },
+                        "interactivity": {
+                            "detect_on": "canvas",
+                            "events": {
+                                "onhover": {
+                                    "enable": true,
+                                    "mode": "grab"
+                                },
+                                "onclick": {
+                                    "enable": true,
+                                    "mode": "push"
+                                },
+                                "resize": true
+                            },
+                            "modes": {
+                                "grab": {
+                                    "distance": 140,
+                                    "line_linked": {
+                                        "opacity": 1
+                                    }
+                                },
+                                "bubble": {
+                                    "distance": 400,
+                                    "size": 40,
+                                    "duration": 2,
+                                    "opacity": 8,
+                                    "speed": 3
+                                },
+                                "repulse": {
+                                    "distance": 200,
+                                    "duration": 0.4
+                                },
+                                "push": {
+                                    "particles_nb": 4
+                                },
+                                "remove": {
+                                    "particles_nb": 2
+                                }
+                            }
+                        },
+                        "retina_detect": true
+                    });
                 }, 500);
             }
         };
@@ -503,99 +595,6 @@
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             document.getElementById('scroll-progress-bar').style.width = scrolled + "%";
-        });
-
-        // Particles.js Config
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#22d3ee"
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": false,
-                    "anim": {
-                        "enable": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#22d3ee",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 6,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 1
-                        }
-                    },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 200,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
-                    }
-                }
-            },
-            "retina_detect": true
         });
 
         // Hamburger menu
