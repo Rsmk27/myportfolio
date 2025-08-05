@@ -3,1219 +3,612 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSMK | Electrical & Electronics Engineering Student</title>
-    
-    <!-- Chosen Palette: Cyber Neon Glow (Background: Jet Black #0D0D0D, Text: Bright Gray #F5F5F5, Accent/Buttons: Neon Cyan #00FFFF, Hover/Links: Magenta Glow #FF00FF, Section BG: Dim Gray #222222). Background updated to solid black with subtle gradient designs. -->
-    <!-- Application Structure Plan: A single-page, vertical scrolling application with a fixed navigation bar for quick access to each section (Hero, About, Projects, Skills, Contact). This standard portfolio structure provides a logical narrative flow, guiding visitors from introduction to proof-of-work and call-to-action, ensuring maximum usability and content comprehension. The fixed navigation enhances non-linear exploration, allowing users to jump directly to areas of interest. -->
-    <!-- Visualization & Content Choices: 1. Hero Section (Goal: Inform/Engage): Uses a CSS animated gradient background and a Typed.js dynamic text animation for a captivating, high-tech first impression. Method: CSS Keyframes, Typed.js. Interaction: Passive viewing. Justification: Creates immediate visual interest and clearly states the individual's core focus. 2. About Me Section (Goal: Inform): Features a circular profile image and a responsive layout for descriptive text and a cloud of interactive interest tags. Method: HTML img, Tailwind CSS. Interaction: Hover effects on image and tags. Justification: Provides a personal touch and highlights key areas of expertise in an engaging, scannable format. 3. Projects Section (Goal: Showcase/Engage): Presents projects in a responsive grid of interactive, glassmorphic cards. Each card includes a placeholder image, title, description, and technology tags. Method: HTML div grid, Tailwind CSS, custom CSS for glassmorphism. Interaction: Hover effects (scale, shadow, border glow) on cards to encourage exploration. Justification: Organizes project details visually, enhancing discoverability and providing a modern aesthetic. 4. Skills Section (Goal: Inform/Quantify): Visualizes technical proficiencies with animated progress bars and key concepts/APIs with Font Awesome icons. Method: HTML div for bars, custom JavaScript for animation (Intersection Observer), Font Awesome for icons. Interaction: Progress bars animate on scroll, icons have hover effects. Justification: Offers a clear, quantifiable representation of skills and quickly communicates core knowledge areas. 5. Contact Section (Goal: Convert): Includes prominent social media links, a contact form with validation, and a resume download link. Method: HTML form, Font Awesome icons, custom JavaScript for validation. Interaction: Hover effects on icons and buttons, form submission. Justification: Provides multiple clear pathways for engagement and professional connection. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>RSMK - Electrical and Electronics Engineering Student</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #000000; /* Solid Black */
             font-family: 'Poppins', sans-serif;
-            color: #F5F5F5; /* Bright Gray */
-            overflow-x: hidden; /* Prevent horizontal scroll from gradients/animations */
-            position: relative; /* For pseudo-element positioning */
+            background-color: #0d1117;
+            color: #c9d1d9;
+            overflow-x: hidden;
         }
         .font-orbitron {
             font-family: 'Orbitron', sans-serif;
         }
-
-        .glass-card {
-            background: rgba(34, 34, 34, 0.8); /* Increased opacity for better readability */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 255, 0.3); /* Neon Cyan */
-            box-shadow: 0 0 30px 8px rgba(0, 255, 255, 0.15); /* Enhanced glow */
-            transition: all 0.3s ease;
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
         }
-        .glass-card:hover {
-            box-shadow: 0 0 40px 12px rgba(0, 255, 255, 0.4); /* Stronger hover glow */
-            border-color: #00FFFF; /* Neon Cyan */
-            transform: translateY(-5px);
+        .progress-bar-container {
+            background-color: #444;
+            height: 8px;
+            border-radius: 9999px;
+            overflow: hidden;
         }
-        .neon-glow-text-blue { /* Now Neon Cyan */
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.4); /* Enhanced glow */
-        }
-        .neon-glow-text-green { /* Now Magenta Glow */
-            text-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.6), 0 0 30px rgba(255, 0, 255, 0.4); /* Enhanced glow */
-        }
-        .progress-bar-inner {
-            background: linear-gradient(to right, #00FFFF, #FF00FF); /* Neon Cyan, Magenta Glow */
-            box-shadow: 0 0 12px rgba(255, 0, 255, 0.6); /* Enhanced glow */
-            border-radius: 10px;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #00FFFF; /* Neon Cyan */
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Enhanced focus glow */
-        }
-        .social-icon:hover {
-            color: #FF00FF; /* Magenta Glow */
-            text-shadow: 0 0 20px #FF00FF; /* Enhanced hover glow */
-            transform: scale(1.2);
-            transition: all 0.3s ease;
-        }
-        .submit-button {
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6); /* Enhanced glow */
-            transition: all 0.3s ease;
-        }
-        .submit-button:hover {
-            background-color: #FF00FF; /* Magenta Glow */
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8); /* Enhanced hover glow */
-            transform: translateY(-2px);
-        }
-        .typed-cursor {
-            color: #00FFFF; /* Neon Cyan */
-            animation: blink 0.7s infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-        
-        /* Enhanced Navigation */
-        .nav-link::after {
-            content: '';
-            display: block;
+        .progress-bar {
+            background-color: #22d3ee;
+            height: 100%;
+            border-radius: 9999px;
             width: 0;
-            height: 2px;
-            background: #00FFFF; /* Neon Cyan */
-            transition: width .3s;
-            box-shadow: 0 0 5px #00FFFF;
+            transition: width 1s ease-in-out;
         }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .nav-link {
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover {
-            color: #00FFFF;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-        }
-        
-        /* Enhanced buttons */
-        .btn-primary {
-            background: linear-gradient(45deg, #00FFFF, #0080FF);
-            border: none;
-            color: #000;
-            font-weight: bold;
-            padding: 12px 24px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(45deg, #FF00FF, #FF0080);
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
-        }
-        
-        /* Improved section spacing */
-        .section-padding {
-            padding: 120px 0;
-        }
-        
-        /* Enhanced hero section */
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
-            border-radius: 20px;
-            padding: 40px;
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
         }
-        
-        /* Cursor animation dot */
-        .cursor-dot {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%); /* Center the dot on the cursor */
-            z-index: 9999; /* Ensure it's above particles */
-            opacity: 0; /* Start hidden */
-        }
-        
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, #00FFFF, #FF00FF);
-            transform-origin: left;
-            transform: scaleX(0);
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-        
-        /* Style for particles.js container */
-        #particles-js {
+        .preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #0D0D0D; /* Jet Black, base for particles */
-            z-index: 0; /* Ensures it's behind all content */
-        }
-        
-        /* Improved mobile responsiveness */
-        @media (max-width: 768px) {
-            .hero-gradient {
-                padding: 20px;
-                margin: 0 10px;
-            }
-            .section-padding {
-                padding: 80px 0;
-            }
-        }
-        
-        /* ==================================== */
-        /* New Loading Screen Styles - Adapted for Cyber Neon Glow */
-        /* ==================================== */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #0D0D0D; /* Jet Black */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease-in-out;
-            overflow: hidden; /* Prevent scrollbars during load */
-        }
-
-        .loading-screen.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Background Pattern for Loading Screen */
-        .loading-screen .bg-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.15; /* Slightly more visible */
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(0, 255, 255, 0.4) 0%, transparent 50%), /* Neon Cyan glow */
-                radial-gradient(circle at 75% 75%, rgba(255, 0, 255, 0.4) 0%, transparent 50%); /* Magenta Glow */
-        }
-
-        /* Main Content Container for Loading Screen */
-        .loading-screen .content-container {
-            position: relative;
-            z-index: 10;
+            background: #0d1117;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            max-width: 900px; /* Increased max-width for content container to fit 820px SVG */
-            margin: 0 auto;
-            padding: 0 24px;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
         }
-
-        /* Signature SVG Container for Loading Screen */
-        .loading-screen .signature-container {
-            margin-bottom: 32px;
-            transform: scale(1);
-            transition: transform 0.3s ease;
+        .signature-svg {
+            width: 250px;
+            height: 100px;
         }
-
-        .loading-screen .signature-svg {
-            width: 820px; /* Set to SVG width attribute */
-            height: 200px; /* Set to SVG height attribute */
-            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.6)); /* Neon Cyan glow */
-            display: block; /* Ensures margin auto works for centering */
-            margin: 0 auto; /* Explicitly center the SVG */
-        }
-
-        /* Signature Animation Styles for Loading Screen */
-        /* These will be applied to dynamically loaded paths */
-        .loading-screen .signature-path {
+        .signature-path {
             fill: none;
-            stroke: #00FFFF; /* Neon Cyan */
+            stroke: #22d3ee;
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
-            /* Dash array/offset will be set by JS based on path length */
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw-signature 2s forwards;
         }
-
-        /* Animation Keyframes (shared/adapted) */
-        @keyframes signature-draw {
-            0% { 
-                stroke-dashoffset: var(--total-length); 
-            }
-            100% { 
-                stroke-dashoffset: 0; 
+        @keyframes draw-signature {
+            to {
+                stroke-dashoffset: 0;
             }
         }
-
-        @keyframes fade-in {
-            0% { 
-                opacity: 0; 
-                transform: scale(0.98); /* Slight scale for fade-in effect */
-            }
-            100% { 
-                opacity: 1; 
-                transform: scale(1); 
-            }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { 
-                opacity: 0.6; 
-                box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-            }
-            50% { 
-                opacity: 1; 
-                box-shadow: 0 0 15px rgba(255, 0, 255, 0.8);
-            }
-        }
-
-        /* Loading Text for Loading Screen */
-        .loading-screen .loading-text {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .loading-screen .loading-title {
-            font-size: 20px;
-            font-weight: 300;
-            color: #00FFFF; /* Neon Cyan */
-            margin-bottom: 8px;
-            animation: fade-in 0.8s ease-in-out forwards;
-            font-family: 'Orbitron', sans-serif; /* Using Orbitron for loading title */
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
-        }
-
-        .loading-screen .loading-subtitle {
-            font-size: 14px;
-            color: #F5F5F5; /* Bright Gray */
-            animation: fade-in 0.8s ease-in-out 0.5s forwards;
-            opacity: 0;
-        }
-
-        /* Progress Bar for Loading Screen */
-        .loading-screen .progress-container {
-            width: 100%;
-            max-width: 300px;
-        }
-
-        .loading-screen .progress-bar {
+        .preloader-progress-bar-container {
+            width: 200px;
             height: 4px;
-            background-color: #222222; /* Dim Gray */
+            background-color: #222;
+            margin-top: 20px;
             border-radius: 9999px;
             overflow: hidden;
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
         }
-
-        .loading-screen .progress-fill {
+        .preloader-progress-bar {
+            width: 0;
             height: 100%;
-            background: linear-gradient(to right, #00FFFF, #FF00FF); /* Neon Cyan to Magenta Glow */
-            border-radius: 9999px;
-            transform-origin: left;
-            transition: width 0.1s ease-out;
-            box-shadow: 0 0 8px rgba(0, 255, 255, 0.6); /* Neon glow */
-            animation: pulse-glow 2s ease-in-out infinite;
+            background-color: #22d3ee;
+            transition: width 0.2s ease-in-out;
         }
-
-        .loading-screen .progress-text {
-            text-align: center;
-            margin-top: 8px;
-            font-size: 12px;
-            color: #F5F5F5; /* Bright Gray */
-        }
-
-        /* Skip Button for Loading Screen */
-        .loading-screen .skip-button {
-            margin-top: 32px;
-            padding: 8px 16px;
-            font-size: 12px;
-            color: #F5F5F5; /* Bright Gray */
-            background: none;
-            border: 1px solid rgba(0, 255, 255, 0.4); /* Neon Cyan border */
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loading-screen .skip-button.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .loading-screen .skip-button:hover {
-            color: #00FFFF; /* Neon Cyan */
-            background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-        }
-
-        /* Your Main Content (initially hidden by JS) */
-        .main-content {
-            display: none; /* Initially hidden */
-            min-height: 100vh; /* Ensure it takes full height when visible */
-            position: relative; /* For proper z-indexing */
-            z-index: 1; /* Make sure it's above particles once visible */
-        }
-
-        .main-content.visible {
-            display: block;
-            animation: fade-in 0.8s ease-in-out forwards;
-        }
-
-        /* Motion Preference Respect */
-        @media (prefers-reduced-motion: reduce) {
-            .loading-screen .signature-path {
-                animation: none !important;
-                stroke-dasharray: none !important;
-                stroke-dashoffset: 0 !important;
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
             }
-            
-            .loading-screen {
-                transition: opacity 0.3s ease-in-out !important; /* Faster fade out */
+            50% {
+                transform: scale(1.05);
             }
-            
-            .loading-screen .progress-fill {
-                animation: none !important; /* Disable pulse glow */
-            }
-
-            .main-content {
-                animation: none !important; /* Disable main content fade-in */
-            }
-            * {
-                animation-duration: 0.3s !important; /* Override all animations to be faster */
-                transition-duration: 0.3s !important;
-            }
+        }
+        .animate-pulse-slow {
+            animation: pulse 4s infinite ease-in-out;
         }
     </style>
 </head>
-<body>
-    <!-- Loading Screen (Preloader) -->
-    <div class="loading-screen" id="loadingScreen">
-        <!-- Background Pattern -->
-        <div class="bg-pattern"></div>
-        
-        <!-- Main Content Container for Loading Screen -->
-        <div class="content-container">
-            <!-- Signature SVG Container -->
-            <div class="signature-container">
-                <!-- SVG paths will be loaded dynamically by JavaScript -->
-                <svg class="signature-svg" viewBox="0 0 820 200">
-                    <!-- Placeholder for dynamically loaded signature paths -->
-                </svg>
-            </div>
-            
-            <!-- Loading Text -->
-            <div class="loading-text">
-                <h2 class="loading-title">Welcome to my portfolio</h2>
-                <p class="loading-subtitle">Loading experience...</p>
-            </div>
-            
-            <!-- Progress Bar -->
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                </div>
-                <div class="progress-text">
-                    <span id="progressText">0%</span>
-                </div>
-            </div>
-            
-            <!-- Skip Button -->
-            <button class="skip-button" id="skipButton">
-                Skip animation
-            </button>
+<body class="bg-[#0d1117] text-[#c9d1d9] font-poppins">
+
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="relative w-[250px] h-[100px]">
+            <svg class="signature-svg" viewBox="0 0 250 100">
+                <path id="signature-path" class="signature-path" d="M10 50 C 40 10, 80 90, 120 50 S 160 10, 200 50 S 240 90, 240 50" />
+            </svg>
+            <text x="125" y="50" text-anchor="middle" dominant-baseline="middle" fill="#22d3ee" font-family="Orbitron" font-size="36">RSMK</text>
         </div>
+        <p id="loading-text" class="mt-4 text-sm font-orbitron">Loading 0%</p>
+        <div class="preloader-progress-bar-container">
+            <div id="preloader-bar" class="preloader-progress-bar"></div>
+        </div>
+        <button id="skip-button" class="mt-8 px-4 py-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 transition-colors">Skip</button>
     </div>
 
-    <!-- Scroll progress indicator -->
-    <div class="scroll-indicator" id="scroll-indicator"></div>
-    
-    <!-- Particles.js container - this will hold the animated background -->
-    <div id="particles-js" class="fixed top-0 left-0 w-full h-full z-0"></div>
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress-container" class="fixed top-0 left-0 w-full h-1 bg-gray-800 z-50">
+        <div id="scroll-progress-bar" class="h-full bg-teal-500 transition-all duration-300 ease-out"></div>
+    </div>
 
-    <!-- Main Portfolio Content - This entire block is controlled by the loading screen JS -->
-    <div class="main-content" id="mainContent">
+    <!-- Main Content -->
+    <div id="main-content" class="hidden">
 
-        <!-- Header & Navigation -->
-        <header class="bg-black/40 backdrop-blur-md fixed top-0 left-0 right-0 z-40 border-b border-[#00FFFF]/20">
-            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#hero" class="font-orbitron text-2xl font-bold tracking-widest neon-glow-text-green">RSMK</a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="nav-link text-lg">About</a>
-                    <a href="#projects" class="nav-link text-lg">Projects</a>
-                    <a href="#skills" class="nav-link text-lg">Skills</a>
-                    <a href="#contact" class="nav-link text-lg">Contact</a>
+        <!-- Particles.js Container -->
+        <div id="particles-js" class="fixed inset-0 z-0"></div>
+
+        <!-- Header -->
+        <header class="sticky top-0 z-40 bg-[#0d1117]/80 backdrop-blur-sm p-4">
+            <div class="container mx-auto flex justify-between items-center px-4">
+                <a href="#hero" class="text-3xl font-orbitron text-teal-400">RSMK</a>
+                <nav class="hidden md:flex space-x-6 text-sm">
+                    <a href="#about" class="hover:text-teal-400 transition-colors">About</a>
+                    <a href="#projects" class="hover:text-teal-400 transition-colors">Projects</a>
+                    <a href="#skills" class="hover:text-teal-400 transition-colors">Skills</a>
+                    <a href="#contact" class="hover:text-teal-400 transition-colors">Contact</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="hamburger-menu" class="text-2xl text-teal-400">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
                 </div>
-                <button id="mobile-menu-button" class="md:hidden focus:outline-none text-[#00FFFF] hover:text-[#FF00FF] transition-colors duration-300">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </nav>
-            <div id="mobile-menu" class="hidden md:hidden bg-black/80 backdrop-blur-md">
-                <a href="#about" class="block text-center py-2 text-lg">About</a>
-                <a href="#projects" class="block text-center py-2 text-lg">Projects</a>
-                <a href="#skills" class="block text-center py-2 text-lg">Skills</a>
-                <a href="#contact" class="block text-center py-2 text-lg">Contact</a>
             </div>
+            <!-- Mobile Menu -->
+            <nav id="mobile-menu-links" class="hidden md:hidden bg-[#0d1117] p-4 border-t border-gray-700">
+                <ul class="flex flex-col space-y-2 text-sm">
+                    <li><a href="#about" class="block py-2 hover:text-teal-400 transition-colors">About</a></li>
+                    <li><a href="#projects" class="block py-2 hover:text-teal-400 transition-colors">Projects</a></li>
+                    <li><a href="#skills" class="block py-2 hover:text-teal-400 transition-colors">Skills</a></li>
+                    <li><a href="#contact" class="block py-2 hover:text-teal-400 transition-colors">Contact</a></li>
+                </ul>
+            </nav>
         </header>
 
-        <!-- Hero Section -->
-        <section id="hero" class="min-h-screen flex items-center justify-center text-center px-4 relative z-10">
-            <div class="relative z-10 hero-gradient max-w-4xl">
-                <h1 class="font-orbitron text-4xl md:text-6xl lg:text-7xl font-bold mb-4 neon-glow-text-blue" data-aos="fade-down">Hi, I'm RSMK</h1>
-                <p class="text-xl md:text-2xl lg:text-3xl font-orbitron mb-6" data-aos="fade-up" data-aos-delay="200">An Electrical and Electronics Engineering Student</p>
-                <p class="max-w-3xl mx-auto text-md md:text-lg text-[#F5F5F5]" data-aos="fade-up" data-aos-delay="400">
-                    Passionately exploring <span id="typed-output" class="font-semibold text-[#00FFFF]"></span>. Always building, always learning.
-                </p>
-                <div class="mt-8" data-aos="fade-up" data-aos-delay="600">
-                    <a href="#projects" class="btn-primary mr-4">View My Work</a>
-                    <a href="#contact" class="btn-primary">Get In Touch</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Me Section -->
-        <section id="about" class="section-padding bg-[#222222]/0 relative z-10">
-            <div class="container mx-auto px-6">
-                <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-green" data-aos="fade-up">About Me</h2>
-                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-                    <div class="md:w-1/3" data-aos="fade-right">
-                        <div class="relative">
-                            <img src="https://placehold.co/600x600/222222/00FFFF?text=RSMK+Profile" alt="A professional image of RSMK" class="rounded-full w-64 h-64 md:w-80 md:h-80 mx-auto border-4 border-[#00FFFF] shadow-[0_0_35px_rgba(0,255,255,0.5)] transition-all duration-500 hover:scale-105 hover:shadow-[0_0_50px_rgba(0,255,255,0.7)]">
-                            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#00FFFF]/20 to-[#FF00FF]/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+        <main class="relative z-10">
+            <!-- Hero Section -->
+            <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center p-4" data-aos="fade-in">
+                <div class="container mx-auto flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-16 px-4">
+                    <!-- Left Column for Text and Buttons -->
+                    <div class="w-full md:w-1/2">
+                        <h1 class="text-5xl md:text-7xl font-orbitron text-white">Hi, I'm <span class="text-teal-400">RSMK</span></h1>
+                        <h2 class="text-xl md:text-2xl font-poppins text-gray-300 mt-4">An Electrical and Electronics Engineering Student</h2>
+                        <div class="mt-6 text-xl md:text-3xl font-poppins text-cyan-400">
+                            <span class="mr-2">I build things related to</span>
+                            <span id="typewriter-text" class="block md:inline-block h-8"></span>
+                        </div>
+                        <div class="mt-10 flex space-x-4 justify-center md:justify-start">
+                            <a href="#projects" class="px-6 py-3 bg-teal-500 text-gray-900 rounded-full font-bold hover:bg-teal-400 transition-colors" data-aos="fade-up" data-aos-delay="200">View My Work</a>
+                            <a href="#contact" class="px-6 py-3 bg-transparent border border-teal-500 text-teal-500 rounded-full font-bold hover:bg-teal-500 hover:text-gray-900 transition-colors" data-aos="fade-up" data-aos-delay="300">Get In Touch</a>
                         </div>
                     </div>
-                    <div class="md:w-2/3 text-center md:text-left" data-aos="fade-left">
-                        <p class="text-lg md:text-xl mb-6 leading-relaxed">I'm an Electrical and Electronics Engineering student who loves building things and solving real-world problems. I enjoy working on hands-on projects, especially anything to do with automation or smart tech. I'm always curious and like learning by trying things out myself. In my free time, I mess around with websites, explore new tools, and share what I learn. I'm just trying to grow step by step and do something meaningful with what I know.</p>
-                        
-                        <h3 class="text-2xl font-bold mb-4 text-[#00FFFF]">My Interests</h3>
-                        <div class="flex flex-wrap justify-center md:justify-start gap-3">
-                            <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">Green Technology & Smart Energy</span>
-                            <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">Embedded Systems and IoT</span>
-                            <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">Automation & Control</span>
-                            <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">AI-based Telegram Bots</span>
-                            <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">MATLAB/Simulink</span>
-                            <span class="bg-[#FF00FF]/20 border border-[#FF00FF]/50 text-[#F5F5F5] px-4 py-2 rounded-full text-sm transition-all duration-300 hover:bg-[#FF00FF] hover:text-black hover:scale-105 hover:shadow-[0_0_15px_rgba(255,0,255,0.5)]">3D Design using Blender</span>
+                    <!-- Right Column for Visual Element -->
+                    <div class="w-full md:w-1/2 flex justify-center items-center" data-aos="fade-left">
+                        <div class="p-8">
+                             <svg viewBox="0 0 200 200" class="w-full max-w-sm opacity-50 animate-pulse-slow">
+                                <path fill="#22d3ee" d="M100,200 C44.77,200 0,155.23 0,100 C0,44.77 44.77,0 100,0 C155.23,0 200,44.77 200,100 C200,155.23 155.23,200 100,200 Z M100,190 C150.23,190 190,150.23 190,100 C190,49.77 150.23,10 100,10 C49.77,10 10,49.77 10,100 C10,150.23 49.77,190 100,190 Z" opacity="0.1"></path>
+                                <path stroke="#22d3ee" stroke-width="2" fill="none" d="M100,100 L150,50 L100,10 L50,50 L100,100 L150,150 L100,190 L50,150 Z" opacity="0.4"></path>
+                                <circle cx="100" cy="100" r="40" stroke="#22d3ee" stroke-width="2" fill="none" opacity="0.6"></circle>
+                                <circle cx="100" cy="100" r="10" fill="#22d3ee" opacity="0.8"></circle>
+                            </svg>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section-padding bg-[#0D0D0D]/0 relative z-10">
-            <div class="container mx-auto px-6">
-                <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-blue" data-aos="fade-up">Featured Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in">
-                        <img src="https://placehold.co/600x400/222222/00FFFF?text=Auto Exhaust Fan" alt="Autonomous Exhaust Fan Project" class="rounded-md mb-4 h-48 object-cover">
-                        <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Automatic Exhaust Fan</h3>
-                        <p class="text-[#F5F5F5] text-sm flex-grow mb-4">An automated system detecting poor air quality via an MQ-2 sensor to activate a fan, ensuring a healthy environment.</p>
-                        <div class="mb-4">
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">Arduino</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">MQ-2</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">C++</span>
-                        </div>
-                        <a href="https://rsmk27.github.io/Autoexhaustfan/" class="mt-auto btn-primary text-center">View Project</a>
-                    </div>
-
-                    <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in" data-aos-delay="100">
-                        <img src="https://placehold.co/600x400/222222/00FFFF?text=Color+Ohm" alt="Color Ohm" class="rounded-md mb-4 h-48 object-cover">
-                        <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Resistor Color Code Calculator</h3>
-                        <p class="text-[#F5F5F5] text-sm flex-grow mb-4">OhmDecoder is a sleek and accurate web tool that instantly decodes resistor color bands into their precise resistance values. Designed for Students</p>
-                        <div class="mb-4">
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">HTML</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">js</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">CSS</span>
-                        </div>
-                        <a href="https://rsmk27.github.io/colorohm/" class="mt-auto btn-primary text-center">View Project</a>
-                    </div>
-
-                    <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in" data-aos-delay="200">
-                        <img src="https://placehold.co/600x400/222222/00FFFF?text=Budget+Buddy" alt="Smart Energy Grid Concept" class="rounded-md mb-4 h-48 object-cover">
-                        <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Budget Buddy</h3>
-                        <p class="text-[#F5F5F5] text-sm flex-grow mb-4">it’s your personal finance sidekick that turns numbers into clarity. With every rupee you log, it paints a story of your spending, helping you budget smarter without even trying.</p>
-                        <div class="mb-4">
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">HTML</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">AI</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">Website</span>
-                        </div>
-                        <a href="https://rsmk27.github.io/BudgetBuddy/" class="mt-auto btn-primary text-center">View Project</a>
-                    </div>
-
-                    <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in">
-                        <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+4" alt="Telegram Bots" class="rounded-md mb-4 h-48 object-cover">
-                        <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Telegram Bots</h3>
-                        <p class="text-[#F5F5F5] text-sm flex-grow mb-4">Developed various AI-powered bots, including a reminder bot, a language translator, and a conversational chatbot using the Telegram Bot API.</p>
-                        <div class="mb-4">
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">Python</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">Telegram API</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">AI</span>
-                        </div>
-                        <a href="#" class="mt-auto btn-primary text-center">View Project</a>
-                    </div>
-
-                    <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in" data-aos-delay="100">
-                        <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+5" alt="Community Service Work" class="rounded-md mb-4 h-48 object-cover">
-                        <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Community Service Work</h3>
-                        <p class="text-[#F5F5F5] text-sm flex-grow mb-4">Conducted a survey and proposed engineering-based solutions for local issues in Murapaka village, focusing on practical problem-solving.</p>
-                        <div class="mb-4">
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">Surveying</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">Problem-Solving</span>
-                        </div>
-                        <a href="#" class="mt-auto btn-primary text-center">View Project</a>
-                    </div>
-
-                    <div class="glass-card rounded-lg p-6 flex flex-col transition-all duration-500 hover:-translate-y-3" data-aos="zoom-in" data-aos-delay="200">
-                        <img src="https://placehold.co/600x400/222222/00FFFF?text=Project+6" alt="Blender Designs" class="rounded-md mb-4 h-48 object-cover">
-                        <h3 class="font-orbitron text-xl font-bold text-[#00FFFF] mb-2">Blender Designs</h3>
-                        <p class="text-[#F5F5F5] text-sm flex-grow mb-4">A collection of 3D modeling experiments, creating various objects and scenes to explore design principles and visualization techniques.</p>
-                        <div class="mb-4">
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300">Blender</span>
-                            <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#FF00FF] bg-[#FF00FF]/20 border border-[#FF00FF]/30 hover:bg-[#FF00FF]/40 transition-all duration-300 ml-1">3D Modeling</span>
-                        </div>
-                        <a href="#" class="mt-auto btn-primary text-center">View Project</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="section-padding bg-[#222222]/0 relative z-10">
-            <div class="container mx-auto px-6">
-                <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 neon-glow-text-green" data-aos="fade-up">Technical Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                    
-                    <div data-aos="fade-right">
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">Arduino / ESP8266</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">90%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="90"></div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">Python</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">85%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="85"></div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">C Language</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">75%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="75"></div>
-                            </div>
+            <!-- About Me Section -->
+            <section id="about" class="container mx-auto p-8 mb-20">
+                <h2 class="text-4xl font-orbitron text-white text-center mb-12" data-aos="fade-up">About Me</h2>
+                <div class="md:grid md:grid-cols-2 md:gap-12 items-center">
+                    <div class="flex justify-center mb-8 md:mb-0" data-aos="fade-right">
+                        <div class="group relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-700 hover:border-teal-500 transition-all duration-300">
+                            <img src="https://placehold.co/320x320/000000/cccccc?text=RSMK" alt="RSMK Profile" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300">
+                            <div class="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-teal-500 transition-all duration-300"></div>
                         </div>
                     </div>
-
                     <div data-aos="fade-left">
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">MATLAB / Simulink</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">80%</span>
+                        <p class="text-lg text-gray-300 leading-relaxed font-poppins">
+                            I'm a passionate Electrical and Electronics Engineering student with a deep-seated love for building things and solving complex problems. My journey began with a curiosity for how things work, leading me to explore a wide range of fields from embedded systems to green technology. I thrive on bringing ideas from concept to reality, constantly seeking new challenges and opportunities to innovate. I believe that technology, when applied thoughtfully, can create a brighter, more sustainable future for everyone.
+                        </p>
+                        <h3 class="text-2xl font-orbitron text-white mt-8 mb-4">My Interests</h3>
+                        <div class="flex flex-wrap gap-2 text-sm font-medium">
+                            <span class="px-4 py-2 bg-gray-800 text-teal-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Green Technology & Smart Energy</span>
+                            <span class="px-4 py-2 bg-gray-800 text-cyan-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Embedded Systems & IoT</span>
+                            <span class="px-4 py-2 bg-gray-800 text-purple-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Automation & Control</span>
+                            <span class="px-4 py-2 bg-gray-800 text-yellow-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Innovative AI Projects</span>
+                            <span class="px-4 py-2 bg-gray-800 text-red-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Robotics</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="container mx-auto p-8 mb-20">
+                <h2 class="text-4xl font-orbitron text-white text-center mb-12" data-aos="fade-up">My Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card 1: Smart Exhaust Fan -->
+                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in">
+                        <img src="https://placehold.co/400x250/111111/444444?text=Smart+Exhaust+Fan" alt="Smart Exhaust Fan" class="w-full h-auto rounded-md mb-4 object-cover">
+                        <h3 class="text-2xl font-orbitron text-teal-400">Smart Exhaust Fan</h3>
+                        <p class="text-sm text-gray-300 mt-2 flex-grow">An automated exhaust fan that detects high levels of heat and humidity in a bathroom and turns on automatically. It is a simple IoT project that demonstrates the use of sensors and a microcontroller.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="text-xs font-medium bg-teal-900 text-teal-300 px-2 py-1 rounded-full">Arduino</span>
+                            <span class="text-xs font-medium bg-cyan-900 text-cyan-300 px-2 py-1 rounded-full">IoT</span>
+                            <span class="text-xs font-medium bg-yellow-900 text-yellow-300 px-2 py-1 rounded-full">Sensors</span>
+                        </div>
+                        <a href="https://github.com/RSMK/smart-exhaust-fan" target="_blank" class="mt-6 inline-block text-center px-4 py-2 bg-teal-500 text-gray-900 font-bold rounded-full hover:bg-teal-400 transition-colors">View Project</a>
+                    </div>
+                    <!-- Project Card 2: Color Ohm -->
+                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="https://placehold.co/400x250/111111/444444?text=Color+Ohm" alt="Color Ohm" class="w-full h-auto rounded-md mb-4 object-cover">
+                        <h3 class="text-2xl font-orbitron text-teal-400">Color Ohm</h3>
+                        <p class="text-sm text-gray-300 mt-2 flex-grow">A Python-based application for calculating the resistance of a resistor from its color bands. It features a simple graphical user interface (GUI) built with Tkinter, making it user-friendly for electronics enthusiasts.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="text-xs font-medium bg-red-900 text-red-300 px-2 py-1 rounded-full">Python</span>
+                            <span class="text-xs font-medium bg-blue-900 text-blue-300 px-2 py-1 rounded-full">Tkinter</span>
+                            <span class="text-xs font-medium bg-purple-900 text-purple-300 px-2 py-1 rounded-full">GUI</span>
+                        </div>
+                        <a href="https://github.com/RSMK/color-ohm" target="_blank" class="mt-6 inline-block text-center px-4 py-2 bg-teal-500 text-gray-900 font-bold rounded-full hover:bg-teal-400 transition-colors">View Project</a>
+                    </div>
+                    <!-- Project Card 3: Budget Buddy -->
+                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="https://placehold.co/400x250/111111/444444?text=Budget+Buddy" alt="Budget Buddy" class="w-full h-auto rounded-md mb-4 object-cover">
+                        <h3 class="text-2xl font-orbitron text-teal-400">Budget Buddy</h3>
+                        <p class="text-sm text-gray-300 mt-2 flex-grow">A web-based personal finance tracker built with HTML, CSS, and JavaScript. It helps users monitor their income and expenses, providing a clear overview of their financial habits. It's designed to be simple and intuitive.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="text-xs font-medium bg-red-900 text-red-300 px-2 py-1 rounded-full">HTML</span>
+                            <span class="text-xs font-medium bg-blue-900 text-blue-300 px-2 py-1 rounded-full">CSS</span>
+                            <span class="text-xs font-medium bg-yellow-900 text-yellow-300 px-2 py-1 rounded-full">JavaScript</span>
+                        </div>
+                        <a href="https://github.com/RSMK/budget-buddy" target="_blank" class="mt-6 inline-block text-center px-4 py-2 bg-teal-500 text-gray-900 font-bold rounded-full hover:bg-teal-400 transition-colors">View Project</a>
+                    </div>
+                    <!-- Project Card 4: Placeholder -->
+                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="300">
+                        <img src="https://placehold.co/400x250/111111/444444?text=Project+4" alt="Project 4" class="w-full h-auto rounded-md mb-4 object-cover">
+                        <h3 class="text-2xl font-orbitron text-teal-400">Placeholder Project</h3>
+                        <p class="text-sm text-gray-300 mt-2 flex-grow">A placeholder for an upcoming project. Details to be added soon.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="text-xs font-medium bg-purple-900 text-purple-300 px-2 py-1 rounded-full">Upcoming</span>
+                            <span class="text-xs font-medium bg-gray-700 text-gray-300 px-2 py-1 rounded-full">TBD</span>
+                        </div>
+                        <a href="#" class="mt-6 inline-block text-center px-4 py-2 bg-gray-700 text-gray-300 font-bold rounded-full cursor-not-allowed">View Project</a>
+                    </div>
+                    <!-- Project Card 5: Placeholder -->
+                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="400">
+                        <img src="https://placehold.co/400x250/111111/444444?text=Project+5" alt="Project 5" class="w-full h-auto rounded-md mb-4 object-cover">
+                        <h3 class="text-2xl font-orbitron text-teal-400">Placeholder Project</h3>
+                        <p class="text-sm text-gray-300 mt-2 flex-grow">A placeholder for an upcoming project. Details to be added soon.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="text-xs font-medium bg-purple-900 text-purple-300 px-2 py-1 rounded-full">Upcoming</span>
+                            <span class="text-xs font-medium bg-gray-700 text-gray-300 px-2 py-1 rounded-full">TBD</span>
+                        </div>
+                        <a href="#" class="mt-6 inline-block text-center px-4 py-2 bg-gray-700 text-gray-300 font-bold rounded-full cursor-not-allowed">View Project</a>
+                    </div>
+                    <!-- Project Card 6: Placeholder -->
+                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="500">
+                        <img src="https://placehold.co/400x250/111111/444444?text=Project+6" alt="Project 6" class="w-full h-auto rounded-md mb-4 object-cover">
+                        <h3 class="text-2xl font-orbitron text-teal-400">Placeholder Project</h3>
+                        <p class="text-sm text-gray-300 mt-2 flex-grow">A placeholder for an upcoming project. Details to be added soon.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="text-xs font-medium bg-purple-900 text-purple-300 px-2 py-1 rounded-full">Upcoming</span>
+                            <span class="text-xs font-medium bg-gray-700 text-gray-300 px-2 py-1 rounded-full">TBD</span>
+                        </div>
+                        <a href="#" class="mt-6 inline-block text-center px-4 py-2 bg-gray-700 text-gray-300 font-bold rounded-full cursor-not-allowed">View Project</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="container mx-auto p-8 mb-20">
+                <h2 class="text-4xl font-orbitron text-white text-center mb-12" data-aos="fade-up">My Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Progress Bars -->
+                    <div class="glass-card p-6" data-aos="fade-right">
+                        <h3 class="text-2xl font-orbitron text-white mb-6">Languages & Tools</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium">Arduino / ESP8266</span>
+                                    <span class="text-sm font-medium">90%</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: 90%;"></div>
+                                </div>
                             </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="80"></div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium">Python</span>
+                                    <span class="text-sm font-medium">85%</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium">HTML & CSS</span>
+                                    <span class="text-sm font-medium">75%</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: 75%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium">JavaScript</span>
+                                    <span class="text-sm font-medium">60%</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium">C++</span>
+                                    <span class="text-sm font-medium">70%</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: 70%;"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">HTML / CSS / JavaScript</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">70%</span>
+                    </div>
+                    <!-- Concepts & APIs -->
+                    <div class="glass-card p-6" data-aos="fade-left">
+                        <h3 class="text-2xl font-orbitron text-white mb-6">Concepts & APIs</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
+                                <i class="fa-solid fa-microchip text-4xl text-gray-500 group-hover:text-teal-500 transform group-hover:scale-110 transition-all duration-300"></i>
+                                <span class="mt-2 text-sm text-gray-400 group-hover:text-teal-300 font-medium">Embedded Systems</span>
                             </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="70"></div>
+                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
+                                <i class="fa-solid fa-network-wired text-4xl text-gray-500 group-hover:text-cyan-500 transform group-hover:scale-110 transition-all duration-300"></i>
+                                <span class="mt-2 text-sm text-gray-400 group-hover:text-cyan-300 font-medium">IoT & Cloud</span>
                             </div>
-                        </div>
-                        <div class="mb-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-base font-medium text-[#F5F5F5]">Blender / Fritzing / Tinkercad</span>
-                                <span class="text-sm font-medium text-[#F5F5F5]">85%</span>
+                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
+                                <i class="fa-brands fa-python text-4xl text-gray-500 group-hover:text-yellow-500 transform group-hover:scale-110 transition-all duration-300"></i>
+                                <span class="mt-2 text-sm text-gray-400 group-hover:text-yellow-300 font-medium">Telegram Bot API</span>
                             </div>
-                            <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner">
-                                <div class="progress-bar-inner h-2.5 rounded-full" data-progress="85"></div>
+                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
+                                <i class="fa-solid fa-code-merge text-4xl text-gray-500 group-hover:text-purple-500 transform group-hover:scale-110 transition-all duration-300"></i>
+                                <span class="mt-2 text-sm text-gray-400 group-hover:text-purple-300 font-medium">Circuit Design</span>
+                            </div>
+                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
+                                <i class="fa-solid fa-battery-half text-4xl text-gray-500 group-hover:text-red-500 transform group-hover:scale-110 transition-all duration-300"></i>
+                                <span class="mt-2 text-sm text-gray-400 group-hover:text-red-300 font-medium">Power Electronics</span>
+                            </div>
+                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
+                                <i class="fa-solid fa-robot text-4xl text-gray-500 group-hover:text-teal-500 transform group-hover:scale-110 transition-all duration-300"></i>
+                                <span class="mt-2 text-sm text-gray-400 group-hover:text-teal-300 font-medium">Robotics</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="mt-12 text-center" data-aos="fade-up">
-                    <h3 class="text-2xl font-bold mb-6 text-[#00FFFF]">Concepts & APIs</h3>
-                    <div class="flex flex-wrap justify-center gap-6">
-                        <div class="text-center transition-all duration-300 hover:scale-110 hover:text-[#00FFFF] p-4 rounded-lg hover:bg-[#00FFFF]/10">
-                            <i class="fas fa-robot text-4xl text-[#FF00FF] mb-2"></i>
-                            <p>APIs</p>
-                        </div>
-                        <div class="text-center transition-all duration-300 hover:scale-110 hover:text-[#00FFFF] p-4 rounded-lg hover:bg-[#00FFFF]/10">
-                            <i class="fas fa-wifi text-4xl text-[#FF00FF] mb-2"></i>
-                            <p>IoT</p>
-                        </div>
-                        <div class="text-center transition-all duration-300 hover:scale-110 hover:text-[#00FFFF] p-4 rounded-lg hover:bg-[#00FFFF]/10">
-                            <i class="fab fa-telegram-plane text-4xl text-[#FF00FF] mb-2"></i>
-                            <p>Telegram Bot API</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section-padding bg-[#0D0D0D]/0 relative z-10">
-            <div class="container mx-auto px-6">
-                <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-center mb-12 neon-glow-text-blue" data-aos="fade-up">Get In Touch</h2>
-                <div class="max-w-3xl mx-auto">
-                    <div class="flex justify-center gap-8 mb-12" data-aos="fade-up">
-                        <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" class="social-icon text-5xl text-[#F5F5F5] transition-all duration-300 p-3 rounded-full hover:bg-[#FF00FF]/20"><i class="fab fa-github"></i></a>
-                        <a href="https://t.me/rsmk27" target="_blank" aria-label="Telegram" class="social-icon text-5xl text-[#F5F5F5] transition-all duration-300 p-3 rounded-full hover:bg-[#FF00FF]/20"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="mailto:srinivasmanikantarajapantula@gmail.com" aria-label="Email" class="social-icon text-5xl text-[#F5F5F5] transition-all duration-300 p-3 rounded-full hover:bg-[#FF00FF]/20"><i class="fas fa-envelope"></i></a>
-                    </div>
-
-                    <form id="contactForm" class="glass-card rounded-lg p-8" data-aos="zoom-in">
-                        <div id="form-feedback" class="text-center mb-4"></div>
-                        <div class="mb-6">
-                            <label for="name" class="block mb-2 text-sm font-medium text-[#00FFFF]">Name</label>
-                            <input type="text" id="name" name="name" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-3 transition-all duration-300" required>
-                            <span class="text-red-500 text-xs mt-1 hidden" id="nameError">Name is required.</span>
-                        </div>
-                        <div class="mb-6">
-                            <label for="email" class="block mb-2 text-sm font-medium text-[#00FFFF]">Email</label>
-                            <input type="email" id="email" name="email" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-3 transition-all duration-300" required>
-                            <span class="text-red-500 text-xs mt-1 hidden" id="emailError">Please enter a valid email.</span>
-                        </div>
-                        <div class="mb-6">
-                            <label for="message" class="block mb-2 text-sm font-medium text-[#00FFFF]">Message</label>
-                            <textarea id="message" name="message" rows="4" class="form-input bg-gray-900/50 border border-gray-600 text-[#F5F5F5] text-sm rounded-lg block w-full p-3 transition-all duration-300" required></textarea>
-                            <span class="text-red-500 text-xs mt-1 hidden" id="messageError">Message cannot be empty.</span>
-                        </div>
-                        <button type="submit" class="submit-button w-full btn-primary">Send Message</button>
-                    </form>
-                    
-                    <div class="text-center mt-12" data-aos="fade-up">
-                        <a href="#" download="RSMK-Resume.pdf" class="btn-primary">
-                            Get Connected <i class="fas fa-download ml-2"></i>
+            <!-- Contact Section -->
+            <section id="contact" class="container mx-auto p-8 mb-20">
+                <h2 class="text-4xl font-orbitron text-white text-center mb-12" data-aos="fade-up">Get In Touch</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <!-- Social Media Icons -->
+                    <div class="flex justify-center space-x-8" data-aos="fade-right">
+                        <a href="https://github.com/RSMK" target="_blank" class="text-4xl text-gray-500 hover:text-white transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://t.me/RSMK_dev" target="_blank" class="text-4xl text-gray-500 hover:text-white transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                        <a href="mailto:rsmk_dev@email.com" class="text-4xl text-gray-500 hover:text-white transform hover:scale-110 transition-all duration-300">
+                            <i class="fa-solid fa-envelope"></i>
                         </a>
                     </div>
+                    <!-- Contact Form -->
+                    <div class="glass-card p-8" data-aos="fade-left">
+                        <form action="#" method="post" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full bg-gray-800 border border-gray-700 text-gray-200 rounded-md py-2 px-3 focus:outline-none focus:ring-1 focus:ring-teal-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full bg-gray-800 border border-gray-700 text-gray-200 rounded-md py-2 px-3 focus:outline-none focus:ring-1 focus:ring-teal-500">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-400 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full bg-gray-800 border border-gray-700 text-gray-200 rounded-md py-2 px-3 focus:outline-none focus:ring-1 focus:ring-teal-500"></textarea>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <button type="submit" class="px-6 py-3 bg-teal-500 text-gray-900 rounded-full font-bold hover:bg-teal-400 transition-colors">Send Message</button>
+                                <a href="/path-to-resume.pdf" download class="px-6 py-3 bg-transparent border border-teal-500 text-teal-500 rounded-full font-bold hover:bg-teal-500 hover:text-gray-900 transition-colors flex items-center space-x-2">
+                                    <span>Get Connected</span>
+                                    <i class="fa-solid fa-download"></i>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
         <!-- Footer -->
-        <footer class="bg-black/80 backdrop-blur-md py-8 border-t border-[#00FFFF]/20">
-            <div class="container mx-auto px-6 text-center text-[#F5F5F5]">
-                <p>&copy; 2025 RSMK. All Rights Reserved.</p>
-                <p class="mt-2">Designed with <i class="fas fa-heart text-red-500 animate-pulse"></i> and a lot of <i class="fas fa-coffee text-yellow-600"></i></p>
-            </div>
+        <footer class="p-8 text-center border-t border-gray-800">
+            <p class="text-sm text-gray-500 font-poppins">© 2025 RSMK. All rights reserved.</p>
+            <p class="text-sm text-gray-500 mt-2 font-poppins">Designed with <span class="text-red-500">❤️</span> and a lot of <span class="text-yellow-500">☕</span></p>
         </footer>
+    </div>
 
-    </div> <!-- End of .main-content wrapper -->
-
-    <!-- particles.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // SignatureLoader class for the preloader animation
-        class SignatureLoader {
-            constructor() {
-                this.loadingScreen = document.getElementById('loadingScreen');
-                this.mainContent = document.getElementById('mainContent');
-                this.signatureSvgContainer = this.loadingScreen.querySelector('.signature-svg');
-                this.progressFill = document.getElementById('progressFill');
-                this.progressText = document.getElementById('progressText');
-                this.skipButton = document.getElementById('skipButton');
-                
-                this.duration = 8000; // Overall duration for the loading screen and progress bar
-                this.startTime = null;
-                this.animationFrame = null;
-                this.isCompleting = false; // Flag to prevent multiple completions
-                
-                this.init();
-            }
-            
-            async init() {
-                // Check if user has seen animation before (optional - remove if you want it to always show)
-                const hasSeenAnimation = sessionStorage.getItem('portfolio-signature-seen');
-                if (hasSeenAnimation) {
-                    this.completeLoading(0); // Complete instantly if seen before
-                    return;
-                }
-                
-                // Load and animate signature SVG
-                await this.loadSignatureSvg('assets/signature.svg');
+        // Preloader Logic
+        window.onload = function() {
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('main-content');
+            const skipButton = document.getElementById('skip-button');
+            const preloaderBar = document.getElementById('preloader-bar');
+            const loadingText = document.getElementById('loading-text');
 
-                // Show skip button after 2 seconds
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                preloaderBar.style.width = `${progress}%`;
+                loadingText.innerText = `Loading ${progress}%`;
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    showMainContent();
+                }
+            }, 20);
+
+            skipButton.addEventListener('click', () => {
+                clearInterval(interval);
+                showMainContent();
+            });
+
+            function showMainContent() {
+                preloader.style.opacity = '0';
                 setTimeout(() => {
-                    this.skipButton.classList.add('visible');
-                }, 2000);
-                
-                // Add event listeners
-                this.skipButton.addEventListener('click', () => this.handleSkip());
-                document.addEventListener('keydown', (e) => this.handleKeyDown(e));
-                
-                // Check for reduced motion preference
-                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                if (prefersReducedMotion) {
-                    this.completeLoading(1000); // Faster completion for reduced motion
-                    return;
-                }
-                
-                // Start animation
-                this.startTime = Date.now();
-                this.updateProgress();
+                    preloader.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    AOS.init({ once: true });
+                }, 500);
             }
+        };
 
-            async loadSignatureSvg(svgPath) {
-                try {
-                    const response = await fetch(svgPath);
-                    if (!response.ok) {
-                        throw new Error(`Failed to load SVG: ${response.statusText}`);
-                    }
-                    const svgContent = await response.text();
-                    const parser = new DOMParser();
-                    const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
-                    const paths = svgDoc.querySelectorAll('path, circle, polyline, line, rect, ellipse, polygon'); // Select all common SVG shapes
+        // Typewriter Effect
+        document.addEventListener("DOMContentLoaded", function() {
+            const words = ["Green Tech", "Smart Energy", "Embedded Systems", "Innovative AI Projects"];
+            const typewriter = document.getElementById("typewriter-text");
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
 
-                    // Clear existing content and add loaded paths
-                    this.signatureSvgContainer.innerHTML = '';
-                    let animationDelay = 0.5; // Initial delay for the first path
-                    const animationDurationPerPath = 4.5; // Increased duration for each path's drawing
-
-                    paths.forEach((path, index) => {
-                        const newPath = path.cloneNode(true);
-                        newPath.classList.add('signature-path'); // Add base class for styling
-
-                        // Calculate total length for path animation
-                        let totalLength;
-                        try {
-                            totalLength = newPath.getTotalLength();
-                        } catch (e) {
-                            // Fallback for elements without getTotalLength (e.g., some circles/rects before rendering)
-                            // Or if SVG is not yet rendered. Set a default large value.
-                            totalLength = 1000; 
-                            console.warn("Could not get total length for SVG path, using fallback. Element:", newPath);
-                        }
-                        
-                        newPath.style.setProperty('--total-length', `${totalLength}px`);
-                        newPath.style.strokeDasharray = totalLength;
-                        newPath.style.strokeDashoffset = totalLength;
-
-                        // Apply animation with staggered delays
-                        newPath.style.animation = `signature-draw ${animationDurationPerPath}s ease-in-out ${animationDelay}s forwards`;
-                        animationDelay += 0.5; // Stagger delay for next path
-
-                        this.signatureSvgContainer.appendChild(newPath);
-                    });
-                    // Adjust viewBox if needed based on the loaded SVG's inherent viewBox
-                    const loadedSvg = svgDoc.querySelector('svg');
-                    if (loadedSvg && loadedSvg.getAttribute('viewBox')) {
-                        this.signatureSvgContainer.setAttribute('viewBox', loadedSvg.getAttribute('viewBox'));
-                    } else {
-                        // Fallback viewBox if the loaded SVG doesn't have one
-                        // Using the provided getBounds MaxX/MaxY for a more accurate fit if no viewBox is present
-                        const minX = 138.5; // From getBounds X
-                        const minY = 19.0; // From getBounds Y
-                        const width = 600.5; // From getBounds Width
-                        const height = 125.37474238704635; // From getBounds Height
-                        this.signatureSvgContainer.setAttribute('viewBox', `${minX} ${minY} ${width} ${height}`);
-                    }
-
-                } catch (error) {
-                    console.error("Error loading signature SVG:", error);
-                    // Fallback: Display a simple text signature if SVG fails to load
-                    this.signatureSvgContainer.innerHTML = `
-                        <text x="10" y="50" font-family="'Orbitron', sans-serif" font-size="24" fill="#00FFFF" opacity="0" style="animation: fade-in 2s ease-in-out forwards;">
-                            - RSMK
-                        </text>
-                    `;
-                }
-            }
-            
-            updateProgress() {
-                if (this.isCompleting) return; // Stop updating if already completing
-                
-                const elapsed = Date.now() - this.startTime;
-                this.progress = Math.min((elapsed / this.duration) * 100, 100);
-                
-                // Update progress bar
-                this.progressFill.style.width = `${this.progress}%`;
-                this.progressText.textContent = `${Math.round(this.progress)}%`;
-                
-                if (this.progress < 100) {
-                    this.animationFrame = requestAnimationFrame(() => this.updateProgress());
+            function type() {
+                const currentWord = words[wordIndex];
+                if (isDeleting) {
+                    typewriter.textContent = currentWord.substring(0, charIndex--);
                 } else {
-                    this.completeLoading();
-                }
-            }
-            
-            handleSkip() {
-                if (this.isCompleting) return;
-                this.isCompleting = true;
-                cancelAnimationFrame(this.animationFrame); // Stop ongoing animation frame
-                sessionStorage.setItem('portfolio-signature-seen', 'true');
-                
-                // Instantly complete progress bar visually
-                this.progressFill.style.width = '100%';
-                this.progressText.textContent = '100%';
-
-                // Ensure all signature paths are fully drawn
-                this.signatureSvgContainer.querySelectorAll('.signature-path').forEach(path => {
-                    path.style.animation = 'none'; // Stop current animation
-                    path.style.strokeDashoffset = '0'; // Ensure it's fully drawn
-                });
-
-                setTimeout(() => {
-                    this.showMainContent();
-                }, 300); // Fast fade out
-            }
-            
-            handleKeyDown(e) {
-                if (e.key === 'Escape' || e.key === ' ') {
-                    this.handleSkip();
-                }
-            }
-            
-            completeLoading(delay = 800) {
-                if (this.isCompleting) return;
-                this.isCompleting = true;
-                cancelAnimationFrame(this.animationFrame); // Stop ongoing animation frame
-                
-                sessionStorage.setItem('portfolio-signature-seen', 'true');
-                
-                // Ensure progress bar is full
-                this.progressFill.style.width = '100%';
-                this.progressText.textContent = '100%';
-
-                // Ensure all signature paths are fully drawn
-                this.signatureSvgContainer.querySelectorAll('.signature-path').forEach(path => {
-                    path.style.animation = 'none'; // Stop current animation
-                    path.style.strokeDashoffset = '0'; // Ensure it's fully drawn
-                });
-                
-                setTimeout(() => {
-                    this.showMainContent();
-                }, delay);
-            }
-            
-            showMainContent() {
-                // Fade out loading screen
-                this.loadingScreen.classList.add('fade-out');
-                
-                // Show main content
-                setTimeout(() => {
-                    this.loadingScreen.style.display = 'none'; // Completely hide after fade
-                    this.mainContent.classList.add('visible'); // Show main content
-                    document.body.style.overflow = 'auto'; // Allow scrolling on main content
-                    AOS.refresh(); // Refresh AOS to trigger animations on new visible content
-                    // Initialize particles.js here after main content is visible
-                    this.initParticles();
-                }, 800); // Matches fade-out transition duration
-            }
-
-            initParticles() {
-                particlesJS('particles-js', {
-                    "particles": {
-                        "number": {
-                            "value": 100,
-                            "density": {
-                                "enable": true,
-                                "value_area": 800
-                            }
-                        },
-                        "color": {
-                            "value": ["#00FFFF", "#FF00FF"]
-                        },
-                        "shape": {
-                            "type": "circle",
-                            "stroke": {
-                                "width": 0,
-                                "color": "#00FFFF"
-                            },
-                            "polygon": {
-                                "nb_sides": 5
-                            }
-                        },
-                        "opacity": {
-                            "value": 0.6,
-                            "random": false,
-                            "anim": {
-                                "enable": false,
-                                "speed": 1,
-                                "opacity_min": 0.1,
-                                "sync": false
-                            }
-                        },
-                        "size": {
-                            "value": 4,
-                            "random": true,
-                            "anim": {
-                                "enable": false,
-                                "speed": 40,
-                                "size_min": 0.1,
-                                "sync": false
-                            }
-                        },
-                        "line_linked": {
-                            "enable": true,
-                            "distance": 150,
-                            "color": "#00FFFF",
-                            "opacity": 0.5,
-                            "width": 1.5
-                        },
-                        "move": {
-                            "enable": true,
-                            "speed": 2,
-                            "direction": "none",
-                            "random": false,
-                            "straight": false,
-                            "out_mode": "out",
-                            "bounce": false,
-                            "attract": {
-                                "enable": false,
-                                "rotateX": 600,
-                                "rotateY": 1200
-                            }
-                        }
-                    },
-                    "interactivity": {
-                        "detect_on": "canvas",
-                        "events": {
-                            "onhover": {
-                                "enable": true,
-                                "mode": "grab"
-                            },
-                            "onclick": {
-                                "enable": true,
-                                "mode": "push"
-                            },
-                            "resize": true
-                        },
-                        "modes": {
-                            "grab": {
-                                "distance": 160,
-                                "line_linked": {
-                                    "opacity": 1
-                                }
-                            },
-                            "bubble": {
-                                "distance": 400,
-                                "size": 40,
-                                "duration": 2,
-                                "opacity": 8,
-                                "speed": 3
-                            },
-                            "repulse": {
-                                "distance": 200,
-                                "duration": 0.4
-                            },
-                            "push": {
-                                "particles_nb": 4
-                            },
-                            "remove": {
-                                "particles_nb": 2
-                            }
-                        }
-                    },
-                    "retina_detect": true
-                });
-            }
-        }
-        
-        // Initialize the signature loader when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            new SignatureLoader();
-
-            // Initial AOS.init call for elements that might be visible initially (though main content is hidden)
-            // AOS will be refreshed after the loading screen fades.
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-                offset: 50
-            });
-
-            // Scroll progress indicator
-            const scrollIndicator = document.getElementById('scroll-indicator');
-            window.addEventListener('scroll', () => {
-                const scrollTop = window.pageYOffset;
-                // Ensure docHeight calculation only considers the scrollable content
-                const docHeight = document.body.scrollHeight - window.innerHeight; // Use scrollHeight for total height
-                const scrollPercent = scrollTop / (docHeight || 1); // Avoid division by zero
-                scrollIndicator.style.transform = `scaleX(${scrollPercent})`;
-            });
-            
-            // Mobile Menu
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                const icon = mobileMenuButton.querySelector('i');
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-            });
-            document.querySelectorAll('#mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    const icon = mobileMenuButton.querySelector('i');
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                });
-            });
-
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            // Typed.js
-            if (document.getElementById('typed-output')) {
-                new Typed('#typed-output', {
-                    strings: ["Green Tech", "Smart Energy", "Embedded Systems", "Innovative AI Projects"],
-                    typeSpeed: 70,
-                    backSpeed: 40,
-                    loop: true,
-                    cursorChar: '_',
-                });
-            }
-
-            // Skill bars animation
-            const skillBars = document.querySelectorAll('.progress-bar-inner');
-            const skillObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const bar = entry.target;
-                        const progress = bar.getAttribute('data-progress');
-                        setTimeout(() => {
-                            bar.style.width = progress + '%';
-                            bar.style.transition = 'width 2s ease-out';
-                        }, 200);
-                        skillObserver.unobserve(bar);
-                    }
-                });
-            }, {
-                threshold: 0.8
-            });
-            skillBars.forEach(bar => {
-                skillObserver.observe(bar);
-            });
-
-            // Contact Form Validation
-            const contactForm = document.getElementById('contactForm');
-            const formFeedback = document.getElementById('form-feedback');
-            
-            contactForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                let isValid = true;
-                
-                const name = document.getElementById('name');
-                const email = document.getElementById('email');
-                const message = document.getElementById('message');
-                
-                const nameError = document.getElementById('nameError');
-                const emailError = document.getElementById('emailError');
-                const messageError = document.getElementById('messageError');
-
-                [nameError, emailError, messageError].forEach(e => e.classList.add('hidden'));
-
-                if (name.value.trim() === '') {
-                    nameError.classList.remove('hidden');
-                    isValid = false;
-                }
-                
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(email.value.trim())) {
-                    emailError.classList.remove('hidden');
-                    isValid = false;
-                }
-                
-                if (message.value.trim() === '') {
-                    messageError.classList.remove('hidden');
-                    isValid = false;
+                    typewriter.textContent = currentWord.substring(0, charIndex++);
                 }
 
-                if (isValid) {
-                    formFeedback.textContent = "Thank you! Your message has been sent. (Demo)";
-                    formFeedback.className = "text-center mb-4 text-green-400";
-                    contactForm.reset();
-                    setTimeout(() => {
-                        formFeedback.textContent = "";
-                    }, 5000);
+                if (!isDeleting && charIndex > currentWord.length) {
+                    isDeleting = true;
+                    setTimeout(type, 1000);
+                } else if (isDeleting && charIndex < 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    setTimeout(type, 500);
                 } else {
-                    formFeedback.textContent = "Please correct the errors below.";
-                    formFeedback.className = "text-center mb-4 text-red-500";
+                    setTimeout(type, isDeleting ? 50 : 100);
                 }
-            });
-
-            // Cursor animation
-            document.addEventListener('mousemove', (e) => {
-                const cursorDot = document.createElement('div');
-                cursorDot.className = 'cursor-dot';
-                document.body.appendChild(cursorDot);
-
-                cursorDot.style.left = `${e.clientX}px`;
-                cursorDot.style.top = `${e.clientY}px`;
-
-                const colors = ['#00FFFF', '#FF00FF']; // Neon Cyan, Magenta Glow
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                cursorDot.style.backgroundColor = randomColor;
-                cursorDot.style.boxShadow = `0 0 8px ${randomColor}, 0 0 16px ${randomColor}`;
-
-                cursorDot.animate([
-                    { transform: 'scale(0)', opacity: 1 },
-                    { transform: 'scale(1)', opacity: 0 }
-                ], {
-                    duration: 800,
-                    easing: 'ease-out',
-                    fill: 'forwards'
-                }).onfinish = () => {
-                    cursorDot.remove();
-                };
-            });
+            }
+            type();
         });
 
-        // Reset function for testing the loading animation
-        window.resetAnimation = () => {
-            sessionStorage.removeItem('portfolio-signature-seen');
-            location.reload();
-        };
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress-bar').style.width = scrolled + "%";
+        });
+
+        // Particles.js Config
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#22d3ee"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#22d3ee",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Hamburger menu
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const mobileMenuLinks = document.getElementById('mobile-menu-links');
+        hamburgerMenu.addEventListener('click', () => {
+            mobileMenuLinks.classList.toggle('hidden');
+        });
+        mobileMenuLinks.addEventListener('click', (event) => {
+            if (event.target.tagName === 'A') {
+                mobileMenuLinks.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 </html>
