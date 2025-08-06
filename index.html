@@ -15,42 +15,43 @@
                 extend: {
                     colors: {
                         primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
                         },
                         accent: {
-                            50: '#fdf4ff',
-                            100: '#fae8ff',
-                            200: '#f5d0fe',
-                            300: '#f0abfc',
-                            400: '#e879f9',
-                            500: '#d946ef',
-                            600: '#c026d3',
-                            700: '#a21caf',
-                            800: '#86198f',
-                            900: '#701a75',
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
                         },
                         success: '#10b981',
                         warning: '#f59e0b',
                         error: '#ef4444',
+                        dark: '#0a0a0a',
+                        light: '#ffffff',
+                        'dark-gray': '#1a1a1a',
+                        'medium-gray': '#2a2a2a',
                     }
                 }
             }
         }
     </script>
     <style>
-        * {
-            cursor: none !important;
-        }
-        
+        /* Base styles */
         body {
             font-family: 'Inter', sans-serif;
             background: #0a0a0a;
@@ -66,7 +67,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0a0a0a 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%, #0a0a0a 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
         }
@@ -78,9 +79,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(217, 70, 239, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
             animation: floatingOrbs 20s ease-in-out infinite;
         }
 
@@ -95,49 +96,51 @@
             66% { transform: translate(-20px, 20px) rotate(240deg); }
         }
 
-        /* Enhanced Custom Cursor */
+        /* Custom Cursor */
         .cursor {
             position: fixed;
             width: 8px;
             height: 8px;
-            background: linear-gradient(45deg, #0ea5e9, #d946ef);
+            background: linear-gradient(45deg, #6366f1, #ec4899); /* Primary to Accent */
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transition: all 0.15s ease;
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+            transform: translate(-50%, -50%); /* Center the cursor */
         }
 
         .cursor-follower {
             position: fixed;
             width: 32px;
             height: 32px;
-            border: 2px solid rgba(14, 165, 233, 0.3);
+            border: 2px solid rgba(99, 102, 241, 0.3); /* Primary with transparency */
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%); /* Center the follower */
         }
 
         .cursor.hover {
-            transform: scale(2);
-            background: linear-gradient(45deg, #d946ef, #10b981);
-            box-shadow: 0 0 30px rgba(217, 70, 239, 0.8);
+            transform: translate(-50%, -50%) scale(2);
+            background: linear-gradient(45deg, #ec4899, #10b981); /* Accent to Success */
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.8);
         }
 
         .cursor-follower.hover {
-            transform: scale(1.5);
-            border-color: rgba(217, 70, 239, 0.6);
-            background: radial-gradient(circle, rgba(217, 70, 239, 0.2) 0%, transparent 70%);
+            transform: translate(-50%, -50%) scale(1.5);
+            border-color: rgba(236, 72, 153, 0.6);
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, transparent 70%);
         }
 
         .cursor.click {
-            transform: scale(0.5);
+            transform: translate(-50%, -50%) scale(0.5);
         }
 
         .cursor-follower.click {
-            transform: scale(2);
+            transform: translate(-50%, -50%) scale(2);
             border-color: rgba(16, 185, 129, 0.8);
         }
 
@@ -154,136 +157,19 @@
 
         .scroll-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #0ea5e9, #d946ef, #10b981);
+            background: linear-gradient(90deg, #6366f1, #ec4899, #10b981); /* Primary, Accent, Success */
             width: 0%;
             transition: width 0.1s ease;
-            box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
-        }
-
-        /* Vector Animation Container */
-        .vector-animation {
-            position: absolute;
-            right: 5%;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 400px;
-            height: 400px;
-            opacity: 0.7;
-        }
-
-        .floating-shapes {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape-1 {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.3), rgba(217, 70, 239, 0.3));
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .shape-2 {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, rgba(217, 70, 239, 0.4), rgba(16, 185, 129, 0.4));
-            top: 60%;
-            right: 20%;
-            animation-delay: -2s;
-        }
-
-        .shape-3 {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(14, 165, 233, 0.2));
-            bottom: 30%;
-            left: 30%;
-            animation-delay: -4s;
-        }
-
-        .circuit-lines {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0.3;
-        }
-
-        .circuit-line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.5), transparent);
-            height: 2px;
-            animation: circuitFlow 4s linear infinite;
-        }
-
-        .circuit-line-1 {
-            top: 25%;
-            left: 0;
-            width: 60%;
-            animation-delay: 0s;
-        }
-
-        .circuit-line-2 {
-            top: 50%;
-            right: 0;
-            width: 70%;
-            animation-delay: -1s;
-        }
-
-        .circuit-line-3 {
-            bottom: 25%;
-            left: 20%;
-            width: 50%;
-            animation-delay: -2s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        @keyframes circuitFlow {
-            0% { opacity: 0; transform: translateX(-100%); }
-            50% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(100%); }
-        }
-
-        /* Enhanced Animations */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .fade-in-up.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in {
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-
-        .fade-in.animate {
-            opacity: 1;
+            box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
         }
 
         /* Hero Section */
         .hero-text {
-            font-size: clamp(3rem, 8vw, 8rem);
+            font-size: clamp(3.5rem, 10vw, 9rem); /* Larger, more impactful */
             line-height: 0.9;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #ffffff 0%, #0ea5e9 50%, #d946ef 100%);
+            font-weight: 900; /* Extra bold */
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, #6366f1 50%, #ec4899 100%); /* White to Primary to Accent */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -296,7 +182,7 @@
         }
 
         .hero-subtitle {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(14, 165, 233, 0.6));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(99, 102, 241, 0.7)); /* Lighter gradient for subtitle */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -304,11 +190,12 @@
 
         /* Enhanced Project Cards */
         .project-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(14, 165, 233, 0.1);
+            background: rgba(255, 255, 255, 0.03); /* Slightly more visible background */
+            border: 1px solid rgba(99, 102, 241, 0.15); /* Primary border */
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Initial subtle shadow */
         }
 
         .project-card::before {
@@ -318,7 +205,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent); /* Primary glow */
             transition: left 0.6s ease;
         }
 
@@ -327,49 +214,51 @@
         }
 
         .project-card:hover {
-            background: rgba(14, 165, 233, 0.05);
-            border-color: rgba(14, 165, 233, 0.3);
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.1);
+            background: rgba(99, 102, 241, 0.08); /* More pronounced hover background */
+            border-color: rgba(99, 102, 241, 0.4); /* Stronger primary border */
+            transform: translateY(-8px) scale(1.01); /* Subtle lift */
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.15); /* Enhanced shadow */
         }
 
         /* Enhanced Skills */
         .skill-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(217, 70, 239, 0.1);
+            background: rgba(255, 255, 255, 0.04); /* Slightly more visible background */
+            border: 1px solid rgba(236, 72, 153, 0.15); /* Accent border */
             transition: all 0.3s ease;
             position: relative;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* Initial subtle shadow */
         }
 
         .skill-item:hover {
-            background: rgba(217, 70, 239, 0.08);
-            border-color: rgba(217, 70, 239, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(217, 70, 239, 0.2);
+            background: rgba(236, 72, 153, 0.1); /* More pronounced hover background */
+            border-color: rgba(236, 72, 153, 0.4); /* Stronger accent border */
+            transform: translateY(-4px); /* Subtle lift */
+            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.25); /* Enhanced shadow */
         }
 
         /* Enhanced Form */
         .form-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(14, 165, 233, 0.2);
+            background: rgba(255, 255, 255, 0.06); /* Darker input background */
+            border: 1px solid rgba(99, 102, 241, 0.25); /* Primary border */
             color: #ffffff;
             transition: all 0.3s ease;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: rgba(14, 165, 233, 0.5);
-            background: rgba(14, 165, 233, 0.08);
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.1);
+            border-color: rgba(99, 102, 241, 0.6); /* Stronger primary border on focus */
+            background: rgba(99, 102, 241, 0.1); /* Primary background on focus */
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15); /* Subtle shadow on focus */
         }
 
         /* Enhanced Buttons */
         .btn-primary {
-            background: linear-gradient(135deg, #0ea5e9, #d946ef);
+            background: linear-gradient(135deg, #6366f1, #ec4899); /* Primary to Accent */
             color: #ffffff;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3); /* Initial shadow */
         }
 
         .btn-primary::before {
@@ -379,7 +268,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent); /* White shimmer */
             transition: left 0.6s ease;
         }
 
@@ -388,39 +277,46 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+            transform: translateY(-4px); /* Slight lift */
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4); /* Enhanced shadow */
         }
 
         .btn-secondary {
             background: transparent;
-            border: 2px solid rgba(217, 70, 239, 0.3);
+            border: 2px solid rgba(236, 72, 153, 0.35); /* Accent border */
             color: #ffffff;
             transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* Initial subtle shadow */
         }
 
         .btn-secondary:hover {
-            background: rgba(217, 70, 239, 0.1);
-            border-color: rgba(217, 70, 239, 0.6);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(217, 70, 239, 0.2);
+            background: rgba(236, 72, 153, 0.15); /* Accent background on hover */
+            border-color: rgba(236, 72, 153, 0.7); /* Stronger accent border */
+            transform: translateY(-4px); /* Slight lift */
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3); /* Enhanced shadow */
         }
 
         /* Enhanced Navigation */
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
+            font-weight: 500; /* Medium weight for nav links */
+            color: rgba(255, 255, 255, 0.7); /* Muted white */
         }
 
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -8px; /* Lower underline */
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #0ea5e9, #d946ef);
+            background: linear-gradient(90deg, #6366f1, #ec4899); /* Primary to Accent */
             transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffffff; /* Brighter on hover */
         }
 
         .nav-link:hover::after {
@@ -430,17 +326,17 @@
         /* Progress Bars */
         .progress-bar {
             width: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #0ea5e9, #d946ef, #10b981);
+            height: 8px; /* Thicker progress bar */
+            background: linear-gradient(90deg, #6366f1, #ec4899, #10b981); /* Primary, Accent, Success */
             transition: width 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border-radius: 3px;
-            box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
+            border-radius: 4px; /* More rounded */
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.4); /* Enhanced shadow */
         }
 
         .progress-container {
-            background: rgba(255, 255, 255, 0.1);
-            height: 6px;
-            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.08); /* Darker container */
+            height: 8px;
+            border-radius: 4px;
             overflow: hidden;
         }
 
@@ -451,9 +347,9 @@
         }
 
         .social-icon:hover {
-            transform: translateY(-5px) scale(1.1);
-            color: #0ea5e9;
-            text-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+            transform: translateY(-6px) scale(1.15); /* More pronounced lift and scale */
+            color: #6366f1; /* Primary color on hover */
+            text-shadow: 0 0 25px rgba(99, 102, 241, 0.6); /* Enhanced shadow */
         }
 
         /* Mobile Responsiveness */
@@ -463,14 +359,14 @@
             }
             
             .hero-text {
-                font-size: clamp(2.5rem, 12vw, 4rem);
+                font-size: clamp(2.8rem, 14vw, 5rem); /* Adjust for smaller screens */
             }
         }
 
         /* Scroll Down Arrow */
         .scroll-arrow {
             animation: bounce 2s infinite;
-            color: rgba(14, 165, 233, 0.6);
+            color: rgba(99, 102, 241, 0.6); /* Primary color */
         }
 
         @keyframes bounce {
@@ -478,10 +374,10 @@
                 transform: translateY(0);
             }
             40% {
-                transform: translateY(-10px);
+                transform: translateY(-12px); /* More bounce */
             }
             60% {
-                transform: translateY(-5px);
+                transform: translateY(-6px);
             }
         }
 
@@ -489,16 +385,26 @@
         .mobile-menu {
             transform: translateX(100%);
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.98); /* Almost opaque dark background */
+            backdrop-filter: blur(25px); /* Stronger blur */
         }
 
         .mobile-menu.open {
             transform: translateX(0);
         }
+
+        .mobile-menu-link {
+            font-weight: 600; /* Slightly bolder for mobile links */
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-link:hover {
+            color: #6366f1; /* Primary color on hover */
+        }
     </style>
 </head>
-<body class="bg-[#0a0a0a] text-white">
+<body class="bg-dark text-light">
     <!-- Dynamic Background -->
     <div class="dynamic-bg"></div>
 
@@ -512,43 +418,41 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 py-6">
+    <nav class="fixed top-0 w-full z-50 bg-dark-gray/60 backdrop-blur-xl border-b border-white/5 py-4">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center">
-                <a href="#hero" class="text-2xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">RSMK</a>
+                <a href="#hero" class="text-3xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">RSMK</a>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="nav-link text-sm font-medium hover:text-primary-400">About</a>
-                    <a href="#projects" class="nav-link text-sm font-medium hover:text-primary-400">Projects</a>
-                    <a href="#skills" class="nav-link text-sm font-medium hover:text-primary-400">Skills</a>
-                    <a href="#contact" class="nav-link text-sm font-medium hover:text-primary-400">Contact</a>
+                <div class="hidden md:flex space-x-10">
+                    <a href="#about" class="nav-link text-base">About</a>
+                    <a href="#projects" class="nav-link text-base">Projects</a>
+                    <a href="#skills" class="nav-link text-base">Skills</a>
+                    <a href="#contact" class="nav-link text-base">Contact</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden" id="mobile-menu-btn">
-                    <div class="w-6 h-6 flex flex-col justify-center items-center">
-                        <span class="w-full h-0.5 bg-white mb-1 transition-all"></span>
-                        <span class="w-full h-0.5 bg-white mb-1 transition-all"></span>
-                        <span class="w-full h-0.5 bg-white transition-all"></span>
-                    </div>
+                <button class="md:hidden relative w-8 h-8 flex flex-col justify-center items-center z-50" id="mobile-menu-btn">
+                    <span class="w-full h-0.5 bg-white mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
+                    <span class="w-full h-0.5 bg-white mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
+                    <span class="w-full h-0.5 bg-white transition-all duration-300 ease-in-out transform origin-center"></span>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu -->
         <div class="mobile-menu fixed top-0 right-0 w-full h-screen md:hidden z-40">
-            <div class="flex flex-col items-center justify-center h-full space-y-8">
-                <a href="#about" class="text-2xl font-medium mobile-menu-link hover:text-primary-400">About</a>
-                <a href="#projects" class="text-2xl font-medium mobile-menu-link hover:text-primary-400">Projects</a>
-                <a href="#skills" class="text-2xl font-medium mobile-menu-link hover:text-primary-400">Skills</a>
-                <a href="#contact" class="text-2xl font-medium mobile-menu-link hover:text-primary-400">Contact</a>
+            <div class="flex flex-col items-center justify-center h-full space-y-10">
+                <a href="#about" class="text-3xl mobile-menu-link" data-section="about">About</a>
+                <a href="#projects" class="text-3xl mobile-menu-link" data-section="projects">Projects</a>
+                <a href="#skills" class="text-3xl mobile-menu-link" data-section="skills">Skills</a>
+                <a href="#contact" class="text-3xl mobile-menu-link" data-section="contact">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex flex-col justify-center items-start px-6 max-w-7xl mx-auto relative">
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-start px-6 lg:px-8 max-w-7xl mx-auto relative pt-24 pb-12">
         <!-- Vector Animation -->
         <div class="vector-animation hidden lg:block">
             <div class="floating-shapes">
@@ -564,215 +468,215 @@
         </div>
 
         <div class="fade-in z-10">
-            <h1 class="hero-text mb-6">
+            <h1 class="hero-text mb-8">
                 Hi, I'm <br>
                 <span class="hero-subtitle">RSMK</span>
             </h1>
-            <p class="text-xl md:text-2xl text-white/80 mb-8 max-w-2xl leading-relaxed">
+            <p class="text-xl md:text-3xl text-white/90 mb-10 max-w-3xl leading-relaxed font-light">
                 An Electrical and Electronics Engineering Student
             </p>
-            <p class="text-lg text-white/70 mb-12 max-w-xl">
+            <p class="text-lg md:text-xl text-white/70 mb-16 max-w-2xl font-light">
                 I build things related to <span class="text-primary-400 font-semibold" id="typewriter"></span>
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-4 mb-16">
-                <a href="#projects" class="btn-primary px-8 py-4 rounded-full font-medium">View My Work</a>
-                <a href="#contact" class="btn-secondary px-8 py-4 rounded-full font-medium">Get In Touch</a>
+            <div class="flex flex-col sm:flex-row gap-6 mb-20">
+                <a href="#projects" class="btn-primary px-10 py-5 rounded-full text-lg font-medium">View My Work</a>
+                <a href="#contact" class="btn-secondary px-10 py-5 rounded-full text-lg font-medium">Get In Touch</a>
             </div>
         </div>
 
         <!-- Scroll Arrow -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-arrow">
-            <i class="fas fa-chevron-down text-xl"></i>
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 scroll-arrow">
+            <i class="fas fa-chevron-down text-2xl"></i>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-32 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
+    <section id="about" class="py-32 px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-20 items-center">
             <div class="fade-in-up">
-                <h2 class="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">About Me</h2>
-                <p class="text-lg text-white/80 leading-relaxed mb-8">
+                <h2 class="text-5xl md:text-7xl font-bold mb-10 bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">About Me</h2>
+                <p class="text-lg md:text-xl text-white/80 leading-loose mb-10">
                     I'm a passionate Electrical and Electronics Engineering student with a deep-seated love for building things and solving complex problems. My journey began with a curiosity for how things work, leading me to explore a wide range of fields from embedded systems to green technology. I thrive on bringing ideas from concept to reality, constantly seeking new challenges and opportunities to innovate. I believe that technology, when applied thoughtfully, can create a brighter, more sustainable future for everyone.
                 </p>
                 
-                <h3 class="text-2xl font-semibold mb-6 text-primary-400">My Interests</h3>
-                <div class="flex flex-wrap gap-3">
-                    <span class="px-4 py-2 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-sm">Green Technology & Smart Energy</span>
-                    <span class="px-4 py-2 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-sm">Embedded Systems & IoT</span>
-                    <span class="px-4 py-2 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-sm">Automation & Control</span>
-                    <span class="px-4 py-2 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-sm">Innovative AI Projects</span>
-                    <span class="px-4 py-2 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-sm">Robotics</span>
+                <h3 class="text-3xl font-semibold mb-8 text-primary-400">My Interests</h3>
+                <div class="flex flex-wrap gap-4">
+                    <span class="px-5 py-2.5 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-base font-medium">Green Technology & Smart Energy</span>
+                    <span class="px-5 py-2.5 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-base font-medium">Embedded Systems & IoT</span>
+                    <span class="px-5 py-2.5 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-base font-medium">Automation & Control</span>
+                    <span class="px-5 py-2.5 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-base font-medium">Innovative AI Projects</span>
+                    <span class="px-5 py-2.5 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-primary-500/30 rounded-full text-base font-medium">Robotics</span>
                 </div>
             </div>
             
-            <div class="fade-in-up flex justify-center">
-                <div class="w-80 h-80 rounded-full overflow-hidden border-2 border-primary-500/30 shadow-2xl shadow-primary-500/20">
-                    <img src="https://placehold.co/320x320/0a0a0a/0ea5e9?text=RSMK" alt="RSMK Profile" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+            <div class="fade-in-up flex justify-center items-center">
+                <div class="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-2 border-primary-500/40 shadow-2xl shadow-primary-500/20 flex items-center justify-center bg-medium-gray">
+                    <img src="https://placehold.co/384x384/0a0a0a/6366f1?text=RSMK" alt="RSMK Profile" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-32 px-6 max-w-7xl mx-auto">
-        <div class="fade-in-up mb-16">
-            <h2 class="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">My Projects</h2>
+    <section id="projects" class="py-32 px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="fade-in-up mb-20">
+            <h2 class="text-5xl md:text-7xl font-bold mb-10 bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">My Projects</h2>
         </div>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             <!-- Project 1 -->
-            <div class="project-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <img src="https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Smart Exhaust Fan" class="w-full h-48 object-cover rounded-lg mb-4">
+            <div class="project-card p-10 rounded-3xl fade-in-up">
+                <div class="mb-8">
+                    <img src="https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Smart Exhaust Fan" class="w-full h-56 object-cover rounded-xl mb-6 shadow-lg">
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Smart Exhaust Fan</h3>
-                <p class="text-white/80 mb-6 leading-relaxed">
+                <h3 class="text-3xl font-semibold mb-5 text-primary-400">Smart Exhaust Fan</h3>
+                <p class="text-white/80 mb-8 leading-relaxed">
                     An automated exhaust fan that detects high levels of heat and humidity in a bathroom and turns on automatically. It is a simple IoT project that demonstrates the use of sensors and a microcontroller.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-primary-500/20 border border-primary-500/30 rounded-full text-xs">Arduino</span>
-                    <span class="px-3 py-1 bg-accent-500/20 border border-accent-500/30 rounded-full text-xs">IoT</span>
-                    <span class="px-3 py-1 bg-success/20 border border-success/30 rounded-full text-xs">Sensors</span>
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="px-4 py-1.5 bg-primary-500/20 border border-primary-500/30 rounded-full text-sm font-medium">Arduino</span>
+                    <span class="px-4 py-1.5 bg-accent-500/20 border border-accent-500/30 rounded-full text-sm font-medium">IoT</span>
+                    <span class="px-4 py-1.5 bg-success/20 border border-success/30 rounded-full text-sm font-medium">Sensors</span>
                 </div>
-                <a href="https://github.com/RSMK/smart-exhaust-fan" target="_blank" class="btn-primary px-6 py-3 rounded-full font-medium inline-block">View Project</a>
+                <a href="https://github.com/RSMK/smart-exhaust-fan" target="_blank" class="btn-primary px-8 py-4 rounded-full text-base font-medium inline-block">View Project</a>
             </div>
 
             <!-- Project 2 -->
-            <div class="project-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <img src="https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Color Ohm" class="w-full h-48 object-cover rounded-lg mb-4">
+            <div class="project-card p-10 rounded-3xl fade-in-up">
+                <div class="mb-8">
+                    <img src="https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Color Ohm" class="w-full h-56 object-cover rounded-xl mb-6 shadow-lg">
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Color Ohm</h3>
-                <p class="text-white/80 mb-6 leading-relaxed">
+                <h3 class="text-3xl font-semibold mb-5 text-primary-400">Color Ohm</h3>
+                <p class="text-white/80 mb-8 leading-relaxed">
                     A Python-based application for calculating the resistance of a resistor from its color bands. It features a simple graphical user interface (GUI) built with Tkinter, making it user-friendly for electronics enthusiasts.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-primary-500/20 border border-primary-500/30 rounded-full text-xs">Python</span>
-                    <span class="px-3 py-1 bg-accent-500/20 border border-accent-500/30 rounded-full text-xs">Tkinter</span>
-                    <span class="px-3 py-1 bg-success/20 border border-success/30 rounded-full text-xs">GUI</span>
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="px-4 py-1.5 bg-primary-500/20 border border-primary-500/30 rounded-full text-sm font-medium">Python</span>
+                    <span class="px-4 py-1.5 bg-accent-500/20 border border-accent-500/30 rounded-full text-sm font-medium">Tkinter</span>
+                    <span class="px-4 py-1.5 bg-success/20 border border-success/30 rounded-full text-sm font-medium">GUI</span>
                 </div>
-                <a href="https://github.com/RSMK/color-ohm" target="_blank" class="btn-primary px-6 py-3 rounded-full font-medium inline-block">View Project</a>
+                <a href="https://github.com/RSMK/color-ohm" target="_blank" class="btn-primary px-8 py-4 rounded-full text-base font-medium inline-block">View Project</a>
             </div>
 
             <!-- Project 3 -->
-            <div class="project-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <img src="https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Budget Buddy" class="w-full h-48 object-cover rounded-lg mb-4">
+            <div class="project-card p-10 rounded-3xl fade-in-up">
+                <div class="mb-8">
+                    <img src="https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Budget Buddy" class="w-full h-56 object-cover rounded-xl mb-6 shadow-lg">
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Budget Buddy</h3>
-                <p class="text-white/80 mb-6 leading-relaxed">
+                <h3 class="text-3xl font-semibold mb-5 text-primary-400">Budget Buddy</h3>
+                <p class="text-white/80 mb-8 leading-relaxed">
                     A web-based personal finance tracker built with HTML, CSS, and JavaScript. It helps users monitor their income and expenses, providing a clear overview of their financial habits. It's designed to be simple and intuitive.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-primary-500/20 border border-primary-500/30 rounded-full text-xs">HTML</span>
-                    <span class="px-3 py-1 bg-accent-500/20 border border-accent-500/30 rounded-full text-xs">CSS</span>
-                    <span class="px-3 py-1 bg-success/20 border border-success/30 rounded-full text-xs">JavaScript</span>
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="px-4 py-1.5 bg-primary-500/20 border border-primary-500/30 rounded-full text-sm font-medium">HTML</span>
+                    <span class="px-4 py-1.5 bg-accent-500/20 border border-accent-500/30 rounded-full text-sm font-medium">CSS</span>
+                    <span class="px-4 py-1.5 bg-success/20 border border-success/30 rounded-full text-sm font-medium">JavaScript</span>
                 </div>
-                <a href="https://github.com/RSMK/budget-buddy" target="_blank" class="btn-primary px-6 py-3 rounded-full font-medium inline-block">View Project</a>
+                <a href="https://github.com/RSMK/budget-buddy" target="_blank" class="btn-primary px-8 py-4 rounded-full text-base font-medium inline-block">View Project</a>
             </div>
 
             <!-- Project 4 -->
-            <div class="project-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Project 4" class="w-full h-48 object-cover rounded-lg mb-4">
+            <div class="project-card p-10 rounded-3xl fade-in-up">
+                <div class="mb-8">
+                    <img src="https://placehold.co/400x224/1a1a1a/818cf8?text=UPCOMING" alt="Placeholder Project" class="w-full h-56 object-cover rounded-xl mb-6 shadow-lg">
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Placeholder Project</h3>
-                <p class="text-white/80 mb-6 leading-relaxed">
+                <h3 class="text-3xl font-semibold mb-5 text-primary-400">Placeholder Project</h3>
+                <p class="text-white/80 mb-8 leading-relaxed">
                     A placeholder for an upcoming project. Details to be added soon.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-warning/20 border border-warning/30 rounded-full text-xs">Upcoming</span>
-                    <span class="px-3 py-1 bg-warning/20 border border-warning/30 rounded-full text-xs">TBD</span>
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="px-4 py-1.5 bg-warning/20 border border-warning/30 rounded-full text-sm font-medium">Upcoming</span>
+                    <span class="px-4 py-1.5 bg-warning/20 border border-warning/30 rounded-full text-sm font-medium">TBD</span>
                 </div>
-                <button class="btn-secondary px-6 py-3 rounded-full font-medium cursor-not-allowed opacity-50">View Project</button>
+                <button class="btn-secondary px-8 py-4 rounded-full text-base font-medium cursor-not-allowed opacity-50">View Project</button>
             </div>
 
             <!-- Project 5 -->
-            <div class="project-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <img src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Project 5" class="w-full h-48 object-cover rounded-lg mb-4">
+            <div class="project-card p-10 rounded-3xl fade-in-up">
+                <div class="mb-8">
+                    <img src="https://placehold.co/400x224/1a1a1a/818cf8?text=UPCOMING" alt="Placeholder Project" class="w-full h-56 object-cover rounded-xl mb-6 shadow-lg">
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Placeholder Project</h3>
-                <p class="text-white/80 mb-6 leading-relaxed">
+                <h3 class="text-3xl font-semibold mb-5 text-primary-400">Placeholder Project</h3>
+                <p class="text-white/80 mb-8 leading-relaxed">
                     A placeholder for an upcoming project. Details to be added soon.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-warning/20 border border-warning/30 rounded-full text-xs">Upcoming</span>
-                    <span class="px-3 py-1 bg-warning/20 border border-warning/30 rounded-full text-xs">TBD</span>
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="px-4 py-1.5 bg-warning/20 border border-warning/30 rounded-full text-sm font-medium">Upcoming</span>
+                    <span class="px-4 py-1.5 bg-warning/20 border border-warning/30 rounded-full text-sm font-medium">TBD</span>
                 </div>
-                <button class="btn-secondary px-6 py-3 rounded-full font-medium cursor-not-allowed opacity-50">View Project</button>
+                <button class="btn-secondary px-8 py-4 rounded-full text-base font-medium cursor-not-allowed opacity-50">View Project</button>
             </div>
 
             <!-- Project 6 -->
-            <div class="project-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <img src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Project 6" class="w-full h-48 object-cover rounded-lg mb-4">
+            <div class="project-card p-10 rounded-3xl fade-in-up">
+                <div class="mb-8">
+                    <img src="https://placehold.co/400x224/1a1a1a/818cf8?text=UPCOMING" alt="Placeholder Project" class="w-full h-56 object-cover rounded-xl mb-6 shadow-lg">
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Placeholder Project</h3>
-                <p class="text-white/80 mb-6 leading-relaxed">
+                <h3 class="text-3xl font-semibold mb-5 text-primary-400">Placeholder Project</h3>
+                <p class="text-white/80 mb-8 leading-relaxed">
                     A placeholder for an upcoming project. Details to be added soon.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-warning/20 border border-warning/30 rounded-full text-xs">Upcoming</span>
-                    <span class="px-3 py-1 bg-warning/20 border border-warning/30 rounded-full text-xs">TBD</span>
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="px-4 py-1.5 bg-warning/20 border border-warning/30 rounded-full text-sm font-medium">Upcoming</span>
+                    <span class="px-4 py-1.5 bg-warning/20 border border-warning/30 rounded-full text-sm font-medium">TBD</span>
                 </div>
-                <button class="btn-secondary px-6 py-3 rounded-full font-medium cursor-not-allowed opacity-50">View Project</button>
+                <button class="btn-secondary px-8 py-4 rounded-full text-base font-medium cursor-not-allowed opacity-50">View Project</button>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-32 px-6 max-w-7xl mx-auto">
-        <div class="fade-in-up mb-16">
-            <h2 class="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">My Skills</h2>
+    <section id="skills" class="py-32 px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="fade-in-up mb-20">
+            <h2 class="text-5xl md:text-7xl font-bold mb-10 bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">My Skills</h2>
         </div>
         
-        <div class="grid md:grid-cols-2 gap-16">
+        <div class="grid md:grid-cols-2 gap-20">
             <!-- Languages & Tools -->
             <div class="fade-in-up">
-                <h3 class="text-2xl font-semibold mb-8 text-primary-400">Languages & Tools</h3>
-                <div class="space-y-6">
+                <h3 class="text-3xl font-semibold mb-10 text-primary-400">Languages & Tools</h3>
+                <div class="space-y-8">
                     <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-medium">Arduino / ESP8266</span>
-                            <span class="text-white/60">90%</span>
+                        <div class="flex justify-between mb-3">
+                            <span class="font-medium text-lg">Arduino / ESP8266</span>
+                            <span class="text-white/60 text-lg">90%</span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-bar" data-width="90"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-medium">Python</span>
-                            <span class="text-white/60">85%</span>
+                        <div class="flex justify-between mb-3">
+                            <span class="font-medium text-lg">Python</span>
+                            <span class="text-white/60 text-lg">85%</span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-bar" data-width="85"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-medium">HTML & CSS</span>
-                            <span class="text-white/60">75%</span>
+                        <div class="flex justify-between mb-3">
+                            <span class="font-medium text-lg">HTML & CSS</span>
+                            <span class="text-white/60 text-lg">75%</span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-bar" data-width="75"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-medium">JavaScript</span>
-                            <span class="text-white/60">60%</span>
+                        <div class="flex justify-between mb-3">
+                            <span class="font-medium text-lg">JavaScript</span>
+                            <span class="text-white/60 text-lg">60%</span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-bar" data-width="60"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-medium">C++</span>
-                            <span class="text-white/60">70%</span>
+                        <div class="flex justify-between mb-3">
+                            <span class="font-medium text-lg">C++</span>
+                            <span class="text-white/60 text-lg">70%</span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-bar" data-width="70"></div>
@@ -783,31 +687,31 @@
 
             <!-- Concepts & APIs -->
             <div class="fade-in-up">
-                <h3 class="text-2xl font-semibold mb-8 text-primary-400">Concepts & APIs</h3>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="skill-item p-6 rounded-xl text-center">
-                        <i class="fas fa-microchip text-3xl mb-4 text-primary-400"></i>
-                        <p class="font-medium">Embedded Systems</p>
+                <h3 class="text-3xl font-semibold mb-10 text-primary-400">Concepts & APIs</h3>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="skill-item p-8 rounded-2xl text-center">
+                        <i class="fas fa-microchip text-4xl mb-5 text-primary-400"></i>
+                        <p class="font-medium text-lg">Embedded Systems</p>
                     </div>
-                    <div class="skill-item p-6 rounded-xl text-center">
-                        <i class="fas fa-network-wired text-3xl mb-4 text-accent-400"></i>
-                        <p class="font-medium">IoT & Cloud</p>
+                    <div class="skill-item p-8 rounded-2xl text-center">
+                        <i class="fas fa-network-wired text-4xl mb-5 text-accent-400"></i>
+                        <p class="font-medium text-lg">IoT & Cloud</p>
                     </div>
-                    <div class="skill-item p-6 rounded-xl text-center">
-                        <i class="fab fa-python text-3xl mb-4 text-success"></i>
-                        <p class="font-medium">Telegram Bot API</p>
+                    <div class="skill-item p-8 rounded-2xl text-center">
+                        <i class="fab fa-python text-4xl mb-5 text-success"></i>
+                        <p class="font-medium text-lg">Telegram Bot API</p>
                     </div>
-                    <div class="skill-item p-6 rounded-xl text-center">
-                        <i class="fas fa-code-merge text-3xl mb-4 text-primary-400"></i>
-                        <p class="font-medium">Circuit Design</p>
+                    <div class="skill-item p-8 rounded-2xl text-center">
+                        <i class="fas fa-code-merge text-4xl mb-5 text-primary-400"></i>
+                        <p class="font-medium text-lg">Circuit Design</p>
                     </div>
-                    <div class="skill-item p-6 rounded-xl text-center">
-                        <i class="fas fa-battery-half text-3xl mb-4 text-accent-400"></i>
-                        <p class="font-medium">Power Electronics</p>
+                    <div class="skill-item p-8 rounded-2xl text-center">
+                        <i class="fas fa-battery-half text-4xl mb-5 text-accent-400"></i>
+                        <p class="font-medium text-lg">Power Electronics</p>
                     </div>
-                    <div class="skill-item p-6 rounded-xl text-center">
-                        <i class="fas fa-robot text-3xl mb-4 text-success"></i>
-                        <p class="font-medium">Robotics</p>
+                    <div class="skill-item p-8 rounded-2xl text-center">
+                        <i class="fas fa-robot text-4xl mb-5 text-success"></i>
+                        <p class="font-medium text-lg">Robotics</p>
                     </div>
                 </div>
             </div>
@@ -815,62 +719,62 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-32 px-6 max-w-7xl mx-auto">
-        <div class="fade-in-up mb-16">
-            <h2 class="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Get In Touch</h2>
+    <section id="contact" class="py-32 px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="fade-in-up mb-20">
+            <h2 class="text-5xl md:text-7xl font-bold mb-10 bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Get In Touch</h2>
         </div>
         
-        <div class="grid md:grid-cols-2 gap-16 items-start">
+        <div class="grid md:grid-cols-2 gap-20 items-start">
             <!-- Social Links -->
             <div class="fade-in-up">
-                <p class="text-xl text-white/80 mb-12 leading-relaxed">
+                <p class="text-xl md:text-2xl text-white/80 mb-14 leading-relaxed">
                     Let's connect and build something amazing together.
                 </p>
                 
-                <div class="flex space-x-8 mb-12">
-                    <a href="https://github.com/RSMK" target="_blank" class="social-icon text-3xl">
+                <div class="flex space-x-10 mb-16">
+                    <a href="https://github.com/RSMK" target="_blank" class="social-icon text-4xl">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://t.me/RSMK_dev" target="_blank" class="social-icon text-3xl">
+                    <a href="https://t.me/RSMK_dev" target="_blank" class="social-icon text-4xl">
                         <i class="fab fa-telegram-plane"></i>
                     </a>
-                    <a href="mailto:rsmk_dev@email.com" class="social-icon text-3xl">
+                    <a href="mailto:rsmk_dev@email.com" class="social-icon text-4xl">
                         <i class="fas fa-envelope"></i>
                     </a>
                 </div>
 
-                <a href="/path-to-resume.pdf" download class="btn-secondary px-8 py-4 rounded-full font-medium inline-flex items-center space-x-2">
+                <a href="/path-to-resume.pdf" download class="btn-secondary px-10 py-5 rounded-full text-lg font-medium inline-flex items-center space-x-3">
                     <span>Get Connected</span>
-                    <i class="fas fa-download"></i>
+                    <i class="fas fa-download text-xl"></i>
                 </a>
             </div>
 
             <!-- Contact Form -->
             <div class="fade-in-up">
-                <form class="space-y-6">
+                <form class="space-y-8">
                     <div>
-                        <label for="name" class="block text-sm font-medium text-white/70 mb-2">Name</label>
-                        <input type="text" id="name" name="name" required class="form-input w-full px-4 py-3 rounded-lg">
+                        <label for="name" class="block text-base font-medium text-white/70 mb-3">Name</label>
+                        <input type="text" id="name" name="name" required class="form-input w-full px-5 py-4 rounded-xl text-lg">
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium text-white/70 mb-2">Email</label>
-                        <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 rounded-lg">
+                        <label for="email" class="block text-base font-medium text-white/70 mb-3">Email</label>
+                        <input type="email" id="email" name="email" required class="form-input w-full px-5 py-4 rounded-xl text-lg">
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-white/70 mb-2">Message</label>
-                        <textarea id="message" name="message" rows="5" required class="form-input w-full px-4 py-3 rounded-lg resize-none"></textarea>
+                        <label for="message" class="block text-base font-medium text-white/70 mb-3">Message</label>
+                        <textarea id="message" name="message" rows="6" required class="form-input w-full px-5 py-4 rounded-xl resize-none text-lg"></textarea>
                     </div>
-                    <button type="submit" class="btn-primary px-8 py-4 rounded-full font-medium">Send Message</button>
+                    <button type="submit" class="btn-primary px-10 py-5 rounded-full text-lg font-medium">Send Message</button>
                 </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-white/10">
+    <footer class="py-16 px-6 border-t border-white/10">
         <div class="max-w-7xl mx-auto text-center">
-            <p class="text-white/50">© 2025 RSMK. All rights reserved.</p>
-            <p class="text-white/50 mt-2">Designed with <span class="text-red-500">❤️</span> and a lot of <span class="text-yellow-500">☕</span></p>
+            <p class="text-white/50 text-base">&copy; 2025 RSMK. All rights reserved.</p>
+            <p class="text-white/50 mt-3 text-base">Designed with <span class="text-red-500">❤️</span> and a lot of <span class="text-yellow-500">☕</span></p>
         </div>
     </footer>
 
@@ -891,11 +795,11 @@
 
         // Smooth follower animation
         function animateFollower() {
-            followerX += (mouseX - followerX) * 0.1;
-            followerY += (mouseY - followerY) * 0.1;
+            followerX += (mouseX - followerX) * 0.15; // Increased damping for smoother follow
+            followerY += (mouseY - followerY) * 0.15;
             
-            cursorFollower.style.left = followerX - 16 + 'px';
-            cursorFollower.style.top = followerY - 16 + 'px';
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
             
             requestAnimationFrame(animateFollower);
         }
@@ -932,7 +836,7 @@
         });
 
         // Enhanced Typewriter Effect
-        const words = ['Green Tech', 'Smart Energy', 'Embedded Systems', 'Innovative AI Projects'];
+        const words = ['Green Tech', 'Smart Energy', 'Embedded Systems', 'Innovative AI Projects', 'Robotics', 'Automation']; // Added more words
         const typewriter = document.getElementById('typewriter');
         let wordIndex = 0;
         let charIndex = 0;
@@ -947,16 +851,16 @@
                 typewriter.textContent = currentWord.substring(0, charIndex++);
             }
 
-            if (!isDeleting && charIndex > currentWord.length) {
+            let typeSpeed = isDeleting ? 70 : 120; // Slightly faster deleting
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000; // Pause at end of word
                 isDeleting = true;
-                setTimeout(type, 1500);
             } else if (isDeleting && charIndex < 0) {
                 isDeleting = false;
                 wordIndex = (wordIndex + 1) % words.length;
-                setTimeout(type, 500);
-            } else {
-                setTimeout(type, isDeleting ? 50 : 100);
+                typeSpeed = 800; // Pause before typing new word
             }
+            setTimeout(type, typeSpeed);
         }
         type();
 
@@ -964,49 +868,60 @@
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.querySelector('.mobile-menu');
         const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+        const mobileMenuBtnSpans = mobileMenuBtn.querySelectorAll('span');
 
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('open');
+            // Animate hamburger icon
+            if (mobileMenu.classList.contains('open')) {
+                mobileMenuBtnSpans[0].classList.add('rotate-45', 'translate-y-2');
+                mobileMenuBtnSpans[1].classList.add('opacity-0');
+                mobileMenuBtnSpans[2].classList.add('-rotate-45', '-translate-y-2');
+            } else {
+                mobileMenuBtnSpans[0].classList.remove('rotate-45', 'translate-y-2');
+                mobileMenuBtnSpans[1].classList.remove('opacity-0');
+                mobileMenuBtnSpans[2].classList.remove('-rotate-45', '-translate-y-2');
+            }
         });
 
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
+                // Reset hamburger icon
+                mobileMenuBtnSpans[0].classList.remove('rotate-45', 'translate-y-2');
+                mobileMenuBtnSpans[1].classList.remove('opacity-0');
+                mobileMenuBtnSpans[2].classList.remove('-rotate-45', '-translate-y-2');
             });
         });
 
         // Enhanced Scroll Animations
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            rootMargin: '0px 0px -100px 0px' // Start animation a bit earlier
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('animate');
-                        
-                        // Animate progress bars
-                        if (entry.target.classList.contains('progress-bar')) {
-                            const width = entry.target.getAttribute('data-width');
-                            setTimeout(() => {
-                                entry.target.style.width = width + '%';
-                            }, 300);
-                        }
-                    }, index * 100);
+                    // Stagger animation for elements within the section
+                    const elementsToAnimate = entry.target.querySelectorAll('.fade-in-up, .fade-in, .project-card, .skill-item');
+                    elementsToAnimate.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('animate');
+                            // Animate progress bars
+                            if (el.classList.contains('progress-bar')) {
+                                const width = el.getAttribute('data-width');
+                                el.style.width = width + '%';
+                            }
+                        }, index * 150); // Stagger delay
+                    });
+                    observer.unobserve(entry.target); // Unobserve once animated
                 }
             });
         }, observerOptions);
 
-        // Observe elements with staggered animation
-        document.querySelectorAll('.fade-in-up, .fade-in').forEach((el, index) => {
-            el.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(el);
-        });
-
-        // Observe progress bars
-        document.querySelectorAll('.progress-bar').forEach(el => {
+        // Observe sections and individual elements for animation
+        document.querySelectorAll('section, .project-card, .skill-item').forEach((el) => {
             observer.observe(el);
         });
 
