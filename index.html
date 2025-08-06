@@ -6,607 +6,720 @@
     <title>RSMK - Electrical and Electronics Engineering Student</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        * {
+            cursor: none !important;
+        }
+        
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
             overflow-x: hidden;
         }
-        .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #ffffff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
         }
-        .font-poppins {
-            font-family: 'Poppins', sans-serif;
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
         }
-        .progress-bar-container {
-            background-color: #444;
-            height: 8px;
-            border-radius: 9999px;
-            overflow: hidden;
+
+        .cursor.hover {
+            transform: scale(1.5);
         }
-        .progress-bar {
-            background-color: #22d3ee;
-            height: 100%;
-            border-radius: 9999px;
-            width: 0;
-            transition: width 1s ease-in-out;
+
+        .cursor-follower.hover {
+            transform: scale(1.5);
+            border-color: rgba(255, 255, 255, 0.6);
         }
-        .glass-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-        }
-        .preloader {
+
+        /* Scroll Progress */
+        .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .scroll-progress-bar {
             height: 100%;
-            background: #0d1117;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
+            background: linear-gradient(90deg, #ffffff, #a0a0a0);
+            width: 0%;
+            transition: width 0.1s ease;
         }
-        .signature-svg {
-            width: 250px;
-            height: 100px;
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
-        .signature-path {
-            fill: none;
-            stroke: #22d3ee;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: draw-signature 2s forwards;
+
+        .fade-in-up.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
-        @keyframes draw-signature {
-            to {
-                stroke-dashoffset: 0;
+
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .fade-in.animate {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero-text {
+            font-size: clamp(3rem, 8vw, 8rem);
+            line-height: 0.9;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Skills Grid */
+        .skill-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Form Styles */
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background: #ffffff;
+            color: #0a0a0a;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #ffffff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Scroll Down Arrow */
+        .scroll-arrow {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
             }
         }
-        .preloader-progress-bar-container {
-            width: 200px;
+
+        /* Progress Bars */
+        .progress-bar {
+            width: 0;
             height: 4px;
-            background-color: #222;
-            margin-top: 20px;
-            border-radius: 9999px;
+            background: linear-gradient(90deg, #ffffff, #a0a0a0);
+            transition: width 1.5s ease;
+            border-radius: 2px;
+        }
+
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            height: 4px;
+            border-radius: 2px;
             overflow: hidden;
         }
-        .preloader-progress-bar {
-            width: 0;
-            height: 100%;
-            background-color: #22d3ee;
-            transition: width 0.2s ease-in-out;
+
+        /* Social Icons */
+        .social-icon {
+            transition: all 0.3s ease;
         }
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-        .animate-pulse-slow {
-            animation: pulse 4s infinite ease-in-out;
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #ffffff;
         }
     </style>
 </head>
-<body class="bg-[#0d1117] text-[#c9d1d9] font-poppins">
+<body class="bg-[#0a0a0a] text-white">
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
 
-    <!-- Preloader -->
-    <div id="preloader" class="preloader">
-        <div class="relative w-[250px] h-[100px]">
-            <svg class="signature-svg" viewBox="0 0 250 100">
-                <path id="signature-path" class="signature-path" d="M10 50 C 40 10, 80 90, 120 50 S 160 10, 200 50 S 240 90, 240 50" />
-            </svg>
-            <text x="125" y="50" text-anchor="middle" dominant-baseline="middle" fill="#22d3ee" font-family="Orbitron" font-size="36">RSMK</text>
-        </div>
-        <p id="loading-text" class="mt-4 text-sm font-orbitron">Loading 0%</p>
-        <div class="preloader-progress-bar-container">
-            <div id="preloader-bar" class="preloader-progress-bar"></div>
-        </div>
-        <button id="skip-button" class="mt-8 px-4 py-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 transition-colors">Skip</button>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
     </div>
 
-    <!-- Scroll Progress Indicator -->
-    <div id="scroll-progress-container" class="fixed top-0 left-0 w-full h-1 bg-gray-800 z-50">
-        <div id="scroll-progress-bar" class="h-full bg-teal-500 transition-all duration-300 ease-out"></div>
-    </div>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-6 py-6">
+            <div class="flex justify-between items-center">
+                <a href="#hero" class="text-2xl font-bold">RSMK</a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="nav-link text-sm font-medium hover:text-white/80">About</a>
+                    <a href="#projects" class="nav-link text-sm font-medium hover:text-white/80">Projects</a>
+                    <a href="#skills" class="nav-link text-sm font-medium hover:text-white/80">Skills</a>
+                    <a href="#contact" class="nav-link text-sm font-medium hover:text-white/80">Contact</a>
+                </div>
 
-    <!-- Main Content -->
-    <div id="main-content" class="hidden">
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden" id="mobile-menu-btn">
+                    <div class="w-6 h-6 flex flex-col justify-center items-center">
+                        <span class="w-full h-0.5 bg-white mb-1 transition-all"></span>
+                        <span class="w-full h-0.5 bg-white mb-1 transition-all"></span>
+                        <span class="w-full h-0.5 bg-white transition-all"></span>
+                    </div>
+                </button>
+            </div>
+        </div>
 
-        <!-- Particles.js Container -->
-        <div id="particles-js" class="fixed inset-0 z-0"></div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu fixed top-0 right-0 w-full h-screen bg-[#0a0a0a] md:hidden z-40">
+            <div class="flex flex-col items-center justify-center h-full space-y-8">
+                <a href="#about" class="text-2xl font-medium mobile-menu-link">About</a>
+                <a href="#projects" class="text-2xl font-medium mobile-menu-link">Projects</a>
+                <a href="#skills" class="text-2xl font-medium mobile-menu-link">Skills</a>
+                <a href="#contact" class="text-2xl font-medium mobile-menu-link">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Header -->
-        <header class="sticky top-0 z-40 bg-[#0d1117]/80 backdrop-blur-sm p-4">
-            <div class="container mx-auto flex justify-between items-center px-4">
-                <a href="#hero" class="text-3xl font-orbitron text-teal-400">RSMK</a>
-                <nav class="hidden md:flex space-x-6 text-sm">
-                    <a href="#about" class="hover:text-teal-400 transition-colors">About</a>
-                    <a href="#projects" class="hover:text-teal-400 transition-colors">Projects</a>
-                    <a href="#skills" class="hover:text-teal-400 transition-colors">Skills</a>
-                    <a href="#contact" class="hover:text-teal-400 transition-colors">Contact</a>
-                </nav>
-                <div class="md:hidden">
-                    <button id="hamburger-menu" class="text-2xl text-teal-400">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-start px-6 max-w-7xl mx-auto">
+        <div class="fade-in">
+            <h1 class="hero-text mb-6">
+                Hi, I'm <br>
+                <span class="text-white/60">RSMK</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-white/70 mb-8 max-w-2xl leading-relaxed">
+                An Electrical and Electronics Engineering Student
+            </p>
+            <p class="text-lg text-white/60 mb-12 max-w-xl">
+                I build things related to <span class="text-white" id="typewriter"></span>
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 mb-16">
+                <a href="#projects" class="btn-primary px-8 py-4 rounded-full font-medium">View My Work</a>
+                <a href="#contact" class="btn-secondary px-8 py-4 rounded-full font-medium">Get In Touch</a>
+            </div>
+        </div>
+
+        <!-- Scroll Arrow -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-arrow">
+            <i class="fas fa-chevron-down text-white/40 text-xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="fade-in-up">
+                <h2 class="text-5xl md:text-6xl font-bold mb-8">About Me</h2>
+                <p class="text-lg text-white/70 leading-relaxed mb-8">
+                    I'm a passionate Electrical and Electronics Engineering student with a deep-seated love for building things and solving complex problems. My journey began with a curiosity for how things work, leading me to explore a wide range of fields from embedded systems to green technology. I thrive on bringing ideas from concept to reality, constantly seeking new challenges and opportunities to innovate. I believe that technology, when applied thoughtfully, can create a brighter, more sustainable future for everyone.
+                </p>
+                
+                <h3 class="text-2xl font-semibold mb-6">My Interests</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm">Green Technology & Smart Energy</span>
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm">Embedded Systems & IoT</span>
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm">Automation & Control</span>
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm">Innovative AI Projects</span>
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm">Robotics</span>
                 </div>
             </div>
-            <!-- Mobile Menu -->
-            <nav id="mobile-menu-links" class="hidden md:hidden bg-[#0d1117] p-4 border-t border-gray-700">
-                <ul class="flex flex-col space-y-2 text-sm">
-                    <li><a href="#about" class="block py-2 hover:text-teal-400 transition-colors">About</a></li>
-                    <li><a href="#projects" class="block py-2 hover:text-teal-400 transition-colors">Projects</a></li>
-                    <li><a href="#skills" class="block py-2 hover:text-teal-400 transition-colors">Skills</a></li>
-                    <li><a href="#contact" class="block py-2 hover:text-teal-400 transition-colors">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
+            
+            <div class="fade-in-up flex justify-center">
+                <div class="w-80 h-80 rounded-full overflow-hidden border border-white/20">
+                    <img src="https://placehold.co/320x320/000000/cccccc?text=RSMK" alt="RSMK Profile" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <main class="relative z-10">
-            <!-- Hero Section -->
-            <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center p-4" data-aos="fade-in">
-                <div class="container mx-auto flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-16 px-4">
-                    <!-- Left Column for Text and Buttons -->
-                    <div class="w-full md:w-1/2">
-                        <h1 class="text-5xl md:text-7xl font-orbitron text-white">Hi, I'm <span class="text-teal-400">RSMK</span></h1>
-                        <h2 class="text-xl md:text-2xl font-poppins text-gray-300 mt-4">An Electrical and Electronics Engineering Student</h2>
-                        <div class="mt-6 text-xl md:text-3xl font-poppins text-white">
-                            <span class="mr-2">I build things related to</span>
-                            <span id="typewriter-text" class="block md:inline-block h-8 text-cyan-400"></span>
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="fade-in-up mb-16">
+            <h2 class="text-5xl md:text-6xl font-bold mb-8">My Projects</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="project-card p-8 rounded-2xl fade-in-up">
+                <div class="mb-6">
+                    <img src="https://placehold.co/400x250/111111/444444?text=Smart+Exhaust+Fan" alt="Smart Exhaust Fan" class="w-full h-48 object-cover rounded-lg mb-4">
+                </div>
+                <h3 class="text-2xl font-semibold mb-4">Smart Exhaust Fan</h3>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    An automated exhaust fan that detects high levels of heat and humidity in a bathroom and turns on automatically. It is a simple IoT project that demonstrates the use of sensors and a microcontroller.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Arduino</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">IoT</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Sensors</span>
+                </div>
+                <a href="https://github.com/RSMK/smart-exhaust-fan" target="_blank" class="btn-primary px-6 py-3 rounded-full font-medium inline-block">View Project</a>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card p-8 rounded-2xl fade-in-up">
+                <div class="mb-6">
+                    <img src="https://placehold.co/400x250/111111/444444?text=Color+Ohm" alt="Color Ohm" class="w-full h-48 object-cover rounded-lg mb-4">
+                </div>
+                <h3 class="text-2xl font-semibold mb-4">Color Ohm</h3>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    A Python-based application for calculating the resistance of a resistor from its color bands. It features a simple graphical user interface (GUI) built with Tkinter, making it user-friendly for electronics enthusiasts.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Python</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Tkinter</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">GUI</span>
+                </div>
+                <a href="https://github.com/RSMK/color-ohm" target="_blank" class="btn-primary px-6 py-3 rounded-full font-medium inline-block">View Project</a>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card p-8 rounded-2xl fade-in-up">
+                <div class="mb-6">
+                    <img src="https://placehold.co/400x250/111111/444444?text=Budget+Buddy" alt="Budget Buddy" class="w-full h-48 object-cover rounded-lg mb-4">
+                </div>
+                <h3 class="text-2xl font-semibold mb-4">Budget Buddy</h3>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    A web-based personal finance tracker built with HTML, CSS, and JavaScript. It helps users monitor their income and expenses, providing a clear overview of their financial habits. It's designed to be simple and intuitive.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">HTML</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">CSS</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">JavaScript</span>
+                </div>
+                <a href="https://github.com/RSMK/budget-buddy" target="_blank" class="btn-primary px-6 py-3 rounded-full font-medium inline-block">View Project</a>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card p-8 rounded-2xl fade-in-up">
+                <div class="mb-6">
+                    <img src="https://placehold.co/400x250/111111/444444?text=Project+4" alt="Project 4" class="w-full h-48 object-cover rounded-lg mb-4">
+                </div>
+                <h3 class="text-2xl font-semibold mb-4">Placeholder Project</h3>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    A placeholder for an upcoming project. Details to be added soon.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Upcoming</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">TBD</span>
+                </div>
+                <button class="btn-secondary px-6 py-3 rounded-full font-medium cursor-not-allowed opacity-50">View Project</button>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card p-8 rounded-2xl fade-in-up">
+                <div class="mb-6">
+                    <img src="https://placehold.co/400x250/111111/444444?text=Project+5" alt="Project 5" class="w-full h-48 object-cover rounded-lg mb-4">
+                </div>
+                <h3 class="text-2xl font-semibold mb-4">Placeholder Project</h3>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    A placeholder for an upcoming project. Details to be added soon.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Upcoming</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">TBD</span>
+                </div>
+                <button class="btn-secondary px-6 py-3 rounded-full font-medium cursor-not-allowed opacity-50">View Project</button>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card p-8 rounded-2xl fade-in-up">
+                <div class="mb-6">
+                    <img src="https://placehold.co/400x250/111111/444444?text=Project+6" alt="Project 6" class="w-full h-48 object-cover rounded-lg mb-4">
+                </div>
+                <h3 class="text-2xl font-semibold mb-4">Placeholder Project</h3>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    A placeholder for an upcoming project. Details to be added soon.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Upcoming</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs">TBD</span>
+                </div>
+                <button class="btn-secondary px-6 py-3 rounded-full font-medium cursor-not-allowed opacity-50">View Project</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="fade-in-up mb-16">
+            <h2 class="text-5xl md:text-6xl font-bold mb-8">My Skills</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-16">
+            <!-- Languages & Tools -->
+            <div class="fade-in-up">
+                <h3 class="text-2xl font-semibold mb-8">Languages & Tools</h3>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Arduino / ESP8266</span>
+                            <span class="text-white/60">90%</span>
                         </div>
-                        <div class="mt-10 flex space-x-4 justify-center md:justify-start">
-                            <a href="#projects" class="px-6 py-3 bg-teal-500 text-gray-900 rounded-full font-bold hover:bg-teal-400 transition-colors" data-aos="fade-up" data-aos-delay="200">View My Work</a>
-                            <a href="#contact" class="px-6 py-3 bg-transparent border border-teal-500 text-teal-500 rounded-full font-bold hover:bg-teal-500 hover:text-gray-900 transition-colors" data-aos="fade-up" data-aos-delay="300">Get In Touch</a>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="90"></div>
                         </div>
                     </div>
-                    <!-- Right Column for Visual Element -->
-                    <div class="w-full md:w-1/2 flex justify-center items-center" data-aos="fade-left">
-                        <div class="p-8">
-                             <svg viewBox="0 0 200 200" class="w-full max-w-sm opacity-50 animate-pulse-slow">
-                                <path fill="#22d3ee" d="M100,200 C44.77,200 0,155.23 0,100 C0,44.77 44.77,0 100,0 C155.23,0 200,44.77 200,100 C200,155.23 155.23,200 100,200 Z M100,190 C150.23,190 190,150.23 190,100 C190,49.77 150.23,10 100,10 C49.77,10 10,49.77 10,100 C10,150.23 49.77,190 100,190 Z" opacity="0.1"></path>
-                                <path stroke="#22d3ee" stroke-width="2" fill="none" d="M100,100 L150,50 L100,10 L50,50 L100,100 L150,150 L100,190 L50,150 Z" opacity="0.4"></path>
-                                <circle cx="100" cy="100" r="40" stroke="#22d3ee" stroke-width="2" fill="none" opacity="0.6"></circle>
-                                <circle cx="100" cy="100" r="10" fill="#22d3ee" opacity="0.8"></circle>
-                            </svg>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Python</span>
+                            <span class="text-white/60">85%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">HTML & CSS</span>
+                            <span class="text-white/60">75%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="75"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">JavaScript</span>
+                            <span class="text-white/60">60%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="60"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">C++</span>
+                            <span class="text-white/60">70%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="70"></div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- About Me Section -->
-            <section id="about" class="container mx-auto p-8 mb-20">
-                <h2 class="text-4xl font-orbitron text-white text-center mb-12" data-aos="fade-up">About Me</h2>
-                <div class="md:grid md:grid-cols-2 md:gap-12 items-center">
-                    <div class="flex justify-center mb-8 md:mb-0" data-aos="fade-right">
-                        <div class="group relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-700 hover:border-teal-500 transition-all duration-300">
-                            <img src="https://placehold.co/320x320/000000/cccccc?text=RSMK" alt="RSMK Profile" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300">
-                            <div class="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-teal-500 transition-all duration-300"></div>
-                        </div>
+            <!-- Concepts & APIs -->
+            <div class="fade-in-up">
+                <h3 class="text-2xl font-semibold mb-8">Concepts & APIs</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="skill-item p-6 rounded-xl text-center">
+                        <i class="fas fa-microchip text-3xl mb-4 text-white/60"></i>
+                        <p class="font-medium">Embedded Systems</p>
                     </div>
-                    <div data-aos="fade-left">
-                        <p class="text-lg text-gray-300 leading-relaxed font-poppins">
-                            I'm a passionate Electrical and Electronics Engineering student with a deep-seated love for building things and solving complex problems. My journey began with a curiosity for how things work, leading me to explore a wide range of fields from embedded systems to green technology. I thrive on bringing ideas from concept to reality, constantly seeking new challenges and opportunities to innovate. I believe that technology, when applied thoughtfully, can create a brighter, more sustainable future for everyone.
-                        </p>
-                        <h3 class="text-2xl font-orbitron text-white mt-8 mb-4">My Interests</h3>
-                        <div class="flex flex-wrap gap-2 text-sm font-medium">
-                            <span class="px-4 py-2 bg-gray-800 text-teal-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Green Technology & Smart Energy</span>
-                            <span class="px-4 py-2 bg-gray-800 text-cyan-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Embedded Systems & IoT</span>
-                            <span class="px-4 py-2 bg-gray-800 text-purple-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Automation & Control</span>
-                            <span class="px-4 py-2 bg-gray-800 text-yellow-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Innovative AI Projects</span>
-                            <span class="px-4 py-2 bg-gray-800 text-red-400 rounded-full transition-colors hover:bg-gray-700 cursor-pointer">Robotics</span>
-                        </div>
+                    <div class="skill-item p-6 rounded-xl text-center">
+                        <i class="fas fa-network-wired text-3xl mb-4 text-white/60"></i>
+                        <p class="font-medium">IoT & Cloud</p>
+                    </div>
+                    <div class="skill-item p-6 rounded-xl text-center">
+                        <i class="fab fa-python text-3xl mb-4 text-white/60"></i>
+                        <p class="font-medium">Telegram Bot API</p>
+                    </div>
+                    <div class="skill-item p-6 rounded-xl text-center">
+                        <i class="fas fa-code-merge text-3xl mb-4 text-white/60"></i>
+                        <p class="font-medium">Circuit Design</p>
+                    </div>
+                    <div class="skill-item p-6 rounded-xl text-center">
+                        <i class="fas fa-battery-half text-3xl mb-4 text-white/60"></i>
+                        <p class="font-medium">Power Electronics</p>
+                    </div>
+                    <div class="skill-item p-6 rounded-xl text-center">
+                        <i class="fas fa-robot text-3xl mb-4 text-white/60"></i>
+                        <p class="font-medium">Robotics</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- Projects Section -->
-            <section id="projects" class="container mx-auto p-8 mb-20">
-                <h2 class="text-4xl font-orbitron text-white text-center mb-12" data-aos="fade-up">My Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project Card 1: Smart Exhaust Fan -->
-                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in">
-                        <img src="https://placehold.co/400x250/111111/444444?text=Smart+Exhaust+Fan" alt="Smart Exhaust Fan" class="w-full h-auto rounded-md mb-4 object-cover">
-                        <h3 class="text-2xl font-orbitron text-teal-400">Smart Exhaust Fan</h3>
-                        <p class="text-sm text-gray-300 mt-2 flex-grow">An automated exhaust fan that detects high levels of heat and humidity in a bathroom and turns on automatically. It is a simple IoT project that demonstrates the use of sensors and a microcontroller.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="text-xs font-medium bg-teal-900 text-teal-300 px-2 py-1 rounded-full">Arduino</span>
-                            <span class="text-xs font-medium bg-cyan-900 text-cyan-300 px-2 py-1 rounded-full">IoT</span>
-                            <span class="text-xs font-medium bg-yellow-900 text-yellow-300 px-2 py-1 rounded-full">Sensors</span>
-                        </div>
-                        <a href="https://github.com/RSMK/smart-exhaust-fan" target="_blank" class="mt-6 inline-block text-center px-4 py-2 bg-teal-500 text-gray-900 font-bold rounded-full hover:bg-teal-400 transition-colors">View Project</a>
-                    </div>
-                    <!-- Project Card 2: Color Ohm -->
-                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="100">
-                        <img src="https://placehold.co/400x250/111111/444444?text=Color+Ohm" alt="Color Ohm" class="w-full h-auto rounded-md mb-4 object-cover">
-                        <h3 class="text-2xl font-orbitron text-teal-400">Color Ohm</h3>
-                        <p class="text-sm text-gray-300 mt-2 flex-grow">A Python-based application for calculating the resistance of a resistor from its color bands. It features a simple graphical user interface (GUI) built with Tkinter, making it user-friendly for electronics enthusiasts.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="text-xs font-medium bg-red-900 text-red-300 px-2 py-1 rounded-full">Python</span>
-                            <span class="text-xs font-medium bg-blue-900 text-blue-300 px-2 py-1 rounded-full">Tkinter</span>
-                            <span class="text-xs font-medium bg-purple-900 text-purple-300 px-2 py-1 rounded-full">GUI</span>
-                        </div>
-                        <a href="https://github.com/RSMK/color-ohm" target="_blank" class="mt-6 inline-block text-center px-4 py-2 bg-teal-500 text-gray-900 font-bold rounded-full hover:bg-teal-400 transition-colors">View Project</a>
-                    </div>
-                    <!-- Project Card 3: Budget Buddy -->
-                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="200">
-                        <img src="https://placehold.co/400x250/111111/444444?text=Budget+Buddy" alt="Budget Buddy" class="w-full h-auto rounded-md mb-4 object-cover">
-                        <h3 class="text-2xl font-orbitron text-teal-400">Budget Buddy</h3>
-                        <p class="text-sm text-gray-300 mt-2 flex-grow">A web-based personal finance tracker built with HTML, CSS, and JavaScript. It helps users monitor their income and expenses, providing a clear overview of their financial habits. It's designed to be simple and intuitive.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="text-xs font-medium bg-red-900 text-red-300 px-2 py-1 rounded-full">HTML</span>
-                            <span class="text-xs font-medium bg-blue-900 text-blue-300 px-2 py-1 rounded-full">CSS</span>
-                            <span class="text-xs font-medium bg-yellow-900 text-yellow-300 px-2 py-1 rounded-full">JavaScript</span>
-                        </div>
-                        <a href="https://github.com/RSMK/budget-buddy" target="_blank" class="mt-6 inline-block text-center px-4 py-2 bg-teal-500 text-gray-900 font-bold rounded-full hover:bg-teal-400 transition-colors">View Project</a>
-                    </div>
-                    <!-- Project Card 4: Placeholder -->
-                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="300">
-                        <img src="https://placehold.co/400x250/111111/444444?text=Project+4" alt="Project 4" class="w-full h-auto rounded-md mb-4 object-cover">
-                        <h3 class="text-2xl font-orbitron text-teal-400">Placeholder Project</h3>
-                        <p class="text-sm text-gray-300 mt-2 flex-grow">A placeholder for an upcoming project. Details to be added soon.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="text-xs font-medium bg-purple-900 text-purple-300 px-2 py-1 rounded-full">Upcoming</span>
-                            <span class="text-xs font-medium bg-gray-700 text-gray-300 px-2 py-1 rounded-full">TBD</span>
-                        </div>
-                        <a href="#" class="mt-6 inline-block text-center px-4 py-2 bg-gray-700 text-gray-300 font-bold rounded-full cursor-not-allowed">View Project</a>
-                    </div>
-                    <!-- Project Card 5: Placeholder -->
-                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="400">
-                        <img src="https://placehold.co/400x250/111111/444444?text=Project+5" alt="Project 5" class="w-full h-auto rounded-md mb-4 object-cover">
-                        <h3 class="text-2xl font-orbitron text-teal-400">Placeholder Project</h3>
-                        <p class="text-sm text-gray-300 mt-2 flex-grow">A placeholder for an upcoming project. Details to be added soon.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="text-xs font-medium bg-purple-900 text-purple-300 px-2 py-1 rounded-full">Upcoming</span>
-                            <span class="text-xs font-medium bg-gray-700 text-gray-300 px-2 py-1 rounded-full">TBD</span>
-                        </div>
-                        <a href="#" class="mt-6 inline-block text-center px-4 py-2 bg-gray-700 text-gray-300 font-bold rounded-full cursor-not-allowed">View Project</a>
-                    </div>
-                    <!-- Project Card 6: Placeholder -->
-                    <div class="glass-card p-6 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="500">
-                        <img src="https://placehold.co/400x250/111111/444444?text=Project+6" alt="Project 6" class="w-full h-auto rounded-md mb-4 object-cover">
-                        <h3 class="text-2xl font-orbitron text-teal-400">Placeholder Project</h3>
-                        <p class="text-sm text-gray-300 mt-2 flex-grow">A placeholder for an upcoming project. Details to be added soon.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="text-xs font-medium bg-purple-900 text-purple-300 px-2 py-1 rounded-full">Upcoming</span>
-                            <span class="text-xs font-medium bg-gray-700 text-gray-300 px-2 py-1 rounded-full">TBD</span>
-                        </div>
-                        <a href="#" class="mt-6 inline-block text-center px-4 py-2 bg-gray-700 text-gray-300 font-bold rounded-full cursor-not-allowed">View Project</a>
-                    </div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="fade-in-up mb-16">
+            <h2 class="text-5xl md:text-6xl font-bold mb-8">Get In Touch</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+            <!-- Social Links -->
+            <div class="fade-in-up">
+                <p class="text-xl text-white/70 mb-12 leading-relaxed">
+                    Let's connect and build something amazing together.
+                </p>
+                
+                <div class="flex space-x-8 mb-12">
+                    <a href="https://github.com/RSMK" target="_blank" class="social-icon text-3xl text-white/60 hover:text-white">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://t.me/RSMK_dev" target="_blank" class="social-icon text-3xl text-white/60 hover:text-white">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                    <a href="mailto:rsmk_dev@email.com" class="social-icon text-3xl text-white/60 hover:text-white">
+                        <i class="fas fa-envelope"></i>
+                    </a>
                 </div>
-            </section>
 
-            <!-- Skills Section -->
-            <section id="skills" class="container mx-auto p-8 mb-20">
-                <h2 class="text-4xl font-orbitron text-white text-center mb-12" data-aos="fade-up">My Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Progress Bars -->
-                    <div class="glass-card p-6" data-aos="fade-right">
-                        <h3 class="text-2xl font-orbitron text-white mb-6">Languages & Tools</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium">Arduino / ESP8266</span>
-                                    <span class="text-sm font-medium">90%</span>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar" style="width: 90%;"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium">Python</span>
-                                    <span class="text-sm font-medium">85%</span>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar" style="width: 85%;"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium">HTML & CSS</span>
-                                    <span class="text-sm font-medium">75%</span>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar" style="width: 75%;"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium">JavaScript</span>
-                                    <span class="text-sm font-medium">60%</span>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar" style="width: 60%;"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium">C++</span>
-                                    <span class="text-sm font-medium">70%</span>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar" style="width: 70%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Concepts & APIs -->
-                    <div class="glass-card p-6" data-aos="fade-left">
-                        <h3 class="text-2xl font-orbitron text-white mb-6">Concepts & APIs</h3>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
-                                <i class="fa-solid fa-microchip text-4xl text-gray-500 group-hover:text-teal-500 transform group-hover:scale-110 transition-all duration-300"></i>
-                                <span class="mt-2 text-sm text-gray-400 group-hover:text-teal-300 font-medium">Embedded Systems</span>
-                            </div>
-                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
-                                <i class="fa-solid fa-network-wired text-4xl text-gray-500 group-hover:text-cyan-500 transform group-hover:scale-110 transition-all duration-300"></i>
-                                <span class="mt-2 text-sm text-gray-400 group-hover:text-cyan-300 font-medium">IoT & Cloud</span>
-                            </div>
-                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
-                                <i class="fa-brands fa-python text-4xl text-gray-500 group-hover:text-yellow-500 transform group-hover:scale-110 transition-all duration-300"></i>
-                                <span class="mt-2 text-sm text-gray-400 group-hover:text-yellow-300 font-medium">Telegram Bot API</span>
-                            </div>
-                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
-                                <i class="fa-solid fa-code-merge text-4xl text-gray-500 group-hover:text-purple-500 transform group-hover:scale-110 transition-all duration-300"></i>
-                                <span class="mt-2 text-sm text-gray-400 group-hover:text-purple-300 font-medium">Circuit Design</span>
-                            </div>
-                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
-                                <i class="fa-solid fa-battery-half text-4xl text-gray-500 group-hover:text-red-500 transform group-hover:scale-110 transition-all duration-300"></i>
-                                <span class="mt-2 text-sm text-gray-400 group-hover:text-red-300 font-medium">Power Electronics</span>
-                            </div>
-                            <div class="flex flex-col items-center group cursor-pointer p-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">
-                                <i class="fa-solid fa-robot text-4xl text-gray-500 group-hover:text-teal-500 transform group-hover:scale-110 transition-all duration-300"></i>
-                                <span class="mt-2 text-sm text-gray-400 group-hover:text-teal-300 font-medium">Robotics</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                <a href="/path-to-resume.pdf" download class="btn-secondary px-8 py-4 rounded-full font-medium inline-flex items-center space-x-2">
+                    <span>Get Connected</span>
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
 
-            <!-- Contact Section -->
-            <section id="contact" class="container mx-auto p-8 mb-20">
-                <h2 class="text-4xl font-orbitron text-white text-center mb-12" data-aos="fade-up">Get In Touch</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    <!-- Social Media Icons -->
-                    <div class="flex justify-center space-x-8" data-aos="fade-right">
-                        <a href="https://github.com/RSMK" target="_blank" class="text-4xl text-gray-500 hover:text-white transform hover:scale-110 transition-all duration-300">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://t.me/RSMK_dev" target="_blank" class="text-4xl text-gray-500 hover:text-white transform hover:scale-110 transition-all duration-300">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                        <a href="mailto:rsmk_dev@email.com" class="text-4xl text-gray-500 hover:text-white transform hover:scale-110 transition-all duration-300">
-                            <i class="fa-solid fa-envelope"></i>
-                        </a>
+            <!-- Contact Form -->
+            <div class="fade-in-up">
+                <form class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-white/60 mb-2">Name</label>
+                        <input type="text" id="name" name="name" required class="form-input w-full px-4 py-3 rounded-lg">
                     </div>
-                    <!-- Contact Form -->
-                    <div class="glass-card p-8" data-aos="fade-left">
-                        <form action="#" method="post" class="space-y-4">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-400 mb-1">Name</label>
-                                <input type="text" id="name" name="name" required class="w-full bg-gray-800 border border-gray-700 text-gray-200 rounded-md py-2 px-3 focus:outline-none focus:ring-1 focus:ring-teal-500">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
-                                <input type="email" id="email" name="email" required class="w-full bg-gray-800 border border-gray-700 text-gray-200 rounded-md py-2 px-3 focus:outline-none focus:ring-1 focus:ring-teal-500">
-                            </div>
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-gray-400 mb-1">Message</label>
-                                <textarea id="message" name="message" rows="4" required class="w-full bg-gray-800 border border-gray-700 text-gray-200 rounded-md py-2 px-3 focus:outline-none focus:ring-1 focus:ring-teal-500"></textarea>
-                            </div>
-                            <div class="flex items-center space-x-4">
-                                <button type="submit" class="px-6 py-3 bg-teal-500 text-gray-900 rounded-full font-bold hover:bg-teal-400 transition-colors">Send Message</button>
-                                <a href="/path-to-resume.pdf" download class="px-6 py-3 bg-transparent border border-teal-500 text-teal-500 rounded-full font-bold hover:bg-teal-500 hover:text-gray-900 transition-colors flex items-center space-x-2">
-                                    <span>Get Connected</span>
-                                    <i class="fa-solid fa-download"></i>
-                                </a>
-                            </div>
-                        </form>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-white/60 mb-2">Email</label>
+                        <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 rounded-lg">
                     </div>
-                </div>
-            </section>
-        </main>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-white/60 mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" required class="form-input w-full px-4 py-3 rounded-lg resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary px-8 py-4 rounded-full font-medium">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-        <!-- Footer -->
-        <footer class="p-8 text-center border-t border-gray-800">
-            <p class="text-sm text-gray-500 font-poppins">© 2025 RSMK. All rights reserved.</p>
-            <p class="text-sm text-gray-500 mt-2 font-poppins">Designed with <span class="text-red-500">❤️</span> and a lot of <span class="text-yellow-500">☕</span></p>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-white/40">© 2025 RSMK. All rights reserved.</p>
+            <p class="text-white/40 mt-2">Designed with <span class="text-red-500">❤️</span> and a lot of <span class="text-yellow-500">☕</span></p>
+        </div>
+    </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Preloader Logic
-        window.onload = function() {
-            const preloader = document.getElementById('preloader');
-            const mainContent = document.getElementById('main-content');
-            const skipButton = document.getElementById('skip-button');
-            const preloaderBar = document.getElementById('preloader-bar');
-            const loadingText = document.getElementById('loading-text');
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX - 20 + 'px';
+                cursorFollower.style.top = e.clientY - 20 + 'px';
+            }, 100);
+        });
 
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 1;
-                preloaderBar.style.width = `${progress}%`;
-                loadingText.innerText = `Loading ${progress}%`;
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    showMainContent();
-                }
-            }, 20);
-
-            skipButton.addEventListener('click', () => {
-                clearInterval(interval);
-                showMainContent();
+        // Cursor hover effects
+        const hoverElements = document.querySelectorAll('a, button, .project-card, .skill-item');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorFollower.classList.add('hover');
             });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorFollower.classList.remove('hover');
+            });
+        });
 
-            function showMainContent() {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                    mainContent.style.display = 'block';
-                    AOS.init({ once: true });
-                    // Initialize Particles.js here
-                    particlesJS("particles-js", {
-                        "particles": {
-                            "number": {
-                                "value": 80,
-                                "density": {
-                                    "enable": true,
-                                    "value_area": 800
-                                }
-                            },
-                            "color": {
-                                "value": "#22d3ee"
-                            },
-                            "shape": {
-                                "type": "circle",
-                                "stroke": {
-                                    "width": 0,
-                                    "color": "#000000"
-                                },
-                            },
-                            "opacity": {
-                                "value": 0.5,
-                                "random": false,
-                                "anim": {
-                                    "enable": false
-                                }
-                            },
-                            "size": {
-                                "value": 3,
-                                "random": true,
-                                "anim": {
-                                    "enable": false
-                                }
-                            },
-                            "line_linked": {
-                                "enable": true,
-                                "distance": 150,
-                                "color": "#22d3ee",
-                                "opacity": 0.4,
-                                "width": 1
-                            },
-                            "move": {
-                                "enable": true,
-                                "speed": 6,
-                                "direction": "none",
-                                "random": false,
-                                "straight": false,
-                                "out_mode": "out",
-                                "bounce": false,
-                            }
-                        },
-                        "interactivity": {
-                            "detect_on": "canvas",
-                            "events": {
-                                "onhover": {
-                                    "enable": true,
-                                    "mode": "grab"
-                                },
-                                "onclick": {
-                                    "enable": true,
-                                    "mode": "push"
-                                },
-                                "resize": true
-                            },
-                            "modes": {
-                                "grab": {
-                                    "distance": 140,
-                                    "line_linked": {
-                                        "opacity": 1
-                                    }
-                                },
-                                "bubble": {
-                                    "distance": 400,
-                                    "size": 40,
-                                    "duration": 2,
-                                    "opacity": 8,
-                                    "speed": 3
-                                },
-                                "repulse": {
-                                    "distance": 200,
-                                    "duration": 0.4
-                                },
-                                "push": {
-                                    "particles_nb": 4
-                                },
-                                "remove": {
-                                    "particles_nb": 2
-                                }
-                            }
-                        },
-                        "retina_detect": true
-                    });
-                }, 500);
-            }
-        };
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress-bar').style.width = scrolled + '%';
+        });
 
         // Typewriter Effect
-        document.addEventListener("DOMContentLoaded", function() {
-            const words = ["Green Tech", "Smart Energy", "Embedded Systems", "Innovative AI Projects"];
-            const typewriter = document.getElementById("typewriter-text");
-            let wordIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
+        const words = ['Green Tech', 'Smart Energy', 'Embedded Systems', 'Innovative AI Projects'];
+        const typewriter = document.getElementById('typewriter');
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
 
-            function type() {
-                const currentWord = words[wordIndex];
-                if (isDeleting) {
-                    typewriter.textContent = currentWord.substring(0, charIndex--);
-                } else {
-                    typewriter.textContent = currentWord.substring(0, charIndex++);
-                }
-
-                if (!isDeleting && charIndex > currentWord.length) {
-                    isDeleting = true;
-                    setTimeout(type, 1000);
-                } else if (isDeleting && charIndex < 0) {
-                    isDeleting = false;
-                    wordIndex = (wordIndex + 1) % words.length;
-                    setTimeout(type, 500);
-                } else {
-                    setTimeout(type, isDeleting ? 50 : 100);
-                }
+        function type() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typewriter.textContent = currentWord.substring(0, charIndex--);
+            } else {
+                typewriter.textContent = currentWord.substring(0, charIndex++);
             }
-            type();
-        });
 
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('scroll-progress-bar').style.width = scrolled + "%";
-        });
-
-        // Hamburger menu
-        const hamburgerMenu = document.getElementById('hamburger-menu');
-        const mobileMenuLinks = document.getElementById('mobile-menu-links');
-        hamburgerMenu.addEventListener('click', () => {
-            mobileMenuLinks.classList.toggle('hidden');
-        });
-        mobileMenuLinks.addEventListener('click', (event) => {
-            if (event.target.tagName === 'A') {
-                mobileMenuLinks.classList.add('hidden');
+            if (!isDeleting && charIndex > currentWord.length) {
+                isDeleting = true;
+                setTimeout(type, 1000);
+            } else if (isDeleting && charIndex < 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
             }
+        }
+        type();
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // Animate progress bars
+                    if (entry.target.classList.contains('progress-bar')) {
+                        const width = entry.target.getAttribute('data-width');
+                        setTimeout(() => {
+                            entry.target.style.width = width + '%';
+                        }, 200);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.fade-in-up, .fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Observe progress bars
+        document.querySelectorAll('.progress-bar').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>
