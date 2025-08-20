@@ -85,18 +85,49 @@
         }
 
         /* Futuristic Background */
-        .bg-grid {
+        .electric-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.3) 0%, transparent 25%),
+                radial-gradient(circle at 80% 80%, rgba(20, 184, 166, 0.3) 0%, transparent 25%),
+                radial-gradient(circle at 40% 70%, rgba(14, 165, 233, 0.2) 0%, transparent 30%),
+                radial-gradient(circle at 70% 30%, rgba(20, 184, 166, 0.2) 0%, transparent 30%),
+                linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
+            overflow: hidden;
+        }
+
+        .electric-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: 
-                linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: float 20s ease-in-out infinite;
+                linear-gradient(45deg, transparent 40%, rgba(14, 165, 233, 0.1) 50%, transparent 60%),
+                linear-gradient(-45deg, transparent 40%, rgba(20, 184, 166, 0.1) 50%, transparent 60%);
+            background-size: 100px 100px, 150px 150px;
+            animation: electricFlow 8s linear infinite;
+        }
+
+        .electric-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 50%, rgba(14, 165, 233, 0.4) 0%, transparent 20%),
+                radial-gradient(circle at 90% 50%, rgba(20, 184, 166, 0.4) 0%, transparent 20%),
+                radial-gradient(circle at 50% 10%, rgba(14, 165, 233, 0.3) 0%, transparent 15%),
+                radial-gradient(circle at 50% 90%, rgba(20, 184, 166, 0.3) 0%, transparent 15%);
+            animation: electricPulse 6s ease-in-out infinite alternate;
         }
 
         .bg-gradient {
@@ -106,10 +137,11 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(45, 212, 191, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
-            animation: float 15s ease-in-out infinite reverse;
+            background: 
+                linear-gradient(0deg, transparent 24%, rgba(14, 165, 233, 0.05) 25%, rgba(14, 165, 233, 0.05) 26%, transparent 27%, transparent 74%, rgba(20, 184, 166, 0.05) 75%, rgba(20, 184, 166, 0.05) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(14, 165, 233, 0.05) 25%, rgba(14, 165, 233, 0.05) 26%, transparent 27%, transparent 74%, rgba(20, 184, 166, 0.05) 75%, rgba(20, 184, 166, 0.05) 76%, transparent 77%, transparent);
+            background-size: 75px 75px;
+            animation: electricGrid 12s linear infinite;
         }
 
         /* Glassmorphism */
@@ -177,6 +209,21 @@
         @keyframes pulseGlow {
             0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
             50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.6); }
+        }
+
+        @keyframes electricFlow {
+            0% { transform: translateX(-100px) translateY(-100px); }
+            100% { transform: translateX(100px) translateY(100px); }
+        }
+
+        @keyframes electricPulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        @keyframes electricGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(75px, 75px); }
         }
 
         /* Hero Text Effects */
@@ -521,27 +568,29 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex flex-col justify-center items-center px-6 lg:px-8 max-w-7xl mx-auto relative pt-24 pb-12">
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-center px-6 lg:px-8 max-w-7xl mx-auto relative pt-20 pb-12">
         <!-- Floating Elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="floating-element absolute top-20 left-10 w-20 h-20 border border-primary-400/20 rounded-full"></div>
-            <div class="floating-element absolute top-40 right-20 w-16 h-16 border border-electric-400/20 rounded-lg rotate-45"></div>
-            <div class="floating-element absolute bottom-40 left-20 w-12 h-12 bg-primary-400/10 rounded-full"></div>
+            <div class="floating-element absolute top-32 left-10 w-20 h-20 border border-primary-400/30 rounded-full glow-border"></div>
+            <div class="floating-element absolute top-48 right-20 w-16 h-16 border border-electric-400/30 rounded-lg rotate-45 glow-border"></div>
+            <div class="floating-element absolute bottom-48 left-20 w-12 h-12 bg-primary-400/20 rounded-full glow-border"></div>
+            <div class="floating-element absolute top-64 right-10 w-8 h-8 bg-electric-400/20 rounded-full"></div>
+            <div class="floating-element absolute bottom-32 right-32 w-14 h-14 border border-primary-400/20 rounded-lg rotate-12"></div>
         </div>
 
-        <div class="fade-in z-10 text-center">
+        <div class="fade-in z-10 text-center max-w-5xl">
             <h1 class="hero-title mb-8">
                 Hi, I'm <br>
                 <span class="hero-subtitle">Srinivasa Manikanta</span>
             </h1>
-            <p class="text-xl md:text-3xl text-slate-200 mb-8 max-w-3xl leading-relaxed font-light">
+            <p class="text-xl md:text-3xl text-slate-200 mb-8 max-w-4xl mx-auto leading-relaxed font-light text-center">
                 An Electrical and Electronics Engineering Student
             </p>
-            <p class="text-lg md:text-xl text-slate-400 mb-12 max-w-2xl font-light">
+            <p class="text-lg md:text-xl text-slate-400 mb-12 max-w-3xl mx-auto font-light text-center">
                 I build things related to <span class="text-primary-400 font-semibold typewriter" id="typewriter"></span>
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-6 mb-16 justify-center">
+            <div class="flex flex-col sm:flex-row gap-6 mb-16 justify-center items-center">
                 <a href="#projects" class="btn-primary px-8 py-4 rounded-full text-lg font-medium">View My Work</a>
                 <a href="#contact" class="btn-secondary px-8 py-4 rounded-full text-lg font-medium">Get In Touch</a>
             </div>
@@ -556,13 +605,13 @@
     <!-- About Section -->
     <section id="about" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="fade-in-up">
+            <div class="fade-in-up text-left">
                 <h2 class="text-4xl md:text-6xl font-bold mb-8 glow-text">About Me</h2>
-                <p class="text-lg text-slate-300 leading-relaxed mb-8">
+                <p class="text-lg text-slate-300 leading-relaxed mb-8 text-left">
                     I'm a passionate Electrical and Electronics Engineering student with a deep-seated love for building things and solving complex problems. My journey began with a curiosity for how things work, leading me to explore a wide range of fields from embedded systems to green technology. I thrive on bringing ideas from concept to reality, constantly seeking new challenges and opportunities to innovate. I believe that technology, when applied thoughtfully, can create a brighter, more sustainable future for everyone.
                 </p>
                 
-                <h3 class="text-2xl font-semibold mb-6 text-primary-400">My Interests</h3>
+                <h3 class="text-2xl font-semibold mb-6 text-primary-400 text-left">My Interests</h3>
                 <div class="flex flex-wrap gap-3">
                     <span class="px-4 py-2 glass-card rounded-full text-sm font-medium">Smart Energy</span>
                     <span class="px-4 py-2 glass-card rounded-full text-sm font-medium">Embedded Systems & IoT</span>
@@ -582,7 +631,7 @@
 
     <!-- Projects Section -->
     <section id="projects" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="fade-in-up mb-16">
+        <div class="fade-in-up mb-16 text-center">
             <h2 class="text-4xl md:text-6xl font-bold mb-8 glow-text">My Projects</h2>
         </div>
         
@@ -592,16 +641,18 @@
                 <div class="mb-6">
                     <img src="https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Smart Exhaust Fan" class="w-full h-48 object-cover rounded-xl mb-4">
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Smart Exhaust Fan</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed">
+                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Smart Exhaust Fan</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed text-left">
                     An automated exhaust fan that detects high levels of heat and humidity in a bathroom and turns on automatically. It is a simple IoT project that demonstrates the use of sensors and a microcontroller.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
+                <div class="flex flex-wrap gap-2 mb-6 justify-start">
                     <span class="px-3 py-1 bg-primary-500/20 border border-primary-500/30 rounded-full text-xs font-medium">Arduino</span>
                     <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">IoT</span>
                     <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">Sensors</span>
                 </div>
-                <a href="https://rsmk27.github.io/myportfolio" target="_blank" class="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-block">View Project</a>
+                <div class="text-left">
+                    <a href="https://rsmk27.github.io/myportfolio" target="_blank" class="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-block">View Project</a>
+                </div>
             </div>
 
             <!-- Project 2 -->
@@ -609,16 +660,18 @@
                 <div class="mb-6">
                     <img src="https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Color Ohm" class="w-full h-48 object-cover rounded-xl mb-4">
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Color Ohm</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed">
+                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Color Ohm</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed text-left">
                     A Python-based application for calculating the resistance of a resistor from its color bands. It features a simple graphical user interface (GUI) built with Tkinter, making it user-friendly for electronics enthusiasts.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
+                <div class="flex flex-wrap gap-2 mb-6 justify-start">
                     <span class="px-3 py-1 bg-primary-500/20 border border-primary-500/30 rounded-full text-xs font-medium">Python</span>
                     <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">Tkinter</span>
                     <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">GUI</span>
                 </div>
-                <a href="https://rsmk27.github.io/colorohm" target="_blank" class="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-block">View Project</a>
+                <div class="text-left">
+                    <a href="https://rsmk27.github.io/colorohm" target="_blank" class="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-block">View Project</a>
+                </div>
             </div>
 
             <!-- Project 3 -->
@@ -626,16 +679,18 @@
                 <div class="mb-6">
                     <img src="https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Budget Buddy" class="w-full h-48 object-cover rounded-xl mb-4">
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Budget Buddy</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed">
+                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Budget Buddy</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed text-left">
                     A web-based personal finance tracker built with HTML, CSS, and JavaScript. It helps users monitor their income and expenses, providing a clear overview of their financial habits. It's designed to be simple and intuitive.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
+                <div class="flex flex-wrap gap-2 mb-6 justify-start">
                     <span class="px-3 py-1 bg-primary-500/20 border border-primary-500/30 rounded-full text-xs font-medium">HTML</span>
                     <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">CSS</span>
                     <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">JavaScript</span>
                 </div>
-                <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank" class="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-block">View Project</a>
+                <div class="text-left">
+                    <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank" class="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-block">View Project</a>
+                </div>
             </div>
 
             <!-- Project 4 -->
@@ -645,15 +700,17 @@
                         <span class="text-primary-400 text-lg font-mono">UPCOMING</span>
                     </div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Placeholder Project</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed">
+                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Placeholder Project</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed text-left">
                     A placeholder for an upcoming project. Details to be added soon.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
+                <div class="flex flex-wrap gap-2 mb-6 justify-start">
                     <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">Upcoming</span>
                     <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">TBD</span>
                 </div>
-                <button class="btn-secondary px-6 py-3 rounded-full text-sm font-medium cursor-not-allowed opacity-50">View Project</button>
+                <div class="text-left">
+                    <button class="btn-secondary px-6 py-3 rounded-full text-sm font-medium cursor-not-allowed opacity-50">View Project</button>
+                </div>
             </div>
 
             <!-- Project 5 -->
@@ -663,15 +720,17 @@
                         <span class="text-primary-400 text-lg font-mono">UPCOMING</span>
                     </div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Placeholder Project</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed">
+                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Placeholder Project</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed text-left">
                     A placeholder for an upcoming project. Details to be added soon.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
+                <div class="flex flex-wrap gap-2 mb-6 justify-start">
                     <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">Upcoming</span>
                     <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">TBD</span>
                 </div>
-                <button class="btn-secondary px-6 py-3 rounded-full text-sm font-medium cursor-not-allowed opacity-50">View Project</button>
+                <div class="text-left">
+                    <button class="btn-secondary px-6 py-3 rounded-full text-sm font-medium cursor-not-allowed opacity-50">View Project</button>
+                </div>
             </div>
 
             <!-- Project 6 -->
@@ -681,28 +740,30 @@
                         <span class="text-primary-400 text-lg font-mono">UPCOMING</span>
                     </div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400">Placeholder Project</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed">
+                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Placeholder Project</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed text-left">
                     A placeholder for an upcoming project. Details to be added soon.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
+                <div class="flex flex-wrap gap-2 mb-6 justify-start">
                     <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">Upcoming</span>
                     <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">TBD</span>
                 </div>
-                <button class="btn-secondary px-6 py-3 rounded-full text-sm font-medium cursor-not-allowed opacity-50">View Project</button>
+                <div class="text-left">
+                    <button class="btn-secondary px-6 py-3 rounded-full text-sm font-medium cursor-not-allowed opacity-50">View Project</button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="fade-in-up mb-16">
+        <div class="fade-in-up mb-16 text-center">
             <h2 class="text-4xl md:text-6xl font-bold mb-8 glow-text">My Skills</h2>
         </div>
         
         <div class="grid md:grid-cols-2 gap-16">
             <!-- Languages & Tools -->
-            <div class="fade-in-up">
+            <div class="fade-in-up text-left">
                 <h3 class="text-2xl font-semibold mb-8 text-primary-400">Languages & Tools</h3>
                 <div class="space-y-6">
                     <div>
@@ -754,7 +815,7 @@
             </div>
 
             <!-- Concepts & APIs -->
-            <div class="fade-in-up">
+            <div class="fade-in-up text-left">
                 <h3 class="text-2xl font-semibold mb-8 text-primary-400">Concepts & APIs</h3>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="skill-item glass-card p-6 rounded-xl text-center">
@@ -788,18 +849,18 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="fade-in-up mb-16">
+        <div class="fade-in-up mb-16 text-center">
             <h2 class="text-4xl md:text-6xl font-bold mb-8 glow-text">Get In Touch</h2>
         </div>
         
         <div class="grid md:grid-cols-2 gap-16 items-start">
             <!-- Social Links -->
-            <div class="fade-in-up">
-                <p class="text-xl text-slate-300 mb-12 leading-relaxed">
+            <div class="fade-in-up text-left">
+                <p class="text-xl text-slate-300 mb-12 leading-relaxed text-left">
                     Let's connect and build something amazing together.
                 </p>
                 
-                <div class="flex space-x-8 mb-12">
+                <div class="flex space-x-8 mb-12 justify-start">
                     <a href="https://github.com/Rsmk27" target="_blank" class="social-icon text-3xl">
                         <i class="fab fa-github"></i>
                     </a>
@@ -811,28 +872,32 @@
                     </a>
                 </div>
 
-                <a href="/path-to-resume.pdf" download class="btn-secondary px-8 py-4 rounded-full text-lg font-medium inline-flex items-center space-x-3">
+                <div class="text-left">
+                    <a href="/path-to-resume.pdf" download class="btn-secondary px-8 py-4 rounded-full text-lg font-medium inline-flex items-center space-x-3">
                     <span>Get Connected</span>
                     <i class="fas fa-download"></i>
-                </a>
+                    </a>
+                </div>
             </div>
 
             <!-- Contact Form -->
-            <div class="fade-in-up">
+            <div class="fade-in-up text-left">
                 <form class="space-y-6" id="contact-form">
                     <div>
-                        <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Name</label>
+                        <label for="name" class="block text-sm font-medium text-slate-300 mb-2 text-left">Name</label>
                         <input type="text" id="name" name="name" required class="form-input w-full px-4 py-3 rounded-xl">
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email</label>
+                        <label for="email" class="block text-sm font-medium text-slate-300 mb-2 text-left">Email</label>
                         <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 rounded-xl">
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
+                        <label for="message" class="block text-sm font-medium text-slate-300 mb-2 text-left">Message</label>
                         <textarea id="message" name="message" rows="5" required class="form-input w-full px-4 py-3 rounded-xl resize-none"></textarea>
                     </div>
-                    <button type="submit" class="btn-primary px-8 py-4 rounded-full text-lg font-medium">Send Message</button>
+                    <div class="text-left">
+                        <button type="submit" class="btn-primary px-8 py-4 rounded-full text-lg font-medium">Send Message</button>
+                    </div>
                 </form>
             </div>
         </div>
