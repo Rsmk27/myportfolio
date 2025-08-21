@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSMK - Electrical and Electronics Engineering Student</title>
+    <title>RSMK - Future-Ready Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -14,56 +14,38 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                        },
-                        electric: {
-                            50: '#f0fdff',
-                            100: '#ccfbf1',
-                            200: '#99f6e4',
-                            300: '#5eead4',
-                            400: '#2dd4bf',
-                            500: '#14b8a6',
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            800: '#115e59',
-                            900: '#134e4a',
+                        neon: {
+                            cyan: '#00ffff',
+                            pink: '#ff00ff',
+                            green: '#00ff00',
+                            blue: '#0080ff',
+                            purple: '#8000ff',
                         },
                         dark: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a',
-                            950: '#020617',
+                            900: '#0a0a0a',
+                            800: '#111111',
+                            700: '#1a1a1a',
+                            600: '#2a2a2a',
                         }
                     },
                     fontFamily: {
-                        'space': ['Space Grotesk', 'sans-serif'],
+                        'orbitron': ['Orbitron', 'monospace'],
+                        'rajdhani': ['Rajdhani', 'sans-serif'],
                         'mono': ['JetBrains Mono', 'monospace'],
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                        'slide-up': 'slideUp 0.8s ease-out',
-                        'fade-in': 'fadeIn 1s ease-out',
+                        'glow-pulse': 'glowPulse 2s ease-in-out infinite alternate',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
                         'scale-in': 'scaleIn 0.6s ease-out',
                         'rotate-slow': 'rotate 20s linear infinite',
-                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'particle-float': 'particleFloat 8s ease-in-out infinite',
+                        'matrix-rain': 'matrixRain 10s linear infinite',
+                        'neon-flicker': 'neonFlicker 1.5s ease-in-out infinite alternate',
+                        'hologram': 'hologram 3s ease-in-out infinite',
+                        'cyber-glitch': 'cyberGlitch 0.3s ease-in-out infinite',
                     }
                 }
             }
@@ -77,212 +59,163 @@
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #020617;
-            color: #f8fafc;
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* Futuristic Background */
-        .electric-background {
+        /* Futuristic Background with Particles */
+        .cyber-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(0, 128, 255, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #1a1a1a 100%);
+        }
+
+        .particle-system {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.3) 0%, transparent 25%),
-                radial-gradient(circle at 80% 80%, rgba(20, 184, 166, 0.3) 0%, transparent 25%),
-                radial-gradient(circle at 40% 70%, rgba(14, 165, 233, 0.2) 0%, transparent 30%),
-                radial-gradient(circle at 70% 30%, rgba(20, 184, 166, 0.2) 0%, transparent 30%),
-                linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
             overflow: hidden;
         }
 
-        .electric-background::before {
-            content: '';
+        .particle {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(45deg, transparent 40%, rgba(14, 165, 233, 0.1) 50%, transparent 60%),
-                linear-gradient(-45deg, transparent 40%, rgba(20, 184, 166, 0.1) 50%, transparent 60%);
-            background-size: 100px 100px, 150px 150px;
-            animation: electricFlow 8s linear infinite;
+            width: 2px;
+            height: 2px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: particleFloat 8s ease-in-out infinite;
+            box-shadow: 0 0 6px #00ffff;
         }
 
-        .electric-background::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 10% 50%, rgba(14, 165, 233, 0.4) 0%, transparent 20%),
-                radial-gradient(circle at 90% 50%, rgba(20, 184, 166, 0.4) 0%, transparent 20%),
-                radial-gradient(circle at 50% 10%, rgba(14, 165, 233, 0.3) 0%, transparent 15%),
-                radial-gradient(circle at 50% 90%, rgba(20, 184, 166, 0.3) 0%, transparent 15%);
-            animation: electricPulse 6s ease-in-out infinite alternate;
+        .particle:nth-child(2n) {
+            background: #ff00ff;
+            box-shadow: 0 0 6px #ff00ff;
+            animation-delay: -2s;
         }
 
-        .bg-gradient {
+        .particle:nth-child(3n) {
+            background: #0080ff;
+            box-shadow: 0 0 6px #0080ff;
+            animation-delay: -4s;
+        }
+
+        .grid-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: 
-                linear-gradient(0deg, transparent 24%, rgba(14, 165, 233, 0.05) 25%, rgba(14, 165, 233, 0.05) 26%, transparent 27%, transparent 74%, rgba(20, 184, 166, 0.05) 75%, rgba(20, 184, 166, 0.05) 76%, transparent 77%, transparent),
-                linear-gradient(90deg, transparent 24%, rgba(14, 165, 233, 0.05) 25%, rgba(14, 165, 233, 0.05) 26%, transparent 27%, transparent 74%, rgba(20, 184, 166, 0.05) 75%, rgba(20, 184, 166, 0.05) 76%, transparent 77%, transparent);
-            background-size: 75px 75px;
-            animation: electricGrid 12s linear infinite;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: matrixRain 20s linear infinite;
         }
 
-        /* Glassmorphism */
-        .glass {
-            background: rgba(15, 23, 42, 0.8);
+        /* Glassmorphism 2.0 */
+        .glass-morphism {
+            background: rgba(17, 17, 17, 0.4);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(14, 165, 233, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.4);
+            background: rgba(26, 26, 26, 0.6);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(14, 165, 233, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(0, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
         }
 
         .glass-card:hover {
-            background: rgba(30, 41, 59, 0.6);
-            border-color: rgba(14, 165, 233, 0.4);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+            background: rgba(26, 26, 26, 0.8);
+            border-color: rgba(0, 255, 255, 0.4);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 255, 255, 0.2),
+                0 0 0 1px rgba(0, 255, 255, 0.3);
         }
 
-        /* Glow Effects */
-        .glow-text {
-            text-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+        /* Neon Effects */
+        .neon-text {
+            color: #00ffff;
+            text-shadow: 
+                0 0 5px #00ffff,
+                0 0 10px #00ffff,
+                0 0 15px #00ffff,
+                0 0 20px #00ffff;
+            animation: neonFlicker 2s ease-in-out infinite alternate;
         }
 
-        .glow-border {
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+        .neon-border {
+            border: 2px solid #00ffff;
+            box-shadow: 
+                0 0 10px #00ffff,
+                inset 0 0 10px rgba(0, 255, 255, 0.1);
         }
 
-        .glow-hover:hover {
-            box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
-        }
-
-        /* Custom Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
-            100% { box-shadow: 0 0 30px rgba(14, 165, 233, 0.6); }
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.6); }
-        }
-
-        @keyframes electricFlow {
-            0% { transform: translateX(-100px) translateY(-100px); }
-            100% { transform: translateX(100px) translateY(100px); }
-        }
-
-        @keyframes electricPulse {
-            0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
-        }
-
-        @keyframes electricGrid {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(75px, 75px); }
-        }
-
-        /* Hero Text Effects */
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 700;
-            line-height: 0.9;
-            background: linear-gradient(135deg, #f8fafc 0%, #0ea5e9 50%, #14b8a6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glow 3s ease-in-out infinite alternate;
-        }
-
-        .hero-subtitle {
-            background: linear-gradient(135deg, rgba(248, 250, 252, 0.8), rgba(14, 165, 233, 0.6));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Navigation */
-        .nav-link {
+        .hologram-effect {
             position: relative;
-            transition: all 0.3s ease;
-            color: rgba(248, 250, 252, 0.7);
-            font-weight: 500;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.1) 50%, transparent 70%);
+            background-size: 20px 20px;
+            animation: hologram 3s ease-in-out infinite;
         }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #0ea5e9, #14b8a6);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #f8fafc;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Buttons */
-        .btn-primary {
-            background: linear-gradient(135deg, #0ea5e9, #14b8a6);
-            color: #f8fafc;
-            transition: all 0.3s ease;
+        /* Advanced Buttons */
+        .cyber-button {
             position: relative;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 2px solid #00ffff;
+            color: #ffffff;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.3),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
         }
 
-        .btn-primary::before {
+        .cyber-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -293,44 +226,101 @@
             transition: left 0.6s ease;
         }
 
-        .btn-primary:hover::before {
+        .cyber-button:hover::before {
             left: 100%;
         }
 
-        .btn-primary:hover {
+        .cyber-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(14, 165, 233, 0.4);
+            box-shadow: 
+                0 10px 30px rgba(0, 255, 255, 0.4),
+                0 0 40px rgba(0, 255, 255, 0.6),
+                inset 0 0 20px rgba(0, 255, 255, 0.2);
+            border-color: #ff00ff;
         }
 
-        .btn-secondary {
+        .cyber-button-secondary {
             background: transparent;
-            border: 2px solid rgba(14, 165, 233, 0.4);
-            color: #f8fafc;
-            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 0, 255, 0.6);
+            color: #ff00ff;
             position: relative;
             overflow: hidden;
         }
 
-        .btn-secondary::before {
+        .cyber-button-secondary::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 0;
             height: 100%;
-            background: rgba(14, 165, 233, 0.1);
+            background: rgba(255, 0, 255, 0.1);
             transition: width 0.3s ease;
             z-index: -1;
         }
 
-        .btn-secondary:hover::before {
+        .cyber-button-secondary:hover::before {
             width: 100%;
         }
 
-        .btn-secondary:hover {
-            border-color: rgba(14, 165, 233, 0.8);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
+        .cyber-button-secondary:hover {
+            color: #ffffff;
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
+        }
+
+        /* Hero Section */
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            line-height: 0.9;
+            background: linear-gradient(135deg, #ffffff 0%, #00ffff 50%, #ff00ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: hologram 4s ease-in-out infinite;
+            position: relative;
+        }
+
+        .hero-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(0, 255, 255, 0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            font-family: 'Orbitron', monospace;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+
+        .nav-link:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
 
         /* Project Cards */
@@ -341,80 +331,89 @@
             transform-style: preserve-3d;
         }
 
-        .project-card::before {
+        .project-card::after {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
-            transition: left 0.6s ease;
-            z-index: 1;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.05) 50%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .project-card:hover::before {
-            left: 100%;
+        .project-card:hover::after {
+            opacity: 1;
         }
 
         .project-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
+            transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
         }
 
-        /* Skill Items */
-        .skill-item {
-            transition: all 0.3s ease;
+        /* Skill Progress Bars */
+        .skill-progress {
+            width: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            transition: width 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 4px;
+            box-shadow: 
+                0 0 15px rgba(0, 255, 255, 0.6),
+                0 0 30px rgba(255, 0, 255, 0.3);
             position: relative;
         }
 
-        .skill-item:hover {
-            transform: translateY(-5px) scale(1.05);
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: matrixRain 2s linear infinite;
         }
 
-        /* Progress Bars */
-        .progress-bar {
-            width: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #0ea5e9, #14b8a6);
-            transition: width 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border-radius: 3px;
-            box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
-        }
-
-        .progress-container {
-            background: rgba(30, 41, 59, 0.5);
-            height: 6px;
-            border-radius: 3px;
+        .skill-container {
+            background: rgba(42, 42, 42, 0.5);
+            height: 8px;
+            border-radius: 4px;
             overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         /* Form Elements */
-        .form-input {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(14, 165, 233, 0.2);
-            color: #f8fafc;
+        .cyber-input {
+            background: rgba(26, 26, 26, 0.6);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
-        .form-input:focus {
+        .cyber-input:focus {
             outline: none;
-            border-color: rgba(14, 165, 233, 0.6);
-            background: rgba(30, 41, 59, 0.6);
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+            border-color: #00ffff;
+            background: rgba(26, 26, 26, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.4),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
         }
 
         /* Social Icons */
         .social-icon {
             transition: all 0.3s ease;
-            color: rgba(248, 250, 252, 0.6);
+            color: rgba(255, 255, 255, 0.6);
             position: relative;
+            font-size: 1.5rem;
         }
 
         .social-icon:hover {
-            transform: translateY(-5px) scale(1.2);
-            color: #0ea5e9;
-            text-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
+            transform: translateY(-8px) scale(1.3) rotateZ(10deg);
+            color: #00ffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
         }
 
         /* Scroll Progress */
@@ -423,25 +422,26 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: rgba(30, 41, 59, 0.3);
+            height: 4px;
+            background: rgba(26, 26, 26, 0.3);
             z-index: 1000;
         }
 
         .scroll-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #0ea5e9, #14b8a6);
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #0080ff);
             width: 0%;
             transition: width 0.1s ease;
-            box-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
         }
 
         /* Mobile Menu */
         .mobile-menu {
             transform: translateX(100%);
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            background: rgba(2, 6, 23, 0.95);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
+            border-left: 2px solid rgba(0, 255, 255, 0.3);
         }
 
         .mobile-menu.open {
@@ -450,47 +450,87 @@
 
         /* Typewriter Effect */
         .typewriter {
-            border-right: 2px solid #0ea5e9;
-            animation: blink 1s infinite;
+            border-right: 3px solid #00ffff;
+            animation: neonFlicker 1s infinite;
         }
 
-        @keyframes blink {
-            0%, 50% { border-color: #0ea5e9; }
-            51%, 100% { border-color: transparent; }
+        /* Custom Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
         }
 
-        /* Scroll Animations */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
         }
 
-        .fade-in-up.animate {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        .fade-in {
-            opacity: 0;
-            transition: opacity 1s ease;
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        .fade-in.animate {
-            opacity: 1;
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        /* 3D Elements */
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
-        .floating-element:nth-child(2) {
-            animation-delay: -2s;
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+            25% { transform: translateY(-100px) translateX(50px); opacity: 1; }
+            50% { transform: translateY(-200px) translateX(-30px); opacity: 0.8; }
+            75% { transform: translateY(-150px) translateX(80px); opacity: 0.6; }
         }
 
-        .floating-element:nth-child(3) {
-            animation-delay: -4s;
+        @keyframes matrixRain {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(100px); }
+        }
+
+        @keyframes neonFlicker {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 5px #00ffff,
+                    0 0 10px #00ffff,
+                    0 0 15px #00ffff,
+                    0 0 20px #00ffff;
+            }
+            50% { 
+                text-shadow: 
+                    0 0 2px #00ffff,
+                    0 0 5px #00ffff,
+                    0 0 8px #00ffff,
+                    0 0 12px #00ffff;
+            }
+        }
+
+        @keyframes hologram {
+            0%, 100% { 
+                opacity: 1;
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                opacity: 0.8;
+                filter: hue-rotate(90deg);
+            }
+        }
+
+        @keyframes cyberGlitch {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-2px); }
+            40% { transform: translateX(2px); }
+            60% { transform: translateX(-1px); }
+            80% { transform: translateX(1px); }
         }
 
         /* Responsive Design */
@@ -502,31 +542,72 @@
             .glass-card {
                 backdrop-filter: blur(10px);
             }
+
+            .particle {
+                display: none;
+            }
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(30, 41, 59, 0.3);
+            background: rgba(26, 26, 26, 0.3);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #0ea5e9, #14b8a6);
-            border-radius: 4px;
+            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #0284c7, #0d9488);
+            background: linear-gradient(135deg, #ff00ff, #0080ff);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 9999;
+            display: flex;
+            justify-center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
     <!-- Background Elements -->
-    <div class="bg-grid"></div>
-    <div class="bg-gradient"></div>
+    <div class="cyber-background"></div>
+    <div class="particle-system" id="particles"></div>
+    <div class="grid-overlay"></div>
 
     <!-- Scroll Progress -->
     <div class="scroll-progress">
@@ -534,10 +615,10 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass py-4">
+    <nav class="fixed top-0 w-full z-50 glass-morphism py-4">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center">
-                <a href="#hero" class="text-3xl font-bold font-mono glow-text">RSMK</a>
+                <a href="#hero" class="text-3xl font-bold font-orbitron neon-text">RSMK</a>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8">
@@ -549,9 +630,9 @@
 
                 <!-- Mobile Menu Button -->
                 <button class="md:hidden relative w-8 h-8 flex flex-col justify-center items-center z-50" id="mobile-menu-btn">
-                    <span class="w-full h-0.5 bg-primary-400 mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
-                    <span class="w-full h-0.5 bg-primary-400 mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
-                    <span class="w-full h-0.5 bg-primary-400 transition-all duration-300 ease-in-out transform origin-center"></span>
+                    <span class="w-full h-0.5 bg-neon-cyan mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
+                    <span class="w-full h-0.5 bg-neon-cyan mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
+                    <span class="w-full h-0.5 bg-neon-cyan transition-all duration-300 ease-in-out transform origin-center"></span>
                 </button>
             </div>
         </div>
@@ -571,59 +652,62 @@
     <section id="hero" class="min-h-screen flex flex-col justify-center items-center px-6 lg:px-8 max-w-7xl mx-auto relative pt-20 pb-12">
         <!-- Floating Elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="floating-element absolute top-32 left-10 w-20 h-20 border border-primary-400/30 rounded-full glow-border"></div>
-            <div class="floating-element absolute top-48 right-20 w-16 h-16 border border-electric-400/30 rounded-lg rotate-45 glow-border"></div>
-            <div class="floating-element absolute bottom-48 left-20 w-12 h-12 bg-primary-400/20 rounded-full glow-border"></div>
-            <div class="floating-element absolute top-64 right-10 w-8 h-8 bg-electric-400/20 rounded-full"></div>
-            <div class="floating-element absolute bottom-32 right-32 w-14 h-14 border border-primary-400/20 rounded-lg rotate-12"></div>
+            <div class="floating-element absolute top-32 left-10 w-20 h-20 neon-border rounded-full animate-glow-pulse"></div>
+            <div class="floating-element absolute top-48 right-20 w-16 h-16 border-2 border-neon-pink rounded-lg rotate-45 animate-glow-pulse"></div>
+            <div class="floating-element absolute bottom-48 left-20 w-12 h-12 bg-neon-cyan/20 rounded-full animate-glow-pulse"></div>
+            <div class="floating-element absolute top-64 right-10 w-8 h-8 bg-neon-purple/30 rounded-full"></div>
+            <div class="floating-element absolute bottom-32 right-32 w-14 h-14 border-2 border-neon-green/40 rounded-lg rotate-12"></div>
         </div>
 
-        <div class="fade-in z-10 text-center max-w-5xl">
+        <div class="fade-in-up z-10 text-center max-w-5xl">
             <h1 class="hero-title mb-8">
                 Hi, I'm <br>
                 <span class="hero-subtitle">Srinivasa Manikanta</span>
             </h1>
-            <p class="text-xl md:text-3xl text-slate-200 mb-8 max-w-4xl mx-auto leading-relaxed font-light text-center">
-                An Electrical and Electronics Engineering Student
+            <p class="text-xl md:text-3xl text-gray-200 mb-8 max-w-4xl mx-auto leading-relaxed font-rajdhani font-light">
+                Future-Ready Electrical & Electronics Engineer
             </p>
-            <p class="text-lg md:text-xl text-slate-400 mb-12 max-w-3xl mx-auto font-light text-center">
-                I build things related to <span class="text-primary-400 font-semibold typewriter" id="typewriter"></span>
+            <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto font-rajdhani font-light">
+                Building tomorrow's technology with <span class="neon-text font-semibold typewriter" id="typewriter"></span>
             </p>
             
             <div class="flex flex-col sm:flex-row gap-6 mb-16 justify-center items-center">
-                <a href="#projects" class="btn-primary px-8 py-4 rounded-full text-lg font-medium">View My Work</a>
-                <a href="#contact" class="btn-secondary px-8 py-4 rounded-full text-lg font-medium">Get In Touch</a>
+                <a href="#projects" class="cyber-button px-8 py-4 rounded-lg text-lg">Explore Work</a>
+                <a href="#contact" class="cyber-button-secondary px-8 py-4 rounded-lg text-lg">Connect</a>
             </div>
         </div>
 
         <!-- Scroll Indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-2xl text-primary-400"></i>
+            <i class="fas fa-chevron-down text-2xl neon-text"></i>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="fade-in-up text-left">
-                <h2 class="text-4xl md:text-6xl font-bold mb-8 glow-text">About Me</h2>
-                <p class="text-lg text-slate-300 leading-relaxed mb-8 text-left">
-                    I'm a passionate Electrical and Electronics Engineering student with a deep-seated love for building things and solving complex problems. My journey began with a curiosity for how things work, leading me to explore a wide range of fields from embedded systems to green technology. I thrive on bringing ideas from concept to reality, constantly seeking new challenges and opportunities to innovate. I believe that technology, when applied thoughtfully, can create a brighter, more sustainable future for everyone.
+            <div class="slide-in-left">
+                <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron neon-text">About Me</h2>
+                <p class="text-lg text-gray-300 leading-relaxed mb-8 font-rajdhani">
+                    I'm a visionary Electrical and Electronics Engineering student passionate about creating the future through technology. My expertise spans from cutting-edge embedded systems to sustainable energy solutions, always pushing the boundaries of what's possible.
+                </p>
+                <p class="text-lg text-gray-300 leading-relaxed mb-8 font-rajdhani">
+                    I believe in the power of innovation to solve complex challenges and create a more connected, intelligent world. Every project I undertake is an opportunity to blend creativity with technical excellence.
                 </p>
                 
-                <h3 class="text-2xl font-semibold mb-6 text-primary-400 text-left">My Interests</h3>
+                <h3 class="text-2xl font-semibold mb-6 neon-text font-orbitron">Core Expertise</h3>
                 <div class="flex flex-wrap gap-3">
-                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium">Smart Energy</span>
-                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium">Embedded Systems & IoT</span>
-                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium">Automation & Control</span>
-                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium">exploring AI</span>
-                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium">Vibe Coding</span>
+                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium font-rajdhani">Smart Energy Systems</span>
+                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium font-rajdhani">IoT & Embedded</span>
+                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium font-rajdhani">AI Integration</span>
+                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium font-rajdhani">Automation</span>
+                    <span class="px-4 py-2 glass-card rounded-full text-sm font-medium font-rajdhani">Future Tech</span>
                 </div>
             </div>
             
-            <div class="fade-in-up flex justify-center items-center">
-                <div class="w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden glass-card glow-hover flex items-center justify-center">
-                    <img src="https://placehold.co/384x384/0f172a/0ea5e9?text=RSMK" alt="RSMK Profile" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+            <div class="slide-in-right flex justify-center items-center">
+                <div class="w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden glass-card hologram-effect flex items-center justify-center">
+                    <img src="https://images.pexels.com/photos/2182863/pexels-photo-2182863.jpeg?auto=compress&cs=tinysrgb&w=400" alt="RSMK Profile" class="w-full h-full object-cover transition-all duration-500 hover:scale-110">
                 </div>
             </div>
         </div>
@@ -632,125 +716,124 @@
     <!-- Projects Section -->
     <section id="projects" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="fade-in-up mb-16 text-center">
-            <h2 class="text-4xl md:text-6xl font-bold mb-8 glow-text">My Projects</h2>
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron neon-text">Featured Projects</h2>
+            <p class="text-xl text-gray-400 font-rajdhani">Innovative solutions for tomorrow's challenges</p>
         </div>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Project 1 -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <img src="https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Smart Exhaust Fan" class="w-full h-48 object-cover rounded-xl mb-4">
+                <div class="mb-6 relative overflow-hidden rounded-xl">
+                    <img src="https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Smart Exhaust Fan" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Smart Exhaust Fan</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed text-left">
-                    An automated exhaust fan that detects high levels of heat and humidity in a bathroom and turns on automatically. It is a simple IoT project that demonstrates the use of sensors and a microcontroller.
+                <h3 class="text-2xl font-semibold mb-4 neon-text font-orbitron">Smart Exhaust Fan</h3>
+                <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
+                    Intelligent IoT-powered exhaust system with advanced sensor integration for automated climate control and energy optimization.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6 justify-start">
-                    <span class="px-3 py-1 bg-primary-500/20 border border-primary-500/30 rounded-full text-xs font-medium">Arduino</span>
-                    <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">IoT</span>
-                    <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">Sensors</span>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-neon-cyan/20 border border-neon-cyan/30 rounded-full text-xs font-medium font-mono">Arduino</span>
+                    <span class="px-3 py-1 bg-neon-pink/20 border border-neon-pink/30 rounded-full text-xs font-medium font-mono">IoT</span>
+                    <span class="px-3 py-1 bg-neon-purple/20 border border-neon-purple/30 rounded-full text-xs font-medium font-mono">Sensors</span>
                 </div>
-                <div class="text-left">
-                    <a href="https://rsmk27.github.io/myportfolio" target="_blank" class="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-block">View Project</a>
-                </div>
+                <a href="https://rsmk27.github.io/myportfolio" target="_blank" class="cyber-button px-6 py-3 rounded-lg text-sm inline-block">Explore</a>
             </div>
 
             <!-- Project 2 -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <img src="https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Color Ohm" class="w-full h-48 object-cover rounded-xl mb-4">
+                <div class="mb-6 relative overflow-hidden rounded-xl">
+                    <img src="https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Color Ohm" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Color Ohm</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed text-left">
-                    A Python-based application for calculating the resistance of a resistor from its color bands. It features a simple graphical user interface (GUI) built with Tkinter, making it user-friendly for electronics enthusiasts.
+                <h3 class="text-2xl font-semibold mb-4 neon-text font-orbitron">Color Ohm</h3>
+                <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
+                    Advanced Python application with intuitive GUI for precise resistor value calculation using color band recognition technology.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6 justify-start">
-                    <span class="px-3 py-1 bg-primary-500/20 border border-primary-500/30 rounded-full text-xs font-medium">Python</span>
-                    <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">Tkinter</span>
-                    <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">GUI</span>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-neon-cyan/20 border border-neon-cyan/30 rounded-full text-xs font-medium font-mono">Python</span>
+                    <span class="px-3 py-1 bg-neon-pink/20 border border-neon-pink/30 rounded-full text-xs font-medium font-mono">Tkinter</span>
+                    <span class="px-3 py-1 bg-neon-purple/20 border border-neon-purple/30 rounded-full text-xs font-medium font-mono">GUI</span>
                 </div>
-                <div class="text-left">
-                    <a href="https://rsmk27.github.io/colorohm" target="_blank" class="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-block">View Project</a>
-                </div>
+                <a href="https://rsmk27.github.io/colorohm" target="_blank" class="cyber-button px-6 py-3 rounded-lg text-sm inline-block">Explore</a>
             </div>
 
             <!-- Project 3 -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <img src="https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Budget Buddy" class="w-full h-48 object-cover rounded-xl mb-4">
+                <div class="mb-6 relative overflow-hidden rounded-xl">
+                    <img src="https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Budget Buddy" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Budget Buddy</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed text-left">
-                    A web-based personal finance tracker built with HTML, CSS, and JavaScript. It helps users monitor their income and expenses, providing a clear overview of their financial habits. It's designed to be simple and intuitive.
+                <h3 class="text-2xl font-semibold mb-4 neon-text font-orbitron">Budget Buddy</h3>
+                <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
+                    Sophisticated web-based financial management platform with real-time analytics and intelligent spending insights.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6 justify-start">
-                    <span class="px-3 py-1 bg-primary-500/20 border border-primary-500/30 rounded-full text-xs font-medium">HTML</span>
-                    <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">CSS</span>
-                    <span class="px-3 py-1 bg-electric-500/20 border border-electric-500/30 rounded-full text-xs font-medium">JavaScript</span>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-neon-cyan/20 border border-neon-cyan/30 rounded-full text-xs font-medium font-mono">HTML5</span>
+                    <span class="px-3 py-1 bg-neon-pink/20 border border-neon-pink/30 rounded-full text-xs font-medium font-mono">CSS3</span>
+                    <span class="px-3 py-1 bg-neon-purple/20 border border-neon-purple/30 rounded-full text-xs font-medium font-mono">JavaScript</span>
                 </div>
-                <div class="text-left">
-                    <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank" class="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-block">View Project</a>
-                </div>
+                <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank" class="cyber-button px-6 py-3 rounded-lg text-sm inline-block">Explore</a>
             </div>
 
-            <!-- Project 4 -->
+            <!-- Future Projects -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl mb-4 flex items-center justify-center border border-primary-500/20">
-                        <span class="text-primary-400 text-lg font-mono">UPCOMING</span>
+                <div class="mb-6 relative overflow-hidden rounded-xl">
+                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl flex items-center justify-center border-2 border-neon-cyan/20 hologram-effect">
+                        <div class="text-center">
+                            <i class="fas fa-rocket text-4xl neon-text mb-2"></i>
+                            <span class="neon-text text-lg font-orbitron">NEXT GEN</span>
+                        </div>
                     </div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Placeholder Project</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed text-left">
-                    A placeholder for an upcoming project. Details to be added soon.
+                <h3 class="text-2xl font-semibold mb-4 neon-text font-orbitron">AI-Powered Grid</h3>
+                <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
+                    Revolutionary smart grid system with AI-driven energy optimization and predictive maintenance capabilities.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6 justify-start">
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">Upcoming</span>
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">TBD</span>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">AI/ML</span>
+                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Coming Soon</span>
                 </div>
-                <div class="text-left">
-                    <button class="btn-secondary px-6 py-3 rounded-full text-sm font-medium cursor-not-allowed opacity-50">View Project</button>
-                </div>
+                <button class="cyber-button-secondary px-6 py-3 rounded-lg text-sm cursor-not-allowed opacity-50">In Development</button>
             </div>
 
-            <!-- Project 5 -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl mb-4 flex items-center justify-center border border-primary-500/20">
-                        <span class="text-primary-400 text-lg font-mono">UPCOMING</span>
+                <div class="mb-6 relative overflow-hidden rounded-xl">
+                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl flex items-center justify-center border-2 border-neon-pink/20 hologram-effect">
+                        <div class="text-center">
+                            <i class="fas fa-brain text-4xl text-neon-pink mb-2"></i>
+                            <span class="text-neon-pink text-lg font-orbitron">NEURAL NET</span>
+                        </div>
                     </div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Placeholder Project</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed text-left">
-                    A placeholder for an upcoming project. Details to be added soon.
+                <h3 class="text-2xl font-semibold mb-4 text-neon-pink font-orbitron">Quantum Interface</h3>
+                <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
+                    Next-generation human-machine interface leveraging quantum computing principles for enhanced interaction.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6 justify-start">
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">Upcoming</span>
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">TBD</span>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Quantum</span>
+                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Research</span>
                 </div>
-                <div class="text-left">
-                    <button class="btn-secondary px-6 py-3 rounded-full text-sm font-medium cursor-not-allowed opacity-50">View Project</button>
-                </div>
+                <button class="cyber-button-secondary px-6 py-3 rounded-lg text-sm cursor-not-allowed opacity-50">Conceptual</button>
             </div>
 
-            <!-- Project 6 -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
-                <div class="mb-6">
-                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl mb-4 flex items-center justify-center border border-primary-500/20">
-                        <span class="text-primary-400 text-lg font-mono">UPCOMING</span>
+                <div class="mb-6 relative overflow-hidden rounded-xl">
+                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl flex items-center justify-center border-2 border-neon-green/20 hologram-effect">
+                        <div class="text-center">
+                            <i class="fas fa-leaf text-4xl text-neon-green mb-2"></i>
+                            <span class="text-neon-green text-lg font-orbitron">ECO TECH</span>
+                        </div>
                     </div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-primary-400 text-left">Placeholder Project</h3>
-                <p class="text-slate-300 mb-6 leading-relaxed text-left">
-                    A placeholder for an upcoming project. Details to be added soon.
+                <h3 class="text-2xl font-semibold mb-4 text-neon-green font-orbitron">Green Energy Hub</h3>
+                <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
+                    Sustainable energy management ecosystem with renewable integration and carbon footprint optimization.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6 justify-start">
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">Upcoming</span>
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium">TBD</span>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Renewable</span>
+                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Planning</span>
                 </div>
-                <div class="text-left">
-                    <button class="btn-secondary px-6 py-3 rounded-full text-sm font-medium cursor-not-allowed opacity-50">View Project</button>
-                </div>
+                <button class="cyber-button-secondary px-6 py-3 rounded-lg text-sm cursor-not-allowed opacity-50">Blueprint</button>
             </div>
         </div>
     </section>
@@ -758,89 +841,90 @@
     <!-- Skills Section -->
     <section id="skills" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="fade-in-up mb-16 text-center">
-            <h2 class="text-4xl md:text-6xl font-bold mb-8 glow-text">My Skills</h2>
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron neon-text">Technical Arsenal</h2>
+            <p class="text-xl text-gray-400 font-rajdhani">Mastering the tools of tomorrow</p>
         </div>
         
         <div class="grid md:grid-cols-2 gap-16">
-            <!-- Languages & Tools -->
-            <div class="fade-in-up text-left">
-                <h3 class="text-2xl font-semibold mb-8 text-primary-400">Languages & Tools</h3>
+            <!-- Programming Skills -->
+            <div class="slide-in-left">
+                <h3 class="text-2xl font-semibold mb-8 neon-text font-orbitron">Programming & Development</h3>
                 <div class="space-y-6">
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="font-medium">Arduino / ESP8266</span>
-                            <span class="text-slate-400">70%</span>
+                            <span class="font-medium font-rajdhani">Arduino / ESP8266</span>
+                            <span class="text-gray-400 font-mono">85%</span>
                         </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" data-width="70"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-medium">Python</span>
-                            <span class="text-slate-400">60%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" data-width="60"></div>
+                        <div class="skill-container">
+                            <div class="skill-progress" data-width="85"></div>
                         </div>
                     </div>
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="font-medium">HTML & CSS</span>
-                            <span class="text-slate-400">30%</span>
+                            <span class="font-medium font-rajdhani">Python</span>
+                            <span class="text-gray-400 font-mono">75%</span>
                         </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" data-width="30"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-medium">Electrical</span>
-                            <span class="text-slate-400">75%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" data-width="75"></div>
+                        <div class="skill-container">
+                            <div class="skill-progress" data-width="75"></div>
                         </div>
                     </div>
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="font-medium">C</span>
-                            <span class="text-slate-400">75%</span>
+                            <span class="font-medium font-rajdhani">C/C++</span>
+                            <span class="text-gray-400 font-mono">80%</span>
                         </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" data-width="75"></div>
+                        <div class="skill-container">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium font-rajdhani">Web Technologies</span>
+                            <span class="text-gray-400 font-mono">65%</span>
+                        </div>
+                        <div class="skill-container">
+                            <div class="skill-progress" data-width="65"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium font-rajdhani">Electrical Systems</span>
+                            <span class="text-gray-400 font-mono">90%</span>
+                        </div>
+                        <div class="skill-container">
+                            <div class="skill-progress" data-width="90"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Concepts & APIs -->
-            <div class="fade-in-up text-left">
-                <h3 class="text-2xl font-semibold mb-8 text-primary-400">Concepts & APIs</h3>
+            <!-- Technology Stack -->
+            <div class="slide-in-right">
+                <h3 class="text-2xl font-semibold mb-8 neon-text font-orbitron">Technology Stack</h3>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="skill-item glass-card p-6 rounded-xl text-center">
-                        <i class="fas fa-microchip text-3xl mb-4 text-primary-400"></i>
-                        <p class="font-medium">Embedded Systems</p>
+                    <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-microchip text-3xl mb-4 neon-text"></i>
+                        <p class="font-medium font-rajdhani">Embedded Systems</p>
                     </div>
-                    <div class="skill-item glass-card p-6 rounded-xl text-center">
-                        <i class="fas fa-network-wired text-3xl mb-4 text-electric-400"></i>
-                        <p class="font-medium">IoT & Cloud</p>
+                    <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-network-wired text-3xl mb-4 text-neon-pink"></i>
+                        <p class="font-medium font-rajdhani">IoT & Cloud</p>
                     </div>
-                    <div class="skill-item glass-card p-6 rounded-xl text-center">
-                        <i class="fab fa-python text-3xl mb-4 text-electric-400"></i>
-                        <p class="font-medium">Telegram Bot API</p>
+                    <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fab fa-python text-3xl mb-4 text-neon-green"></i>
+                        <p class="font-medium font-rajdhani">AI Integration</p>
                     </div>
-                    <div class="skill-item glass-card p-6 rounded-xl text-center">
-                        <i class="fas fa-code-merge text-3xl mb-4 text-primary-400"></i>
-                        <p class="font-medium">Circuit Design</p>
+                    <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-robot text-3xl mb-4 text-neon-purple"></i>
+                        <p class="font-medium font-rajdhani">Automation</p>
                     </div>
-                    <div class="skill-item glass-card p-6 rounded-xl text-center">
-                        <i class="fas fa-battery-half text-3xl mb-4 text-electric-400"></i>
-                        <p class="font-medium">Power Electronics</p>
+                    <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-battery-half text-3xl mb-4 text-neon-blue"></i>
+                        <p class="font-medium font-rajdhani">Power Electronics</p>
                     </div>
-                    <div class="skill-item glass-card p-6 rounded-xl text-center">
-                        <i class="fas fa-robot text-3xl mb-4 text-primary-400"></i>
-                        <p class="font-medium">AI</p>
+                    <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-brain text-3xl mb-4 neon-text"></i>
+                        <p class="font-medium font-rajdhani">Machine Learning</p>
                     </div>
                 </div>
             </div>
@@ -850,68 +934,95 @@
     <!-- Contact Section -->
     <section id="contact" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="fade-in-up mb-16 text-center">
-            <h2 class="text-4xl md:text-6xl font-bold mb-8 glow-text">Get In Touch</h2>
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron neon-text">Connect</h2>
+            <p class="text-xl text-gray-400 font-rajdhani">Let's build the future together</p>
         </div>
         
         <div class="grid md:grid-cols-2 gap-16 items-start">
-            <!-- Social Links -->
-            <div class="fade-in-up text-left">
-                <p class="text-xl text-slate-300 mb-12 leading-relaxed text-left">
-                    Let's connect and build something amazing together.
+            <!-- Contact Info -->
+            <div class="slide-in-left">
+                <p class="text-xl text-gray-300 mb-12 leading-relaxed font-rajdhani">
+                    Ready to collaborate on groundbreaking projects? Let's connect and create something extraordinary.
                 </p>
                 
-                <div class="flex space-x-8 mb-12 justify-start">
-                    <a href="https://github.com/Rsmk27" target="_blank" class="social-icon text-3xl">
+                <div class="flex space-x-8 mb-12">
+                    <a href="https://github.com/Rsmk27" target="_blank" class="social-icon">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://t.me/Rsmk_27" target="_blank" class="social-icon text-3xl">
+                    <a href="https://t.me/Rsmk_27" target="_blank" class="social-icon">
                         <i class="fab fa-telegram-plane"></i>
                     </a>
-                    <a href="mailto:srinivasmanikantarajapantula@gmail.com" class="social-icon text-3xl">
+                    <a href="mailto:srinivasmanikantarajapantula@gmail.com" class="social-icon">
                         <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-linkedin"></i>
                     </a>
                 </div>
 
-                <div class="text-left">
-                    <a href="/path-to-resume.pdf" download class="btn-secondary px-8 py-4 rounded-full text-lg font-medium inline-flex items-center space-x-3">
-                    <span>Get Connected</span>
+                <a href="#" class="cyber-button-secondary px-8 py-4 rounded-lg text-lg font-medium inline-flex items-center space-x-3">
+                    <span>Download Resume</span>
                     <i class="fas fa-download"></i>
-                    </a>
-                </div>
+                </a>
             </div>
 
             <!-- Contact Form -->
-            <div class="fade-in-up text-left">
+            <div class="slide-in-right">
                 <form class="space-y-6" id="contact-form">
                     <div>
-                        <label for="name" class="block text-sm font-medium text-slate-300 mb-2 text-left">Name</label>
-                        <input type="text" id="name" name="name" required class="form-input w-full px-4 py-3 rounded-xl">
+                        <label for="name" class="block text-sm font-medium text-gray-300 mb-2 font-rajdhani">Name</label>
+                        <input type="text" id="name" name="name" required class="cyber-input w-full px-4 py-3 rounded-xl">
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium text-slate-300 mb-2 text-left">Email</label>
-                        <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 rounded-xl">
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-2 font-rajdhani">Email</label>
+                        <input type="email" id="email" name="email" required class="cyber-input w-full px-4 py-3 rounded-xl">
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-slate-300 mb-2 text-left">Message</label>
-                        <textarea id="message" name="message" rows="5" required class="form-input w-full px-4 py-3 rounded-xl resize-none"></textarea>
+                        <label for="message" class="block text-sm font-medium text-gray-300 mb-2 font-rajdhani">Message</label>
+                        <textarea id="message" name="message" rows="5" required class="cyber-input w-full px-4 py-3 rounded-xl resize-none"></textarea>
                     </div>
-                    <div class="text-left">
-                        <button type="submit" class="btn-primary px-8 py-4 rounded-full text-lg font-medium">Send Message</button>
-                    </div>
+                    <button type="submit" class="cyber-button px-8 py-4 rounded-lg text-lg w-full">Send Message</button>
                 </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-slate-800">
+    <footer class="py-12 px-6 border-t border-gray-800">
         <div class="max-w-7xl mx-auto text-center">
-            <p class="text-slate-400">&copy; 2025 RSMK. All rights reserved.</p>
-            <p class="text-slate-400 mt-2">Designed with <span class="text-red-400">❤️</span> and a lot of <span class="text-yellow-400">☕</span></p>
+            <p class="text-gray-400 font-rajdhani">&copy; 2025 RSMK. Engineered for the future.</p>
+            <p class="text-gray-400 mt-2 font-rajdhani">Crafted with <span class="neon-text">⚡</span> and endless <span class="text-neon-pink">☕</span></p>
         </div>
     </footer>
 
     <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Particle System
+        function createParticles() {
+            const particleContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 30 : 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                particleContainer.appendChild(particle);
+            }
+        }
+
         // Scroll Progress
         window.addEventListener('scroll', () => {
             const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
@@ -919,7 +1030,7 @@
         });
 
         // Typewriter Effect
-        const words = ['Green Tech', 'Smart Energy', 'Embedded Systems', 'Innovative AI Projects', 'Robotics', 'Automation'];
+        const words = ['Smart Energy', 'IoT Innovation', 'AI Integration', 'Quantum Computing', 'Green Technology', 'Future Systems'];
         const typewriter = document.getElementById('typewriter');
         let wordIndex = 0;
         let charIndex = 0;
@@ -945,7 +1056,6 @@
             }
             setTimeout(type, typeSpeed);
         }
-        type();
 
         // Mobile Menu
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -984,14 +1094,11 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    const elementsToAnimate = entry.target.querySelectorAll('.fade-in-up, .fade-in, .project-card, .skill-item');
+                    const elementsToAnimate = entry.target.querySelectorAll('.fade-in-up, .slide-in-left, .slide-in-right, .project-card');
                     elementsToAnimate.forEach((el, index) => {
                         setTimeout(() => {
-                            el.classList.add('animate');
-                            if (el.classList.contains('progress-bar')) {
-                                const width = el.getAttribute('data-width');
-                                el.style.width = width + '%';
-                            }
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0) translateX(0)';
                         }, index * 100);
                     });
                     observer.unobserve(entry.target);
@@ -1024,7 +1131,7 @@
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             
-            submitBtn.textContent = 'Sending...';
+            submitBtn.textContent = 'Transmitting...';
             submitBtn.disabled = true;
             
             setTimeout(() => {
@@ -1038,7 +1145,7 @@
         });
 
         // Progress bars animation
-        const progressBars = document.querySelectorAll('.progress-bar');
+        const progressBars = document.querySelectorAll('.skill-progress');
         const progressObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1054,6 +1161,36 @@
 
         progressBars.forEach(bar => {
             progressObserver.observe(bar);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            type();
+            
+            // Set initial states for animations
+            document.querySelectorAll('.fade-in-up, .slide-in-left, .slide-in-right').forEach(el => {
+                el.style.opacity = '0';
+                if (el.classList.contains('slide-in-left')) {
+                    el.style.transform = 'translateX(-50px)';
+                } else if (el.classList.contains('slide-in-right')) {
+                    el.style.transform = 'translateX(50px)';
+                } else {
+                    el.style.transform = 'translateY(30px)';
+                }
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.floating-element');
+            const speed = 0.5;
+
+            parallax.forEach((element, index) => {
+                const yPos = -(scrolled * speed * (index + 1) * 0.1);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
         });
     </script>
 </body>
