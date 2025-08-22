@@ -14,18 +14,27 @@
             theme: {
                 extend: {
                     colors: {
-                        neon: {
-                            cyan: '#00ffff',
-                            pink: '#ff00ff',
-                            green: '#00ff00',
-                            blue: '#0080ff',
-                            purple: '#8000ff',
+                        primary: {
+                            500: '#0066ff',
+                            400: '#2e86de',
+                        },
+                        secondary: {
+                            500: '#a855f7',
+                            400: '#c084fc',
+                        },
+                        tertiary: {
+                            500: '#d97706',
+                            400: '#ca8a04',
                         },
                         dark: {
                             900: '#0a0a0a',
                             800: '#111111',
                             700: '#1a1a1a',
                             600: '#2a2a2a',
+                        },
+                        gray: {
+                            300: '#d4d4d4',
+                            400: '#a0a0a0',
                         }
                     },
                     fontFamily: {
@@ -43,7 +52,6 @@
                         'rotate-slow': 'rotate 20s linear infinite',
                         'particle-float': 'particleFloat 8s ease-in-out infinite',
                         'matrix-rain': 'matrixRain 10s linear infinite',
-                        'neon-flicker': 'neonFlicker 1.5s ease-in-out infinite alternate',
                         'hologram': 'hologram 3s ease-in-out infinite',
                         'cyber-glitch': 'cyberGlitch 0.3s ease-in-out infinite',
                     }
@@ -75,9 +83,9 @@
             height: 100%;
             z-index: -3;
             background: 
-                radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 70%, rgba(0, 128, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(217, 119, 6, 0.08) 0%, transparent 50%),
                 linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #1a1a1a 100%);
         }
 
@@ -95,21 +103,21 @@
             position: absolute;
             width: 2px;
             height: 2px;
-            background: #00ffff;
+            background: #0066ff;
             border-radius: 50%;
             animation: particleFloat 8s ease-in-out infinite;
-            box-shadow: 0 0 6px #00ffff;
+            box-shadow: 0 0 6px #0066ff;
         }
 
         .particle:nth-child(2n) {
-            background: #ff00ff;
-            box-shadow: 0 0 6px #ff00ff;
+            background: #a855f7;
+            box-shadow: 0 0 6px #a855f7;
             animation-delay: -2s;
         }
 
         .particle:nth-child(3n) {
-            background: #0080ff;
-            box-shadow: 0 0 6px #0080ff;
+            background: #d97706;
+            box-shadow: 0 0 6px #d97706;
             animation-delay: -4s;
         }
 
@@ -121,8 +129,8 @@
             height: 100%;
             z-index: -1;
             background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(0, 102, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 102, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             animation: matrixRain 20s linear infinite;
         }
@@ -131,7 +139,7 @@
         .glass-morphism {
             background: rgba(17, 17, 17, 0.4);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 102, 255, 0.2);
             box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -140,10 +148,10 @@
         .glass-card {
             background: rgba(26, 26, 26, 0.6);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 102, 255, 0.1);
             box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(0, 255, 255, 0.05);
+                0 0 0 1px rgba(0, 102, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
@@ -156,7 +164,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.1), transparent);
             transition: left 0.6s ease;
         }
 
@@ -166,34 +174,28 @@
 
         .glass-card:hover {
             background: rgba(26, 26, 26, 0.8);
-            border-color: rgba(0, 255, 255, 0.4);
+            border-color: rgba(0, 102, 255, 0.4);
             transform: translateY(-10px) scale(1.02);
             box-shadow: 
-                0 20px 40px rgba(0, 255, 255, 0.2),
-                0 0 0 1px rgba(0, 255, 255, 0.3);
+                0 20px 40px rgba(0, 102, 255, 0.2),
+                0 0 0 1px rgba(0, 102, 255, 0.3);
         }
 
-        /* Neon Effects */
-        .neon-text {
-            color: #00ffff;
-            text-shadow: 
-                0 0 5px #00ffff,
-                0 0 10px #00ffff,
-                0 0 15px #00ffff,
-                0 0 20px #00ffff;
-            animation: neonFlicker 2s ease-in-out infinite alternate;
+        /* Text without glow */
+        .primary-text {
+            color: #0066ff;
         }
 
-        .neon-border {
-            border: 2px solid #00ffff;
+        .primary-border {
+            border: 2px solid #0066ff;
             box-shadow: 
-                0 0 10px #00ffff,
-                inset 0 0 10px rgba(0, 255, 255, 0.1);
+                0 0 10px #0066ff,
+                inset 0 0 10px rgba(0, 102, 255, 0.1);
         }
 
         .hologram-effect {
             position: relative;
-            background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.1) 50%, transparent 70%);
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 102, 255, 0.1) 50%, transparent 70%);
             background-size: 20px 20px;
             animation: hologram 3s ease-in-out infinite;
         }
@@ -201,8 +203,8 @@
         /* Advanced Buttons */
         .cyber-button {
             position: relative;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
-            border: 2px solid #00ffff;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(168, 85, 247, 0.1));
+            border: 2px solid #0066ff;
             color: #ffffff;
             font-family: 'Orbitron', monospace;
             font-weight: 600;
@@ -211,8 +213,8 @@
             transition: all 0.3s ease;
             overflow: hidden;
             box-shadow: 
-                0 0 20px rgba(0, 255, 255, 0.3),
-                inset 0 0 20px rgba(0, 255, 255, 0.1);
+                0 0 20px rgba(0, 102, 255, 0.3),
+                inset 0 0 20px rgba(0, 102, 255, 0.1);
         }
 
         .cyber-button::before {
@@ -233,16 +235,16 @@
         .cyber-button:hover {
             transform: translateY(-3px);
             box-shadow: 
-                0 10px 30px rgba(0, 255, 255, 0.4),
-                0 0 40px rgba(0, 255, 255, 0.6),
-                inset 0 0 20px rgba(0, 255, 255, 0.2);
-            border-color: #ff00ff;
+                0 10px 30px rgba(0, 102, 255, 0.4),
+                0 0 40px rgba(0, 102, 255, 0.6),
+                inset 0 0 20px rgba(0, 102, 255, 0.2);
+            border-color: #a855f7;
         }
 
         .cyber-button-secondary {
             background: transparent;
-            border: 2px solid rgba(255, 0, 255, 0.6);
-            color: #ff00ff;
+            border: 2px solid rgba(168, 85, 247, 0.6);
+            color: #a855f7;
             position: relative;
             overflow: hidden;
         }
@@ -254,7 +256,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: rgba(255, 0, 255, 0.1);
+            background: rgba(168, 85, 247, 0.1);
             transition: width 0.3s ease;
             z-index: -1;
         }
@@ -265,8 +267,8 @@
 
         .cyber-button-secondary:hover {
             color: #ffffff;
-            border-color: #00ffff;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
+            border-color: #0066ff;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
         }
 
         /* Hero Section */
@@ -275,7 +277,7 @@
             font-size: clamp(3rem, 8vw, 8rem);
             font-weight: 900;
             line-height: 0.9;
-            background: linear-gradient(135deg, #ffffff 0%, #00ffff 50%, #ff00ff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #0066ff 50%, #a855f7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -285,7 +287,7 @@
 
         .hero-subtitle {
             font-family: 'Rajdhani', sans-serif;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(0, 255, 255, 0.7));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(0, 102, 255, 0.7));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -309,14 +311,14 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            background: linear-gradient(90deg, #0066ff, #a855f7);
             transition: width 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+            box-shadow: 0 0 10px rgba(0, 102, 255, 0.6);
         }
 
         .nav-link:hover {
-            color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+            color: #0066ff;
+            text-shadow: 0 0 10px rgba(0, 102, 255, 0.6);
         }
 
         .nav-link:hover::after {
@@ -338,7 +340,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.05) 50%, transparent 70%);
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 102, 255, 0.05) 50%, transparent 70%);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -355,12 +357,12 @@
         .skill-progress {
             width: 0;
             height: 8px;
-            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            background: linear-gradient(90deg, #0066ff, #a855f7);
             transition: width 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border-radius: 4px;
             box-shadow: 
-                0 0 15px rgba(0, 255, 255, 0.6),
-                0 0 30px rgba(255, 0, 255, 0.3);
+                0 0 15px rgba(0, 102, 255, 0.6),
+                0 0 30px rgba(168, 85, 247, 0.3);
             position: relative;
         }
 
@@ -380,13 +382,13 @@
             height: 8px;
             border-radius: 4px;
             overflow: hidden;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 102, 255, 0.2);
         }
 
         /* Form Elements */
         .cyber-input {
             background: rgba(26, 26, 26, 0.6);
-            border: 2px solid rgba(0, 255, 255, 0.3);
+            border: 2px solid rgba(0, 102, 255, 0.3);
             color: #ffffff;
             font-family: 'Rajdhani', sans-serif;
             transition: all 0.3s ease;
@@ -395,11 +397,11 @@
 
         .cyber-input:focus {
             outline: none;
-            border-color: #00ffff;
+            border-color: #0066ff;
             background: rgba(26, 26, 26, 0.8);
             box-shadow: 
-                0 0 20px rgba(0, 255, 255, 0.4),
-                inset 0 0 20px rgba(0, 255, 255, 0.1);
+                0 0 20px rgba(0, 102, 255, 0.4),
+                inset 0 0 20px rgba(0, 102, 255, 0.1);
         }
 
         /* Social Icons */
@@ -412,8 +414,8 @@
 
         .social-icon:hover {
             transform: translateY(-8px) scale(1.3) rotateZ(10deg);
-            color: #00ffff;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            color: #0066ff;
+            text-shadow: 0 0 20px rgba(0, 102, 255, 0.8);
         }
 
         /* Scroll Progress */
@@ -429,10 +431,10 @@
 
         .scroll-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #00ffff, #ff00ff, #0080ff);
+            background: linear-gradient(90deg, #0066ff, #a855f7, #d97706);
             width: 0%;
             transition: width 0.1s ease;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 102, 255, 0.8);
         }
 
         /* Mobile Menu */
@@ -441,7 +443,7 @@
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
-            border-left: 2px solid rgba(0, 255, 255, 0.3);
+            border-left: 2px solid rgba(0, 102, 255, 0.3);
         }
 
         .mobile-menu.open {
@@ -450,8 +452,7 @@
 
         /* Typewriter Effect */
         .typewriter {
-            border-right: 3px solid #00ffff;
-            animation: neonFlicker 1s infinite;
+            border-right: 3px solid #0066ff;
         }
 
         /* Custom Animations */
@@ -461,8 +462,8 @@
         }
 
         @keyframes glowPulse {
-            0% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
-            100% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
+            0% { box-shadow: 0 0 20px rgba(0, 102, 255, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(0, 102, 255, 0.8); }
         }
 
         @keyframes slideInLeft {
@@ -495,23 +496,6 @@
         @keyframes matrixRain {
             0% { transform: translateY(-100px); }
             100% { transform: translateY(100px); }
-        }
-
-        @keyframes neonFlicker {
-            0%, 100% { 
-                text-shadow: 
-                    0 0 5px #00ffff,
-                    0 0 10px #00ffff,
-                    0 0 15px #00ffff,
-                    0 0 20px #00ffff;
-            }
-            50% { 
-                text-shadow: 
-                    0 0 2px #00ffff,
-                    0 0 5px #00ffff,
-                    0 0 8px #00ffff,
-                    0 0 12px #00ffff;
-            }
         }
 
         @keyframes hologram {
@@ -558,13 +542,13 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            background: linear-gradient(135deg, #0066ff, #a855f7);
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #ff00ff, #0080ff);
+            background: linear-gradient(135deg, #a855f7, #d97706);
         }
 
         /* Loading Animation */
@@ -577,7 +561,7 @@
             background: #0a0a0a;
             z-index: 9999;
             display: flex;
-            justify-center;
+            justify-content: center;
             align-items: center;
             transition: opacity 0.5s ease;
         }
@@ -585,11 +569,11 @@
         .loading-spinner {
             width: 60px;
             height: 60px;
-            border: 3px solid rgba(0, 255, 255, 0.3);
-            border-top: 3px solid #00ffff;
+            border: 3px solid rgba(0, 102, 255, 0.3);
+            border-top: 3px solid #0066ff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+            box-shadow: 0 0 30px rgba(0, 102, 255, 0.6);
         }
 
         @keyframes spin {
@@ -599,28 +583,23 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
     <div class="loading-overlay" id="loading">
         <div class="loading-spinner"></div>
     </div>
 
-    <!-- Background Elements -->
     <div class="cyber-background"></div>
     <div class="particle-system" id="particles"></div>
     <div class="grid-overlay"></div>
 
-    <!-- Scroll Progress -->
     <div class="scroll-progress">
         <div class="scroll-progress-bar"></div>
     </div>
 
-    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-morphism py-4">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center">
-                <a href="#hero" class="text-3xl font-bold font-orbitron neon-text">RSMK</a>
+                <a href="#hero" class="text-3xl font-bold font-orbitron primary-text">RSMK</a>
                 
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8">
                     <a href="#about" class="nav-link">About</a>
                     <a href="#projects" class="nav-link">Projects</a>
@@ -628,16 +607,14 @@
                     <a href="#contact" class="nav-link">Contact</a>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <button class="md:hidden relative w-8 h-8 flex flex-col justify-center items-center z-50" id="mobile-menu-btn">
-                    <span class="w-full h-0.5 bg-neon-cyan mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
-                    <span class="w-full h-0.5 bg-neon-cyan mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
-                    <span class="w-full h-0.5 bg-neon-cyan transition-all duration-300 ease-in-out transform origin-center"></span>
+                    <span class="w-full h-0.5 bg-primary-500 mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
+                    <span class="w-full h-0.5 bg-primary-500 mb-1.5 transition-all duration-300 ease-in-out transform origin-center"></span>
+                    <span class="w-full h-0.5 bg-primary-500 transition-all duration-300 ease-in-out transform origin-center"></span>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div class="mobile-menu fixed top-0 right-0 w-full h-screen md:hidden z-40">
             <div class="flex flex-col items-center justify-center h-full space-y-8">
                 <a href="#about" class="text-2xl nav-link mobile-menu-link">About</a>
@@ -648,15 +625,13 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex flex-col justify-center items-center px-6 lg:px-8 max-w-7xl mx-auto relative pt-20 pb-12">
-        <!-- Floating Elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="floating-element absolute top-32 left-10 w-20 h-20 neon-border rounded-full animate-glow-pulse"></div>
-            <div class="floating-element absolute top-48 right-20 w-16 h-16 border-2 border-neon-pink rounded-lg rotate-45 animate-glow-pulse"></div>
-            <div class="floating-element absolute bottom-48 left-20 w-12 h-12 bg-neon-cyan/20 rounded-full animate-glow-pulse"></div>
-            <div class="floating-element absolute top-64 right-10 w-8 h-8 bg-neon-purple/30 rounded-full"></div>
-            <div class="floating-element absolute bottom-32 right-32 w-14 h-14 border-2 border-neon-green/40 rounded-lg rotate-12"></div>
+            <div class="floating-element absolute top-32 left-10 w-20 h-20 primary-border rounded-full animate-glow-pulse"></div>
+            <div class="floating-element absolute top-48 right-20 w-16 h-16 border-2 border-secondary-500 rounded-lg rotate-45 animate-glow-pulse"></div>
+            <div class="floating-element absolute bottom-48 left-20 w-12 h-12 bg-primary-400/20 rounded-full animate-glow-pulse"></div>
+            <div class="floating-element absolute top-64 right-10 w-8 h-8 bg-secondary-400/30 rounded-full"></div>
+            <div class="floating-element absolute bottom-32 right-32 w-14 h-14 border-2 border-tertiary-400/40 rounded-lg rotate-12"></div>
         </div>
 
         <div class="fade-in-up z-10 text-center max-w-5xl">
@@ -668,7 +643,7 @@
                 Future-Ready Electrical & Electronics Engineer
             </p>
             <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto font-rajdhani font-light">
-                Building tomorrow's technology with <span class="neon-text font-semibold typewriter" id="typewriter"></span>
+                Building tomorrow's technology with <span class="primary-text font-semibold typewriter" id="typewriter"></span>
             </p>
             
             <div class="flex flex-col sm:flex-row gap-6 mb-16 justify-center items-center">
@@ -677,17 +652,15 @@
             </div>
         </div>
 
-        <!-- Scroll Indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-2xl neon-text"></i>
+            <i class="fas fa-chevron-down text-2xl primary-text"></i>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="grid md:grid-cols-2 gap-16 items-center">
             <div class="slide-in-left">
-                <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron neon-text">About Me</h2>
+                <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text">About Me</h2>
                 <p class="text-lg text-gray-300 leading-relaxed mb-8 font-rajdhani">
                     I'm a visionary Electrical and Electronics Engineering student passionate about creating the future through technology. My expertise spans from cutting-edge embedded systems to sustainable energy solutions, always pushing the boundaries of what's possible.
                 </p>
@@ -695,7 +668,7 @@
                     I believe in the power of innovation to solve complex challenges and create a more connected, intelligent world. Every project I undertake is an opportunity to blend creativity with technical excellence.
                 </p>
                 
-                <h3 class="text-2xl font-semibold mb-6 neon-text font-orbitron">Core Expertise</h3>
+                <h3 class="text-2xl font-semibold mb-6 primary-text font-orbitron">Core Expertise</h3>
                 <div class="flex flex-wrap gap-3">
                     <span class="px-4 py-2 glass-card rounded-full text-sm font-medium font-rajdhani">Smart Energy Systems</span>
                     <span class="px-4 py-2 glass-card rounded-full text-sm font-medium font-rajdhani">IoT & Embedded</span>
@@ -713,142 +686,135 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="fade-in-up mb-16 text-center">
-            <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron neon-text">Featured Projects</h2>
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text">Featured Projects</h2>
             <p class="text-xl text-gray-400 font-rajdhani">Innovative solutions for tomorrow's challenges</p>
         </div>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Project 1 -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
                 <div class="mb-6 relative overflow-hidden rounded-xl">
                     <img src="https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Smart Exhaust Fan" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 neon-text font-orbitron">Smart Exhaust Fan</h3>
+                <h3 class="text-2xl font-semibold mb-4 primary-text font-orbitron">Smart Exhaust Fan</h3>
                 <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
                     Intelligent IoT-powered exhaust system with advanced sensor integration for automated climate control and energy optimization.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-neon-cyan/20 border border-neon-cyan/30 rounded-full text-xs font-medium font-mono">Arduino</span>
-                    <span class="px-3 py-1 bg-neon-pink/20 border border-neon-pink/30 rounded-full text-xs font-medium font-mono">IoT</span>
-                    <span class="px-3 py-1 bg-neon-purple/20 border border-neon-purple/30 rounded-full text-xs font-medium font-mono">Sensors</span>
+                    <span class="px-3 py-1 bg-primary-400/20 border border-primary-400/30 rounded-full text-xs font-medium font-mono">Arduino</span>
+                    <span class="px-3 py-1 bg-secondary-400/20 border border-secondary-400/30 rounded-full text-xs font-medium font-mono">IoT</span>
+                    <span class="px-3 py-1 bg-secondary-500/20 border border-secondary-500/30 rounded-full text-xs font-medium font-mono">Sensors</span>
                 </div>
                 <a href="https://rsmk27.github.io/myportfolio" target="_blank" class="cyber-button px-6 py-3 rounded-lg text-sm inline-block">Explore</a>
             </div>
 
-            <!-- Project 2 -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
                 <div class="mb-6 relative overflow-hidden rounded-xl">
                     <img src="https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Color Ohm" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 neon-text font-orbitron">Color Ohm</h3>
+                <h3 class="text-2xl font-semibold mb-4 primary-text font-orbitron">Color Ohm</h3>
                 <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
                     Advanced Python application with intuitive GUI for precise resistor value calculation using color band recognition technology.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-neon-cyan/20 border border-neon-cyan/30 rounded-full text-xs font-medium font-mono">Python</span>
-                    <span class="px-3 py-1 bg-neon-pink/20 border border-neon-pink/30 rounded-full text-xs font-medium font-mono">Tkinter</span>
-                    <span class="px-3 py-1 bg-neon-purple/20 border border-neon-purple/30 rounded-full text-xs font-medium font-mono">GUI</span>
+                    <span class="px-3 py-1 bg-primary-400/20 border border-primary-400/30 rounded-full text-xs font-medium font-mono">Python</span>
+                    <span class="px-3 py-1 bg-secondary-400/20 border border-secondary-400/30 rounded-full text-xs font-medium font-mono">Tkinter</span>
+                    <span class="px-3 py-1 bg-secondary-500/20 border border-secondary-500/30 rounded-full text-xs font-medium font-mono">GUI</span>
                 </div>
                 <a href="https://rsmk27.github.io/colorohm" target="_blank" class="cyber-button px-6 py-3 rounded-lg text-sm inline-block">Explore</a>
             </div>
 
-            <!-- Project 3 -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
                 <div class="mb-6 relative overflow-hidden rounded-xl">
                     <img src="https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Budget Buddy" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 neon-text font-orbitron">Budget Buddy</h3>
+                <h3 class="text-2xl font-semibold mb-4 primary-text font-orbitron">Budget Buddy</h3>
                 <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
                     Sophisticated web-based financial management platform with real-time analytics and intelligent spending insights.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-neon-cyan/20 border border-neon-cyan/30 rounded-full text-xs font-medium font-mono">HTML5</span>
-                    <span class="px-3 py-1 bg-neon-pink/20 border border-neon-pink/30 rounded-full text-xs font-medium font-mono">CSS3</span>
-                    <span class="px-3 py-1 bg-neon-purple/20 border border-neon-purple/30 rounded-full text-xs font-medium font-mono">JavaScript</span>
+                    <span class="px-3 py-1 bg-primary-400/20 border border-primary-400/30 rounded-full text-xs font-medium font-mono">HTML5</span>
+                    <span class="px-3 py-1 bg-secondary-400/20 border border-secondary-400/30 rounded-full text-xs font-medium font-mono">CSS3</span>
+                    <span class="px-3 py-1 bg-secondary-500/20 border border-secondary-500/30 rounded-full text-xs font-medium font-mono">JavaScript</span>
                 </div>
                 <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank" class="cyber-button px-6 py-3 rounded-lg text-sm inline-block">Explore</a>
             </div>
 
-            <!-- Future Projects -->
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
                 <div class="mb-6 relative overflow-hidden rounded-xl">
-                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl flex items-center justify-center border-2 border-neon-cyan/20 hologram-effect">
+                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl flex items-center justify-center border-2 border-primary-400/20 hologram-effect">
                         <div class="text-center">
-                            <i class="fas fa-rocket text-4xl neon-text mb-2"></i>
-                            <span class="neon-text text-lg font-orbitron">NEXT GEN</span>
+                            <i class="fas fa-rocket text-4xl primary-text mb-2"></i>
+                            <span class="primary-text text-lg font-orbitron">NEXT GEN</span>
                         </div>
                     </div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 neon-text font-orbitron">AI-Powered Grid</h3>
+                <h3 class="text-2xl font-semibold mb-4 primary-text font-orbitron">AI-Powered Grid</h3>
                 <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
                     Revolutionary smart grid system with AI-driven energy optimization and predictive maintenance capabilities.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">AI/ML</span>
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Coming Soon</span>
+                    <span class="px-3 py-1 bg-tertiary-400/20 border border-tertiary-400/30 rounded-full text-xs font-medium font-mono">AI/ML</span>
+                    <span class="px-3 py-1 bg-tertiary-400/20 border border-tertiary-400/30 rounded-full text-xs font-medium font-mono">Coming Soon</span>
                 </div>
                 <button class="cyber-button-secondary px-6 py-3 rounded-lg text-sm cursor-not-allowed opacity-50">In Development</button>
             </div>
 
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
                 <div class="mb-6 relative overflow-hidden rounded-xl">
-                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl flex items-center justify-center border-2 border-neon-pink/20 hologram-effect">
+                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl flex items-center justify-center border-2 border-secondary-400/20 hologram-effect">
                         <div class="text-center">
-                            <i class="fas fa-brain text-4xl text-neon-pink mb-2"></i>
-                            <span class="text-neon-pink text-lg font-orbitron">NEURAL NET</span>
+                            <i class="fas fa-brain text-4xl text-secondary-500 mb-2"></i>
+                            <span class="text-secondary-500 text-lg font-orbitron">NEURAL NET</span>
                         </div>
                     </div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-neon-pink font-orbitron">Quantum Interface</h3>
+                <h3 class="text-2xl font-semibold mb-4 text-secondary-500 font-orbitron">Quantum Interface</h3>
                 <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
                     Next-generation human-machine interface leveraging quantum computing principles for enhanced interaction.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Quantum</span>
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Research</span>
+                    <span class="px-3 py-1 bg-tertiary-400/20 border border-tertiary-400/30 rounded-full text-xs font-medium font-mono">Quantum</span>
+                    <span class="px-3 py-1 bg-tertiary-400/20 border border-tertiary-400/30 rounded-full text-xs font-medium font-mono">Research</span>
                 </div>
                 <button class="cyber-button-secondary px-6 py-3 rounded-lg text-sm cursor-not-allowed opacity-50">Conceptual</button>
             </div>
 
             <div class="project-card glass-card p-8 rounded-2xl fade-in-up">
                 <div class="mb-6 relative overflow-hidden rounded-xl">
-                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl flex items-center justify-center border-2 border-neon-green/20 hologram-effect">
+                    <div class="w-full h-48 bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl flex items-center justify-center border-2 border-tertiary-400/20 hologram-effect">
                         <div class="text-center">
-                            <i class="fas fa-leaf text-4xl text-neon-green mb-2"></i>
-                            <span class="text-neon-green text-lg font-orbitron">ECO TECH</span>
+                            <i class="fas fa-leaf text-4xl text-tertiary-500 mb-2"></i>
+                            <span class="text-tertiary-500 text-lg font-orbitron">ECO TECH</span>
                         </div>
                     </div>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4 text-neon-green font-orbitron">Green Energy Hub</h3>
+                <h3 class="text-2xl font-semibold mb-4 text-tertiary-500 font-orbitron">Green Energy Hub</h3>
                 <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
                     Sustainable energy management ecosystem with renewable integration and carbon footprint optimization.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Renewable</span>
-                    <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-xs font-medium font-mono">Planning</span>
+                    <span class="px-3 py-1 bg-tertiary-400/20 border border-tertiary-400/30 rounded-full text-xs font-medium font-mono">Renewable</span>
+                    <span class="px-3 py-1 bg-tertiary-400/20 border border-tertiary-400/30 rounded-full text-xs font-medium font-mono">Planning</span>
                 </div>
                 <button class="cyber-button-secondary px-6 py-3 rounded-lg text-sm cursor-not-allowed opacity-50">Blueprint</button>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="fade-in-up mb-16 text-center">
-            <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron neon-text">Technical Arsenal</h2>
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text">Technical Arsenal</h2>
             <p class="text-xl text-gray-400 font-rajdhani">Mastering the tools of tomorrow</p>
         </div>
         
         <div class="grid md:grid-cols-2 gap-16">
-            <!-- Programming Skills -->
             <div class="slide-in-left">
-                <h3 class="text-2xl font-semibold mb-8 neon-text font-orbitron">Programming & Development</h3>
+                <h3 class="text-2xl font-semibold mb-8 primary-text font-orbitron">Programming & Development</h3>
                 <div class="space-y-6">
                     <div>
                         <div class="flex justify-between mb-2">
@@ -898,32 +864,31 @@
                 </div>
             </div>
 
-            <!-- Technology Stack -->
             <div class="slide-in-right">
-                <h3 class="text-2xl font-semibold mb-8 neon-text font-orbitron">Technology Stack</h3>
+                <h3 class="text-2xl font-semibold mb-8 primary-text font-orbitron">Technology Stack</h3>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
-                        <i class="fas fa-microchip text-3xl mb-4 neon-text"></i>
+                        <i class="fas fa-microchip text-3xl mb-4 primary-text"></i>
                         <p class="font-medium font-rajdhani">Embedded Systems</p>
                     </div>
                     <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
-                        <i class="fas fa-network-wired text-3xl mb-4 text-neon-pink"></i>
+                        <i class="fas fa-network-wired text-3xl mb-4 text-secondary-500"></i>
                         <p class="font-medium font-rajdhani">IoT & Cloud</p>
                     </div>
                     <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
-                        <i class="fab fa-python text-3xl mb-4 text-neon-green"></i>
+                        <i class="fab fa-python text-3xl mb-4 text-tertiary-500"></i>
                         <p class="font-medium font-rajdhani">AI Integration</p>
                     </div>
                     <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
-                        <i class="fas fa-robot text-3xl mb-4 text-neon-purple"></i>
+                        <i class="fas fa-robot text-3xl mb-4 text-secondary-500"></i>
                         <p class="font-medium font-rajdhani">Automation</p>
                     </div>
                     <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
-                        <i class="fas fa-battery-half text-3xl mb-4 text-neon-blue"></i>
+                        <i class="fas fa-battery-half text-3xl mb-4 text-primary-500"></i>
                         <p class="font-medium font-rajdhani">Power Electronics</p>
                     </div>
                     <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300">
-                        <i class="fas fa-brain text-3xl mb-4 neon-text"></i>
+                        <i class="fas fa-brain text-3xl mb-4 primary-text"></i>
                         <p class="font-medium font-rajdhani">Machine Learning</p>
                     </div>
                 </div>
@@ -931,15 +896,13 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="fade-in-up mb-16 text-center">
-            <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron neon-text">Connect</h2>
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text">Connect</h2>
             <p class="text-xl text-gray-400 font-rajdhani">Let's build the future together</p>
         </div>
         
         <div class="grid md:grid-cols-2 gap-16 items-start">
-            <!-- Contact Info -->
             <div class="slide-in-left">
                 <p class="text-xl text-gray-300 mb-12 leading-relaxed font-rajdhani">
                     Ready to collaborate on groundbreaking projects? Let's connect and create something extraordinary.
@@ -966,7 +929,6 @@
                 </a>
             </div>
 
-            <!-- Contact Form -->
             <div class="slide-in-right">
                 <form class="space-y-6" id="contact-form">
                     <div>
@@ -987,11 +949,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="py-12 px-6 border-t border-gray-800">
         <div class="max-w-7xl mx-auto text-center">
             <p class="text-gray-400 font-rajdhani">&copy; 2025 RSMK. Engineered for the future.</p>
-            <p class="text-gray-400 mt-2 font-rajdhani">Crafted with <span class="neon-text">⚡</span> and endless <span class="text-neon-pink">☕</span></p>
+            <p class="text-gray-400 mt-2 font-rajdhani">Crafted with <span class="primary-text">⚡</span> and endless <span class="text-secondary-500">☕</span></p>
         </div>
     </footer>
 
