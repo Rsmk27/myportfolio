@@ -1,2 +1,3 @@
-# myportfolio
-my personal portfolio website
+an enthusiastic Electrical and Electronics Engineering (EEE) student with a passion for combining traditional electrical engineering with emerging technologies such as IoT, Smart Energy, and Artificial Intelligence.
+
+I believe engineering is not just about theory but about building real-world solutions. Over time, I’ve developed a strong interest in Green Technology, Smart Energy Systems, and Autonomous Grids, aiming to create sustainable innovations that shape the future of energy. Alongside my core engineering studies, I actively explore software development, embedded systems, and web technologies, bridging the gap between hardware and software.
