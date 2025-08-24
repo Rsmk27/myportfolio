@@ -17,26 +17,53 @@
                 extend: {
                     colors: {
                         primary: {
-                            500: '#0066ff',
-                            400: '#2e86de',
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
                         },
                         secondary: {
-                            500: '#a855f7',
-                            400: '#c084fc',
+                            50: '#fdf4ff',
+                            100: '#fae8ff',
+                            200: '#f5d0fe',
+                            300: '#f0abfc',
+                            400: '#e879f9',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                            700: '#a21caf',
+                            800: '#86198f',
+                            900: '#701a75',
                         },
-                        tertiary: {
-                            500: '#d97706',
-                            400: '#ca8a04',
+                        accent: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
                         },
-                        dark: {
-                            900: '#0a0a0a',
-                            800: '#111111',
-                            700: '#1a1a1a',
-                            600: '#2a2a2a',
-                        },
-                        gray: {
+                        neutral: {
+                            50: '#fafafa',
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
                             300: '#d4d4d4',
-                            400: '#a0a0a0',
+                            400: '#a3a3a3',
+                            500: '#737373',
+                            600: '#525252',
+                            700: '#404040',
+                            800: '#262626',
+                            900: '#171717',
+                            950: '#0a0a0a',
                         }
                     },
                     fontFamily: {
@@ -75,13 +102,13 @@
 
         body {
             font-family: 'Rajdhani', sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            color: #171717;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* Enhanced Futuristic Background with Dynamic Elements */
+        /* Modern Gradient Background */
         .cyber-background {
             position: fixed;
             top: 0;
@@ -90,23 +117,24 @@
             height: 100%;
             z-index: -3;
             background: 
-                radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 40% 70%, rgba(217, 119, 6, 0.1) 0%, transparent 60%),
-                linear-gradient(135deg, #0a0a0a 0%, #111111 30%, #1a1a1a 70%, #0a0a0a 100%);
-            animation: backgroundShift 20s ease-in-out infinite;
+                radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(217, 70, 239, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(34, 197, 94, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, #fafafa 0%, #f5f5f5 25%, #e5e5e5 75%, #f5f5f5 100%);
+            animation: backgroundShift 25s ease-in-out infinite;
         }
 
         .cursor-follower {
             position: fixed;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, rgba(0, 102, 255, 0.6) 0%, transparent 70%);
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, transparent 70%);
+            border: 1px solid rgba(14, 165, 233, 0.2);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.1s ease;
-            mix-blend-mode: screen;
+            transition: transform 0.15s ease;
+            backdrop-filter: blur(4px);
         }
 
         .magnetic-element {
@@ -125,24 +153,24 @@
 
         .particle {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #0066ff;
+            width: 3px;
+            height: 3px;
+            background: rgba(14, 165, 233, 0.6);
             border-radius: 50%;
-            animation: particleFloat 8s ease-in-out infinite;
-            box-shadow: 0 0 6px #0066ff;
+            animation: particleFloat 12s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
         }
 
         .particle:nth-child(2n) {
-            background: #a855f7;
-            box-shadow: 0 0 6px #a855f7;
-            animation-delay: -2s;
+            background: rgba(217, 70, 239, 0.5);
+            box-shadow: 0 0 8px rgba(217, 70, 239, 0.2);
+            animation-delay: -3s;
         }
 
         .particle:nth-child(3n) {
-            background: #d97706;
-            box-shadow: 0 0 6px #d97706;
-            animation-delay: -4s;
+            background: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.2);
+            animation-delay: -6s;
         }
 
         .grid-overlay {
@@ -153,21 +181,21 @@
             height: 100%;
             z-index: -1;
             background-image: 
-                linear-gradient(rgba(0, 102, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 102, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: matrixRain 20s linear infinite;
+                linear-gradient(rgba(14, 165, 233, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridShift 30s linear infinite;
         }
 
-        /* Enhanced Glassmorphism 3.0 */
+        /* Modern Glassmorphism */
         .glass-morphism {
-            background: rgba(17, 17, 17, 0.4);
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(0, 102, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                0 0 0 1px rgba(0, 102, 255, 0.05);
+                0 8px 32px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 0 0 1px rgba(14, 165, 233, 0.05);
             position: relative;
             overflow: hidden;
         }
@@ -181,21 +209,21 @@
             bottom: 0;
             background: linear-gradient(45deg, 
                 transparent 30%, 
-                rgba(0, 102, 255, 0.05) 50%, 
+                rgba(14, 165, 233, 0.04) 50%, 
                 transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
+            animation: shimmer 4s ease-in-out infinite;
             pointer-events: none;
         }
 
         .glass-card {
-            background: rgba(26, 26, 26, 0.6);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid rgba(0, 102, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(0, 102, 255, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.03);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+                0 8px 32px rgba(0, 0, 0, 0.06),
+                0 0 0 1px rgba(14, 165, 233, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
             overflow: hidden;
         }
@@ -209,28 +237,28 @@
             height: 100%;
             background: linear-gradient(90deg, 
                 transparent, 
-                rgba(0, 102, 255, 0.15), 
-                rgba(168, 85, 247, 0.1), 
+                rgba(14, 165, 233, 0.08), 
+                rgba(217, 70, 239, 0.06), 
                 transparent);
-            transition: left 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+            transition: left 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             z-index: 1;
         }
 
         .glass-card::after {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
             background: linear-gradient(45deg, 
-                rgba(0, 102, 255, 0.3), 
-                rgba(168, 85, 247, 0.3), 
-                rgba(217, 119, 6, 0.3));
-            filter: blur(10px);
+                rgba(14, 165, 233, 0.1), 
+                rgba(217, 70, 239, 0.08), 
+                rgba(34, 197, 94, 0.06));
+            filter: blur(8px);
             opacity: 0;
             z-index: -1;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.4s ease;
         }
 
         .glass-card:hover::before {
@@ -238,29 +266,37 @@
         }
 
         .glass-card:hover::after {
-            opacity: 0.6;
+            opacity: 0.4;
         }
 
         .glass-card:hover {
-            background: rgba(26, 26, 26, 0.8);
-            border-color: rgba(0, 102, 255, 0.4);
-            transform: translateY(-15px) scale(1.03) rotateX(5deg);
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(14, 165, 233, 0.2);
+            transform: translateY(-12px) scale(1.02);
             box-shadow: 
-                0 25px 50px rgba(0, 102, 255, 0.3),
-                0 0 0 1px rgba(0, 102, 255, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 20px 40px rgba(14, 165, 233, 0.15),
+                0 0 0 1px rgba(14, 165, 233, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
         }
 
-        /* Text without glow */
+        /* Modern Text Styling */
         .primary-text {
-            color: #0066ff;
+            color: #0ea5e9;
+        }
+
+        .secondary-text {
+            color: #d946ef;
+        }
+
+        .accent-text {
+            color: #22c55e;
         }
 
         .primary-border {
-            border: 2px solid #0066ff;
+            border: 2px solid #0ea5e9;
             box-shadow: 
-                0 0 10px #0066ff,
-                inset 0 0 10px rgba(0, 102, 255, 0.1);
+                0 4px 12px rgba(14, 165, 233, 0.2),
+                inset 0 0 12px rgba(14, 165, 233, 0.05);
         }
 
         .hologram-effect {
@@ -270,21 +306,21 @@
             animation: hologram 3s ease-in-out infinite;
         }
 
-        /* Advanced Buttons */
+        /* Modern Buttons */
         .cyber-button {
             position: relative;
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(168, 85, 247, 0.1));
-            border: 2px solid #0066ff;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(217, 70, 239, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
-            font-family: 'Orbitron', monospace;
+            font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             overflow: hidden;
+            backdrop-filter: blur(10px);
             box-shadow: 
-                0 0 20px rgba(0, 102, 255, 0.3),
-                inset 0 0 20px rgba(0, 102, 255, 0.1);
+                0 8px 32px rgba(14, 165, 233, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .cyber-button::before {
@@ -294,8 +330,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .cyber-button:hover::before {
@@ -303,20 +339,21 @@
         }
 
         .cyber-button:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 
-                0 10px 30px rgba(0, 102, 255, 0.4),
-                0 0 40px rgba(0, 102, 255, 0.6),
-                inset 0 0 20px rgba(0, 102, 255, 0.2);
-            border-color: #a855f7;
+                0 12px 40px rgba(14, 165, 233, 0.3),
+                0 0 20px rgba(217, 70, 239, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, rgba(14, 165, 233, 1), rgba(217, 70, 239, 0.9));
         }
 
         .cyber-button-secondary {
-            background: transparent;
-            border: 2px solid rgba(168, 85, 247, 0.6);
-            color: #a855f7;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            color: #0ea5e9;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         .cyber-button-secondary::before {
@@ -326,8 +363,8 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: rgba(168, 85, 247, 0.1);
-            transition: width 0.3s ease;
+            background: rgba(14, 165, 233, 0.1);
+            transition: width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             z-index: -1;
         }
 
@@ -337,24 +374,25 @@
 
         .cyber-button-secondary:hover {
             color: #ffffff;
-            border-color: #0066ff;
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+            background: rgba(14, 165, 233, 0.8);
+            border-color: rgba(14, 165, 233, 0.5);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
         }
 
-        /* Enhanced Hero Section */
+        /* Modern Hero Section */
         .hero-title {
             font-family: 'Orbitron', monospace;
             font-size: clamp(3rem, 8vw, 8rem);
             font-weight: 900;
             line-height: 0.9;
-            background: linear-gradient(135deg, #ffffff 0%, #0066ff 30%, #a855f7 70%, #d97706 100%);
+            background: linear-gradient(135deg, #171717 0%, #0ea5e9 30%, #d946ef 70%, #22c55e 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 6s ease-in-out infinite, textGlow 3s ease-in-out infinite;
+            animation: modernGradientShift 8s ease-in-out infinite;
             position: relative;
-            filter: drop-shadow(0 0 20px rgba(0, 102, 255, 0.5));
+            filter: drop-shadow(0 4px 8px rgba(14, 165, 233, 0.2));
         }
 
         .hero-title::before {
@@ -364,23 +402,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(168, 85, 247, 0.1));
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(217, 70, 239, 0.05));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             z-index: -1;
-            animation: glitchText 4s ease-in-out infinite;
-            transform: translate(2px, 2px);
+            animation: subtleGlitch 6s ease-in-out infinite;
+            transform: translate(1px, 1px);
         }
 
         .hero-subtitle {
             font-family: 'Rajdhani', sans-serif;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(0, 102, 255, 0.8), rgba(168, 85, 247, 0.6));
+            background: linear-gradient(135deg, #404040 0%, #0ea5e9 50%, #d946ef 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: subtitleGlow 4s ease-in-out infinite;
+            animation: subtitleFlow 6s ease-in-out infinite;
             position: relative;
         }
 
@@ -391,46 +429,45 @@
         .floating-orb {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 102, 255, 0.3) 0%, transparent 70%);
-            animation: floatingOrb 8s ease-in-out infinite;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 70%);
+            animation: modernFloatingOrb 10s ease-in-out infinite;
             filter: blur(1px);
         }
 
         .floating-orb:nth-child(1) {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             top: 10%;
             left: 10%;
             animation-delay: 0s;
         }
 
         .floating-orb:nth-child(2) {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             top: 20%;
             right: 15%;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
-            animation-delay: -2s;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.15) 0%, transparent 70%);
+            animation-delay: -3s;
         }
 
         .floating-orb:nth-child(3) {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             bottom: 20%;
             left: 20%;
-            background: radial-gradient(circle, rgba(217, 119, 6, 0.3) 0%, transparent 70%);
-            animation-delay: -4s;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
+            animation-delay: -6s;
         }
 
-        /* Navigation */
+        /* Modern Navigation */
         .nav-link {
             position: relative;
-            font-family: 'Orbitron', monospace;
+            font-family: 'Rajdhani', sans-serif;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.7);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #525252;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            letter-spacing: 0.5px;
         }
 
         .nav-link::after {
@@ -440,14 +477,13 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #0066ff, #a855f7);
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 102, 255, 0.6);
+            background: linear-gradient(90deg, #0ea5e9, #d946ef);
+            transition: width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
         }
 
         .nav-link:hover {
-            color: #0066ff;
-            text-shadow: 0 0 10px rgba(0, 102, 255, 0.6);
+            color: #0ea5e9;
         }
 
         .nav-link:hover::after {
@@ -653,26 +689,31 @@
             }
             50% { 
                 background-position: 100% 50%;
-                filter: hue-rotate(30deg);
+                filter: hue-rotate(15deg);
             }
         }
 
-        @keyframes gradientShift {
+        @keyframes modernGradientShift {
             0%, 100% { 
                 background-position: 0% 50%;
                 filter: hue-rotate(0deg) brightness(1);
             }
-            25% { 
+            33% { 
                 background-position: 100% 50%;
-                filter: hue-rotate(15deg) brightness(1.1);
+                filter: hue-rotate(10deg) brightness(1.05);
+            }
+            66% { 
+                background-position: 0% 50%;
+                filter: hue-rotate(20deg) brightness(0.95);
+            }
+        }
+
+        @keyframes gridShift {
+            0%, 100% { 
+                transform: translateX(0) translateY(0);
             }
             50% { 
-                background-position: 0% 50%;
-                filter: hue-rotate(30deg) brightness(0.9);
-            }
-            75% { 
-                background-position: 100% 50%;
-                filter: hue-rotate(15deg) brightness(1.1);
+                transform: translateX(30px) translateY(30px);
             }
         }
 
@@ -696,29 +737,42 @@
             }
         }
 
-        @keyframes glitchText {
-            0%, 90%, 100% { 
+        @keyframes subtleGlitch {
+            0%, 95%, 100% { 
                 transform: translate(0, 0);
                 opacity: 0;
             }
-            91%, 99% { 
-                transform: translate(2px, -2px);
-                opacity: 0.2;
+            96%, 99% { 
+                transform: translate(1px, -1px);
+                opacity: 0.1;
             }
         }
 
-        @keyframes floatingOrb {
+        @keyframes subtitleFlow {
             0%, 100% { 
-                transform: translateY(0px) translateX(0px) rotate(0deg);
+                background-position: 0% 50%;
+            }
+            50% { 
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes modernFloatingOrb {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+                opacity: 0.4;
+            }
+            25% { 
+                transform: translateY(-20px) translateX(15px) rotate(90deg) scale(1.1);
                 opacity: 0.6;
             }
-            33% { 
-                transform: translateY(-30px) translateX(20px) rotate(120deg);
-                opacity: 0.8;
+            50% { 
+                transform: translateY(0px) translateX(30px) rotate(180deg) scale(0.9);
+                opacity: 0.3;
             }
-            66% { 
-                transform: translateY(20px) translateX(-15px) rotate(240deg);
-                opacity: 0.4;
+            75% { 
+                transform: translateY(15px) translateX(-10px) rotate(270deg) scale(1.05);
+                opacity: 0.5;
             }
         }
 
@@ -973,10 +1027,10 @@
                 Hi, I'm <br>
                 <span class="hero-subtitle">Srinivasa Manikanta</span>
             </h1>
-            <p class="text-xl md:text-3xl text-gray-200 mb-8 max-w-4xl mx-auto leading-relaxed font-rajdhani font-light gpu-accelerated">
+            <p class="text-xl md:text-3xl text-neutral-600 mb-8 max-w-4xl mx-auto leading-relaxed font-rajdhani font-light gpu-accelerated">
                 Future-Ready Electrical & Electronics Engineer
             </p>
-            <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto font-rajdhani font-light gpu-accelerated">
+            <p class="text-lg md:text-xl text-neutral-500 mb-12 max-w-3xl mx-auto font-rajdhani font-light gpu-accelerated">
                 Building tomorrow's technology with <span class="primary-text font-semibold typewriter" id="typewriter"></span>
             </p>
             
@@ -995,10 +1049,10 @@
         <div class="grid md:grid-cols-2 gap-16 items-center">
             <div class="slide-in-left">
                 <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text">About Me</h2>
-                <p class="text-lg text-gray-300 leading-relaxed mb-8 font-rajdhani">
+                <p class="text-lg text-neutral-600 leading-relaxed mb-8 font-rajdhani">
                     I'm a visionary Electrical and Electronics Engineering student passionate about creating the future through technology. My expertise spans from cutting-edge embedded systems to sustainable energy solutions, always pushing the boundaries of what's possible.
                 </p>
-                <p class="text-lg text-gray-300 leading-relaxed mb-8 font-rajdhani">
+                <p class="text-lg text-neutral-600 leading-relaxed mb-8 font-rajdhani">
                     I believe in the power of innovation to solve complex challenges and create a more connected, intelligent world. Every project I undertake is an opportunity to blend creativity with technical excellence.
                 </p>
                 
@@ -1023,7 +1077,7 @@
     <section id="projects" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="fade-in-up mb-16 text-center">
             <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text">Featured Projects</h2>
-            <p class="text-xl text-gray-400 font-rajdhani">Innovative solutions for tomorrow's challenges</p>
+            <p class="text-xl text-neutral-500 font-rajdhani">Innovative solutions for tomorrow's challenges</p>
         </div>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1033,7 +1087,7 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
                 <h3 class="text-2xl font-semibold mb-4 primary-text font-orbitron">Smart Exhaust Fan</h3>
-                <p class="text-gray-300 mb-6 leading-relaxed font-rajdhani">
+                <p class="text-neutral-600 mb-6 leading-relaxed font-rajdhani">
                     Intelligent IoT-powered exhaust system with advanced sensor integration for automated climate control and energy optimization.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
@@ -1143,7 +1197,7 @@
     <section id="skills" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="fade-in-up mb-16 text-center">
             <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text">Technical Arsenal</h2>
-            <p class="text-xl text-gray-400 font-rajdhani">Mastering the tools of tomorrow</p>
+            <p class="text-xl text-neutral-500 font-rajdhani">Mastering the tools of tomorrow</p>
         </div>
         
         <div class="grid md:grid-cols-2 gap-16">
@@ -1233,12 +1287,12 @@
     <section id="contact" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="fade-in-up mb-16 text-center">
             <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text">Connect</h2>
-            <p class="text-xl text-gray-400 font-rajdhani">Let's build the future together</p>
+            <p class="text-xl text-neutral-500 font-rajdhani">Let's build the future together</p>
         </div>
         
         <div class="grid md:grid-cols-2 gap-16 items-start">
             <div class="slide-in-left">
-                <p class="text-xl text-gray-300 mb-12 leading-relaxed font-rajdhani">
+                <p class="text-xl text-neutral-600 mb-12 leading-relaxed font-rajdhani">
                     Ready to collaborate on groundbreaking projects? Let's connect and create something extraordinary.
                 </p>
                 
@@ -1285,8 +1339,8 @@
 
     <footer class="py-12 px-6 border-t border-gray-800">
         <div class="max-w-7xl mx-auto text-center">
-            <p class="text-gray-400 font-rajdhani">&copy; 2025 RSMK. Engineered for the future.</p>
-            <p class="text-gray-400 mt-2 font-rajdhani">Crafted with <span class="primary-text">⚡</span> and endless <span class="text-secondary-500">☕</span></p>
+            <p class="text-neutral-500 font-rajdhani">&copy; 2025 RSMK. Engineered for the future.</p>
+            <p class="text-neutral-500 mt-2 font-rajdhani">Crafted with <span class="primary-text">⚡</span> and endless <span class="secondary-text">☕</span></p>
         </div>
     </footer>
 
