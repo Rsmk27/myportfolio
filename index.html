@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RSMK - Future-Ready Engineer</title>
+    <!-- New CDN Links Added Here -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -960,7 +965,7 @@
             <div class="floating-element absolute top-32 left-10 w-20 h-20 primary-border rounded-full animate-glow-pulse magnetic-element"></div>
             <div class="floating-element absolute top-48 right-20 w-16 h-16 border-2 border-secondary-500 rounded-lg rotate-45 animate-glow-pulse magnetic-element animate-morph"></div>
             <div class="floating-element absolute bottom-48 left-20 w-12 h-12 bg-primary-400/20 rounded-full animate-glow-pulse animate-wave"></div>
-            <div class="floating-element absolute top-64 right-10 w-8 h-8 bg-secondary-400/30 rounded-full animate-geometricSpin"></div>
+            <div class="floating-element absolute top-64 right-10 w-8 h-8 bg-secondary-400/30 rounded-full animate-geometric-spin"></div>
             <div class="floating-element absolute bottom-32 right-32 w-14 h-14 border-2 border-tertiary-400/40 rounded-lg rotate-12 animate-pulse-ring"></div>
             
             <!-- Pulse Rings -->
@@ -980,7 +985,7 @@
                 Building tomorrow's technology with <span class="primary-text font-semibold typewriter" id="typewriter"></span>
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-6 mb-16 justify-center items-center gpu-accelerated">
+            <div class="flex flex-col sm:flex-row gap-6 mb-16 justify-content-center align-items-center gpu-accelerated">
                 <a href="#projects" class="cyber-button px-8 py-4 rounded-lg text-lg gpu-accelerated">Explore Work</a>
                 <a href="#contact" class="cyber-button-secondary px-8 py-4 rounded-lg text-lg gpu-accelerated">Connect</a>
             </div>
@@ -994,7 +999,8 @@
     <section id="about" class="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="grid md:grid-cols-2 gap-16 items-center">
             <div class="slide-in-left">
-                <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text">About Me</h2>
+                <!-- AOS DEMO: Add data-aos attribute to a heading to make it animate on scroll -->
+                <h2 class="text-4xl md:text-6xl font-bold mb-8 font-orbitron primary-text" data-aos="fade-up">About Me</h2>
                 <p class="text-lg text-gray-300 leading-relaxed mb-8 font-rajdhani">
                     I'm a visionary Electrical and Electronics Engineering student passionate about creating the future through technology. My expertise spans from cutting-edge embedded systems to sustainable energy solutions, always pushing the boundaries of what's possible.
                 </p>
@@ -1290,7 +1296,17 @@
         </div>
     </footer>
 
+    <!-- New JS CDN Links Added Here -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
     <script>
+        // Initialize AOS
+        AOS.init({
+            once: true, // Only animate once
+            duration: 1000, // Animation duration in ms
+        });
+
         // Register GSAP plugins
         gsap.registerPlugin(ScrollTrigger);
 
