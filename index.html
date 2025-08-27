@@ -9,11 +9,12 @@
     <!-- Fonts from old theme for a mix -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Lightbox CSS for gallery -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+    <!-- Lottie JS for animation -->
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
     <style>
         :root {
@@ -25,7 +26,7 @@
             --glass: rgba(255, 255, 255, 0.03);
             --card-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
             --radius: 12px;
-            --ease: cubic-bezier(.2, .9,.3,1);
+            --ease: cubic-bezier(.2, .9, .3, 1);
         }
 
         /* Basic reset */
@@ -132,22 +133,40 @@
         section {
             padding: 80px 0
         }
-
+        
         .hero {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 40px;
-            align-items: center;
             min-height: 78vh;
-            text-align: center;
+            align-items: center;
         }
 
+        .hero-left {
+            text-align: left;
+        }
+        
         .hero-left h1 {
-            font-size: clamp(28px, 4.6vw, 44px);
+            font-size: clamp(40px, 6vw, 60px);
             margin: 0 0 12px 0;
             letter-spacing: -0.02em;
             font-family: 'Orbitron', monospace;
             line-height: 1.1;
+            opacity: 0; /* Initially hidden for animation */
+            transform: translateY(20px); /* Initially moved down */
+            animation: text-reveal 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes text-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .hero-left h1 span {
@@ -157,93 +176,27 @@
             background-clip: text;
         }
 
-        .hero-left h1.glitch {
-            position: relative;
-        }
-
-        .hero-left h1.glitch::before,
-        .hero-left h1.glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #e6eef8 0%, var(--accent) 50%, var(--accent-2) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-left h1.glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 var(--accent);
-            animation: glitch-anim-1 2s linear infinite alternate;
-        }
-
-        .hero-left h1.glitch::after {
-            left: -2px;
-            text-shadow: 2px 0 var(--accent-2);
-            animation: glitch-anim-2 2s linear infinite alternate;
-        }
-
-        @keyframes glitch-anim-1 {
-            0% {
-                clip-path: inset(0 0 100% 0);
-            }
-
-            25% {
-                clip-path: inset(0 0 75% 0);
-            }
-
-            50% {
-                clip-path: inset(0 0 50% 0);
-            }
-
-            75% {
-                clip-path: inset(0 0 25% 0);
-            }
-
-            100% {
-                clip-path: inset(0 0 0 0);
-            }
-        }
-
-        @keyframes glitch-anim-2 {
-            0% {
-                clip-path: inset(0 0 0 0);
-            }
-
-            25% {
-                clip-path: inset(25% 0 0 0);
-            }
-
-            50% {
-                clip-path: inset(50% 0 0 0);
-            }
-
-            75% {
-                clip-path: inset(75% 0 0 0);
-            }
-
-            100% {
-                clip-path: inset(100% 0 0 0);
-            }
-        }
-
         .hero-left p {
             color: var(--muted);
             max-width: 60ch;
-            margin: 0 auto 18px auto; /* Centered with auto margins */
+            margin: 0 0 18px 0;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+        }
+        
+        .hero-left .section-title {
+            justify-content: flex-start;
+        }
+        
+        .hero-left .section-title h2 {
+            font-size: 1.2rem;
+            text-align: left;
         }
 
         .actions {
             display: flex;
             gap: 12px;
             align-items: center;
-            justify-content: center;
         }
 
         .typewriter {
@@ -255,10 +208,9 @@
 
         /* Lottie container */
         .lottie-container {
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
-            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         /* Projects */
@@ -498,7 +450,7 @@
             transform: none
         }
 
-        /* Custom Styles for Timeline & Gallery */
+        /* Custom Styles for Timeline */
         .timeline-item {
             position: relative;
             padding-left: 2rem;
@@ -624,7 +576,24 @@
         @media (max-width:980px) {
             .hero {
                 grid-template-columns: 1fr;
-                padding-top: 30px
+                padding-top: 30px;
+                text-align: center;
+            }
+
+            .hero-left {
+                text-align: center;
+            }
+            
+            .hero-left p {
+                margin: 0 auto 18px auto;
+            }
+
+            .hero-left .section-title {
+                justify-content: center;
+            }
+
+            .actions {
+                justify-content: center;
             }
         }
 
@@ -690,9 +659,9 @@
             <div class="hero-left">
                 <div class="section-title animate-on-scroll" style="--delay:0s">
                     <div style="width:2px;height:36px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:6px"></div>
-                    <h2 style="font-size:14px;color:var(--muted);margin:0">Future-Ready Engineer</h2>
+                    <h2 style="font-size:1.2rem;color:var(--muted);margin:0">Future-Ready Engineer</h2>
                 </div>
-                <h1 class="animate-on-scroll glitch" data-text="Hi, I'm Srinivasa Manikanta" style="--delay:0.05s">
+                <h1 class="animate-on-scroll" style="--delay:0.05s">
                     Hi, I'm <span>Srinivasa Manikanta</span>
                 </h1>
                 <p class="animate-on-scroll" style="--delay:0.08s">Building tomorrow's technology with <span class="typewriter" id="typewriter"></span></p>
@@ -701,7 +670,9 @@
                     <a href="#contact" style="color:var(--accent);font-weight:700;text-decoration:none;padding:8px">Connect →</a>
                 </div>
             </div>
-            <div class="lottie-container animate-on-scroll" id="lottie-animation" style="--delay:0.15s"></div>
+            <div class="lottie-container">
+                <dotlottie-wc class="animate-on-scroll" style="width: 300px; height: 300px; --delay:0.15s;" src="https://lottie.host/f28cb506-f901-4a45-af49-b9cbd5287633/buOAGeosUq.lottie" speed="0.5" autoplay loop></dotlottie-wc>
+            </div>
         </section>
 
         <section id="about" class="container animate-on-scroll">
@@ -969,9 +940,6 @@
         </div>
     </footer>
 
-    <!-- JS dependencies -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
     <script>
         // Utilities
         const q = (sel, el = document) => el.querySelector(sel);
@@ -1018,7 +986,7 @@
             });
             document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
         })();
-
+        
         // 3) Background decorative circles
         (function parallax() {
             const parallaxEls = [];
@@ -1137,6 +1105,7 @@
                 } else if (isDeleting && charIndex < 0) {
                     isDeleting = false;
                     wordIndex = (wordIndex + 1) % words.length;
+                    typewriter.textContent = '';
                     typeSpeed = 500;
                 }
                 setTimeout(type, typeSpeed);
@@ -1160,19 +1129,7 @@
             progressBars.forEach(bar => obs.observe(bar));
         })();
 
-        // 8) Lottie Animation Initialization
-        document.addEventListener('DOMContentLoaded', () => {
-            const lottieContainer = document.getElementById('lottie-animation');
-            if (lottieContainer) {
-                lottie.loadAnimation({
-                    container: lottieContainer,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: 'https://assets3.lottiefiles.com/packages/lf20_g6t1s5.json'
-                });
-            }
-        });
+        // 8) Lottie Animation Initialization (not needed with dotlottie-wc)
         
         // utilities: set current year
         document.getElementById('year').textContent = new Date().getFullYear();
