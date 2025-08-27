@@ -340,13 +340,19 @@
         }
 
         /* contact form */
+        .contact-section-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
         .contact-form {
             max-width: 680px;
             background: var(--glass);
             padding: 18px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.02);
-            margin: 0 auto;
         }
 
         .field {
@@ -595,6 +601,10 @@
             .actions {
                 justify-content: center;
             }
+            
+            .contact-section-container {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width:640px) {
@@ -657,21 +667,21 @@
     <main>
         <section id="hero" class="container hero">
             <div class="hero-left">
-                <div class="section-title animate-on-scroll" style="--delay:0s">
+                <div class="section-title animate-on-scroll" style="--delay:0s;">
                     <div style="width:2px;height:36px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:6px"></div>
                     <h2 style="font-size:1.2rem;color:var(--muted);margin:0">Future-Ready Engineer</h2>
                 </div>
-                <h1 class="animate-on-scroll" style="--delay:0.05s">
+                <h1 class="animate-on-scroll" style="--delay:0.05s;">
                     Hi, I'm <span>Srinivasa Manikanta</span>
                 </h1>
-                <p class="animate-on-scroll" style="--delay:0.08s">Building tomorrow's technology with <span class="typewriter" id="typewriter"></span></p>
-                <div class="actions animate-on-scroll" style="--delay:0.12s">
+                <p class="animate-on-scroll" style="--delay:0.08s;">Building tomorrow's technology with <span class="typewriter" id="typewriter"></span></p>
+                <div class="actions animate-on-scroll" style="--delay:0.12s;">
                     <a href="#projects" class="cta-btn ripple-btn" data-ripple>Explore Work</a>
                     <a href="#contact" style="color:var(--accent);font-weight:700;text-decoration:none;padding:8px">Connect →</a>
                 </div>
             </div>
             <div class="lottie-container">
-                <dotlottie-wc class="animate-on-scroll" style="width: 300px; height: 300px; --delay:0.15s;" src="https://lottie.host/f28cb506-f901-4a45-af49-b9cbd5287633/buOAGeosUq.lottie" speed="0.5" autoplay loop></dotlottie-wc>
+                <dotlottie-wc class="animate-on-scroll" style="width: 300px; height: 300px; --delay:0.15s;" src="https://lottie.host/791fe641-c759-4729-8955-f37266f1c666/MXuQmFDloO.lottie" speed="1" autoplay loop></dotlottie-wc>
             </div>
         </section>
 
@@ -890,22 +900,27 @@
             <div class="section-title">
                 <h2>Connect</h2>
             </div>
-            <div class="contact-form" role="form" aria-labelledby="contact">
-                <div class="field">
-                    <label for="name">Name</label>
-                    <input id="name" placeholder="Your name" type="text" required>
+            <div class="contact-section-container">
+                <div class="contact-form" role="form" aria-labelledby="contact">
+                    <div class="field">
+                        <label for="name">Name</label>
+                        <input id="name" placeholder="Your name" type="text" required>
+                    </div>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input id="email" placeholder="you@example.com" type="email" required>
+                    </div>
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Tell me about your project..." required></textarea>
+                    </div>
+                    <div class="btn-row">
+                        <button class="cta-btn ripple-btn" data-ripple id="sendBtn">Send message</button>
+                        <div id="sendState" aria-live="polite" style="color:var(--muted)"></div>
+                    </div>
                 </div>
-                <div class="field">
-                    <label for="email">Email</label>
-                    <input id="email" placeholder="you@example.com" type="email" required>
-                </div>
-                <div class="field">
-                    <label for="message">Message</label>
-                    <textarea id="message" placeholder="Tell me about your project..." required></textarea>
-                </div>
-                <div class="btn-row">
-                    <button class="cta-btn ripple-btn" data-ripple id="sendBtn">Send message</button>
-                    <div id="sendState" aria-live="polite" style="color:var(--muted)"></div>
+                <div class="lottie-container">
+                    <dotlottie-wc class="animate-on-scroll" style="width: 300px; height: 300px" src="https://lottie.host/1f9a391d-80cb-4a18-9802-3b411387ccde/XTCtftM8xU.lottie" speed="1" autoplay loop></dotlottie-wc>
                 </div>
             </div>
         </section>
