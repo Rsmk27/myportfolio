@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>RSMK Portfolio</title>
+    <link rel="icon" href="assets/rsmk-logo.png" type="image/png">
     <!-- Inter font from new theme -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <!-- Fonts from old theme for a mix -->
@@ -80,6 +81,10 @@
             align-items: center;
             gap: 10px;
             font-weight: 600
+        }
+
+        .logo img {
+            height: 30px;
         }
 
         .logo .dot {
@@ -342,13 +347,12 @@
         /* contact form */
         .contact-section-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 2fr 1fr; /* Adjusted for wider form */
             gap: 40px;
             align-items: center;
         }
 
         .contact-form {
-            max-width: 680px;
             background: var(--glass);
             padding: 18px;
             border-radius: 12px;
@@ -437,6 +441,7 @@
             color: var(--muted);
             text-decoration: none;
             transition: transform .18s, var(--ease), background .18s;
+            cursor: default;
         }
 
         .socials a:hover {
@@ -649,10 +654,9 @@
 
 <body>
     <header id="siteHeader" role="banner">
-        <div class="logo" aria-hidden="true">
-            <div class="dot"></div>
-            <div>RSMK</div>
-        </div>
+        <a href="#" class="logo">
+            <img src="assets/rsmk-logo.png" alt="RSMK Logo" style="height: 30px;">
+        </a>
         <nav role="navigation" aria-label="Main navigation">
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
