@@ -13,10 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Lottie JS for animation -->
+    <!-- Lottie JS for animation (restored) -->
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-
+    
     <style>
         :root {
             --bg: #0b0f14;
@@ -211,7 +211,7 @@
             color: var(--accent);
         }
 
-        /* Lottie container */
+        /* Video/Lottie container */
         .lottie-container {
             display: flex;
             justify-content: center;
@@ -649,321 +649,394 @@
             outline: 3px solid rgba(0, 123, 255, 0.14);
             outline-offset: 4px
         }
+
+        /* New styles for the loading screen */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     </style>
 </head>
 
 <body>
-    <header id="siteHeader" role="banner">
-        <a href="#" class="logo">
-            <img src="assets/rsmk-logo.png" alt="RSMK Logo" style="height: 30px;">
-        </a>
-        <nav role="navigation" aria-label="Main navigation">
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#timeline">Timeline</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <div style="display:flex;gap:10px;align-items:center">
-            <a href="#contact" class="cta-btn ripple-btn" data-ripple>Get in touch</a>
-        </div>
-    </header>
+    <!-- Loading overlay with video animation -->
+    <div id="loading-overlay" class="loading-overlay">
+        <video id="loading-video" class="loading-video" autoplay muted playsinline>
+            <!-- Replace the src with your video file path -->
+            <source src="your-loading-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
-    <main>
-        <section id="hero" class="container hero">
-            <div class="hero-left">
-                <div class="section-title animate-on-scroll" style="--delay:0s;">
-                    <div style="width:2px;height:36px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:6px"></div>
-                    <h2 style="font-size:1.2rem;color:var(--muted);margin:0">Future-Ready Engineer</h2>
-                </div>
-                <h1 class="animate-on-scroll" style="--delay:0.05s;">
-                    Hi, I'm <span>Srinivasa Manikanta</span>
-                </h1>
-                <p class="animate-on-scroll" style="--delay:0.08s;">Building tomorrow's technology with <span class="typewriter" id="typewriter"></span></p>
-                <div class="actions animate-on-scroll" style="--delay:0.12s;">
-                    <a href="#projects" class="cta-btn ripple-btn" data-ripple>Explore Work</a>
-                    <a href="#contact" style="color:var(--accent);font-weight:700;text-decoration:none;padding:8px">Connect →</a>
-                </div>
+    <!-- Main content, initially hidden -->
+    <div id="main-content" style="opacity:0; transition: opacity 1s ease-in-out;">
+        <header id="siteHeader" role="banner">
+            <a href="#" class="logo">
+                <img src="assets/rsmk-logo.png" alt="RSMK Logo" style="height: 30px;">
+            </a>
+            <nav role="navigation" aria-label="Main navigation">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#timeline">Timeline</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div style="display:flex;gap:10px;align-items:center">
+                <a href="#contact" class="cta-btn ripple-btn" data-ripple>Get in touch</a>
             </div>
-            <div class="lottie-container">
-                <dotlottie-wc class="animate-on-scroll" style="width: 300px; height: 300px; --delay:0.15s;" src="https://lottie.host/791fe641-c759-4729-8955-f37266f1c666/MXuQmFDloO.lottie" speed="1" autoplay loop></dotlottie-wc>
-            </div>
-        </section>
+        </header>
 
-        <section id="about" class="container animate-on-scroll">
-            <div class="section-title">
-                <h2>About Me</h2>
-            </div>
-            <div style="display:flex;gap:28px;flex-wrap:wrap">
-                <div style="flex:1;min-width:260px">
-                    <p style="color:var(--muted)">I'm a visionary Electrical and Electronics Engineering student passionate about creating the future through technology. My expertise spans from cutting-edge embedded systems to sustainable energy solutions, always pushing the boundaries of what's possible.</p>
-                    <ul style="color:var(--muted)">
-                        <li>Smart Energy Systems</li>
-                        <li>IoT & Embedded Systems</li>
-                        <li>AI Integration & Automation</li>
-                        <li>Future-proof Technology</li>
-                    </ul>
-                </div>
-                <div style="width:320px;">
-                    <div style="background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:16px;border-radius:12px">
-                        <div style="background:var(--surface);padding:14px;border-radius:10px">
-                            <strong>My Vision:</strong>
-                            <p style="margin:8px 0 0;color:var(--muted)">AI May Won’t Take Your Job — But Someone Using It Might</p>
-                        </div>
+        <main>
+            <section id="hero" class="container hero">
+                <div class="hero-left">
+                    <div class="section-title animate-on-scroll" style="--delay:0s;">
+                        <div style="width:2px;height:36px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:6px"></div>
+                        <h2 style="font-size:1.2rem;color:var(--muted);margin:0">Future-Ready Engineer</h2>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="container animate-on-scroll" data-stagger-children=".project">
-            <div class="section-title">
-                <h2>Featured Projects</h2>
-            </div>
-            <div class="projects-grid" id="projectsGrid">
-                <article class="project animate-on-scroll">
-                    <div class="project-media">
-                        <img src="assets/autoexhaustfan.png" alt="Smart Exhaust Fan">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://rsmk27.github.io/Autoexhaustfan/" target="_blank">Explore</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <h3>Smart Exhaust Fan</h3>
-                        <p>Intelligent IoT-powered exhaust system with advanced sensor integration for automated climate control and energy optimization.</p>
-                        <div class="tags">
-                            <div class="tag">Arduino</div>
-                            <div class="tag">IoT</div>
-                            <div class="tag">Sensors</div>
-                        </div>
-                    </div>
-                </article>
-                <article class="project animate-on-scroll">
-                    <div class="project-media">
-                        <img src="assets/colorohm.png" alt="Color Ohm">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://rsmk27.github.io/colorohm" target="_blank">Explore</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <h3>Color Ohm</h3>
-                        <p>Advanced Python application for precise resistor value calculation using color band recognition technology.</p>
-                        <div class="tags">
-                            <div class="tag">Python</div>
-                            <div class="tag">Resistors</div>
-                            <div class="tag">HTML</div>
-                        </div>
-                    </div>
-                </article>
-                <article class="project animate-on-scroll">
-                    <div class="project-media">
-                        <img src="assets/budgetbuddy.png" alt="Budget Buddy">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank">Explore</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <h3>Budget Buddy</h3>
-                        <p>Web-based financial management platform with real-time analytics and intelligent spending insights.</p>
-                        <div class="tags">
-                            <div class="tag">HTML5</div>
-                            <div class="tag">CSS3</div>
-                            <div class="tag">JavaScript</div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section id="timeline" class="container animate-on-scroll">
-            <div class="section-title">
-                <h2>Journey & Milestones</h2>
-            </div>
-            <div class="relative max-w-2xl mx-auto">
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-item-dot"></div>
-                    <div class="text-white">
-                        <h3 class="text-lg font-semibold mb-1 text-white">School</h3>
-                        <p class="text-sm text-gray-400">upto 2021</p>
-                        <p class="text-sm text-muted mt-2">I have graduated my Secondary Education in year 2021.</p>
-                    </div>
-                </div>
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-item-dot"></div>
-                    <div class="text-white">
-                        <h3 class="text-lg font-semibold mb-1 text-white">Diploma in Electrical and Electronics Engineering</h3>
-                        <p class="text-sm text-gray-400">2021-2024</p>
-                        <p class="text-sm text-muted mt-2">pursed my diploma in Electrical and Electronics Engineering degree in the year 2024.</p>
-                    </div>
-                </div>
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-item-dot"></div>
-                    <div class="text-white">
-                        <h3 class="text-lg font-semibold mb-1 text-white">B.tech in Electrical and Electronics Engineering</h3>
-                        <p class="text-sm text-gray-400">2024- present</p>
-                        <p class="text-sm text-muted mt-2">currently pursuing my b.tech degree.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="container animate-on-scroll" data-stagger-children=".skills-card">
-            <div class="section-title">
-                <h2>Technical Arsenal</h2>
-            </div>
-            <div class="skills-grid">
-                <!-- New Skills Card for Programming -->
-                <div class="skills-card animate-on-scroll">
-                    <h3 class="text-lg md:text-xl">Skills</h3>
-                    <div class="space-y-4">
-                        <div class="skill-item-new">
-                            <div class="skill-header">
-                                <span class="skill-name">Arduino / ESP's</span>
-                                <span class="skill-level">75%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="75"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item-new">
-                            <div class="skill-header">
-                                <span class="skill-name">C programming</span>
-                                <span class="skill-level">70%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="70"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item-new">
-                            <div class="skill-header">
-                                <span class="skill-name">Python</span>
-                                <span class="skill-level">65%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="65"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item-new">
-                            <div class="skill-header">
-                                <span class="skill-name">AI usage</span>
-                                <span class="skill-level">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="80"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item-new">
-                            <div class="skill-header">
-                                <span class="skill-name">Electrical</span>
-                                <span class="skill-level">90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="90"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Skills Card for Tech Stack -->
-                <div class="skills-card animate-on-scroll">
-                    <h3 class="text-lg md:text-xl">Technology Stack</h3>
-                    <div class="tech-grid">
-                        <div class="tech-item">
-                            <i class="fas fa-microchip"></i>
-                            <p>Embedded</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-network-wired"></i>
-                            <p>IoT & Cloud</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fab fa-python"></i>
-                            <p>AI Integration</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-robot"></i>
-                            <p>Automation</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-battery-half"></i>
-                            <p>Power Electronics</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-brain"></i>
-                            <p>Soft Skills</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="container animate-on-scroll">
-            <div class="section-title">
-                <h2>Connect</h2>
-            </div>
-            <div class="contact-section-container">
-                <div class="contact-form" role="form" aria-labelledby="contact">
-                    <div class="field">
-                        <label for="name">Name</label>
-                        <input id="name" placeholder="Your name" type="text" required>
-                    </div>
-                    <div class="field">
-                        <label for="email">Email</label>
-                        <input id="email" placeholder="you@example.com" type="email" required>
-                    </div>
-                    <div class="field">
-                        <label for="message">Message</label>
-                        <textarea id="message" placeholder="Tell me about your project..." required></textarea>
-                    </div>
-                    <div class="btn-row">
-                        <button class="cta-btn ripple-btn" data-ripple id="sendBtn">Send message</button>
-                        <div id="sendState" aria-live="polite" style="color:var(--muted)"></div>
+                    <h1 class="animate-on-scroll" style="--delay:0.05s;">
+                        Hi, I'm <span>Srinivasa Manikanta</span>
+                    </h1>
+                    <p class="animate-on-scroll" style="--delay:0.08s;">Building tomorrow's technology with <span class="typewriter" id="typewriter"></span></p>
+                    <div class="actions animate-on-scroll" style="--delay:0.12s;">
+                        <a href="#projects" class="cta-btn ripple-btn" data-ripple>Explore Work</a>
+                        <a href="#contact" style="color:var(--accent);font-weight:700;text-decoration:none;padding:8px">Connect →</a>
                     </div>
                 </div>
                 <div class="lottie-container">
-                    <dotlottie-wc class="animate-on-scroll" style="width: 300px; height: 300px" src="https://lottie.host/1f9a391d-80cb-4a18-9802-3b411387ccde/XTCtftM8xU.lottie" speed="1" autoplay loop></dotlottie-wc>
+                    <dotlottie-wc class="animate-on-scroll" style="width: 300px; height: 300px; --delay:0.15s;" src="https://lottie.host/791fe641-c759-4729-8955-f37266f1c666/MXuQmFDloO.lottie" speed="1" autoplay loop></dotlottie-wc>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
 
-    <footer class="container" role="contentinfo">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px">
-            <div style="display:flex;gap:12px;align-items:center">
-                <div class="logo" aria-hidden="true">
-                    <div class="dot"></div>
-                    <div>RSMK</div>
+            <section id="about" class="container animate-on-scroll">
+                <div class="section-title">
+                    <h2>About Me</h2>
                 </div>
-                <div style="color:var(--muted)">© <span id="year"></span> RSMK</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:22px">
-                <div class="socials">
-                    <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram" title="Telegram">
-                        <i class="fab fa-telegram-plane"></i>
-                    </a>
-                    <a href="mailto:srinivasmanikantarajapantula@gmail.com" aria-label="Email" title="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/rsmk27" aria-label="LinkedIn" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
+                <div style="display:flex;gap:28px;flex-wrap:wrap">
+                    <div style="flex:1;min-width:260px">
+                        <p style="color:var(--muted)">I'm a visionary Electrical and Electronics Engineering student passionate about creating the future through technology. My expertise spans from cutting-edge embedded systems to sustainable energy solutions, always pushing the boundaries of what's possible.</p>
+                        <ul style="color:var(--muted)">
+                            <li>Smart Energy Systems</li>
+                            <li>IoT & Embedded Systems</li>
+                            <li>AI Integration & Automation</li>
+                            <li>Future-proof Technology</li>
+                        </ul>
+                    </div>
+                    <div style="width:320px;">
+                        <div style="background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:16px;border-radius:12px">
+                            <div style="background:var(--surface);padding:14px;border-radius:10px">
+                                <strong>My Vision:</strong>
+                                <p style="margin:8px 0 0;color:var(--muted)">AI May Won’t Take Your Job — But Someone Using It Might</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div style="color:var(--muted)">Engineered for the future.</div>
+            </section>
+
+            <section id="projects" class="container animate-on-scroll" data-stagger-children=".project">
+                <div class="section-title">
+                    <h2>Featured Projects</h2>
+                </div>
+                <div class="projects-grid" id="projectsGrid">
+                    <article class="project animate-on-scroll">
+                        <div class="project-media">
+                            <img src="assets/autoexhaustfan.png" alt="Smart Exhaust Fan">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://rsmk27.github.io/Autoexhaustfan/" target="_blank">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Smart Exhaust Fan</h3>
+                            <p>Intelligent IoT-powered exhaust system with advanced sensor integration for automated climate control and energy optimization.</p>
+                            <div class="tags">
+                                <div class="tag">Arduino</div>
+                                <div class="tag">IoT</div>
+                                <div class="tag">Sensors</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project animate-on-scroll">
+                        <div class="project-media">
+                            <img src="assets/colorohm.png" alt="Color Ohm">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://rsmk27.github.io/colorohm" target="_blank">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Color Ohm</h3>
+                            <p>Advanced Python application for precise resistor value calculation using color band recognition technology.</p>
+                            <div class="tags">
+                                <div class="tag">Python</div>
+                                <div class="tag">Resistors</div>
+                                <div class="tag">HTML</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project animate-on-scroll">
+                        <div class="project-media">
+                            <img src="assets/budgetbuddy.png" alt="Budget Buddy">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Budget Buddy</h3>
+                            <p>Web-based financial management platform with real-time analytics and intelligent spending insights.</p>
+                            <div class="tags">
+                                <div class="tag">HTML5</div>
+                                <div class="tag">CSS3</div>
+                                <div class="tag">JavaScript</div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="timeline" class="container animate-on-scroll">
+                <div class="section-title">
+                    <h2>Journey & Milestones</h2>
+                </div>
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-item-dot"></div>
+                        <div class="text-white">
+                            <h3 class="text-lg font-semibold mb-1 text-white">School</h3>
+                            <p class="text-sm text-gray-400">upto 2021</p>
+                            <p class="text-sm text-muted mt-2">I have graduated my Secondary Education in year 2021.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-item-dot"></div>
+                        <div class="text-white">
+                            <h3 class="text-lg font-semibold mb-1 text-white">Diploma in Electrical and Electronics Engineering</h3>
+                            <p class="text-sm text-gray-400">2021-2024</p>
+                            <p class="text-sm text-muted mt-2">pursed my diploma in Electrical and Electronics Engineering degree in the year 2024.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-item-dot"></div>
+                        <div class="text-white">
+                            <h3 class="text-lg font-semibold mb-1 text-white">B.tech in Electrical and Electronics Engineering</h3>
+                            <p class="text-sm text-gray-400">2024- present</p>
+                            <p class="text-sm text-muted mt-2">currently pursuing my b.tech degree.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="container animate-on-scroll" data-stagger-children=".skills-card">
+                <div class="section-title">
+                    <h2>Technical Arsenal</h2>
+                </div>
+                <div class="skills-grid">
+                    <!-- New Skills Card for Programming -->
+                    <div class="skills-card animate-on-scroll">
+                        <h3 class="text-lg md:text-xl">Skills</h3>
+                        <div class="space-y-4">
+                            <div class="skill-item-new">
+                                <div class="skill-header">
+                                    <span class="skill-name">Arduino / ESP's</span>
+                                    <span class="skill-level">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item-new">
+                                <div class="skill-header">
+                                    <span class="skill-name">C programming</span>
+                                    <span class="skill-level">70%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="70"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item-new">
+                                <div class="skill-header">
+                                    <span class="skill-name">Python</span>
+                                    <span class="skill-level">65%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="65"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item-new">
+                                <div class="skill-header">
+                                    <span class="skill-name">AI usage</span>
+                                    <span class="skill-level">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item-new">
+                                <div class="skill-header">
+                                    <span class="skill-name">Electrical</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New Skills Card for Tech Stack -->
+                    <div class="skills-card animate-on-scroll">
+                        <h3 class="text-lg md:text-xl">Technology Stack</h3>
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <i class="fas fa-microchip"></i>
+                                <p>Embedded</p>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-network-wired"></i>
+                                <p>IoT & Cloud</p>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-python"></i>
+                                <p>AI Integration</p>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-robot"></i>
+                                <p>Automation</p>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-battery-half"></i>
+                                <p>Power Electronics</p>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-brain"></i>
+                                <p>Soft Skills</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="container animate-on-scroll">
+                <div class="section-title">
+                    <h2>Connect</h2>
+                </div>
+                <div class="contact-section-container">
+                    <div class="contact-form" role="form" aria-labelledby="contact">
+                        <div class="field">
+                            <label for="name">Name</label>
+                            <input id="name" placeholder="Your name" type="text" required>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input id="email" placeholder="you@example.com" type="email" required>
+                        </div>
+                        <div class="field">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Tell me about your project..." required></textarea>
+                        </div>
+                        <div class="btn-row">
+                            <button class="cta-btn ripple-btn" data-ripple id="sendBtn">Send message</button>
+                            <div id="sendState" aria-live="polite" style="color:var(--muted)"></div>
+                        </div>
+                    </div>
+                    <div class="lottie-container">
+                        <dotlottie-wc class="animate-on-scroll" style="width: 300px; height: 300px" src="https://lottie.host/1f9a391d-80cb-4a18-9802-3b411387ccde/XTCtftM8xU.lottie" speed="1" autoplay loop></dotlottie-wc>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="container" role="contentinfo">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px">
+                <div style="display:flex;gap:12px;align-items:center">
+                    <div class="logo" aria-hidden="true">
+                        <div class="dot"></div>
+                        <div>RSMK</div>
+                    </div>
+                    <div style="color:var(--muted)">© <span id="year"></span> RSMK</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:22px">
+                    <div class="socials">
+                        <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram" title="Telegram">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                        <a href="mailto:srinivasmanikantarajapantula@gmail.com" aria-label="Email" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/rsmk27" aria-label="LinkedIn" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <div style="color:var(--muted)">Engineered for the future.</div>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script>
         // Utilities
         const q = (sel, el = document) => el.querySelector(sel);
         const qAll = (sel, el = document) => Array.from(el.querySelectorAll(sel));
+
+        // New Loading Animation Logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const loadingOverlay = document.getElementById("loading-overlay");
+            const loadingVideo = document.getElementById("loading-video");
+            const mainContent = document.getElementById("main-content");
+
+            // A fallback to ensure the page always loads
+            const timeout = setTimeout(showContent, 5000);
+
+            // Hide the video overlay and show main content
+            function showContent() {
+                clearTimeout(timeout);
+                loadingOverlay.classList.add("hidden");
+                mainContent.style.opacity = "1";
+            }
+            
+            // Wait for the video to be ready to play
+            loadingVideo.addEventListener('canplaythrough', () => {
+                loadingVideo.play().then(() => {
+                    // Video started playing, now show the content after a brief delay
+                    setTimeout(showContent, 500);
+                }).catch(e => {
+                    console.warn("Video playback was blocked:", e);
+                    showContent(); // Fallback to showing content immediately
+                });
+            });
+
+            // If for some reason the video is already ready, show content
+            if (loadingVideo.readyState >= 4) { // HAVE_ENOUGH_DATA
+                loadingVideo.play();
+                showContent();
+            }
+        });
 
         // 1) Header hide/show on scroll
         (function headerHideShow() {
@@ -1149,8 +1222,6 @@
             progressBars.forEach(bar => obs.observe(bar));
         })();
 
-        // 8) Lottie Animation Initialization (not needed with dotlottie-wc)
-        
         // utilities: set current year
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
