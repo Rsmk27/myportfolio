@@ -217,15 +217,24 @@
             justify-content: center;
             align-items: center;
         }
-
-        /* Projects */
+        
+        /* New projects container for horizontal scroll */
+        .projects-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 2rem;
+            scroll-snap-type: x mandatory;
+        }
+        
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            display: flex;
             gap: 22px;
+            padding: 0 20px;
         }
 
         .project {
+            flex: 0 0 300px; /* Fixed width for each card */
+            scroll-snap-align: center;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
             border-radius: 14px;
             padding: 0;
@@ -236,7 +245,7 @@
             box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.02);
         }
-
+        
         .project:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 20px 60px rgba(2, 6, 23, 0.75)
@@ -344,110 +353,157 @@
             color: var(--accent);
         }
 
-        /* contact form */
-        .contact-section-container {
-            display: grid;
-            grid-template-columns: 2.5fr 1fr; /* Adjusted for wider form */
-            gap: 40px;
-            align-items: center;
-        }
-
-        .contact-form {
-            background: var(--glass);
-            padding: 18px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-            margin: 0 auto;
-        }
-
-        .field {
+        /* Revamped contact section */
+        .contact-info-container {
             display: flex;
             flex-direction: column;
-            margin-bottom: 12px
-        }
-
-        label {
-            font-size: 13px;
-            color: var(--muted);
-            margin-bottom: 6px;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            background: transparent;
+            align-items: center;
+            text-align: center;
+            background: var(--glass);
+            padding: 3rem 2rem;
+            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 12px;
-            border-radius: 10px;
-            color: #eaf4ff;
-            outline: none;
-            transition: box-shadow .15s, var(--ease);
-            font-family: 'Rajdhani', sans-serif;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+            max-width: 600px;
         }
-
-        input:focus,
-        textarea:focus {
-            box-shadow: 0 6px 30px rgba(0, 123, 255, 0.08);
-            border-color: rgba(0, 123, 255, 0.25)
+        /* New advanced contact section layout */
+        .advanced-contact-card {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            background: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            max-width: 900px;
+            margin: 0 auto;
         }
-
-        textarea {
-            min-height: 120px;
-            resize: vertical
-        }
-
-        .btn-row {
-            display: flex;
-            gap: 12px;
-            align-items: center
-        }
-
-        .spinner {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.12);
-            border-top-color: var(--accent);
-            animation: spin .8s linear infinite;
-            display: inline-block
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
+        @media (min-width: 768px) {
+            .advanced-contact-card {
+                grid-template-columns: 1.2fr 1fr;
+                gap: 4rem;
+                text-align: left;
             }
+        }
+
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .contact-content h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            margin: 0 0 0.5rem 0;
+            color: white;
+            line-height: 1.2;
+        }
+        .contact-content p {
+            color: var(--muted);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            margin: 0 0 2rem 0;
+        }
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .contact-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--muted);
+        }
+        .contact-detail-item i {
+            color: var(--accent);
+            font-size: 1.2rem;
+            width: 20px;
+        }
+        .contact-detail-item a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.2s var(--ease);
+        }
+        .contact-detail-item a:hover {
+            color: var(--accent);
+        }
+        .contact-socials {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .contact-socials a {
+            display: inline-flex;
+            width: 48px;
+            height: 48px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: transform .18s, background .18s;
+        }
+        .contact-socials a:hover {
+            transform: scale(1.1);
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            color: white;
+        }
+        .contact-animation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .contact-info-container h3 {
+            font-size: 1.8rem;
+            margin: 0 0 1rem 0;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .contact-info-container p {
+            color: var(--muted);
+            font-family: 'Rajdhani', sans-serif;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* New social links in contact section */
+        .contact-socials {
+            display: flex;
+            gap: 14px;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+        
+        .contact-socials a {
+            display: inline-flex;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            text-decoration: none;
+            transition: transform .18s, background .18s;
+        }
+
+        .contact-socials a:hover {
+            transform: scale(1.1);
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            color: white
         }
 
         /* footer */
         footer {
             padding: 40px 0;
-            color: var(--muted)
-        }
-
-        .socials {
-            display: flex;
-            gap: 14px
-        }
-
-        .socials a {
-            display: inline-flex;
-            width: 40px;
-            height: 40px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.02);
             color: var(--muted);
-            text-decoration: none;
-            transition: transform .18s, var(--ease), background .18s;
-            cursor: default;
-        }
-
-        .socials a:hover {
-            transform: translateY(-6px);
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: white
+            text-align: center;
         }
 
         /* scroll animations (default hidden) */
@@ -462,21 +518,25 @@
             transform: none
         }
 
-        /* Custom Styles for Timeline */
+        /* Revamped Timeline Styles */
         .timeline-item {
             position: relative;
-            padding-left: 2rem;
-            margin-bottom: 2rem;
+            padding-left: 2.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
             left: 0.5rem;
-            top: 0.2rem;
+            top: 0;
+            bottom: 0;
             width: 2px;
-            height: 100%;
             background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+            transition: height 0.6s var(--ease);
+            transform-origin: top;
+            animation: expand-line 1s forwards;
+            animation-delay: 0.4s;
         }
 
         .timeline-item-dot {
@@ -489,9 +549,35 @@
             border-radius: 50%;
             background: var(--bg);
             border: 2px solid var(--accent);
+            animation: pulse-border 1.5s infinite ease-in-out;
+            transition: background-color 0.2s;
         }
 
-        /* New Skills Section Styles */
+        .timeline-item-dot:hover {
+            background-color: var(--accent-2);
+        }
+        
+        .timeline-content {
+            background: var(--surface);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: var(--card-shadow);
+        }
+
+        .timeline-content h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            color: white;
+            margin-top: 0;
+        }
+
+        .timeline-content p {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        /* New Skills & Certifications section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -504,8 +590,13 @@
             border-radius: var(--radius);
             padding: 1.5rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-out;
         }
-
+        
+        .skills-card:hover {
+            transform: translateY(-8px);
+        }
+        
         .skills-card h3 {
             font-size: 1.5rem;
             color: white;
@@ -516,7 +607,7 @@
         .skill-item-new {
             margin-bottom: 1rem;
         }
-
+        
         .skill-header {
             display: flex;
             justify-content: space-between;
@@ -548,6 +639,24 @@
             transition: width 1s var(--ease);
         }
         
+        .certifications-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .certification-item {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(51, 144, 255, 0.05));
+            color: var(--accent);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 123, 255, 0.1);
+        }
+
         .tech-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -583,7 +692,6 @@
             color: var(--muted);
         }
 
-
         /* responsive */
         @media (max-width:980px) {
             .hero {
@@ -606,10 +714,6 @@
 
             .actions {
                 justify-content: center;
-            }
-            
-            .contact-section-container {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -655,7 +759,7 @@
 <body>
     <header id="siteHeader" role="banner">
         <a href="#" class="logo">
-            <img src="assets/rsmk-logo.png" alt="RSMK Logo" style="height: 30px;">
+            <img src="https://placehold.co/30x30/0b0f14/e6eef8?text=RSMK" alt="RSMK Logo" style="height: 30px;">
         </a>
         <nav role="navigation" aria-label="Main navigation">
             <a href="#about">About</a>
@@ -719,64 +823,125 @@
             <div class="section-title">
                 <h2>Featured Projects</h2>
             </div>
-            <div class="projects-grid" id="projectsGrid">
-                <article class="project animate-on-scroll">
-                    <div class="project-media">
-                        <img src="assets/autoexhaustfan.png" alt="Smart Exhaust Fan">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://rsmk27.github.io/Autoexhaustfan/" target="_blank">Explore</a>
+            <!-- Projects Container with horizontal scroll -->
+            <div class="projects-container">
+                <div class="projects-grid" id="projectsGrid">
+                    <article class="project animate-on-scroll">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f1720/3390ff?text=Smart+Exhaust+Fan" alt="Smart Exhaust Fan">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://rsmk27.github.io/Autoexhaustfan/" target="_blank">Explore</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="project-body">
-                        <h3>Smart Exhaust Fan</h3>
-                        <p>Intelligent IoT-powered exhaust system with advanced sensor integration for automated climate control and energy optimization.</p>
-                        <div class="tags">
-                            <div class="tag">Arduino</div>
-                            <div class="tag">IoT</div>
-                            <div class="tag">Sensors</div>
-                        </div>
-                    </div>
-                </article>
-                <article class="project animate-on-scroll">
-                    <div class="project-media">
-                        <img src="assets/colorohm.png" alt="Color Ohm">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://rsmk27.github.io/colorohm" target="_blank">Explore</a>
+                        <div class="project-body">
+                            <h3>Smart Exhaust Fan</h3>
+                            <p>Intelligent IoT-powered exhaust system with advanced sensor integration for automated climate control and energy optimization.</p>
+                            <div class="tags">
+                                <div class="tag">Arduino</div>
+                                <div class="tag">IoT</div>
+                                <div class="tag">Sensors</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="project-body">
-                        <h3>Color Ohm</h3>
-                        <p>Advanced Python application for precise resistor value calculation using color band recognition technology.</p>
-                        <div class="tags">
-                            <div class="tag">Python</div>
-                            <div class="tag">Resistors</div>
-                            <div class="tag">HTML</div>
-                        </div>
-                    </div>
-                </article>
-                <article class="project animate-on-scroll">
-                    <div class="project-media">
-                        <img src="assets/budgetbuddy.png" alt="Budget Buddy">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank">Explore</a>
+                    </article>
+                    <article class="project animate-on-scroll">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f1720/3390ff?text=Color+Ohm" alt="Color Ohm">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://rsmk27.github.io/colorohm" target="_blank">Explore</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="project-body">
-                        <h3>Budget Buddy</h3>
-                        <p>Web-based financial management platform with real-time analytics and intelligent spending insights.</p>
-                        <div class="tags">
-                            <div class="tag">HTML5</div>
-                            <div class="tag">CSS3</div>
-                            <div class="tag">JavaScript</div>
+                        <div class="project-body">
+                            <h3>Color Ohm</h3>
+                            <p>Advanced Python application for precise resistor value calculation using color band recognition technology.</p>
+                            <div class="tags">
+                                <div class="tag">Python</div>
+                                <div class="tag">Resistors</div>
+                                <div class="tag">HTML</div>
+                            </div>
                         </div>
-                    </div>
-                </article>
+                    </article>
+                    <article class="project animate-on-scroll">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f1720/3390ff?text=Budget+Buddy" alt="Budget Buddy">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Budget Buddy</h3>
+                            <p>Web-based financial management platform with real-time analytics and intelligent spending insights.</p>
+                            <div class="tags">
+                                <div class="tag">HTML5</div>
+                                <div class="tag">CSS3</div>
+                                <div class="tag">JavaScript</div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Placeholder projects -->
+                    <article class="project animate-on-scroll">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f1720/3390ff?text=Project+X" alt="Placeholder project image">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Coming Soon</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Future Project X</h3>
+                            <p>An innovative solution currently in the planning and development phase. Stay tuned for updates!</p>
+                            <div class="tags">
+                                <div class="tag">Research</div>
+                                <div class="tag">Design</div>
+                                <div class="tag">Innovation</div>
+                            </div>
+                        </div>
+                    </article>
+                     <article class="project animate-on-scroll">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f1720/3390ff?text=Project+Y" alt="Placeholder project image">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Coming Soon</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Future Project Y</h3>
+                            <p>A new venture into sustainable technology and automation, leveraging cutting-edge AI. </p>
+                            <div class="tags">
+                                <div class="tag">AI</div>
+                                <div class="tag">Sustainability</div>
+                                <div class="tag">Prototypes</div>
+                            </div>
+                        </div>
+                    </article>
+                     <article class="project animate-on-scroll">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f1720/3390ff?text=Project+Z" alt="Placeholder project image">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Coming Soon</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Future Project Z</h3>
+                            <p>Exploring the intersection of robotics and embedded systems for next-generation devices.</p>
+                            <div class="tags">
+                                <div class="tag">Robotics</div>
+                                <div class="tag">Embedded</div>
+                                <div class="tag">Firmware</div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
@@ -787,26 +952,26 @@
             <div class="relative max-w-2xl mx-auto">
                 <div class="timeline-item animate-on-scroll">
                     <div class="timeline-item-dot"></div>
-                    <div class="text-white">
-                        <h3 class="text-lg font-semibold mb-1 text-white">School</h3>
+                    <div class="timeline-content">
+                        <h3>School</h3>
                         <p class="text-sm text-gray-400">upto 2021</p>
-                        <p class="text-sm text-muted mt-2">I have graduated my Secondary Education in year 2021.</p>
+                        <p class="text-sm text-muted mt-2">Graduated from secondary education, establishing a strong foundation in science and mathematics. This period sparked my initial curiosity in the fields of technology and engineering.</p>
                     </div>
                 </div>
                 <div class="timeline-item animate-on-scroll">
                     <div class="timeline-item-dot"></div>
-                    <div class="text-white">
-                        <h3 class="text-lg font-semibold mb-1 text-white">Diploma in Electrical and Electronics Engineering</h3>
+                    <div class="timeline-content">
+                        <h3>Diploma in Electrical and Electronics Engineering</h3>
                         <p class="text-sm text-gray-400">2021-2024</p>
-                        <p class="text-sm text-muted mt-2">pursed my diploma in Electrical and Electronics Engineering degree in the year 2024.</p>
+                        <p class="text-sm text-muted mt-2">Completed my diploma in Electrical and Electronics Engineering, gaining hands-on experience in circuit design, power systems, and embedded programming. </p>
                     </div>
                 </div>
                 <div class="timeline-item animate-on-scroll">
                     <div class="timeline-item-dot"></div>
-                    <div class="text-white">
-                        <h3 class="text-lg font-semibold mb-1 text-white">B.tech in Electrical and Electronics Engineering</h3>
-                        <p class="text-sm text-gray-400">2024- present</p>
-                        <p class="text-sm text-muted mt-2">currently pursuing my b.tech degree.</p>
+                    <div class="timeline-content">
+                        <h3>B.tech in Electrical and Electronics Engineering</h3>
+                        <p class="text-sm text-gray-400">2024 - Present</p>
+                        <p class="text-sm text-muted mt-2">Currently pursuing a bachelor's degree to deepen my expertise in advanced topics like AI, machine learning, and IoT, preparing for a future in cutting-edge engineering roles.</p>
                     </div>
                 </div>
             </div>
@@ -817,9 +982,8 @@
                 <h2>Technical Arsenal</h2>
             </div>
             <div class="skills-grid">
-                <!-- New Skills Card for Programming -->
                 <div class="skills-card animate-on-scroll">
-                    <h3 class="text-lg md:text-xl">Skills</h3>
+                    <h3>Skills</h3>
                     <div class="space-y-4">
                         <div class="skill-item-new">
                             <div class="skill-header">
@@ -868,9 +1032,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- New Skills Card for Tech Stack -->
                 <div class="skills-card animate-on-scroll">
-                    <h3 class="text-lg md:text-xl">Technology Stack</h3>
+                    <h3>Technology Stack</h3>
                     <div class="tech-grid">
                         <div class="tech-item">
                             <i class="fas fa-microchip"></i>
@@ -898,64 +1061,67 @@
                         </div>
                     </div>
                 </div>
+                <div class="skills-card animate-on-scroll">
+                    <h3>Certifications</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">Certified AI Specialist</div>
+                        <div class="certification-item">IoT Fundamentals</div>
+                        <div class="certification-item">Embedded Systems Design</div>
+                        <div class="certification-item">Cybersecurity Basics</div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="contact" class="container animate-on-scroll">
             <div class="section-title">
-                <h2>Connect</h2>
+                <h2>Connect With Me</h2>
             </div>
-            <div class="contact-section-container">
-                <div class="contact-form" role="form" aria-labelledby="contact">
-                    <div class="field">
-                        <label for="name">Name</label>
-                        <input id="name" placeholder="Your name" type="text" required>
+            <div class="advanced-contact-card">
+                <div class="contact-content">
+                    <h3>Let's Build the Future Together.</h3>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be a part of your vision. Whether you have a question or just want to say hi, my inbox is always open.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:srinivasmanikantarajapantula@gmail.com">srinivasmanikantarajapantula@gmail.com</a>
+                        </div>
+                        <div class="contact-detail-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <a href="tel:+918886392097">+91 88863 92097</a>
+                        </div>
+                        <div class="contact-detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hyderabad, India</span>
+                        </div>
                     </div>
-                    <div class="field">
-                        <label for="email">Email</label>
-                        <input id="email" placeholder="you@example.com" type="email" required>
-                    </div>
-                    <div class="field">
-                        <label for="message">Message</label>
-                        <textarea id="message" placeholder="Tell me about your project..." required></textarea>
-                    </div>
-                    <div class="btn-row">
-                        <button class="cta-btn ripple-btn" data-ripple id="sendBtn">Send message</button>
-                        <div id="sendState" aria-live="polite" style="color:var(--muted)"></div>
+                    <div class="contact-socials">
+                        <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram" title="Telegram">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/rsmk27" aria-label="LinkedIn" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="lottie-container">
-                    <dotlottie-wc class="animate-on-scroll" style="width: 300px; height: 300px" src="https://lottie.host/1f9a391d-80cb-4a18-9802-3b411387ccde/XTCtftM8xU.lottie" speed="1" autoplay loop></dotlottie-wc>
+                <div class="contact-animation">
+                    <dotlottie-wc style="width: 100%; height: 100%;" src="https://lottie.host/1f9a391d-80cb-4a18-9802-3b411387ccde/XTCtftM8xU.lottie" speed="1" autoplay loop></dotlottie-wc>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="container" role="contentinfo">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px">
+        <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:18px">
             <div style="display:flex;gap:12px;align-items:center">
                 <div class="logo" aria-hidden="true">
                     <div class="dot"></div>
                     <div>RSMK</div>
                 </div>
                 <div style="color:var(--muted)">© <span id="year"></span> RSMK</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:22px">
-                <div class="socials">
-                    <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram" title="Telegram">
-                        <i class="fab fa-telegram-plane"></i>
-                    </a>
-                    <a href="mailto:srinivasmanikantarajapantula@gmail.com" aria-label="Email" title="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/rsmk27" aria-label="LinkedIn" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
-                <div style="color:var(--muted)">Engineered for the future.</div>
             </div>
         </div>
     </footer>
@@ -1075,35 +1241,7 @@
             });
         })();
 
-        // 5) Form submission with loading states (simulated)
-        (function formSubmit() {
-            const sendBtn = document.getElementById('sendBtn');
-            const sendState = document.getElementById('sendState');
-            if (!sendBtn || !sendState) return;
-            sendBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const name = q('#name').value.trim();
-                const email = q('#email').value.trim();
-                const message = q('#message').value.trim();
-                if (!name || !email || !message) {
-                    sendState.textContent = 'Please complete all fields.';
-                    return;
-                }
-                sendBtn.disabled = true;
-                const spinner = document.createElement('span');
-                spinner.className = 'spinner';
-                sendState.textContent = 'Sending...';
-                sendState.prepend(spinner);
-                setTimeout(() => {
-                    sendBtn.disabled = false;
-                    sendState.textContent = 'Message sent — thanks!';
-                    q('#name').value = q('#email').value = q('#message').value = '';
-                    setTimeout(() => sendState.textContent = '', 5000);
-                }, 1400);
-            });
-        })();
-
-        // 6) Custom Typewriter Effect (re-implemented from old site)
+        // 5) Custom Typewriter Effect (fixed)
         (function typewriterEffect() {
             const words = ['Smart Energy', 'IoT Innovation', 'AI Integration', 'Quantum Computing', 'Green Technology', 'Future Systems'];
             const typewriter = document.getElementById('typewriter');
@@ -1111,29 +1249,36 @@
             let wordIndex = 0;
             let charIndex = 0;
             let isDeleting = false;
+            let speed = 100;
+
             function type() {
                 const currentWord = words[wordIndex];
                 if (isDeleting) {
-                    typewriter.textContent = currentWord.substring(0, charIndex--);
+                    charIndex--;
+                    if (charIndex < 0) {
+                        isDeleting = false;
+                        wordIndex = (wordIndex + 1) % words.length;
+                        speed = 500;
+                    } else {
+                        speed = 50;
+                    }
                 } else {
-                    typewriter.textContent = currentWord.substring(0, charIndex++);
+                    charIndex++;
+                    if (charIndex > currentWord.length) {
+                        isDeleting = true;
+                        speed = 2000;
+                        charIndex = currentWord.length; // Ensure we don't go past the last letter
+                    } else {
+                        speed = 100;
+                    }
                 }
-                let typeSpeed = isDeleting ? 50 : 100;
-                if (!isDeleting && charIndex === currentWord.length) {
-                    typeSpeed = 2000;
-                    isDeleting = true;
-                } else if (isDeleting && charIndex < 0) {
-                    isDeleting = false;
-                    wordIndex = (wordIndex + 1) % words.length;
-                    typewriter.textContent = '';
-                    typeSpeed = 500;
-                }
-                setTimeout(type, typeSpeed);
+                typewriter.textContent = currentWord.substring(0, charIndex);
+                setTimeout(type, speed);
             }
             type();
         })();
-        
-        // 7) Skills Progress Bar Animation
+
+        // 6) Skills Progress Bar Animation
         (function skillsProgress() {
             const progressBars = qAll('.skill-progress');
             const obs = new IntersectionObserver(entries => {
