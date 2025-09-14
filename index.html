@@ -224,6 +224,14 @@
             -webkit-overflow-scrolling: touch;
             padding-bottom: 2rem;
             scroll-snap-type: x mandatory;
+            
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            /* Hide scrollbar for IE, Edge and Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
         
         .projects-grid {
@@ -895,7 +903,7 @@
                             </div>
                         </div>
                     </article>
-                     <article class="project animate-on-scroll">
+                    <article class="project animate-on-scroll">
                         <div class="project-media">
                             <img src="https://placehold.co/600x400/0f1720/3390ff?text=Project+Y" alt="Placeholder project image">
                             <div class="project-overlay">
@@ -914,7 +922,7 @@
                             </div>
                         </div>
                     </article>
-                     <article class="project animate-on-scroll">
+                    <article class="project animate-on-scroll">
                         <div class="project-media">
                             <img src="https://placehold.co/600x400/0f1720/3390ff?text=Project+Z" alt="Placeholder project image">
                             <div class="project-overlay">
