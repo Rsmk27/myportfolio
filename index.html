@@ -1127,6 +1127,7 @@
     </footer>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
         // Utilities
         const q = (sel, el = document) => el.querySelector(sel);
         const qAll = (sel, el = document) => Array.from(el.querySelectorAll(sel));
@@ -1296,6 +1297,7 @@
 
         // utilities: set current year
         document.getElementById('year').textContent = new Date().getFullYear();
+        });
     </script>
 </body>
 </html>
