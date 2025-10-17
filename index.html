@@ -13,8 +13,9 @@
     <meta property="og:url" content="http://rsmk27.github.io/myportfolio" />
 
     <!-- Favicon and Preload for Critical Assets -->
-    <link rel="icon" href="assets/rsmk-logo.png" type="image/png">
-    <link rel="preload" href="assets/rsmk-logo.png" as="image">
+    <!-- NOTE: Updated placeholder image for the logo to be dark text on blue background for better visibility on dark header -->
+    <link rel="icon" href="https://placehold.co/30x30/0b0f14/3390ff?text=R" type="image/png"> 
+    <link rel="preload" href="https://placehold.co/30x30/0b0f14/3390ff?text=R" as="image">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" as="style">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" as="style">
     
@@ -28,24 +29,21 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0HW7FXHBR"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-          gtag('config', 'G-Z0HW7FXHBR');
+            gtag('config', 'G-Z0HW7FXHBR');
     </script>
     
-    <!-- Spline 3D Viewer Library for the Background -->
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.77/build/spline-viewer.js"></script>
-
     <style>
         /* CSS Variables - Slightly improved contrast for accessibility */
         :root {
             --bg: #0a0e13; /* Slightly darker */
             --surface: #121924; /* Darker surface */
             --muted: #aab8ca; /* Lighter muted for better contrast */
-            --accent: #007bff;
-            --accent-2: #3390ff;
+            --accent: #007bff; /* RGB: 0, 123, 255 */
+            --accent-2: #3390ff; /* RGB: 51, 144, 255 */
             --glass: rgba(255, 255, 255, 0.04);
             --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             --radius: 12px;
@@ -74,15 +72,104 @@
             position: relative;
         }
 
-        /* Spline background container */
-        spline-viewer {
-            position: fixed;
+        /* New Animated Aurora Background Styles (OPACITY REDUCED FOR PROFESSIONAL SUBTLETY) */
+        .aurora-background {
+            position: fixed; /* Use fixed for full viewport background */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            opacity: 0.8; /* Optional: Tone it down a bit */
+            z-index: -2; /* Ensure it's behind all content */
+            background: 
+                /* Spot 1: Accent Blue 1 (Reduced Opacity) */
+                radial-gradient(
+                    ellipse at 20% 30%,
+                    rgba(0, 123, 255, 0.35) 0%, /* 0.5 -> 0.35 */
+                    rgba(0, 123, 255, 0) 60%
+                ),
+                /* Spot 2: Accent Blue 2 (Reduced Opacity) */
+                radial-gradient(
+                    ellipse at 80% 50%,
+                    rgba(51, 144, 255, 0.25) 0%, /* 0.4 -> 0.25 */
+                    rgba(51, 144, 255, 0) 70%
+                ),
+                /* Spot 3: Accent Blue 1 (Further Reduced Opacity) */
+                radial-gradient(
+                    ellipse at 50% 80%,
+                    rgba(0, 123, 255, 0.15) 0%, /* 0.3 -> 0.15 */
+                    rgba(0, 123, 255, 0) 65%
+                ),
+                /* Base Gradient: Using site dark colors */
+                linear-gradient(135deg, var(--bg) 0%, #0a0520 100%);
+            
+            background-blend-mode: overlay, screen, hard-light;
+            overflow: hidden;
+            animation: aurora-drift 25s infinite alternate ease-in-out;
+        }
+
+        .aurora-background::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            /* Subtle dark grid overlay for futuristic look */
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.02) 0px,
+                rgba(255, 255, 255, 0.02) 1px,
+                transparent 1px,
+                transparent 40px
+            ),
+            repeating-linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.03) 0px,
+                rgba(255, 255, 255, 0.03) 1px,
+                transparent 1px,
+                transparent 60px
+            );
+            animation: grid-shift 20s linear infinite;
+        }
+
+        .aurora-background::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            /* Dark vignette effect */
+            background: radial-gradient(
+                circle at center,
+                transparent 70%,
+                rgba(10, 5, 32, 0.95) 100% 
+            );
+            animation: aurora-pulse 8s infinite alternate;
+        }
+
+        @keyframes aurora-drift {
+            0% {
+                background-position: 0% 0%, 0% 0%, 0% 0%;
+                filter: brightness(1); 
+            }
+            50% {
+                background-position: -10% -5%, 5% 10%, 0% 15%;
+                filter: brightness(1.2); 
+            }
+            100% {
+                background-position: 5% 10%, -10% -5%, 15% 0%;
+                filter: brightness(1); 
+            }
+        }
+
+        @keyframes grid-shift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); }
+        }
+
+        @keyframes aurora-pulse {
+            0% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+            100% { opacity: 0.8; transform: scale(1); }
         }
 
         /* Header */
@@ -162,8 +249,8 @@
         }
         
         .cta-btn:focus {
-             outline: 3px solid rgba(0, 123, 255, 0.14);
-             outline-offset: 4px;
+            outline: 3px solid rgba(0, 123, 255, 0.14);
+            outline-offset: 4px;
         }
 
         /* Layout */
@@ -186,7 +273,8 @@
             text-align: center;
             position: relative;
             z-index: 1;
-            background: radial-gradient(ellipse at center, rgba(10, 14, 19, 0.6) 0%, transparent 70%);
+            /* Using a radial gradient to darken the center over the new background for contrast */
+            background: radial-gradient(ellipse at center, rgba(10, 14, 19, 0.7) 0%, transparent 70%); 
         }
 
         .hero-left {
@@ -572,8 +660,19 @@
             background: linear-gradient(to bottom, var(--accent), var(--accent-2));
             transition: height 0.6s var(--ease);
             transform-origin: top;
-            animation: expand-line 1s forwards;
+            /* Now using the defined animation keyframes */
+            animation: expand-line 1s forwards; 
             animation-delay: 0.4s;
+        }
+        
+        /* FIX: Define the missing timeline animation keyframes */
+        @keyframes expand-line {
+            from {
+                height: 0;
+            }
+            to {
+                height: 100%;
+            }
         }
 
         .timeline-item-dot {
@@ -793,12 +892,13 @@
 </head>
 
 <body>
-    <!-- Spline 3D Background -->
-    <spline-viewer url="https://prod.spline.design/UEX9IyVgmUQElFEb/scene.splinecode"></spline-viewer>
+    <!-- Animated Aurora Background Element (REPLACED SPLINE VIEWER) -->
+    <div class="aurora-background" aria-hidden="true"></div>
 
     <header id="siteHeader" role="banner">
+        <!-- Replaced "assets/rsmk-logo.png" with a placeholder for portability -->
         <a href="#hero" class="logo" aria-label="Home">
-            <img src="https://placehold.co/30x30/0b0f14/e6eef8?text=RSMK" alt="RSMK Logo" style="height: 30px;">
+            <img src="https://placehold.co/30x30/0b0f14/3390ff?text=R" alt="RSMK Logo" style="height: 30px;">
         </a>
         <nav role="navigation" aria-label="Main navigation">
             <a href="#about" data-nav-section="about">About</a>
@@ -817,7 +917,7 @@
             <div class="hero-left">
                 <div class="section-title animate-on-scroll" style="--delay:0s;">
                     <div style="width:2px;height:36px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:6px"></div>
-                    <h2 style="font-size:1.2rem;color:var(--muted);margin:0">Future-Ready Engineer</h2>
+                    <h2 style="font-size:1.2rem;color:var(--muted);margin:0">Future-Ready Engineer </h2>
                 </div>
                 <h1 class="animate-on-scroll" style="--delay:0.05s;">
                     Hi, I'm <span>Srinivasa Manikanta</span>
@@ -865,9 +965,10 @@
             <!-- Projects Container with horizontal scroll -->
             <div class="projects-container">
                 <div class="projects-grid" id="projectsGrid">
+                    <!-- Note: Image assets updated to use placeholders for portability, please replace with actual images if available -->
                     <article class="project animate-on-scroll" data-tags="IoT Embedded Sensors">
                         <div class="project-media">
-                            <img src="assets/autoexhaustfan.png" alt="Smart Exhaust Fan">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Smart+Exhaust+Fan" alt="Smart Exhaust Fan">
                             <div class="project-overlay">
                                 <div class="project-links">
                                     <a href="https://rsmk27.github.io/Autoexhaustfan/" target="_blank">Explore</a>
@@ -886,7 +987,7 @@
                     </article>
                     <article class="project animate-on-scroll" data-tags="Python Resistors">
                         <div class="project-media">
-                            <img src="assets/colorohm.png" alt="Color Ohm">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Color+Ohm+Python+App" alt="Color Ohm">
                             <div class="project-overlay">
                                 <div class="project-links">
                                     <a href="https://rsmk27.github.io/colorohm" target="_blank">Explore</a>
@@ -905,7 +1006,7 @@
                     </article>
                     <article class="project animate-on-scroll" data-tags="Web HTML">
                         <div class="project-media">
-                            <img src="assets/budgetbuddy.png" alt="Budget Buddy">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Budget+Buddy+App" alt="Budget Buddy">
                             <div class="project-overlay">
                                 <div class="project-links">
                                     <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank">Explore</a>
@@ -913,7 +1014,7 @@
                             </div>
                         </div>
                         <div class="project-body">
-                            <h3>Budget Buddy</h3>
+                            <h3>Budget Buddy </h3>
                             <p>Web-based financial management platform with real-time analytics and intelligent spending insights.</p>
                             <div class="tags">
                                 <div class="tag">HTML5</div>
@@ -925,7 +1026,7 @@
                     <!-- Placeholder projects -->
                     <article class="project animate-on-scroll" data-tags="Future Research">
                         <div class="project-media">
-                            <img src="assets/Chatbot.png" alt="Placeholder project image">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=GPT+OSS+Chatbot" alt="AI Chatbot with GPT-OSS Integration">
                             <div class="project-overlay">
                                 <div class="project-links">
                                     <a href="https://gpt-oss-web.vercel.app" target="_blank">Try Now</a>
@@ -944,10 +1045,10 @@
                     </article>
                     <article class="project animate-on-scroll" data-tags="Future AI">
                         <div class="project-media">
-                            <img src="https://placehold.co/600x400/0f1720/3390ff?text=Project+X" alt="Placeholder project image">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Future+Tech+Concept" alt="Future Project X">
                             <div class="project-overlay">
                                 <div class="project-links">
-                                    <a href="#" target="_blank">Try Now</a>
+                                    <a href="javascript:void(0)" target="_blank">Try Now</a>
                                 </div>
                             </div>
                         </div>
@@ -963,10 +1064,10 @@
                     </article>
                     <article class="project animate-on-scroll" data-tags="Embedded Robotics">
                         <div class="project-media">
-                            <img src="https://placehold.co/600x400/0f1720/3390ff?text=Project+Y" alt="Placeholder project image">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Robotics+Firmware" alt="Future Project Z">
                             <div class="project-overlay">
                                 <div class="project-links">
-                                    <a href="#" target="_blank">Coming Soon</a>
+                                    <a href="javascript:void(0)" target="_blank">Coming Soon</a>
                                 </div>
                             </div>
                         </div>
@@ -1027,7 +1128,7 @@
                         <div class="skill-item-new">
                             <div class="skill-header">
                                 <span class="skill-name">Arduino / ESP's</span>
-                                <span class="skill-level">75%</span>
+                                <span class="skill-level" data-percent="75">75%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" data-width="75"></div>
@@ -1036,7 +1137,7 @@
                         <div class="skill-item-new">
                             <div class="skill-header">
                                 <span class="skill-name">C programming</span>
-                                <span class="skill-level">70%</span>
+                                <span class="skill-level" data-percent="70">70%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" data-width="70"></div>
@@ -1045,7 +1146,7 @@
                         <div class="skill-item-new">
                             <div class="skill-header">
                                 <span class="skill-name">Python</span>
-                                <span class="skill-level">65%</span>
+                                <span class="skill-level" data-percent="65">65%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" data-width="65"></div>
@@ -1054,7 +1155,7 @@
                         <div class="skill-item-new">
                             <div class="skill-header">
                                 <span class="skill-name">AI Tools</span>
-                                <span class="skill-level">80%</span>
+                                <span class="skill-level" data-percent="80">80%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" data-width="80"></div>
@@ -1063,7 +1164,7 @@
                         <div class="skill-item-new">
                             <div class="skill-header">
                                 <span class="skill-name">Electrical</span>
-                                <span class="skill-level">90%</span>
+                                <span class="skill-level" data-percent="90">90%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" data-width="90"></div>
@@ -1220,44 +1321,7 @@
             document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
         })();
         
-        // 3) Background decorative circles (parallax)
-        (function parallax() {
-            const parallaxEls = [];
-            const container = document.createElement('div');
-            container.style.position = 'fixed';
-            container.style.inset = '0';
-            container.style.zIndex = '-1';
-            container.style.pointerEvents = 'none';
-            document.body.appendChild(container);
-            const make = (size, left, top, blur, opacity, speed, color) => {
-                const d = document.createElement('div');
-                d.style.position = 'absolute';
-                d.style.left = left;
-                d.style.top = top;
-                d.style.width = size;
-                d.style.height = size;
-                d.style.borderRadius = '50%';
-                d.style.filter = `blur(${blur})`;
-                d.style.opacity = opacity;
-                d.style.background = color;
-                d.style.transform = 'translate3d(0,0,0)';
-                container.appendChild(d);
-                parallaxEls.push({
-                    el: d,
-                    speed
-                });
-            };
-            make('400px', '-8%', '-6%', '30px', 0.06, 0.2, 'linear-gradient(180deg,var(--accent),var(--accent-2))');
-            make('300px', '70%', '70%', '40px', 0.04, 0.08, 'linear-gradient(180deg,var(--accent),var(--accent-2))');
-            window.addEventListener('scroll', () => {
-                const y = window.scrollY;
-                parallaxEls.forEach(p => {
-                    p.el.style.transform = `translateY(${y * p.speed}px)`;
-                });
-            }, {
-                passive: true
-            });
-        })();
+        // ** Removed: Section 3 (Parallax) as it's replaced by the new CSS animation **
 
         // 4) Button ripple effect
         (function ripples() {
@@ -1297,7 +1361,7 @@
             let wordIndex = 0;
             let charIndex = 0;
             let isDeleting = false;
-            let speed = 100;
+            let speed = 100; // Typing speed
 
             function type() {
                 const currentWord = words[wordIndex];
@@ -1306,18 +1370,18 @@
                     if (charIndex < 0) {
                         isDeleting = false;
                         wordIndex = (wordIndex + 1) % words.length;
-                        speed = 500;
+                        speed = 500; // Pause before typing next word
                     } else {
-                        speed = 50;
+                        speed = 50; // Deleting speed
                     }
                 } else {
                     charIndex++;
                     if (charIndex > currentWord.length) {
                         isDeleting = true;
-                        speed = 2000;
+                        speed = 2000; // Pause after typing word
                         charIndex = currentWord.length;
                     } else {
-                        speed = 100;
+                        speed = 100; // Typing speed
                     }
                 }
                 typewriter.textContent = currentWord.substring(0, charIndex);
@@ -1356,6 +1420,7 @@
                     const navLink = q(`a[data-nav-section="${sectionId}"]`);
                     
                     if (entry.isIntersecting) {
+                        // Clear active state only if the current section is intersecting
                         navLinks.forEach(link => link.classList.remove('active'));
                         if (navLink) {
                             navLink.classList.add('active');
@@ -1403,4 +1468,3 @@
     </script>
 </body>
 </html>
-
