@@ -14,7 +14,7 @@
 
     <!-- Favicon and Preload for Critical Assets -->
     <!-- NOTE: Updated placeholder image for the logo to be dark text on blue background for better visibility on dark header -->
-    <link rel="icon" href="assets/rsmk-logo.png" type="image/png"> 
+    <link rel="icon" href="assets/rsmk-logo.png" type="image/png">
     <link rel="preload" href="assets/rsmk-logo.png" as="image">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" as="style">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" as="style">
@@ -246,6 +246,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 8px 28px rgba(0, 123, 255, 0.18);
+            text-decoration: none;
         }
         
         .cta-btn:focus {
@@ -327,6 +328,13 @@
             font-size: 1.2rem;
             text-align: center;
         }
+        
+        .hero-subheading {
+            font-family: 'Orbitron', monospace;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
 
         .actions {
             display: flex;
@@ -334,14 +342,21 @@
             align-items: center;
             justify-content: center;
         }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent); }
+        }
 
         .typewriter {
-            border-right: 3px solid var(--accent);
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 600;
+            border-right: .15em solid var(--accent);
+            animation: blink-caret .75s step-end infinite;
             color: var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            vertical-align: bottom;
         }
-        
+
         /* About Me Section Glass Container */
         .about-container {
             background: rgba(30, 41, 59, 0.5);
@@ -389,14 +404,30 @@
             -webkit-overflow-scrolling: touch;
             padding-bottom: 2rem;
             scroll-snap-type: x mandatory;
-            
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            &::-webkit-scrollbar {
-                display: none;
-            }
-            /* Hide scrollbar for IE, Edge and Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
+            /* Scrollbar styles for Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) rgba(30, 41, 59, 0.5);
+        }
+
+        /* Custom Scrollbar for Webkit browsers (Chrome, Safari) */
+        .projects-container::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .projects-container::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 5px;
+        }
+
+        .projects-container::-webkit-scrollbar-thumb {
+            background-color: var(--accent);
+            border-radius: 5px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+
+        .projects-container::-webkit-scrollbar-thumb:hover {
+            background-color: var(--accent-2);
         }
         
         .projects-grid {
@@ -417,6 +448,8 @@
             position: relative;
             transition: transform .35s var(--ease), box-shadow .35s var(--ease);
             box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+            display: flex;
+            flex-direction: column;
         }
 
         .project.hidden {
@@ -474,7 +507,10 @@
         }
 
         .project-body {
-            padding: 14px 16px
+            padding: 14px 16px;
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column;
         }
 
         .project-body h3 {
@@ -488,6 +524,7 @@
             color: var(--muted);
             font-size: 13px;
             font-family: 'Rajdhani', sans-serif;
+            flex-grow: 1;
         }
 
         .tags {
@@ -896,7 +933,6 @@
     <div class="aurora-background" aria-hidden="true"></div>
 
     <header id="siteHeader" role="banner">
-        <!-- Replaced "assets/rsmk-logo.png" with a placeholder for portability -->
         <a href="#hero" class="logo" aria-label="Home">
             <img src="assets/rsmk-logo.png" alt="RSMK Logo" style="height: 30px;">
         </a>
@@ -915,17 +951,16 @@
     <main>
         <section id="hero" class="container hero">
             <div class="hero-left">
-                <div class="section-title animate-on-scroll" style="--delay:0s;">
-                    <div style="width:2px;height:36px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:6px"></div>
-                    <h2 style="font-size:1.2rem;color:var(--muted);margin:0">Future-Ready Engineer </h2>
-                </div>
                 <h1 class="animate-on-scroll" style="--delay:0.05s;">
-                    Hi, I'm <span>Srinivasa Manikanta</span>
+                    Hi, I’m <span>Srinivasa Manikanta</span>
                 </h1>
-                <p class="animate-on-scroll" style="--delay:0.08s;">Building tomorrow's technology with <span class="typewriter" id="typewriter"></span></p>
+                 <p class="hero-subheading animate-on-scroll" style="--delay:0.08s;">
+                    Electrical & Electronics Engineer | <span id="typewriter" class="typewriter"></span>
+                </p>
+                
                 <div class="actions animate-on-scroll" style="--delay:0.12s;">
-                    <a href="#projects" class="cta-btn ripple-btn" data-ripple>Explore Work</a>
-                    <a href="#contact" style="color:var(--accent);font-weight:700;text-decoration:none;padding:8px">Connect →</a>
+                    <a href="#projects" class="cta-btn ripple-btn" data-ripple>View Projects</a>
+                    <a href="#contact" class="cta-btn ripple-btn" data-ripple>Contact Me</a>
                 </div>
             </div>
         </section>
@@ -935,150 +970,173 @@
                 <h2>About Me</h2>
             </div>
             <div class="about-container animate-on-scroll" style="transition-delay: 100ms;">
-                <div style="flex:1;min-width:260px; text-align: center;">
-                    <p style="color:var(--muted); margin-bottom: 1rem;">I'm a visionary Electrical and Electronics Engineering student passionate about creating the future through technology. My expertise spans from cutting-edge embedded systems to sustainable energy solutions, always pushing the boundaries of what's possible.</p>
-                    <ul style="color:var(--muted); list-style: none; padding: 0; display: inline-block; text-align: left;">
-                        <li style="margin-bottom: 0.5rem;">✓ Smart Energy Systems</li>
-                        <li style="margin-bottom: 0.5rem;">✓ IoT & Embedded Systems</li>
-                        <li style="margin-bottom: 0.5rem;">✓ AI Integration & Automation</li>
-                        <li>✓ Future-proof Technology</li>
-                    </ul>
+                <div style="flex:1;min-width:260px;">
+                    <p style="color:var(--muted); margin-bottom: 1.5rem;">I am an Electrical and Electronics Engineering student with a passion for embedded systems, web development, and smart energy solutions. I specialize in designing projects that combine electronics, IoT, and software to solve real-world problems.</p>
+                     <p style="color:var(--muted);">I follow a simulation-first approach, using platforms like Tinkercad, Wokwi, and Circuit Designer to prototype before building. I’m constantly learning and upgrading my skills, and I thrive on turning concepts into live, functional projects.</p>
                 </div>
             </div>
         </section>
 
         <section id="projects" class="container animate-on-scroll" data-stagger-children=".project">
             <div class="section-title">
-                <h2>Featured Projects</h2>
+                <h2>My Projects</h2>
             </div>
             
             <!-- Project Filters -->
             <div class="filter-tags" id="projectFilters">
-                <button class="active" data-filter="all">All Projects</button>
+                <button class="active" data-filter="all">All</button>
+                <button data-filter="Embedded">Embedded</button>
+                <button data-filter="Web">Web/Software</button>
                 <button data-filter="IoT">IoT</button>
-                <button data-filter="Python">Python</button>
-                <button data-filter="Web">Web Development</button>
-                <button data-filter="Embedded">Embedded Systems</button>
-                <button data-filter="Future">Future Concepts</button>
+                <button data-filter="AI">AI</button>
+                <button data-filter="Robotics">Robotics</button>
             </div>
 
             <!-- Projects Container with horizontal scroll -->
             <div class="projects-container">
                 <div class="projects-grid" id="projectsGrid">
-                    <!-- Note: Image assets updated to use placeholders for portability, please replace with actual images if available -->
-                    <article class="project animate-on-scroll" data-tags="IoT Embedded Sensors">
+                    
+                    <article class="project animate-on-scroll" data-tags="Embedded IoT">
                         <div class="project-media">
                             <img src="assets/autoexhaustfan.png" alt="Smart Exhaust Fan">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://autoexhaustfan.rsmk.co.in/" target="_blank">Explore</a>
-                                </div>
-                            </div>
+                            <div class="project-overlay"><div class="project-links"><a href="https://autoexhaustfan.rsmk.co.in/" target="_blank">Explore</a></div></div>
                         </div>
                         <div class="project-body">
-                            <h3>Smart Exhaust Fan</h3>
-                            <p>Intelligent IoT-powered exhaust system with advanced sensor integration for automated climate control and energy optimization.</p>
-                            <div class="tags">
-                                <div class="tag">Arduino</div>
-                                <div class="tag">IoT</div>
-                                <div class="tag">Sensors</div>
-                            </div>
+                            <h3>Automatic Exhaust Fan</h3>
+                            <p>Smart exhaust fan that detects gas concentration and turns on/off automatically. Includes manual override and auto-off timer.</p>
+                            <div class="tags"><div class="tag">Arduino</div><div class="tag">MQ-2 Sensor</div><div class="tag">Relay</div></div>
                         </div>
                     </article>
-                    <article class="project animate-on-scroll" data-tags="Python Resistors">
+
+                    <article class="project animate-on-scroll" data-tags="Web">
                         <div class="project-media">
-                            <img src="assets/colorohm.png" alt="Color Ohm">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://rsmk27.github.io/colorohm" target="_blank">Explore</a>
-                                </div>
-                            </div>
+                            <img src="assets/colorohm.png" alt="OhmDecoder (Color Ohm)">
+                            <div class="project-overlay"><div class="project-links"><a href="https://rsmk27.github.io/colorohm" target="_blank">Explore</a></div></div>
                         </div>
                         <div class="project-body">
-                            <h3>Color Ohm</h3>
-                            <p>Advanced Python application for precise resistor value calculation using color band recognition technology.</p>
-                            <div class="tags">
-                                <div class="tag">Python</div>
-                                <div class="tag">Resistors</div>
-                                <div class="tag">HTML</div>
-                            </div>
+                            <h3>OhmDecoder (Color Ohm)</h3>
+                            <p>A live web tool to instantly and accurately calculate resistor values from standard color bands.</p>
+                            <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">JavaScript</div></div>
                         </div>
                     </article>
-                    <article class="project animate-on-scroll" data-tags="Web HTML">
+
+                    <article class="project animate-on-scroll" data-tags="Web AI">
+                        <div class="project-media">
+                            <img src="assets/Chatbot.png" alt="AI Chatbot with GPT-OSS">
+                            <div class="project-overlay"><div class="project-links"><a href="https://ai.rsmk.co.in" target="_blank">Try Now</a></div></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>AI Chatbot with GPT-OSS</h3>
+                            <p>Human-like chatbot interface with real-time API-powered responses from the Hugging Face ecosystem.</p>
+                            <div class="tags"><div class="tag">Next.js</div><div class="tag">API</div><div class="tag">AI</div></div>
+                        </div>
+                    </article>
+
+                    <article class="project animate-on-scroll" data-tags="Web">
                         <div class="project-media">
                             <img src="assets/budgetbuddy.png" alt="Budget Buddy">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://rsmk27.github.io/BudgetBuddy" target="_blank">Explore</a>
-                                </div>
-                            </div>
+                            <div class="project-overlay"><div class="project-links"><a href="https://rsmk27.github.io/BudgetBuddy" target="_blank">Explore</a></div></div>
                         </div>
                         <div class="project-body">
-                            <h3>Budget Buddy </h3>
-                            <p>Web-based financial management platform with real-time analytics and intelligent spending insights.</p>
-                            <div class="tags">
-                                <div class="tag">HTML5</div>
-                                <div class="tag">CSS3</div>
-                                <div class="tag">JavaScript</div>
-                            </div>
+                            <h3>Budget Buddy</h3>
+                            <p>A web-based budgeting and expense tracker with interactive data visualization using Chart.js.</p>
+                            <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">Chart.js</div></div>
                         </div>
                     </article>
-                    <!-- Placeholder projects -->
-                    <article class="project animate-on-scroll" data-tags="Future Research">
-                        <div class="project-media">
-                            <img src="assets/Chatbot.png" alt="AI Chatbot with GPT-OSS Integration">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://gpt-oss-web.vercel.app" target="_blank">Try Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>AI Chatbot with GPT-OSS Integration</h3>
-                            <p>A fully functional web-based chatbot powered by GPT-OSS from Hugging Face.</p>
-                            <div class="tags">
-                                <div class="tag">AI Chatbot</div>
-                                <div class="tag">API Integration</div>
-                                <div class="tag">Web Development</div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="project animate-on-scroll" data-tags="Future AI">
-                        <div class="project-media">
-                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Future+Tech+Concept" alt="Future Project X">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="javascript:void(0)" target="_blank">Try Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>Future Project Y</h3>
-                            <p>A new venture into sustainable technology and automation, leveraging cutting-edge AI. </p>
-                            <div class="tags">
-                                <div class="tag">AI</div>
-                                <div class="tag">Sustainability</div>
-                                <div class="tag">Prototypes</div>
-                            </div>
-                        </div>
-                    </article>
+                    
                     <article class="project animate-on-scroll" data-tags="Embedded Robotics">
                         <div class="project-media">
-                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Robotics+Firmware" alt="Future Project Z">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="javascript:void(0)" target="_blank">Coming Soon</a>
-                                </div>
-                            </div>
+                             <img src="https://placehold.co/600x400/0f172a/3390ff?text=Robotics" alt="Robotics Workshop Projects">
+                             <div class="project-overlay"><div class="project-links"><a href="javascript:void(0);">Details</a></div></div>
                         </div>
                         <div class="project-body">
-                            <h3>Future Project Z</h3>
-                            <p>Exploring the intersection of robotics and embedded systems for next-generation devices.</p>
-                            <div class="tags">
-                                <div class="tag">Robotics</div>
-                                <div class="tag">Embedded</div>
-                                <div class="tag">Firmware</div>
-                            </div>
+                            <h3>Robotics Workshop Projects</h3>
+                            <p>Projects include a Bluetooth-controlled car (Arduino Nano, HC-05) and a line-following car (Raspberry Pi Pico).</p>
+                            <div class="tags"><div class="tag">Arduino</div><div class="tag">Pi Pico</div><div class="tag">Robotics</div></div>
+                        </div>
+                    </article>
+                    
+                     <article class="project animate-on-scroll" data-tags="Embedded IoT">
+                        <div class="project-media">
+                             <img src="https://placehold.co/600x400/0f172a/3390ff?text=Street+Light" alt="Automatic Street Light">
+                             <div class="project-overlay"><div class="project-links"><a href="javascript:void(0);">Details</a></div></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Automatic Street Light</h3>
+                            <p>Turns street lights on/off automatically based on ambient light using LDR sensors for energy efficiency.</p>
+                            <div class="tags"><div class="tag">Arduino</div><div class="tag">LDR Sensor</div><div class="tag">Relay</div></div>
+                        </div>
+                    </article>
+
+                    <article class="project animate-on-scroll" data-tags="Embedded IoT">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Solar+Dewatering" alt="Solar-Powered Dewatering System">
+                            <div class="project-overlay"><div class="project-links"><a href="https://sih25072.vercel.app">Details</a></div></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Solar Dewatering System</h3>
+                            <p>Multi-circuit solar system with battery charging, pump control, moisture detection, and single-axis solar tracking.</p>
+                            <div class="tags"><div class="tag">Solar</div><div class="tag">Sensors</div><div class="tag">Arduino</div></div>
+                        </div>
+                    </article>
+
+                    <article class="project animate-on-scroll" data-tags="Embedded IoT">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Temp+%26+Humidity" alt="IoT Temp & Humidity">
+                            <div class="project-overlay"><div class="project-links"><a href="javascript:void(0);">Details</a></div></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>IoT Humidity & Temp Display</h3>
+                            <p>Displays real-time temperature and humidity on a mobile app via ESP8266 and the Blynk IoT platform.</p>
+                            <div class="tags"><div class="tag">ESP8266</div><div class="tag">Blynk</div><div class="tag">IoT</div></div>
+                        </div>
+                    </article>
+
+                    <article class="project animate-on-scroll" data-tags="Web">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Portfolio" alt="Portfolio Website">
+                            <div class="project-overlay"><div class="project-links"><a href="#hero">On It!</a></div></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Portfolio Website</h3>
+                            <p>This personal portfolio, designed to showcase projects, blogs, and experiments in a clean, interactive format.</p>
+                            <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">JavaScript</div></div>
+                        </div>
+                    </article>
+
+                    <article class="project animate-on-scroll" data-tags="Web">
+                        <div class="project-media">
+                             <img src="https://placehold.co/600x400/0f172a/3390ff?text=Playzone" alt="Playzone">
+                             <div class="project-overlay"><div class="project-links"><a href="https://rsmk27.github.io/playzone/">Explore</a></div></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Playzone</h3>
+                            <p>An interactive web-based entertainment platform featuring a collection of simple games and activities.</p>
+                            <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">JavaScript</div></div>
+                        </div>
+                    </article>
+
+                    <article class="project animate-on-scroll" data-tags="Web">
+                        <div class="project-media">
+                            <img src="https://placehold.co/600x400/0f172a/3390ff?text=Project+Docs" alt="Documentation Websites">
+                            <div class="project-overlay"><div class="project-links"><a href="javascript:void(0);">View Docs</a></div></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Documentation Websites</h3>
+                            <p>Created detailed documentation sites for complex projects like the Solar Dewatering and Auto Exhaust Fan systems.</p>
+                            <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">Tech Writing</div></div>
+                        </div>
+                    </article>
+
+                    <article class="project animate-on-scroll" data-tags="Web">
+                        <div class="project-media">
+                             <img src="https://placehold.co/600x400/0f172a/3390ff?text=My+Blogs" alt="My Blogs">
+                             <div class="project-overlay"><div class="project-links"><a href="javascript:void(0);">Read More</a></div></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>My Blogs</h3>
+                            <p>A personal blog for sharing project walkthroughs, technical tutorials, and insights on new technologies.</p>
+                            <div class="tags"><div class="tag">Content</div><div class="tag">HTML</div><div class="tag">CSS</div></div>
                         </div>
                     </article>
                 </div>
@@ -1123,38 +1181,29 @@
             </div>
             <div class="skills-grid">
                 <div class="skills-card animate-on-scroll">
-                    <h3>Skills</h3>
+                    <h3>Core Skills</h3>
                     <div class="space-y-4">
                         <div class="skill-item-new">
                             <div class="skill-header">
-                                <span class="skill-name">Arduino / ESP's</span>
-                                <span class="skill-level" data-percent="75">75%</span>
+                                <span class="skill-name">Sensors & IoT</span>
+                                <span class="skill-level" data-percent="90">90%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" data-width="75"></div>
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                         <div class="skill-item-new">
+                            <div class="skill-header">
+                                <span class="skill-name">Arduino / ESP / Pico</span>
+                                <span class="skill-level" data-percent="85">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
                             </div>
                         </div>
                         <div class="skill-item-new">
                             <div class="skill-header">
-                                <span class="skill-name">C programming</span>
-                                <span class="skill-level" data-percent="70">70%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="70"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item-new">
-                            <div class="skill-header">
-                                <span class="skill-name">Python</span>
-                                <span class="skill-level" data-percent="65">65%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="65"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item-new">
-                            <div class="skill-header">
-                                <span class="skill-name">AI Tools</span>
+                                <span class="skill-name">Web Dev (HTML, CSS, JS)</span>
                                 <span class="skill-level" data-percent="80">80%</span>
                             </div>
                             <div class="skill-bar">
@@ -1163,11 +1212,20 @@
                         </div>
                         <div class="skill-item-new">
                             <div class="skill-header">
-                                <span class="skill-name">Electrical</span>
-                                <span class="skill-level" data-percent="90">90%</span>
+                                <span class="skill-name">API Integration</span>
+                                <span class="skill-level" data-percent="75">75%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" data-width="90"></div>
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item-new">
+                            <div class="skill-header">
+                                <span class="skill-name">Simulation & Prototyping</span>
+                                <span class="skill-level" data-percent="95">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
                             </div>
                         </div>
                     </div>
@@ -1183,21 +1241,21 @@
                             <i class="fas fa-network-wired"></i>
                             <p>IoT & Cloud</p>
                         </div>
+                         <div class="tech-item">
+                            <i class="fab fa-html5"></i>
+                            <p>Web Dev</p>
+                        </div>
                         <div class="tech-item">
-                            <i class="fab fa-python"></i>
-                            <p>AI Integration</p>
+                            <i class="fas fa-cogs"></i>
+                            <p>API Integration</p>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-drafting-compass"></i>
+                            <p>Simulation</p>
                         </div>
                         <div class="tech-item">
                             <i class="fas fa-robot"></i>
                             <p>Automation</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-battery-half"></i>
-                            <p>Power Electronics</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-brain"></i>
-                            <p>Soft Skills</p>
                         </div>
                     </div>
                 </div>
@@ -1237,7 +1295,7 @@
                         <!-- Resume Download Link -->
                         <div class="contact-detail-item">
                             <i class="fas fa-file-download"></i>
-                            <a href="https://github.com/Rsmk27/myportfolio/blob/main/resume.pdf" download style="color:var(--accent); font-weight:700;">Download Resume</a>
+                            <a href="assets/resume.pdf" download="Srinivasa_Manikanta_Resume.pdf" style="color:var(--accent); font-weight:700;">Download Resume</a>
                         </div>
                     </div>
                     <div class="contact-socials">
@@ -1321,9 +1379,7 @@
             document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
         })();
         
-        // ** Removed: Section 3 (Parallax) as it's replaced by the new CSS animation **
-
-        // 4) Button ripple effect
+        // 3) Button ripple effect
         (function ripples() {
             const buttons = qAll('[data-ripple]');
             buttons.forEach(btn => {
@@ -1353,60 +1409,63 @@
             });
         })();
 
-        // 5) Custom Typewriter Effect
+        // 4) Custom Typewriter Effect
         (function typewriterEffect() {
-            const words = ['Smart Energy', 'IoT Innovation', 'AI Integration', 'Quantum Computing', 'Green Technology', 'Future Systems'];
+            const words = ['Embedded Systems Developer', 'Web Developer', 'Smart Tech Innovator', 'IoT Enthusiast'];
             const typewriter = document.getElementById('typewriter');
             if (!typewriter) return;
             let wordIndex = 0;
             let charIndex = 0;
             let isDeleting = false;
-            let speed = 100; // Typing speed
 
             function type() {
                 const currentWord = words[wordIndex];
+                let typeSpeed = 120;
+
                 if (isDeleting) {
+                    typeSpeed = 60; // Faster deleting
+                    typewriter.textContent = currentWord.substring(0, charIndex - 1);
                     charIndex--;
-                    if (charIndex < 0) {
-                        isDeleting = false;
-                        wordIndex = (wordIndex + 1) % words.length;
-                        speed = 500; // Pause before typing next word
-                    } else {
-                        speed = 50; // Deleting speed
-                    }
                 } else {
+                    typewriter.textContent = currentWord.substring(0, charIndex + 1);
                     charIndex++;
-                    if (charIndex > currentWord.length) {
-                        isDeleting = true;
-                        speed = 2000; // Pause after typing word
-                        charIndex = currentWord.length;
-                    } else {
-                        speed = 100; // Typing speed
-                    }
                 }
-                typewriter.textContent = currentWord.substring(0, charIndex);
-                setTimeout(type, speed);
+
+                if (!isDeleting && charIndex === currentWord.length) {
+                    typeSpeed = 2000; // Pause at end of word
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    typeSpeed = 500; // Pause before new word
+                }
+
+                setTimeout(type, typeSpeed);
             }
-            type();
+            setTimeout(type, 1200); // Start after initial page animations
         })();
 
-        // 6) Skills Progress Bar Animation
+
+        // 5) Skills Progress Bar Animation
         (function skillsProgress() {
-            const progressBars = qAll('.skill-progress');
+            const skillSection = q('#skills');
             const obs = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const progressBar = entry.target;
-                        const width = progressBar.dataset.width;
-                        progressBar.style.width = width + '%';
-                        obs.unobserve(progressBar);
+                        const progressBars = qAll('.skill-progress', entry.target);
+                        progressBars.forEach(progressBar => {
+                            const width = progressBar.dataset.width;
+                            progressBar.style.width = width + '%';
+                        });
+                        obs.unobserve(skillSection);
                     }
                 });
-            }, { threshold: 0.5 });
-            progressBars.forEach(bar => obs.observe(bar));
+            }, { threshold: 0.3 });
+             if (skillSection) obs.observe(skillSection);
         })();
 
-        // 7) Active Navigation State with Intersection Observer
+
+        // 6) Active Navigation State with Intersection Observer
         (function activeNav() {
             const observerOptions = {
                 root: null,
@@ -1432,10 +1491,12 @@
             sections.forEach(section => navObserver.observe(section));
         })();
         
-        // 8) Project Filtering Logic
+        // 7) Project Filtering Logic
         (function projectFiltering() {
             const filterContainer = document.getElementById('projectFilters');
-            const projects = qAll('.project');
+            const projects = qAll('#projectsGrid .project');
+
+            if (!filterContainer) return;
 
             filterContainer.addEventListener('click', (e) => {
                 if (e.target.tagName !== 'BUTTON') return;
@@ -1452,11 +1513,11 @@
                     const filterLower = filterTag.toLowerCase();
 
                     if (filterTag === 'all' || tags.includes(filterLower)) {
-                        project.style.display = 'block';
-                        project.classList.remove('hidden');
+                        project.style.display = 'flex'; // Use flex to match original display style
+                        setTimeout(() => project.classList.remove('hidden'), 50);
                     } else {
-                        project.style.display = 'none';
                         project.classList.add('hidden');
+                        setTimeout(() => project.style.display = 'none', 300); // Hide after transition
                     }
                 });
             });
@@ -1468,3 +1529,5 @@
     </script>
 </body>
 </html>
+
+
