@@ -1,9 +1,0 @@
-{
-  "outputDirectory": ".",
-  "routes": [
-    {
-      "source": "/(.*)",
-      "destination": "/$1"
-    }
-  ]
-}
