@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSMK</title>
+
+    <!-- You can add your own favicon link here -->
+    <!-- <link rel="icon" href="path/to/your/favicon.ico" type="image/x-icon"> -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'gradient': 'gradient 6s ease infinite', // Kept for dark mode toggle icon, but not used for bg
+                        'glow': 'glow 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 },
+                        },
+                        slideUp: {
+                            '0%': { opacity: 0, transform: 'translateY(30px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        glow: {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.5 },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.5s ease;
+        }
+
+        /* MINIMAL: Simple static gradient */
+        .gradient-bg {
+            background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+        }
+
+        /* MINIMAL: Simple static dark gradient */
+        .dark .gradient-bg {
+            background: linear-gradient(to bottom right, #0f172a, #020617);
+        }
+
+        /* MINIMAL: Removed .glass-effect */
+
+        /* MINIMAL: Removed .liquid-shape */
+
+        .link-item {
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .link-item:hover {
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #a78bfa;
+        }
+
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #a78bfa;
+        }
+
+        /* MINIMAL: Removed .profile-img-wrapper and ::before styles */
+
+        .animate-fade-in {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="gradient-bg flex justify-center pt-16 px-4 pb-16 relative">
+
+    <!-- MINIMAL: Removed liquid shape divs -->
+    
+    <div class="w-full max-w-md lg:max-w-2xl relative z-10 transition-all duration-300">
+
+        <!-- MINIMAL: Replaced glass-effect with solid card -->
+        <div class="bg-white dark:bg-gray-950/70 dark:backdrop-blur-lg dark:border dark:border-gray-800/50 rounded-3xl p-8 shadow-xl">
+
+            <div class="flex justify-end mb-6">
+                <div class="relative inline-block w-14 h-7 cursor-pointer">
+                    <input type="checkbox" id="darkModeToggle" class="sr-only" onclick="toggleDarkMode()">
+                    <label for="darkModeToggle" class="block overflow-hidden h-7 rounded-full bg-gray-300 dark:bg-gray-700 cursor-pointer transition-colors duration-300">
+                        <span class="absolute left-1 top-1 bg-white w-5 h-5 rounded-full shadow-md transform transition-transform duration-300 dark:translate-x-7 flex items-center justify-center">
+                            <!-- Sun Icon -->
+                            <svg class="w-3 h-3 text-yellow-500 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                            </svg>
+                            <!-- Moon Icon -->
+                            <svg class="w-3 h-3 text-indigo-400 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+
+                <!-- MINIMAL: Removed wrapper div, styled img directly -->
+                
+
+                <!-- CONTENT: Title -->
+                <div class="text-center animate-fade-in" style="animation-delay: 0.2s;">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mt-4 transition-colors duration-300">
+                        <a href="https://rsmk.me" target="_blank" rel="noopener noreferrer" class="hover:text-purple-500 dark:hover:text-purple-400 transition-colors duration-300">
+                            RSMK
+                        </a>
+                    </h1>
+                </div>
+
+                <!-- CONTENT: Bio -->
+                <div class="text-center text-gray-800 dark:text-gray-300 animate-fade-in leading-relaxed" style="animation-delay: 0.3s;">
+                  
+                    <p>Find all my links, projects, and referred content below.</p>
+                </div>
+
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4">
+
+                    <!-- MINIMAL: Simplified Link Style -->
+                    <a href="https://x.com/SrinivasManik20"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="link-item animate-slide-up flex items-center w-full bg-gray-100 dark:bg-gray-800/60 hover:bg-gray-200 dark:hover:bg-gray-700/60 p-4 rounded-2xl shadow-sm hover:shadow-lg text-gray-900 dark:text-white font-semibold"
+                       style="animation-delay: 0.4s;">
+                        <!-- SVG Icon for Twitter/X -->
+                        <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.16 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                        <span class="flex-1 ml-4 text-left text-lg">Twitter / X</span>
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+
+                    <!-- MINIMAL: Simplified Link Style -->
+                    <a href="https://www.linkedin.com/in/rsmk27/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="link-item animate-slide-up flex items-center w-full bg-gray-100 dark:bg-gray-800/60 hover:bg-gray-200 dark:hover:bg-gray-700/60 p-4 rounded-2xl shadow-sm hover:shadow-lg text-gray-900 dark:text-white font-semibold"
+                       style="animation-delay: 0.5s;">
+                        <!-- SVG Icon for LinkedIn -->
+                        <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                        <span class="flex-1 ml-4 text-left text-lg">LinkedIn</span>
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+
+                    <!-- MINIMAL: Simplified Link Style -->
+                    <a href="https://t.me/Rsmk_27"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="link-item animate-slide-up flex items-center w-full bg-gray-100 dark:bg-gray-800/60 hover:bg-gray-200 dark:hover:bg-gray-700/60 p-4 rounded-2xl shadow-sm hover:shadow-lg text-gray-900 dark:text-white font-semibold"
+                       style="animation-delay: 0.6s;">
+                        <!-- REPLACED: YouTube icon with Telegram icon -->
+                        <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0C5.35 0 0 4.815 0 10.743c0 5.006 3.818 9.201 8.85 10.491l.243.056.002-.001c.086.02.17.04.256.058l.001.001c.084.018.168.036.253.051.087.016.173.03.26.045l.003.001c.083.013.167.025.25.037l.003.001c.082.012.164.022.247.031l.006.001c.084.009.168.017.252.024l.01.001c.082.006.164.012.247.017.085.005.17.009.255.012.088.003.175.005.263.005h.001c.088 0 .176-.002.264-.005.084-.003.17-.007.254-.012.083-.005.165-.011.247-.017l.01-.001c.084-.007.168-.015.252-.024l.006-.001c.083-.009.165-.019.247-.031l.003-.001c.083-.012.167-.024.25-.037l.003-.001c.087-.015.173-.029.26-.045.085-.015.169-.033.253-.051l.001-.001c.086-.018.17-.038.256-.058l.002.001.243-.056c5.032-1.29 8.85-5.485 8.85-10.491C23.887 4.815 18.537 0 11.944 0zm5.178 7.39c-.18.736-1.05 3.702-1.468 5.627-1.118 4.92-2.316 4.34-2.71 4.113-.37-.215-1.04-.69-1.55-1.045-.94-.654-1.5-1.007-2.4-1.63s-1.46-.94-1.28-1.42c.16-.43 1.03-1.42 1.54-1.92s1.02-1.03 1.52-1.53c.5-.5.25-.71-.13-.42-1.23.95-2.22 1.69-3.02 2.24-.26.17-.5.27-.72.27-.22 0-.4-.06-.51-.12-.13-.07-.2-.17-.18-.31.02-.13.12-.28.29-.45.33-.3.6-.54.82-.72 2.6-2.1 3.9-3.1 3.9-3.1s.38-.25.8-.25c.4 0 .7.12.81.25.12.12.15.28.15.41s-.03.28-.08.39c-.06.11-.14.22-.25.33-.12.11-.27.24-.46.39l-1.1.91-1.03.88c-.1.08-.1.23 0 .3s.17-.04.25-.11c.08-.07.15-.14.21-.2.06-.06.12-.12.19-.19s.13-.13.19-.19c.06-.06.12-.12.19-.19.07-.07.13-.13.2-.2s.13-.13.19-.19c.06-.06.12-.12.19-.19.46-.46.8-.83.8-.83s.38-.38.56-.56c.18-.18.33-.28.47-.28.13 0 .25.04.34.13.09.09.13.21.13.36 0 .15-.04.31-.12.48l-.34.72-.34.72-.34.72-.34.72c-.06.12-.11.25-.17.37s-.11.24-.17.37l-.17.37c-.06.12-.11.25-.17.37s-.11.24-.17.37l-1.12 2.24c-.13.25.04.5.3.5.15 0 .28-.07.4-.2.12-.13.22-.27.3-.4l2.1-5.1c.18-.45.34-.88.48-1.28.14-.4.28-.8.4-1.2.13-.4.25-.8.34-1.18.1-.38.17-.75.21-1.1.04-.35.06-.68.06-1 0-.6-.17-1.03-.5-1.28-.35-.25-.86-.25-1.54-.02z"></path></svg>
+                        <!-- REPLACED: YouTube text with Telegram text -->
+                        <span class="flex-1 ml-4 text-left text-lg">Telegram</span>
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+
+                    <!-- MINIMAL: Simplified Link Style -->
+                    <a href="https://github.com/Rsmk27"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="link-item animate-slide-up flex items-center w-full bg-gray-100 dark:bg-gray-800/60 hover:bg-gray-200 dark:hover:bg-gray-700/60 p-4 rounded-2xl shadow-sm hover:shadow-lg text-gray-900 dark:text-white font-semibold"
+                       style="animation-delay: 0.7s;">
+                        <!-- SVG Icon for GitHub -->
+                        <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+                        <span class="flex-1 ml-4 text-left text-lg">GitHub</span>
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+
+                    <!-- NEW: Instagram Link -->
+                    <a href="https://www.instagram.com/rsmk_27/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="link-item animate-slide-up flex items-center w-full bg-gray-100 dark:bg-gray-800/60 hover:bg-gray-200 dark:hover:bg-gray-700/60 p-4 rounded-2xl shadow-sm hover:shadow-lg text-gray-900 dark:text-white font-semibold"
+                       style="animation-delay: 0.8s;">
+                        <!-- SVG Icon for Instagram -->
+                        <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.07 4.85c-.148 3.227-1.667 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.667-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.308.196-6.484 2.372-6.68 6.68-.058 1.279-.072 1.688-.072 4.947s.014 3.668.072 4.947c.196 4.308 2.372 6.484 6.68 6.68 1.279.058 1.688.072 4.947.072s3.668-.014 4.947-.072c4.308-.196 6.484-2.372 6.68-6.68.058-1.279.072-1.688.072-4.947s-.014-3.668-.072-4.947c-.196-4.308-2.372-6.484-6.68-6.68-1.279-.058-1.688-.072-4.947-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.441s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.441-1.441-1.441z"></path></svg>
+                        <span class="flex-1 ml-4 text-left text-lg">Instagram</span>
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+
+                    <!-- REPLACED: TikTok Link with Email Link -->
+                    <a href="mailto:srinivasmanikantarajapantula@gmail.com"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="link-item animate-slide-up flex items-center w-full bg-gray-100 dark:bg-gray-800/60 hover:bg-gray-200 dark:hover:bg-gray-700/60 p-4 rounded-2xl shadow-sm hover:shadow-lg text-gray-900 dark:text-white font-semibold"
+                       style="animation-delay: 0.9s;">
+                        <!-- REPLACED: TikTok icon with Email icon -->
+                        <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-10 7L2 8V6l10 7 10-7v2z"></path></svg>
+                        <!-- REPLACED: TikTok text with Email text -->
+                        <span class="flex-1 ml-4 text-left text-lg">Email Me</span>
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+
+                   
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+        }
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+            document.getElementById('darkModeToggle').checked = true;
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="fixed bottom-4 right-4 z-20 animate-fade-in" style="animation-delay: 1s;">
+        <p class="text-xs text-gray-700 dark:text-gray-400 opacity-75">
+            by 
+            <a href="#" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="font-semibold hover:text-purple-500 dark:hover:text-purple-400 transition-colors">
+                srinivasa Mani Kanta
+            </a>
+        </p>
+    </footer>
+
+</body>
+</html>
+
+
+
+
+
