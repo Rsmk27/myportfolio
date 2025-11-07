@@ -1112,51 +1112,7 @@
         }
 
 
-        /* Custom Cursor Styles */
-        .cursor-dot,
-        .cursor-outline {
-            position: fixed;
-            top: 0; left: 0;
-            pointer-events: none;
-            z-index: 9999;
-            border-radius: 50%;
-            opacity: 0; /* Hidden by default, shown by JS */
-            transition: opacity 0.3s ease;
-        }
 
-        .cursor-dot {
-            width: 8px; height: 8px;
-            background-color: var(--accent);
-            transform: translate(-50%, -50%);
-        }
-
-        .cursor-outline {
-            width: 40px; height: 40px;
-            border: 2px solid var(--accent);
-            transform: translate(-50%, -50%);
-            transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, transform 0.1s ease-out; /* Adjusted timing */
-        }
-
-        /* Show cursor only when JS is enabled and not on touch */
-        body.js-enabled:not(.no-touch) .cursor-dot,
-        body.js-enabled:not(.no-touch) .cursor-outline {
-            opacity: 1;
-        }
-
-        /* Hide default cursor */
-        body.custom-cursor-active {
-            cursor: none;
-        }
-        body.custom-cursor-active a,
-        body.custom-cursor-active button {
-            cursor: none; /* Ensure interactive elements also hide default cursor */
-        }
-
-        /* Hide cursor on touch devices */
-        body.no-touch .cursor-dot,
-        body.no-touch .cursor-outline {
-            display: none !important;
-        }
     </style>
 
 </head>
@@ -1167,8 +1123,7 @@
             This site requires JavaScript for full functionality. Please enable it in your browser settings.
         </div>
     </noscript>
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+
 
     <!-- Dynamic Canvas Background -->
     <div id="vortex-bg-canvas" aria-hidden="true"></div>
@@ -1830,46 +1785,7 @@
                 // });
             }
 
-            // 9) Custom Cursor (only if not touch)
-            function customCursor() {
-                if (isTouchDevice) return; // Skip if touch device
 
-                const cursorDot = document.querySelector('.cursor-dot');
-                const cursorOutline = document.querySelector('.cursor-outline');
-                if (!cursorDot || !cursorOutline) return;
-
-                body.classList.add('custom-cursor-active'); // Hides default cursor via CSS
-
-                gsap.set([cursorDot, cursorOutline], { xPercent: -50, yPercent: -50 });
-
-                let mouseX = 0, mouseY = 0;
-                let dotX = 0, dotY = 0;
-                let outlineX = 0, outlineY = 0;
-
-                window.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-                });
-
-                // Use GSAP ticker for smoother animation updates
-                gsap.ticker.add(() => {
-                    // Dot moves instantly (or very fast lerp)
-                    dotX += (mouseX - dotX) * 0.9;
-                    dotY += (mouseY - dotY) * 0.9;
-                    gsap.set(cursorDot, { x: dotX, y: dotY });
-
-                    // Outline lags slightly
-                    outlineX += (mouseX - outlineX) * 0.15;
-                    outlineY += (mouseY - outlineY) * 0.15;
-                    gsap.set(cursorOutline, { x: outlineX, y: outlineY });
-                });
-
-
-                document.querySelectorAll('a, button').forEach(el => {
-                    el.addEventListener('mouseenter', () => gsap.to(cursorOutline, { duration: 0.3, scale: 1.5, borderColor: 'var(--accent-2)', ease: 'power2.out' }));
-                    el.addEventListener('mouseleave', () => gsap.to(cursorOutline, { duration: 0.3, scale: 1, borderColor: 'var(--accent)', ease: 'power2.out' }));
-                });
-            }
 
             // 10) Mobile Menu Toggle
             function mobileMenu() {
@@ -1902,7 +1818,7 @@
             activeNav();
             projectFiltering();
             themeToggle();
-            customCursor();
+
             mobileMenu();
 
             // Set current year in footer
