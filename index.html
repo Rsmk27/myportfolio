@@ -735,21 +735,65 @@
         }
 
         .certifications-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
         .certification-item {
-            background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(51, 144, 255, 0.05));
-            color: var(--accent);
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 123, 255, 0.2);
-            box-shadow: 0 2px 10px rgba(0, 123, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s var(--ease);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .certification-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .certification-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 12px 32px rgba(0, 123, 255, 0.25);
+        }
+
+        .certification-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .certification-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .certification-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .certification-description {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.6;
         }
 
         .tech-grid {
@@ -1136,8 +1180,9 @@
         <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
             <a href="#about" data-nav-section="about">About</a>
             <a href="#projects" data-nav-section="projects">Projects</a>
-            <a href="#timeline" data-nav-section="timeline">Timeline</a>
+            <a href="#education" data-nav-section="education">Education</a>
             <a href="#skills" data-nav-section="skills">Skills</a>
+            <a href="#certifications" data-nav-section="certifications">Certifications</a>
             <a href="#contact" data-nav-section="contact">Contact</a>
         </nav>
 
@@ -1148,8 +1193,9 @@
     <nav id="mobile-nav" class="mobile-nav-panel" aria-label="Mobile navigation">
         <a href="#about" data-nav-section="about">About</a>
         <a href="#projects" data-nav-section="projects">Projects</a>
-        <a href="#timeline" data-nav-section="timeline">Timeline</a>
+        <a href="#education" data-nav-section="education">Education</a>
         <a href="#skills" data-nav-section="skills">Skills</a>
+        <a href="#certifications" data-nav-section="certifications">Certifications</a>
         <a href="#contact" data-nav-section="contact">Contact</a>
     </nav>
 
@@ -1322,9 +1368,9 @@
             </div>
         </section>
 
-        <section id="timeline" class="container animate-on-scroll">
+        <section id="education" class="container animate-on-scroll">
             <div class="section-title">
-                <h2>Journey & Milestones</h2>
+                <h2>Education & Journey</h2>
             </div>
             <div class="relative max-w-2xl mx-auto">
                 <div class="timeline-item animate-on-scroll">
@@ -1436,15 +1482,42 @@
                         </div>
                     </div>
                 </div>
-                <div class="skills-card animate-on-scroll">
-                    <h3>Certifications</h3>
-                    <div class="certifications-grid">
-                        <div class="certification-item">Embedded Systems</div>
-                        <div class="certification-item">3D Printing</div>
-                        <div class="certification-item">EV Technology</div>
-                        <div class="certification-item">Drone Technology</div>
+            </div>
+        </section>
+
+        <section id="certifications" class="container animate-on-scroll" data-stagger-children=".certification-item">
+            <div class="section-title">
+                <h2>Certifications & Achievements</h2>
+            </div>
+            <div class="certifications-grid">
+                <article class="certification-item animate-on-scroll">
+                    <div class="certification-icon">
+                        <i class="fas fa-microchip"></i>
                     </div>
-                </div>
+                    <h3 class="certification-name">Embedded Systems</h3>
+                    <p class="certification-description">Advanced training in embedded systems design, microcontroller programming, and real-time operating systems.</p>
+                </article>
+                <article class="certification-item animate-on-scroll">
+                    <div class="certification-icon">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h3 class="certification-name">3D Printing</h3>
+                    <p class="certification-description">Proficient in additive manufacturing, 3D modeling, and rapid prototyping for engineering applications.</p>
+                </article>
+                <article class="certification-item animate-on-scroll">
+                    <div class="certification-icon">
+                        <i class="fas fa-charging-station"></i>
+                    </div>
+                    <h3 class="certification-name">EV Technology</h3>
+                    <p class="certification-description">Specialized knowledge in electric vehicle systems, battery management, and sustainable mobility solutions.</p>
+                </article>
+                <article class="certification-item animate-on-scroll">
+                    <div class="certification-icon">
+                        <i class="fas fa-drone"></i>
+                    </div>
+                    <h3 class="certification-name">Drone Technology</h3>
+                    <p class="certification-description">Expertise in UAV systems, flight control, autonomous navigation, and aerial applications.</p>
+                </article>
             </div>
         </section>
 
