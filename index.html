@@ -1,27 +1,34 @@
 <!doctype html>
 <html lang="en-US" class="scroll-smooth">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Srinivasa Manikanta Portfolio</title>
 
     <!-- SEO & Social Sharing Tags -->
-    <meta name="description" content="Srinivasa Manikanta's Electrical and Electronics Engineering Portfolio, specializing in IoT, Smart Energy, and AI Integration, EEE, ALIET, portfolio" />
+    <meta name="description"
+        content="Srinivasa Manikanta's Electrical and Electronics Engineering Portfolio, specializing in IoT, Smart Energy, and AI Integration, EEE, ALIET, portfolio" />
     <meta name="theme-color" content="#0a0e13">
     <meta property="og:title" content="Srinivasa Manikanta | EEE Portfolio" />
-    <meta property="og:description" content="Building tomorrow's technology with Smart Energy, IoT, and AI Integration." />
+    <meta property="og:description"
+        content="Building tomorrow's technology with Smart Energy, IoT, and AI Integration." />
     <meta property="og:image" content="assets/rsmk-logo.png" />
     <meta property="og:url" content="http://rsmk27.github.io/myportfolio" />
 
     <!-- Favicon and Preload for Critical Assets -->
     <link rel="icon" href="assets/rsmk-logo.png" type="image/png">
     <link rel="preload" href="assets/rsmk-logo.png" as="image">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap"
+        as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        as="style">
 
     <!-- Fonts, Icons, and Libraries -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Lottie JS for animation components -->
@@ -29,10 +36,10 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0HW7FXHBR"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5458337028479481"
-     crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-Z0HW7FXHBR');
     </script>
@@ -44,11 +51,16 @@
     <style>
         /* CSS Variables - Slightly improved contrast for accessibility */
         :root {
-            --bg: #0a0e13; /* Slightly darker */
-            --surface: #121924; /* Darker surface */
-            --muted: #aab8ca; /* Lighter muted for better contrast */
-            --accent: #007bff; /* RGB: 0, 123, 255 */
-            --accent-2: #3390ff; /* RGB: 51, 144, 255 */
+            --bg: #0a0e13;
+            /* Slightly darker */
+            --surface: #121924;
+            /* Darker surface */
+            --muted: #aab8ca;
+            /* Lighter muted for better contrast */
+            --accent: #007bff;
+            /* RGB: 0, 123, 255 */
+            --accent-2: #3390ff;
+            /* RGB: 51, 144, 255 */
             --glass: rgba(255, 255, 255, 0.04);
             --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             --radius: 12px;
@@ -77,10 +89,13 @@
             background: var(--bg);
             color: #e6eef8;
             -webkit-font-smoothing: antialiased;
-            line-height: 1.5; /* Slightly increased for better readability */
-            padding-top: var(--header-height); /* Use variable */
+            line-height: 1.5;
+            /* Slightly increased for better readability */
+            padding-top: var(--header-height);
+            /* Use variable */
             position: relative;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
         }
 
         /* No-JS Warning */
@@ -114,7 +129,8 @@
             left: 0;
             right: 0;
             top: 0;
-            height: var(--header-height); /* Use variable */
+            height: var(--header-height);
+            /* Use variable */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -137,8 +153,10 @@
             align-items: center;
             gap: 10px;
             font-weight: 600;
-            text-decoration: none; /* Add for links */
-            color: inherit; /* Add for links */
+            text-decoration: none;
+            /* Add for links */
+            color: inherit;
+            /* Add for links */
         }
 
         .logo img {
@@ -175,7 +193,8 @@
             transition: color .18s var(--ease), background .18s var(--ease);
         }
 
-        nav.desktop-nav a:hover, nav.desktop-nav a.active {
+        nav.desktop-nav a:hover,
+        nav.desktop-nav a.active {
             color: #fff;
             background: rgba(255, 255, 255, 0.05);
         }
@@ -192,8 +211,10 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 8px 28px rgba(0, 123, 255, 0.18);
-            text-decoration: none; /* Ensure links look like buttons */
-            display: inline-flex; /* Align icon and text if needed */
+            text-decoration: none;
+            /* Ensure links look like buttons */
+            display: inline-flex;
+            /* Align icon and text if needed */
             align-items: center;
             justify-content: center;
             gap: 6px;
@@ -207,48 +228,78 @@
 
         /* Theme Toggle Button Specifics */
         .theme-toggle-btn {
-            padding: 9px 12px; /* Adjust padding for icon button */
+            padding: 9px 12px;
+            /* Adjust padding for icon button */
             font-size: 1rem;
         }
-        .theme-toggle-btn .fa-sun { display: none; } /* Initially hide sun */
-        .theme-toggle-btn .fa-moon { display: block; } /* Initially show moon */
+
+        .theme-toggle-btn .fa-sun {
+            display: none;
+        }
+
+        /* Initially hide sun */
+        .theme-toggle-btn .fa-moon {
+            display: block;
+        }
+
+        /* Initially show moon */
 
         /* Mobile Menu Button */
         .mobile-menu-btn {
-            display: none; /* Hide by default */
+            display: none;
+            /* Hide by default */
             background: none;
             border: none;
             color: var(--muted);
             font-size: 1.5rem;
             cursor: pointer;
             padding: 8px;
-            z-index: 1100; /* Above header background */
+            z-index: 1100;
+            /* Above header background */
         }
-        .mobile-menu-btn .close-icon { display: none; }
-        .mobile-menu-btn .open-icon { display: block; }
-        .mobile-menu-btn[aria-expanded="true"] .close-icon { display: block; }
-        .mobile-menu-btn[aria-expanded="true"] .open-icon { display: none; }
+
+        .mobile-menu-btn .close-icon {
+            display: none;
+        }
+
+        .mobile-menu-btn .open-icon {
+            display: block;
+        }
+
+        .mobile-menu-btn[aria-expanded="true"] .close-icon {
+            display: block;
+        }
+
+        .mobile-menu-btn[aria-expanded="true"] .open-icon {
+            display: none;
+        }
 
         /* Mobile Navigation Panel */
         .mobile-nav-panel {
             position: fixed;
             top: 0;
-            right: -100%; /* Start off-screen */
+            right: -100%;
+            /* Start off-screen */
             width: 280px;
             height: 100vh;
-            background: rgba(18, 25, 36, 0.9); /* Slightly transparent */
+            background: rgba(18, 25, 36, 0.9);
+            /* Slightly transparent */
             backdrop-filter: blur(15px);
-            padding: calc(var(--header-height) + 40px) 30px 40px; /* Space below header */
-            z-index: 999; /* Below header but above content */
+            padding: calc(var(--header-height) + 40px) 30px 40px;
+            /* Space below header */
+            z-index: 999;
+            /* Below header but above content */
             display: flex;
             flex-direction: column;
             gap: 20px;
             transition: right 0.4s var(--ease);
             box-shadow: -10px 0 30px rgba(0, 0, 0, 0.4);
         }
+
         .mobile-nav-panel.active {
             right: 0;
         }
+
         .mobile-nav-panel a {
             color: #e6eef8;
             text-decoration: none;
@@ -258,13 +309,16 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: color 0.2s var(--ease);
         }
+
         .mobile-nav-panel a:hover,
         .mobile-nav-panel a.active {
             color: var(--accent);
         }
+
         /* Optional: Prevent body scroll when mobile menu is open */
         body.mobile-menu-active {
-            /* overflow: hidden; */ /* Can cause layout shifts, use cautiously */
+            /* overflow: hidden; */
+            /* Can cause layout shifts, use cautiously */
         }
 
 
@@ -307,8 +361,15 @@
 
         /* Original Keyframe - kept for reference but not used if GSAP handles it */
         @keyframes text-reveal {
-            from { opacity: 0; transform: translateY(20px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .hero-left h1 span {
@@ -316,10 +377,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent; /* Fallback */
+            color: transparent;
+            /* Fallback */
         }
 
-        .hero-left p.hero-subheading { /* Make selector more specific */
+        .hero-left p.hero-subheading {
+            /* Make selector more specific */
             color: var(--muted);
             max-width: 60ch;
             margin: 0 auto 18px;
@@ -348,13 +411,21 @@
             gap: 12px;
             align-items: center;
             justify-content: center;
-            margin-top: 1.5rem; /* Added margin */
+            margin-top: 1.5rem;
+            /* Added margin */
         }
 
         /* Typewriter */
         @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--accent); }
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--accent);
+            }
         }
 
         .typewriter {
@@ -364,7 +435,8 @@
             white-space: nowrap;
             overflow: hidden;
             vertical-align: bottom;
-            display: inline-block; /* Prevent line break issues */
+            display: inline-block;
+            /* Prevent line break issues */
         }
 
         /* About Me Section */
@@ -378,10 +450,12 @@
             max-width: 900px;
             margin: 0 auto;
         }
+
         .about-description {
             color: var(--muted);
             margin-bottom: 1.5rem;
         }
+
         .about-description:last-child {
             margin-bottom: 0;
         }
@@ -426,20 +500,38 @@
         }
 
         /* Custom Scrollbar for Webkit browsers (Chrome, Safari) */
-        .projects-container::-webkit-scrollbar { height: 10px; }
-        .projects-container::-webkit-scrollbar-track { background: rgba(30, 41, 59, 0.5); border-radius: 5px; }
-        .projects-container::-webkit-scrollbar-thumb { background-color: var(--accent); border-radius: 5px; border: 2px solid transparent; background-clip: content-box; }
-        .projects-container::-webkit-scrollbar-thumb:hover { background-color: var(--accent-2); }
+        .projects-container::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .projects-container::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 5px;
+        }
+
+        .projects-container::-webkit-scrollbar-thumb {
+            background-color: var(--accent);
+            border-radius: 5px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+
+        .projects-container::-webkit-scrollbar-thumb:hover {
+            background-color: var(--accent-2);
+        }
 
         .projects-grid {
             display: flex;
             gap: 22px;
-            padding: 0 20px; /* Add padding for visual spacing at ends */
-            width: max-content; /* Allow grid to expand horizontally */
+            padding: 0 20px;
+            /* Add padding for visual spacing at ends */
+            width: max-content;
+            /* Allow grid to expand horizontally */
         }
 
         .project {
-            flex: 0 0 300px; /* Fixed width for each card */
+            flex: 0 0 300px;
+            /* Fixed width for each card */
             scroll-snap-align: center;
             background: rgba(30, 41, 59, 0.5);
             backdrop-filter: blur(10px);
@@ -497,13 +589,15 @@
             display: inline-flex;
             padding: 8px 10px;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1); /* Slightly more visible */
+            background: rgba(255, 255, 255, 0.1);
+            /* Slightly more visible */
             color: white;
             text-decoration: none;
             font-weight: 700;
             font-size: 13px;
             transition: background 0.2s ease;
         }
+
         .project-links a:hover {
             background: rgba(255, 255, 255, 0.2);
         }
@@ -519,13 +613,15 @@
             margin: 0 0 8px 0;
             font-size: 1.2rem;
             font-family: 'Orbitron', monospace;
-            color: #fff; /* Ensure contrast */
+            color: #fff;
+            /* Ensure contrast */
         }
 
         .project-body p {
             margin: 0;
             color: var(--muted);
-            font-size: 0.9rem; /* Slightly larger */
+            font-size: 0.9rem;
+            /* Slightly larger */
             font-family: 'Rajdhani', sans-serif;
             flex-grow: 1;
             line-height: 1.4;
@@ -539,9 +635,12 @@
         }
 
         .tag {
-            padding: 6px 10px; /* Slightly more padding */
-            background: rgba(255, 255, 255, 0.04); /* Slightly lighter */
-            border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+            padding: 6px 10px;
+            /* Slightly more padding */
+            background: rgba(255, 255, 255, 0.04);
+            /* Slightly lighter */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            /* Subtle border */
             border-radius: 8px;
             color: var(--muted);
             font-size: 12px;
@@ -562,7 +661,8 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 2.5rem; /* Increased margin */
+            margin-bottom: 2.5rem;
+            /* Increased margin */
             justify-content: center;
             text-align: center;
         }
@@ -570,7 +670,8 @@
         .section-title h2 {
             margin: 0;
             font-family: 'Orbitron', monospace;
-            font-size: clamp(1.8rem, 5vw, 2.2rem); /* Responsive font size */
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            /* Responsive font size */
             color: var(--accent);
         }
 
@@ -580,29 +681,41 @@
             padding-left: 2.5rem;
             margin-bottom: 2.5rem;
         }
+
         .timeline-item:last-child {
             margin-bottom: 0;
         }
+
         .timeline-item:last-child .timeline-line {
             /* Optionally hide or shorten the line on the last item */
-             display: none;
+            display: none;
         }
 
         .timeline-line {
             position: absolute;
             left: 0.5rem;
-            top: 1rem; /* Start below the dot */
-            bottom: -1rem; /* Extend slightly below content */
+            top: 1rem;
+            /* Start below the dot */
+            bottom: -1rem;
+            /* Extend slightly below content */
             width: 2px;
             background: linear-gradient(to bottom, var(--accent), var(--accent-2));
             transform-origin: top;
             /* Animation handled by GSAP */
-            transform: scaleY(0); /* Start scaled down */
+            transform: scaleY(0);
+            /* Start scaled down */
         }
 
         @keyframes pulse-border {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4); }
-          50% { box-shadow: 0 0 0 6px rgba(0, 123, 255, 0); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(0, 123, 255, 0);
+            }
         }
 
         .timeline-item-dot {
@@ -617,7 +730,8 @@
             border: 2px solid var(--accent);
             animation: pulse-border 1.8s infinite ease-in-out;
             transition: background-color 0.2s;
-            z-index: 1; /* Above the line */
+            z-index: 1;
+            /* Above the line */
         }
 
         .timeline-item-dot:hover {
@@ -628,7 +742,8 @@
             background: rgba(30, 41, 59, 0.5);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.25rem 1.5rem; /* More padding */
+            padding: 1.25rem 1.5rem;
+            /* More padding */
             border-radius: 12px;
             box-shadow: var(--card-shadow);
         }
@@ -637,14 +752,17 @@
             font-family: 'Orbitron', monospace;
             font-size: 1.3rem;
             color: white;
-            margin: 0 0 0.25rem 0; /* Adjusted margin */
+            margin: 0 0 0.25rem 0;
+            /* Adjusted margin */
         }
+
         .timeline-date {
             font-size: 0.85rem;
             color: var(--accent);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
+
         .timeline-description {
             color: var(--muted);
             margin-bottom: 0;
@@ -683,20 +801,24 @@
         .skills-grid-circular {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 2.5rem 1.5rem; /* More row gap */
+            gap: 2.5rem 1.5rem;
+            /* More row gap */
         }
 
         .skill-item-circular {
             text-align: center;
-            position: relative; /* For percentage text */
+            position: relative;
+            /* For percentage text */
         }
 
         .skill-item-circular svg {
             width: 100%;
             max-width: 120px;
             transform: rotate(-90deg);
-            display: block; /* Remove extra space below SVG */
-            margin: 0 auto; /* Center SVG */
+            display: block;
+            /* Remove extra space below SVG */
+            margin: 0 auto;
+            /* Center SVG */
         }
 
         /* Added percentage text inside circle */
@@ -708,7 +830,8 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--accent);
-            margin-top: -18px; /* Adjust vertical alignment */
+            margin-top: -18px;
+            /* Adjust vertical alignment */
             font-family: 'Orbitron', monospace;
         }
 
@@ -724,8 +847,10 @@
             stroke: var(--accent);
             stroke-width: 10;
             stroke-linecap: round;
-            stroke-dasharray: 283; /* Circumference for r=45 */
-            stroke-dashoffset: 283; /* Start empty */
+            stroke-dasharray: 283;
+            /* Circumference for r=45 */
+            stroke-dashoffset: 283;
+            /* Start empty */
             /* Animation handled by GSAP */
         }
 
@@ -800,7 +925,8 @@
 
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); /* Slightly smaller min width */
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            /* Slightly smaller min width */
             gap: 1rem;
         }
 
@@ -813,7 +939,7 @@
             background: var(--glass);
             padding: 1rem;
             border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
         }
 
@@ -829,9 +955,11 @@
         }
 
         .tech-item p {
-            font-size: 0.85rem; /* Slightly larger */
+            font-size: 0.85rem;
+            /* Slightly larger */
             color: var(--muted);
-            margin: 0; /* Remove default margin */
+            margin: 0;
+            /* Remove default margin */
         }
 
         /* Contact Section */
@@ -848,6 +976,7 @@
             max-width: 900px;
             margin: 0 auto;
         }
+
         @media (min-width: 768px) {
             .advanced-contact-card {
                 grid-template-columns: 1.2fr 1fr;
@@ -861,6 +990,7 @@
             flex-direction: column;
             justify-content: center;
         }
+
         .contact-content h3 {
             font-family: 'Orbitron', monospace;
             font-size: 1.8rem;
@@ -868,76 +998,95 @@
             color: white;
             line-height: 1.2;
         }
+
         .contact-content p {
             color: var(--muted);
             font-family: 'Rajdhani', sans-serif;
             font-size: 1.1rem;
             margin: 0 0 2rem 0;
         }
+
         .contact-details {
             display: flex;
             flex-direction: column;
             gap: 1.25rem;
         }
+
         .contact-detail-item {
             display: flex;
             align-items: center;
             gap: 1rem;
             color: var(--muted);
         }
+
         .contact-detail-item i {
             color: var(--accent);
             font-size: 1.2rem;
             width: 20px;
-            text-align: center; /* Center icon */
+            text-align: center;
+            /* Center icon */
         }
-        .contact-detail-item a, .contact-detail-item span {
-            color: #e6eef8; /* Lighter text */
+
+        .contact-detail-item a,
+        .contact-detail-item span {
+            color: #e6eef8;
+            /* Lighter text */
             text-decoration: none;
             transition: color 0.2s var(--ease);
-            word-break: break-word; /* Prevent long emails/links overflowing */
+            word-break: break-word;
+            /* Prevent long emails/links overflowing */
         }
+
         .contact-detail-item a:hover {
             color: var(--accent);
         }
+
         .download-resume-link {
             color: var(--accent) !important;
             font-weight: 700;
         }
+
         .download-resume-link:hover {
-             color: var(--accent-2) !important;
+            color: var(--accent-2) !important;
         }
 
         .contact-socials {
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
-            flex-wrap: wrap; /* Allow wrapping on small screens */
+            flex-wrap: wrap;
+            /* Allow wrapping on small screens */
         }
+
         .contact-socials a {
             display: inline-flex;
-            width: 44px; /* Slightly smaller */
+            width: 44px;
+            /* Slightly smaller */
             height: 44px;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.05);
             color: var(--muted);
-            font-size: 1.1rem; /* Slightly smaller */
+            font-size: 1.1rem;
+            /* Slightly smaller */
             text-decoration: none;
             transition: transform .18s, background .18s, box-shadow .18s;
         }
+
         .contact-socials a:hover {
             transform: scale(1.1) translateY(-2px);
             background: linear-gradient(90deg, var(--accent), var(--accent-2));
             color: white;
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
         }
+
         .contact-animation {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 250px; /* Ensure space for animation */
+            min-height: 250px;
+            /* Ensure space for animation */
         }
 
         /* Footer */
@@ -946,7 +1095,8 @@
             color: var(--muted);
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 60px; /* Add margin above footer */
+            margin-top: 60px;
+            /* Add margin above footer */
         }
 
         .footer-content {
@@ -962,6 +1112,7 @@
             gap: 12px;
             align-items: center;
         }
+
         .copyright-text {
             font-size: 0.9rem;
         }
@@ -970,6 +1121,7 @@
             display: flex;
             gap: 1rem;
         }
+
         /* Reusing contact social styles for footer */
         .footer-socials a {
             display: inline-flex;
@@ -984,6 +1136,7 @@
             text-decoration: none;
             transition: transform .18s, background .18s, box-shadow .18s;
         }
+
         .footer-socials a:hover {
             transform: scale(1.1);
             background: linear-gradient(90deg, var(--accent), var(--accent-2));
@@ -997,36 +1150,91 @@
             .hero-left p.hero-subheading {
                 margin: 0 auto 18px auto;
             }
+
             .hero-left .section-title {
                 justify-content: center;
             }
         }
 
         @media (max-width: 768px) {
+
             /* Adjust padding for medium screens */
-            .container { padding: 36px 15px; }
-            section { padding: 60px 0; }
-            .footer-content { flex-direction: column; gap: 30px; }
+            .container {
+                padding: 36px 15px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
         }
 
         @media (max-width: 640px) {
-            :root { --header-height: 64px; } /* Update header height */
-            header { padding: 0 14px; }
-            body { padding-top: var(--header-height); }
-            .logo { font-size: 14px; }
+            :root {
+                --header-height: 64px;
+            }
+
+            /* Update header height */
+            header {
+                padding: 0 14px;
+            }
+
+            body {
+                padding-top: var(--header-height);
+            }
+
+            .logo {
+                font-size: 14px;
+            }
 
             /* Hide desktop nav, show mobile button */
-            nav.desktop-nav { display: none; }
-            .mobile-menu-btn { display: block; }
-            .get-in-touch-btn { display: none; } /* Hide redundant button */
+            nav.desktop-nav {
+                display: none;
+            }
 
-            .section-title { flex-direction: column; text-align: center; gap: 8px; margin-bottom: 2rem; }
-            .section-title h2 { margin-top: 0; } /* Removed top margin */
+            .mobile-menu-btn {
+                display: block;
+            }
 
-            .projects-grid { padding: 0 10px; gap: 14px; }
-            .project { flex: 0 0 280px; } /* Slightly smaller cards */
+            .get-in-touch-btn {
+                display: none;
+            }
 
-            .footer-content { justify-content: center; } /* Center content in footer */
+            /* Hide redundant button */
+
+            .section-title {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+                margin-bottom: 2rem;
+            }
+
+            .section-title h2 {
+                margin-top: 0;
+            }
+
+            /* Removed top margin */
+
+            .projects-grid {
+                padding: 0 10px;
+                gap: 14px;
+            }
+
+            .project {
+                flex: 0 0 280px;
+            }
+
+            /* Slightly smaller cards */
+
+            .footer-content {
+                justify-content: center;
+            }
+
+            /* Center content in footer */
         }
 
 
@@ -1043,16 +1251,21 @@
         }
 
         .light-mode .logo img {
-            /* filter: invert(1); */ /* Consider if logo looks good inverted */
+            /* filter: invert(1); */
+            /* Consider if logo looks good inverted */
         }
 
         .light-mode header {
-            background: rgba(255, 255, 255, 0.7); /* More opaque */
+            background: rgba(255, 255, 255, 0.7);
+            /* More opaque */
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
-        .light-mode nav.desktop-nav a { color: var(--muted); }
+        .light-mode nav.desktop-nav a {
+            color: var(--muted);
+        }
+
         .light-mode nav.desktop-nav a:hover,
         .light-mode nav.desktop-nav a.active {
             color: #000;
@@ -1070,68 +1283,90 @@
         .light-mode .timeline-content,
         .light-mode .skills-card,
         .light-mode .advanced-contact-card {
-            background: rgba(255, 255, 255, 0.7); /* Lighter background */
+            background: rgba(255, 255, 255, 0.7);
+            /* Lighter background */
             border: 1px solid rgba(0, 0, 0, 0.08);
         }
+
         .light-mode .project-body h3,
         .light-mode .timeline-content h3,
         .light-mode .skills-card h3,
         .light-mode .contact-content h3 {
-            color: #212529; /* Darker headings */
+            color: #212529;
+            /* Darker headings */
         }
-        .light-mode .contact-detail-item a, .light-mode .contact-detail-item span {
+
+        .light-mode .contact-detail-item a,
+        .light-mode .contact-detail-item span {
             color: #212529;
         }
+
         .light-mode .tag {
             background: rgba(0, 0, 0, 0.04);
             border: 1px solid rgba(0, 0, 0, 0.08);
             color: var(--muted);
         }
+
         .light-mode .tag:hover {
             background: linear-gradient(90deg, var(--accent), var(--accent-2));
             color: white;
             border-color: transparent;
         }
+
         .light-mode .filter-tags button {
             background: rgba(0, 0, 0, 0.03);
             border: 1px solid rgba(0, 0, 0, 0.08);
             color: var(--muted);
         }
+
         .light-mode .filter-tags button.active,
         .light-mode .filter-tags button:hover {
             background: var(--accent);
             color: white;
             border-color: var(--accent-2);
         }
+
         .light-mode .mobile-nav-panel {
             background: rgba(255, 255, 255, 0.9);
         }
+
         .light-mode .mobile-nav-panel a {
             color: #212529;
             border-bottom-color: rgba(0, 0, 0, 0.1);
         }
+
         .light-mode .mobile-nav-panel a:hover,
         .light-mode .mobile-nav-panel a.active {
             color: var(--accent);
         }
+
         .light-mode .mobile-menu-btn {
             color: #212529;
         }
+
         .light-mode footer {
             border-top-color: rgba(0, 0, 0, 0.1);
         }
+
         .light-mode .footer-socials a,
         .light-mode .contact-socials a {
             background: rgba(0, 0, 0, 0.05);
             color: var(--muted);
         }
+
         .light-mode .footer-socials a:hover,
         .light-mode .contact-socials a:hover {
-             background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
             color: white;
         }
-        .light-mode .theme-toggle-btn .fa-sun { display: block; }
-        .light-mode .theme-toggle-btn .fa-moon { display: none; }
+
+        .light-mode .theme-toggle-btn .fa-sun {
+            display: block;
+        }
+
+        .light-mode .theme-toggle-btn .fa-moon {
+            display: none;
+        }
 
 
         /* Accessibility: Focus Visible */
@@ -1141,24 +1376,27 @@
         textarea:focus-visible {
             outline: 3px solid var(--accent);
             outline-offset: 2px;
-            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.14); /* Extra glow */
-            border-radius: 4px; /* Optional: adds rounding to the outline */
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.14);
+            /* Extra glow */
+            border-radius: 4px;
+            /* Optional: adds rounding to the outline */
         }
+
         /* Ensure smooth scroll respects reduced motion preferences */
         @media (prefers-reduced-motion: reduce) {
-          html {
-            scroll-behavior: auto;
-          }
-          *, *::before, *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-            scroll-behavior: auto !important;
-          }
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
-
-
-
     </style>
 
 </head>
@@ -1207,7 +1445,7 @@
                 <h1 class="animate-on-scroll main-headline" style="--delay:0.05s;">
                     Hi, I’m <span>Srinivasa Manikanta</span>
                 </h1>
-                 <p class="hero-subheading animate-on-scroll sub-headline" style="--delay:0.08s;">
+                <p class="hero-subheading animate-on-scroll sub-headline" style="--delay:0.08s;">
                     Electrical & Electronics Engineer | <span id="typewriter" class="typewriter"></span>
                 </p>
 
@@ -1224,8 +1462,12 @@
             </div>
             <div class="about-container animate-on-scroll about-content">
                 <div style="flex:1;min-width:260px;">
-                    <p class="about-description">I am an Electrical and Electronics Engineering student with a passion for embedded systems, web development, and smart energy solutions. I specialize in designing projects that combine electronics, IoT, and software to solve real-world problems.</p>
-                     <p class="about-description">I follow a simulation-first approach, using platforms like Tinkercad, Wokwi, and Circuit Designer to prototype before building. I’m constantly learning and upgrading my skills, and I thrive on turning concepts into live, functional projects.</p>
+                    <p class="about-description">I am an Electrical and Electronics Engineering student with a passion
+                        for embedded systems, web development, and smart energy solutions. I specialize in designing
+                        projects that combine electronics, IoT, and software to solve real-world problems.</p>
+                    <p class="about-description">I follow a simulation-first approach, using platforms like Tinkercad,
+                        Wokwi, and Circuit Designer to prototype before building. I’m constantly learning and upgrading
+                        my skills, and I thrive on turning concepts into live, functional projects.</p>
                 </div>
             </div>
         </section>
@@ -1251,119 +1493,203 @@
 
                     <article class="project animate-on-scroll" data-tags="Embedded IoT">
                         <div class="project-media">
-                            <img src="assets/autoexhaustfan.png" alt="Illustration of an automatic exhaust fan system" loading="lazy">
-                            <div class="project-overlay"><div class="project-links"><a href="https://autoexhaustfan.rsmk.co.in/" target="_blank">Explore</a></div></div>
+                            <img src="assets/autoexhaustfan.png" alt="Illustration of an automatic exhaust fan system"
+                                loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links"><a href="https://autoexhaustfan.rsmk.co.in/"
+                                        target="_blank">Explore</a></div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>Automatic Exhaust Fan</h3>
-                            <p>Smart exhaust fan that detects gas concentration and turns on/off automatically. Includes manual override and auto-off timer.</p>
-                            <div class="tags"><div class="tag">Arduino</div><div class="tag">MQ-2 Sensor</div><div class="tag">Relay</div></div>
+                            <p>Smart exhaust fan that detects gas concentration and turns on/off automatically. Includes
+                                manual override and auto-off timer.</p>
+                            <div class="tags">
+                                <div class="tag">Arduino</div>
+                                <div class="tag">MQ-2 Sensor</div>
+                                <div class="tag">Relay</div>
+                            </div>
                         </div>
                     </article>
 
                     <article class="project animate-on-scroll" data-tags="Web">
                         <div class="project-media">
-                            <img src="assets/colorohm.png" alt="Graphic representation of a resistor with color bands" loading="lazy">
-                            <div class="project-overlay"><div class="project-links"><a href="https://colorohm.rsmk.me/" target="_blank">Explore</a></div></div>
+                            <img src="assets/colorohm.png" alt="Graphic representation of a resistor with color bands"
+                                loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links"><a href="https://colorohm.rsmk.me/"
+                                        target="_blank">Explore</a></div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>OhmDecoder (Color Ohm)</h3>
-                            <p>A live web tool to instantly and accurately calculate resistor values from standard color bands.</p>
-                            <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">JavaScript</div></div>
+                            <p>A live web tool to instantly and accurately calculate resistor values from standard color
+                                bands.</p>
+                            <div class="tags">
+                                <div class="tag">HTML</div>
+                                <div class="tag">CSS</div>
+                                <div class="tag">JavaScript</div>
+                            </div>
                         </div>
                     </article>
 
                     <article class="project animate-on-scroll" data-tags="Web AI">
                         <div class="project-media">
-                            <img src="assets/Chatbot.png" alt="Laptop displaying an AI chatbot interface" loading="lazy">
-                            <div class="project-overlay"><div class="project-links"><a href="https://ai.rsmk.co.in" target="_blank">Try Now</a></div></div>
+                            <img src="assets/Chatbot.png" alt="Laptop displaying an AI chatbot interface"
+                                loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links"><a href="https://ai.rsmk.co.in" target="_blank">Try Now</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>AI Chatbot with GPT-OSS</h3>
-                            <p>Human-like chatbot interface with real-time API-powered responses from the Hugging Face ecosystem.</p>
-                            <div class="tags"><div class="tag">Next.js</div><div class="tag">API</div><div class="tag">AI</div></div>
+                            <p>Human-like chatbot interface with real-time API-powered responses from the Hugging Face
+                                ecosystem.</p>
+                            <div class="tags">
+                                <div class="tag">Next.js</div>
+                                <div class="tag">API</div>
+                                <div class="tag">AI</div>
+                            </div>
                         </div>
                     </article>
 
                     <article class="project animate-on-scroll" data-tags="Web">
                         <div class="project-media">
                             <img src="assets/budgetbuddy.png" alt="Budget Buddy application logo" loading="lazy">
-                            <div class="project-overlay"><div class="project-links"><a href="https://budgetbuddy.rsmk.co.in/" target="_blank">Explore</a></div></div>
+                            <div class="project-overlay">
+                                <div class="project-links"><a href="https://budgetbuddy.rsmk.co.in/"
+                                        target="_blank">Explore</a></div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>Budget Buddy</h3>
-                            <p>A web-based budgeting and expense tracker with interactive data visualization using Chart.js.</p>
-                            <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">Chart.js</div></div>
+                            <p>A web-based budgeting and expense tracker with interactive data visualization using
+                                Chart.js.</p>
+                            <div class="tags">
+                                <div class="tag">HTML</div>
+                                <div class="tag">CSS</div>
+                                <div class="tag">Chart.js</div>
+                            </div>
                         </div>
                     </article>
-                     <article class="project animate-on-scroll" data-tags="Embedded IoT">
+                    <article class="project animate-on-scroll" data-tags="Embedded IoT">
                         <div class="project-media">
-                             <img src="assets/automated street light.webp" alt="Futuristic street view with smart street lights" loading="lazy">
-                             <div class="project-overlay"><div class="project-links"><a href="https://rsmk27.github.io/special-websites/">Details</a></div></div>
+                            <img src="assets/automated street light.webp"
+                                alt="Futuristic street view with smart street lights" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links"><a
+                                        href="https://rsmk27.github.io/special-websites/">Details</a></div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>Automatic Street Light</h3>
-                            <p>Turns street lights on/off automatically based on ambient light using LDR sensors for energy efficiency.</p>
-                            <div class="tags"><div class="tag">Arduino</div><div class="tag">LDR Sensor</div><div class="tag">Relay</div></div>
+                            <p>Turns street lights on/off automatically based on ambient light using LDR sensors for
+                                energy efficiency.</p>
+                            <div class="tags">
+                                <div class="tag">Arduino</div>
+                                <div class="tag">LDR Sensor</div>
+                                <div class="tag">Relay</div>
+                            </div>
                         </div>
                     </article>
 
                     <article class="project animate-on-scroll" data-tags="Embedded IoT">
                         <div class="project-media">
-                            <img src="assets/Bgimage.webp" alt="Solar panel system powering water pumps in a quarry" loading="lazy">
-                            <div class="project-overlay"><div class="project-links"><a href="https://sih25072.vercel.app">Details</a></div></div>
+                            <img src="assets/Bgimage.webp" alt="Solar panel system powering water pumps in a quarry"
+                                loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links"><a href="https://spds.rsmk.me">Details</a></div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>Solar Dewatering System</h3>
-                            <p>Multi-circuit solar system with battery charging, pump control, moisture detection, and single-axis solar tracking.</p>
-                            <div class="tags"><div class="tag">Solar</div><div class="tag">Sensors</div><div class="tag">Arduino</div></div>
+                            <p>Multi-circuit solar system with battery charging, pump control, moisture detection, and
+                                single-axis solar tracking.</p>
+                            <div class="tags">
+                                <div class="tag">Solar</div>
+                                <div class="tag">Sensors</div>
+                                <div class="tag">Arduino</div>
+                            </div>
                         </div>
                     </article>
 
                     <article class="project animate-on-scroll" data-tags="Web">
                         <div class="project-media">
-                            <img src="assets/portfolio.webp" alt="Laptop displaying a portfolio website interface" loading="lazy">
-                            <div class="project-overlay"><div class="project-links"><a href="#hero">On It!</a></div></div>
+                            <img src="assets/portfolio.webp" alt="Laptop displaying a portfolio website interface"
+                                loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links"><a href="https://rsmk.me">On It!</a></div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>Portfolio Website</h3>
-                            <p>This personal portfolio, designed to showcase projects, blogs, and experiments in a clean, interactive format.</p>
-                            <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">JavaScript</div></div>
+                            <p>This personal portfolio, designed to showcase projects, blogs, and experiments in a
+                                clean, interactive format.</p>
+                            <div class="tags">
+                                <div class="tag">HTML</div>
+                                <div class="tag">CSS</div>
+                                <div class="tag">JavaScript</div>
+                            </div>
                         </div>
                     </article>
 
                     <article class="project animate-on-scroll" data-tags="Web">
                         <div class="project-media">
-                             <img src="assets/playzone.webp" alt="Futuristic interface for a gaming platform" loading="lazy">
-                             <div class="project-overlay"><div class="project-links"><a href="https://playzone.rsmk.me">Explore</a></div></div>
+                            <img src="assets/playzone.webp" alt="Futuristic interface for a gaming platform"
+                                loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links"><a href="https://playzone.rsmk.me">Explore</a></div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>Playzone</h3>
-                            <p>An interactive web-based entertainment platform featuring a collection of simple games and activities.</p>
-                            <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">JavaScript</div></div>
+                            <p>An interactive web-based entertainment platform featuring a collection of simple games
+                                and activities.</p>
+                            <div class="tags">
+                                <div class="tag">HTML</div>
+                                <div class="tag">CSS</div>
+                                <div class="tag">JavaScript</div>
+                            </div>
                         </div>
                     </article>
                     <article class="project animate-on-scroll" data-tags="Web">
                         <div class="project-media">
-                             <img src="assets/my blogs.webp" alt="Laptop displaying a blog website interface" loading="lazy">
-                             <div class="project-overlay"><div class="project-links"><a href="https://blogs.rsmk.me">Read More</a></div></div>
+                            <img src="assets/my blogs.webp" alt="Laptop displaying a blog website interface"
+                                loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links"><a href="https://blogs.rsmk.me">Read More</a></div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>My Blogs</h3>
-                            <p>A personal blog for sharing project walkthroughs, technical tutorials, and insights on new technologies.</p>
-                            <div class="tags"><div class="tag">Content</div><div class="tag">HTML</div><div class="tag">CSS</div></div>
+                            <p>A personal blog for sharing project walkthroughs, technical tutorials, and insights on
+                                new technologies.</p>
+                            <div class="tags">
+                                <div class="tag">Content</div>
+                                <div class="tag">HTML</div>
+                                <div class="tag">CSS</div>
+                            </div>
                         </div>
                     </article>
 
                     <article class="project animate-on-scroll" data-tags="Web">
                         <div class="project-media">
-                             <img src="assets/newshub.webp" alt="Laptop displaying a news aggregation website interface" loading="lazy">
-                             <div class="project-overlay"><div class="project-links"><a href="https://news.rsmk.co.in">Read More</a></div></div>
+                            <img src="assets/newshub.webp" alt="Laptop displaying a news aggregation website interface"
+                                loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links"><a href="https://news.rsmk.co.in">Read More</a></div>
+                            </div>
                         </div>
                         <div class="project-body">
                             <h3>NEWS hub</h3>
-                            <p>News Hub is a real-time headline aggregator that delivers the latest news of the day in a clean, distraction-free interface.</p>
-                            <div class="tags"><div class="tag">Content</div><div class="tag">HTML</div><div class="tag">CSS</div></div>
+                            <p>News Hub is a real-time headline aggregator that delivers the latest news of the day in a
+                                clean, distraction-free interface.</p>
+                            <div class="tags">
+                                <div class="tag">Content</div>
+                                <div class="tag">HTML</div>
+                                <div class="tag">CSS</div>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -1376,30 +1702,35 @@
             </div>
             <div class="relative max-w-2xl mx-auto">
                 <div class="timeline-item animate-on-scroll">
-                     <div class="timeline-line"></div> <!-- Line moved here -->
+                    <div class="timeline-line"></div> <!-- Line moved here -->
                     <div class="timeline-item-dot"></div>
                     <div class="timeline-content">
                         <h3>School</h3>
                         <p class="timeline-date">upto 2021</p>
-                        <p class="timeline-description">Graduated from secondary education, establishing a strong foundation in science and mathematics. This period sparked my initial curiosity in the fields of technology and engineering.</p>
+                        <p class="timeline-description">Graduated from secondary education, establishing a strong
+                            foundation in science and mathematics. This period sparked my initial curiosity in the
+                            fields of technology and engineering.</p>
                     </div>
                 </div>
                 <div class="timeline-item animate-on-scroll">
-                     <div class="timeline-line"></div> <!-- Line moved here -->
+                    <div class="timeline-line"></div> <!-- Line moved here -->
                     <div class="timeline-item-dot"></div>
                     <div class="timeline-content">
                         <h3>Diploma in Electrical and Electronics Engineering</h3>
                         <p class="timeline-date">2021-2024</p>
-                        <p class="timeline-description">Completed my diploma in Electrical and Electronics Engineering, gaining hands-on experience in circuit design, power systems, and embedded programming. </p>
+                        <p class="timeline-description">Completed my diploma in Electrical and Electronics Engineering,
+                            gaining hands-on experience in circuit design, power systems, and embedded programming. </p>
                     </div>
                 </div>
                 <div class="timeline-item animate-on-scroll">
-                     <div class="timeline-line"></div> <!-- Line moved here -->
+                    <div class="timeline-line"></div> <!-- Line moved here -->
                     <div class="timeline-item-dot"></div>
                     <div class="timeline-content">
                         <h3>B.tech in Electrical and Electronics Engineering</h3>
                         <p class="timeline-date">2024 - Present</p>
-                        <p class="timeline-description">Currently pursuing a bachelor's degree to deepen my expertise in advanced topics like AI, machine learning, and IoT, preparing for a future in cutting-edge engineering roles.</p>
+                        <p class="timeline-description">Currently pursuing a bachelor's degree to deepen my expertise in
+                            advanced topics like AI, machine learning, and IoT, preparing for a future in cutting-edge
+                            engineering roles.</p>
                     </div>
                 </div>
             </div>
@@ -1466,7 +1797,7 @@
                             <i class="fas fa-network-wired"></i>
                             <p>IoT & Cloud</p>
                         </div>
-                         <div class="tech-item">
+                        <div class="tech-item">
                             <i class="fab fa-html5"></i>
                             <p>Web Dev</p>
                         </div>
@@ -1497,28 +1828,32 @@
                         <i class="fas fa-microchip"></i>
                     </div>
                     <h3 class="certification-name">Embedded Systems</h3>
-                    <p class="certification-description">Advanced training in embedded systems design, microcontroller programming, and real-time operating systems.</p>
+                    <p class="certification-description">Advanced training in embedded systems design, microcontroller
+                        programming, and real-time operating systems.</p>
                 </article>
                 <article class="certification-item animate-on-scroll">
                     <div class="certification-icon">
                         <i class="fas fa-print"></i>
                     </div>
                     <h3 class="certification-name">3D Printing</h3>
-                    <p class="certification-description">Proficient in additive manufacturing, 3D modeling, and rapid prototyping for engineering applications.</p>
+                    <p class="certification-description">Proficient in additive manufacturing, 3D modeling, and rapid
+                        prototyping for engineering applications.</p>
                 </article>
                 <article class="certification-item animate-on-scroll">
                     <div class="certification-icon">
                         <i class="fas fa-charging-station"></i>
                     </div>
                     <h3 class="certification-name">EV Technology</h3>
-                    <p class="certification-description">Specialized knowledge in electric vehicle systems, battery management, and sustainable mobility solutions.</p>
+                    <p class="certification-description">Specialized knowledge in electric vehicle systems, battery
+                        management, and sustainable mobility solutions.</p>
                 </article>
                 <article class="certification-item animate-on-scroll">
                     <div class="certification-icon">
                         <i class="fas fa-drone"></i>
                     </div>
                     <h3 class="certification-name">Drone Technology</h3>
-                    <p class="certification-description">Expertise in UAV systems, flight control, autonomous navigation, and aerial applications.</p>
+                    <p class="certification-description">Expertise in UAV systems, flight control, autonomous
+                        navigation, and aerial applications.</p>
                 </article>
             </div>
         </section>
@@ -1530,11 +1865,13 @@
             <div class="advanced-contact-card">
                 <div class="contact-content">
                     <h3>Let's Build the Future Together.</h3>
-                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be a part of your vision. Whether you have a question or just want to say hi, my inbox is always open.</p>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be a part of your
+                        vision. Whether you have a question or just want to say hi, my inbox is always open.</p>
                     <div class="contact-details">
                         <div class="contact-detail-item">
                             <i class="fas fa-envelope"></i>
-                            <a href="mailto:srinivasmanikantarajapantula@gmail.com">srinivasmanikantarajapantula@gmail.com</a>
+                            <a
+                                href="mailto:srinivasmanikantarajapantula@gmail.com">srinivasmanikantarajapantula@gmail.com</a>
                         </div>
                         <div class="contact-detail-item">
                             <i class="fas fa-phone-alt"></i>
@@ -1547,7 +1884,9 @@
                         <!-- Resume Download Link -->
                         <div class="contact-detail-item">
                             <i class="fas fa-file-download"></i>
-                            <a href="https://github.com/Rsmk27/myportfolio/blob/aa698ea9d00a82c1aa3a0862561675b509744559/resume.pdf" download="Srinivasa_Manikanta_Resume.pdf" class="download-resume-link">Download Resume</a>
+                            <a href="resume.pdf"
+                                download="Srinivasa_Manikanta_Resume.pdf" class="download-resume-link">Download
+                                Resume</a>
                         </div>
                     </div>
                     <div class="contact-socials">
@@ -1557,13 +1896,16 @@
                         <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram Profile" title="Telegram">
                             <i class="fab fa-telegram-plane"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/rsmk27" target="_blank" aria-label="LinkedIn Profile" title="LinkedIn">
+                        <a href="https://www.linkedin.com/in/rsmk27" target="_blank" aria-label="LinkedIn Profile"
+                            title="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
                 </div>
                 <div class="contact-animation">
-                    <dotlottie-wc style="width: 100%; height: 100%;" src="https://lottie.host/1f9a391d-80cb-4a18-9802-3b411387ccde/XTCtftM8xU.lottie" speed="1" autoplay loop></dotlottie-wc>
+                    <dotlottie-wc style="width: 100%; height: 100%;"
+                        src="https://lottie.host/1f9a391d-80cb-4a18-9802-3b411387ccde/XTCtftM8xU.lottie" speed="1"
+                        autoplay loop></dotlottie-wc>
                 </div>
             </div>
         </section>
@@ -1579,13 +1921,14 @@
                 <div class="copyright-text">© <span id="year"></span> RSMK - All Rights Reserved</div>
             </div>
             <div class="footer-socials">
-                 <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub Profile" title="GitHub">
+                <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub Profile" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
                 <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram Profile" title="Telegram">
                     <i class="fab fa-telegram-plane"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/rsmk27" target="_blank" aria-label="LinkedIn Profile" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/rsmk27" target="_blank" aria-label="LinkedIn Profile"
+                    title="LinkedIn">
                     <i class="fab fa-linkedin"></i>
                 </a>
             </div>
@@ -1593,7 +1936,7 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const body = document.body;
             const header = document.getElementById('siteHeader');
             const sections = document.querySelectorAll('main section');
@@ -1638,7 +1981,7 @@
             function gsapAnimations() {
                 gsap.registerPlugin(ScrollTrigger);
 
-                 // Animate elements within sections (using original .animate-on-scroll class)
+                // Animate elements within sections (using original .animate-on-scroll class)
                 const animatedElements = document.querySelectorAll(".animate-on-scroll");
                 animatedElements.forEach((el, index) => {
                     const delay = el.style.getPropertyValue("--delay") ? parseFloat(el.style.getPropertyValue("--delay")) : 0;
@@ -1648,10 +1991,10 @@
                     if (el.classList.contains('timeline-item')) {
                         const line = el.querySelector('.timeline-line'); // Target existing line
                         if (line) {
-                           gsap.from(line, {
+                            gsap.from(line, {
                                 scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
                                 scaleY: 0, duration: 1.2, ease: "power3.out", delay: index * 0.15 // Slightly adjusted delay
-                           });
+                            });
                         }
                         // Add x-axis animation for timeline items if desired
                         // animationProps.x = -30;
@@ -1668,7 +2011,7 @@
                 skillItems.forEach(item => {
                     const percentText = item.querySelector('.skill-percent');
                     const percentValue = item.dataset.percent || 0;
-                    if(percentText) {
+                    if (percentText) {
                         gsap.fromTo(percentText,
                             { innerText: 0 },
                             {
@@ -1677,7 +2020,7 @@
                                 ease: "power3.out",
                                 scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none none", once: true },
                                 snap: { innerText: 1 }, // Snap to integer values
-                                onUpdate: function() {
+                                onUpdate: function () {
                                     percentText.innerText = Math.round(this.targets()[0].innerText) + "%";
                                 }
                             }
@@ -1766,9 +2109,9 @@
                 const navObserver = new IntersectionObserver((entries) => {
                     let intersectingSectionId = null;
                     entries.forEach(entry => {
-                         if (entry.isIntersecting) {
+                        if (entry.isIntersecting) {
                             intersectingSectionId = entry.target.id;
-                         }
+                        }
                     });
 
                     // Update all links based on the last intersecting section found
@@ -1780,7 +2123,7 @@
                         }
                     });
                     navLinksMobile.forEach(link => {
-                         if (link.dataset.navSection === intersectingSectionId) {
+                        if (link.dataset.navSection === intersectingSectionId) {
                             link.classList.add('active');
                         } else {
                             link.classList.remove('active');
@@ -1835,7 +2178,7 @@
                 let currentTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark-mode' : 'light-mode');
 
                 function applyTheme(theme) {
-                     if (theme === 'light-mode') {
+                    if (theme === 'light-mode') {
                         body.classList.add('light-mode');
                         body.classList.remove('dark-mode'); // Explicitly remove dark if needed by other CSS
                     } else {
@@ -1876,9 +2219,9 @@
                 // Close menu when a link is clicked
                 mobileNavPanel.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
-                         mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                         mobileNavPanel.classList.remove('active');
-                         body.classList.remove('mobile-menu-active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        mobileNavPanel.classList.remove('active');
+                        body.classList.remove('mobile-menu-active');
                     });
                 });
             }
@@ -1905,5 +2248,5 @@
     <!-- Ensure this script exists and is correctly referenced -->
     <script type="module" src="vortex-background.js"></script>
 </body>
-</html>
 
+</html>
