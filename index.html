@@ -29,7 +29,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Lottie JS for animation components -->
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
@@ -316,10 +316,7 @@
         }
 
         /* Optional: Prevent body scroll when mobile menu is open */
-        body.mobile-menu-active {
-            /* overflow: hidden; */
-            /* Can cause layout shifts, use cautiously */
-        }
+
 
 
         /* Layout */
@@ -1250,10 +1247,7 @@
             color: #212529;
         }
 
-        .light-mode .logo img {
-            /* filter: invert(1); */
-            /* Consider if logo looks good inverted */
-        }
+
 
         .light-mode header {
             background: rgba(255, 255, 255, 0.7);
@@ -1397,6 +1391,22 @@
                 scroll-behavior: auto !important;
             }
         }
+
+        .new-badge {
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            color: white;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 50px;
+            vertical-align: middle;
+            margin-left: 8px;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+            display: inline-block;
+            transform: translateY(-2px);
+        }
     </style>
 
 </head>
@@ -1483,8 +1493,7 @@
                 <button data-filter="Embedded">Embedded</button>
                 <button data-filter="Web">Web/Software</button>
                 <button data-filter="IoT">IoT</button>
-                <button data-filter="AI">AI</button>
-                <button data-filter="Robotics">Robotics</button>
+
             </div>
 
             <!-- Projects Container with horizontal scroll -->
@@ -1533,26 +1542,7 @@
                         </div>
                     </article>
 
-                    <article class="project animate-on-scroll" data-tags="Web AI">
-                        <div class="project-media">
-                            <img src="assets/Chatbot.png" alt="Laptop displaying an AI chatbot interface"
-                                loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a href="https://ai.rsmk.co.in" target="_blank">Try Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>AI Chatbot with GPT-OSS</h3>
-                            <p>Human-like chatbot interface with real-time API-powered responses from the Hugging Face
-                                ecosystem.</p>
-                            <div class="tags">
-                                <div class="tag">Next.js</div>
-                                <div class="tag">API</div>
-                                <div class="tag">AI</div>
-                            </div>
-                        </div>
-                    </article>
+
 
                     <article class="project animate-on-scroll" data-tags="Web">
                         <div class="project-media">
@@ -1564,8 +1554,8 @@
                         </div>
                         <div class="project-body">
                             <h3>Budget Buddy</h3>
-                            <p>A web-based budgeting and expense tracker with interactive data visualization using
-                                Chart.js.</p>
+                            <p>An Expense tracker website "vibe coded" by me. It started as a personal expense logger
+                                and is now public with Google Auth, secure database, and email budget reminders.</p>
                             <div class="tags">
                                 <div class="tag">HTML</div>
                                 <div class="tag">CSS</div>
@@ -1855,6 +1845,14 @@
                     <p class="certification-description">Expertise in UAV systems, flight control, autonomous
                         navigation, and aerial applications.</p>
                 </article>
+                <article class="certification-item animate-on-scroll">
+                    <div class="certification-icon">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="certification-name">Prompt to Prototype <span class="new-badge">New</span></h3>
+                    <p class="certification-description">Learned how to use AI models to build fully functional
+                        prototypes, and successfully upgraded BudgetBuddy with multiple advanced features.</p>
+                </article>
             </div>
         </section>
 
@@ -1884,21 +1882,42 @@
                         <!-- Resume Download Link -->
                         <div class="contact-detail-item">
                             <i class="fas fa-file-download"></i>
-                            <a href="resume.pdf"
-                                download="Srinivasa_Manikanta_Resume.pdf" class="download-resume-link">Download
+                            <a href="resume.pdf" download="Srinivasa_Manikanta_Resume.pdf"
+                                class="download-resume-link">Download
                                 Resume</a>
                         </div>
                     </div>
                     <div class="contact-socials">
-                        <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub Profile" title="GitHub">
+                        <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" title="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram Profile" title="Telegram">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/rsmk27" target="_blank" aria-label="LinkedIn Profile"
+                        <a href="https://www.linkedin.com/in/rsmk27" target="_blank" aria-label="LinkedIn"
                             title="LinkedIn">
                             <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram" title="Telegram">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                        <a href="#" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" target="_blank" aria-label="X (Twitter)" title="X (Twitter)">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank" aria-label="Threads" title="Threads">
+                            <i class="fa-brands fa-threads"></i>
+                        </a>
+                        <a href="#" target="_blank" aria-label="Discord" title="Discord">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" target="_blank" aria-label="Instagram" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank" aria-label="Facebook" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" target="_blank" aria-label="YouTube" title="YouTube">
+                            <i class="fab fa-youtube"></i>
                         </a>
                     </div>
                 </div>
@@ -1920,18 +1939,7 @@
                 </div>
                 <div class="copyright-text">© <span id="year"></span> RSMK - All Rights Reserved</div>
             </div>
-            <div class="footer-socials">
-                <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub Profile" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram Profile" title="Telegram">
-                    <i class="fab fa-telegram-plane"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/rsmk27" target="_blank" aria-label="LinkedIn Profile"
-                    title="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-            </div>
+
         </div>
     </footer>
 
