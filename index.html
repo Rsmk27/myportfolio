@@ -1,2264 +1,553 @@
-<!doctype html>
-<html lang="en-US" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Srinivasa Manikanta Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srinivasa Manikanta | Electrical & Electronics Engineer</title>
+    <link rel="icon" type="image/jpeg" href="assets/profile.jpg">
 
-    <!-- SEO & Social Sharing Tags -->
+    <!-- SEO -->
     <meta name="description"
-        content="Srinivasa Manikanta's Electrical and Electronics Engineering Portfolio, specializing in IoT, Smart Energy, and AI Integration, EEE, ALIET, portfolio" />
-    <meta name="theme-color" content="#0a0e13">
-    <meta property="og:title" content="Srinivasa Manikanta | EEE Portfolio" />
-    <meta property="og:description"
-        content="Building tomorrow's technology with Smart Energy, IoT, and AI Integration." />
-    <meta property="og:image" content="assets/rsmk-logo.png" />
-    <meta property="og:url" content="http://rsmk27.github.io/myportfolio" />
+        content="Portfolio of Srinivasa Manikanta - Electrical & Electronics Engineer specializing in Embedded Systems, Smart Energy, and Intelligent Software Platforms.">
+    <meta name="theme-color" content="#0F1115">
 
-    <!-- Favicon and Preload for Critical Assets -->
-    <link rel="icon" href="assets/rsmk-logo.png" type="image/png">
-    <link rel="preload" href="assets/rsmk-logo.png" as="image">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap"
-        as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
-        as="style">
-
-    <!-- Fonts, Icons, and Libraries -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@500;700&family=Space+Grotesk:wght@300;500;700&display=swap"
         rel="stylesheet">
+
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Lottie JS for animation components -->
-    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0HW7FXHBR"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5458337028479481"
-        crossorigin="anonymous"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-Z0HW7FXHBR');
-    </script>
-    <!-- GSAP for animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <!-- Embedded CSS -->
-    <style>
-        /* CSS Variables - Slightly improved contrast for accessibility */
-        :root {
-            --bg: #0a0e13;
-            /* Slightly darker */
-            --surface: #121924;
-            /* Darker surface */
-            --muted: #aab8ca;
-            /* Lighter muted for better contrast */
-            --accent: #007bff;
-            /* RGB: 0, 123, 255 */
-            --accent-2: #3390ff;
-            /* RGB: 51, 144, 255 */
-            --glass: rgba(255, 255, 255, 0.04);
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            --radius: 12px;
-            --ease: cubic-bezier(.2, .9, .3, 1);
-            --header-height: 72px;
-        }
-
-        /* Basic reset */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        html,
-        body {
-            height: 100%;
-        }
-
-        body {
-            font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: var(--bg);
-            color: #e6eef8;
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.5;
-            /* Slightly increased for better readability */
-            padding-top: var(--header-height);
-            /* Use variable */
-            position: relative;
-            overflow-x: hidden;
-            /* Prevent horizontal scroll */
-        }
-
-        /* No-JS Warning */
-        .no-script-warning {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #ffc107;
-            color: #000;
-            text-align: center;
-            padding: 10px;
-            z-index: 9999;
-        }
-
-
-        /* Dynamic Canvas Background Container */
-        #vortex-bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            height: var(--header-height);
-            /* Use variable */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
-            backdrop-filter: blur(12px) saturate(150%);
-            background: rgba(18, 25, 36, 0.5);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-            z-index: 1000;
-            transition: transform .35s var(--ease), opacity .35s var(--ease);
-        }
-
-        header.hidden {
-            transform: translateY(-110%);
-            opacity: 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-            text-decoration: none;
-            /* Add for links */
-            color: inherit;
-            /* Add for links */
-        }
-
-        .logo img {
-            height: 30px;
-        }
-
-        .logo .dot {
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            border-radius: 3px;
-            box-shadow: 0 4px 18px rgba(0, 123, 255, 0.18);
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        /* Desktop Navigation */
-        nav.desktop-nav {
-            display: flex;
-            gap: 18px;
-            align-items: center;
-        }
-
-        nav.desktop-nav a {
-            color: var(--muted);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 10px;
-            border-radius: 8px;
-            transition: color .18s var(--ease), background .18s var(--ease);
-        }
-
-        nav.desktop-nav a:hover,
-        nav.desktop-nav a.active {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* Call to Action Button */
-        .cta-btn {
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: white;
-            padding: 9px 14px;
-            border-radius: 10px;
-            font-weight: 700;
-            border: 0;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 28px rgba(0, 123, 255, 0.18);
-            text-decoration: none;
-            /* Ensure links look like buttons */
-            display: inline-flex;
-            /* Align icon and text if needed */
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 123, 255, 0.25);
-        }
-
-        /* Theme Toggle Button Specifics */
-        .theme-toggle-btn {
-            padding: 9px 12px;
-            /* Adjust padding for icon button */
-            font-size: 1rem;
-        }
-
-        .theme-toggle-btn .fa-sun {
-            display: none;
-        }
-
-        /* Initially hide sun */
-        .theme-toggle-btn .fa-moon {
-            display: block;
-        }
-
-        /* Initially show moon */
-
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: none;
-            /* Hide by default */
-            background: none;
-            border: none;
-            color: var(--muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 8px;
-            z-index: 1100;
-            /* Above header background */
-        }
-
-        .mobile-menu-btn .close-icon {
-            display: none;
-        }
-
-        .mobile-menu-btn .open-icon {
-            display: block;
-        }
-
-        .mobile-menu-btn[aria-expanded="true"] .close-icon {
-            display: block;
-        }
-
-        .mobile-menu-btn[aria-expanded="true"] .open-icon {
-            display: none;
-        }
-
-        /* Mobile Navigation Panel */
-        .mobile-nav-panel {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            /* Start off-screen */
-            width: 280px;
-            height: 100vh;
-            background: rgba(18, 25, 36, 0.9);
-            /* Slightly transparent */
-            backdrop-filter: blur(15px);
-            padding: calc(var(--header-height) + 40px) 30px 40px;
-            /* Space below header */
-            z-index: 999;
-            /* Below header but above content */
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            transition: right 0.4s var(--ease);
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .mobile-nav-panel.active {
-            right: 0;
-        }
-
-        .mobile-nav-panel a {
-            color: #e6eef8;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: color 0.2s var(--ease);
-        }
-
-        .mobile-nav-panel a:hover,
-        .mobile-nav-panel a.active {
-            color: var(--accent);
-        }
-
-        /* Optional: Prevent body scroll when mobile menu is open */
-
-
-
-        /* Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 36px 20px;
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        /* Hero Section */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            min-height: 60vh;
-            place-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            background: radial-gradient(ellipse at center, rgba(10, 14, 19, 0.7) 0%, transparent 70%);
-        }
-
-        .hero-left {
-            text-align: center;
-        }
-
-        .hero-left h1 {
-            font-size: clamp(40px, 6vw, 60px);
-            margin: 0 0 12px 0;
-            letter-spacing: -0.02em;
-            font-family: 'Orbitron', monospace;
-            line-height: 1.1;
-            /* Animation handled by GSAP */
-        }
-
-        /* Original Keyframe - kept for reference but not used if GSAP handles it */
-        @keyframes text-reveal {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(0.95);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .hero-left h1 span {
-            background: linear-gradient(135deg, #e6eef8 0%, var(--accent) 50%, var(--accent-2) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
-            /* Fallback */
-        }
-
-        .hero-left p.hero-subheading {
-            /* Make selector more specific */
-            color: var(--muted);
-            max-width: 60ch;
-            margin: 0 auto 18px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
-        }
-
-        .hero-left .section-title {
-            justify-content: center;
-        }
-
-        .hero-left .section-title h2 {
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
-        .hero-subheading {
-            font-family: 'Orbitron', monospace;
-            color: var(--muted);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .actions {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            justify-content: center;
-            margin-top: 1.5rem;
-            /* Added margin */
-        }
-
-        /* Typewriter */
-        @keyframes blink-caret {
-
-            from,
-            to {
-                border-color: transparent
-            }
-
-            50% {
-                border-color: var(--accent);
-            }
-        }
-
-        .typewriter {
-            border-right: .15em solid var(--accent);
-            animation: blink-caret .75s step-end infinite;
-            color: var(--accent);
-            white-space: nowrap;
-            overflow: hidden;
-            vertical-align: bottom;
-            display: inline-block;
-            /* Prevent line break issues */
-        }
-
-        /* About Me Section */
-        .about-container {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            box-shadow: var(--card-shadow);
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .about-description {
-            color: var(--muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-description:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Projects Section */
-        .filter-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .filter-tags button {
-            padding: 8px 16px;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--muted);
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            cursor: pointer;
-            transition: all 0.2s var(--ease);
-        }
-
-        .filter-tags button.active,
-        .filter-tags button:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent-2);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
-        }
-
-        .projects-container {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 2rem;
-            scroll-snap-type: x mandatory;
-            /* Scrollbar styles for Firefox */
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent) rgba(30, 41, 59, 0.5);
-        }
-
-        /* Custom Scrollbar for Webkit browsers (Chrome, Safari) */
-        .projects-container::-webkit-scrollbar {
-            height: 10px;
-        }
-
-        .projects-container::-webkit-scrollbar-track {
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 5px;
-        }
-
-        .projects-container::-webkit-scrollbar-thumb {
-            background-color: var(--accent);
-            border-radius: 5px;
-            border: 2px solid transparent;
-            background-clip: content-box;
-        }
-
-        .projects-container::-webkit-scrollbar-thumb:hover {
-            background-color: var(--accent-2);
-        }
-
-        .projects-grid {
-            display: flex;
-            gap: 22px;
-            padding: 0 20px;
-            /* Add padding for visual spacing at ends */
-            width: max-content;
-            /* Allow grid to expand horizontally */
-        }
-
-        .project {
-            flex: 0 0 300px;
-            /* Fixed width for each card */
-            scroll-snap-align: center;
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 0;
-            overflow: hidden;
-            position: relative;
-            transition: transform .35s var(--ease), box-shadow .35s var(--ease);
-            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
-            display: flex;
-            flex-direction: column;
-            /* GSAP will handle showing/hiding */
-        }
-
-        .project:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(2, 6, 23, 0.75);
-        }
-
-        .project-media {
-            height: 160px;
-            background: linear-gradient(120deg, rgba(0, 123, 255, 0.08), rgba(51, 144, 255, 0.03));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .project-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .project-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(2, 6, 23, 0.2), rgba(2, 6, 23, 0.45));
-            opacity: 0;
-            transition: opacity .28s var(--ease);
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 14px;
-            gap: 8px;
-        }
-
-        .project:hover .project-overlay {
-            opacity: 1;
-        }
-
-        .project-links a {
-            display: inline-flex;
-            padding: 8px 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            /* Slightly more visible */
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 13px;
-            transition: background 0.2s ease;
-        }
-
-        .project-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .project-body {
-            padding: 14px 16px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-body h3 {
-            margin: 0 0 8px 0;
-            font-size: 1.2rem;
-            font-family: 'Orbitron', monospace;
-            color: #fff;
-            /* Ensure contrast */
-        }
-
-        .project-body p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 0.9rem;
-            /* Slightly larger */
-            font-family: 'Rajdhani', sans-serif;
-            flex-grow: 1;
-            line-height: 1.4;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .tag {
-            padding: 6px 10px;
-            /* Slightly more padding */
-            background: rgba(255, 255, 255, 0.04);
-            /* Slightly lighter */
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            /* Subtle border */
-            border-radius: 8px;
-            color: var(--muted);
-            font-size: 12px;
-            font-weight: 600;
-            transition: transform .18s var(--ease), background .18s var(--ease), color .18s var(--ease);
-            cursor: default;
-        }
-
-        .tag:hover {
-            transform: translateY(-4px);
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: white;
-            border-color: transparent;
-        }
-
-        /* Section Titles */
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 2.5rem;
-            /* Increased margin */
-            justify-content: center;
-            text-align: center;
-        }
-
-        .section-title h2 {
-            margin: 0;
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(1.8rem, 5vw, 2.2rem);
-            /* Responsive font size */
-            color: var(--accent);
-        }
-
-        /* Timeline Section */
-        .timeline-item {
-            position: relative;
-            padding-left: 2.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-item:last-child .timeline-line {
-            /* Optionally hide or shorten the line on the last item */
-            display: none;
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 0.5rem;
-            top: 1rem;
-            /* Start below the dot */
-            bottom: -1rem;
-            /* Extend slightly below content */
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent), var(--accent-2));
-            transform-origin: top;
-            /* Animation handled by GSAP */
-            transform: scaleY(0);
-            /* Start scaled down */
-        }
-
-        @keyframes pulse-border {
-
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
-            }
-
-            50% {
-                box-shadow: 0 0 0 6px rgba(0, 123, 255, 0);
-            }
-        }
-
-        .timeline-item-dot {
-            position: absolute;
-            left: 0.5rem;
-            top: 0.2rem;
-            transform: translateX(-50%);
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            background: var(--bg);
-            border: 2px solid var(--accent);
-            animation: pulse-border 1.8s infinite ease-in-out;
-            transition: background-color 0.2s;
-            z-index: 1;
-            /* Above the line */
-        }
-
-        .timeline-item-dot:hover {
-            background-color: var(--accent-2);
-        }
-
-        .timeline-content {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.25rem 1.5rem;
-            /* More padding */
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .timeline-content h3 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.3rem;
-            color: white;
-            margin: 0 0 0.25rem 0;
-            /* Adjusted margin */
-        }
-
-        .timeline-date {
-            font-size: 0.85rem;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-description {
-            color: var(--muted);
-            margin-bottom: 0;
-            line-height: 1.6;
-        }
-
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skills-card {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease-out;
-        }
-
-        .skills-card:hover {
-            transform: translateY(-8px);
-        }
-
-        .skills-card h3 {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 1.5rem;
-            font-family: 'Orbitron', monospace;
-        }
-
-        .skills-grid-circular {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 2.5rem 1.5rem;
-            /* More row gap */
-        }
-
-        .skill-item-circular {
-            text-align: center;
-            position: relative;
-            /* For percentage text */
-        }
-
-        .skill-item-circular svg {
-            width: 100%;
-            max-width: 120px;
-            transform: rotate(-90deg);
-            display: block;
-            /* Remove extra space below SVG */
-            margin: 0 auto;
-            /* Center SVG */
-        }
-
-        /* Added percentage text inside circle */
-        .skill-percent {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-top: -18px;
-            /* Adjust vertical alignment */
-            font-family: 'Orbitron', monospace;
-        }
-
-
-        .skill-circle-bg {
-            fill: none;
-            stroke: rgba(255, 255, 255, 0.1);
-            stroke-width: 10;
-        }
-
-        .skill-circle-fg {
-            fill: none;
-            stroke: var(--accent);
-            stroke-width: 10;
-            stroke-linecap: round;
-            stroke-dasharray: 283;
-            /* Circumference for r=45 */
-            stroke-dashoffset: 283;
-            /* Start empty */
-            /* Animation handled by GSAP */
-        }
-
-        .skill-name-circular {
-            margin-top: 1rem;
-            font-weight: 600;
-            color: var(--muted);
-            font-size: 0.9rem;
-        }
-
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .certification-item {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 123, 255, 0.2);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s var(--ease);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .certification-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s var(--ease);
-        }
-
-        .certification-item:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 12px 32px rgba(0, 123, 255, 0.25);
-        }
-
-        .certification-item:hover::before {
-            transform: scaleX(1);
-        }
-
-        .certification-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .certification-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.5rem;
-            font-family: 'Orbitron', monospace;
-        }
-
-        .certification-description {
-            font-size: 0.9rem;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            /* Slightly smaller min width */
-            gap: 1rem;
-        }
-
-        .tech-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: var(--glass);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-        }
-
-        .tech-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .tech-item i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-
-        .tech-item p {
-            font-size: 0.85rem;
-            /* Slightly larger */
-            color: var(--muted);
-            margin: 0;
-            /* Remove default margin */
-        }
-
-        /* Contact Section */
-        .advanced-contact-card {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            box-shadow: var(--card-shadow);
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            .advanced-contact-card {
-                grid-template-columns: 1.2fr 1fr;
-                gap: 4rem;
-                text-align: left;
-            }
-        }
-
-        .contact-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .contact-content h3 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.8rem;
-            margin: 0 0 0.5rem 0;
-            color: white;
-            line-height: 1.2;
-        }
-
-        .contact-content p {
-            color: var(--muted);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.1rem;
-            margin: 0 0 2rem 0;
-        }
-
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .contact-detail-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--muted);
-        }
-
-        .contact-detail-item i {
-            color: var(--accent);
-            font-size: 1.2rem;
-            width: 20px;
-            text-align: center;
-            /* Center icon */
-        }
-
-        .contact-detail-item a,
-        .contact-detail-item span {
-            color: #e6eef8;
-            /* Lighter text */
-            text-decoration: none;
-            transition: color 0.2s var(--ease);
-            word-break: break-word;
-            /* Prevent long emails/links overflowing */
-        }
-
-        .contact-detail-item a:hover {
-            color: var(--accent);
-        }
-
-        .download-resume-link {
-            color: var(--accent) !important;
-            font-weight: 700;
-        }
-
-        .download-resume-link:hover {
-            color: var(--accent-2) !important;
-        }
-
-        .contact-socials {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-            /* Allow wrapping on small screens */
-        }
-
-        .contact-socials a {
-            display: inline-flex;
-            width: 44px;
-            /* Slightly smaller */
-            height: 44px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--muted);
-            font-size: 1.1rem;
-            /* Slightly smaller */
-            text-decoration: none;
-            transition: transform .18s, background .18s, box-shadow .18s;
-        }
-
-        .contact-socials a:hover {
-            transform: scale(1.1) translateY(-2px);
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-        }
-
-        .contact-animation {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 250px;
-            /* Ensure space for animation */
-        }
-
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            color: var(--muted);
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 60px;
-            /* Add margin above footer */
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .footer-logo {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .copyright-text {
-            font-size: 0.9rem;
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* Reusing contact social styles for footer */
-        .footer-socials a {
-            display: inline-flex;
-            width: 40px;
-            height: 40px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--muted);
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: transform .18s, background .18s, box-shadow .18s;
-        }
-
-        .footer-socials a:hover {
-            transform: scale(1.1);
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: white;
-            box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
-        }
-
-
-        /* Responsive Design */
-        @media (max-width: 980px) {
-            .hero-left p.hero-subheading {
-                margin: 0 auto 18px auto;
-            }
-
-            .hero-left .section-title {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 768px) {
-
-            /* Adjust padding for medium screens */
-            .container {
-                padding: 36px 15px;
-            }
-
-            section {
-                padding: 60px 0;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 30px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            :root {
-                --header-height: 64px;
-            }
-
-            /* Update header height */
-            header {
-                padding: 0 14px;
-            }
-
-            body {
-                padding-top: var(--header-height);
-            }
-
-            .logo {
-                font-size: 14px;
-            }
-
-            /* Hide desktop nav, show mobile button */
-            nav.desktop-nav {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .get-in-touch-btn {
-                display: none;
-            }
-
-            /* Hide redundant button */
-
-            .section-title {
-                flex-direction: column;
-                text-align: center;
-                gap: 8px;
-                margin-bottom: 2rem;
-            }
-
-            .section-title h2 {
-                margin-top: 0;
-            }
-
-            /* Removed top margin */
-
-            .projects-grid {
-                padding: 0 10px;
-                gap: 14px;
-            }
-
-            .project {
-                flex: 0 0 280px;
-            }
-
-            /* Slightly smaller cards */
-
-            .footer-content {
-                justify-content: center;
-            }
-
-            /* Center content in footer */
-        }
-
-
-        /* Light Mode Styles */
-        .light-mode {
-            --bg: #f0f2f5;
-            --surface: #ffffff;
-            --muted: #5f6c7b;
-            --accent: #005cbf;
-            --accent-2: #007bff;
-            --glass: rgba(0, 0, 0, 0.04);
-            --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            color: #212529;
-        }
-
-
-
-        .light-mode header {
-            background: rgba(255, 255, 255, 0.7);
-            /* More opaque */
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .light-mode nav.desktop-nav a {
-            color: var(--muted);
-        }
-
-        .light-mode nav.desktop-nav a:hover,
-        .light-mode nav.desktop-nav a.active {
-            color: #000;
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .light-mode .hero-left h1 span {
-            background: linear-gradient(135deg, #212529 0%, var(--accent) 50%, var(--accent-2) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-
-        .light-mode .about-container,
-        .light-mode .project,
-        .light-mode .timeline-content,
-        .light-mode .skills-card,
-        .light-mode .advanced-contact-card {
-            background: rgba(255, 255, 255, 0.7);
-            /* Lighter background */
-            border: 1px solid rgba(0, 0, 0, 0.08);
-        }
-
-        .light-mode .project-body h3,
-        .light-mode .timeline-content h3,
-        .light-mode .skills-card h3,
-        .light-mode .contact-content h3 {
-            color: #212529;
-            /* Darker headings */
-        }
-
-        .light-mode .contact-detail-item a,
-        .light-mode .contact-detail-item span {
-            color: #212529;
-        }
-
-        .light-mode .tag {
-            background: rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            color: var(--muted);
-        }
-
-        .light-mode .tag:hover {
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: white;
-            border-color: transparent;
-        }
-
-        .light-mode .filter-tags button {
-            background: rgba(0, 0, 0, 0.03);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            color: var(--muted);
-        }
-
-        .light-mode .filter-tags button.active,
-        .light-mode .filter-tags button:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent-2);
-        }
-
-        .light-mode .mobile-nav-panel {
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .light-mode .mobile-nav-panel a {
-            color: #212529;
-            border-bottom-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .light-mode .mobile-nav-panel a:hover,
-        .light-mode .mobile-nav-panel a.active {
-            color: var(--accent);
-        }
-
-        .light-mode .mobile-menu-btn {
-            color: #212529;
-        }
-
-        .light-mode footer {
-            border-top-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .light-mode .footer-socials a,
-        .light-mode .contact-socials a {
-            background: rgba(0, 0, 0, 0.05);
-            color: var(--muted);
-        }
-
-        .light-mode .footer-socials a:hover,
-        .light-mode .contact-socials a:hover {
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: white;
-        }
-
-        .light-mode .theme-toggle-btn .fa-sun {
-            display: block;
-        }
-
-        .light-mode .theme-toggle-btn .fa-moon {
-            display: none;
-        }
-
-
-        /* Accessibility: Focus Visible */
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible,
-        textarea:focus-visible {
-            outline: 3px solid var(--accent);
-            outline-offset: 2px;
-            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.14);
-            /* Extra glow */
-            border-radius: 4px;
-            /* Optional: adds rounding to the outline */
-        }
-
-        /* Ensure smooth scroll respects reduced motion preferences */
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        .new-badge {
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: white;
-            font-size: 0.65rem;
-            padding: 3px 8px;
-            border-radius: 50px;
-            vertical-align: middle;
-            margin-left: 8px;
-            font-family: 'Orbitron', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
-            display: inline-block;
-            transform: translateY(-2px);
-        }
-    </style>
-
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="js-enabled"> <!-- js-enabled is added by JS if enabled -->
-    <noscript>
-        <div class="no-script-warning">
-            This site requires JavaScript for full functionality. Please enable it in your browser settings.
-        </div>
-    </noscript>
+<body>
 
-
-    <!-- Dynamic Canvas Background -->
-    <div id="vortex-bg-canvas" aria-hidden="true"></div>
-
-    <header id="siteHeader" role="banner">
-        <a href="#hero" class="logo" aria-label="Home" title="Home">
-            <img src="assets/rsmk-logo.png" alt="RSMK Abstract Logo" style="height: 30px;">
-        </a>
-        <!-- Desktop Navigation -->
-        <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
-            <a href="#about" data-nav-section="about">About</a>
-            <a href="#projects" data-nav-section="projects">Projects</a>
-            <a href="#education" data-nav-section="education">Education</a>
-            <a href="#skills" data-nav-section="skills">Skills</a>
-            <a href="#certifications" data-nav-section="certifications">Certifications</a>
-            <a href="#contact" data-nav-section="contact">Contact</a>
-        </nav>
-
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-bolt text-accent"></i> RSMK
+            </a>
+            <nav class="nav-links">
+                <a href="#about">Identity</a>
+                <a href="#skills">Capability</a>
+                <a href="#projects">Proof</a>
+                <a href="#experience">Journey</a>
+                <a href="#certifications">Credentials</a>
+                <a href="#vision">Future</a>
+                <a href="#contact" class="btn btn-outline" style="padding: 0.5rem 1rem;">Contact</a>
+            </nav>
+            <button class="mobile-nav-toggle"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
-    <!-- Mobile Navigation Panel -->
-    <nav id="mobile-nav" class="mobile-nav-panel" aria-label="Mobile navigation">
-        <a href="#about" data-nav-section="about">About</a>
-        <a href="#projects" data-nav-section="projects">Projects</a>
-        <a href="#education" data-nav-section="education">Education</a>
-        <a href="#skills" data-nav-section="skills">Skills</a>
-        <a href="#certifications" data-nav-section="certifications">Certifications</a>
-        <a href="#contact" data-nav-section="contact">Contact</a>
-    </nav>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="tech-grid-bg"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <div class="hero-headline">
+                        <h1>Srinivasa Manikanta</h1>
+                        <h2 style="font-size: 1.5rem; color: var(--text-accent); margin-bottom: 0;">Electrical &
+                            Electronics
+                            Engineer</h2>
+                        <span class="mono" style="color: var(--text-secondary);">Embedded & Smart Energy
+                            Developer</span>
+                    </div>
 
-    <main id="main-content">
-        <section id="hero" class="container hero hero-section">
-            <div class="hero-left hero-content">
-                <h1 class="animate-on-scroll main-headline" style="--delay:0.05s;">
-                    Hi, I’m <span>Srinivasa Manikanta</span>
-                </h1>
-                <p class="hero-subheading animate-on-scroll sub-headline" style="--delay:0.08s;">
-                    Electrical & Electronics Engineer | <span id="typewriter" class="typewriter"></span>
-                </p>
+                    <p class="hero-sub" style="font-size: 1.5rem; max-width: 600px; color: var(--text-primary);">
+                        Engineering intelligent systems for a sustainable, automated future.
+                    </p>
 
-                <div class="actions animate-on-scroll cta-buttons" style="--delay:0.12s;">
-                    <a href="#projects" class="cta-btn ripple-btn" data-ripple>View Projects</a>
-                    <a href="#contact" class="cta-btn ripple-btn" data-ripple>Contact Me</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="container">
-            <div class="section-title animate-on-scroll">
-                <h2 class="section-heading">About Me</h2>
-            </div>
-            <div class="about-container animate-on-scroll about-content">
-                <div style="flex:1;min-width:260px;">
-                    <p class="about-description">I am an Electrical and Electronics Engineering student with a passion
-                        for embedded systems, web development, and smart energy solutions. I specialize in designing
-                        projects that combine electronics, IoT, and software to solve real-world problems.</p>
-                    <p class="about-description">I follow a simulation-first approach, using platforms like Tinkercad,
-                        Wokwi, and Circuit Designer to prototype before building. I’m constantly learning and upgrading
-                        my skills, and I thrive on turning concepts into live, functional projects.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="container animate-on-scroll" data-stagger-children=".project">
-            <div class="section-title">
-                <h2>My Projects</h2>
-            </div>
-
-            <!-- Project Filters -->
-            <div class="filter-tags" id="projectFilters">
-                <button class="active" data-filter="all">All</button>
-                <button data-filter="Embedded">Embedded</button>
-                <button data-filter="Web">Web/Software</button>
-                <button data-filter="IoT">IoT</button>
-
-            </div>
-
-            <!-- Projects Container with horizontal scroll -->
-            <div class="projects-container">
-                <div class="projects-grid" id="projectsGrid">
-
-                    <article class="project animate-on-scroll" data-tags="Embedded IoT">
-                        <div class="project-media">
-                            <img src="assets/autoexhaustfan.png" alt="Illustration of an automatic exhaust fan system"
-                                loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a href="https://autoexhaustfan.rsmk.co.in/"
-                                        target="_blank">Explore</a></div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>Automatic Exhaust Fan</h3>
-                            <p>Smart exhaust fan that detects gas concentration and turns on/off automatically. Includes
-                                manual override and auto-off timer.</p>
-                            <div class="tags">
-                                <div class="tag">Arduino</div>
-                                <div class="tag">MQ-2 Sensor</div>
-                                <div class="tag">Relay</div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project animate-on-scroll" data-tags="Web">
-                        <div class="project-media">
-                            <img src="assets/colorohm.png" alt="Graphic representation of a resistor with color bands"
-                                loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a href="https://colorohm.rsmk.me/"
-                                        target="_blank">Explore</a></div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>OhmDecoder (Color Ohm)</h3>
-                            <p>A live web tool to instantly and accurately calculate resistor values from standard color
-                                bands.</p>
-                            <div class="tags">
-                                <div class="tag">HTML</div>
-                                <div class="tag">CSS</div>
-                                <div class="tag">JavaScript</div>
-                            </div>
-                        </div>
-                    </article>
-
-
-
-                    <article class="project animate-on-scroll" data-tags="Web">
-                        <div class="project-media">
-                            <img src="assets/budgetbuddy.png" alt="Budget Buddy application logo" loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a href="https://budgetbuddy.rsmk.co.in/"
-                                        target="_blank">Explore</a></div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>Budget Buddy</h3>
-                            <p>An Expense tracker website "vibe coded" by me. It started as a personal expense logger
-                                and is now public with Google Auth, secure database, and email budget reminders.</p>
-                            <div class="tags">
-                                <div class="tag">HTML</div>
-                                <div class="tag">CSS</div>
-                                <div class="tag">Chart.js</div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="project animate-on-scroll" data-tags="Embedded IoT">
-                        <div class="project-media">
-                            <img src="assets/automated street light.webp"
-                                alt="Futuristic street view with smart street lights" loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a
-                                        href="https://rsmk27.github.io/special-websites/">Details</a></div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>Automatic Street Light</h3>
-                            <p>Turns street lights on/off automatically based on ambient light using LDR sensors for
-                                energy efficiency.</p>
-                            <div class="tags">
-                                <div class="tag">Arduino</div>
-                                <div class="tag">LDR Sensor</div>
-                                <div class="tag">Relay</div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project animate-on-scroll" data-tags="Embedded IoT">
-                        <div class="project-media">
-                            <img src="assets/Bgimage.webp" alt="Solar panel system powering water pumps in a quarry"
-                                loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a href="https://spds.rsmk.me">Details</a></div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>Solar Dewatering System</h3>
-                            <p>Multi-circuit solar system with battery charging, pump control, moisture detection, and
-                                single-axis solar tracking.</p>
-                            <div class="tags">
-                                <div class="tag">Solar</div>
-                                <div class="tag">Sensors</div>
-                                <div class="tag">Arduino</div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project animate-on-scroll" data-tags="Web">
-                        <div class="project-media">
-                            <img src="assets/portfolio.webp" alt="Laptop displaying a portfolio website interface"
-                                loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a href="https://rsmk.me">On It!</a></div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>Portfolio Website</h3>
-                            <p>This personal portfolio, designed to showcase projects, blogs, and experiments in a
-                                clean, interactive format.</p>
-                            <div class="tags">
-                                <div class="tag">HTML</div>
-                                <div class="tag">CSS</div>
-                                <div class="tag">JavaScript</div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project animate-on-scroll" data-tags="Web">
-                        <div class="project-media">
-                            <img src="assets/playzone.webp" alt="Futuristic interface for a gaming platform"
-                                loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a href="https://playzone.rsmk.me">Explore</a></div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>Playzone</h3>
-                            <p>An interactive web-based entertainment platform featuring a collection of simple games
-                                and activities.</p>
-                            <div class="tags">
-                                <div class="tag">HTML</div>
-                                <div class="tag">CSS</div>
-                                <div class="tag">JavaScript</div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="project animate-on-scroll" data-tags="Web">
-                        <div class="project-media">
-                            <img src="assets/my blogs.webp" alt="Laptop displaying a blog website interface"
-                                loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a href="https://blogs.rsmk.me">Read More</a></div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>My Blogs</h3>
-                            <p>A personal blog for sharing project walkthroughs, technical tutorials, and insights on
-                                new technologies.</p>
-                            <div class="tags">
-                                <div class="tag">Content</div>
-                                <div class="tag">HTML</div>
-                                <div class="tag">CSS</div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project animate-on-scroll" data-tags="Web">
-                        <div class="project-media">
-                            <img src="assets/newshub.webp" alt="Laptop displaying a news aggregation website interface"
-                                loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links"><a href="https://news.rsmk.co.in">Read More</a></div>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <h3>NEWS hub</h3>
-                            <p>News Hub is a real-time headline aggregator that delivers the latest news of the day in a
-                                clean, distraction-free interface.</p>
-                            <div class="tags">
-                                <div class="tag">Content</div>
-                                <div class="tag">HTML</div>
-                                <div class="tag">CSS</div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="education" class="container animate-on-scroll">
-            <div class="section-title">
-                <h2>Education & Journey</h2>
-            </div>
-            <div class="relative max-w-2xl mx-auto">
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-line"></div> <!-- Line moved here -->
-                    <div class="timeline-item-dot"></div>
-                    <div class="timeline-content">
-                        <h3>School</h3>
-                        <p class="timeline-date">upto 2021</p>
-                        <p class="timeline-description">Graduated from secondary education, establishing a strong
-                            foundation in science and mathematics. This period sparked my initial curiosity in the
-                            fields of technology and engineering.</p>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn btn-primary">View Projects <i class="fas fa-arrow-right"></i></a>
+                        <a href="#contact" class="btn btn-outline">Contact Me</a>
                     </div>
                 </div>
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-line"></div> <!-- Line moved here -->
-                    <div class="timeline-item-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Diploma in Electrical and Electronics Engineering</h3>
-                        <p class="timeline-date">2021-2024</p>
-                        <p class="timeline-description">Completed my diploma in Electrical and Electronics Engineering,
-                            gaining hands-on experience in circuit design, power systems, and embedded programming. </p>
-                    </div>
-                </div>
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-line"></div> <!-- Line moved here -->
-                    <div class="timeline-item-dot"></div>
-                    <div class="timeline-content">
-                        <h3>B.tech in Electrical and Electronics Engineering</h3>
-                        <p class="timeline-date">2024 - Present</p>
-                        <p class="timeline-description">Currently pursuing a bachelor's degree to deepen my expertise in
-                            advanced topics like AI, machine learning, and IoT, preparing for a future in cutting-edge
-                            engineering roles.</p>
+                <div class="hero-visual">
+                    <div class="profile-placeholder">
+                        <img src="assets/profile.jpg" alt="Srinivasa Manikanta">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="skills" class="container animate-on-scroll" data-stagger-children=".skills-card">
-            <div class="section-title">
-                <h2>Technical Arsenal</h2>
-            </div>
-            <div class="skills-grid">
-                <div class="skills-card animate-on-scroll">
-                    <h3>Core Skills</h3>
-                    <div class="skills-grid-circular">
-                        <div class="skill-item-circular" data-percent="90">
-                            <svg viewBox="0 0 100 100">
-                                <circle class="skill-circle-bg" cx="50" cy="50" r="45"></circle>
-                                <circle class="skill-circle-fg" cx="50" cy="50" r="45"></circle>
-                            </svg>
-                            <div class="skill-percent">90%</div>
-                            <div class="skill-name-circular">Sensors & IoT</div>
-                        </div>
-                        <div class="skill-item-circular" data-percent="85">
-                            <svg viewBox="0 0 100 100">
-                                <circle class="skill-circle-bg" cx="50" cy="50" r="45"></circle>
-                                <circle class="skill-circle-fg" cx="50" cy="50" r="45"></circle>
-                            </svg>
-                            <div class="skill-percent">85%</div>
-                            <div class="skill-name-circular">Arduino / ESP / Pico</div>
-                        </div>
-                        <div class="skill-item-circular" data-percent="80">
-                            <svg viewBox="0 0 100 100">
-                                <circle class="skill-circle-bg" cx="50" cy="50" r="45"></circle>
-                                <circle class="skill-circle-fg" cx="50" cy="50" r="45"></circle>
-                            </svg>
-                            <div class="skill-percent">80%</div>
-                            <div class="skill-name-circular">Web Dev (HTML, CSS, JS)</div>
-                        </div>
-                        <div class="skill-item-circular" data-percent="75">
-                            <svg viewBox="0 0 100 100">
-                                <circle class="skill-circle-bg" cx="50" cy="50" r="45"></circle>
-                                <circle class="skill-circle-fg" cx="50" cy="50" r="45"></circle>
-                            </svg>
-                            <div class="skill-percent">75%</div>
-                            <div class="skill-name-circular">API Integration</div>
-                        </div>
-                        <div class="skill-item-circular" data-percent="95">
-                            <svg viewBox="0 0 100 100">
-                                <circle class="skill-circle-bg" cx="50" cy="50" r="45"></circle>
-                                <circle class="skill-circle-fg" cx="50" cy="50" r="45"></circle>
-                            </svg>
-                            <div class="skill-percent">95%</div>
-                            <div class="skill-name-circular">Simulation & Prototyping</div>
-                        </div>
-                    </div>
+    <!-- Identity / About Me -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <span class="mono text-accent">01. IDENTITY</span>
+                    <h2>Builder Mindset. <br>System Architect.</h2>
+                    <p>I am an Electrical and Electronics Engineer driven by a passion for real-world systems. My focus
+                        lies at the intersection of <strong>Green Tech, Smart Energy, and Embedded AI</strong>.</p>
+                    <p>Unlike traditional engineering that stops at theory, I thrive on the execution—turning abstract
+                        concepts into live, functional systems. From autonomous power grids to intelligent software
+                        platforms, my mission is to build scalable technology for a cleaner, smarter tomorrow.</p>
                 </div>
-                <div class="skills-card animate-on-scroll">
-                    <h3>Technology Stack</h3>
-                    <div class="tech-grid">
-                        <div class="tech-item">
-                            <i class="fas fa-microchip"></i>
-                            <p>Embedded</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-network-wired"></i>
-                            <p>IoT & Cloud</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fab fa-html5"></i>
-                            <p>Web Dev</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-cogs"></i>
-                            <p>API Integration</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-drafting-compass"></i>
-                            <p>Simulation</p>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-robot"></i>
-                            <p>Automation</p>
-                        </div>
-                    </div>
+                <div class="about-card">
+                    <h3 class="mono">Core Focus</h3>
+                    <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-microchip text-accent"></i> Embedded Systems & IoT
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-solar-panel text-accent"></i> Smart Energy & Green Tech
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-code text-accent"></i> Intelligent Software Platforms
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-robot text-accent"></i> Automation & AI Integration
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="certifications" class="container animate-on-scroll" data-stagger-children=".certification-item">
-            <div class="section-title">
-                <h2>Certifications & Achievements</h2>
+    <!-- Capability / Skills -->
+    <section id="skills" class="section" style="background: rgba(22, 27, 34, 0.5);">
+        <div class="container">
+            <span class="mono text-accent">02. CAPABILITY</span>
+            <h2>Technical Arsenal</h2>
+
+            <div class="skills-container">
+                <!-- Pillar 1 -->
+                <article class="skill-pillar">
+                    <h3><i class="fas fa-cogs"></i> Core Engineering</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">EEE Fundamentals</span>
+                        <span class="skill-tag">Embedded Systems</span>
+                        <span class="skill-tag">Power Systems</span>
+                        <span class="skill-tag">Circuit Design</span>
+                        <span class="skill-tag">IoT Architecture</span>
+                    </div>
+                </article>
+
+                <!-- Pillar 2 -->
+                <article class="skill-pillar">
+                    <h3><i class="fas fa-laptop-code"></i> Software & Tools</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Arduino/ESP8266</span>
+                        <span class="skill-tag">React/Web</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Linux</span>
+                    </div>
+                </article>
+
+                <!-- Pillar 3 -->
+                <article class="skill-pillar">
+                    <h3><i class="fas fa-globe-americas"></i> Applied Domains</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Smart Energy</span>
+                        <span class="skill-tag">Green Tech</span>
+                        <span class="skill-tag">Autonomous Grids</span>
+                        <span class="skill-tag">FinTech Systems</span>
+                    </div>
+                </article>
             </div>
-            <div class="certifications-grid">
-                <article class="certification-item animate-on-scroll">
-                    <div class="certification-icon">
+        </div>
+    </section>
+
+    <!-- Proof / Projects -->
+    <section id="projects" class="section">
+        <div class="container">
+            <span class="mono text-accent">03. PROOF OF WORK</span>
+            <h2>Featured Projects</h2>
+
+            <div class="projects-grid">
+
+                <!-- Project 1 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="assets/budgetbuddy.png" alt="Budget Buddy Interface">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">FinTech / Web App</div>
+                        <h3>Budget Buddy</h3>
+                        <div class="project-steps">
+                            <div class="step-item">
+                                <span class="step-title">Problem</span>
+                                <span class="step-desc">Lack of intuitive, personalized expense tracking for
+                                    students.</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-title">Solution</span>
+                                <span class="step-desc">A "vibe coded" expense tracker with Google Auth and chart
+                                    visualization.</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-title">Impact</span>
+                                <span class="step-desc">Accessible public tool helping users manage finances
+                                    securely.</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span>HTML/CSS</span>
+                            <span>Chart.js</span>
+                            <span>Firebase</span>
+                        </div>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="project.html?id=budgetbuddy" class="btn btn-outline"
+                                style="font-size: 0.8rem;">View Case Study</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="assets/colorohm.png" alt="ColorOhm Interface">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">Engineering Tool / Web</div>
+                        <h3>ColorOhm (OhmDecoder)</h3>
+                        <div class="project-steps">
+                            <div class="step-item">
+                                <span class="step-title">Problem</span>
+                                <span class="step-desc">Manual calculation of resistor color codes is slow and
+                                    error-prone.</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-title">Solution</span>
+                                <span class="step-desc">Instant, interactive web calculator for standard resistor
+                                    bands.</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-title">Impact</span>
+                                <span class="step-desc">Speeds up circuit design and learning for engineering
+                                    students.</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span>JavaScript</span>
+                            <span>DOM Manipulation</span>
+                            <span>CSS3</span>
+                        </div>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="project.html?id=colorohm" class="btn btn-outline" style="font-size: 0.8rem;">View
+                                Case Study</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="assets/autoexhaustfan.png" alt="Automatic Exhaust Fan">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">IoT / Safety</div>
+                        <h3>Smart Exhaust System</h3>
+                        <div class="project-steps">
+                            <div class="step-item">
+                                <span class="step-title">Problem</span>
+                                <span class="step-desc">Unnoticed gas leaks in kitchens and industries pose severe
+                                    risks.</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-title">Solution</span>
+                                <span class="step-desc">Automated system detecting gas concentration to trigger
+                                    exhaust.</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-title">Impact</span>
+                                <span class="step-desc">Enhanced safety with autonomous response and manual
+                                    override.</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span>Arduino</span>
+                            <span>MQ-2 Sensor</span>
+                            <span>Relays</span>
+                        </div>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="project.html?id=exhaust" class="btn btn-outline" style="font-size: 0.8rem;">View
+                                Case Study</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="assets/Bgimage.webp" alt="Solar Dewatering">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">Green Tech / Embedded</div>
+                        <h3>Solar Dewatering System</h3>
+                        <div class="project-steps">
+                            <div class="step-item">
+                                <span class="step-title">Problem</span>
+                                <span class="step-desc">Inefficient water management in off-grid areas reliant on grid
+                                    power.</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-title">Solution</span>
+                                <span class="step-desc">Solar-tracking pump system with moisture detection.</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-title">Impact</span>
+                                <span class="step-desc">Sustainable, autonomous irrigation operating independently of
+                                    the grid.</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span>Solar</span>
+                            <span>Sensors</span>
+                            <span>Automation</span>
+                        </div>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="project.html?id=solar" class="btn btn-outline" style="font-size: 0.8rem;">View Case
+                                Study</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education -->
+    <section id="experience" class="section" style="background: rgba(22, 27, 34, 0.5);">
+        <div class="container">
+            <span class="mono text-accent">04. JOURNEY</span>
+            <h2>Experience & Education</h2>
+
+            <div class="timeline">
+                <!-- Education Item -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-date">2024 - Present</div>
+                    <h3>B.Tech, Electrical & Electronics Engineering</h3>
+                    <p>Deepening expertise in Advanced IoT, Machine Learning, and Grid Automation. Leading projects in
+                        Smart Energy systems.</p>
+                </div>
+
+                <!-- Education Item -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-date">2021 - 2024</div>
+                    <h3>Diploma, Electrical & Electronics Engineering</h3>
+                    <p>Built foundational knowledge in Circuit Design and Power Systems. Developed multiple embedded
+                        system prototypes.</p>
+                </div>
+
+                <!-- Experience Item -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-date">Project Experience</div>
+                    <h3>Independent Developer & Engineer</h3>
+                    <p>Designed and deployed web applications and IoT solutions. Experience with full-stack development
+                        (React/Node) and hardware integration (Arduino/ESP).</p>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="container" style="margin-top: 4rem; padding: 0;">
+                <h3 class="mono">Community Impact</h3>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div
+                        style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <i class="fas fa-code-branch text-accent" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <h4 style="margin: 0;">Open Source</h4>
+                        <p style="font-size: 0.9rem; margin: 0.5rem 0 0;">Contributor to GitHub projects & developer
+                            tools</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" class="section">
+        <div class="container">
+            <span class="mono text-accent">05. CREDENTIALS</span>
+            <h2>Certifications</h2>
+
+            <div class="cert-grid">
+                <!-- Cert 1 -->
+                <div class="cert-card">
+                    <div class="cert-icon">
                         <i class="fas fa-microchip"></i>
                     </div>
-                    <h3 class="certification-name">Embedded Systems</h3>
-                    <p class="certification-description">Advanced training in embedded systems design, microcontroller
-                        programming, and real-time operating systems.</p>
-                </article>
-                <article class="certification-item animate-on-scroll">
-                    <div class="certification-icon">
-                        <i class="fas fa-print"></i>
+                    <div class="cert-content">
+                        <h3>Embedded Systems Design</h3>
+                        <p class="cert-issuer">Specialized Training</p>
+                        <p class="cert-desc">Comprehensive expertise in microcontroller architecture, interfacing
+                            periperhals, and real-time systems programming.</p>
                     </div>
-                    <h3 class="certification-name">3D Printing</h3>
-                    <p class="certification-description">Proficient in additive manufacturing, 3D modeling, and rapid
-                        prototyping for engineering applications.</p>
-                </article>
-                <article class="certification-item animate-on-scroll">
-                    <div class="certification-icon">
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="cert-card">
+                    <div class="cert-icon">
                         <i class="fas fa-charging-station"></i>
                     </div>
-                    <h3 class="certification-name">EV Technology</h3>
-                    <p class="certification-description">Specialized knowledge in electric vehicle systems, battery
-                        management, and sustainable mobility solutions.</p>
-                </article>
-                <article class="certification-item animate-on-scroll">
-                    <div class="certification-icon">
-                        <i class="fas fa-drone"></i>
+                    <div class="cert-content">
+                        <h3>Electric Vehicle Technology</h3>
+                        <p class="cert-issuer">Technical Certification</p>
+                        <p class="cert-desc">Advanced training in EV powertrains, battery management systems (BMS), and
+                            charging infrastructure architectures.</p>
                     </div>
-                    <h3 class="certification-name">Drone Technology</h3>
-                    <p class="certification-description">Expertise in UAV systems, flight control, autonomous
-                        navigation, and aerial applications.</p>
-                </article>
-                <article class="certification-item animate-on-scroll">
-                    <div class="certification-icon">
-                        <i class="fas fa-wand-magic-sparkles"></i>
-                    </div>
-                    <h3 class="certification-name">Prompt to Prototype <span class="new-badge">New</span></h3>
-                    <p class="certification-description">Learned how to use AI models to build fully functional
-                        prototypes, and successfully upgraded BudgetBuddy with multiple advanced features.</p>
-                </article>
-            </div>
-        </section>
+                </div>
 
-        <section id="contact" class="container animate-on-scroll">
-            <div class="section-title">
-                <h2>Connect With Me</h2>
-            </div>
-            <div class="advanced-contact-card">
-                <div class="contact-content">
-                    <h3>Let's Build the Future Together.</h3>
-                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be a part of your
-                        vision. Whether you have a question or just want to say hi, my inbox is always open.</p>
-                    <div class="contact-details">
-                        <div class="contact-detail-item">
-                            <i class="fas fa-envelope"></i>
-                            <a
-                                href="mailto:srinivasmanikantarajapantula@gmail.com">srinivasmanikantarajapantula@gmail.com</a>
-                        </div>
-                        <div class="contact-detail-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <a href="tel:+916301165183">Contact number</a>
-                        </div>
-                        <div class="contact-detail-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Srikakulam, Andhra Pradesh, India</span>
-                        </div>
-                        <!-- Resume Download Link -->
-                        <div class="contact-detail-item">
-                            <i class="fas fa-file-download"></i>
-                            <a href="resume.pdf" download="Srinivasa_Manikanta_Resume.pdf"
-                                class="download-resume-link">Download
-                                Resume</a>
-                        </div>
+                <!-- Cert 3 -->
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-helicopter"></i>
                     </div>
-                    <div class="contact-socials">
-                        <a href="https://github.com/Rsmk27" target="_blank" aria-label="GitHub" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/rsmk27" target="_blank" aria-label="LinkedIn"
-                            title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://t.me/Rsmk_27" target="_blank" aria-label="Telegram" title="Telegram">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                        <a href="https://api.whatsapp.com/send?phone=916301165183&text=%F0%9F%98%8A%20Hey%2C%20I%20have%20recently%20saw%20your%20portfolio%2C%20lets%20get%20in%20touch%20%F0%9F%A4%9D"
-                            target="_blank" aria-label="WhatsApp" title="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="https://x.com/SrinivasManik20" target="_blank" aria-label="X (Twitter)"
-                            title="X (Twitter)">
-                            <i class="fa-brands fa-x-twitter"></i>
-                        </a>
-                        <a href="https://www.threads.net/@rsmk_27" target="_blank" aria-label="Threads" title="Threads">
-                            <i class="fa-brands fa-threads"></i>
-                        </a>
-                        <a href="https://discord.gg/ApdrxFF8" target="_blank" aria-label="Discord" title="Discord">
-                            <i class="fab fa-discord"></i>
-                        </a>
-                        <a href="https://www.instagram.com/rsmk_27/" target="_blank" aria-label="Instagram"
-                            title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100074367521180" target="_blank"
-                            aria-label="Facebook" title="Facebook">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://www.youtube.com/@rsmk27" target="_blank" aria-label="YouTube" title="YouTube">
-                            <i class="fab fa-youtube"></i>
+                    <div class="cert-content">
+                        <h3>Drone Technology</h3>
+                        <p class="cert-issuer">Workshop Certification</p>
+                        <p class="cert-desc">Hands-on experience with UAV dynamics, flight controllers, aerial sensor
+                            integration, and calibration.</p>
+                    </div>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="cert-content">
+                        <h3>Python for Data Science</h3>
+                        <p class="cert-issuer">Online Credential</p>
+                        <p class="cert-desc">Proficiency in data analysis, visualization, and algorithmic problem
+                            solving using Python.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision -->
+    <section id="vision" class="section">
+        <div class="container">
+            <span class="mono text-accent">06. FUTURE</span>
+            <h2>The Roadmap</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+                <div>
+                    <p>My engineering vision focuses on the convergence of <strong>energy and intelligence</strong>. I
+                        am building towards:</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 1.5rem;">
+                            <h4 style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-broadcast-tower text-accent"></i> Autonomous Grids
+                            </h4>
+                            <p style="font-size: 0.9rem; margin: 0;">Self-healing power networks that adapt to load
+                                changes instantly.</p>
+                        </li>
+                        <li style="margin-bottom: 1.5rem;">
+                            <h4 style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-leaf text-accent"></i> Sustainable Energy Systems
+                            </h4>
+                            <p style="font-size: 0.9rem; margin: 0;">Maximizing efficiency in renewable energy capture
+                                and storage.</p>
+                        </li>
+                        <li style="margin-bottom: 1.5rem;">
+                            <h4 style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-brain text-accent"></i> AI-Driven Engineering
+                            </h4>
+                            <p style="font-size: 0.9rem; margin: 0;">Using machine learning to optimize hardware
+                                performance.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="about-card" style="padding: 2rem;">
+                    <h3>Recent Research & Blog</h3>
+                    <p>Exploring the latest in tech.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="https://blogs.rsmk.me" target="_blank" class="btn btn-outline"
+                            style="width: 100%; justify-content: space-between;">
+                            Read My Engineering Articles <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>
                 </div>
-                <div class="contact-animation">
-                    <dotlottie-wc style="width: 100%; height: 100%;"
-                        src="https://lottie.host/1f9a391d-80cb-4a18-9802-3b411387ccde/XTCtftM8xU.lottie" speed="1"
-                        autoplay loop></dotlottie-wc>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section" style="background: rgba(47, 129, 247, 0.03);">
+        <div class="container">
+            <span class="mono text-accent">07. COLLABORATION</span>
+            <h2>Let's Build the Future</h2>
+
+            <div class="contact-grid">
+                <div>
+                    <h3>Contact</h3>
+                    <p>I am always open to discussing sustainable tech, embedded projects, or full-time engineering
+                        roles.</p>
+
+                    <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <a href="mailto:srinivasmanikantarajapantula@gmail.com"
+                            style="display: flex; align-items: center; gap: 1rem; color: var(--text-primary); font-size: 1.1rem;">
+                            <i class="fas fa-envelope text-accent"></i> srinivasmanikantarajapantula@gmail.com
+                        </a>
+                        <a href="tel:+916301165183"
+                            style="display: flex; align-items: center; gap: 1rem; color: var(--text-primary); font-size: 1.1rem;">
+                            <i class="fas fa-phone text-accent"></i> +91 63011 65183
+                        </a>
+                        <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-secondary);">
+                            <i class="fas fa-map-marker-alt text-accent"></i> Srikakulam, Andhra Pradesh, India
+                        </div>
+                    </div>
+
+                    <a href="resume.pdf" class="btn btn-primary" style="margin-top: 2rem;" download>
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                </div>
+
+                <div>
+                    <h3>Connect</h3>
+                    <div class="social-links" style="flex-wrap: wrap;">
+                        <a href="https://github.com/Rsmk27" target="_blank" class="social-icon"><i
+                                class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/rsmk27" target="_blank" class="social-icon"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://twitter.com/SrinivasManik20" target="_blank" class="social-icon"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="https://t.me/Rsmk_27" target="_blank" class="social-icon"><i
+                                class="fab fa-telegram"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=916301165183&text=%F0%9F%98%8A%20Hey%2C%20I%20have%20recently%20saw%20your%20portfolio%2C%20lets%20get%20in%20touch%20%F0%9F%A4%9D" target="_blank" class="social-icon"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="container" role="contentinfo">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <div class="logo" aria-hidden="true">
-                    <div class="dot"></div>
-                    <div>RSMK</div>
-                </div>
-                <div class="copyright-text">© <span id="year"></span> RSMK - All Rights Reserved</div>
-            </div>
-
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Srinivasa Manikanta. Built for the Future.</p>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const body = document.body;
-            const header = document.getElementById('siteHeader');
-            const sections = document.querySelectorAll('main section');
-            const navLinksDesktop = document.querySelectorAll('nav.desktop-nav a');
-            const navLinksMobile = document.querySelectorAll('nav.mobile-nav-panel a');
-            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-            const mobileNavPanel = document.getElementById('mobile-nav');
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-            // Add js-enabled class if JS is running
-            body.classList.add('js-enabled');
+        // Mobile Navigation Toggle
+        const toggleBtn = document.querySelector('.mobile-nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
 
-            // Detect touch device to disable custom cursor
-            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            if (isTouchDevice) {
-                body.classList.add('no-touch');
-            }
-
-            // --- Function Definitions ---
-
-            // 1) Header hide/show on scroll
-            function headerHideShow() {
-                let lastY = window.scrollY;
-                let ticking = false;
-                window.addEventListener('scroll', () => {
-                    if (!ticking) {
-                        window.requestAnimationFrame(() => {
-                            const y = window.scrollY;
-                            if (y > lastY && y > 120) {
-                                header.classList.add('hidden');
-                            } else {
-                                header.classList.remove('hidden');
-                            }
-                            lastY = y;
-                            ticking = false;
-                        });
-                        ticking = true;
-                    }
-                }, { passive: true });
-            }
-
-            // 2) GSAP Scroll-triggered animations
-            function gsapAnimations() {
-                gsap.registerPlugin(ScrollTrigger);
-
-                // Animate elements within sections (using original .animate-on-scroll class)
-                const animatedElements = document.querySelectorAll(".animate-on-scroll");
-                animatedElements.forEach((el, index) => {
-                    const delay = el.style.getPropertyValue("--delay") ? parseFloat(el.style.getPropertyValue("--delay")) : 0;
-                    let animationProps = { opacity: 0, y: 30, duration: 0.8, ease: "power3.out", delay: delay };
-
-                    // Timeline specific animations
-                    if (el.classList.contains('timeline-item')) {
-                        const line = el.querySelector('.timeline-line'); // Target existing line
-                        if (line) {
-                            gsap.from(line, {
-                                scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
-                                scaleY: 0, duration: 1.2, ease: "power3.out", delay: index * 0.15 // Slightly adjusted delay
-                            });
-                        }
-                        // Add x-axis animation for timeline items if desired
-                        // animationProps.x = -30;
-                    }
-
-                    gsap.from(el, {
-                        scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" },
-                        ...animationProps
-                    });
-                });
-
-                // Add percentage text animation inside skill circles
-                const skillItems = document.querySelectorAll('.skill-item-circular');
-                skillItems.forEach(item => {
-                    const percentText = item.querySelector('.skill-percent');
-                    const percentValue = item.dataset.percent || 0;
-                    if (percentText) {
-                        gsap.fromTo(percentText,
-                            { innerText: 0 },
-                            {
-                                innerText: percentValue,
-                                duration: 1.5,
-                                ease: "power3.out",
-                                scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none none", once: true },
-                                snap: { innerText: 1 }, // Snap to integer values
-                                onUpdate: function () {
-                                    percentText.innerText = Math.round(this.targets()[0].innerText) + "%";
-                                }
-                            }
-                        );
-                    }
-                });
-            }
-
-            // 3) Button ripple effect
-            function ripples() {
-                document.querySelectorAll('[data-ripple]').forEach(btn => {
-                    btn.addEventListener('pointerdown', function (e) {
-                        const rect = btn.getBoundingClientRect();
-                        const circle = document.createElement('span');
-                        const size = Math.max(rect.width, rect.height) * 1.6;
-                        circle.style.cssText = `
-                            position: absolute;
-                            width: ${size}px; height: ${size}px;
-                            left: ${e.clientX - rect.left - size / 2}px;
-                            top: ${e.clientY - rect.top - size / 2}px;
-                            border-radius: 50%;
-                            background: rgba(255,255,255,0.12);
-                            transform: scale(0.2);
-                            opacity: 1;
-                            pointer-events: none;
-                            transition: transform .6s cubic-bezier(.2, .9, .3, 1), opacity .6s cubic-bezier(.2, .9, .3, 1);
-                        `;
-                        btn.style.position = 'relative'; // Ensure positioning context
-                        btn.style.overflow = 'hidden'; // Ensure ripple stays within bounds
-                        btn.appendChild(circle);
-                        requestAnimationFrame(() => circle.style.transform = 'scale(1)');
-                        setTimeout(() => {
-                            circle.style.opacity = '0';
-                            setTimeout(() => circle.remove(), 700);
-                        }, 350);
-                    });
-                });
-            }
-
-            // 4) Custom Typewriter Effect
-            function typewriterEffect() {
-                const words = ['Embedded Systems', 'Web Developer', 'Smart Tech Innovator', 'IoT Enthusiast'];
-                const typewriter = document.getElementById('typewriter');
-                if (!typewriter) return;
-                let wordIndex = 0, charIndex = 0, isDeleting = false;
-
-                function type() {
-                    const currentWord = words[wordIndex];
-                    let typeSpeed = isDeleting ? 60 : 120;
-                    typewriter.textContent = currentWord.substring(0, charIndex + (isDeleting ? -1 : 1));
-                    charIndex += isDeleting ? -1 : 1;
-
-                    if (!isDeleting && charIndex === currentWord.length) {
-                        typeSpeed = 2000; isDeleting = true;
-                    } else if (isDeleting && charIndex === 0) {
-                        isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500;
-                    }
-                    setTimeout(type, typeSpeed);
-                }
-                setTimeout(type, 1500); // Slightly longer initial delay
-            }
-
-            // 5) Skills Progress Circle Animation
-            function skillsProgress() {
-                const skillItems = document.querySelectorAll('.skill-item-circular');
-                if (!skillItems.length) return;
-                skillItems.forEach(item => {
-                    const circle = item.querySelector('.skill-circle-fg');
-                    const percent = item.dataset.percent;
-                    const radius = circle.r.baseVal.value;
-                    const circumference = 2 * Math.PI * radius;
-                    gsap.fromTo(circle,
-                        { strokeDashoffset: circumference },
-                        {
-                            strokeDashoffset: circumference - (percent / 100) * circumference,
-                            scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none none", once: true },
-                            duration: 1.5, ease: "power3.out"
-                        }
-                    );
-                });
-            }
-
-            // 6) Active Navigation State
-            function activeNav() {
-                const observerOptions = { root: null, rootMargin: "0px 0px -65% 0px", threshold: 0.3 };
-                const navObserver = new IntersectionObserver((entries) => {
-                    let intersectingSectionId = null;
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            intersectingSectionId = entry.target.id;
-                        }
-                    });
-
-                    // Update all links based on the last intersecting section found
-                    navLinksDesktop.forEach(link => {
-                        if (link.dataset.navSection === intersectingSectionId) {
-                            link.classList.add('active');
-                        } else {
-                            link.classList.remove('active');
-                        }
-                    });
-                    navLinksMobile.forEach(link => {
-                        if (link.dataset.navSection === intersectingSectionId) {
-                            link.classList.add('active');
-                        } else {
-                            link.classList.remove('active');
-                        }
-                    });
-
-                }, observerOptions);
-                sections.forEach(section => navObserver.observe(section));
-            }
-
-
-            // 7) Project Filtering Logic
-            function projectFiltering() {
-                const filterContainer = document.getElementById('projectFilters');
-                const projects = document.querySelectorAll('#projectsGrid .project');
-                if (!filterContainer || !projects.length) return;
-
-                let ctx = gsap.context(() => {
-                    filterContainer.addEventListener('click', (e) => {
-                        if (e.target.tagName !== 'BUTTON') return;
-                        const filterTag = e.target.dataset.filter;
-                        document.querySelectorAll('#projectFilters button').forEach(btn => btn.classList.remove('active'));
-                        e.target.classList.add('active');
-
-                        const tl = gsap.timeline();
-                        projects.forEach(project => {
-                            const tags = project.dataset.tags.split(' ').map(t => t.toLowerCase());
-                            const filterLower = filterTag.toLowerCase();
-                            const shouldShow = filterTag === 'all' || tags.includes(filterLower);
-
-                            // Fade out existing items slightly faster
-                            tl.to(project, {
-                                duration: 0.25, opacity: 0, scale: 0.97,
-                                onComplete: () => project.style.display = shouldShow ? 'flex' : 'none'
-                            }, "<"); // Overlap slightly
-
-                            // Fade in matching items
-                            if (shouldShow) {
-                                tl.to(project, { duration: 0.3, opacity: 1, scale: 1 }, "-=0.1"); // Start fade in slightly before fade out completes
-                            }
-                        });
-                    });
-                });
-                return () => ctx.revert(); // Cleanup GSAP context
-            }
-
-            // 8) Theme Toggle
-            function themeToggle() {
-                const themeToggleButton = document.getElementById('theme-toggle');
-                const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-                // Default to system preference THEN localStorage THEN dark
-                let currentTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark-mode' : 'light-mode');
-
-                function applyTheme(theme) {
-                    if (theme === 'light-mode') {
-                        body.classList.add('light-mode');
-                        body.classList.remove('dark-mode'); // Explicitly remove dark if needed by other CSS
-                    } else {
-                        body.classList.remove('light-mode');
-                        body.classList.add('dark-mode'); // Explicitly add dark
-                    }
-                    localStorage.setItem('theme', theme); // Save preference
-                }
-
-                applyTheme(currentTheme); // Apply initial theme
-
-                themeToggleButton.addEventListener('click', () => {
-                    currentTheme = body.classList.contains('light-mode') ? 'dark-mode' : 'light-mode';
-                    applyTheme(currentTheme);
-                });
-
-                // Optional: Listen for system changes if no localStorage is set
-                // prefersDarkScheme.addEventListener('change', e => {
-                //     if (!localStorage.getItem('theme')) { // Only if user hasn't set preference
-                //         applyTheme(e.matches ? 'dark-mode' : 'light-mode');
-                //     }
-                // });
-            }
-
-
-
-            // 10) Mobile Menu Toggle
-            function mobileMenu() {
-                if (!mobileMenuToggle || !mobileNavPanel) return;
-
-                mobileMenuToggle.addEventListener('click', () => {
-                    const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-                    mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
-                    mobileNavPanel.classList.toggle('active');
-                    body.classList.toggle('mobile-menu-active'); // Optional: for potential body overflow control
-                });
-
-                // Close menu when a link is clicked
-                mobileNavPanel.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                        mobileNavPanel.classList.remove('active');
-                        body.classList.remove('mobile-menu-active');
-                    });
-                });
-            }
-
-
-            // --- Initialization ---
-            headerHideShow();
-            gsapAnimations();
-            ripples();
-            typewriterEffect();
-            skillsProgress();
-            activeNav();
-            projectFiltering();
-            themeToggle();
-
-            mobileMenu();
-
-            // Set current year in footer
-            document.getElementById('year').textContent = new Date().getFullYear();
+        toggleBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
     </script>
-
-    <!-- Dynamic Background Animation Script -->
-    <!-- Ensure this script exists and is correctly referenced -->
-    <script type="module" src="vortex-background.js"></script>
 </body>
 
 </html>

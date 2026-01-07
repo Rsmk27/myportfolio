@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details | Srinivasa Manikanta</title>
+    <link rel="icon" type="image/jpeg" href="assets/profile.jpg">
+    <meta name="theme-color" content="#0F1115">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@500;700&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Project Specific Styles */
+        .project-hero {
+            padding-top: calc(var(--header-height) + 4rem);
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--text-accent);
+        }
+
+        .project-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .meta-item h4 {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-item p {
+            color: var(--text-primary);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .project-split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .project-split-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .project-image-container {
+                position: static !important;
+                margin-bottom: 2rem;
+            }
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-img {
+            width: 100%;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .tech-tag {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: rgba(47, 129, 247, 0.1);
+            color: var(--text-accent);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt text-accent"></i> RSMK
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#projects">Back to Projects</a>
+                <a href="index.html#contact" class="btn btn-outline" style="padding: 0.5rem 1rem;">Contact</a>
+            </nav>
+            <button class="mobile-nav-toggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Content injected by JS -->
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Srinivasa Manikanta. Built for the Future.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Project Database
+        const projects = {
+            'budgetbuddy': {
+                title: 'Budget Buddy',
+                category: 'FinTech / Web App',
+                tagline: 'A "vibe coded" expense tracker for the modern student.',
+                description: `
+                    <p>Budget Buddy is a response to the complex, boring finance apps that students typically avoid. It bridges the gap between financial responsibility and modern design aesthetics ("vibes").</p>
+                    <p>The application allows users to track expenses, visualize spending habits through interactive charts, and manage their budget with a secure, Google Auth-backed login system.</p>
+                `,
+                features: [
+                    'Google Authentication for secure access',
+                    'Real-time database updates via Firebase',
+                    'Interactive charts using Chart.js',
+                    'Responsive mobile-first design'
+                ],
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'Chart.js'],
+                image: 'assets/budgetbuddy.png',
+                gallery: [],
+                links: {
+                    demo: 'https://budgetbuddy.rsmk.co.in/',
+                    repo: '#'
+                },
+                date: '2023'
+            },
+            'colorohm': {
+                title: 'ColorOhm (OhmDecoder)',
+                category: 'Engineering Tool',
+                tagline: 'Instant resistor color code calculator for engineers.',
+                description: `
+                    <p>Calculating resistor values manually from color bands is a rite of passage for every electrical engineer, but it's prone to error and slow during rapid prototyping.</p>
+                    <p>ColorOhm handles 4-band and 5-band resistors instantly. It provides a visual interface where users can select colors and immediately see the resistance value and tolerance, effectively functioning as a "digital multimeter" for design.</p>
+                `,
+                features: [
+                    'Support for 4 and 5 band resistors',
+                    'Dynamic color visualization',
+                    'Instant calculation logic',
+                    'Mobile-friendly interface'
+                ],
+                tech: ['JavaScript', 'DOM Manipulation', 'CSS3', 'HTML5'],
+                image: 'assets/colorohm.png',
+                gallery: [],
+                links: {
+                    demo: 'https://colorohm.rsmk.me/',
+                    repo: '#'
+                },
+                date: '2023'
+            },
+            'exhaust': {
+                title: 'Smart Exhaust System',
+                category: 'IoT / Safety',
+                tagline: 'Automated gas detection and ventilation system.',
+                description: `
+                    <p>Safety in kitchens and industrial environments is paramount. This system uses an MQ-2 gas sensor to continuously monitor the air quality for LPG, smoke, and other harmful gases.</p>
+                    <p>Upon detection of a threshold breach, the system automatically triggers a high-power exhaust fan to ventilate the area and alerts the user. It features both automatic and manual override modes for maximum control.</p>
+                `,
+                features: [
+                    'Real-time gas concentration monitoring',
+                    'Automatic relay triggering',
+                    'Manual override switch',
+                    'Status indicators'
+                ],
+                tech: ['Arduino Uno', 'MQ-2 Gas Sensor', 'Relay Module', 'C++ (Embedded)'],
+                image: 'assets/autoexhaustfan.png',
+                gallery: [],
+                links: {
+                    demo: 'https://autoexhaustfan.rsmk.co.in/',
+                    repo: '#'
+                },
+                date: '2022'
+            },
+            'solar': {
+                title: 'Solar Dewatering System',
+                category: 'Green Tech / Embedded',
+                tagline: 'Autonomous solar-tracking pump for off-grid irrigation.',
+                description: `
+                    <p>Dewatering and irrigation in remote areas often face two challenges: lack of grid power and inefficient fixed-panel solar setups.</p>
+                    <p>This project implements a dual-axis solar tracker that follows the sun to maximize energy generation by up to 40% compared to fixed panels. It powers a dewatering pump that activates based on soil moisture levels, creating a completely autonomous, off-grid solution.</p>
+                `,
+                features: [
+                    'Dual-axis solar tracking',
+                    'LDR sensor array for sun positioning',
+                    'Soil moisture automated pumping',
+                    'Fully off-grid operation'
+                ],
+                tech: ['Solar Panels', 'Servo Motors', 'LDR Sensors', 'Arduino', 'Pump Drivers'],
+                image: 'assets/Bgimage.webp',
+                gallery: [],
+                links: {
+                    demo: 'https://spds.rsmk.me',
+                    repo: '#'
+                },
+                date: '2023'
+            }
+        };
+
+        // Render Function
+        function loadProject() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const project = projects[id];
+
+            if (!project) {
+                document.getElementById('main-content').innerHTML = `
+                    <div class="container section" style="text-align: center;">
+                        <h2>Project Not Found</h2>
+                        <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">Return Home</a>
+                    </div>
+                `;
+                return;
+            }
+
+            document.title = `${project.title} | Project Details`;
+
+            const techHtml = project.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
+            const featuresHtml = project.features.map(f => `<li style="margin-bottom: 0.5rem;"><i class="fas fa-check text-accent" style="margin-right: 0.5rem;"></i>${f}</li>`).join('');
+
+            const html = `
+                <section class="project-hero">
+                    <div class="container">
+                        <div class="breadcrumb">
+                            <a href="index.html">Home</a> / <a href="index.html#projects">Projects</a> / <span class="text-accent">${project.title}</span>
+                        </div>
+                        <span class="mono text-accent">${project.category}</span>
+                        <h1 style="margin-top: 1rem; margin-bottom: 1rem;">${project.title}</h1>
+                        <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 800px;">${project.tagline}</p>
+
+                        <div class="project-meta-grid">
+                            <div class="meta-item">
+                                <h4>Role</h4>
+                                <p>Lead Developer</p>
+                            </div>
+                            <div class="meta-item">
+                                <h4>Year</h4>
+                                <p>${project.date}</p>
+                            </div>
+                            <div class="meta-item">
+                                <h4>Stack</h4>
+                                <p style="font-weight: 400; font-size: 0.9rem;">${project.tech.join(', ')}</p>
+                            </div>
+                            <div class="meta-item">
+                                <a href="${project.links.demo}" target="_blank" class="btn btn-primary">
+                                    Live Demo <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section" style="padding-top: 2rem;">
+                    <div class="container">
+                       
+                       <div class="project-split-layout">
+                            <!-- Left: Image (Sticky) -->
+                            <div class="project-image-col">
+                                <div class="project-image-container" style="border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); position: sticky; top: 100px;">
+                                    <img src="${project.image}" alt="${project.title}" style="width: 100%; display: block;">
+                                </div>
+                            </div>
+
+                            <!-- Right: Content -->
+                            <div class="project-details-col">
+                                <h3 style="margin-top: 0;">Overview</h3>
+                                <div style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                                    ${project.description}
+                                </div>
+
+                                <h3>Key Features</h3>
+                                <ul style="list-style: none; padding: 0; margin-top: 1rem; color: var(--text-secondary); margin-bottom: 2.5rem;">
+                                    ${featuresHtml}
+                                </ul>
+
+                                <div style="background: var(--bg-card); padding: 2rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                                    <h4 class="mono" style="margin-bottom: 1.5rem; color: var(--text-primary);">Technologies</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;">
+                                        ${techHtml}
+                                    </div>
+
+                                    <h4 class="mono" style="margin-bottom: 1rem; color: var(--text-primary);">Resources</h4>
+                                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                        <a href="${project.links.demo}" target="_blank" class="btn btn-outline" style="justify-content: space-between;">
+                                            Live Project <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                        <a href="${project.links.repo}" class="btn btn-outline" style="justify-content: space-between;">
+                                            Source Code <i class="fab fa-github"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+
+                    </div>
+                </section>
+            `;
+
+            document.getElementById('main-content').innerHTML = html;
+        }
+
+        // Initialize
+        loadProject();
+    </script>
+</body>
+
+</html>
