@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Buddy | Financial Engineering Case Study</title>
+    <link rel="stylesheet" href="../style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo-container">
+                <span class="logo-name">RSMK</span>
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html#projects">Back to Projects</a>
+                <a href="../index.html#contact" class="btn btn-primary">Contact Me</a>
+            </nav>
+            <button class="mobile-nav-toggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- 1. Project Hero -->
+    <section class="project-page-header">
+        <div class="container">
+            <span class="mono text-accent">FINTECH / WEB APPLICATION</span>
+            <h1 class="project-title" style="font-size: 3rem; margin-top: 1rem;">Budget Buddy</h1>
+            <p class="project-tagline">
+                A "vibe coded" expense tracker that transforms personal finance into an intuitive, real-time visual
+                experience.
+            </p>
+
+            <div class="project-tech-stack" style="justify-content: center; border: none; padding: 0; margin: 2rem 0;">
+                <span class="tech-pill">React Ecosystem</span>
+                <span class="tech-pill">Firebase</span>
+                <span class="tech-pill">Chart.js</span>
+                <span class="tech-pill">Google Auth</span>
+            </div>
+
+            <div class="project-actions" style="justify-content: center; max-width: 400px; margin: 0 auto;">
+                <a href="https://budgetbuddy.rsmk.co.in/" target="_blank" class="action-btn"><i
+                        class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/Rsmk27/BudgetBuddy" target="_blank" class="action-btn"><i
+                        class="fab fa-github"></i> GitHub Repo</a>
+            </div>
+
+            <div class="project-image-container"
+                style="max-width: 800px; height: 400px; margin: 4rem auto -120px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+                <img src="../assets/budgetbuddy.png" alt="Budget Buddy Interface"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Content -->
+    <div class="project-report-container">
+
+        <!-- 2. Problem Statement -->
+        <section class="report-section">
+            <h2>01. The Problem</h2>
+            <p>
+                Personal finance tracking is often viewed by students and young professionals as tedious, complex, or
+                aesthetically unappealing.
+                Traditional spreadsheet methods lack engagement ("vibes"), while complex banking apps can be
+                overwhelming.
+                This friction leads to poor financial habits and a lack of awareness regarding personal spending
+                patterns.
+            </p>
+        </section>
+
+        <!-- 3. Solution Overview -->
+        <section class="report-section">
+            <h2>02. The Solution</h2>
+            <p>
+                Budget Buddy bridges the gap between financial utility and modern design. It is a secure, serverless web
+                application
+                that offers real-time expense tracking with instant visual feedback.
+                By prioritizing user experience (UX) and data visualization, it encourages users to actively engage with
+                their finances
+                rather than avoiding them.
+            </p>
+        </section>
+
+        <!-- 4. System Architecture -->
+        <section class="report-section">
+            <h2>03. System Architecture</h2>
+            <p>The application follows a serverless architecture leveraging Firebase for backend services to ensure
+                scalability and real-time performance.</p>
+
+            <div class="architecture-diagram">
+                <div
+                    style="display: flex; gap: 1rem; justify-content: center; align-items: center; padding: 2rem; flex-wrap: wrap;">
+                    <div class="diagram-block">Client (React/JS)</div>
+                    <i class="fas fa-arrow-right text-accent"></i>
+                    <div class="diagram-block">Firebase Auth</div>
+                    <i class="fas fa-arrow-right text-accent"></i>
+                    <div class="diagram-block">Firestore DB</div>
+                    <i class="fas fa-arrow-right text-accent"></i>
+                    <div class="diagram-block">Chart.js Renderer</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Figure 1: Data Flow & Component Interaction</p>
+            </div>
+        </section>
+
+        <!-- 5. Implementation Details -->
+        <section class="report-section">
+            <h2>04. Implementation Details</h2>
+            <div class="tech-implementation-grid">
+                <div class="tech-block">
+                    <h4><i class="fas fa-shield-alt"></i> Authentication & Security</h4>
+                    <p>Implemented <strong>Google OAuth</strong> via Firebase Authentication to provide secure,
+                        passwordless login and session management.</p>
+                </div>
+                <div class="tech-block">
+                    <h4><i class="fas fa-database"></i> Real-time Database</h4>
+                    <p>Utilized <strong>Cloud Firestore</strong> for NoSQL document storage, enabling instant
+                        synchronization of expense data across devices without page reloads.</p>
+                </div>
+                <div class="tech-block">
+                    <h4><i class="fas fa-chart-pie"></i> Data Visualization</h4>
+                    <p>Integrated <strong>Chart.js</strong> to dynamically parse expense arrays and render interactive
+                        doughnut and bar charts for category-wise analysis.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Results & Impact -->
+        <section class="report-section">
+            <h2>05. Results & Impact</h2>
+            <div class="results-grid">
+                <div class="result-stat">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-label">Real-time Sync</span>
+                </div>
+                <div class="result-stat">
+                    <span class="stat-value">Secure</span>
+                    <span class="stat-label">Google Auth</span>
+                </div>
+                <div class="result-stat">
+                    <span class="stat-value">Mobile</span>
+                    <span class="stat-label">Responsive UI</span>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; text-align: center;">
+                The platform successfully simplifies the entry barrier for personal finance tracking,
+                providing users with immediate insights into their economic behavior.
+            </p>
+        </section>
+
+        <!-- 7. Challenges & Learnings -->
+        <section class="report-section">
+            <h2>06. Challenges & Learnings</h2>
+            <div class="challenge-card">
+                <span class="challenge-title">Challenge: Asynchronous Data Handling</span>
+                <p>Rendering charts before data fetch completion caused empty states or errors.</p>
+                <p><strong>Solution:</strong> Implemented async/await patterns with loading skeletons to ensure data
+                    integrity before rendering components.</p>
+            </div>
+            <div class="challenge-card">
+                <span class="challenge-title">Challenge: Mobile Responsiveness</span>
+                <p>Complex data tables and charts were difficult to view on mobile screens.</p>
+                <p><strong>Solution:</strong> Designed a mobile-first card layout for transactions and responsive canvas
+                    resizing for charts.</p>
+            </div>
+        </section>
+
+        <!-- 8. Future Improvements -->
+        <section class="report-section">
+            <h2>07. Future Improvements</h2>
+            <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                <li><strong>AI Insights:</strong> Integrate LLMs to analyze spending patterns and suggest budget
+                    improvements.</li>
+                <li><strong>Export Functionality:</strong> Allow users to download monthly reports as PDF or CSV.</li>
+                <li><strong>Budget Alerts:</strong> Implement push notifications when category limits are approached.
+                </li>
+            </ul>
+        </section>
+
+        <!-- 9. Resources -->
+        <section class="report-section">
+            <h2>08. Resources</h2>
+            <div class="project-actions" style="justify-content: flex-start;">
+                <a href="https://github.com/Rsmk27/BudgetBuddy" class="action-btn"><i class="fab fa-github"></i> View
+                    Source Code</a>
+                <a href="https://budgetbuddy.rsmk.co.in/" class="action-btn"><i class="fas fa-external-link-alt"></i>
+                    Live Demo</a>
+            </div>
+        </section>
+
+        <!-- 10. Call to Action -->
+        <div class="project-cta-block">
+            <h3>Building a FinTech product?</h3>
+            <p>I specialize in building secure, interactive web applications. Let's discuss your project.</p>
+            <div style="margin-top: 2rem;">
+                <a href="../index.html#contact" class="btn btn-primary">Contact Me</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container"
+            style="text-align: center; padding: 2rem 0; color: var(--text-secondary); font-size: 0.9rem;">
+            &copy; 2025 RSMK. Engineered for the Future.
+        </div>
+    </footer>
+    <script>
+        const toggleBtn = document.querySelector('.mobile-nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Dewatering System | Green Tech</title>
+    <link rel="stylesheet" href="../style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo-container">
+                <span class="logo-name">RSMK</span>
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html#projects">Back to Projects</a>
+                <a href="../index.html#contact" class="btn btn-primary">Contact Me</a>
+            </nav>
+            <button class="mobile-nav-toggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- 1. Project Hero -->
+    <section class="project-page-header">
+        <div class="container">
+            <span class="mono text-accent">GREEN TECH / EMBEDDED SYSTEMS</span>
+            <h1 class="project-title" style="font-size: 3rem; margin-top: 1rem;">Solar Dewatering System</h1>
+            <p class="project-tagline">
+                An autonomous, dual-axis solar tracking pump designed to maximize renewable energy value for off-grid
+                irrigation.
+            </p>
+
+            <div class="project-tech-stack" style="justify-content: center; border: none; padding: 0; margin: 2rem 0;">
+                <span class="tech-pill">Arduino</span>
+                <span class="tech-pill">Servo Motors</span>
+                <span class="tech-pill">LDR Sensors</span>
+                <span class="tech-pill">Solar PV</span>
+            </div>
+
+            <div class="project-actions" style="justify-content: center; max-width: 400px; margin: 0 auto;">
+                <a href="https://spds.rsmk.me" target="_blank" class="action-btn"><i
+                        class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="#" class="action-btn"><i class="fab fa-github"></i> GitHub Repo</a>
+            </div>
+
+            <div class="project-image-container"
+                style="max-width: 800px; height: 400px; margin: 4rem auto -120px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+                <img src="../assets/Bgimage.webp" alt="Solar Dewatering System Prototype"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Content -->
+    <div class="project-report-container">
+
+        <!-- 2. Problem Statement -->
+        <section class="report-section">
+            <h2>01. The Problem</h2>
+            <p>
+                Remote agriculture and dewatering sites often lack reliable grid power. While solar pumps are a viable
+                alternative,
+                standard fixed-panel setups lose significant efficiency (up to 40%) because panels are not aligned with
+                the sun throughout the day.
+                Additionally, manual pump operation leads to water wastage or insufficient irrigation.
+            </p>
+        </section>
+
+        <!-- 3. Solution Overview -->
+        <section class="report-section">
+            <h2>02. The Solution</h2>
+            <p>
+                The Solar Power Dewatering System (SPDS) is a fully autonomous solution. It integrates a
+                <strong>Dual-Axis Solar Tracker</strong>
+                that actively follows the sun's position from East to West and adjusts elevation for seasonal changes.
+                Coupled with standard soil moisture sensors, the system ensures water is pumped only when necessary,
+                maximizing both energy capture and water conservation.
+            </p>
+        </section>
+
+        <!-- 4. System Architecture -->
+        <section class="report-section">
+            <h2>03. System Architecture</h2>
+            <p>The system fuses mechanical control (tracking) with environmental sensing (moisture).</p>
+
+            <div class="architecture-diagram">
+                <div
+                    style="display: flex; gap: 1rem; justify-content: center; align-items: center; padding: 2rem; flex-wrap: wrap;">
+                    <div class="diagram-block">LDR Array (Eyes)</div>
+                    <i class="fas fa-arrow-right text-accent"></i>
+                    <div class="diagram-block">Arduino (Brain)</div>
+                    <i class="fas fa-arrow-right text-accent"></i>
+                    <div class="diagram-block">Servos (Muscles)</div>
+                    <i class="fas fa-plus margin-horizontal-sm"></i>
+                    <div class="diagram-block">Pump Control</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Figure 1: Sensor-Actuator Control Flow</p>
+            </div>
+        </section>
+
+        <!-- 5. Implementation Details -->
+        <section class="report-section">
+            <h2>04. Implementation Details</h2>
+            <div class="tech-implementation-grid">
+                <div class="tech-block">
+                    <h4><i class="fas fa-solar-panel"></i> Solar Tracking</h4>
+                    <p>Designed a differential logic using 4 LDRs (Light Dependent Resistors). The Arduino compares
+                        light intensity values (Top vs. Bottom, Left vs. Right) to drive the servo motors toward the
+                        brightest point.</p>
+                </div>
+                <div class="tech-block">
+                    <h4><i class="fas fa-tint"></i> Smart Irrigation</h4>
+                    <p>The pump subsystem is triggered only when soil moisture acts as a "Gate". Even if solar power is
+                        available, water is not wasted if the soil is already wet.</p>
+                </div>
+                <div class="tech-block">
+                    <h4><i class="fas fa-cogs"></i> Mechanical Design</h4>
+                    <p>Built a custom dual-axis gimbal mechanism using high-torque servos to support the weight of the
+                        PV panel prototype.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Results & Impact -->
+        <section class="report-section">
+            <h2>05. Results & Impact</h2>
+            <div class="results-grid">
+                <div class="result-stat">
+                    <span class="stat-value">+35%</span>
+                    <span class="stat-label">Energy Gen</span>
+                </div>
+                <div class="result-stat">
+                    <span class="stat-value">Auto</span>
+                    <span class="stat-label">Irrigation</span>
+                </div>
+                <div class="result-stat">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-label">Off-Grid</span>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; text-align: center;">
+                The tracking mechanism significantly extended the "peak power" window of the solar panel, allowing the
+                pump to operate for more hours per day.
+            </p>
+        </section>
+
+        <!-- 7. Challenges & Learnings -->
+        <section class="report-section">
+            <h2>06. Challenges & Learnings</h2>
+            <div class="challenge-card">
+                <span class="challenge-title">Challenge: Jittery Movement</span>
+                <p>Cloud cover caused rapidly fluctuating LDR readings, making the servos jitter.</p>
+                <p><strong>Solution:</strong> Implementation of a software "deadband" (tolerance range) so small changes
+                    in light do not trigger movement.</p>
+            </div>
+            <div class="challenge-card">
+                <span class="challenge-title">Challenge: Power Consumption</span>
+                <p>The servos themselves consumed power, potentially negating the gain from tracking.</p>
+                <p><strong>Solution:</strong> Optimized the code to update position only every few minutes rather than
+                    continuously, drastically reducing idle power draw.</p>
+            </div>
+        </section>
+
+        <!-- 8. Future Improvements -->
+        <section class="report-section">
+            <h2>07. Future Improvements</h2>
+            <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                <li><strong>MPPT Controller:</strong> Integrate Maximum Power Point Tracking for electrical efficiency.
+                </li>
+                <li><strong>Weather Protection:</strong> Add a "stow" mode to flatten panels during high winds.</li>
+                <li><strong>Remote Dashboard:</strong> LoRaWAN integration for long-range monitoring.</li>
+            </ul>
+        </section>
+
+        <!-- 9. Resources -->
+        <section class="report-section">
+            <h2>08. Resources</h2>
+            <div class="project-actions" style="justify-content: flex-start;">
+                <a href="#" class="action-btn"><i class="fab fa-github"></i> View Source Code</a>
+                <a href="https://spds.rsmk.me" class="action-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            </div>
+        </section>
+
+        <!-- 10. Call to Action -->
+        <div class="project-cta-block">
+            <h3>Building sustainable tech?</h3>
+            <p>I am passionate about green energy engineering. Let's collaborate on impactful solutions.</p>
+            <div style="margin-top: 2rem;">
+                <a href="../index.html#contact" class="btn btn-primary">Contact Me</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container"
+            style="text-align: center; padding: 2rem 0; color: var(--text-secondary); font-size: 0.9rem;">
+            &copy; 2025 RSMK. Engineered for the Future.
+        </div>
+    </footer>
+    <script>
+        const toggleBtn = document.querySelector('.mobile-nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>
