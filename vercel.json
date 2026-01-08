@@ -1,0 +1,10 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/projects/:match*",
+      "destination": "/projects/:match*"
+    }
+  ]
+}
