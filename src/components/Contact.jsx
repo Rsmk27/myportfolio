@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { fadeInUp, staggerContainer } from '../utils/animations';
+import { blurIn, staggerContainer } from '../utils/animations';
 
 const Contact = () => {
     return (
@@ -12,13 +12,13 @@ const Contact = () => {
                 viewport={{ once: false, amount: 0.3 }}
                 variants={staggerContainer}
             >
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={blurIn}>
                     <span className="mono text-accent">07. COLLABORATION</span>
                     <h2>Let's Build the Future</h2>
                 </motion.div>
 
                 <div className="contact-grid">
-                    <motion.div variants={fadeInUp}>
+                    <motion.div variants={blurIn}>
                         <h3>Contact</h3>
                         <p>I am always open to discussing sustainable tech, embedded projects, or full-time engineering
                             roles.</p>
@@ -43,7 +43,7 @@ const Contact = () => {
                         </a>
                     </motion.div>
 
-                    <motion.div variants={fadeInUp}>
+                    <motion.div variants={blurIn}>
                         <h3>Connect</h3>
                         <div className="social-links" style={{ flexWrap: 'wrap' }}>
                             <a href="https://github.com/Rsmk27" target="_blank" rel="noreferrer" className="social-icon"><i

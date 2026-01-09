@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { fadeInUp, staggerContainer } from '../utils/animations';
+import { fadeInRight, staggerContainer } from '../utils/animations';
 
 const Experience = () => {
     return (
@@ -12,14 +12,14 @@ const Experience = () => {
                 viewport={{ once: false, amount: 0.3 }}
                 variants={staggerContainer}
             >
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={fadeInRight}>
                     <span className="mono text-accent">04. JOURNEY</span>
                     <h2>Experience & Education</h2>
                 </motion.div>
 
                 <div className="timeline">
                     {/* Education Item */}
-                    <motion.div className="timeline-item" variants={fadeInUp}>
+                    <motion.div className="timeline-item" variants={fadeInRight}>
                         <div className="timeline-marker"></div>
                         <div className="timeline-date">2024 - Present</div>
                         <h3>B.Tech, Electrical & Electronics Engineering</h3>
@@ -28,7 +28,7 @@ const Experience = () => {
                     </motion.div>
 
                     {/* Experience Item */}
-                    <motion.div className="timeline-item" variants={fadeInUp}>
+                    <motion.div className="timeline-item" variants={fadeInRight}>
                         <div className="timeline-marker"></div>
                         <div className="timeline-date">Nov 2023 - May 2024</div>
                         <h3>Electrical Engineering Intern</h3>
@@ -53,7 +53,7 @@ const Experience = () => {
                     </motion.div>
 
                     {/* Education Item */}
-                    <motion.div className="timeline-item" variants={fadeInUp}>
+                    <motion.div className="timeline-item" variants={fadeInRight}>
                         <div className="timeline-marker"></div>
                         <div className="timeline-date">2021 - 2024</div>
                         <h3>Diploma, Electrical & Electronics Engineering</h3>

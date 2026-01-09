@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { fadeInUp, staggerContainer } from '../utils/animations';
+import { popIn, staggerContainer } from '../utils/animations';
 
 const Projects = () => {
     return (
@@ -13,7 +13,7 @@ const Projects = () => {
                 viewport={{ once: false, amount: 0.1 }}
                 variants={staggerContainer}
             >
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={popIn}>
                     <span className="mono text-accent">03. PROOF OF WORK</span>
                     <h2>Featured Projects</h2>
                 </motion.div>
@@ -21,7 +21,7 @@ const Projects = () => {
                 <div className="projects-grid">
 
                     {/* Project 1: BudgetBuddy */}
-                    <motion.article className="project-card" variants={fadeInUp}>
+                    <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
                             <img src="/assets/budgetbuddy.png" alt="Budget Buddy Interface" />
                         </div>
@@ -59,7 +59,7 @@ const Projects = () => {
                     </motion.article>
 
                     {/* Project 2: AI Chatbot */}
-                    <motion.article className="project-card" variants={fadeInUp}>
+                    <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
                             <img src="/assets/Bgimage.webp" alt="AI Chatbot Concept" />
                         </div>
@@ -96,7 +96,7 @@ const Projects = () => {
                     </motion.article>
 
                     {/* Project 3: ColorOhm */}
-                    <motion.article className="project-card" variants={fadeInUp}>
+                    <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
                             <img src="/assets/colorohm.png" alt="ColorOhm Interface" />
                         </div>
@@ -133,7 +133,7 @@ const Projects = () => {
                     </motion.article>
 
                     {/* Project 4: Embedded IoT Monitoring */}
-                    <motion.article className="project-card" variants={fadeInUp}>
+                    <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
                             <img src="/assets/autoexhaustfan.png" alt="IoT Monitoring System" />
                         </div>

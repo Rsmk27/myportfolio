@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { fadeInUp, staggerContainer } from '../utils/animations';
+import { fadeInUp, staggerContainer, textContainer, textVariant } from '../utils/animations';
 
 const Hero = () => {
     return (
@@ -15,14 +15,34 @@ const Hero = () => {
             >
                 <div className="hero-grid">
                     <div className="hero-text">
-                        <motion.div className="hero-headline" variants={fadeInUp}>
-                            <h1>Srinivasa Manikanta</h1>
-                            <h2 style={{ fontSize: '1.5rem', color: 'var(--text-accent)', marginBottom: 0 }}>
+                        <motion.div className="hero-headline" variants={staggerContainer}>
+                            <motion.h1
+                                variants={textContainer}
+                                style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}
+                            >
+                                {["Srinivasa", "Manikanta"].map((word, i) => (
+                                    <span key={i} style={{ display: 'flex' }}>
+                                        {Array.from(word).map((letter, index) => (
+                                            <motion.span variants={textVariant} key={index}>
+                                                {letter}
+                                            </motion.span>
+                                        ))}
+                                    </span>
+                                ))}
+                            </motion.h1>
+                            <motion.h2
+                                variants={fadeInUp}
+                                style={{ fontSize: '1.5rem', color: 'var(--text-accent)', marginBottom: 0 }}
+                            >
                                 Electrical & Electronics Engineer
-                            </h2>
-                            <span className="mono" style={{ color: 'var(--text-secondary)' }}>
+                            </motion.h2>
+                            <motion.span
+                                className="mono"
+                                variants={fadeInUp}
+                                style={{ color: 'var(--text-secondary)', display: 'inline-block' }}
+                            >
                                 Embedded & Smart Energy Developer
-                            </span>
+                            </motion.span>
                         </motion.div>
 
                         <motion.p
