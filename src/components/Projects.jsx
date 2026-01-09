@@ -1,17 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const Projects = () => {
     return (
         <section id="projects" className="section">
-            <div className="container">
-                <span className="mono text-accent">03. PROOF OF WORK</span>
-                <h2>Featured Projects</h2>
+            <motion.div
+                className="container"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.1 }}
+                variants={staggerContainer}
+            >
+                <motion.div variants={fadeInUp}>
+                    <span className="mono text-accent">03. PROOF OF WORK</span>
+                    <h2>Featured Projects</h2>
+                </motion.div>
 
                 <div className="projects-grid">
 
                     {/* Project 1: BudgetBuddy */}
-                    <article className="project-card">
+                    <motion.article className="project-card" variants={fadeInUp}>
                         <div className="project-image-container">
                             <img src="/assets/budgetbuddy.png" alt="Budget Buddy Interface" />
                         </div>
@@ -46,10 +56,10 @@ const Projects = () => {
                                     className="fab fa-github"></i> GitHub</a>
                             </div>
                         </div>
-                    </article>
+                    </motion.article>
 
                     {/* Project 2: AI Chatbot */}
-                    <article className="project-card">
+                    <motion.article className="project-card" variants={fadeInUp}>
                         <div className="project-image-container">
                             <img src="/assets/Bgimage.webp" alt="AI Chatbot Concept" />
                         </div>
@@ -83,10 +93,10 @@ const Projects = () => {
                                     className="fab fa-github"></i> GitHub</a>
                             </div>
                         </div>
-                    </article>
+                    </motion.article>
 
                     {/* Project 3: ColorOhm */}
-                    <article className="project-card">
+                    <motion.article className="project-card" variants={fadeInUp}>
                         <div className="project-image-container">
                             <img src="/assets/colorohm.png" alt="ColorOhm Interface" />
                         </div>
@@ -120,10 +130,10 @@ const Projects = () => {
                                     className="fab fa-github"></i> GitHub</a>
                             </div>
                         </div>
-                    </article>
+                    </motion.article>
 
                     {/* Project 4: Embedded IoT Monitoring */}
-                    <article className="project-card">
+                    <motion.article className="project-card" variants={fadeInUp}>
                         <div className="project-image-container">
                             <img src="/assets/autoexhaustfan.png" alt="IoT Monitoring System" />
                         </div>
@@ -158,10 +168,10 @@ const Projects = () => {
                                     className="fab fa-github"></i> GitHub</a>
                             </div>
                         </div>
-                    </article>
+                    </motion.article>
 
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

@@ -1,11 +1,19 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const About = () => {
     return (
         <section id="about" className="section">
-            <div className="container">
+            <motion.div
+                className="container"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                variants={staggerContainer}
+            >
                 <div className="about-grid">
-                    <div className="about-text">
+                    <motion.div className="about-text" variants={fadeInUp}>
                         <span className="mono text-accent">01. IDENTITY</span>
                         <h2>About Me</h2>
                         <p>I am an Electrical & Electronics Engineering student with a deep interest in designing
@@ -28,9 +36,9 @@ const About = () => {
                             style={{ borderLeft: '3px solid var(--text-accent)', paddingLeft: '1rem', marginTop: '2rem', fontStyle: 'italic', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
                             “Build systems that are not only functional — but meaningful, efficient, and future-ready.”
                         </blockquote>
-                    </div>
+                    </motion.div>
                     {/* Core Focus Card Remains */}
-                    <div className="about-card">
+                    <motion.div className="about-card" variants={fadeInUp}>
                         <h3 className="mono">Core Focus</h3>
                         <ul style={{ listStyle: 'none', padding: 0, marginTop: '1rem' }}>
                             <li style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -46,9 +54,9 @@ const About = () => {
                                 <i className="fas fa-robot text-accent"></i> Automation & AI Integration
                             </li>
                         </ul>
-                    </div>
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

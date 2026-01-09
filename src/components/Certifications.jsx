@@ -1,15 +1,25 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const Certifications = () => {
     return (
         <section id="certifications" className="section">
-            <div className="container">
-                <span className="mono text-accent">05. CREDENTIALS</span>
-                <h2>Certifications</h2>
+            <motion.div
+                className="container"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.1 }}
+                variants={staggerContainer}
+            >
+                <motion.div variants={fadeInUp}>
+                    <span className="mono text-accent">05. CREDENTIALS</span>
+                    <h2>Certifications</h2>
+                </motion.div>
 
                 <div className="cert-grid">
                     {/* Cert 1 */}
-                    <div className="cert-card">
+                    <motion.div className="cert-card" variants={fadeInUp}>
                         <div className="cert-icon">
                             <i className="fas fa-microchip"></i>
                         </div>
@@ -19,10 +29,10 @@ const Certifications = () => {
                             <p className="cert-desc">Comprehensive expertise in microcontroller architecture, interfacing
                                 periperhals, and real-time systems programming.</p>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Cert 2 */}
-                    <div className="cert-card">
+                    <motion.div className="cert-card" variants={fadeInUp}>
                         <div className="cert-icon">
                             <i className="fas fa-charging-station"></i>
                         </div>
@@ -32,10 +42,10 @@ const Certifications = () => {
                             <p className="cert-desc">Advanced training in EV powertrains, battery management systems (BMS), and
                                 charging infrastructure architectures.</p>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Cert 3 */}
-                    <div className="cert-card">
+                    <motion.div className="cert-card" variants={fadeInUp}>
                         <div className="cert-icon">
                             <i className="fas fa-helicopter"></i>
                         </div>
@@ -45,10 +55,10 @@ const Certifications = () => {
                             <p className="cert-desc">Hands-on experience with UAV dynamics, flight controllers, aerial sensor
                                 integration, and calibration.</p>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Cert 5 */}
-                    <div className="cert-card">
+                    <motion.div className="cert-card" variants={fadeInUp}>
                         <div className="cert-icon">
                             <i className="fas fa-cube"></i>
                         </div>
@@ -58,10 +68,10 @@ const Certifications = () => {
                             <p className="cert-desc">Expertise in layered manufacturing, CAD-to-print workflows, and rapid
                                 prototyping materials.</p>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Cert 6 */}
-                    <div className="cert-card">
+                    <motion.div className="cert-card" variants={fadeInUp}>
                         <div className="cert-icon">
                             <i className="fas fa-magic"></i>
                         </div>
@@ -71,9 +81,9 @@ const Certifications = () => {
                             <p className="cert-desc">Leveraging Generative AI and LLMs to accelerate the engineering design
                                 lifecycle from concept to code.</p>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

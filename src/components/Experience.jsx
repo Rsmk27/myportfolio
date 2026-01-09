@@ -1,24 +1,34 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const Experience = () => {
     return (
         <section id="experience" className="section" style={{ background: 'rgba(22, 27, 34, 0.5)' }}>
-            <div className="container">
-                <span className="mono text-accent">04. JOURNEY</span>
-                <h2>Experience & Education</h2>
+            <motion.div
+                className="container"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                variants={staggerContainer}
+            >
+                <motion.div variants={fadeInUp}>
+                    <span className="mono text-accent">04. JOURNEY</span>
+                    <h2>Experience & Education</h2>
+                </motion.div>
 
                 <div className="timeline">
                     {/* Education Item */}
-                    <div className="timeline-item">
+                    <motion.div className="timeline-item" variants={fadeInUp}>
                         <div className="timeline-marker"></div>
                         <div className="timeline-date">2024 - Present</div>
                         <h3>B.Tech, Electrical & Electronics Engineering</h3>
                         <p>Deepening expertise in Advanced IoT, Machine Learning, and Grid Automation. Leading projects in
                             Smart Energy systems.</p>
-                    </div>
+                    </motion.div>
 
                     {/* Experience Item */}
-                    <div className="timeline-item">
+                    <motion.div className="timeline-item" variants={fadeInUp}>
                         <div className="timeline-marker"></div>
                         <div className="timeline-date">Nov 2023 - May 2024</div>
                         <h3>Electrical Engineering Intern</h3>
@@ -40,18 +50,18 @@ const Experience = () => {
                             <li style={{ marginBottom: '0.5rem' }}>Adhered to rigorous industrial safety protocols and energy
                                 management standards (ISO 50001) in high-risk plant environments.</li>
                         </ul>
-                    </div>
+                    </motion.div>
 
                     {/* Education Item */}
-                    <div className="timeline-item">
+                    <motion.div className="timeline-item" variants={fadeInUp}>
                         <div className="timeline-marker"></div>
                         <div className="timeline-date">2021 - 2024</div>
                         <h3>Diploma, Electrical & Electronics Engineering</h3>
                         <p>Built foundational knowledge in Circuit Design and Power Systems. Developed multiple embedded
                             system prototypes.</p>
-                    </div>
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { projectsData } from '../data/projects';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const ProjectDetail = () => {
     const { id } = useParams();
@@ -32,39 +34,54 @@ const ProjectDetail = () => {
 
             {/* 1. Project Hero */}
             <section className="project-page-header">
-                <div className="container">
-                    <span className="mono text-accent">{project.category}</span>
-                    <h1 className="project-title" style={{ fontSize: '3rem', marginTop: '1rem' }}>{project.title}</h1>
-                    <p className="project-tagline">
+                <motion.div
+                    className="container"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={staggerContainer}
+                >
+                    <motion.span className="mono text-accent" variants={fadeInUp}>{project.category}</motion.span>
+                    <motion.h1 className="project-title" style={{ fontSize: '3rem', marginTop: '1rem' }} variants={fadeInUp}>{project.title}</motion.h1>
+                    <motion.p className="project-tagline" variants={fadeInUp}>
                         {project.tagline}
-                    </p>
+                    </motion.p>
 
-                    <div className="project-tech-stack" style={{ justifyContent: 'center', border: 'none', padding: 0, margin: '2rem 0' }}>
+                    <motion.div className="project-tech-stack" style={{ justifyContent: 'center', border: 'none', padding: 0, margin: '2rem 0' }} variants={fadeInUp}>
                         {project.techStack.map((tech, index) => (
                             <span key={index} className="tech-pill">{tech}</span>
                         ))}
-                    </div>
+                    </motion.div>
 
-                    <div className="project-actions" style={{ justifyContent: 'center', maxWidth: '400px', margin: '0 auto' }}>
+                    <motion.div className="project-actions" style={{ justifyContent: 'center', maxWidth: '400px', margin: '0 auto' }} variants={fadeInUp}>
                         {project.actions.map((action, index) => (
                             <a key={index} href={action.link} target="_blank" rel="noreferrer" className="action-btn">
                                 <i className={action.icon}></i> {action.label}
                             </a>
                         ))}
-                    </div>
+                    </motion.div>
 
-                    <div className="project-image-container"
-                        style={{ maxWidth: '800px', height: '400px', margin: '4rem auto -120px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-color)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}>
+                    <motion.div className="project-image-container"
+                        style={{ maxWidth: '800px', height: '400px', margin: '4rem auto -120px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-color)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}
+                        variants={fadeInUp}
+                    >
                         <img src={project.heroImage} alt={`${project.title} Screenshot`}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </section>
 
             {/* Report Content */}
             <div className="project-report-container">
                 {project.sections.map((section, index) => (
-                    <section key={index} className="report-section">
+                    <motion.section
+                        key={index}
+                        className="report-section"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: false, amount: 0.1 }}
+                        variants={fadeInUp}
+                    >
                         <h2>{section.title}</h2>
                         {section.content && (
                             <p dangerouslySetInnerHTML={{ __html: section.content }}></p>
@@ -147,18 +164,24 @@ const ProjectDetail = () => {
                             </div>
                         )}
 
-                    </section>
+                    </motion.section>
                 ))}
 
                 {/* CTA */}
                 {project.cta && (
-                    <div className="project-cta-block">
+                    <motion.div
+                        className="project-cta-block"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: false, amount: 0.3 }}
+                        variants={fadeInUp}
+                    >
                         <h3>{project.cta.title}</h3>
                         <p>{project.cta.text}</p>
                         <div style={{ marginTop: '2rem' }}>
                             <Link to="/#contact" className="btn btn-primary">Contact Me</Link>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
 
             </div>

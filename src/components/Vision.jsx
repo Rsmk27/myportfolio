@@ -1,15 +1,25 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const Vision = () => {
     return (
         <section id="vision" className="section">
-            <div className="container">
-                <span className="mono text-accent">06. VISION & FUTURE DIRECTION</span>
-                <h2>The Roadmap</h2>
+            <motion.div
+                className="container"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                variants={staggerContainer}
+            >
+                <motion.div variants={fadeInUp}>
+                    <span className="mono text-accent">06. VISION & FUTURE DIRECTION</span>
+                    <h2>The Roadmap</h2>
+                </motion.div>
 
                 <div className="vision-content">
                     {/* Main Vision Statement */}
-                    <div className="vision-statement">
+                    <motion.div className="vision-statement" variants={fadeInUp}>
                         <p>
                             I am working toward building <strong>intelligent engineering systems</strong> that make energy
                             infrastructure more efficient, autonomous, and sustainable.
@@ -23,33 +33,33 @@ const Vision = () => {
                                 autonomous control systems, and software-defined infrastructure</strong> — and I am
                             preparing myself to contribute meaningfully to that future.
                         </p>
-                    </div>
+                    </motion.div>
 
                     {/* Focus Areas */}
-                    <div className="focus-grid">
-                        <div className="focus-card">
+                    <motion.div className="focus-grid" variants={staggerContainer}>
+                        <motion.div className="focus-card" variants={fadeInUp}>
                             <span className="focus-icon">🌱</span>
                             <h4>Sustainable & Smart Energy</h4>
                             <p>Designing cleaner, more adaptive power systems and energy management platforms.</p>
-                        </div>
-                        <div className="focus-card">
+                        </motion.div>
+                        <motion.div className="focus-card" variants={fadeInUp}>
                             <span className="focus-icon">🧠</span>
                             <h4>Intelligent & Autonomous Infrastructure</h4>
                             <p>Developing self-regulating systems using embedded control, IoT, and AI.</p>
-                        </div>
-                        <div className="focus-card">
+                        </motion.div>
+                        <motion.div className="focus-card" variants={fadeInUp}>
                             <span className="focus-icon">⚙️</span>
                             <h4>Full-Stack Physical Systems</h4>
                             <p>Building platforms where hardware, data, and software operate as one.</p>
-                        </div>
-                        <div className="focus-card">
+                        </motion.div>
+                        <motion.div className="focus-card" variants={fadeInUp}>
                             <span className="focus-icon">🔬</span>
                             <h4>Continuous Learning & Innovation</h4>
                             <p>Pursuing advanced knowledge in emerging engineering technologies.</p>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

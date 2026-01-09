@@ -1,15 +1,25 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const Skills = () => {
     return (
         <section id="skills" className="section" style={{ background: 'rgba(22, 27, 34, 0.5)' }}>
-            <div className="container">
-                <span className="mono text-accent">02. CAPABILITY</span>
-                <h2>Technical Arsenal</h2>
+            <motion.div
+                className="container"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                variants={staggerContainer}
+            >
+                <motion.div variants={fadeInUp}>
+                    <span className="mono text-accent">02. CAPABILITY</span>
+                    <h2>Technical Arsenal</h2>
+                </motion.div>
 
-                <div className="skills-container">
+                <motion.div className="skills-container" variants={staggerContainer}>
                     {/* Pillar 1 */}
-                    <article className="skill-pillar pillar-core">
+                    <motion.article className="skill-pillar pillar-core" variants={fadeInUp}>
                         <h3><i className="fas fa-microchip"></i> Core Engineering</h3>
                         <div className="skill-list">
                             <span className="skill-tag">Electrical & Electronics Engineering</span>
@@ -18,10 +28,10 @@ const Skills = () => {
                             <span className="skill-tag">Control Systems & Automation</span>
                             <span className="skill-tag">Internet of Things (IoT)</span>
                         </div>
-                    </article>
+                    </motion.article>
 
                     {/* Pillar 2 */}
-                    <article className="skill-pillar pillar-software">
+                    <motion.article className="skill-pillar pillar-software" variants={fadeInUp}>
                         <h3><i className="fas fa-terminal"></i> Software & Tools</h3>
                         <div className="skill-list">
                             <span className="skill-tag">C / C++ / Python</span>
@@ -30,10 +40,10 @@ const Skills = () => {
                             <span className="skill-tag">Firebase / APIs</span>
                             <span className="skill-tag">Git / Linux</span>
                         </div>
-                    </article>
+                    </motion.article>
 
                     {/* Pillar 3 */}
-                    <article className="skill-pillar pillar-domains">
+                    <motion.article className="skill-pillar pillar-domains" variants={fadeInUp}>
                         <h3><i className="fas fa-globe-americas"></i> Applied Domains</h3>
                         <div className="skill-list">
                             <span className="skill-tag">Smart Energy Systems</span>
@@ -42,11 +52,11 @@ const Skills = () => {
                             <span className="skill-tag">FinTech Platforms</span>
                             <span className="skill-tag">AI-Driven Engineering</span>
                         </div>
-                    </article>
-                </div>
+                    </motion.article>
+                </motion.div>
 
                 {/* Engineering Strengths */}
-                <div className="engineering-strengths">
+                <motion.div className="engineering-strengths" variants={fadeInUp}>
                     <h3 style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>
                         Engineering Confidence
                     </h3>
@@ -57,9 +67,9 @@ const Skills = () => {
                         <div className="strength-item"><i className="fas fa-check-circle"></i> Scalable Architecture</div>
                         <div className="strength-item"><i className="fas fa-check-circle"></i> Rapid Prototyping</div>
                     </div>
-                </div>
+                </motion.div>
 
-            </div>
+            </motion.div>
         </section>
     );
 };

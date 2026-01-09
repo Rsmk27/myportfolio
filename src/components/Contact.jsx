@@ -1,14 +1,24 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const Contact = () => {
     return (
         <section id="contact" className="section" style={{ background: 'rgba(47, 129, 247, 0.03)' }}>
-            <div className="container">
-                <span className="mono text-accent">07. COLLABORATION</span>
-                <h2>Let's Build the Future</h2>
+            <motion.div
+                className="container"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                variants={staggerContainer}
+            >
+                <motion.div variants={fadeInUp}>
+                    <span className="mono text-accent">07. COLLABORATION</span>
+                    <h2>Let's Build the Future</h2>
+                </motion.div>
 
                 <div className="contact-grid">
-                    <div>
+                    <motion.div variants={fadeInUp}>
                         <h3>Contact</h3>
                         <p>I am always open to discussing sustainable tech, embedded projects, or full-time engineering
                             roles.</p>
@@ -31,9 +41,9 @@ const Contact = () => {
                             target="_blank" download>
                             <i className="fas fa-download"></i> Download Resume
                         </a>
-                    </div>
+                    </motion.div>
 
-                    <div>
+                    <motion.div variants={fadeInUp}>
                         <h3>Connect</h3>
                         <div className="social-links" style={{ flexWrap: 'wrap' }}>
                             <a href="https://github.com/Rsmk27" target="_blank" rel="noreferrer" className="social-icon"><i
@@ -47,9 +57,9 @@ const Contact = () => {
                             <a href="https://api.whatsapp.com/send?phone=916301165183&text=%F0%9F%98%8A%20Hey%2C%20I%20have%20recently%20saw%20your%20portfolio%2C%20lets%20get%20in%20touch%20%F0%9F%A4%9D"
                                 target="_blank" rel="noreferrer" className="social-icon"><i className="fab fa-whatsapp"></i></a>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };
