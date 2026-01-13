@@ -25,7 +25,7 @@ const Projects = () => {
                     {/* Project 1: BudgetBuddy */}
                     <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
-                            <img src="/assets/budget-buddy-expense-tracker-app.png" 
+                            <img src="/assets/budget-buddy-expense-tracker-app.webp" 
                                  alt="Budget Buddy expense tracking application interface showing real-time financial analytics and budget management dashboard" 
                                  width="2560" 
                                  height="1792" 
@@ -108,7 +108,7 @@ const Projects = () => {
                     {/* Project 3: ColorOhm */}
                     <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
-                            <img src="/assets/color-ohm-resistor-calculator-tool.png" 
+                            <img src="/assets/color-ohm-resistor-calculator-tool.webp" 
                                  alt="ColorOhm resistor color code calculator tool interface for electrical engineers showing 4-band and 5-band resistance calculation" 
                                  width="2560" 
                                  height="1792" 
@@ -149,7 +149,7 @@ const Projects = () => {
                     {/* Project 4: Embedded IoT Monitoring */}
                     <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
-                            <img src="/assets/smart-exhaust-gas-detection-system.png" 
+                            <img src="/assets/smart-exhaust-gas-detection-system.webp" 
                                  alt="Smart exhaust fan system with MQ-2 gas sensor for automatic hazardous gas detection and ventilation control using Arduino" 
                                  width="2560" 
                                  height="1792" 

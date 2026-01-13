@@ -62,7 +62,7 @@ const Hero = () => {
                     </div>
                     <motion.div className="hero-visual" variants={fadeInUp}>
                         <div className="profile-placeholder">
-                            <img src="/assets/srinivasa-manikanta-profile.jpg" 
+                            <img src="/assets/srinivasa-manikanta-profile.webp" 
                                  alt="Srinivasa Manikanta - Electrical and Electronics Engineer specializing in embedded systems and smart energy solutions" 
                                  width="400" 
                                  height="400" />

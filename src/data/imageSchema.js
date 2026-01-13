@@ -3,8 +3,8 @@ export const imageStructuredData = {
   profileImage: {
     "@context": "https://schema.org",
     "@type": "ImageObject",
-    "contentUrl": "https://rsmk.me/assets/srinivasa-manikanta-profile.jpg",
-    "url": "https://rsmk.me/assets/srinivasa-manikanta-profile.jpg",
+    "contentUrl": "https://rsmk.me/assets/srinivasa-manikanta-profile.webp",
+    "url": "https://rsmk.me/assets/srinivasa-manikanta-profile.webp",
     "name": "Srinivasa Manikanta Professional Profile Photo",
     "description": "Professional photo of Srinivasa Manikanta, Electrical and Electronics Engineer specializing in embedded systems, IoT, and smart energy solutions",
     "author": {
@@ -17,7 +17,7 @@ export const imageStructuredData = {
     },
     "width": "400px",
     "height": "400px",
-    "encodingFormat": "image/jpeg",
+    "encodingFormat": "image/webp",
     "license": "https://rsmk.me/",
     "acquireLicensePage": "https://rsmk.me/contact.html"
   },
@@ -25,8 +25,8 @@ export const imageStructuredData = {
   budgetBuddyImage: {
     "@context": "https://schema.org",
     "@type": "ImageObject",
-    "contentUrl": "https://rsmk.me/assets/budget-buddy-expense-tracker-app.png",
-    "url": "https://rsmk.me/assets/budget-buddy-expense-tracker-app.png",
+    "contentUrl": "https://rsmk.me/assets/budget-buddy-expense-tracker-app.webp",
+    "url": "https://rsmk.me/assets/budget-buddy-expense-tracker-app.webp",
     "name": "Budget Buddy Expense Tracker Application",
     "description": "Budget Buddy expense tracking application interface showing real-time financial analytics, budget management dashboard with React and Firebase integration",
     "about": {
@@ -41,14 +41,14 @@ export const imageStructuredData = {
     },
     "width": "2560px",
     "height": "1792px",
-    "encodingFormat": "image/png"
+    "encodingFormat": "image/webp"
   },
   
   colorOhmImage: {
     "@context": "https://schema.org",
     "@type": "ImageObject",
-    "contentUrl": "https://rsmk.me/assets/color-ohm-resistor-calculator-tool.png",
-    "url": "https://rsmk.me/assets/color-ohm-resistor-calculator-tool.png",
+    "contentUrl": "https://rsmk.me/assets/color-ohm-resistor-calculator-tool.webp",
+    "url": "https://rsmk.me/assets/color-ohm-resistor-calculator-tool.webp",
     "name": "ColorOhm Resistor Color Code Calculator Tool",
     "description": "ColorOhm resistor color code calculator tool interface for electrical engineers showing 4-band and 5-band resistance calculation with instant visual feedback",
     "about": {
@@ -63,14 +63,14 @@ export const imageStructuredData = {
     },
     "width": "2560px",
     "height": "1792px",
-    "encodingFormat": "image/png"
+    "encodingFormat": "image/webp"
   },
   
   smartExhaustImage: {
     "@context": "https://schema.org",
     "@type": "ImageObject",
-    "contentUrl": "https://rsmk.me/assets/smart-exhaust-gas-detection-system.png",
-    "url": "https://rsmk.me/assets/smart-exhaust-gas-detection-system.png",
+    "contentUrl": "https://rsmk.me/assets/smart-exhaust-gas-detection-system.webp",
+    "url": "https://rsmk.me/assets/smart-exhaust-gas-detection-system.webp",
     "name": "Smart Exhaust Gas Detection System",
     "description": "Smart exhaust fan system with MQ-2 gas sensor for automatic hazardous gas detection and ventilation control using Arduino microcontroller and IoT technology",
     "about": {
@@ -80,7 +80,7 @@ export const imageStructuredData = {
     },
     "width": "2560px",
     "height": "1792px",
-    "encodingFormat": "image/png"
+    "encodingFormat": "image/webp"
   },
   
   aiChatbotImage: {

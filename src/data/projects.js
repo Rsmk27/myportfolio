@@ -9,7 +9,7 @@ export const projectsData = {
             { label: "Live Demo", link: "https://budgetbuddy.rsmk.co.in/", icon: "fas fa-external-link-alt" },
             { label: "GitHub Repo", link: "https://github.com/Rsmk27/BudgetBuddy", icon: "fab fa-github" }
         ],
-        heroImage: "/assets/budget-buddy-expense-tracker-app.png",
+        heroImage: "/assets/budget-buddy-expense-tracker-app.webp",
         sections: [
             {
                 title: "01. The Problem",
@@ -85,7 +85,7 @@ export const projectsData = {
             { label: "Live Tool", link: "https://colorohm.rsmk.me/", icon: "fas fa-external-link-alt" },
             { label: "GitHub Repo", link: "#", icon: "fab fa-github" }
         ],
-        heroImage: "/assets/color-ohm-resistor-calculator-tool.png",
+        heroImage: "/assets/color-ohm-resistor-calculator-tool.webp",
         sections: [
             {
                 title: "01. The Problem",
@@ -161,7 +161,7 @@ export const projectsData = {
             { label: "Live Demo", link: "https://autoexhaustfan.rsmk.co.in/", icon: "fas fa-external-link-alt" },
             { label: "GitHub Repo", link: "#", icon: "fab fa-github" }
         ],
-        heroImage: "/assets/smart-exhaust-gas-detection-system.png",
+        heroImage: "/assets/smart-exhaust-gas-detection-system.webp",
         sections: [
             {
                 title: "01. The Problem",
