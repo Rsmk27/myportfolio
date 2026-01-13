@@ -15,8 +15,8 @@ export const imageStructuredData = {
       "@type": "Person",
       "name": "Srinivasa Manikanta"
     },
-    "width": "400px",
-    "height": "400px",
+    "width": 400,
+    "height": 400,
     "encodingFormat": "image/webp",
     "license": "https://rsmk.me/",
     "acquireLicensePage": "https://rsmk.me/contact.html"
@@ -39,8 +39,8 @@ export const imageStructuredData = {
         "priceCurrency": "USD"
       }
     },
-    "width": "2560px",
-    "height": "1792px",
+    "width": 2560,
+    "height": 1792,
     "encodingFormat": "image/webp"
   },
   
@@ -61,8 +61,8 @@ export const imageStructuredData = {
         "priceCurrency": "USD"
       }
     },
-    "width": "2560px",
-    "height": "1792px",
+    "width": 2560,
+    "height": 1792,
     "encodingFormat": "image/webp"
   },
   
@@ -78,8 +78,8 @@ export const imageStructuredData = {
       "name": "Smart Exhaust System",
       "description": "Intelligent safety system for hazardous gas detection"
     },
-    "width": "2560px",
-    "height": "1792px",
+    "width": 2560,
+    "height": 1792,
     "encodingFormat": "image/webp"
   },
   
@@ -100,8 +100,8 @@ export const imageStructuredData = {
         "priceCurrency": "USD"
       }
     },
-    "width": "1600px",
-    "height": "896px",
+    "width": 1600,
+    "height": 896,
     "encodingFormat": "image/webp"
   }
 };
