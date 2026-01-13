@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage with Profile Image -->
+  <url>
+    <loc>https://rsmk.me/</loc>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/srinivasa-manikanta-profile.jpg</image:loc>
+      <image:caption>Srinivasa Manikanta - Electrical and Electronics Engineer</image:caption>
+      <image:title>Srinivasa Manikanta Professional Profile Photo</image:title>
+      <image:geo_location>India</image:geo_location>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/budget-buddy-expense-tracker-app.png</image:loc>
+      <image:caption>Budget Buddy expense tracking application interface showing real-time financial analytics and budget management dashboard</image:caption>
+      <image:title>Budget Buddy Expense Tracker Application</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/ai-chatbot-interface-background.webp</image:loc>
+      <image:caption>AI-powered chatbot interface with GPT integration showing conversational AI capabilities</image:caption>
+      <image:title>AI Chatbot with GPT Integration</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/color-ohm-resistor-calculator-tool.png</image:loc>
+      <image:caption>ColorOhm resistor color code calculator tool for electrical engineers</image:caption>
+      <image:title>ColorOhm Resistor Calculator Tool Interface</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/smart-exhaust-gas-detection-system.png</image:loc>
+      <image:caption>Smart exhaust fan system with MQ-2 gas sensor for automatic hazardous gas detection</image:caption>
+      <image:title>Smart Exhaust Gas Detection System</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Budget Buddy Project Page -->
+  <url>
+    <loc>https://rsmk.me/projects/budget-buddy</loc>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/budget-buddy-expense-tracker-app.png</image:loc>
+      <image:caption>Budget Buddy - A vibe coded expense tracker that transforms personal finance into an intuitive, real-time visual experience</image:caption>
+      <image:title>Budget Buddy Expense Tracker App Dashboard</image:title>
+    </image:image>
+  </url>
+  
+  <!-- ColorOhm Project Page -->
+  <url>
+    <loc>https://rsmk.me/projects/color-ohm</loc>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/color-ohm-resistor-calculator-tool.png</image:loc>
+      <image:caption>ColorOhm - An instant, visual resistor color code calculator that functions like a digital multimeter for your browser</image:caption>
+      <image:title>ColorOhm Resistor Color Code Calculator</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Smart Exhaust Project Page -->
+  <url>
+    <loc>https://rsmk.me/projects/smart-exhaust</loc>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/smart-exhaust-gas-detection-system.png</image:loc>
+      <image:caption>Smart Exhaust System - An intelligent safety system that detects hazardous gas leaks and automatically triggers active ventilation</image:caption>
+      <image:title>Smart Exhaust Gas Detection and Ventilation System</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Solar Dewatering Project Page -->
+  <url>
+    <loc>https://rsmk.me/projects/solar-dewatering</loc>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/ai-chatbot-interface-background.webp</image:loc>
+      <image:caption>Solar Dewatering System - An autonomous, dual-axis solar tracking pump designed to maximize renewable energy value for off-grid irrigation</image:caption>
+      <image:title>Solar Power Dewatering System with Dual-Axis Tracking</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Additional Portfolio Projects -->
+  <url>
+    <loc>https://rsmk.me/</loc>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/automated-street-light-system.webp</image:loc>
+      <image:caption>Automated street light system using sensors and smart control</image:caption>
+      <image:title>Automated Street Light System Project</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/technical-blog-platform.webp</image:loc>
+      <image:caption>Technical blog platform for engineering and technology articles</image:caption>
+      <image:title>Technical Blog Platform Interface</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/news-hub-aggregator-app.webp</image:loc>
+      <image:caption>News Hub aggregator application for curated technology news</image:caption>
+      <image:title>News Hub Aggregator Application</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/playzone-interactive-platform.webp</image:loc>
+      <image:caption>Playzone interactive platform for educational games and tools</image:caption>
+      <image:title>Playzone Interactive Platform</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/portfolio-website-design.webp</image:loc>
+      <image:caption>Portfolio website design showcasing modern web development practices</image:caption>
+      <image:title>Portfolio Website Design</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/ai-powered-chatbot-application.png</image:loc>
+      <image:caption>AI-powered chatbot application with natural language processing</image:caption>
+      <image:title>AI Powered Chatbot Application</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/srinivasa-manikanta-logo.png</image:loc>
+      <image:caption>Srinivasa Manikanta personal branding logo</image:caption>
+      <image:title>Srinivasa Manikanta Logo</image:title>
+    </image:image>
+  </url>
+  
+</urlset>

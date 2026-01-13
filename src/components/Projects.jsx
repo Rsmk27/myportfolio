@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { popIn, staggerContainer } from '../utils/animations';
+import { generateAllImagesJsonLd } from '../data/imageSchema';
 
 const Projects = () => {
     return (
         <section id="projects" className="section">
+            <script type="application/ld+json" dangerouslySetInnerHTML={generateAllImagesJsonLd()} />
             <motion.div
                 className="container"
                 initial="hidden"
@@ -23,7 +25,11 @@ const Projects = () => {
                     {/* Project 1: BudgetBuddy */}
                     <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
-                            <img src="/assets/budgetbuddy.png" alt="Budget Buddy Interface" />
+                            <img src="/assets/budget-buddy-expense-tracker-app.png" 
+                                 alt="Budget Buddy expense tracking application interface showing real-time financial analytics and budget management dashboard" 
+                                 width="2560" 
+                                 height="1792" 
+                                 loading="lazy" />
                         </div>
                         <div className="project-content">
                             <div className="project-header">
@@ -61,7 +67,11 @@ const Projects = () => {
                     {/* Project 2: AI Chatbot */}
                     <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
-                            <img src="/assets/Bgimage.webp" alt="AI Chatbot Concept" />
+                            <img src="/assets/ai-chatbot-interface-background.webp" 
+                                 alt="AI-powered chatbot interface with GPT integration showing conversational AI capabilities and real-time response system" 
+                                 width="1600" 
+                                 height="896" 
+                                 loading="lazy" />
                         </div>
                         <div className="project-content">
                             <div className="project-header">
@@ -98,7 +108,11 @@ const Projects = () => {
                     {/* Project 3: ColorOhm */}
                     <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
-                            <img src="/assets/colorohm.png" alt="ColorOhm Interface" />
+                            <img src="/assets/color-ohm-resistor-calculator-tool.png" 
+                                 alt="ColorOhm resistor color code calculator tool interface for electrical engineers showing 4-band and 5-band resistance calculation" 
+                                 width="2560" 
+                                 height="1792" 
+                                 loading="lazy" />
                         </div>
                         <div className="project-content">
                             <div className="project-header">
@@ -135,7 +149,11 @@ const Projects = () => {
                     {/* Project 4: Embedded IoT Monitoring */}
                     <motion.article className="project-card" variants={popIn}>
                         <div className="project-image-container">
-                            <img src="/assets/autoexhaustfan.png" alt="IoT Monitoring System" />
+                            <img src="/assets/smart-exhaust-gas-detection-system.png" 
+                                 alt="Smart exhaust fan system with MQ-2 gas sensor for automatic hazardous gas detection and ventilation control using Arduino" 
+                                 width="2560" 
+                                 height="1792" 
+                                 loading="lazy" />
                         </div>
                         <div className="project-content">
                             <div className="project-header">

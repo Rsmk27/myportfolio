@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer, textContainer, textVariant } from '../utils/animations';
+import { generateImageJsonLd } from '../data/imageSchema';
 
 const Hero = () => {
     return (
         <section className="hero" id="hero">
+            <script type="application/ld+json" dangerouslySetInnerHTML={generateImageJsonLd('profileImage')} />
             <div className="tech-grid-bg"></div>
             <motion.div
                 className="container"
@@ -60,7 +62,10 @@ const Hero = () => {
                     </div>
                     <motion.div className="hero-visual" variants={fadeInUp}>
                         <div className="profile-placeholder">
-                            <img src="/assets/profile.jpg" alt="Srinivasa Manikanta" />
+                            <img src="/assets/srinivasa-manikanta-profile.jpg" 
+                                 alt="Srinivasa Manikanta - Electrical and Electronics Engineer specializing in embedded systems and smart energy solutions" 
+                                 width="400" 
+                                 height="400" />
                         </div>
                     </motion.div>
                 </div>

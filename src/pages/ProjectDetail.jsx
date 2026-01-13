@@ -65,8 +65,11 @@ const ProjectDetail = () => {
                         style={{ maxWidth: '800px', height: '400px', margin: '4rem auto -120px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-color)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}
                         variants={fadeInUp}
                     >
-                        <img src={project.heroImage} alt={`${project.title} Screenshot`}
-                            style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <img src={project.heroImage} 
+                             alt={`${project.title} - ${project.tagline}`}
+                             width="800"
+                             height="400"
+                             style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </motion.div>
                 </motion.div>
             </section>
