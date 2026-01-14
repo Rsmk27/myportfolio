@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { popIn, staggerContainer } from '../utils/animations';
 import { generateAllImagesJsonLd } from '../data/imageSchema';
+import useMobileDetect from '../utils/useMobileDetect';
 
 const Projects = () => {
+    const isMobile = useMobileDetect();
+    
     return (
         <section id="projects" className="section">
             <script type="application/ld+json" dangerouslySetInnerHTML={generateAllImagesJsonLd()} />
@@ -13,9 +16,9 @@ const Projects = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.1 }}
-                variants={staggerContainer}
+                variants={staggerContainer(isMobile)}
             >
-                <motion.div variants={popIn}>
+                <motion.div variants={popIn(isMobile)}>
                     <span className="mono text-accent">03. PROOF OF WORK</span>
                     <h2>Featured Projects</h2>
                 </motion.div>
@@ -23,7 +26,7 @@ const Projects = () => {
                 <div className="projects-grid">
 
                     {/* Project 1: BudgetBuddy */}
-                    <motion.article className="project-card" variants={popIn}>
+                    <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
                             <img src="/assets/budget-buddy-expense-tracker-app.webp" 
                                  alt="Budget Buddy expense tracking application interface showing real-time financial analytics and budget management dashboard" 
@@ -65,7 +68,7 @@ const Projects = () => {
                     </motion.article>
 
                     {/* Project 2: AI Chatbot */}
-                    <motion.article className="project-card" variants={popIn}>
+                    <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
                             <img src="/assets/ai-chatbot-interface-background.webp" 
                                  alt="AI-powered chatbot interface with GPT integration showing conversational AI capabilities and real-time response system" 
@@ -106,7 +109,7 @@ const Projects = () => {
                     </motion.article>
 
                     {/* Project 3: ColorOhm */}
-                    <motion.article className="project-card" variants={popIn}>
+                    <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
                             <img src="/assets/color-ohm-resistor-calculator-tool.webp" 
                                  alt="ColorOhm resistor color code calculator tool interface for electrical engineers showing 4-band and 5-band resistance calculation" 
@@ -147,7 +150,7 @@ const Projects = () => {
                     </motion.article>
 
                     {/* Project 4: Embedded IoT Monitoring */}
-                    <motion.article className="project-card" variants={popIn}>
+                    <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
                             <img src="/assets/smart-exhaust-gas-detection-system.webp" 
                                  alt="Smart exhaust fan system with MQ-2 gas sensor for automatic hazardous gas detection and ventilation control using Arduino" 
@@ -189,7 +192,7 @@ const Projects = () => {
                     </motion.article>
 
                     {/* Project 5: GridForge */}
-                    <motion.article className="project-card" variants={popIn}>
+                    <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
                             <img src="/assets/gridforge-power-system-simulation.webp" 
                                  alt="GridForge web-based power system simulation platform showing MATLAB-Python-React integration for real-time electrical grid analysis" 

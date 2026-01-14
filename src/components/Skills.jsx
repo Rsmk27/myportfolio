@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { zoomIn, staggerContainer } from '../utils/animations';
+import useMobileDetect from '../utils/useMobileDetect';
 
 const Skills = () => {
+    const isMobile = useMobileDetect();
+    
     return (
         <section id="skills" className="section" style={{ background: 'rgba(22, 27, 34, 0.5)' }}>
             <motion.div
@@ -10,16 +13,16 @@ const Skills = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.3 }}
-                variants={staggerContainer}
+                variants={staggerContainer(isMobile)}
             >
-                <motion.div variants={zoomIn}>
+                <motion.div variants={zoomIn(isMobile)}>
                     <span className="mono text-accent">02. CAPABILITY</span>
                     <h2>Technical Arsenal</h2>
                 </motion.div>
 
-                <motion.div className="skills-container" variants={staggerContainer}>
+                <motion.div className="skills-container" variants={staggerContainer(isMobile)}>
                     {/* Pillar 1 */}
-                    <motion.article className="skill-pillar pillar-core" variants={zoomIn}>
+                    <motion.article className="skill-pillar pillar-core" variants={zoomIn(isMobile)}>
                         <h3><i className="fas fa-microchip"></i> Core Engineering</h3>
                         <div className="skill-list">
                             <span className="skill-tag">Electrical & Electronics Engineering</span>
@@ -31,7 +34,7 @@ const Skills = () => {
                     </motion.article>
 
                     {/* Pillar 2 */}
-                    <motion.article className="skill-pillar pillar-software" variants={zoomIn}>
+                    <motion.article className="skill-pillar pillar-software" variants={zoomIn(isMobile)}>
                         <h3><i className="fas fa-terminal"></i> Software & Tools</h3>
                         <div className="skill-list">
                             <span className="skill-tag">C / C++ / Python</span>
@@ -43,7 +46,7 @@ const Skills = () => {
                     </motion.article>
 
                     {/* Pillar 3 */}
-                    <motion.article className="skill-pillar pillar-domains" variants={zoomIn}>
+                    <motion.article className="skill-pillar pillar-domains" variants={zoomIn(isMobile)}>
                         <h3><i className="fas fa-globe-americas"></i> Applied Domains</h3>
                         <div className="skill-list">
                             <span className="skill-tag">Smart Energy Systems</span>
@@ -56,7 +59,7 @@ const Skills = () => {
                 </motion.div>
 
                 {/* Engineering Strengths */}
-                <motion.div className="engineering-strengths" variants={zoomIn}>
+                <motion.div className="engineering-strengths" variants={zoomIn(isMobile)}>
                     <h3 style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>
                         Engineering Confidence
                     </h3>

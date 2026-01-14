@@ -1,4 +1,17 @@
-export const fadeInUp = {
+// Helper function to create mobile-aware animation variants
+const createVariants = (desktopVariants, isMobile = false) => {
+    if (isMobile) {
+        // Return static variants with no animation for mobile
+        return {
+            hidden: { opacity: 1 },
+            visible: { opacity: 1 }
+        };
+    }
+    return desktopVariants;
+};
+
+// Desktop animation variants
+const fadeInUpDesktop = {
     hidden: { opacity: 0, y: 60 },
     visible: {
         opacity: 1,
@@ -7,7 +20,7 @@ export const fadeInUp = {
     }
 };
 
-export const fadeInLeft = {
+const fadeInLeftDesktop = {
     hidden: { opacity: 0, x: -60 },
     visible: {
         opacity: 1,
@@ -16,7 +29,7 @@ export const fadeInLeft = {
     }
 };
 
-export const fadeInRight = {
+const fadeInRightDesktop = {
     hidden: { opacity: 0, x: 60 },
     visible: {
         opacity: 1,
@@ -25,7 +38,7 @@ export const fadeInRight = {
     }
 };
 
-export const zoomIn = {
+const zoomInDesktop = {
     hidden: { opacity: 0, scale: 0.85 },
     visible: {
         opacity: 1,
@@ -34,7 +47,7 @@ export const zoomIn = {
     }
 };
 
-export const blurIn = {
+const blurInDesktop = {
     hidden: { opacity: 0, filter: "blur(20px)" },
     visible: {
         opacity: 1,
@@ -43,7 +56,7 @@ export const blurIn = {
     }
 };
 
-export const rotateIn = {
+const rotateInDesktop = {
     hidden: { opacity: 0, rotate: -5, scale: 0.95 },
     visible: {
         opacity: 1,
@@ -53,7 +66,7 @@ export const rotateIn = {
     }
 };
 
-export const popIn = {
+const popInDesktop = {
     hidden: { opacity: 0, scale: 0.5 },
     visible: {
         opacity: 1,
@@ -62,7 +75,7 @@ export const popIn = {
     }
 };
 
-export const staggerContainer = {
+const staggerContainerDesktop = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -72,7 +85,7 @@ export const staggerContainer = {
     }
 };
 
-export const textContainer = {
+const textContainerDesktop = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -83,7 +96,7 @@ export const textContainer = {
     }
 };
 
-export const textVariant = {
+const textVariantDesktop = {
     hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,
@@ -95,3 +108,15 @@ export const textVariant = {
         }
     }
 };
+
+// Export functions that accept isMobile parameter
+export const fadeInUp = (isMobile) => createVariants(fadeInUpDesktop, isMobile);
+export const fadeInLeft = (isMobile) => createVariants(fadeInLeftDesktop, isMobile);
+export const fadeInRight = (isMobile) => createVariants(fadeInRightDesktop, isMobile);
+export const zoomIn = (isMobile) => createVariants(zoomInDesktop, isMobile);
+export const blurIn = (isMobile) => createVariants(blurInDesktop, isMobile);
+export const rotateIn = (isMobile) => createVariants(rotateInDesktop, isMobile);
+export const popIn = (isMobile) => createVariants(popInDesktop, isMobile);
+export const staggerContainer = (isMobile) => createVariants(staggerContainerDesktop, isMobile);
+export const textContainer = (isMobile) => createVariants(textContainerDesktop, isMobile);
+export const textVariant = (isMobile) => createVariants(textVariantDesktop, isMobile);

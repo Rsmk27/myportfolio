@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer } from '../utils/animations';
+import useMobileDetect from '../utils/useMobileDetect';
 
 const Certifications = () => {
+    const isMobile = useMobileDetect();
+    
     return (
         <section id="certifications" className="section">
             <motion.div
@@ -10,16 +13,16 @@ const Certifications = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.1 }}
-                variants={staggerContainer}
+                variants={staggerContainer(isMobile)}
             >
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={fadeInUp(isMobile)}>
                     <span className="mono text-accent">05. CREDENTIALS</span>
                     <h2>Certifications</h2>
                 </motion.div>
 
                 <div className="cert-grid">
                     {/* Cert 1 */}
-                    <motion.div className="cert-card" variants={fadeInUp}>
+                    <motion.div className="cert-card" variants={fadeInUp(isMobile)}>
                         <div className="cert-icon">
                             <i className="fas fa-microchip"></i>
                         </div>
@@ -32,7 +35,7 @@ const Certifications = () => {
                     </motion.div>
 
                     {/* Cert 2 */}
-                    <motion.div className="cert-card" variants={fadeInUp}>
+                    <motion.div className="cert-card" variants={fadeInUp(isMobile)}>
                         <div className="cert-icon">
                             <i className="fas fa-charging-station"></i>
                         </div>
@@ -45,7 +48,7 @@ const Certifications = () => {
                     </motion.div>
 
                     {/* Cert 3 */}
-                    <motion.div className="cert-card" variants={fadeInUp}>
+                    <motion.div className="cert-card" variants={fadeInUp(isMobile)}>
                         <div className="cert-icon">
                             <i className="fas fa-helicopter"></i>
                         </div>
@@ -58,7 +61,7 @@ const Certifications = () => {
                     </motion.div>
 
                     {/* Cert 5 */}
-                    <motion.div className="cert-card" variants={fadeInUp}>
+                    <motion.div className="cert-card" variants={fadeInUp(isMobile)}>
                         <div className="cert-icon">
                             <i className="fas fa-cube"></i>
                         </div>
@@ -71,7 +74,7 @@ const Certifications = () => {
                     </motion.div>
 
                     {/* Cert 6 */}
-                    <motion.div className="cert-card" variants={fadeInUp}>
+                    <motion.div className="cert-card" variants={fadeInUp(isMobile)}>
                         <div className="cert-icon">
                             <i className="fas fa-magic"></i>
                         </div>

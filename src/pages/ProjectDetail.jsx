@@ -5,10 +5,12 @@ import { projectsData } from '../data/projects';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { fadeInUp, staggerContainer } from '../utils/animations';
+import useMobileDetect from '../utils/useMobileDetect';
 
 const ProjectDetail = () => {
     const { id } = useParams();
     const project = projectsData[id];
+    const isMobile = useMobileDetect();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -39,21 +41,21 @@ const ProjectDetail = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.1 }}
-                    variants={staggerContainer}
+                    variants={staggerContainer(isMobile)}
                 >
-                    <motion.span className="mono text-accent" variants={fadeInUp}>{project.category}</motion.span>
-                    <motion.h1 className="project-title" style={{ fontSize: '3rem', marginTop: '1rem' }} variants={fadeInUp}>{project.title}</motion.h1>
-                    <motion.p className="project-tagline" variants={fadeInUp}>
+                    <motion.span className="mono text-accent" variants={fadeInUp(isMobile)}>{project.category}</motion.span>
+                    <motion.h1 className="project-title" style={{ fontSize: '3rem', marginTop: '1rem' }} variants={fadeInUp(isMobile)}>{project.title}</motion.h1>
+                    <motion.p className="project-tagline" variants={fadeInUp(isMobile)}>
                         {project.tagline}
                     </motion.p>
 
-                    <motion.div className="project-tech-stack" style={{ justifyContent: 'center', border: 'none', padding: 0, margin: '2rem 0' }} variants={fadeInUp}>
+                    <motion.div className="project-tech-stack" style={{ justifyContent: 'center', border: 'none', padding: 0, margin: '2rem 0' }} variants={fadeInUp(isMobile)}>
                         {project.techStack.map((tech, index) => (
                             <span key={index} className="tech-pill">{tech}</span>
                         ))}
                     </motion.div>
 
-                    <motion.div className="project-actions" style={{ justifyContent: 'center', maxWidth: '400px', margin: '0 auto' }} variants={fadeInUp}>
+                    <motion.div className="project-actions" style={{ justifyContent: 'center', maxWidth: '400px', margin: '0 auto' }} variants={fadeInUp(isMobile)}>
                         {project.actions.map((action, index) => (
                             <a key={index} href={action.link} target="_blank" rel="noreferrer" className="action-btn">
                                 <i className={action.icon}></i> {action.label}
@@ -63,7 +65,7 @@ const ProjectDetail = () => {
 
                     <motion.div className="project-image-container"
                         style={{ maxWidth: '800px', height: '400px', margin: '4rem auto -120px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-color)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}
-                        variants={fadeInUp}
+                        variants={fadeInUp(isMobile)}
                     >
                         <img src={project.heroImage} 
                              alt={`${project.title} - ${project.tagline}`}
@@ -83,7 +85,7 @@ const ProjectDetail = () => {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: false, amount: 0.1 }}
-                        variants={fadeInUp}
+                        variants={fadeInUp(isMobile)}
                     >
                         <h2>{section.title}</h2>
                         {section.content && (
@@ -177,7 +179,7 @@ const ProjectDetail = () => {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: false, amount: 0.3 }}
-                        variants={fadeInUp}
+                        variants={fadeInUp(isMobile)}
                     >
                         <h3>{project.cta.title}</h3>
                         <p>{project.cta.text}</p>

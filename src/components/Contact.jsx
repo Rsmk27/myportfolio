@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { blurIn, staggerContainer } from '../utils/animations';
+import useMobileDetect from '../utils/useMobileDetect';
 
 const Contact = () => {
+    const isMobile = useMobileDetect();
+    
     return (
         <section id="contact" className="section" style={{ background: 'rgba(47, 129, 247, 0.03)' }}>
             <motion.div
@@ -10,15 +13,15 @@ const Contact = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.3 }}
-                variants={staggerContainer}
+                variants={staggerContainer(isMobile)}
             >
-                <motion.div variants={blurIn}>
+                <motion.div variants={blurIn(isMobile)}>
                     <span className="mono text-accent">07. COLLABORATION</span>
                     <h2>Let's Build the Future</h2>
                 </motion.div>
 
                 <div className="contact-grid">
-                    <motion.div variants={blurIn}>
+                    <motion.div variants={blurIn(isMobile)}>
                         <h3>Contact</h3>
                         <p>I am always open to discussing sustainable tech, embedded projects, or full-time engineering
                             roles.</p>
@@ -43,7 +46,7 @@ const Contact = () => {
                         </a>
                     </motion.div>
 
-                    <motion.div variants={blurIn}>
+                    <motion.div variants={blurIn(isMobile)}>
                         <h3>Connect</h3>
                         <div className="social-links" style={{ flexWrap: 'wrap' }}>
                             <a href="https://github.com/Rsmk27" target="_blank" rel="noreferrer" className="social-icon"><i
