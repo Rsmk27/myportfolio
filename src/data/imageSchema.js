@@ -103,6 +103,28 @@ export const imageStructuredData = {
     "width": 1600,
     "height": 896,
     "encodingFormat": "image/webp"
+  },
+
+  gridForgeImage: {
+    "@context": "https://schema.org",
+    "@type": "ImageObject",
+    "contentUrl": "https://rsmk.me/assets/gridforge-power-system-simulation.webp",
+    "url": "https://rsmk.me/assets/gridforge-power-system-simulation.webp",
+    "name": "GridForge Power System Simulation Platform",
+    "description": "GridForge web-based power system simulation platform showing MATLAB-Python-React integration for real-time electrical grid analysis and interactive visualization",
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "GridForge",
+      "applicationCategory": "EngineeringApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    "width": 2560,
+    "height": 1792,
+    "encodingFormat": "image/webp"
   }
 };
 

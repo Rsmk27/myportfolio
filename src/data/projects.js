@@ -303,5 +303,84 @@ export const projectsData = {
             title: "Building sustainable tech?",
             text: "I am passionate about green energy engineering. Let's collaborate on impactful solutions."
         }
+    },
+    "gridforge": {
+        category: "POWER SYSTEMS / FULL-STACK SIMULATION",
+        title: "GridForge",
+        tagline: "A web-based power system simulation platform that transforms classical MATLAB models into modern, interactive engineering tools.",
+        techStack: ["MATLAB Engine API", "Python (Flask)", "React (Vite)", "Full-Stack Architecture"],
+        actions: [
+            { label: "GitHub Repo", link: "https://github.com/Rsmk27", icon: "fab fa-github" }
+        ],
+        heroImage: "/assets/gridforge-power-system-simulation.webp",
+        sections: [
+            {
+                title: "01. The Problem",
+                content: "Classical power system analysis relies heavily on MATLAB simulations that are confined to desktop environments. Engineers and students lack accessible, interactive platforms to experiment with electrical grid behavior in real-time. Traditional MATLAB scripts don't provide the visual interactivity or web accessibility needed for modern collaborative learning and demonstration."
+            },
+            {
+                title: "02. The Solution",
+                content: "GridForge is a full-stack engineering simulation platform that bridges MATLAB's computational power with modern web technologies. The system uses MATLAB as the numerical computation engine, a Python (Flask) backend for simulation control and data orchestration, and a React (Vite) frontend to provide real-time visualization and user interaction. Users can dynamically adjust load demand through an intuitive web interface while MATLAB computes system parameters in real-time."
+            },
+            {
+                title: "03. System Architecture",
+                content: "The platform implements a three-tier architecture that separates computation, control, and presentation layers.",
+                type: "diagram",
+                diagramItems: ["React Frontend", "Flask API", "MATLAB Engine", "Real-time Results"],
+                diagramCaption: "Figure 1: Full-Stack Simulation Pipeline"
+            },
+            {
+                title: "04. Implementation Details",
+                type: "grid",
+                gridItems: [
+                    { title: "MATLAB Integration", icon: "fas fa-calculator", desc: "Leveraged <strong>MATLAB Engine API for Python</strong> to execute power system calculations server-side, enabling real-time computation of line current, voltage drop, delivered power, and system efficiency." },
+                    { title: "Flask Backend", icon: "fas fa-server", desc: "Built a <strong>RESTful API</strong> using Flask to handle simulation requests, manage MATLAB engine sessions, and orchestrate data flow between frontend and computational backend." },
+                    { title: "React Frontend", icon: "fas fa-chart-line", desc: "Developed an interactive <strong>React (Vite)</strong> interface with real-time data visualization, allowing users to adjust parameters and instantly see the impact on power system behavior." }
+                ]
+            },
+            {
+                title: "05. Current Implementation",
+                type: "stats",
+                stats: [
+                    { value: "Real-time", label: "Computation" },
+                    { value: "Interactive", label: "Web Interface" },
+                    { value: "Full-Stack", label: "Architecture" }
+                ],
+                description: "The first implemented simulation models a basic electrical power delivery system with source, transmission line, and load. Users dynamically adjust load demand while the system computes resulting electrical parameters in real-time."
+            },
+            {
+                title: "06. Technical Skills Demonstrated",
+                type: "list",
+                items: [
+                    "<strong>Power System Modeling:</strong> Applied electrical engineering fundamentals to model transmission lines, voltage drop, and power delivery.",
+                    "<strong>MATLAB–Python Integration:</strong> Mastered MATLAB Engine API for seamless computational integration.",
+                    "<strong>Backend API Development:</strong> Designed and implemented RESTful endpoints for simulation control.",
+                    "<strong>Frontend Engineering:</strong> Built responsive, real-time visualization interfaces.",
+                    "<strong>Full-Stack Debugging:</strong> Navigated cross-language integration challenges and optimized data flow."
+                ]
+            },
+            {
+                title: "07. Future Roadmap",
+                type: "list",
+                items: [
+                    "<strong>Microgrid Simulation:</strong> Extend platform to model distributed energy resources and microgrid behavior.",
+                    "<strong>Renewable Integration:</strong> Add solar and wind generation models with intermittency analysis.",
+                    "<strong>Fault Analysis:</strong> Implement short-circuit and protection system simulations.",
+                    "<strong>Optimization Engine:</strong> Integrate optimization algorithms for power flow and economic dispatch.",
+                    "<strong>AI-Based Control:</strong> Explore machine learning strategies for adaptive grid control."
+                ]
+            },
+            {
+                title: "08. Resources",
+                type: "actions",
+                actions: [
+                    { label: "View Source Code", link: "https://github.com/Rsmk27", icon: "fab fa-github" }
+                ]
+            }
+        ],
+        cta: {
+            title: "Interested in engineering simulation platforms?",
+            text: "I build full-stack systems that combine computational engineering with modern web technologies. Let's collaborate."
+        }
     }
 };

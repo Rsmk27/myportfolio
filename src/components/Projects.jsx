@@ -188,6 +188,49 @@ const Projects = () => {
                         </div>
                     </motion.article>
 
+                    {/* Project 5: GridForge */}
+                    <motion.article className="project-card" variants={popIn}>
+                        <div className="project-image-container">
+                            <img src="/assets/gridforge-power-system-simulation.webp" 
+                                 alt="GridForge web-based power system simulation platform showing MATLAB-Python-React integration for real-time electrical grid analysis" 
+                                 width="2560" 
+                                 height="1792" 
+                                 loading="lazy" />
+                        </div>
+                        <div className="project-content">
+                            <div className="project-header">
+                                <h3 className="project-title">GridForge</h3>
+                            </div>
+
+                            <div className="project-case-block">
+                                <span className="case-label">Problem</span>
+                                <p className="case-text">MATLAB power simulations lack web accessibility.</p>
+                            </div>
+                            <div className="project-case-block">
+                                <span className="case-label">Solution</span>
+                                <p className="case-text">Built full-stack platform with MATLAB, Python, and React.</p>
+                            </div>
+                            <div className="project-case-block">
+                                <span className="case-label">Impact</span>
+                                <p className="case-text">Creates interactive digital laboratory for power systems.</p>
+                            </div>
+
+                            <div className="project-tech-stack">
+                                <span className="tech-pill">MATLAB</span>
+                                <span className="tech-pill">Python (Flask)</span>
+                                <span className="tech-pill">React (Vite)</span>
+                                <span className="tech-pill">Full-Stack</span>
+                            </div>
+
+                            <div className="project-actions">
+                                <Link to="/projects/gridforge" className="action-btn"><i
+                                    className="fas fa-external-link-alt"></i> Details</Link>
+                                <a href="https://github.com/Rsmk27" target="_blank" rel="noreferrer" className="action-btn"><i
+                                    className="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </motion.article>
+
                 </div>
             </motion.div>
         </section>
