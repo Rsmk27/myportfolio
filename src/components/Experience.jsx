@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeInRight, staggerContainer } from '../utils/animations';
+import useMobileDetect from '../utils/useMobileDetect';
 
 const Experience = () => {
+    const isMobile = useMobileDetect();
+    
     return (
         <section id="experience" className="section" style={{ background: 'rgba(22, 27, 34, 0.5)' }}>
             <motion.div
@@ -10,16 +13,16 @@ const Experience = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.3 }}
-                variants={staggerContainer}
+                variants={staggerContainer(isMobile)}
             >
-                <motion.div variants={fadeInRight}>
+                <motion.div variants={fadeInRight(isMobile)}>
                     <span className="mono text-accent">04. JOURNEY</span>
                     <h2>Experience & Education</h2>
                 </motion.div>
 
                 <div className="timeline">
                     {/* Education Item */}
-                    <motion.div className="timeline-item" variants={fadeInRight}>
+                    <motion.div className="timeline-item" variants={fadeInRight(isMobile)}>
                         <div className="timeline-marker"></div>
                         <div className="timeline-date">2024 - Present</div>
                         <h3>B.Tech, Electrical & Electronics Engineering</h3>
@@ -28,7 +31,7 @@ const Experience = () => {
                     </motion.div>
 
                     {/* Experience Item */}
-                    <motion.div className="timeline-item" variants={fadeInRight}>
+                    <motion.div className="timeline-item" variants={fadeInRight(isMobile)}>
                         <div className="timeline-marker"></div>
                         <div className="timeline-date">Nov 2023 - May 2024</div>
                         <h3>Electrical Engineering Intern</h3>
@@ -53,7 +56,7 @@ const Experience = () => {
                     </motion.div>
 
                     {/* Education Item */}
-                    <motion.div className="timeline-item" variants={fadeInRight}>
+                    <motion.div className="timeline-item" variants={fadeInRight(isMobile)}>
                         <div className="timeline-marker"></div>
                         <div className="timeline-date">2021 - 2024</div>
                         <h3>Diploma, Electrical & Electronics Engineering</h3>

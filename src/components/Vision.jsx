@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer } from '../utils/animations';
+import useMobileDetect from '../utils/useMobileDetect';
 
 const Vision = () => {
+    const isMobile = useMobileDetect();
+    
     return (
         <section id="vision" className="section">
             <motion.div
@@ -10,16 +13,16 @@ const Vision = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.3 }}
-                variants={staggerContainer}
+                variants={staggerContainer(isMobile)}
             >
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={fadeInUp(isMobile)}>
                     <span className="mono text-accent">06. VISION & FUTURE DIRECTION</span>
                     <h2>The Roadmap</h2>
                 </motion.div>
 
                 <div className="vision-content">
                     {/* Main Vision Statement */}
-                    <motion.div className="vision-statement" variants={fadeInUp}>
+                    <motion.div className="vision-statement" variants={fadeInUp(isMobile)}>
                         <p>
                             I am working toward building <strong>intelligent engineering systems</strong> that make energy
                             infrastructure more efficient, autonomous, and sustainable.
@@ -36,23 +39,23 @@ const Vision = () => {
                     </motion.div>
 
                     {/* Focus Areas */}
-                    <motion.div className="focus-grid" variants={staggerContainer}>
-                        <motion.div className="focus-card" variants={fadeInUp}>
+                    <motion.div className="focus-grid" variants={staggerContainer(isMobile)}>
+                        <motion.div className="focus-card" variants={fadeInUp(isMobile)}>
                             <span className="focus-icon">🌱</span>
                             <h4>Sustainable & Smart Energy</h4>
                             <p>Designing cleaner, more adaptive power systems and energy management platforms.</p>
                         </motion.div>
-                        <motion.div className="focus-card" variants={fadeInUp}>
+                        <motion.div className="focus-card" variants={fadeInUp(isMobile)}>
                             <span className="focus-icon">🧠</span>
                             <h4>Intelligent & Autonomous Infrastructure</h4>
                             <p>Developing self-regulating systems using embedded control, IoT, and AI.</p>
                         </motion.div>
-                        <motion.div className="focus-card" variants={fadeInUp}>
+                        <motion.div className="focus-card" variants={fadeInUp(isMobile)}>
                             <span className="focus-icon">⚙️</span>
                             <h4>Full-Stack Physical Systems</h4>
                             <p>Building platforms where hardware, data, and software operate as one.</p>
                         </motion.div>
-                        <motion.div className="focus-card" variants={fadeInUp}>
+                        <motion.div className="focus-card" variants={fadeInUp(isMobile)}>
                             <span className="focus-icon">🔬</span>
                             <h4>Continuous Learning & Innovation</h4>
                             <p>Pursuing advanced knowledge in emerging engineering technologies.</p>

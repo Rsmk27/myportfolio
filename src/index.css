@@ -1229,3 +1229,24 @@ footer {
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-color);
 }
+
+/* Mobile Performance Optimization - Disable animations and transitions on mobile devices */
+@media (max-width: 768px), (pointer: coarse) {
+    * {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+    }
+    
+    /* Disable hover effects on mobile */
+    .btn:hover,
+    .project-card:hover,
+    .cert-card:hover,
+    .skill-pillar:hover,
+    .timeline-item:hover,
+    .social-icon:hover,
+    .action-btn:hover {
+        transform: none !important;
+    }
+}

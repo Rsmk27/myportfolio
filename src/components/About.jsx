@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer } from '../utils/animations';
+import useMobileDetect from '../utils/useMobileDetect';
 
 const About = () => {
+    const isMobile = useMobileDetect();
+    
     return (
         <section id="about" className="section">
             <motion.div
@@ -10,10 +13,10 @@ const About = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.3 }}
-                variants={staggerContainer}
+                variants={staggerContainer(isMobile)}
             >
                 <div className="about-grid">
-                    <motion.div className="about-text" variants={fadeInUp}>
+                    <motion.div className="about-text" variants={fadeInUp(isMobile)}>
                         <span className="mono text-accent">01. IDENTITY</span>
                         <h2>About Me</h2>
                         <p>I am an Electrical & Electronics Engineering student with a deep interest in designing
@@ -38,7 +41,7 @@ const About = () => {
                         </blockquote>
                     </motion.div>
                     {/* Core Focus Card Remains */}
-                    <motion.div className="about-card" variants={fadeInUp}>
+                    <motion.div className="about-card" variants={fadeInUp(isMobile)}>
                         <h3 className="mono">Core Focus</h3>
                         <ul style={{ listStyle: 'none', padding: 0, marginTop: '1rem' }}>
                             <li style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
