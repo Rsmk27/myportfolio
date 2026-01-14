@@ -1,11 +1,14 @@
+// Cached static mobile variants to avoid object recreation
+const staticMobileVariants = {
+    hidden: { opacity: 1 },
+    visible: { opacity: 1 }
+};
+
 // Helper function to create mobile-aware animation variants
 const createVariants = (desktopVariants, isMobile = false) => {
     if (isMobile) {
-        // Return static variants with no animation for mobile
-        return {
-            hidden: { opacity: 1 },
-            visible: { opacity: 1 }
-        };
+        // Return cached static variants with no animation for mobile
+        return staticMobileVariants;
     }
     return desktopVariants;
 };

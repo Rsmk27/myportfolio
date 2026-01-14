@@ -31,10 +31,7 @@ const useMobileDetect = () => {
             setIsMobile(isMobileWidth || isTouchDevice);
         };
 
-        // Check on mount
-        checkMobile();
-
-        // Listen for resize events
+        // Listen for resize events (initial state is already set via useState)
         window.addEventListener('resize', checkMobile);
 
         // Cleanup
