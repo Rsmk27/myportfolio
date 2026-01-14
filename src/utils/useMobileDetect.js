@@ -1,9 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 
 const useMobileDetect = () => {
-    const [isMobile, setIsMobile] = useState(false);
+    // Initialize with mobile check on mount to prevent hydration mismatches
+    const [isMobile, setIsMobile] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const isMobileWidth = window.innerWidth <= 768;
+            const isTouchDevice = (
+                'ontouchstart' in window ||
+                navigator.maxTouchPoints > 0 ||
+                navigator.msMaxTouchPoints > 0
+            );
+            return isMobileWidth || isTouchDevice;
+        }
+        return false;
+    });
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const checkMobile = () => {
             // Check for mobile screen width (768px is a common breakpoint for tablets/mobile)
             const isMobileWidth = window.innerWidth <= 768;
