@@ -67,11 +67,11 @@ const ProjectDetail = () => {
                         style={{ maxWidth: '800px', height: '400px', margin: '4rem auto -120px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-color)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}
                         variants={fadeInUp(isMobile)}
                     >
-                        <img src={project.heroImage} 
-                             alt={`${project.title} - ${project.tagline}`}
-                             width="800"
-                             height="400"
-                             style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <img src={project.heroImage}
+                            alt={`${project.title} - ${project.tagline}`}
+                            width="800"
+                            height="400"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </motion.div>
                 </motion.div>
             </section>
@@ -166,6 +166,41 @@ const ProjectDetail = () => {
                                         <i className={action.icon}></i> {action.label}
                                     </a>
                                 ))}
+                            </div>
+                        )}
+
+                        {/* Gallery Type */}
+                        {section.type === 'gallery' && (
+                            <div className="project-gallery" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '2rem' }}>
+                                {section.images.map((img, i) => (
+                                    <div key={i} className="gallery-item" style={{ textAlign: 'center' }}>
+                                        <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', boxShadow: '0 5px 15px rgba(0,0,0,0.2)', marginBottom: '1rem', border: '1px solid var(--border-color)' }}>
+                                            <img
+                                                src={img.image}
+                                                alt={img.heading}
+                                                style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+                                            />
+                                        </div>
+                                        <h4 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>{img.heading}</h4>
+                                        {img.caption && <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{img.caption}</p>}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Embed Type (e.g., LinkedIn) */}
+                        {section.type === 'embed' && (
+                            <div className="project-embed" style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
+                                <iframe
+                                    src={section.src}
+                                    height={section.height || "600"}
+                                    width={section.width || "100%"}
+                                    frameBorder="0"
+                                    allowFullScreen={true}
+                                    title="Embedded Content"
+                                    style={{ borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}
+                                >
+                                </iframe>
                             </div>
                         )}
 

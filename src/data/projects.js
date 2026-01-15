@@ -229,79 +229,78 @@ export const projectsData = {
         }
     },
     "solar-dewatering": {
-        category: "GREEN TECH / EMBEDDED SYSTEMS",
-        title: "Solar Dewatering System",
-        tagline: "An autonomous, dual-axis solar tracking pump designed to maximize renewable energy value for off-grid irrigation.",
-        techStack: ["Arduino", "Servo Motors", "LDR Sensors", "Solar PV"],
+        category: "RENEWABLE ENERGY / EMBEDDED SYSTEMS",
+        title: "Solar-Powered Dewatering System",
+        tagline: "Smart Renewable Energy Solution for Efficient Water Management.",
+        techStack: ["Solar PV", "Arduino", "Power Electronics", "Sensors"],
         actions: [
             { label: "Live Demo", link: "https://spds.rsmk.me", icon: "fas fa-external-link-alt" },
-            { label: "GitHub Repo", link: "#", icon: "fab fa-github" }
+            { label: "GitHub Repo", link: "https://github.com/Rsmk27/solar-powered-dewatering-system", icon: "fab fa-github" }
         ],
         heroImage: "/assets/ai-chatbot-interface-background.webp",
         sections: [
             {
-                title: "01. The Problem",
-                content: "Remote agriculture and dewatering sites often lack reliable grid power. While solar pumps are a viable alternative, standard fixed-panel setups lose significant efficiency (up to 40%) because panels are not aligned with the sun throughout the day. Additionally, manual pump operation leads to water wastage or insufficient irrigation."
+                title: "01. Project Overview",
+                content: "The Solar-Powered Dewatering System is a self-sustaining water removal system designed to operate entirely on renewable energy. Its primary purpose is to automatically remove excess water from low-lying areas such as agricultural fields, construction sites, basements, and drainage zones—without relying on grid power.<br><br>The system intelligently combines solar energy generation, energy storage, power electronics, and electromechanical pumping into a compact, field-deployable solution. This project demonstrates practical integration of renewable energy systems, embedded control, and power management engineering."
             },
             {
-                title: "02. The Solution",
-                content: "The Solar Power Dewatering System (SPDS) is a fully autonomous solution. It integrates a <strong>Dual-Axis Solar Tracker</strong> that actively follows the sun's position from East to West and adjusts elevation for seasonal changes. Coupled with standard soil moisture sensors, the system ensures water is pumped only when necessary, maximizing both energy capture and water conservation."
-            },
-            {
-                title: "03. System Architecture",
-                content: "The system fuses mechanical control (tracking) with environmental sensing (moisture).",
-                type: "diagram",
-                diagramItems: ["LDR Array (Eyes)", "Arduino (Brain)", "Servos (Muscles)", "+", "Pump Control"],
-                diagramCaption: "Figure 1: Sensor-Actuator Control Flow"
-            },
-            {
-                title: "04. Implementation Details",
+                title: "02. System Architecture",
                 type: "grid",
                 gridItems: [
-                    { title: "Solar Tracking", icon: "fas fa-solar-panel", desc: "Designed a differential logic using 4 LDRs (Light Dependent Resistors). The Arduino compares light intensity values (Top vs. Bottom, Left vs. Right) to drive the servo motors toward the brightest point." },
-                    { title: "Smart Irrigation", icon: "fas fa-tint", desc: "The pump subsystem is triggered only when soil moisture acts as a \"Gate\". Even if solar power is available, water is not wasted if the soil is already wet." },
-                    { title: "Mechanical Design", icon: "fas fa-cogs", desc: "Built a custom dual-axis gimbal mechanism using high-torque servos to support the weight of the PV panel prototype." }
+                    { title: "1. Solar Energy Generation", icon: "fas fa-solar-panel", desc: "A photovoltaic (PV) panel converts sunlight into DC electrical power, acting as the primary energy source to harvest renewable energy and charge the system." },
+                    { title: "2. Charge Controller & Battery", icon: "fas fa-battery-full", desc: "Regulates power flow to prevent over-charging/deep discharge and stores excess energy in a 12V rechargeable battery for operation during cloudy weather or night hours." },
+                    { title: "3. Control & Automation", icon: "fas fa-microchip", desc: "An Arduino-based embedded controller monitors water level sensors and battery voltage to execute logic for pump activation and safety cutoffs." },
+                    { title: "4. Pumping Mechanism", icon: "fas fa-water", desc: "A high-efficiency DC water pump is activated via a relay when excess water is detected and power is available, creating a closed-loop dewatering process." },
+                    { title: "5. Protection Layer", icon: "fas fa-shield-alt", desc: "Includes over-current, reverse polarity, and short-circuit protection, along with a weather-resistant enclosure for reliability." }
                 ]
             },
             {
-                title: "05. Results & Impact",
-                type: "stats",
-                stats: [
-                    { value: "+35%", label: "Energy Gen" },
-                    { value: "Auto", label: "Irrigation" },
-                    { value: "100%", label: "Off-Grid" }
-                ],
-                description: "The tracking mechanism significantly extended the \"peak power\" window of the solar panel, allowing the pump to operate for more hours per day."
-            },
-            {
-                title: "06. Challenges & Learnings",
-                type: "challenges",
-                challenges: [
-                    { title: "Challenge: Jittery Movement", problem: "Cloud cover caused rapidly fluctuating LDR readings, making the servos jitter.", solution: "Implementation of a software \"deadband\" (tolerance range) so small changes in light do not trigger movement." },
-                    { title: "Challenge: Power Consumption", problem: "The servos themselves consumed power, potentially negating the gain from tracking.", solution: "Optimized the code to update position only every few minutes rather than continuously, drastically reducing idle power draw." }
-                ]
-            },
-            {
-                title: "07. Future Improvements",
+                title: "03. Engineering Concepts Demonstrated",
                 type: "list",
                 items: [
-                    "<strong>MPPT Controller:</strong> Integrate Maximum Power Point Tracking for electrical efficiency.",
-                    "<strong>Weather Protection:</strong> Add a \"stow\" mode to flatten panels during high winds.",
-                    "<strong>Remote Dashboard:</strong> LoRaWAN integration for long-range monitoring."
+                    "<strong>Power Electronics:</strong> DC-DC regulation, load switching, protection circuits.",
+                    "<strong>Renewable Energy:</strong> PV harvesting, battery storage, energy efficiency.",
+                    "<strong>Embedded Systems:</strong> Sensor interfacing, real-time control, automation logic.",
+                    "<strong>Control Systems:</strong> Threshold-based decision logic, closed-loop control.",
+                    "<strong>Electromechanics:</strong> Motor control, relay switching, pump operation."
                 ]
             },
             {
-                title: "08. Resources",
+                title: "04. Practical Impact",
+                type: "list",
+                items: [
+                    "✔ <strong>Eliminates dependency</strong> on grid electricity.",
+                    "✔ <strong>Enables operation</strong> in remote & off-grid environments.",
+                    "✔ <strong>Reduces operational cost</strong> & carbon footprint.",
+                    "✔ <strong>Prevents flooding-related damage</strong>.",
+                    "✔ <strong>Supports sustainable</strong> water management."
+                ]
+            },
+            {
+                title: "05. Applications",
+                type: "grid",
+                gridItems: [
+                    { title: "Agricultural Drainage", icon: "fas fa-tractor", desc: "Prevent waterlogging in crop fields." },
+                    { title: "Construction Sites", icon: "fas fa-hard-hat", desc: "Remove accumulated rainwater from pits." },
+                    { title: "Flood-Prone Areas", icon: "fas fa-home", desc: "Protect residential basements and low zones." },
+                    { title: "Remote Monitoring", icon: "fas fa-broadcast-tower", desc: "Autonomous environmental stations." }
+                ]
+            },
+            {
+                title: "06. Why This Project Matters",
+                content: "This project is a direct demonstration of green engineering principles—using renewable energy, intelligent automation, and efficient power management to solve real-world infrastructure problems. It reflects strong competence in sustainable system design, embedded automation, and end-to-end product development."
+            },
+            {
+                title: "07. Resources",
                 type: "actions",
                 actions: [
-                    { label: "View Source Code", link: "#", icon: "fab fa-github" },
                     { label: "Live Demo", link: "https://spds.rsmk.me", icon: "fas fa-external-link-alt" }
                 ]
             }
         ],
         cta: {
-            title: "Building sustainable tech?",
-            text: "I am passionate about green energy engineering. Let's collaborate on impactful solutions."
+            title: "Interested in Green Tech?",
+            text: "I build sustainable engineering solutions. Let's discuss your project."
         }
     },
     "gridforge": {
@@ -310,9 +309,10 @@ export const projectsData = {
         tagline: "A web-based power system simulation platform that transforms classical MATLAB models into modern, interactive engineering tools.",
         techStack: ["MATLAB Engine API", "Python (Flask)", "React (Vite)", "Full-Stack Architecture"],
         actions: [
-            { label: "GitHub Repo", link: "https://github.com/Rsmk27", icon: "fab fa-github" }
+            { label: "GitHub Repo", link: "https://github.com/Rsmk27/gridforge", icon: "fab fa-github" },
+            { label: "LinkedIn Post", link: "https://www.linkedin.com/posts/srinivasamanikanta_electricalengineering-fullstack-matlab-activity-7417434184719261696-0vQG", icon: "fab fa-linkedin" }
         ],
-        heroImage: "/assets/gridforge-power-system-simulation.webp",
+        heroImage: "/assets/gridforge/simulation-results.png",
         sections: [
             {
                 title: "01. The Problem",
@@ -349,7 +349,17 @@ export const projectsData = {
                 description: "The first implemented simulation models a basic electrical power delivery system with source, transmission line, and load. Users dynamically adjust load demand while the system computes resulting electrical parameters in real-time."
             },
             {
-                title: "06. Technical Skills Demonstrated",
+                title: "06. Visual Walkthrough",
+                type: "gallery",
+                images: [
+                    { heading: "Web Interface Dashboard", image: "/assets/gridforge/web-dashboard-interface.png", caption: "Interactive React-based dashboard for parameter control and real-time monitoring." },
+                    { heading: "MATLAB Simulation Logic", image: "/assets/gridforge/matlab-simulation-model.png", caption: "Core power system model defined in MATLAB script." },
+                    { heading: "Simulation Results Output", image: "/assets/gridforge/simulation-results.png", caption: "Structured output returned by the MATLAB Engine." },
+                    { heading: "Flask Backend Implementation", image: "/assets/gridforge/backend-api-code.png", caption: "Python/Flask API handling requests and MATLAB Engine orchestration." }
+                ]
+            },
+            {
+                title: "07. Technical Skills Demonstrated",
                 type: "list",
                 items: [
                     "<strong>Power System Modeling:</strong> Applied electrical engineering fundamentals to model transmission lines, voltage drop, and power delivery.",
@@ -360,7 +370,7 @@ export const projectsData = {
                 ]
             },
             {
-                title: "07. Future Roadmap",
+                title: "08. Future Roadmap",
                 type: "list",
                 items: [
                     "<strong>Microgrid Simulation:</strong> Extend platform to model distributed energy resources and microgrid behavior.",
@@ -371,10 +381,16 @@ export const projectsData = {
                 ]
             },
             {
-                title: "08. Resources",
+                title: "09. Featured on LinkedIn",
+                type: "embed",
+                src: "https://www.linkedin.com/embed/feed/update/urn:li:activity:7417434184719261696",
+                height: "600"
+            },
+            {
+                title: "10. Resources",
                 type: "actions",
                 actions: [
-                    { label: "View Source Code", link: "https://github.com/Rsmk27", icon: "fab fa-github" }
+                    { label: "View Source Code", link: "https://github.com/Rsmk27/gridforge", icon: "fab fa-github" }
                 ]
             }
         ],

@@ -7,7 +7,7 @@ import useMobileDetect from '../utils/useMobileDetect';
 
 const Projects = () => {
     const isMobile = useMobileDetect();
-    
+
     return (
         <section id="projects" className="section">
             <script type="application/ld+json" dangerouslySetInnerHTML={generateAllImagesJsonLd()} />
@@ -28,11 +28,11 @@ const Projects = () => {
                     {/* Project 1: BudgetBuddy */}
                     <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
-                            <img src="/assets/budget-buddy-expense-tracker-app.webp" 
-                                 alt="Budget Buddy expense tracking application interface showing real-time financial analytics and budget management dashboard" 
-                                 width="2560" 
-                                 height="1792" 
-                                 loading="lazy" />
+                            <img src="/assets/budget-buddy-expense-tracker-app.webp"
+                                alt="Budget Buddy expense tracking application interface showing real-time financial analytics and budget management dashboard"
+                                width="2560"
+                                height="1792"
+                                loading="lazy" />
                         </div>
                         <div className="project-content">
                             <div className="project-header">
@@ -67,43 +67,43 @@ const Projects = () => {
                         </div>
                     </motion.article>
 
-                    {/* Project 2: AI Chatbot */}
+                    {/* Project 2: Solar Dewatering */}
                     <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
-                            <img src="/assets/ai-chatbot-interface-background.webp" 
-                                 alt="AI-powered chatbot interface with GPT integration showing conversational AI capabilities and real-time response system" 
-                                 width="1600" 
-                                 height="896" 
-                                 loading="lazy" />
+                            <img src="/assets/ai-chatbot-interface-background.webp"
+                                alt="Solar-powered dewatering system concept visualization"
+                                width="1600"
+                                height="896"
+                                loading="lazy" />
                         </div>
                         <div className="project-content">
                             <div className="project-header">
-                                <h3 className="project-title">AI Chatbot with GPT</h3>
+                                <h3 className="project-title">Solar Dewatering System</h3>
                             </div>
 
                             <div className="project-case-block">
                                 <span className="case-label">Problem</span>
-                                <p className="case-text">Need for intelligent conversational systems.</p>
+                                <p className="case-text">Removing excess water from off-grid areas without reliable electricity.</p>
                             </div>
                             <div className="project-case-block">
                                 <span className="case-label">Solution</span>
-                                <p className="case-text">Built an AI-powered web chatbot with real-time responses.</p>
+                                <p className="case-text">A self-sustaining, renewable energy system for automated water management.</p>
                             </div>
                             <div className="project-case-block">
                                 <span className="case-label">Impact</span>
-                                <p className="case-text">Demonstrates applied AI & full-stack system design.</p>
+                                <p className="case-text">Eliminates grid dependency and prevents flooding damage sustainably.</p>
                             </div>
 
                             <div className="project-tech-stack">
-                                <span className="tech-pill">Next.js</span>
-                                <span className="tech-pill">GPT APIs</span>
-                                <span className="tech-pill">Vercel</span>
+                                <span className="tech-pill">Solar PV</span>
+                                <span className="tech-pill">Arduino</span>
+                                <span className="tech-pill">Power Systems</span>
                             </div>
 
                             <div className="project-actions">
-                                <a href="#" className="action-btn"><i className="fas fa-external-link-alt"></i> Live Demo</a>
-                                <a href="https://github.com/Rsmk27" target="_blank" rel="noreferrer" className="action-btn"><i
-                                    className="fab fa-github"></i> GitHub</a>
+                                <Link to="/projects/solar-dewatering" className="action-btn"><i className="fas fa-external-link-alt"></i> Details</Link>
+                                <a href="https://spds.rsmk.me" target="_blank" rel="noreferrer" className="action-btn"><i
+                                    className="fas fa-desktop"></i> Demo</a>
                             </div>
                         </div>
                     </motion.article>
@@ -111,11 +111,11 @@ const Projects = () => {
                     {/* Project 3: ColorOhm */}
                     <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
-                            <img src="/assets/color-ohm-resistor-calculator-tool.webp" 
-                                 alt="ColorOhm resistor color code calculator tool interface for electrical engineers showing 4-band and 5-band resistance calculation" 
-                                 width="2560" 
-                                 height="1792" 
-                                 loading="lazy" />
+                            <img src="/assets/color-ohm-resistor-calculator-tool.webp"
+                                alt="ColorOhm resistor color code calculator tool interface for electrical engineers showing 4-band and 5-band resistance calculation"
+                                width="2560"
+                                height="1792"
+                                loading="lazy" />
                         </div>
                         <div className="project-content">
                             <div className="project-header">
@@ -152,11 +152,11 @@ const Projects = () => {
                     {/* Project 4: Embedded IoT Monitoring */}
                     <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
-                            <img src="/assets/smart-exhaust-gas-detection-system.webp" 
-                                 alt="Smart exhaust fan system with MQ-2 gas sensor for automatic hazardous gas detection and ventilation control using Arduino" 
-                                 width="2560" 
-                                 height="1792" 
-                                 loading="lazy" />
+                            <img src="/assets/smart-exhaust-gas-detection-system.webp"
+                                alt="Smart exhaust fan system with MQ-2 gas sensor for automatic hazardous gas detection and ventilation control using Arduino"
+                                width="2560"
+                                height="1792"
+                                loading="lazy" />
                         </div>
                         <div className="project-content">
                             <div className="project-header">
@@ -194,11 +194,11 @@ const Projects = () => {
                     {/* Project 5: GridForge */}
                     <motion.article className="project-card" variants={popIn(isMobile)}>
                         <div className="project-image-container">
-                            <img src="/assets/gridforge-power-system-simulation.webp" 
-                                 alt="GridForge web-based power system simulation platform showing MATLAB-Python-React integration for real-time electrical grid analysis" 
-                                 width="2560" 
-                                 height="1792" 
-                                 loading="lazy" />
+                            <img src="/assets/gridforge/simulation-results.png"
+                                alt="GridForge web-based power system simulation platform showing MATLAB-Python-React integration for real-time electrical grid analysis"
+                                width="2560"
+                                height="1792"
+                                loading="lazy" />
                         </div>
                         <div className="project-content">
                             <div className="project-header">
@@ -228,7 +228,7 @@ const Projects = () => {
                             <div className="project-actions">
                                 <Link to="/projects/gridforge" className="action-btn"><i
                                     className="fas fa-external-link-alt"></i> Details</Link>
-                                <a href="https://github.com/Rsmk27" target="_blank" rel="noreferrer" className="action-btn"><i
+                                <a href="https://github.com/Rsmk27/gridforge" target="_blank" rel="noreferrer" className="action-btn"><i
                                     className="fab fa-github"></i> GitHub</a>
                             </div>
                         </div>
