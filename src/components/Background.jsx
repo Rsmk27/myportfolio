@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 class DynamicBackgroundLogic {
     constructor(canvas, width, height) {
         this.canvas = canvas;
-        this.ctx = this.canvas.getContext('2d');
+        this.ctx = this.canvas.getContext('2d', { alpha: false }); // Optimize by disabling alpha if not needed (but we might need it for layers) -> actually we draw full rect so alpha: false is good for the base canvas? No, fixed pos on top of what? It's z-index -1, so it is the background.
         this.width = width;
         this.height = height;
 
@@ -19,6 +19,9 @@ class DynamicBackgroundLogic {
             accent: { r: 100, g: 180, b: 255 }
         };
 
+        this.bgGradient = null;
+        this.waveGradients = [];
+
         this.init();
     }
 
@@ -26,8 +29,6 @@ class DynamicBackgroundLogic {
         this.resize(this.width, this.height);
         this.createParticles();
         this.createWaves();
-        // Mouse listener handled via React props/events if needed, or window
-        // But for simplicity, we attach to window here or passed in.
     }
 
     resize(width, height) {
@@ -35,11 +36,36 @@ class DynamicBackgroundLogic {
         this.height = height;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
+        this.cacheGradients();
+    }
+
+    cacheGradients() {
+        // Cache Background Gradient
+        this.bgGradient = this.ctx.createRadialGradient(
+            this.width / 2, this.height / 2, 0,
+            this.width / 2, this.height / 2, this.width * 0.8
+        );
+        this.bgGradient.addColorStop(0, 'rgba(10, 14, 19, 1)');
+        this.bgGradient.addColorStop(0.5, 'rgba(10, 5, 32, 0.98)');
+        this.bgGradient.addColorStop(1, 'rgba(5, 8, 15, 1)');
+
+        // Cache Wave Gradients (approximate since they move slightly, but vertical gradient can be fixed height large enough)
+        this.waveGradients = [];
+        this.waves.forEach((wave, index) => {
+            // Create a gradient that covers the potential area of the wave
+            const waveGradient = this.ctx.createLinearGradient(0, wave.yOffset - 100, 0, wave.yOffset + 200);
+            const color = index === 0 ? this.colors.primary : index === 1 ? this.colors.secondary : this.colors.accent;
+            waveGradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+            waveGradient.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, ${wave.opacity})`);
+            waveGradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+            this.waveGradients.push(waveGradient);
+        });
     }
 
     createParticles() {
         this.particles = [];
-        const particleCount = Math.min(Math.floor((this.width * this.height) / 15000), 80);
+        // Reduced density for better performance
+        const particleCount = Math.min(Math.floor((this.width * this.height) / 20000), 60);
 
         for (let i = 0; i < particleCount; i++) {
             this.particles.push({
@@ -66,19 +92,13 @@ class DynamicBackgroundLogic {
                 yOffset: this.height * (0.2 + i * 0.25)
             });
         }
+        // Re-cache gradients when waves are recreated (usually only on init, but good practice)
+        if (this.width) this.cacheGradients();
     }
 
     drawGradientBackground() {
-        const gradient = this.ctx.createRadialGradient(
-            this.width / 2, this.height / 2, 0,
-            this.width / 2, this.height / 2, this.width * 0.8
-        );
-
-        gradient.addColorStop(0, 'rgba(10, 14, 19, 1)');
-        gradient.addColorStop(0.5, 'rgba(10, 5, 32, 0.98)');
-        gradient.addColorStop(1, 'rgba(5, 8, 15, 1)');
-
-        this.ctx.fillStyle = gradient;
+        if (!this.bgGradient) return;
+        this.ctx.fillStyle = this.bgGradient;
         this.ctx.fillRect(0, 0, this.width, this.height);
     }
 
@@ -87,7 +107,8 @@ class DynamicBackgroundLogic {
             this.ctx.beginPath();
             this.ctx.moveTo(0, wave.yOffset);
 
-            for (let x = 0; x < this.width; x += 5) {
+            // Optimization: Increase step size
+            for (let x = 0; x < this.width; x += 10) {
                 const y = wave.yOffset +
                     Math.sin(x * wave.frequency + this.time * wave.speed + wave.offset) * wave.amplitude +
                     Math.sin(x * wave.frequency * 0.5 + this.time * wave.speed * 1.3) * wave.amplitude * 0.5;
@@ -99,14 +120,7 @@ class DynamicBackgroundLogic {
             this.ctx.lineTo(0, this.height);
             this.ctx.closePath();
 
-            const waveGradient = this.ctx.createLinearGradient(0, wave.yOffset - 100, 0, wave.yOffset + 200);
-            const color = index === 0 ? this.colors.primary : index === 1 ? this.colors.secondary : this.colors.accent;
-
-            waveGradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
-            waveGradient.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, ${wave.opacity})`);
-            waveGradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
-
-            this.ctx.fillStyle = waveGradient;
+            this.ctx.fillStyle = this.waveGradients[index] || '#000';
             this.ctx.fill();
         });
     }
@@ -116,9 +130,15 @@ class DynamicBackgroundLogic {
             particle.x += particle.vx;
             particle.y += particle.vy;
 
-            const mouseDist = Math.hypot(this.mouseX - particle.x, this.mouseY - particle.y);
-            if (mouseDist < 150) {
-                const angle = Math.atan2(particle.y - this.mouseY, particle.x - this.mouseX);
+            // Simplified mouse interaction
+            const dx = this.mouseX - particle.x;
+            const dy = this.mouseY - particle.y;
+            // distinct checking to avoid sqrt every frame if far away - simple bounding box first?
+            // Just standard dist check is fine for <100 particles
+            const distSq = dx * dx + dy * dy;
+
+            if (distSq < 22500) { // 150^2
+                const angle = Math.atan2(dy, dx);
                 particle.x += Math.cos(angle) * 0.5;
                 particle.y += Math.sin(angle) * 0.5;
             }
@@ -126,8 +146,11 @@ class DynamicBackgroundLogic {
             if (particle.x < 0 || particle.x > this.width) particle.vx *= -1;
             if (particle.y < 0 || particle.y > this.height) particle.vy *= -1;
 
-            particle.x = Math.max(0, Math.min(this.width, particle.x));
-            particle.y = Math.max(0, Math.min(this.height, particle.y));
+            // Simple bounds clamp
+            if (particle.x < 0) particle.x = 0;
+            if (particle.x > this.width) particle.x = this.width;
+            if (particle.y < 0) particle.y = 0;
+            if (particle.y > this.height) particle.y = this.height;
 
             const pulse = Math.sin(this.time * 0.002 + particle.pulsePhase) * 0.2 + 0.8;
             const alpha = particle.opacity * pulse;
@@ -137,37 +160,36 @@ class DynamicBackgroundLogic {
             this.ctx.fillStyle = `rgba(100, 180, 255, ${alpha})`;
             this.ctx.fill();
 
-            const glowGradient = this.ctx.createRadialGradient(
-                particle.x, particle.y, 0,
-                particle.x, particle.y, particle.radius * 3
-            );
-            glowGradient.addColorStop(0, `rgba(100, 180, 255, ${alpha * 0.3})`);
-            glowGradient.addColorStop(1, 'rgba(100, 180, 255, 0)');
-
-            this.ctx.fillStyle = glowGradient;
-            this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.radius * 3, 0, Math.PI * 2);
-            this.ctx.fill();
+            // Glow - can be expensive, maybe skip for performance if needed? 
+            // Let's keep it but optimized: use a pre-rendered canvas for particle glow? 
+            // For now, removing the gradient glow per particle is a huge win.
+            // Replacing gradient glow with simple larger arc or just skipping for performance.
+            // Let's keep it simple for speed:
+            // this.ctx.beginPath();
+            // this.ctx.arc(particle.x, particle.y, particle.radius * 3, 0, Math.PI * 2);
+            // this.ctx.fillStyle = `rgba(100, 180, 255, ${alpha * 0.1})`; // constant fill is faster than gradient
+            // this.ctx.fill();
         });
     }
 
     drawConnections() {
         const maxDistance = 120;
+        const maxDistSq = maxDistance * maxDistance;
+
+        this.ctx.lineWidth = 0.5;
 
         for (let i = 0; i < this.particles.length; i++) {
             for (let j = i + 1; j < this.particles.length; j++) {
                 const dx = this.particles[i].x - this.particles[j].x;
                 const dy = this.particles[i].y - this.particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+                const distSq = dx * dx + dy * dy;
 
-                if (distance < maxDistance) {
-                    const opacity = (1 - distance / maxDistance) * 0.15;
-
+                if (distSq < maxDistSq) {
+                    const opacity = (1 - Math.sqrt(distSq) / maxDistance) * 0.15;
                     this.ctx.beginPath();
                     this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
                     this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
                     this.ctx.strokeStyle = `rgba(51, 144, 255, ${opacity})`;
-                    this.ctx.lineWidth = 0.5;
                     this.ctx.stroke();
                 }
             }
@@ -176,6 +198,8 @@ class DynamicBackgroundLogic {
 
     drawFloatingGeometry() {
         const geometryCount = 5;
+        this.ctx.lineWidth = 1.5;
+        this.ctx.strokeStyle = `rgba(0, 123, 255, 0.06)`;
 
         for (let i = 0; i < geometryCount; i++) {
             const angle = (this.time * 0.0002 + i * (Math.PI * 2) / geometryCount) % (Math.PI * 2);
@@ -190,9 +214,6 @@ class DynamicBackgroundLogic {
             this.ctx.save();
             this.ctx.translate(x, y);
             this.ctx.rotate(rotation);
-
-            this.ctx.strokeStyle = `rgba(0, 123, 255, 0.06)`;
-            this.ctx.lineWidth = 1.5;
 
             this.ctx.beginPath();
             for (let j = 0; j < 6; j++) {
@@ -218,19 +239,17 @@ class DynamicBackgroundLogic {
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.015)';
         this.ctx.lineWidth = 1;
 
+        // Optimize: Batch strokes
+        this.ctx.beginPath();
         for (let x = -offsetX; x < this.width + gridSize; x += gridSize) {
-            this.ctx.beginPath();
             this.ctx.moveTo(x, 0);
             this.ctx.lineTo(x, this.height);
-            this.ctx.stroke();
         }
-
         for (let y = -offsetY; y < this.height + gridSize; y += gridSize) {
-            this.ctx.beginPath();
             this.ctx.moveTo(0, y);
             this.ctx.lineTo(this.width, y);
-            this.ctx.stroke();
         }
+        this.ctx.stroke();
     }
 
     animate() {
