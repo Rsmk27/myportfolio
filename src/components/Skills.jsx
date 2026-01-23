@@ -6,8 +6,41 @@ import useMobileDetect from '../utils/useMobileDetect';
 const Skills = () => {
     const isMobile = useMobileDetect();
     
+    const signalPaths = [
+        {
+            category: 'ANALOG',
+            icon: 'fa-wave-square',
+            strength: 'strong',
+            skills: ['Electrical & Electronics Engineering', 'Power & Energy Systems', 'Control Systems & Automation']
+        },
+        {
+            category: 'DIGITAL',
+            icon: 'fa-microchip',
+            strength: 'strong',
+            skills: ['Embedded Systems Design', 'Internet of Things (IoT)', 'Arduino / ESP8266']
+        },
+        {
+            category: 'EMBEDDED',
+            icon: 'fa-memory',
+            strength: 'strong',
+            skills: ['C / C++ / Python', 'Firmware Development', 'Real-time Systems']
+        },
+        {
+            category: 'SOFTWARE',
+            icon: 'fa-code',
+            strength: 'developing',
+            skills: ['Web (HTML/CSS/React)', 'Firebase / APIs', 'Git / Linux']
+        },
+        {
+            category: 'APPLIED DOMAINS',
+            icon: 'fa-project-diagram',
+            strength: 'strong',
+            skills: ['Smart Energy Systems', 'Green Technology', 'Autonomous Grids', 'AI-Driven Engineering']
+        }
+    ];
+    
     return (
-        <section id="skills" className="section" style={{ background: 'rgba(22, 27, 34, 0.5)' }}>
+        <section id="skills" className="section signal-processing-section" style={{ background: 'rgba(22, 27, 34, 0.5)' }}>
             <motion.div
                 className="container"
                 initial="hidden"
@@ -16,59 +49,90 @@ const Skills = () => {
                 variants={staggerContainer(isMobile)}
             >
                 <motion.div variants={zoomIn(isMobile)}>
-                    <span className="mono text-accent">02. CAPABILITY</span>
-                    <h2>Technical Arsenal</h2>
+                    <span className="mono text-accent system-label">SIGNAL PROCESSING // CAPABILITY MATRIX</span>
+                    <h2>Technical Signal Paths</h2>
                 </motion.div>
 
-                <motion.div className="skills-container" variants={staggerContainer(isMobile)}>
-                    {/* Pillar 1 */}
-                    <motion.article className="skill-pillar pillar-core" variants={zoomIn(isMobile)}>
-                        <h3><i className="fas fa-microchip"></i> Core Engineering</h3>
-                        <div className="skill-list">
-                            <span className="skill-tag">Electrical & Electronics Engineering</span>
-                            <span className="skill-tag">Embedded Systems Design</span>
-                            <span className="skill-tag">Power & Energy Systems</span>
-                            <span className="skill-tag">Control Systems & Automation</span>
-                            <span className="skill-tag">Internet of Things (IoT)</span>
-                        </div>
-                    </motion.article>
-
-                    {/* Pillar 2 */}
-                    <motion.article className="skill-pillar pillar-software" variants={zoomIn(isMobile)}>
-                        <h3><i className="fas fa-terminal"></i> Software & Tools</h3>
-                        <div className="skill-list">
-                            <span className="skill-tag">C / C++ / Python</span>
-                            <span className="skill-tag">Arduino / ESP8266</span>
-                            <span className="skill-tag">Web (HTML/CSS/React)</span>
-                            <span className="skill-tag">Firebase / APIs</span>
-                            <span className="skill-tag">Git / Linux</span>
-                        </div>
-                    </motion.article>
-
-                    {/* Pillar 3 */}
-                    <motion.article className="skill-pillar pillar-domains" variants={zoomIn(isMobile)}>
-                        <h3><i className="fas fa-globe-americas"></i> Applied Domains</h3>
-                        <div className="skill-list">
-                            <span className="skill-tag">Smart Energy Systems</span>
-                            <span className="skill-tag">Green Technology</span>
-                            <span className="skill-tag">Autonomous Grids</span>
-                            <span className="skill-tag">FinTech Platforms</span>
-                            <span className="skill-tag">AI-Driven Engineering</span>
-                        </div>
-                    </motion.article>
+                <motion.div className="signal-paths-container" variants={staggerContainer(isMobile)}>
+                    {signalPaths.map((path, index) => (
+                        <motion.div 
+                            key={index}
+                            className={`signal-path-block signal-${path.strength}`} 
+                            variants={zoomIn(isMobile)}
+                        >
+                            <div className="signal-path-header">
+                                <div className="signal-indicator">
+                                    <i className={`fas ${path.icon}`}></i>
+                                    <span className="path-category">{path.category}</span>
+                                </div>
+                                <div className={`signal-strength signal-${path.strength}`}>
+                                    <div className="strength-bars">
+                                        <span className="bar"></span>
+                                        <span className="bar"></span>
+                                        <span className="bar"></span>
+                                        <span className="bar"></span>
+                                        <span className="bar"></span>
+                                    </div>
+                                    <span className="strength-label">
+                                        {path.strength === 'strong' ? 'CLEAN SIGNAL' : 'DEVELOPING'}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="signal-path-waveform">
+                                <svg viewBox="0 0 200 40" className="waveform-svg">
+                                    {path.strength === 'strong' ? (
+                                        <path d="M 0 20 L 20 20 L 25 5 L 30 35 L 35 5 L 40 35 L 45 5 L 50 35 L 55 20 L 200 20" 
+                                              stroke="var(--electric-blue)" 
+                                              strokeWidth="2" 
+                                              fill="none" />
+                                    ) : (
+                                        <path d="M 0 20 Q 25 15, 50 20 T 100 20 T 150 20 L 200 20" 
+                                              stroke="var(--electric-blue)" 
+                                              strokeWidth="2" 
+                                              fill="none" 
+                                              opacity="0.6" />
+                                    )}
+                                </svg>
+                            </div>
+                            <div className="signal-components">
+                                {path.skills.map((skill, idx) => (
+                                    <span key={idx} className="component-tag">
+                                        <span className="component-pin"></span>
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </motion.div>
+                    ))}
                 </motion.div>
 
-                {/* Engineering Strengths */}
-                <motion.div className="engineering-strengths" variants={zoomIn(isMobile)}>
-                    <h3 style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>
-                        Engineering Confidence
+                {/* System Reliability Indicators */}
+                <motion.div className="system-reliability" variants={zoomIn(isMobile)}>
+                    <h3 className="reliability-title">
+                        <i className="fas fa-shield-alt"></i>
+                        SYSTEM RELIABILITY METRICS
                     </h3>
-                    <div className="strengths-grid">
-                        <div className="strength-item"><i className="fas fa-check-circle"></i> Systems Thinking</div>
-                        <div className="strength-item"><i className="fas fa-check-circle"></i> Full-Stack Engineering</div>
-                        <div className="strength-item"><i className="fas fa-check-circle"></i> Problem Decomposition</div>
-                        <div className="strength-item"><i className="fas fa-check-circle"></i> Scalable Architecture</div>
-                        <div className="strength-item"><i className="fas fa-check-circle"></i> Rapid Prototyping</div>
+                    <div className="reliability-grid">
+                        <div className="reliability-item">
+                            <i className="fas fa-check-double"></i>
+                            <span>Systems Thinking</span>
+                        </div>
+                        <div className="reliability-item">
+                            <i className="fas fa-check-double"></i>
+                            <span>Full-Stack Engineering</span>
+                        </div>
+                        <div className="reliability-item">
+                            <i className="fas fa-check-double"></i>
+                            <span>Problem Decomposition</span>
+                        </div>
+                        <div className="reliability-item">
+                            <i className="fas fa-check-double"></i>
+                            <span>Scalable Architecture</span>
+                        </div>
+                        <div className="reliability-item">
+                            <i className="fas fa-check-double"></i>
+                            <span>Rapid Prototyping</span>
+                        </div>
                     </div>
                 </motion.div>
 

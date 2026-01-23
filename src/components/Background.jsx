@@ -14,9 +14,9 @@ class DynamicBackgroundLogic {
         this.time = 0;
 
         this.colors = {
-            primary: { r: 0, g: 123, b: 255 },
-            secondary: { r: 51, g: 144, b: 255 },
-            accent: { r: 100, g: 180, b: 255 }
+            primary: { r: 0, g: 217, b: 255 },      // Electric Blue
+            secondary: { r: 0, g: 255, b: 209 },    // Cyan accent
+            accent: { r: 102, g: 230, b: 255 }      // Light electric blue
         };
 
         this.bgGradient = null;
@@ -40,14 +40,14 @@ class DynamicBackgroundLogic {
     }
 
     cacheGradients() {
-        // Cache Background Gradient
+        // Cache Background Gradient - Deep charcoal electrical theme
         this.bgGradient = this.ctx.createRadialGradient(
             this.width / 2, this.height / 2, 0,
             this.width / 2, this.height / 2, this.width * 0.8
         );
         this.bgGradient.addColorStop(0, 'rgba(10, 14, 19, 1)');
-        this.bgGradient.addColorStop(0.5, 'rgba(10, 5, 32, 0.98)');
-        this.bgGradient.addColorStop(1, 'rgba(5, 8, 15, 1)');
+        this.bgGradient.addColorStop(0.5, 'rgba(5, 12, 20, 0.98)');
+        this.bgGradient.addColorStop(1, 'rgba(8, 10, 15, 1)');
 
         // Cache Wave Gradients (approximate since they move slightly, but vertical gradient can be fixed height large enough)
         this.waveGradients = [];
@@ -157,7 +157,7 @@ class DynamicBackgroundLogic {
 
             this.ctx.beginPath();
             this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-            this.ctx.fillStyle = `rgba(100, 180, 255, ${alpha})`;
+            this.ctx.fillStyle = `rgba(0, 217, 255, ${alpha})`;  // Electric blue particles
             this.ctx.fill();
 
             // Glow - can be expensive, maybe skip for performance if needed? 
@@ -185,11 +185,11 @@ class DynamicBackgroundLogic {
                 const distSq = dx * dx + dy * dy;
 
                 if (distSq < maxDistSq) {
-                    const opacity = (1 - Math.sqrt(distSq) / maxDistance) * 0.15;
+                    const opacity = (1 - Math.sqrt(distSq) / maxDistance) * 0.2;
                     this.ctx.beginPath();
                     this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
                     this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
-                    this.ctx.strokeStyle = `rgba(51, 144, 255, ${opacity})`;
+                    this.ctx.strokeStyle = `rgba(0, 217, 255, ${opacity})`;  // Electric blue connections
                     this.ctx.stroke();
                 }
             }
@@ -199,7 +199,7 @@ class DynamicBackgroundLogic {
     drawFloatingGeometry() {
         const geometryCount = 5;
         this.ctx.lineWidth = 1.5;
-        this.ctx.strokeStyle = `rgba(0, 123, 255, 0.06)`;
+        this.ctx.strokeStyle = `rgba(0, 217, 255, 0.08)`;  // Electric blue geometry
 
         for (let i = 0; i < geometryCount; i++) {
             const angle = (this.time * 0.0002 + i * (Math.PI * 2) / geometryCount) % (Math.PI * 2);
@@ -236,7 +236,7 @@ class DynamicBackgroundLogic {
         const offsetX = (this.time * 0.01) % gridSize;
         const offsetY = (this.time * 0.01) % gridSize;
 
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.015)';
+        this.ctx.strokeStyle = 'rgba(0, 217, 255, 0.02)';  // Electric blue grid
         this.ctx.lineWidth = 1;
 
         // Optimize: Batch strokes
