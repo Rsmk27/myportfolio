@@ -37,7 +37,14 @@ const Hero = () => {
                             </motion.h1>
                             <motion.h2
                                 variants={fadeInUp(isMobile)}
-                                style={{ fontSize: '1.5rem', color: 'var(--text-accent)', marginBottom: 0 }}
+                                style={{ 
+                                    fontSize: '1.5rem', 
+                                    color: 'var(--electric-blue)', 
+                                    marginBottom: 0,
+                                    textShadow: '0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3)',
+                                    fontWeight: 700,
+                                    letterSpacing: '0.02em'
+                                }}
                             >
                                 Electrical & Electronics Engineer
                             </motion.h2>

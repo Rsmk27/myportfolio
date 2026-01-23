@@ -4,19 +4,33 @@
  */
 
 :root {
-    /* Color Palette */
-    --bg-dark: #0F1115;
-    --bg-card: #161B22;
-    --bg-card-hover: #1C2128;
+    /* Color Palette - Electrical Engineering Theme */
+    --bg-dark: #0A0E13;
+    /* Deep charcoal */
+    --bg-card: #12161D;
+    /* Graphite black */
+    --bg-card-hover: #1A1F28;
     --text-primary: #E6EDF3;
+    /* Neutral white */
     --text-secondary: #8B949E;
-    --text-accent: #2F81F7;
-    /* Electric Blue */
-    --accent-glow: rgba(47, 129, 247, 0.15);
-    --border-color: #30363D;
+    /* Soft gray */
+    --text-accent: #00D9FF;
+    /* Electric Blue - Primary Signal Color */
+    --electric-blue: #00D9FF;
+    --electric-blue-glow: rgba(0, 217, 255, 0.25);
+    --electric-blue-dim: rgba(0, 217, 255, 0.1);
+    --accent-glow: rgba(0, 217, 255, 0.2);
+    --border-color: #2A3038;
+    /* Subtle border */
+    --border-active: #00D9FF;
+    /* Electric blue for active states */
     --success: #2EA043;
     /* Green Tech */
     --warning: #D29922;
+    --cyan-accent: #00FFD1;
+    /* Subtle cyan secondary */
+    --signal-inactive: #3A4048;
+    /* Gray for inactive states */
 
     /* Typography */
     --font-display: 'Orbitron', 'Space Grotesk', sans-serif;
@@ -60,8 +74,8 @@ body {
     width: 100%;
     position: relative;
     background-image:
-        linear-gradient(rgba(48, 54, 61, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(48, 54, 61, 0.15) 1px, transparent 1px);
+        linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
 }
 
@@ -100,13 +114,46 @@ p {
 }
 
 a {
-    color: var(--text-accent);
+    color: var(--electric-blue);
     text-decoration: none;
     transition: var(--transition-fast);
 }
 
 a:hover {
-    color: #58A6FF;
+    color: var(--cyan-accent);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+}
+
+/* Section Headers with Circuit Traces */
+.section h2 {
+    position: relative;
+    display: inline-block;
+}
+
+.section h2::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--electric-blue);
+    box-shadow: 0 0 10px var(--electric-blue-glow);
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--electric-blue);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--electric-blue-glow);
+    animation: signalPulse 2s ease-in-out infinite;
 }
 
 /* Utilities */
@@ -148,15 +195,18 @@ a:hover {
 }
 
 .btn-primary {
-    background: var(--text-accent);
-    color: white;
-    box-shadow: 0 0 20px rgba(47, 129, 247, 0.1);
+    background: var(--electric-blue);
+    color: #0A0E13;
+    font-weight: 700;
+    box-shadow: 0 0 20px var(--electric-blue-glow);
+    border: 1px solid var(--electric-blue);
 }
 
 .btn-primary:hover {
-    background: #1F6FEB;
+    background: var(--cyan-accent);
     transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(47, 129, 247, 0.3);
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.5), 0 0 60px rgba(0, 217, 255, 0.3);
+    color: #0A0E13;
 }
 
 .btn-outline {
@@ -166,9 +216,10 @@ a:hover {
 }
 
 .btn-outline:hover {
-    border-color: var(--text-accent);
-    color: var(--text-accent);
-    background: rgba(47, 129, 247, 0.05);
+    border-color: var(--electric-blue);
+    color: var(--electric-blue);
+    background: var(--electric-blue-dim);
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.2);
 }
 
 .mono {
@@ -264,7 +315,8 @@ header .container {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--text-accent);
+    background: var(--electric-blue);
+    box-shadow: 0 0 10px var(--electric-blue-glow);
     transition: width 0.3s ease;
 }
 
@@ -317,7 +369,7 @@ header .container {
     width: 300px;
     height: 300px;
     background: var(--bg-card);
-    border: 2px solid var(--text-accent);
+    border: 2px solid var(--electric-blue);
     border-radius: 50%;
     padding: 6px;
     /* Creates the gap for the frame */
@@ -325,8 +377,18 @@ header .container {
     align-items: center;
     justify-content: center;
     color: var(--text-secondary);
-    box-shadow: 0 0 30px rgba(47, 129, 247, 0.2);
+    box-shadow: 0 0 40px var(--electric-blue-glow), 0 0 80px rgba(0, 217, 255, 0.1);
     position: relative;
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 40px var(--electric-blue-glow), 0 0 80px rgba(0, 217, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 50px var(--electric-blue-glow), 0 0 100px rgba(0, 217, 255, 0.15);
+    }
 }
 
 .profile-placeholder img {
@@ -365,7 +427,20 @@ header .container {
     display: block;
     width: 40px;
     height: 1px;
-    background: var(--text-accent);
+    background: var(--electric-blue);
+    box-shadow: 0 0 5px var(--electric-blue-glow);
+    animation: voltageFlow 2s ease-in-out infinite;
+}
+
+@keyframes voltageFlow {
+    0%, 100% {
+        opacity: 0.6;
+        box-shadow: 0 0 5px var(--electric-blue-glow);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 10px var(--electric-blue-glow), 0 0 20px rgba(0, 217, 255, 0.3);
+    }
 }
 
 .hero-cta {
@@ -382,13 +457,23 @@ header .container {
     width: 50vw;
     height: 50vw;
     background-image:
-        radial-gradient(circle, var(--accent-glow) 1px, transparent 1px);
+        radial-gradient(circle, var(--electric-blue-glow) 1px, transparent 1px);
     background-size: 30px 30px;
-    opacity: 0.5;
+    opacity: 0.6;
     z-index: 1;
     pointer-events: none;
     -webkit-mask-image: radial-gradient(circle, black 30%, transparent 70%);
     mask-image: radial-gradient(circle, black 30%, transparent 70%);
+    animation: gridPulse 4s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.7;
+    }
 }
 
 @media (max-width: 768px) {
@@ -432,9 +517,9 @@ header .container {
     right: -1px;
     bottom: -1px;
     border-radius: inherit;
-    background: linear-gradient(45deg, var(--text-accent), transparent);
+    background: linear-gradient(45deg, var(--electric-blue), transparent);
     z-index: -1;
-    opacity: 0.3;
+    opacity: 0.4;
 }
 
 /* Skills */
@@ -461,8 +546,8 @@ header .container {
 
 .skill-pillar:hover {
     transform: translateY(-5px);
-    border-color: var(--text-accent);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--electric-blue);
+    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2), 0 0 40px rgba(0, 217, 255, 0.1);
 }
 
 /* Visual Cues Backgrounds */
@@ -519,7 +604,8 @@ header .container {
 }
 
 .skill-pillar h3 i {
-    color: var(--text-accent);
+    color: var(--electric-blue);
+    filter: drop-shadow(0 0 5px var(--electric-blue-glow));
 }
 
 .skill-list {
@@ -529,22 +615,36 @@ header .container {
 }
 
 .skill-tag {
-    background: rgba(47, 129, 247, 0.05);
-    /* Very subtle tint */
+    background: var(--electric-blue-dim);
     padding: 0.5rem 0.9rem;
     border-radius: var(--radius-sm);
     font-size: 0.9rem;
     color: var(--text-primary);
-    border: 1px solid rgba(47, 129, 247, 0.1);
+    border: 1px solid rgba(0, 217, 255, 0.2);
     transition: all 0.2s;
     font-family: var(--font-mono);
+    position: relative;
+}
+
+.skill-tag::before {
+    content: '●';
+    color: var(--signal-inactive);
+    margin-right: 0.5rem;
+    font-size: 0.6rem;
+    transition: all 0.3s;
+}
+
+.skill-tag:hover::before {
+    color: var(--electric-blue);
+    text-shadow: 0 0 8px var(--electric-blue-glow);
 }
 
 .skill-tag:hover {
-    background: rgba(47, 129, 247, 0.15);
-    color: var(--text-accent);
-    border-color: var(--text-accent);
+    background: rgba(0, 217, 255, 0.2);
+    color: var(--electric-blue);
+    border-color: var(--electric-blue);
     transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
 }
 
 /* Engineering Strengths Section */
@@ -611,6 +711,24 @@ header .container {
     height: 100%;
 }
 
+/* Circuit connector corners */
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid var(--signal-inactive);
+    border-right: 2px solid var(--signal-inactive);
+    transition: all 0.3s ease;
+}
+
+.project-card:hover::after {
+    border-color: var(--electric-blue);
+    box-shadow: 0 0 10px var(--electric-blue-glow);
+}
+
 .project-card::before {
     content: '';
     position: absolute;
@@ -628,12 +746,12 @@ header .container {
 
 .project-card:hover {
     transform: translateY(-8px);
-    border-color: var(--text-accent);
-    box-shadow: 0 15px 30px rgba(47, 129, 247, 0.15);
+    border-color: var(--electric-blue);
+    box-shadow: 0 15px 30px rgba(0, 217, 255, 0.25), 0 0 60px rgba(0, 217, 255, 0.15);
 }
 
 .project-card:hover::before {
-    background: linear-gradient(180deg, var(--text-accent), transparent);
+    background: linear-gradient(180deg, var(--electric-blue), transparent);
     opacity: 1;
 }
 
@@ -686,11 +804,12 @@ header .container {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     text-transform: uppercase;
-    color: var(--text-accent);
+    color: var(--electric-blue);
     margin-bottom: 0.25rem;
     display: block;
     letter-spacing: 0.05em;
-    opacity: 0.8;
+    opacity: 0.9;
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
 }
 
 .case-text {
@@ -737,9 +856,10 @@ header .container {
 }
 
 .action-btn:hover {
-    background: rgba(47, 129, 247, 0.1);
-    border-color: var(--text-accent);
-    color: var(--text-accent);
+    background: var(--electric-blue-dim);
+    border-color: var(--electric-blue);
+    color: var(--electric-blue);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
 }
 
 .action-btn i {
@@ -776,15 +896,26 @@ header .container {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: var(--text-accent);
-    box-shadow: 0 0 0 4px rgba(47, 129, 247, 0.2);
+    background: var(--electric-blue);
+    box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.2), 0 0 15px var(--electric-blue-glow);
+    animation: signalPulse 2s ease-in-out infinite;
+}
+
+@keyframes signalPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.2), 0 0 15px var(--electric-blue-glow);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(0, 217, 255, 0.3), 0 0 20px var(--electric-blue-glow);
+    }
 }
 
 .timeline-date {
     font-family: var(--font-mono);
-    color: var(--text-accent);
+    color: var(--electric-blue);
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
 }
 
 
@@ -805,25 +936,54 @@ header .container {
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scan-line effect */
+.cert-card::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--electric-blue), transparent);
+    box-shadow: 0 0 20px var(--electric-blue-glow);
+    animation: scanLine 3s ease-in-out infinite;
+}
+
+@keyframes scanLine {
+    0% {
+        top: -100%;
+    }
+    50% {
+        top: 100%;
+    }
+    100% {
+        top: 100%;
+    }
 }
 
 .cert-card:hover {
-    border-color: var(--text-accent);
+    border-color: var(--electric-blue);
     transform: translateY(-5px);
     background: var(--bg-card-hover);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2), 0 0 40px rgba(0, 217, 255, 0.1);
 }
 
 .cert-icon {
     font-size: 1.5rem;
-    color: var(--text-accent);
-    background: rgba(47, 129, 247, 0.1);
+    color: var(--electric-blue);
+    background: var(--electric-blue-dim);
     min-width: 50px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.15);
 }
 
 .cert-content {
@@ -839,9 +999,10 @@ header .container {
 .cert-issuer {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--text-accent);
+    color: var(--electric-blue);
     margin-bottom: 0.75rem;
     text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
 }
 
 .cert-desc {
@@ -888,7 +1049,9 @@ header .container {
 }
 
 .social-icon:hover {
-    color: var(--text-accent);
+    color: var(--electric-blue);
+    filter: drop-shadow(0 0 10px var(--electric-blue-glow));
+    transform: translateY(-3px);
 }
 
 /* Footer */
@@ -947,8 +1110,9 @@ footer {
 }
 
 .footer-nav a:hover {
-    color: var(--text-accent);
+    color: var(--electric-blue);
     transform: translateX(5px);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
 }
 
 .footer-bottom {
@@ -1013,10 +1177,10 @@ footer {
 }
 
 .focus-card:hover {
-    border-color: var(--text-accent);
+    border-color: var(--electric-blue);
     transform: translateY(-5px);
     background: rgba(22, 27, 34, 0.8);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2), 0 0 40px rgba(0, 217, 255, 0.1);
 }
 
 .focus-icon {
@@ -1049,7 +1213,7 @@ footer {
     padding: 2rem;
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
-    background: linear-gradient(90deg, transparent, rgba(47, 129, 247, 0.05), transparent);
+    background: linear-gradient(90deg, transparent, var(--electric-blue-dim), transparent);
 }
 
 /* Mobile Nav */
@@ -1140,11 +1304,12 @@ footer {
 .diagram-block {
     display: inline-block;
     padding: 1rem 2rem;
-    background: rgba(47, 129, 247, 0.1);
-    border: 1px solid var(--text-accent);
-    color: var(--text-accent);
+    background: var(--electric-blue-dim);
+    border: 1px solid var(--electric-blue);
+    color: var(--electric-blue);
     border-radius: 4px;
     font-family: var(--font-mono);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
 }
 
 /* Implementation Grid */
@@ -1162,9 +1327,10 @@ footer {
 }
 
 .tech-block h4 {
-    color: var(--text-accent);
+    color: var(--electric-blue);
     margin-bottom: 1rem;
     font-family: var(--font-mono);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
 }
 
 /* Challenge Cards */
