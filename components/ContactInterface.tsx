@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Profile, Social } from '../types';
 import { Mail, Github, Linkedin, Twitter, Send, Terminal, Wifi, Activity, Instagram } from 'lucide-react';
 
+import { PROJECTS, SKILLS, EXPERIENCE } from '../constants';
+
 interface ContactInterfaceProps {
     profile: Profile;
     isPowered: boolean;
@@ -11,9 +13,11 @@ interface ContactInterfaceProps {
 
 export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isPowered }) => {
     const [consoleInput, setConsoleInput] = useState('');
-    const [messages, setMessages] = useState<Array<{ text: string, type: 'sys' | 'user' | 'success' }>>([
+    const [messages, setMessages] = useState<Array<{ text: string, type: 'sys' | 'user' | 'success' | 'info' }>>([
         { text: '> INITIALIZING COMM_UPLINK...', type: 'sys' },
-        { text: '> SECURE CHANNEL ESTABLISHED', type: 'sys' }
+        { text: '> SECURE CHANNEL ESTABLISHED', type: 'sys' },
+        { text: '> TYPE "HELP" FOR COMMAND_LIST', type: 'info' }
+
     ]);
     const [isSending, setIsSending] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -24,6 +28,40 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
         }
     }, [messages]);
 
+    const processCommand = (cmd: string) => {
+        const lowerCmd = cmd.toLowerCase().trim();
+        let response = '';
+        let type: 'sys' | 'success' | 'info' = 'info';
+
+        if (lowerCmd === 'help' || lowerCmd === 'commands') {
+            response = 'AVAILABLE_COMMANDS: [ABOUT, PROJECTS, SKILLS, EXP, CONTACT, CLEAR]';
+            type = 'sys';
+        } else if (lowerCmd === 'clear') {
+            setMessages([]);
+            return;
+        } else if (lowerCmd.includes('about') || lowerCmd.includes('who') || lowerCmd === 'bio') {
+            response = profile.bio;
+        } else if (lowerCmd.includes('project') || lowerCmd === 'work') {
+            response = `LOADED_MODULES:\n${PROJECTS.map(p => `> ${p.title}`).join('\n')}`;
+        } else if (lowerCmd.includes('skill') || lowerCmd === 'stack') {
+            response = `ACTIVE_PROTOCOLS:\n${SKILLS.map(s => `> ${s.name} (${s.level}%)`).join('\n')}`;
+        } else if (lowerCmd.includes('exp') || lowerCmd.includes('job') || lowerCmd === 'history') {
+            response = `CAREER_LOGS:\n${EXPERIENCE.map(e => `> ${e.role} @ ${e.company}`).join('\n')}`;
+        } else if (lowerCmd.includes('contact') || lowerCmd.includes('mail') || lowerCmd.includes('social')) {
+            response = `Please use the "Primary Channel" or "Social Uplinks" panel on the left to establish connection.`;
+        } else if (['hi', 'hello', 'hey'].some(g => lowerCmd.includes(g))) {
+            response = `GREETINGS USER. I AM TERM_V2.0. HOW MAY I ASSIST?`;
+        } else {
+            response = `ERR_UNKNOWN_CMD: "${cmd}". TYPE "HELP" FOR MANUAL.`;
+            type = 'sys';
+        }
+
+        setTimeout(() => {
+            setMessages(prev => [...prev, { text: response, type }]);
+            setIsSending(false);
+        }, 500);
+    };
+
     const handleCommand = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!consoleInput.trim() || isSending) return;
@@ -31,22 +69,9 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
         const cmd = consoleInput;
         setConsoleInput('');
         setMessages(prev => [...prev, { text: `> ${cmd}`, type: 'user' }]);
-
         setIsSending(true);
 
-        // Simulate transmission delay
-        setTimeout(() => {
-            setMessages(prev => [...prev, { text: '> ENCRYPTING PACKET...', type: 'sys' }]);
-        }, 600);
-
-        setTimeout(() => {
-            setMessages(prev => [...prev, { text: '> TRANSMITTING TO REMOTE HOST...', type: 'sys' }]);
-        }, 1200);
-
-        setTimeout(() => {
-            setMessages(prev => [...prev, { text: '> ACKNOWLEDGED. MESSAGE LOGGED.', type: 'success' }]);
-            setIsSending(false);
-        }, 2200);
+        processCommand(cmd);
     };
 
     const getIcon = (platform: Social['platform']) => {
@@ -149,9 +174,10 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             key={i}
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className={`${msg.type === 'user' ? 'text-white' :
+                            className={`whitespace-pre-wrap ${msg.type === 'user' ? 'text-white' :
                                 msg.type === 'success' ? 'text-emerald-400' :
-                                    'text-cyan-600'
+                                    msg.type === 'info' ? 'text-cyan-400' :
+                                        'text-cyan-600'
                                 }`}
                         >
                             <span className="opacity-50 mr-2">

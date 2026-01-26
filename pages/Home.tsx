@@ -19,7 +19,7 @@ const Home: React.FC = () => {
         const saved = sessionStorage.getItem('isPowered');
         return saved === 'true';
     });
-    const [bootSequence, setBootSequence] = useState(false);
+
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const isFirstMount = React.useRef(true);
@@ -32,11 +32,7 @@ const Home: React.FC = () => {
             return;
         }
 
-        if (isPowered) {
-            setBootSequence(true);
-            const timer = setTimeout(() => setBootSequence(false), 2000);
-            return () => clearTimeout(timer);
-        }
+
     }, [isPowered]);
 
     const navItems = ['Projects', 'Skills', 'Experience', 'Education', 'Contact'];
@@ -116,22 +112,22 @@ const Home: React.FC = () => {
             </AnimatePresence>
 
             {/* Main Content */}
-            <main className="container mx-auto px-6 pt-32 pb-32">
+            <main className="container mx-auto px-4 md:px-6 pt-24 md:pt-32 pb-24 md:pb-32 overflow-x-hidden">
                 {/* Hero Section */}
-                <section className="min-h-[85vh] flex flex-col items-center justify-center text-center mb-32 relative">
+                <section className="min-h-[calc(100vh-8rem)] md:min-h-[85vh] flex flex-col items-center justify-center text-center mb-24 md:mb-32 relative">
 
                     {/* CPU Core Animation */}
-                    <div className="relative mb-12 group">
+                    <div className="relative mb-8 md:mb-12 group">
                         {/* Outer rotating rings - Only visible when powered */}
                         {isPowered && (
                             <>
-                                <div className="absolute inset-[-40px] border border-cyan-500/20 rounded-full animate-spin-slow pointer-events-none" style={{ animationDuration: '20s' }} />
-                                <div className="absolute inset-[-20px] border-2 border-dashed border-cyan-500/30 rounded-full animate-spin-slow pointer-events-none" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
+                                <div className="absolute inset-[-30px] md:inset-[-40px] border border-cyan-500/20 rounded-full animate-spin-slow pointer-events-none" style={{ animationDuration: '20s' }} />
+                                <div className="absolute inset-[-15px] md:inset-[-20px] border-2 border-dashed border-cyan-500/30 rounded-full animate-spin-slow pointer-events-none" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
                             </>
                         )}
 
                         {/* Main Profile Container */}
-                        <div className={`relative z-10 w-48 h-48 md:w-64 md:h-64 rounded-full p-2 transition-all duration-700 ${isPowered ? 'bg-cyan-950/20' : 'bg-transparent'}`}>
+                        <div className={`relative z-10 w-40 h-40 md:w-64 md:h-64 rounded-full p-2 transition-all duration-700 ${isPowered ? 'bg-cyan-950/20' : 'bg-transparent'}`}>
                             {/* Inner Glowing Rim */}
                             <div className={`absolute inset-0 rounded-full border-4 transition-all duration-500 ${isPowered ? 'border-cyan-500 shadow-[0_0_50px_rgba(0,242,255,0.4)]' : 'border-[#1a1a1a]'}`} />
 
@@ -157,7 +153,7 @@ const Home: React.FC = () => {
                     </div>
 
                     {/* Main Title Block */}
-                    <div className="relative z-20 max-w-4xl min-h-[400px] flex flex-col items-center justify-center">
+                    <div className="relative z-20 max-w-4xl min-h-[300px] md:min-h-[400px] flex flex-col items-center justify-center">
                         <AnimatePresence mode='wait'>
                             {isPowered && (
                                 <motion.div
@@ -167,7 +163,7 @@ const Home: React.FC = () => {
                                     transition={{ duration: 0.8 }}
                                 >
                                     <div className="mb-6 flex flex-col items-center">
-                                        <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-2 relative">
+                                        <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter leading-none mb-2 relative">
                                             <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">
                                                 {PROFILE.name.split(' ')[0]}
                                             </span>
@@ -176,14 +172,14 @@ const Home: React.FC = () => {
                                                 {PROFILE.name.split(' ')[1]}
                                             </span>
                                         </h1>
-                                        <div className="h-1 w-32 mt-4 rounded-full bg-cyan-500 shadow-[0_0_10px_#00f2ff]" />
+                                        <div className="h-1 w-24 md:w-32 mt-4 rounded-full bg-cyan-500 shadow-[0_0_10px_#00f2ff]" />
                                     </div>
 
-                                    <p className="text-lg md:text-xl font-mono mb-4 max-w-2xl mx-auto leading-relaxed text-gray-400">
+                                    <p className="text-base md:text-xl font-mono mb-4 max-w-xs md:max-w-2xl mx-auto leading-relaxed text-gray-400">
                                         {PROFILE.tagline}
                                     </p>
                                     {PROFILE.heroSubtitle && (
-                                        <p className="text-sm md:text-base font-mono mb-10 max-w-xl mx-auto leading-relaxed text-gray-500">
+                                        <p className="text-xs md:text-base font-mono mb-10 max-w-xs md:max-w-xl mx-auto leading-relaxed text-gray-500 px-4">
                                             {PROFILE.heroSubtitle}
                                         </p>
                                     )}
@@ -199,30 +195,30 @@ const Home: React.FC = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5 }}
-                                className="flex flex-col items-center gap-8 mt-12"
+                                className="flex flex-col items-center gap-8 mt-8 md:mt-12 w-full"
                             >
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-2xl px-4">
                                     {[
                                         { label: "ROLE", val: "ENGINEER" },
                                         { label: "STACK", val: "FULL_CYCLE" },
                                         { label: "LOC", val: "INDIA" },
                                         { label: "MODE", val: "CREATIVE" }
                                     ].map((stat, i) => (
-                                        <div key={i} className="px-4 py-2 border-l border-gray-800 text-left">
+                                        <div key={i} className="px-2 md:px-4 py-2 border-l border-gray-800 text-left">
                                             <div className="text-[9px] text-gray-600 font-mono mb-1">{stat.label}</div>
                                             <div className="text-xs font-bold text-gray-300">{stat.val}</div>
                                         </div>
                                     ))}
                                 </div>
 
-                                <div className="flex flex-wrap justify-center gap-4">
-                                    <a href="#projects" className="px-8 py-3 rounded-lg font-bold uppercase tracking-wider text-xs md:text-sm bg-cyan-500 text-black hover:bg-white hover:shadow-[0_0_20px_rgba(0,242,255,0.4)] transition-all">
+                                <div className="flex flex-wrap justify-center gap-4 w-full px-4">
+                                    <a href="#projects" className="flex-1 md:flex-none px-6 md:px-8 py-3 rounded-lg font-bold uppercase tracking-wider text-xs md:text-sm bg-cyan-500 text-black hover:bg-white hover:shadow-[0_0_20px_rgba(0,242,255,0.4)] transition-all text-center">
                                         View Projects
                                     </a>
-                                    <a href="#contact" className="px-8 py-3 rounded-lg font-bold uppercase tracking-wider text-xs md:text-sm border border-cyan-500 text-cyan-400 hover:bg-cyan-950/30 transition-all">
+                                    <a href="#contact" className="flex-1 md:flex-none px-6 md:px-8 py-3 rounded-lg font-bold uppercase tracking-wider text-xs md:text-sm border border-cyan-500 text-cyan-400 hover:bg-cyan-950/30 transition-all text-center">
                                         Contact Me
                                     </a>
-                                    <a href="#" className="hidden md:flex items-center gap-2 px-8 py-3 rounded-lg font-bold uppercase tracking-wider text-xs md:text-sm border border-gray-700 text-gray-400 hover:text-white hover:border-white transition-all">
+                                    <a href="#" className="hidden md:flex items-center gap-2 px-8 py-3 rounded-lg font-bold uppercase tracking-wider text-xs md:text-sm border border-gray-700 text-gray-400 hover:text-white hover:border-white transition-all text-center">
                                         <span>Resume</span>
                                     </a>
                                 </div>
@@ -232,10 +228,10 @@ const Home: React.FC = () => {
                 </section>
 
                 {/* About Me Section - TERMINAL_LOG_STYLE */}
-                <section className="mb-40 max-w-6xl mx-auto">
+                <section className="mb-24 md:mb-40 max-w-6xl mx-auto">
                     <SectionHeader title="MISSION_STATEMENT" subtitle="KERNEL_OBJECTIVE" isPowered={isPowered} flip />
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
                         {/* Left Column: Core Focus */}
                         <div className="lg:col-span-4 order-2 lg:order-1">
                             <div className={`h-full p-6 border-2 border-dashed transition-colors duration-500 ${isPowered ? 'border-gray-800 bg-[#080808]' : 'border-gray-900 bg-transparent'}`}>
@@ -275,7 +271,7 @@ const Home: React.FC = () => {
                         </div>
 
                         {/* Right Column: Narrative */}
-                        <div className={`lg:col-span-8 order-1 lg:order-2 relative p-8 md:p-12 border-l-2 transition-all duration-700 ${isPowered ? 'border-cyan-500 bg-cyan-950/5' : 'border-gray-800 bg-transparent'}`}>
+                        <div className={`lg:col-span-8 order-1 lg:order-2 relative p-6 md:p-12 border-l-2 transition-all duration-700 ${isPowered ? 'border-cyan-500 bg-cyan-950/5' : 'border-gray-800 bg-transparent'}`}>
                             {/* Decorative scanline */}
                             {isPowered && (
                                 <motion.div
@@ -286,17 +282,17 @@ const Home: React.FC = () => {
                             )}
 
                             <div className="space-y-6 relative z-10">
-                                <p className={`text-base md:text-lg leading-relaxed font-mono transition-colors ${isPowered ? 'text-gray-300' : 'text-gray-600'}`}>
+                                <p className={`text-sm md:text-lg leading-relaxed font-mono transition-colors ${isPowered ? 'text-gray-300' : 'text-gray-600'}`}>
                                     <span className="text-cyan-600 font-bold mr-2">&gt;</span>
                                     I am an Electrical & Electronics Engineering student with a deep interest in designing <span className={isPowered ? "text-cyan-400" : ""}>intelligent, real-world systems</span> that integrate hardware, software, and energy infrastructure. My work focuses on building practical solutions across Embedded Systems, IoT, Smart Energy, and Green Technology.
                                 </p>
 
-                                <p className={`text-base md:text-lg leading-relaxed font-mono transition-colors ${isPowered ? 'text-gray-300' : 'text-gray-600'}`}>
+                                <p className={`text-sm md:text-lg leading-relaxed font-mono transition-colors ${isPowered ? 'text-gray-300' : 'text-gray-600'}`}>
                                     <span className="text-cyan-600 font-bold mr-2">&gt;</span>
                                     From developing embedded controllers and IoT platforms to building full-stack software systems, I approach every project with a <span className={isPowered ? "text-cyan-400" : ""}>systems mindset</span> — understanding not just how components function, but how entire systems behave, evolve, and improve over time.
                                 </p>
 
-                                <p className={`text-base md:text-lg leading-relaxed font-mono transition-colors ${isPowered ? 'text-gray-300' : 'text-gray-600'}`}>
+                                <p className={`text-sm md:text-lg leading-relaxed font-mono transition-colors ${isPowered ? 'text-gray-300' : 'text-gray-600'}`}>
                                     <span className="text-cyan-600 font-bold mr-2">&gt;</span>
                                     What drives me is the challenge of solving problems that matter: making energy systems smarter, automation more adaptive, and digital platforms more intelligent.
                                 </p>
@@ -323,7 +319,7 @@ const Home: React.FC = () => {
                 </section>
 
                 {/* Projects Section */}
-                <section id="projects" className="mb-40">
+                <section id="projects" className="mb-24 md:mb-40">
                     <SectionHeader title="PROJ_MODULES" subtitle="ADDR: 0x4A - 0x7B" isPowered={isPowered} />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
                         {PROJECTS.map(proj => (
@@ -333,23 +329,23 @@ const Home: React.FC = () => {
                 </section>
 
                 {/* Skills Section */}
-                <section id="skills" className="mb-40">
+                <section id="skills" className="mb-24 md:mb-40">
                     <SkillBreadboard isPowered={isPowered} />
                 </section>
 
                 {/* Certifications Section */}
-                <section id="certifications" className="mb-40">
+                <section id="certifications" className="mb-24 md:mb-40">
                     <CertificationsBlock isPowered={isPowered} />
                 </section>
 
                 {/* Experience Section */}
-                <section id="experience" className="mb-40">
+                <section id="experience" className="mb-24 md:mb-40">
                     <SectionHeader title="SYSTEM_LOG" subtitle="RUNTIME_HISTORY" isPowered={isPowered} />
                     <ExperienceTimeline experience={EXPERIENCE} isPowered={isPowered} />
                 </section>
 
                 {/* Education Section */}
-                <section id="education" className="mb-40">
+                <section id="education" className="mb-24 md:mb-40">
                     <SectionHeader title="KNOWLEDGE_BANKS" subtitle="FIRMWARE_VER" isPowered={isPowered} flip />
                     <EducationBlock education={EDUCATION} isPowered={isPowered} />
                 </section>
@@ -431,30 +427,7 @@ const Home: React.FC = () => {
                 </section>
             </main>
 
-            {/* Boot Animation Overlay */}
-            <AnimatePresence>
-                {bootSequence && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center backdrop-blur-sm pointer-events-none"
-                    >
-                        <div className="text-left font-mono">
-                            <p className="text-cyan-500 text-xs mb-1">VOLT_OS v4.2.0 Loading...</p>
-                            <p className="text-gray-500 text-[10px] mb-1">[ OK ] Kernel initialized</p>
-                            <p className="text-gray-500 text-[10px] mb-1">[ OK ] Power rails stable (3.3V, 5V, 12V)</p>
-                            <p className="text-gray-500 text-[10px] mb-1">[ OK ] Memory check complete: 64GB DDR5</p>
-                            <p className="text-gray-500 text-[10px] mb-4">[ OK ] Starting GUI module...</p>
-                            <motion.div
-                                initial={{ width: 0 }}
-                                animate={{ width: 200 }}
-                                className="h-1 bg-cyan-500"
-                            />
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+
 
             <style>{`
         @keyframes signalFlow {
@@ -475,7 +448,7 @@ const Home: React.FC = () => {
 };
 
 const SectionHeader: React.FC<{ title: string; subtitle: string; isPowered: boolean; flip?: boolean }> = ({ title, subtitle, isPowered, flip }) => (
-    <div className={`flex items-center gap-4 mb-16 ${flip ? 'flex-row-reverse' : ''}`}>
+    <div className={`flex items-center gap-4 mb-8 md:mb-16 ${flip ? 'flex-row-reverse' : ''}`}>
         <h2 className={`text-2xl font-black transition-colors ${isPowered ? 'text-white' : 'text-gray-900'}`}>
             {title}
         </h2>

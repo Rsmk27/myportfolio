@@ -16,11 +16,12 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
 
   return (
     <motion.div
-      className="relative group p-5"
+      className="relative group p-5 h-full"
       onHoverStart={() => setIsExpanded(true)}
       onHoverEnd={() => setIsExpanded(false)}
+      onClick={() => setIsExpanded(!isExpanded)}
       initial={{ scale: 1, zIndex: 0 }}
-      whileHover={{ scale: 1.1, zIndex: 50 }}
+      whileHover={{ scale: 1.05, zIndex: 50 }}
       transition={{ duration: 0.3 }}
     >
       {/* IC Pins - Left */}
@@ -38,8 +39,8 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
       </div>
 
       {/* Main Package / Electric Card */}
-      <div className="relative z-10">
-        <div className="bg-black rounded-[1.5em] relative">
+      <div className="relative z-10 h-full">
+        <div className="bg-black rounded-[1.5em] relative h-full overflow-hidden">
           {/* Connecting lines to pins */}
           <div className={`absolute top-0 bottom-0 -left-1 w-2 transition-colors ${isPowered ? 'bg-cyan-900/50' : 'bg-[#111]'}`} />
           <div className={`absolute top-0 bottom-0 -right-1 w-2 transition-colors ${isPowered ? 'bg-cyan-900/50' : 'bg-[#111]'}`} />
@@ -48,68 +49,47 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
             variant={isPowered ? "hue" : "swirl"}
             color={isPowered ? "#00f2ff" : "#333333"}
             badge={`PN: ${project.id}-REV_C`}
-            title={project.title}
-            description={project.description}
+            title="" // Clearing internal title to use custom overlay
+            description="" // Clearing internal description
             image={project.image}
             width="100%"
             aspectRatio="16/9"
-            className="shadow-2xl"
+            className="shadow-2xl h-full"
           />
 
-          {/* Tech Specs Overlay on Hover */}
-          <AnimatePresence>
-            {isExpanded && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="absolute bottom-16 left-6 right-6 z-50 flex flex-wrap gap-2 pointer-events-none"
-              >
-                {project.tech.map(t => (
-                  <span key={t} className="px-2 py-1 text-[10px] uppercase font-bold bg-black/90 backdrop-blur border border-cyan-500/30 text-cyan-100 rounded shadow-lg">
-                    {t}
+          {/* Custom Overlay for Basic Details */}
+          <div className={`absolute inset-0 flex flex-col justify-end p-6 transition-all duration-500 ${isExpanded ? 'bg-black/80' : 'bg-transparent'}`}>
+            <div className="relative z-20 transform translate-y-4 transition-transform duration-500">
+              {/* Title */}
+              <h3 className={`text-xl font-bold mb-2 transition-all duration-500 ${isExpanded ? 'opacity-100 translate-y-0 text-white' : 'opacity-0 translate-y-4 text-transparent'}`}>
+                {project.title}
+              </h3>
+
+              {/* Tech Tags (Optional, keeping for context but smaller) */}
+              <div className={`flex flex-wrap gap-2 mb-4 transition-all duration-500 delay-75 ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                {project.tech.slice(0, 3).map(t => (
+                  <span key={t} className="text-[10px] text-cyan-300 font-mono">
+                    #{t}
                   </span>
                 ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Action Buttons */}
-          <AnimatePresence>
-            {isExpanded && (
-              <div className="absolute top-4 right-4 z-50 flex gap-2">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  <Link
-                    to={`/project/${project.id}`}
-                    title="View Project Details"
-                    className={`p-2 rounded-full flex items-center justify-center transition-all duration-300 ${isPowered ? 'bg-black/80 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500 hover:text-black' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-                  >
-                    <Info size={18} />
-                  </Link>
-                </motion.div>
-
-                {project.link && (
-                  <motion.a
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="View Live Project"
-                    className={`p-2 rounded-full flex items-center justify-center transition-all duration-300 ${isPowered ? 'bg-cyan-500 text-black shadow-[0_0_15px_rgba(0,242,255,0.6)] hover:bg-white' : 'bg-white text-black'}`}
-                  >
-                    <ExternalLink size={18} />
-                  </motion.a>
-                )}
               </div>
-            )}
-          </AnimatePresence>
+
+              {/* View Details Button */}
+              <div className={`transition-all duration-500 delay-100 ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                <Link
+                  to={`/project/${project.id}`}
+                  className={`inline-flex items-center gap-2 px-6 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${isPowered
+                    ? 'bg-cyan-500 text-black hover:bg-white hover:shadow-[0_0_20px_rgba(0,242,255,0.5)]'
+                    : 'bg-gray-200 text-gray-800 hover:bg-white'
+                    }`}
+                >
+                  View Details
+                  <ExternalLink size={14} />
+                </Link>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </motion.div>
