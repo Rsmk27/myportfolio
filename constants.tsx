@@ -81,7 +81,20 @@ export const PROJECTS: Project[] = [
     title: 'GridForge',
     description: 'Full-stack power system simulation platform. Bridges MATLAB computation with web interactivity.',
     tech: ['MATLAB API', 'Python (Flask)', 'React', 'Power Systems'],
-    image: '/assets/gridforge-power-system-simulation.webp'
+    image: '/assets/gridforge-power-system-simulation.webp',
+    details: "GridForge is a comprehensive power system simulation platform that bridges the gap between complex MATLAB computations and accessible web interfaces. It allows engineers and students to simulate power grids, analyze load flow, and visualize results in real-time without needing local MATLAB installations. The system uses a Python Flask backend to interface with the MATLAB engine, processing simulation requests and returning data to a modern React frontend.",
+    features: [
+      "Real-time Power Flow Analysis via Web Interface",
+      "MATLAB Integration for High-Precision Computation",
+      "Interactive Graph & Network Visualizations",
+      "Scenario Management & Historical Data Tracking"
+    ],
+    gallery: [
+      '/assets/gridforge/web-dashboard-interface.png',
+      '/assets/gridforge/matlab-simulation-model.png',
+      '/assets/gridforge/simulation-results.png',
+      '/assets/gridforge/backend-api-code.png'
+    ]
   },
   {
     id: 'p5',

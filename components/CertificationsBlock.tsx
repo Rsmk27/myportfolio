@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Zap, Fan, Box, Sparkles, LucideIcon } from 'lucide-react';
+import { Cpu, Zap, Fan, Box, Sparkles, LucideIcon, Wifi } from 'lucide-react';
 
 interface CertificationsBlockProps {
     isPowered: boolean;
@@ -44,6 +44,12 @@ const CERTS: Certification[] = [
         subtitle: "AI-ASSISTED ENGINEERING",
         description: "Leveraging Generative AI and LLMs to accelerate the engineering design lifecycle from concept to code.",
         icon: Sparkles
+    },
+    {
+        title: "IoT & Smart Systems",
+        subtitle: "NETWORK INTERCONNECTIVITY",
+        description: "Designing interconnected smart devices using ESP modules, MQTT protocols, and cloud-based data telemetry.",
+        icon: Wifi
     }
 ];
 

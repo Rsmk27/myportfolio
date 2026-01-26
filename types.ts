@@ -6,6 +6,9 @@ export interface Project {
   tech: string[];
   image: string;
   link?: string;
+  details?: string;
+  gallery?: string[];
+  features?: string[];
 }
 
 export interface Skill {

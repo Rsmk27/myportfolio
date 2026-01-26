@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '../types';
-import { ExternalLink, Cpu } from 'lucide-react';
+import { ExternalLink, Cpu, Info } from 'lucide-react';
 import { ElectricCard } from './ui/electric-card';
+import { Link } from 'react-router-dom';
 
 interface ProjectChipProps {
   project: Project;
@@ -73,21 +74,40 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
             )}
           </AnimatePresence>
 
-          {/* External Link Button */}
+          {/* Action Buttons */}
           <AnimatePresence>
-            {project.link && isExpanded && (
-              <motion.a
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="View Live Project"
-                className={`absolute top-4 right-4 z-50 p-2 rounded-full transition-all duration-300 ${isPowered ? 'bg-cyan-500 text-black shadow-[0_0_15px_rgba(0,242,255,0.6)] hover:bg-white' : 'bg-white text-black'}`}
-              >
-                <ExternalLink size={18} />
-              </motion.a>
+            {isExpanded && (
+              <div className="absolute top-4 right-4 z-50 flex gap-2">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <Link
+                    to={`/project/${project.id}`}
+                    title="View Project Details"
+                    className={`p-2 rounded-full flex items-center justify-center transition-all duration-300 ${isPowered ? 'bg-black/80 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500 hover:text-black' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+                  >
+                    <Info size={18} />
+                  </Link>
+                </motion.div>
+
+                {project.link && (
+                  <motion.a
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="View Live Project"
+                    className={`p-2 rounded-full flex items-center justify-center transition-all duration-300 ${isPowered ? 'bg-cyan-500 text-black shadow-[0_0_15px_rgba(0,242,255,0.6)] hover:bg-white' : 'bg-white text-black'}`}
+                  >
+                    <ExternalLink size={18} />
+                  </motion.a>
+                )}
+              </div>
             )}
           </AnimatePresence>
         </div>
