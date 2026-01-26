@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-depth: #030303;
+    --bg-surface: #0a0a0a;
+    --bg-panel: #111111;
+    --line-dim: #1f1f1f;
+    --line-mid: #2a2a2a;
+    --line-bright: #444444;
+
+    --primary-cyan: #00f0ff;
+    --primary-glow: rgba(0, 240, 255, 0.15);
+
+    --accent-amber: #ffae00;
+    --accent-red: #ff3333;
+
+    --text-main: #e0e0e0;
+    --text-dim: #888888;
+    --text-dark: #444444;
+}
+
+body {
+    background-color: var(--bg-depth);
+    color: var(--text-main);
+    font-family: 'JetBrains Mono', monospace;
+    overflow-x: hidden;
+    cursor: crosshair;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-depth);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--line-bright);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-cyan);
+}
+
+/* Utility Classes for "Technical" look */
+.border-tech {
+    border: 1px solid var(--line-mid);
+}
+
+.bg-grid-pattern {
+    background-image:
+        linear-gradient(to right, #1a1a1a 1px, transparent 1px),
+        linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.text-glow {
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.animate-spin-slow {
+    animation: spin 12s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.clip-corner {
+    clip-path: polygon(0 0,
+            100% 0,
+            100% calc(100% - 10px),
+            calc(100% - 10px) 100%,
+            0 100%);
+}
