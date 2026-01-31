@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PCBBackground } from '../components/PCBBackground';
-import { PowerSwitch } from '../components/PowerSwitch';
 import { ProjectChip } from '../components/ProjectChip';
 import { SkillBreadboard } from '../components/SkillBreadboard';
 import { CertificationsBlock } from '../components/CertificationsBlock';
@@ -13,11 +12,19 @@ import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import { Cpu, Terminal, Zap, Info, Briefcase, GraduationCap, Send, Menu, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
+const LOADING_DURATION = 3000; // 3 seconds loading time
+
 const Home: React.FC = () => {
     const [isPowered, setIsPowered] = useState(() => {
         // Initialize from session storage to persist state during navigation
         const saved = sessionStorage.getItem('isPowered');
         return saved === 'true';
+    });
+
+    const [showLoading, setShowLoading] = useState(() => {
+        // Only show loading on first visit (when not powered)
+        const saved = sessionStorage.getItem('isPowered');
+        return saved !== 'true';
     });
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,6 +42,17 @@ const Home: React.FC = () => {
 
     }, [isPowered]);
 
+    // Auto-power on after loading duration with loading screen
+    useEffect(() => {
+        if (showLoading) {
+            const timer = setTimeout(() => {
+                setIsPowered(true);
+                setShowLoading(false);
+            }, LOADING_DURATION);
+            return () => clearTimeout(timer);
+        }
+    }, [showLoading]);
+
     const navItems = ['Projects', 'Skills', 'Experience', 'Education', 'Contact'];
 
     return (
@@ -46,6 +64,35 @@ const Home: React.FC = () => {
                 <meta property="og:description" content={PROFILE.bio} />
                 <meta property="og:image" content={PROFILE.image} />
             </Helmet>
+
+            {/* Loading Screen with RSMK text */}
+            <AnimatePresence>
+                {showLoading && (
+                    <motion.div
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5 }}
+                            className="text-center"
+                        >
+                            <h1 className="text-6xl md:text-8xl font-black tracking-wider text-cyan-500 drop-shadow-[0_0_30px_rgba(0,242,255,0.8)]" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                                RSMK
+                            </h1>
+                            <motion.div
+                                className="h-1 w-32 mt-4 mx-auto rounded-full bg-cyan-500 shadow-[0_0_20px_#00f2ff]"
+                                animate={{ scaleX: [0, 1] }}
+                                transition={{ duration: LOADING_DURATION / 1000, ease: "easeInOut" }}
+                            />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <PCBBackground isPowered={isPowered} />
 
             {/* Header Overlay */}
@@ -357,67 +404,7 @@ const Home: React.FC = () => {
                 </section>
 
                 {/* Footer info */}
-                {/* Footer info & Control Switch */}
                 <section className="flex flex-col items-center gap-12 pt-20 pb-12 border-t border-[#111]">
-                    {/* Control Module - MovesLayout from Center to Footer */}
-                    <motion.div
-                        layout
-                        className={`flex flex-col items-center gap-8 transition-all duration-1000 ease-in-out z-[100] ${!isPowered
-                            ? 'fixed inset-0 items-center justify-center bg-black/90 backdrop-blur-sm'
-                            : 'relative scale-[0.6] origin-center bg-transparent pointer-events-auto'
-                            }`}
-                    >
-                        <motion.div
-                            layout
-                            className={`relative rounded-xl flex items-center gap-6 transition-all duration-500 ${isPowered
-                                ? 'p-0 bg-transparent border-none'
-                                : 'p-4 scale-150 bg-black/50 border border-cyan-900/30'
-                                }`}
-                        >
-                            {/* Attention Grabber when remote is off */}
-                            {!isPowered && (
-                                <motion.div
-                                    className="absolute -inset-4 rounded-2xl border-2 border-cyan-500/30"
-                                    animate={{
-                                        scale: [1, 1.1, 1],
-                                        opacity: [0.3, 0.8, 0.3]
-                                    }}
-                                    transition={{
-                                        duration: 2,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }}
-                                />
-                            )}
-
-                            <PowerSwitch isOn={isPowered} onToggle={() => setIsPowered(!isPowered)} />
-
-                            {!isPowered && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    className="text-left hidden md:block"
-                                >
-                                    <div className="text-[10px] text-gray-500 font-mono uppercase tracking-widest mb-1">System Control</div>
-                                    <div className="text-xs font-bold text-gray-700">
-                                        ○ STANDBY
-                                    </div>
-                                </motion.div>
-                            )}
-                        </motion.div>
-
-                        {!isPowered && (
-                            <motion.p
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="text-cyan-500 font-mono text-xs tracking-[0.2em] animate-pulse"
-                            >
-                                INITIALIZE_SYSTEM // CLICK_TO_START
-                            </motion.p>
-                        )}
-                    </motion.div>
-
                     <div className="inline-flex items-center gap-2 px-4 py-2 border border-gray-800 rounded-full opacity-40 hover:opacity-100 transition-opacity">
                         <Info size={14} className="text-gray-500" />
                         <p className="text-[10px] text-gray-500 font-mono">

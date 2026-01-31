@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSMK Font Comparison</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #000;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .sample {
+            background: #050505;
+            padding: 60px 40px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .label {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .old {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: #00f2ff;
+            text-shadow: 0 0 30px rgba(0, 242, 255, 0.8);
+        }
+        .new {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            color: #00f2ff;
+            text-shadow: 0 0 30px rgba(0, 242, 255, 0.8);
+        }
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #00f2ff;
+        }
+        .note {
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RSMK Loading Screen Font Comparison</h1>
+        
+        <div class="comparison">
+            <div class="sample">
+                <div class="label">Before: JetBrains Mono (tracking-tighter)</div>
+                <div class="old">RSMK</div>
+            </div>
+            
+            <div class="sample">
+                <div class="label">After: Orbitron (tracking-wider)</div>
+                <div class="new">RSMK</div>
+            </div>
+        </div>
+        
+        <div class="note">
+            <p>✨ Orbitron provides a futuristic, tech-forward aesthetic that better aligns with the portfolio's cyberpunk theme</p>
+            <p>The wider letter spacing creates a more distinctive, professional logo appearance</p>
+        </div>
+    </div>
+</body>
+</html>
