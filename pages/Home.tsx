@@ -80,7 +80,7 @@ const Home: React.FC = () => {
                             transition={{ duration: 0.5 }}
                             className="text-center"
                         >
-                            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-cyan-500 drop-shadow-[0_0_30px_rgba(0,242,255,0.8)]">
+                            <h1 className="text-6xl md:text-8xl font-black tracking-wider text-cyan-500 drop-shadow-[0_0_30px_rgba(0,242,255,0.8)]" style={{ fontFamily: "'Orbitron', sans-serif" }}>
                                 RSMK
                             </h1>
                             <motion.div
