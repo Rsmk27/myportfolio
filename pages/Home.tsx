@@ -12,6 +12,8 @@ import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import { Cpu, Terminal, Zap, Info, Briefcase, GraduationCap, Send, Menu, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
+const LOADING_DURATION = 3000; // 3 seconds loading time
+
 const Home: React.FC = () => {
     const [isPowered, setIsPowered] = useState(() => {
         // Initialize from session storage to persist state during navigation
@@ -20,7 +22,7 @@ const Home: React.FC = () => {
     });
 
     const [showLoading, setShowLoading] = useState(() => {
-        // Only show loading on first visit
+        // Only show loading on first visit (when not powered)
         const saved = sessionStorage.getItem('isPowered');
         return saved !== 'true';
     });
@@ -40,13 +42,13 @@ const Home: React.FC = () => {
 
     }, [isPowered]);
 
-    // Auto-power on after 3 seconds with loading screen
+    // Auto-power on after loading duration with loading screen
     useEffect(() => {
         if (showLoading) {
             const timer = setTimeout(() => {
                 setIsPowered(true);
                 setShowLoading(false);
-            }, 3000);
+            }, LOADING_DURATION);
             return () => clearTimeout(timer);
         }
     }, [showLoading]);
@@ -84,7 +86,7 @@ const Home: React.FC = () => {
                             <motion.div
                                 className="h-1 w-32 mt-4 mx-auto rounded-full bg-cyan-500 shadow-[0_0_20px_#00f2ff]"
                                 animate={{ scaleX: [0, 1] }}
-                                transition={{ duration: 2.5, ease: "easeInOut" }}
+                                transition={{ duration: LOADING_DURATION / 1000, ease: "easeInOut" }}
                             />
                         </motion.div>
                     </motion.div>
