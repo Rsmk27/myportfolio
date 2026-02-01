@@ -67,8 +67,13 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
                     <motion.div
                         key={cert.title}
                         initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: idx * 0.1 }}
+                        whileInView={{
+                            opacity: 1,
+                            y: 0,
+                            scale: [0.95, 1],
+                            boxShadow: isPowered ? ["0 0 0px rgba(0,0,0,0)", "0 0 20px rgba(6,182,212,0.2)", "0 0 0px rgba(0,0,0,0)"] : "none"
+                        }}
+                        transition={{ duration: 0.6, delay: idx * 0.1 }}
                         className={`p-6 rounded-xl border transition-all duration-300 group ${isPowered
                             ? 'bg-[#0f0f0f] border-gray-800 hover:border-cyan-500/30'
                             : 'bg-transparent border-gray-900'

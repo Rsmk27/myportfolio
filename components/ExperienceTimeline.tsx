@@ -45,8 +45,10 @@ const TimelineItem: React.FC<{ data: Experience; isPowered: boolean; index: numb
                 {isPowered && (
                     <motion.div
                         className="w-full h-full bg-cyan-500 rounded-full"
+                        initial={{ boxShadow: "0 0 0px rgba(6,182,212,0)" }}
+                        whileInView={{ boxShadow: ["0 0 0px rgba(6,182,212,0)", "0 0 20px rgba(6,182,212,0.8)", "0 0 10px rgba(6,182,212,0.5)"] }}
+                        transition={{ duration: 1.5 }}
                         animate={{ scale: [0, 1, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
                     />
                 )}
             </div>

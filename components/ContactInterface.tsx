@@ -20,6 +20,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
 
     ]);
     const [isSending, setIsSending] = useState(false);
+    const [uplinkStatus, setUplinkStatus] = useState<'IDLE' | 'TRANSMITTING' | 'ACKNOWLEDGED'>('IDLE');
     const scrollRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -59,6 +60,8 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
         setTimeout(() => {
             setMessages(prev => [...prev, { text: response, type }]);
             setIsSending(false);
+            setUplinkStatus('ACKNOWLEDGED');
+            setTimeout(() => setUplinkStatus('IDLE'), 2000);
         }, 500);
     };
 
@@ -70,6 +73,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
         setConsoleInput('');
         setMessages(prev => [...prev, { text: `> ${cmd}`, type: 'user' }]);
         setIsSending(true);
+        setUplinkStatus('TRANSMITTING');
 
         processCommand(cmd);
     };
@@ -111,6 +115,16 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                                     />
                                 ))}
                             </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 mt-2">
+                            <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>UPLINK_STATUS:</span>
+                            <span className={`text-[10px] font-mono font-bold ${uplinkStatus === 'TRANSMITTING' ? 'text-amber-500 animate-pulse' :
+                                uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-500' :
+                                    isPowered ? 'text-cyan-500' : 'text-gray-600'
+                                }`}>
+                                {uplinkStatus === 'IDLE' ? (isPowered ? 'READY' : 'OFFLINE') : uplinkStatus}
+                            </span>
                         </div>
                     </div>
                     <Wifi size={18} className={isPowered ? 'text-cyan-500 animate-pulse' : 'text-gray-800'} />
@@ -219,7 +233,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                     </div>
                 </form>
             </div>
-        </div>
+        </div >
     );
 };
 

@@ -9,6 +9,7 @@ import { ExperienceTimeline } from '../components/ExperienceTimeline';
 import { EducationBlock } from '../components/EducationBlock';
 import { ContactInterface } from '../components/ContactInterface';
 import { LoadingScreen } from '../components/LoadingScreen';
+import { HeroCircuit } from '../components/HeroCircuit';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import { Cpu, Terminal, Zap, Info, Briefcase, GraduationCap, Send, Menu, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
@@ -187,37 +188,14 @@ const Home: React.FC = () => {
                     </div>
 
                     {/* Main Title Block */}
-                    <div className="relative z-20 max-w-4xl min-h-[300px] md:min-h-[400px] flex flex-col items-center justify-center">
+                    <div className="relative z-20 max-w-4xl min-h-[400px] flex flex-col items-center justify-center w-full">
                         <AnimatePresence mode='wait'>
                             {isPowered && (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                                    exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-                                    transition={{ duration: 0.8 }}
-                                >
-                                    <div className="mb-6 flex flex-col items-center">
-                                        <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter leading-none mb-2 relative">
-                                            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">
-                                                {PROFILE.name.split(' ')[0]}
-                                            </span>
-                                            <br />
-                                            <span className="text-cyan-500 drop-shadow-[0_0_15px_rgba(0,242,255,0.5)]">
-                                                {PROFILE.name.split(' ')[1]}
-                                            </span>
-                                        </h1>
-                                        <div className="h-1 w-24 md:w-32 mt-4 rounded-full bg-cyan-500 shadow-[0_0_10px_#00f2ff]" />
-                                    </div>
-
-                                    <p className="text-base md:text-xl font-mono mb-4 max-w-xs md:max-w-2xl mx-auto leading-relaxed text-gray-400">
-                                        {PROFILE.tagline}
-                                    </p>
-                                    {PROFILE.heroSubtitle && (
-                                        <p className="text-xs md:text-base font-mono mb-10 max-w-xs md:max-w-xl mx-auto leading-relaxed text-gray-500 px-4">
-                                            {PROFILE.heroSubtitle}
-                                        </p>
-                                    )}
-                                </motion.div>
+                                <HeroCircuit
+                                    title={PROFILE.name}
+                                    subtitle={PROFILE.heroSubtitle || PROFILE.tagline}
+                                    isPowered={isPowered}
+                                />
                             )}
                         </AnimatePresence>
 
@@ -279,7 +257,14 @@ const Home: React.FC = () => {
                                         "Intelligent Software Platforms",
                                         "Automation & AI Integration"
                                     ].map((focus, i) => (
-                                        <div key={i} className="group cursor-default">
+                                        <motion.div
+                                            key={i}
+                                            className="group cursor-default"
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: i * 0.1 }}
+                                            viewport={{ once: true }}
+                                        >
                                             <div className="flex items-center gap-3 mb-2">
                                                 <div className={`w-1.5 h-1.5 transition-all duration-300 ${isPowered ? 'bg-cyan-500 group-hover:scale-150' : 'bg-gray-800'}`} />
                                                 <span className={`text-xs md:text-sm font-bold uppercase transition-colors ${isPowered ? 'text-gray-300 group-hover:text-cyan-400' : 'text-gray-600'}`}>
@@ -287,7 +272,7 @@ const Home: React.FC = () => {
                                                 </span>
                                             </div>
                                             {isPowered && <div className="h-[1px] w-0 group-hover:w-full bg-cyan-900/50 transition-all duration-700" />}
-                                        </div>
+                                        </motion.div>
                                     ))}
                                 </div>
 
@@ -417,7 +402,7 @@ const Home: React.FC = () => {
           pointer-events: none;
         }
       `}</style>
-        </div>
+        </div >
     );
 };
 

@@ -5,6 +5,7 @@ import { Project } from '../types';
 import { ExternalLink, Cpu, Info } from 'lucide-react';
 import { ElectricCard } from './ui/electric-card';
 import { Link } from 'react-router-dom';
+import { SystemFlow } from './SystemFlow';
 
 interface ProjectChipProps {
   project: Project;
@@ -56,6 +57,21 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
             aspectRatio="16/9"
             className="shadow-2xl h-full"
           />
+
+          {/* System Flow Overlay - Only rendered when expanded/hovered for performance */}
+          <AnimatePresence>
+            {isPowered && isExpanded && (
+              <motion.div
+                className="absolute inset-0 z-10 pointer-events-none mix-blend-screen"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.8 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <SystemFlow />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Custom Overlay for Basic Details */}
           <div className={`absolute inset-0 flex flex-col justify-end p-6 transition-all duration-500 ${isExpanded ? 'bg-black/80' : 'bg-transparent'}`}>
