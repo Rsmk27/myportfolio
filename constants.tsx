@@ -2,7 +2,7 @@ import { Project, Skill, Profile, Experience, Education } from './types';
 import { Zap, Cpu, Radio, BatteryMedium, Layers, ShieldCheck, Database, Code, Activity, Globe } from 'lucide-react';
 
 export const PROFILE: Profile = {
-  name: "SRINIVASA MANIKANTA",
+  name: "Srinivasa Manikanta",
   title: "EEE Student | Embedded Systems | IoT | Smart Energy",
   tagline: "Electrical & Electronics Engineering Student focused on Embedded Systems, IoT, and Smart Energy Solutions",
   heroSubtitle: "Building intelligent systems with a practical engineering mindset and sustainability-driven problem solving.",

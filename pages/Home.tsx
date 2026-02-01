@@ -8,6 +8,7 @@ import { CertificationsBlock } from '../components/CertificationsBlock';
 import { ExperienceTimeline } from '../components/ExperienceTimeline';
 import { EducationBlock } from '../components/EducationBlock';
 import { ContactInterface } from '../components/ContactInterface';
+import { LoadingScreen } from '../components/LoadingScreen';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import { Cpu, Terminal, Zap, Info, Briefcase, GraduationCap, Send, Menu, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
@@ -58,7 +59,7 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30">
             <Helmet>
-                <title>{PROFILE.name} | Volt Engineer</title>
+                <title>{PROFILE.name}</title>
                 <meta name="description" content={PROFILE.tagline} />
                 <meta property="og:title" content={`${PROFILE.name} - Portfolio`} />
                 <meta property="og:description" content={PROFILE.bio} />
@@ -71,24 +72,10 @@ const Home: React.FC = () => {
                     <motion.div
                         initial={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
+                        transition={{ duration: 0.8 }}
+                        className="fixed inset-0 z-[9999]"
                     >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.5 }}
-                            className="text-center"
-                        >
-                            <h1 className="text-6xl md:text-8xl font-black tracking-wider text-cyan-500 drop-shadow-[0_0_30px_rgba(0,242,255,0.8)]" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-                                RSMK
-                            </h1>
-                            <motion.div
-                                className="h-1 w-32 mt-4 mx-auto rounded-full bg-cyan-500 shadow-[0_0_20px_#00f2ff]"
-                                animate={{ scaleX: [0, 1] }}
-                                transition={{ duration: LOADING_DURATION / 1000, ease: "easeInOut" }}
-                            />
-                        </motion.div>
+                        <LoadingScreen />
                     </motion.div>
                 )}
             </AnimatePresence>
