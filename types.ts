@@ -36,6 +36,7 @@ export interface Experience {
   duration: string;
   description: string[];
   tech: string[];
+  gallery?: string[];
 }
 
 export interface Education {

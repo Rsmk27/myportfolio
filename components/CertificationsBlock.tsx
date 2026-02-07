@@ -12,6 +12,7 @@ interface Certification {
     subtitle: string;
     description: string;
     icon: LucideIcon;
+    gallery?: string[];
 }
 
 const CERTS: Certification[] = [
@@ -37,7 +38,13 @@ const CERTS: Certification[] = [
         title: "3D Printing",
         subtitle: "ADDITIVE MANUFACTURING",
         description: "Expertise in layered manufacturing, CAD-to-print workflows, and rapid prototyping materials.",
-        icon: Box
+        icon: Box,
+        gallery: [
+            '/assets/certifications/3d-printing/workshop-1.jpg',
+            '/assets/certifications/3d-printing/workshop-2.jpg',
+            '/assets/certifications/3d-printing/workshop-3.jpg',
+            '/assets/certifications/3d-printing/workshop-4.jpg'
+        ]
     },
     {
         title: "Prompt to Prototype",
@@ -54,6 +61,16 @@ const CERTS: Certification[] = [
 ];
 
 export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowered }) => {
+    const [selectedCert, setSelectedCert] = React.useState<Certification | null>(null);
+    const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
+
+    const openGallery = (cert: Certification) => {
+        if (cert.gallery && cert.gallery.length > 0) {
+            setSelectedCert(cert);
+            setSelectedImage(cert.gallery[0]);
+        }
+    };
+
     return (
         <div className="w-full max-w-7xl mx-auto">
             <div className="mb-12">
@@ -74,11 +91,18 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
                             boxShadow: isPowered ? ["0 0 0px rgba(0,0,0,0)", "0 0 20px rgba(6,182,212,0.2)", "0 0 0px rgba(0,0,0,0)"] : "none"
                         }}
                         transition={{ duration: 0.6, delay: idx * 0.1 }}
-                        className={`p-6 rounded-xl border transition-all duration-300 group ${isPowered
+                        onClick={() => openGallery(cert)}
+                        className={`p-6 rounded-xl border transition-all duration-300 group relative overflow-hidden ${isPowered
                             ? 'bg-[#0f0f0f] border-gray-800 hover:border-cyan-500/30'
                             : 'bg-transparent border-gray-900'
-                            }`}
+                            } ${cert.gallery ? 'cursor-pointer hover:bg-gray-900/50' : ''}`}
                     >
+                        {cert.gallery && (
+                            <div className="absolute top-0 right-0 p-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <Box size={16} className={isPowered ? "text-cyan-500" : "text-gray-500"} />
+                            </div>
+                        )}
+
                         <div className="flex items-start gap-4 mb-4">
                             <div className={`p-3 rounded-lg ${isPowered ? 'bg-cyan-950/30 text-cyan-400' : 'bg-gray-800 text-gray-500'}`}>
                                 <cert.icon size={24} />
@@ -96,9 +120,71 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
                         <p className={`text-sm leading-relaxed ${isPowered ? 'text-gray-400' : 'text-gray-600'}`}>
                             {cert.description}
                         </p>
+
+                        {cert.gallery && (
+                            <div className={`mt-4 text-xs font-mono uppercase tracking-wider flex items-center gap-2 ${isPowered ? 'text-cyan-600' : 'text-gray-500'}`}>
+                                <span>[ View Gallery ]</span>
+                            </div>
+                        )}
                     </motion.div>
                 ))}
             </div>
+
+            {/* Gallery Modal */}
+            {selectedCert && (
+                <div
+                    className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+                    onClick={() => setSelectedCert(null)}
+                >
+                    <div
+                        className="relative max-w-5xl w-full max-h-[90vh] bg-[#0a0a0a] border border-gray-800 rounded-xl overflow-hidden flex flex-col"
+                        onClick={e => e.stopPropagation()}
+                    >
+                        {/* Header */}
+                        <div className="p-4 border-b border-gray-800 flex justify-between items-center bg-black/50">
+                            <div>
+                                <h3 className="text-white font-bold">{selectedCert.title}</h3>
+                                <p className="text-xs text-cyan-500 font-mono">GALLERY_VIEW</p>
+                            </div>
+                            <button
+                                onClick={() => setSelectedCert(null)}
+                                className="p-2 hover:bg-gray-800 rounded-full transition-colors text-gray-400"
+                            >
+                                <Box size={20} className="rotate-45" />
+                                {/* Using Box as a generic close icon rotated, or could import X */}
+                            </button>
+                        </div>
+
+                        {/* Main Image */}
+                        <div className="flex-1 bg-black overflow-hidden flex items-center justify-center relative p-4 min-h-[400px]">
+                            {selectedImage && (
+                                <img
+                                    src={selectedImage}
+                                    alt="Certification Gallery"
+                                    className="max-w-full max-h-[60vh] object-contain rounded border border-gray-900"
+                                />
+                            )}
+                        </div>
+
+                        {/* Thumbnails */}
+                        {selectedCert.gallery && selectedCert.gallery.length > 1 && (
+                            <div className="p-4 bg-black/50 border-t border-gray-800 overflow-x-auto">
+                                <div className="flex gap-2 justify-center">
+                                    {selectedCert.gallery.map((img, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => setSelectedImage(img)}
+                                            className={`w-20 h-14 rounded overflow-hidden border-2 transition-all ${selectedImage === img ? 'border-cyan-500 opacity-100' : 'border-transparent opacity-50 hover:opacity-80'}`}
+                                        >
+                                            <img src={img} alt="Thumb" className="w-full h-full object-cover" />
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

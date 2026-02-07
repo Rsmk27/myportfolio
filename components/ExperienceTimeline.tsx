@@ -1,8 +1,8 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Experience } from '../types';
-import { Briefcase, Calendar, ChevronRight } from 'lucide-react';
+import { Briefcase, Calendar, ChevronRight, Image as ImageIcon, X } from 'lucide-react';
 
 interface ExperienceTimelineProps {
     experience: Experience[];
@@ -10,6 +10,8 @@ interface ExperienceTimelineProps {
 }
 
 export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experience, isPowered }) => {
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
     return (
         <div className="relative pl-8 md:pl-16 border-l-2 border-gray-800 ml-4 md:ml-10">
             {/* Bus Line Animation */}
@@ -24,14 +26,57 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
 
             <div className="flex flex-col gap-12">
                 {experience.map((exp, index) => (
-                    <TimelineItem key={exp.id} data={exp} isPowered={isPowered} index={index} />
+                    <TimelineItem
+                        key={exp.id}
+                        data={exp}
+                        isPowered={isPowered}
+                        index={index}
+                        onImageClick={setSelectedImage}
+                    />
                 ))}
             </div>
+
+            {/* Image Preview Modal */}
+            <AnimatePresence>
+                {selectedImage && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedImage(null)}
+                        className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
+                    >
+                        <motion.button
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white bg-black/50 rounded-full border border-gray-800 transition-colors"
+                        >
+                            <X size={24} />
+                        </motion.button>
+
+                        <motion.img
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            src={selectedImage}
+                            alt="Experience Evidence"
+                            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-gray-800"
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
 
-const TimelineItem: React.FC<{ data: Experience; isPowered: boolean; index: number }> = ({ data, isPowered, index }) => {
+const TimelineItem: React.FC<{
+    data: Experience;
+    isPowered: boolean;
+    index: number;
+    onImageClick: (img: string) => void;
+}> = ({ data, isPowered, index, onImageClick }) => {
     return (
         <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -99,6 +144,27 @@ const TimelineItem: React.FC<{ data: Experience; isPowered: boolean; index: numb
                         </li>
                     ))}
                 </ul>
+
+                {/* Gallery Thumbnails */}
+                {data.gallery && data.gallery.length > 0 && (
+                    <div className="mb-6 relative z-10">
+                        <div className="flex items-center gap-2 mb-2 text-[10px] font-mono uppercase tracking-widest text-gray-600">
+                            <ImageIcon size={10} />
+                            <span>Field_Logs</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {data.gallery.map((img, i) => (
+                                <div
+                                    key={i}
+                                    onClick={() => onImageClick(img)}
+                                    className={`relative w-24 h-16 rounded overflow-hidden border cursor-pointer transition-all hover:scale-105 ${isPowered ? 'border-gray-800 hover:border-cyan-500 opacity-80 hover:opacity-100' : 'border-gray-900 opacity-50'}`}
+                                >
+                                    <img src={img} alt={`Log ${i}`} className="w-full h-full object-cover" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-900/50 relative z-10">
                     {data.tech.map((tech) => (

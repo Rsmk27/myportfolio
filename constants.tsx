@@ -32,7 +32,12 @@ export const EXPERIENCE: Experience[] = [
       "Performed insulation resistance testing on three-phase induction motors.",
       "Implemented ISO 50001 energy management protocols in high-risk environments."
     ],
-    tech: ["Power Systems", "Transformers", "ISO 50001", "Thermodynamics"]
+    tech: ["Power Systems", "Transformers", "ISO 50001", "Thermodynamics"],
+    gallery: [
+      '/assets/experience/coromandel/single-line-diagram.jpg',
+      '/assets/experience/coromandel/site-photo.jpg',
+      '/assets/experience/coromandel/internship-certificate.jpg'
+    ]
   }
 ];
 
@@ -70,11 +75,24 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'p3',
-    title: 'Embedded & IoT Projects',
-    description: 'Collection of Arduino, sensor-based, and automation projects. Focus on Control systems, monitoring, and smart applications.',
-    tech: ['Arduino', 'C++', 'IoT', 'Automation', 'Sensors'],
-    image: '/assets/smart-exhaust-gas-detection-system.webp', // Using existing matching image
-    link: 'https://its.rsmk.me'
+    title: 'Auto Exhaust Fan',
+    description: 'Intelligent ventilation system that automatically detects harmful gases and smoke to ensure safer environments.',
+    tech: ['Arduino', 'C++', 'MQ-2 Sensor', 'Relay Module', 'IoT'],
+    image: '/assets/smart-exhaust-gas-detection-system.webp',
+    link: 'https://autoexhaustfan.rsmk.co.in/',
+    details: "The Auto Exhaust Fan is an intelligent safety system designed to prevent gas-related accidents and ensure fresh air circulation. Built around an Arduino UNO and MQ-2 Gas/Smoke sensor, it continuously monitors air quality. Upon detecting hazardous levels of smoke or gas, the system automatically triggers a 5V relay to switch on a high-power exhaust fan, effectively ventilating the space. This solution addresses the risks of human error in manual ventilation control and is ideal for kitchens, workshops, and chemical storage areas.",
+    features: [
+      "Automatic Detection of Smoke & Gas",
+      "Instant Response via Relay Actuation",
+      "Real-time Sensor Monitoring",
+      "Energy Efficient Operation"
+    ],
+    gallery: [
+      '/assets/smart-exhaust-gas-detection-system.webp',
+      '/assets/auto-exhaust-fan/image-1.jpg',
+      '/assets/auto-exhaust-fan/image-2.jpg',
+      '/assets/auto-exhaust-fan/image-3.jpg'
+    ]
   },
   {
     id: 'p4',
