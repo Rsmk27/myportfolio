@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { HelmetProvider } from 'react-helmet-async';
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
+import Gallery from './pages/Gallery';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -20,6 +21,7 @@ const App: React.FC = () => {
                 <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/gallery" element={<Gallery />} />
                     <Route path="/project/:id" element={<ProjectDetails />} />
                     <Route path="*" element={<Home />} />
                 </Routes>

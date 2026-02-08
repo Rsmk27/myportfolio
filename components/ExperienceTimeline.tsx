@@ -159,7 +159,7 @@ const TimelineItem: React.FC<{
                                     onClick={() => onImageClick(img)}
                                     className={`relative w-24 h-16 rounded overflow-hidden border cursor-pointer transition-all hover:scale-105 ${isPowered ? 'border-gray-800 hover:border-cyan-500 opacity-80 hover:opacity-100' : 'border-gray-900 opacity-50'}`}
                                 >
-                                    <img src={img} alt={`Log ${i}`} className="w-full h-full object-cover" />
+                                    <img src={img} alt={`Log ${i}`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                                 </div>
                             ))}
                         </div>

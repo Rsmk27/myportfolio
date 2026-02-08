@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PROJECTS, PROFILE, PCB_COLORS } from '../constants';
-import { ArrowLeft, ExternalLink, Cpu, Image as ImageIcon, CheckCircle, Terminal, X } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Cpu, Image as ImageIcon, CheckCircle, Terminal, X, Play } from 'lucide-react';
 import { PCBBackground } from '../components/PCBBackground';
 import { Helmet } from 'react-helmet-async';
 
@@ -123,7 +123,25 @@ const ProjectDetails: React.FC = () => {
                                             onClick={() => setSelectedImage(img)}
                                             className="rounded-lg overflow-hidden border border-gray-800 relative group aspect-video bg-black cursor-pointer"
                                         >
-                                            <img src={img} alt={`Gallery ${idx}`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105" />
+                                            {img.match(/\.(mp4|webm|ogg)$/i) ? (
+                                                <div className="relative w-full h-full">
+                                                    <video
+                                                        src={img}
+                                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                                                        muted
+                                                        playsInline
+                                                        onMouseOver={e => e.currentTarget.play()}
+                                                        onMouseOut={e => e.currentTarget.pause()}
+                                                    />
+                                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity">
+                                                        <div className="bg-black/50 rounded-full p-3 backdrop-blur-sm border border-white/20">
+                                                            <Play size={24} className="text-white fill-white" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <img src={img} alt={`Gallery ${idx}`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105" />
+                                            )}
                                         </motion.div>
                                     ))}
                                 </div>
@@ -186,15 +204,28 @@ const ProjectDetails: React.FC = () => {
                             <X size={24} />
                         </motion.button>
 
-                        <motion.img
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            src={selectedImage}
-                            alt="Preview"
-                            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-gray-800"
-                            onClick={(e) => e.stopPropagation()}
-                        />
+                        {selectedImage.match(/\.(mp4|webm|ogg)$/i) ? (
+                            <motion.video
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                                src={selectedImage}
+                                controls
+                                autoPlay
+                                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-gray-800"
+                                onClick={(e) => e.stopPropagation()}
+                            />
+                        ) : (
+                            <motion.img
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                                src={selectedImage}
+                                alt="Preview"
+                                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-gray-800"
+                                onClick={(e) => e.stopPropagation()}
+                            />
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>

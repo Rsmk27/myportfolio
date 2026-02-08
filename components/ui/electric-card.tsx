@@ -196,8 +196,10 @@ export const ElectricCard = ({
           margin-top: -4px;
           margin-left: -4px;
           filter: var(--f);
+          will-change: filter;
           /* gives subtle dark base so displacement reads nicely */
           background: oklch(0.145 0 0);
+          transform: translateZ(0); /* Hardware acceleration hack */
         }
 
         .clean-image {

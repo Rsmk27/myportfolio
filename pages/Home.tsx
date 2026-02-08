@@ -55,7 +55,7 @@ const Home: React.FC = () => {
         }
     }, [showLoading]);
 
-    const navItems = ['Projects', 'Skills', 'Experience', 'Education', 'Contact'];
+    const navItems = ['Projects', 'Skills', 'Gallery', 'Experience', 'Education', 'Contact'];
 
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30">
@@ -101,7 +101,7 @@ const Home: React.FC = () => {
                     {navItems.map((item) => (
                         <a
                             key={item}
-                            href={`#${item.toLowerCase()}`}
+                            href={item === 'Gallery' ? '/gallery' : `#${item.toLowerCase()}`}
                             className={`text-[11px] font-bold uppercase tracking-widest transition-all hover:text-cyan-400 ${isPowered ? 'text-gray-300' : 'text-gray-800'}`}
                         >
                             {item}
@@ -134,7 +134,7 @@ const Home: React.FC = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: i * 0.1 }}
-                                    href={`#${item.toLowerCase()}`}
+                                    href={item === 'Gallery' ? '/gallery' : `#${item.toLowerCase()}`}
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`text-2xl font-black uppercase tracking-tighter ${isPowered ? 'text-white' : 'text-gray-400'} hover:text-cyan-500 transition-colors`}
                                 >

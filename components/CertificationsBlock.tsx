@@ -12,6 +12,7 @@ interface Certification {
     subtitle: string;
     description: string;
     icon: LucideIcon;
+    image?: string;
     gallery?: string[];
 }
 
@@ -20,30 +21,50 @@ const CERTS: Certification[] = [
         title: "Embedded Systems Design",
         subtitle: "SPECIALIZED TRAINING",
         description: "Comprehensive expertise in microcontroller architecture, interfacing peripherals, and real-time systems programming.",
-        icon: Cpu
+        icon: Cpu,
+        image: '/assets/certifications/embedded-systems/certificate.jpg',
+        gallery: [
+            '/assets/certifications/embedded-systems/certificate.jpg'
+        ]
     },
     {
         title: "Electric Vehicle Technology",
         subtitle: "TECHNICAL CERTIFICATION",
         description: "Advanced training in EV powertrains, battery management systems (BMS), and charging infrastructure architectures.",
-        icon: Zap
+        icon: Zap,
+        image: '/assets/certifications/electric-vehicle/certificate.jpg',
+        gallery: [
+            '/assets/certifications/electric-vehicle/certificate.jpg'
+        ]
     },
     {
         title: "Drone Technology",
         subtitle: "WORKSHOP CERTIFICATION",
         description: "Hands-on experience with UAV dynamics, flight controllers, aerial sensor integration, and calibration.",
-        icon: Fan
+        icon: Fan,
+        image: '/assets/certifications/drone-technology/certificate.png',
+        gallery: [
+            '/assets/certifications/drone-technology/certificate.png',
+            '/assets/certifications/drone-technology/training-1.jpg',
+            '/assets/certifications/drone-technology/training-2.jpg',
+            '/assets/certifications/drone-technology/flight-1.mp4',
+            '/assets/certifications/drone-technology/flight-2.mp4',
+            '/assets/certifications/drone-technology/flight-3.mp4'
+        ]
     },
     {
         title: "3D Printing",
         subtitle: "ADDITIVE MANUFACTURING",
         description: "Expertise in layered manufacturing, CAD-to-print workflows, and rapid prototyping materials.",
         icon: Box,
+        image: '/assets/certifications/3d-printing/certificate.jpg',
         gallery: [
+            '/assets/certifications/3d-printing/certificate.jpg',
             '/assets/certifications/3d-printing/workshop-1.jpg',
             '/assets/certifications/3d-printing/workshop-2.jpg',
             '/assets/certifications/3d-printing/workshop-3.jpg',
-            '/assets/certifications/3d-printing/workshop-4.jpg'
+            '/assets/certifications/3d-printing/workshop-4.jpg',
+            '/assets/certifications/3d-printing/workshop-5.jpg'
         ]
     },
     {
@@ -98,8 +119,22 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
                             } ${cert.gallery ? 'cursor-pointer hover:bg-gray-900/50' : ''}`}
                     >
                         {cert.gallery && (
-                            <div className="absolute top-0 right-0 p-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                            <div className="absolute top-0 right-0 p-2 opacity-50 group-hover:opacity-100 transition-opacity z-10">
                                 <Box size={16} className={isPowered ? "text-cyan-500" : "text-gray-500"} />
+                            </div>
+                        )}
+
+                        {cert.image && (
+                            <div className="mb-4 -mx-6 -mt-6 h-48 overflow-hidden relative group-hover:shadow-[0_0_20px_rgba(0,242,255,0.15)] transition-all duration-500">
+                                <div className={`absolute inset-0 z-10 transition-colors duration-300 ${isPowered ? 'bg-cyan-950/20 group-hover:bg-transparent' : 'bg-black/10'}`} />
+                                <img
+                                    src={cert.image}
+                                    alt={cert.title}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                                {isPowered && <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0f0f0f] to-transparent z-10" />}
                             </div>
                         )}
 
@@ -158,11 +193,20 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
                         {/* Main Image */}
                         <div className="flex-1 bg-black overflow-hidden flex items-center justify-center relative p-4 min-h-[400px]">
                             {selectedImage && (
-                                <img
-                                    src={selectedImage}
-                                    alt="Certification Gallery"
-                                    className="max-w-full max-h-[60vh] object-contain rounded border border-gray-900"
-                                />
+                                selectedImage.match(/\.(mp4|webm|ogg)$/i) ? (
+                                    <video
+                                        src={selectedImage}
+                                        controls
+                                        autoPlay
+                                        className="max-w-full max-h-[60vh] object-contain rounded border border-gray-900"
+                                    />
+                                ) : (
+                                    <img
+                                        src={selectedImage}
+                                        alt="Certification Gallery"
+                                        className="max-w-full max-h-[60vh] object-contain rounded border border-gray-900"
+                                    />
+                                )
                             )}
                         </div>
 
@@ -176,7 +220,11 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
                                             onClick={() => setSelectedImage(img)}
                                             className={`w-20 h-14 rounded overflow-hidden border-2 transition-all ${selectedImage === img ? 'border-cyan-500 opacity-100' : 'border-transparent opacity-50 hover:opacity-80'}`}
                                         >
-                                            <img src={img} alt="Thumb" className="w-full h-full object-cover" />
+                                            {img.match(/\.(mp4|webm|ogg)$/i) ? (
+                                                <video src={img} className="w-full h-full object-cover" />
+                                            ) : (
+                                                <img src={img} alt="Thumb" className="w-full h-full object-cover" />
+                                            )}
                                         </button>
                                     ))}
                                 </div>

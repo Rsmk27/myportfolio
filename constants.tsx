@@ -36,7 +36,8 @@ export const EXPERIENCE: Experience[] = [
     gallery: [
       '/assets/experience/coromandel/single-line-diagram.jpg',
       '/assets/experience/coromandel/site-photo.jpg',
-      '/assets/experience/coromandel/internship-certificate.jpg'
+      '/assets/experience/coromandel/internship-certificate.jpg',
+      '/assets/experience/coromandel/training-site.jpg'
     ]
   }
 ];
@@ -88,6 +89,7 @@ export const PROJECTS: Project[] = [
       "Energy Efficient Operation"
     ],
     gallery: [
+      '/assets/auto-exhaust-fan/demo-video.mp4',
       '/assets/smart-exhaust-gas-detection-system.webp',
       '/assets/auto-exhaust-fan/image-1.jpg',
       '/assets/auto-exhaust-fan/image-2.jpg',
