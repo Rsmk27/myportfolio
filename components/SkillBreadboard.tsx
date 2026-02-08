@@ -1,9 +1,6 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Terminal, Globe, Code, Zap, Radio } from 'lucide-react';
-import { Oscilloscope } from './Oscilloscope';
-import { useState } from 'react';
+import { Cpu, Terminal, Globe, Zap, Radio, Database, Layout, Server, Wifi } from 'lucide-react';
 
 interface SkillBreadboardProps {
   isPowered: boolean;
@@ -11,138 +8,171 @@ interface SkillBreadboardProps {
 
 export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) => {
 
-  // Categorized Skills Data based on user requirement
   const categories = [
     {
-      title: "Core Engineering",
-      icon: Zap, // Electrical
+      id: "electrical",
+      title: "Electrical Engineering",
+      icon: Zap,
+      color: "text-amber-400",
+      borderColor: "border-amber-500/50",
+      bgGradient: "from-amber-500/20",
       skills: [
-        "Electrical & Electronics Engineering",
-        "Circuit Analysis",
-        "Sensors & Actuators",
-        "Power Systems"
+        { name: "Circuit Analysis", level: 90 },
+        { name: "Power Systems", level: 85 },
+        { name: "PCB Design", level: 80 },
+        { name: "Matlab / Simulink", level: 75 }
       ]
     },
     {
+      id: "embedded",
       title: "Embedded Systems",
       icon: Cpu,
+      color: "text-cyan-400",
+      borderColor: "border-cyan-500/50",
+      bgGradient: "from-cyan-500/20",
       skills: [
-        "Arduino",
-        "Microcontrollers",
-        "Motor Drivers",
-        "Servo Systems",
-        "Firmware"
+        { name: "Arduino / C++", level: 95 },
+        { name: "ESP32 / IoT", level: 90 },
+        { name: "Microcontrollers", level: 85 },
+        { name: "Sensors & Actuators", level: 88 }
       ]
     },
     {
-      title: "IoT & Automation",
-      icon: Radio,
-      skills: [
-        "Sensors Integration",
-        "Wireless Communication",
-        "Smart Monitoring Systems",
-        "ESP8266 / ESP32"
-      ]
-    },
-    {
-      title: "Software & Tools",
+      id: "software",
+      title: "Software & Web",
       icon: Terminal,
+      color: "text-emerald-400",
+      borderColor: "border-emerald-500/50",
+      bgGradient: "from-emerald-500/20",
       skills: [
-        "Web-based tools",
-        "APIs",
-        "Basic AI integration",
-        "C / C++ / Python",
-        "Git"
+        { name: "React / TypeScript", level: 85 },
+        { name: "Python", level: 80 },
+        { name: "Node.js", level: 70 },
+        { name: "Git / Version Control", level: 85 }
       ]
     },
     {
-      title: "Domains",
-      icon: Globe,
+      id: "tools",
+      title: "Tools & Platforms",
+      icon: Database,
+      color: "text-purple-400",
+      borderColor: "border-purple-500/50",
+      bgGradient: "from-purple-500/20",
       skills: [
-        "Smart Energy",
-        "Green Tech",
-        "Automation",
-        "Sustainable Systems"
+        { name: "VS Code", level: 95 },
+        { name: "Proteus / Multisim", level: 85 },
+        { name: "Fusion 360", level: 75 },
+        { name: "Firebase", level: 80 }
       ]
     }
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto">
-      <div className="mb-12">
-
-        <h3 className={`text-4xl md:text-6xl font-black uppercase tracking-tighter ${isPowered ? 'text-white' : 'text-gray-800'}`}>
-          Technical Arsenal
+    <div className="w-full max-w-7xl mx-auto px-4">
+      <div className="mb-16 text-center">
+        <h3 className={`text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 ${isPowered ? 'text-white' : 'text-gray-800'}`}>
+          Tech Stack Matrix
         </h3>
+        <p className={`text-sm md:text-base font-mono max-w-2xl mx-auto ${isPowered ? 'text-gray-400' : 'text-gray-600'}`}>
+          // SYSTEM_CAPABILITIES: LOADED
+          <br />
+          Overview of technical proficiency across hardware and software domains.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         {categories.map((cat, idx) => (
-          <SkillCard key={cat.title} cat={cat} idx={idx} isPowered={isPowered} />
+          <TechPanel key={cat.id} cat={cat} idx={idx} isPowered={isPowered} />
         ))}
       </div>
     </div>
   );
 };
 
-const SkillCard: React.FC<{ cat: any; idx: number; isPowered: boolean }> = ({ cat, idx, isPowered }) => {
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
-
-  // Dynamic Frequency based on hover
-  const frequency = hoveredSkill ? 0.2 : 0.05;
-  const amplitude = hoveredSkill ? 0.45 : 0.35;
-
+const TechPanel: React.FC<{ cat: any; idx: number; isPowered: boolean }> = ({ cat, idx, isPowered }) => {
   return (
-    <div
-      className={`relative p-8 rounded-2xl border transition-all duration-300 group overflow-hidden ${isPowered ? 'bg-[#0a0a0a] border-gray-800' : 'bg-transparent border-gray-900'}`}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ delay: idx * 0.1 }}
+      viewport={{ once: true }}
+      className={`relative rounded-xl border-t border-b overflow-hidden group
+        ${isPowered
+          ? 'bg-black/40 border-gray-800 hover:border-gray-700'
+          : 'bg-white border-gray-200'
+        }`}
     >
-      {/* Oscilloscope Background Header */}
-      <div className="absolute top-0 left-0 right-0 h-32 opacity-30 pointer-events-none">
-        <Oscilloscope isPowered={isPowered} color={isPowered ? "#22d3ee" : "#333"} frequency={frequency} amplitude={amplitude} />
+      {/* Background Grid Pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(${isPowered ? '#fff' : '#000'} 1px, transparent 1px), linear-gradient(90deg, ${isPowered ? '#fff' : '#000'} 1px, transparent 1px)`,
+          backgroundSize: '20px 20px'
+        }}
+      />
+
+      {/* Header Panel */}
+      <div className={`relative px-6 py-4 flex items-center justify-between border-b ${isPowered ? 'border-gray-800 bg-[#0a0a0a]' : 'border-gray-100 bg-gray-50'}`}>
+        <div className="flex items-center gap-3">
+          <div className={`p-2 rounded-lg bg-opacity-10 ${cat.color} bg-current`}>
+            <cat.icon size={20} />
+          </div>
+          <h4 className={`text-lg font-bold tracking-wide uppercase ${isPowered ? 'text-gray-200' : 'text-gray-800'}`}>
+            {cat.title}
+          </h4>
+        </div>
+        {isPowered && (
+          <div className="flex gap-1">
+            <div className={`w-1 h-1 rounded-full ${cat.color.replace('text-', 'bg-')} animate-pulse`} />
+            <div className={`w-1 h-1 rounded-full ${cat.color.replace('text-', 'bg-')} animate-pulse delay-75`} />
+            <div className={`w-1 h-1 rounded-full ${cat.color.replace('text-', 'bg-')} animate-pulse delay-150`} />
+          </div>
+        )}
       </div>
 
-      {/* Header */}
-      <div className="relative z-10 flex items-center gap-3 mb-8 pb-4 border-b border-gray-900 mt-16">
-        <cat.icon size={24} className={isPowered ? 'text-cyan-400' : 'text-gray-700'} />
-        <h4 className={`text-xl font-bold uppercase tracking-wider ${isPowered ? 'text-gray-200' : 'text-gray-600'}`}>
-          {cat.title}
-        </h4>
-      </div>
-
-      {/* Skill Pills */}
-      <div className="relative z-10 bg-[#111]/50 rounded-xl p-2 space-y-3">
-        {cat.skills.map((skill: string, sIdx: number) => (
-          <motion.div
-            key={skill}
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: idx * 0.1 + sIdx * 0.05 }}
-            onHoverStart={() => setHoveredSkill(skill)}
-            onHoverEnd={() => setHoveredSkill(null)}
-            className={`relative px-4 py-3 rounded-lg border text-sm font-mono font-bold tracking-wide transition-all cursor-crosshair
-                          ${isPowered
-                ? 'bg-[#151515] border-gray-800 text-gray-400 hover:border-cyan-500/50 hover:text-white hover:shadow-[0_0_15px_rgba(0,242,255,0.1)]'
-                : 'bg-black border-gray-900 text-gray-700'
-              }`}
-          >
-            {isPowered && (
-              <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-            )}
-            <div className="flex justify-between items-center">
-              <span>{skill}</span>
-              {/* Visual indicator of "frequency" per skill, just a small bit */}
-              {hoveredSkill === skill && (
-                <motion.div
-                  className="w-2 h-2 rounded-full bg-cyan-500"
-                  animate={{ opacity: [0, 1, 0] }}
-                  transition={{ duration: 0.5, repeat: Infinity }}
-                />
-              )}
+      {/* Skills Grid */}
+      <div className="p-6 grid grid-cols-1 gap-4 relative z-10">
+        {cat.skills.map((skill: any, sIdx: number) => (
+          <div key={skill.name} className="relative group/skill">
+            <div className="flex justify-between items-center mb-1.5">
+              <span className={`text-xs font-mono font-bold uppercase tracking-wider ${isPowered ? 'text-gray-400 group-hover/skill:text-white transition-colors' : 'text-gray-600'}`}>
+                {skill.name}
+              </span>
+              <span className={`text-[10px] font-mono ${isPowered ? cat.color : 'text-gray-500'}`}>
+                {skill.level}%
+              </span>
             </div>
-          </motion.div>
+
+            {/* Energy Bar Container */}
+            <div className={`h-1.5 w-full rounded-full overflow-hidden ${isPowered ? 'bg-gray-800' : 'bg-gray-200'}`}>
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: `${skill.level}%` }}
+                transition={{ duration: 1, delay: 0.2 + (sIdx * 0.1), ease: "easeOut" }}
+                className={`h-full rounded-full relative ${cat.color.replace('text-', 'bg-')}`}
+              >
+                {/* Animated Glow on Bar */}
+                {isPowered && (
+                  <motion.div
+                    className="absolute top-0 bottom-0 right-0 w-4 bg-white/50 blur-[2px]"
+                    animate={{ x: [-20, 300] }} // simple sweep
+                    transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: Math.random() }}
+                  />
+                )}
+              </motion.div>
+            </div>
+          </div>
         ))}
       </div>
-    </div>
+
+      {/* Connection Nodes Decorative */}
+      {isPowered && (
+        <>
+          <div className={`absolute top-1/2 -left-1 w-2 h-2 rounded-full ${cat.color.replace('text-', 'bg-')} shadow-[0_0_8px_currentColor]`} />
+          <div className={`absolute top-1/2 -right-1 w-2 h-2 rounded-full ${cat.color.replace('text-', 'bg-')} shadow-[0_0_8px_currentColor]`} />
+        </>
+      )}
+    </motion.div>
   );
 };
 

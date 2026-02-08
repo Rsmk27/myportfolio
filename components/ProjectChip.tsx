@@ -13,100 +13,104 @@ interface ProjectChipProps {
 }
 
 export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   return (
     <motion.div
-      className="relative group p-5 h-full"
-      onHoverStart={() => setIsExpanded(true)}
-      onHoverEnd={() => setIsExpanded(false)}
-      onClick={() => setIsExpanded(!isExpanded)}
-      initial={{ scale: 1, zIndex: 0 }}
-      whileHover={{ scale: 1.05, zIndex: 50 }}
-      transition={{ duration: 0.3 }}
+      className="relative group h-full"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
     >
-      {/* IC Pins - Left */}
-      <div className="absolute left-1 top-1/2 -translate-y-1/2 flex flex-col gap-5 z-0">
-        {[...Array(4)].map((_, i) => (
-          <Pin key={`l-${i}`} active={isPowered} delay={i * 0.1} />
+      {/* Resistor/Component Legs (Decorative) */}
+      <div className="absolute -left-1 top-4 bottom-4 flex flex-col justify-between py-2 z-0">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className={`w-2 h-1 bg-gradient-to-r from-gray-600 to-gray-800 rounded-l ${isPowered ? 'group-hover:bg-cyan-600 transition-colors' : ''}`} />
+        ))}
+      </div>
+      <div className="absolute -right-1 top-4 bottom-4 flex flex-col justify-between py-2 z-0">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className={`w-2 h-1 bg-gradient-to-l from-gray-600 to-gray-800 rounded-r ${isPowered ? 'group-hover:bg-cyan-600 transition-colors' : ''}`} />
         ))}
       </div>
 
-      {/* IC Pins - Right */}
-      <div className="absolute right-1 top-1/2 -translate-y-1/2 flex flex-col gap-5 z-0">
-        {[...Array(4)].map((_, i) => (
-          <Pin key={`r-${i}`} active={isPowered} delay={i * 0.1} />
-        ))}
-      </div>
-
-      {/* Main Package / Electric Card */}
-      <div className="relative z-10 h-full">
-        <div className="bg-black rounded-[1.5em] relative h-full overflow-hidden">
-          {/* Connecting lines to pins */}
-          <div className={`absolute top-0 bottom-0 -left-1 w-2 transition-colors ${isPowered ? 'bg-cyan-900/50' : 'bg-[#111]'}`} />
-          <div className={`absolute top-0 bottom-0 -right-1 w-2 transition-colors ${isPowered ? 'bg-cyan-900/50' : 'bg-[#111]'}`} />
-
-          <ElectricCard
-            variant={isPowered ? "hue" : "swirl"}
-            color={isPowered ? "#00f2ff" : "#333333"}
-            badge={`PN: ${project.id}-REV_C`}
-            title="" // Clearing internal title to use custom overlay
-            description="" // Clearing internal description
-            image={project.image}
-            width="100%"
-            aspectRatio="16/9"
-            className="shadow-2xl h-full"
-          />
-
-          {/* System Flow Overlay - Only rendered when expanded/hovered for performance */}
-          <AnimatePresence>
-            {isPowered && isExpanded && (
-              <motion.div
-                className="absolute inset-0 z-10 pointer-events-none mix-blend-screen"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.8 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <SystemFlow />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Custom Overlay for Basic Details */}
-          <div className={`absolute inset-0 flex flex-col justify-end p-6 transition-all duration-500 ${isExpanded ? 'bg-black/80' : 'bg-transparent'}`}>
-            <div className="relative z-20 transform translate-y-4 transition-transform duration-500">
-              {/* Title */}
-              <h3 className={`text-xl font-bold mb-2 transition-all duration-500 ${isExpanded ? 'opacity-100 translate-y-0 text-white' : 'opacity-0 translate-y-4 text-transparent'}`}>
-                {project.title}
-              </h3>
-
-              {/* Tech Tags (Optional, keeping for context but smaller) */}
-              <div className={`flex flex-wrap gap-2 mb-4 transition-all duration-500 delay-75 ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                {project.tech.slice(0, 3).map(t => (
-                  <span key={t} className="text-[10px] text-cyan-300 font-mono">
-                    #{t}
-                  </span>
-                ))}
-              </div>
-
-              {/* View Details Button */}
-              <div className={`transition-all duration-500 delay-100 ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                <Link
-                  to={`/project/${project.id}`}
-                  className={`inline-flex items-center gap-2 px-6 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${isPowered
-                    ? 'bg-cyan-500 text-black hover:bg-white hover:shadow-[0_0_20px_rgba(0,242,255,0.5)]'
-                    : 'bg-gray-200 text-gray-800 hover:bg-white'
-                    }`}
-                >
-                  View Details
-                  <ExternalLink size={14} />
-                </Link>
-              </div>
+      {/* Main Chip Body */}
+      <div className={`relative z-10 h-full rounded-xl overflow-hidden border transition-all duration-500 flex flex-col
+        ${isPowered
+          ? 'bg-[#0a0a0a] border-gray-800 shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:border-cyan-500/50 group-hover:shadow-[0_0_25px_rgba(0,242,255,0.15)]'
+          : 'bg-white border-gray-200 shadow-sm'
+        }`}
+      >
+        {/* Header / Label Area */}
+        <div className={`p-4 border-b flex justify-between items-start
+          ${isPowered ? 'bg-[#0f0f0f] border-gray-800' : 'bg-gray-50 border-gray-200'}`}
+        >
+          <div>
+            <div className={`text-[10px] font-mono mb-1 uppercase tracking-widest ${isPowered ? 'text-gray-500' : 'text-gray-400'}`}>
+              PROJECT_ID: {project.id}
             </div>
+            <h3 className={`text-xl font-bold leading-tight ${isPowered ? 'text-white' : 'text-gray-900'}`}>
+              {project.title}
+            </h3>
           </div>
-
+          {isPowered && <Cpu size={18} className={`text-gray-700 group-hover:text-cyan-400 transition-colors duration-300`} />}
         </div>
+
+        {/* Image / Visual Area */}
+        <div className="relative h-48 overflow-hidden bg-black">
+          {project.image && (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+            />
+          )}
+          {/* Scanline Overlay */}
+          {isPowered && (
+            <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,242,255,0.05)_50%)] bg-[length:100%_4px] pointer-events-none" />
+          )}
+
+          {/* Hover Overlay Actions */}
+          <div className={`absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+            <Link
+              to={`/project/${project.id}`}
+              className="flex items-center gap-2 px-6 py-2 bg-cyan-500 text-black font-bold rounded-full hover:scale-105 transition-transform"
+            >
+              <span>View System</span>
+              <ExternalLink size={16} />
+            </Link>
+          </div>
+        </div>
+
+        {/* Specs / Tech Stack */}
+        <div className={`p-4 flex-grow flex flex-col justify-between ${isPowered ? 'bg-[#0a0a0a]' : 'bg-white'}`}>
+          <p className={`text-sm mb-4 line-clamp-3 ${isPowered ? 'text-gray-400' : 'text-gray-600'}`}>
+            {project.description}
+          </p>
+
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {project.tech.slice(0, 4).map(t => (
+              <span key={t} className={`text-[10px] px-2 py-1 rounded border font-mono uppercase
+                 ${isPowered
+                  ? 'border-gray-800 text-cyan-600 bg-cyan-950/10'
+                  : 'border-gray-200 text-gray-600 bg-gray-100'
+                }`}
+              >
+                {t}
+              </span>
+            ))}
+            {project.tech.length > 4 && (
+              <span className={`text-[10px] px-2 py-1 rounded border font-mono uppercase ${isPowered ? 'border-gray-800 text-gray-500' : 'border-gray-200 text-gray-400'}`}>
+                +{project.tech.length - 4}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Footer Status Bar */}
+        <div className={`h-1 w-full transition-colors duration-500 ${isPowered ? 'bg-gray-800 group-hover:bg-cyan-500' : 'bg-gray-200'}`} />
       </div>
     </motion.div>
   );

@@ -18,10 +18,10 @@ const ProjectDetails: React.FC = () => {
     if (!project) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-black text-gray-400 font-mono">
-                <h1 className="text-4xl font-bold mb-4 text-red-500">404 // MODULE_NOT_FOUND</h1>
+                <h1 className="text-4xl font-bold mb-4 text-red-500">404 // Project Not Found</h1>
                 <p className="mb-8">The requested project module could not be initialized.</p>
                 <Link to="/" className="px-6 py-2 border border-cyan-500 text-cyan-500 rounded hover:bg-cyan-500/10 transition-all">
-                    RETURN_TO_BASE
+                    Return Home
                 </Link>
             </div>
         );
@@ -44,7 +44,7 @@ const ProjectDetails: React.FC = () => {
                 <div className="mb-12">
                     <Link to="/" className="inline-flex items-center gap-2 mb-8 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group">
                         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                        <span>// RETURN_TO_DASHBOARD</span>
+                        <span>Back to Dashboard</span>
                     </Link>
 
                     <h1 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tight">
@@ -86,7 +86,7 @@ const ProjectDetails: React.FC = () => {
                                 <Terminal size={64} />
                             </div>
                             <h3 className="text-sm font-bold text-cyan-500 mb-4 tracking-widest uppercase flex items-center gap-2">
-                                <Cpu size={14} /> SYSTEM_DESCRIPTION
+                                <Cpu size={14} /> DESCRIPTION
                             </h3>
                             <p className="text-lg leading-relaxed text-gray-300">
                                 {project.details || project.description}
@@ -100,7 +100,7 @@ const ProjectDetails: React.FC = () => {
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded transition-all shadow-[0_0_15px_rgba(0,242,255,0.3)] hover:shadow-[0_0_25px_rgba(0,242,255,0.5)]"
                                     >
-                                        <span>LAUNCH_SYSTEM</span>
+                                        <span>CHECK LIVE</span>
                                         <ExternalLink size={16} />
                                     </a>
                                 </div>
@@ -111,7 +111,7 @@ const ProjectDetails: React.FC = () => {
                         {project.gallery && project.gallery.length > 0 && (
                             <div className="space-y-6">
                                 <h3 className="text-sm font-bold text-cyan-500 tracking-widest uppercase flex items-center gap-2">
-                                    <ImageIcon size={14} /> VISUAL_LOGS
+                                    <ImageIcon size={14} /> GALLERY
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {project.gallery.map((img, idx) => (
@@ -154,7 +154,7 @@ const ProjectDetails: React.FC = () => {
                         {project.features && (
                             <div className="p-6 border border-cyan-900/30 bg-cyan-950/10 rounded-xl">
                                 <h3 className="text-xs font-bold text-cyan-400 mb-6 tracking-widest uppercase">
-                                    // KEY_FEATURES
+                                    KEY FEATURES
                                 </h3>
                                 <div className="space-y-4">
                                     {project.features.map((feature, idx) => (
@@ -171,7 +171,7 @@ const ProjectDetails: React.FC = () => {
 
                         <div className="p-6 border border-gray-800 bg-[#0a0a0a] rounded-xl">
                             <h3 className="text-xs font-bold text-gray-500 mb-6 tracking-widest uppercase">
-                                 // TECH_STACK_DUMP
+                                TECH STACK
                             </h3>
                             <div className="flex flex-wrap gap-2">
                                 {project.tech.map((t, i) => (

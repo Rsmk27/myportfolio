@@ -150,7 +150,7 @@ const TimelineItem: React.FC<{
                     <div className="mb-6 relative z-10">
                         <div className="flex items-center gap-2 mb-2 text-[10px] font-mono uppercase tracking-widest text-gray-600">
                             <ImageIcon size={10} />
-                            <span>Field_Logs</span>
+                            <span>Gallery</span>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             {data.gallery.map((img, i) => (

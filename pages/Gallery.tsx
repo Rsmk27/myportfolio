@@ -172,15 +172,15 @@ const Gallery: React.FC = () => {
                 <div className="mb-12">
                     <Link to="/" className="inline-flex items-center gap-2 mb-8 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group">
                         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                        <span>// RETURN_TO_DASHBOARD</span>
+                        <span>Back to Dashboard</span>
                     </Link>
 
                     <h1 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tight flex items-center gap-4">
                         <ImageIcon size={48} className="text-cyan-500" />
-                        VISUAL_LOGS
+                        GALLERY
                     </h1>
                     <p className="text-gray-400 max-w-2xl text-lg">
-                        /var/www/gallery/ &mdash; A collection of snapshots, videos, and visual data from my projects and workshops.
+                        A collection of snapshots, videos, and visual data from my projects and workshops.
                     </p>
                 </div>
 

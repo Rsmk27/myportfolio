@@ -14,9 +14,9 @@ interface ContactInterfaceProps {
 export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isPowered }) => {
     const [consoleInput, setConsoleInput] = useState('');
     const [messages, setMessages] = useState<Array<{ text: string, type: 'sys' | 'user' | 'success' | 'info' }>>([
-        { text: '> INITIALIZING COMM_UPLINK...', type: 'sys' },
-        { text: '> SECURE CHANNEL ESTABLISHED', type: 'sys' },
-        { text: '> TYPE "HELP" FOR COMMAND_LIST', type: 'info' }
+        { text: '> Loading contact interface...', type: 'sys' },
+        { text: '> Ready to connect.', type: 'sys' },
+        { text: '> Type "help" for available commands', type: 'info' }
 
     ]);
     const [isSending, setIsSending] = useState(false);
@@ -35,7 +35,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
         let type: 'sys' | 'success' | 'info' = 'info';
 
         if (lowerCmd === 'help' || lowerCmd === 'commands') {
-            response = 'AVAILABLE_COMMANDS: [ABOUT, PROJECTS, SKILLS, EXP, CONTACT, CLEAR]';
+            response = 'Commands: [about, projects, skills, exp, contact, clear]';
             type = 'sys';
         } else if (lowerCmd === 'clear') {
             setMessages([]);
@@ -43,17 +43,17 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
         } else if (lowerCmd.includes('about') || lowerCmd.includes('who') || lowerCmd === 'bio') {
             response = profile.bio;
         } else if (lowerCmd.includes('project') || lowerCmd === 'work') {
-            response = `LOADED_MODULES:\n${PROJECTS.map(p => `> ${p.title}`).join('\n')}`;
+            response = `PROJECTS:\n${PROJECTS.map(p => `> ${p.title}`).join('\n')}`;
         } else if (lowerCmd.includes('skill') || lowerCmd === 'stack') {
-            response = `ACTIVE_PROTOCOLS:\n${SKILLS.map(s => `> ${s.name} (${s.level}%)`).join('\n')}`;
+            response = `SKILLS:\n${SKILLS.map(s => `> ${s.name} (${s.level}%)`).join('\n')}`;
         } else if (lowerCmd.includes('exp') || lowerCmd.includes('job') || lowerCmd === 'history') {
-            response = `CAREER_LOGS:\n${EXPERIENCE.map(e => `> ${e.role} @ ${e.company}`).join('\n')}`;
+            response = `EXPERIENCE:\n${EXPERIENCE.map(e => `> ${e.role} @ ${e.company}`).join('\n')}`;
         } else if (lowerCmd.includes('contact') || lowerCmd.includes('mail') || lowerCmd.includes('social')) {
-            response = `Please use the "Primary Channel" or "Social Uplinks" panel on the left to establish connection.`;
+            response = `Please use the "Email" or "Social Links" panel on the left to establish connection.`;
         } else if (['hi', 'hello', 'hey'].some(g => lowerCmd.includes(g))) {
-            response = `GREETINGS USER. I AM TERM_V2.0. HOW MAY I ASSIST?`;
+            response = `Hello! How can I help you today?`;
         } else {
-            response = `ERR_UNKNOWN_CMD: "${cmd}". TYPE "HELP" FOR MANUAL.`;
+            response = `Unknown command: "${cmd}". Type "help" for manual.`;
             type = 'sys';
         }
 
@@ -98,10 +98,10 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                 <div className="flex justify-between items-end pb-2 border-b border-gray-800">
                     <div>
                         <h3 className={`text-xs font-mono tracking-[0.2em] mb-1 ${isPowered ? 'text-cyan-400' : 'text-gray-600'}`}>
-                            // FREQUENCY_MODULATION
+                            CONTACT CHANNELS
                         </h3>
                         <div className="flex items-center gap-2">
-                            <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>SIGNAL_STRENGTH</span>
+                            <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Status</span>
                             <div className="flex gap-0.5 items-end h-4">
                                 {[...Array(8)].map((_, i) => (
                                     <motion.div
@@ -118,7 +118,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                         </div>
 
                         <div className="flex items-center gap-2 mt-2">
-                            <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>UPLINK_STATUS:</span>
+                            <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Status:</span>
                             <span className={`text-[10px] font-mono font-bold ${uplinkStatus === 'TRANSMITTING' ? 'text-amber-500 animate-pulse' :
                                 uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-500' :
                                     isPowered ? 'text-cyan-500' : 'text-gray-600'
@@ -134,7 +134,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                     <ContactCard
                         href={`mailto:${profile.email}`}
                         icon={Mail}
-                        label="PRIMARY_CHANNEL"
+                        label="EMAIL"
                         value={profile.email}
                         isPowered={isPowered}
                     />
@@ -154,7 +154,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                                 key={social.platform}
                                 href={social.url}
                                 icon={Icon}
-                                label={`${social.platform}_UPLINK`}
+                                label={`${social.platform.toUpperCase()}`}
                                 value={handle}
                                 isPowered={isPowered}
                             />
@@ -172,7 +172,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                 <div className={`px-4 py-2 border-b flex justify-between items-center ${isPowered ? 'bg-cyan-950/20 border-cyan-900/30' : 'bg-[#111] border-gray-800'}`}>
                     <div className="flex items-center gap-2">
                         <Terminal size={14} className={isPowered ? 'text-cyan-400' : 'text-gray-600'} />
-                        <span className={`text-xs font-mono font-bold ${isPowered ? 'text-cyan-500' : 'text-gray-600'}`}>TERM_V2.0 // REMOTE_ACCESS</span>
+                        <span className={`text-xs font-mono font-bold ${isPowered ? 'text-cyan-500' : 'text-gray-600'}`}>INTERACTIVE TERMINAL</span>
                     </div>
                     <div className="flex gap-1.5">
                         <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-red-500' : 'bg-gray-800'}`} />
@@ -219,7 +219,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             type="text"
                             value={consoleInput}
                             onChange={(e) => setConsoleInput(e.target.value)}
-                            placeholder={isPowered ? "Enter message sequence..." : "TERMINAL OFFLINE"}
+                            placeholder={isPowered ? "Enter message..." : "Offline"}
                             disabled={!isPowered || isSending}
                             className={`flex-1 bg-transparent border-none outline-none font-mono text-sm ${isPowered ? 'text-cyan-100 placeholder-cyan-900/50' : 'text-gray-600 placeholder-gray-800'}`}
                             autoComplete="off"

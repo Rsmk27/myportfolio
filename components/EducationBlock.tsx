@@ -82,7 +82,7 @@ const EduCard: React.FC<{ data: Education; isPowered: boolean; index: number }> 
         )}
 
         <div className={`absolute bottom-0 right-0 px-2 py-1 text-[8px] font-mono ${isPowered ? 'text-gray-700' : 'text-gray-900'}`}>
-            ADDR: 0x{data.year.slice(-2)}F
+            Year: {data.year}
         </div>
     </motion.div>
 );

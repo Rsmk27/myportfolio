@@ -55,6 +55,19 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
           isPowered={isPowered}
           delay={0.5}
         />
+        {/* Mobile Friendly Traces */}
+        <TracePath
+          d="M 50,50 L 50,150 L 200,150"
+          color={PCB_COLORS.lime}
+          isPowered={isPowered}
+          delay={1.5}
+        />
+        <TracePath
+          d="M 300,300 L 300,500 L 100,500"
+          color={PCB_COLORS.cyan}
+          isPowered={isPowered}
+          delay={2.5}
+        />
       </svg>
     </div>
   );

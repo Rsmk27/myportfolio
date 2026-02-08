@@ -27,6 +27,7 @@ export interface Profile {
   socials: Social[];
   image?: string;
   heroSubtitle?: string;
+  resume?: string;
 }
 
 export interface Experience {
