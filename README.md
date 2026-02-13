@@ -212,7 +212,7 @@ myportfolio/
 
 5. **Open in browser**
    
-   Navigate to `http://localhost:3000`
+   Navigate to `http://localhost:3000` (configured in `vite.config.ts`)
 
 ---
 
@@ -220,7 +220,7 @@ myportfolio/
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server on port 3000 |
+| `npm run dev` | Start development server on port 3000 (customized in vite.config.ts) |
 | `npm run build` | Build production-ready application |
 | `npm run preview` | Preview production build locally |
 
