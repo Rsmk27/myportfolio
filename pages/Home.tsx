@@ -7,8 +7,9 @@ import { CertificationsBlock } from '../components/CertificationsBlock';
 import { TimelineSystem } from '../components/TimelineSystem'; // New Component
 import { ContactInterface } from '../components/ContactInterface';
 import { LoadingScreen } from '../components/LoadingScreen';
+import { HeroEngineeringAnimation } from '../components/HeroEngineeringAnimation';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
-import { Zap, Hexagon, Code, Database, Cpu, Globe, Terminal, Mail, Github, Linkedin, Twitter, ExternalLink, Menu, X, ChevronRight, Activity, Info, Server, Layers, User } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 
@@ -171,45 +172,14 @@ const Home: React.FC = () => {
 
                         <div className="relative z-10 flex flex-col items-center gap-6 max-w-4xl mx-auto px-4 w-full">
 
-                            {/* Avatar Core */}
-                            <div className="relative group z-10 mb-8">
-                                {/* Rotating 'Stator' Ring */}
-                                <motion.div
-                                    animate={{ rotate: 360 }}
-                                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                                    className="absolute inset-[-60px] border-[2px] border-cyan-900/40 rounded-full w-[320px] h-[320px] md:w-[380px] md:h-[380px] pointer-events-none opacity-40 border-dashed"
-                                />
-                                {/* Inner 'Rotor' Field */}
-                                <motion.div
-                                    animate={{ rotate: -360 }}
-                                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                                    className="absolute inset-[-30px] border border-cyan-500/30 rounded-full w-[260px] h-[260px] md:w-[320px] md:h-[320px] pointer-events-none"
-                                >
-                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-3 bg-cyan-500/50" />
-                                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-3 bg-cyan-500/50" />
-                                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-1 bg-cyan-500/50" />
-                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-1 bg-cyan-500/50" />
-                                </motion.div>
-
-                                <motion.div
-                                    initial={{ scale: 0, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    transition={{ duration: 0.8, type: "spring" }}
-                                    className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-cyan-500/20 shadow-[0_0_50px_rgba(0,242,255,0.2)] bg-black z-20 group-hover:border-cyan-400/50 transition-colors duration-500"
-                                >
-                                    <img
-                                        src={PROFILE.image}
-                                        alt={PROFILE.name}
-                                        className="w-full h-full object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent pointer-events-none" />
-                                </motion.div>
-
-                                {/* Orbiting Icons */}
-                                <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="absolute inset-[-40px] pointer-events-none">
-                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"><Zap size={20} className="text-cyan-400 fill-cyan-400/20" /></div>
-                                </motion.div>
-                            </div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 18 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, ease: 'easeOut' }}
+                                className="mb-6"
+                            >
+                                <HeroEngineeringAnimation />
+                            </motion.div>
 
                             {/* Text Content */}
                             <div className="space-y-4">
