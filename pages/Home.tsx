@@ -7,6 +7,7 @@ import { CertificationsBlock } from '../components/CertificationsBlock';
 import { TimelineSystem } from '../components/TimelineSystem'; // New Component
 import { ContactInterface } from '../components/ContactInterface';
 import { LoadingScreen } from '../components/LoadingScreen';
+import { ElectroHeroAnimation } from '../components/ElectroHeroAnimation';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import { Zap, Hexagon, Code, Database, Cpu, Globe, Terminal, Mail, Github, Linkedin, Twitter, ExternalLink, Menu, X, ChevronRight, Activity, Info, Server, Layers, User } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
@@ -161,6 +162,8 @@ const Home: React.FC = () => {
 
                     {/* 1. HERO SECTION - CONTROL CENTER */}
                     <section className="min-h-[100dvh] flex flex-col items-center justify-center relative pt-20 pb-10 text-center">
+
+                        <ElectroHeroAnimation />
 
                         {/* Background Elements */}
                         <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center opacity-20">
