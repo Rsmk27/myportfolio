@@ -123,6 +123,29 @@ export const PROJECTS: Project[] = [
     description: 'Fintech expense tracker with real-time visualization and Google Auth integration.',
     tech: ['React', 'Firebase', 'Chart.js', 'Google OAuth'],
     image: '/assets/budget-buddy-expense-tracker-app.webp'
+  },
+  {
+    id: 'p6',
+    title: 'Firefighter Monitoring Device',
+    description: "IoT wearable safety device that continuously monitors a firefighter's vital signs, movement, and GPS location in real time — relayed to a live command dashboard.",
+    tech: ['ESP32', 'C++', 'Firebase RTDB', 'Next.js', 'MPU-6050', 'DHT11', 'Neo-6M GPS', 'Solar Power'],
+    image: '/assets/firefighter-monitoring-device.webp',
+    link: 'https://github.com/Rsmk27/firefighter-monitoring-device',
+    details: "The Sustainable Firefighter Monitoring System (SFMS) is a real-time IoT safety solution for firefighters. A wearable device worn by the firefighter collects sensor data — motion via MPU-6050 accelerometer, ambient temperature via DHT11, and live GPS location via Neo-6M GPS — and transmits it over Wi-Fi using HTTPS to a Firebase backend. A Next.js web dashboard for fire commanders provides instant situational awareness, showing the firefighter's current status, live GPS position on an interactive map, environmental readings, and a complete history of alerts and events. The device operates as a state machine (NORMAL → MAN_DOWN → HIGH_TEMP → SOS) and features solar-assisted Li-ion power for extended field operation.",
+    features: [
+      "Automatic Man-Down Detection via MPU-6050 Accelerometer (0.03g threshold)",
+      "High Temperature Alert using DHT11 Sensor",
+      "Manual SOS Button for Immediate Distress Signaling",
+      "Live GPS Tracking on an Interactive Map",
+      "Color-coded Status Indicators with Voice Alerts on Dashboard",
+      "Historical Data & Analytics (Temperature Trend, Movement Timeline)",
+      "Firebase Realtime Database + Firestore for Live & Historical Data",
+      "Solar-Assisted Li-ion Power for Extended Field Operation",
+      "Local Buzzer & LED Alerts even when Wi-Fi is Unavailable"
+    ],
+    gallery: [
+      '/assets/firefighter-monitoring-device.webp'
+    ]
   }
 ];
 
