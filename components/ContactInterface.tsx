@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Profile, Social } from '../types';
 import { Mail, Github, Linkedin, Twitter, Send, Terminal, Wifi, Activity, Instagram } from 'lucide-react';
@@ -22,6 +22,9 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
     const [isSending, setIsSending] = useState(false);
     const [uplinkStatus, setUplinkStatus] = useState<'IDLE' | 'TRANSMITTING' | 'ACKNOWLEDGED'>('IDLE');
     const scrollRef = useRef<HTMLDivElement>(null);
+
+    // Pre-compute stable random heights to avoid Math.random() in render/animate
+    const barHeights = useMemo(() => Array.from({ length: 8 }, () => Math.random() * 12 + 4), []);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -108,10 +111,10 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                                         key={i}
                                         className={`w-1 rounded-sm ${isPowered ? 'bg-cyan-500' : 'bg-gray-800'}`}
                                         animate={isPowered ? {
-                                            height: [4, Math.random() * 12 + 4, 4],
+                                            height: [4, barHeights[i], 4],
                                             opacity: [0.5, 1, 0.5]
                                         } : { height: 4 }}
-                                        transition={{ duration: 0.5 + Math.random() * 0.5, repeat: Infinity }}
+                                        transition={{ duration: 0.5 + (barHeights[i] / 24), repeat: Infinity }}
                                     />
                                 ))}
                             </div>

@@ -58,7 +58,7 @@ const Home: React.FC = () => {
         }
     }, [isPowered]);
 
-    const navItems = ['About', 'Projects', 'Skills', 'Gallery', 'Experience', 'Contact'];
+    const navItems = ['About', 'Projects', 'Skills', 'Certifications', 'Gallery', 'Experience', 'Contact'];
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: string) => {
         if (item === 'Gallery') return;
@@ -75,8 +75,16 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30">
             <Helmet>
-                <title>{PROFILE.name} | System Architect</title>
+                <title>{PROFILE.name} | Embedded Systems & IoT Engineer</title>
                 <meta name="description" content={PROFILE.tagline} />
+                <meta property="og:title" content={`${PROFILE.name} | Portfolio`} />
+                <meta property="og:description" content={PROFILE.bio} />
+                <meta property="og:image" content={PROFILE.image} />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={`${PROFILE.name} | Portfolio`} />
+                <meta name="twitter:description" content={PROFILE.tagline} />
+                <meta name="twitter:image" content={PROFILE.image} />
             </Helmet>
 
             {showLoading && (
@@ -94,7 +102,7 @@ const Home: React.FC = () => {
                 <header className="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center pointer-events-none mix-blend-difference text-white">
                     <div className="flex flex-col">
                         <h1 className={`text-2xl font-black tracking-tighter transition-all duration-500 ${isPowered ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(0,242,255,0.8)]' : 'text-gray-500'}`}>
-                            {PROFILE.name.split(' ')[0]}
+                            RSMK
                         </h1>
                         <div className="flex items-center gap-2 mt-1">
                             <div className={`w-1.5 h-1.5 rounded-full ${isPowered ? 'bg-cyan-500 animate-ping' : 'bg-red-500'}`} />
@@ -152,6 +160,17 @@ const Home: React.FC = () => {
                                         {item}
                                     </motion.a>
                                 ))}
+                                <motion.a
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: navItems.length * 0.1 }}
+                                    href={PROFILE.resume}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="mt-2 px-6 py-3 border border-cyan-500/50 text-cyan-400 text-sm font-bold rounded hover:bg-cyan-500/10 transition-colors"
+                                >
+                                    RESUME_V2.0
+                                </motion.a>
                             </nav>
                         </motion.div>
                     )}
@@ -171,19 +190,23 @@ const Home: React.FC = () => {
 
                         <div className="relative z-10 flex flex-col items-center gap-6 max-w-4xl mx-auto px-4 w-full">
 
-                            {/* Avatar Core */}
-                            <div className="relative group z-10 mb-8">
-                                {/* Rotating 'Stator' Ring */}
+                            {/* Avatar Core — all rings and image share the same center */}
+                            <div className="relative group z-10 mb-8 flex items-center justify-center w-48 h-48 md:w-64 md:h-64">
+
+                                {/* Outer dashed 'Stator' Ring */}
                                 <motion.div
                                     animate={{ rotate: 360 }}
                                     transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                                    className="absolute inset-[-60px] border-[2px] border-cyan-900/40 rounded-full w-[320px] h-[320px] md:w-[380px] md:h-[380px] pointer-events-none opacity-40 border-dashed"
+                                    className="absolute rounded-full border-[2px] border-dashed border-cyan-900/40 opacity-40 pointer-events-none"
+                                    style={{ width: 'calc(100% + 120px)', height: 'calc(100% + 120px)' }}
                                 />
-                                {/* Inner 'Rotor' Field */}
+
+                                {/* Inner 'Rotor' Field with tick marks */}
                                 <motion.div
                                     animate={{ rotate: -360 }}
                                     transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                                    className="absolute inset-[-30px] border border-cyan-500/30 rounded-full w-[260px] h-[260px] md:w-[320px] md:h-[320px] pointer-events-none"
+                                    className="absolute rounded-full border border-cyan-500/30 pointer-events-none"
+                                    style={{ width: 'calc(100% + 60px)', height: 'calc(100% + 60px)' }}
                                 >
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-3 bg-cyan-500/50" />
                                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-3 bg-cyan-500/50" />
@@ -191,11 +214,12 @@ const Home: React.FC = () => {
                                     <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-1 bg-cyan-500/50" />
                                 </motion.div>
 
+                                {/* Profile Image */}
                                 <motion.div
                                     initial={{ scale: 0, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
                                     transition={{ duration: 0.8, type: "spring" }}
-                                    className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-cyan-500/20 shadow-[0_0_50px_rgba(0,242,255,0.2)] bg-black z-20 group-hover:border-cyan-400/50 transition-colors duration-500"
+                                    className="relative w-full h-full rounded-full overflow-hidden border-4 border-cyan-500/20 shadow-[0_0_50px_rgba(0,242,255,0.2)] bg-black z-20 group-hover:border-cyan-400/50 transition-colors duration-500"
                                 >
                                     <img
                                         src={PROFILE.image}
@@ -205,8 +229,8 @@ const Home: React.FC = () => {
                                     <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent pointer-events-none" />
                                 </motion.div>
 
-                                {/* Orbiting Icons */}
-                                <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="absolute inset-[-40px] pointer-events-none">
+                                {/* Orbiting Icon */}
+                                <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="absolute pointer-events-none" style={{ width: 'calc(100% + 80px)', height: 'calc(100% + 80px)' }}>
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"><Zap size={20} className="text-cyan-400 fill-cyan-400/20" /></div>
                                 </motion.div>
                             </div>
@@ -236,6 +260,18 @@ const Home: React.FC = () => {
                                     Initialize Comms
                                 </a>
                             </div>
+
+                            {/* Scroll Down Indicator */}
+                            <motion.div
+                                className="flex flex-col items-center gap-2 mt-12 cursor-pointer"
+                                animate={{ y: [0, 8, 0] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                                onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                            >
+                                <span className="text-[10px] font-mono text-cyan-500/60 tracking-[0.2em] uppercase">Scroll</span>
+                                <div className="w-px h-8 bg-gradient-to-b from-cyan-500/50 to-transparent" />
+                                <div className="w-1 h-1 rounded-full bg-cyan-500/50" />
+                            </motion.div>
                         </div>
                     </section>
 
@@ -252,7 +288,7 @@ const Home: React.FC = () => {
                                 <div>
                                     <h3 className="text-xs font-mono text-cyan-500 mb-6">// IDENTITY_MODULE</h3>
                                     <div className="relative aspect-square w-40 h-40 mx-auto rounded-full border-2 border-dashed border-gray-700 p-2 mb-8">
-                                        <img src={PROFILE.image} className="w-full h-full rounded-full object-cover grayscale opacity-80" alt="Profile" />
+                                        <img src={PROFILE.image} className={`w-full h-full rounded-full object-cover transition-all duration-500 ${isPowered ? 'opacity-90' : 'grayscale opacity-60'}`} alt="Profile" />
                                     </div>
                                     <div className="space-y-4 font-mono text-sm">
                                         <div className="flex justify-between border-b border-gray-800 pb-2">
@@ -265,7 +301,7 @@ const Home: React.FC = () => {
                                         </div>
                                         <div className="flex justify-between border-b border-gray-800 pb-2">
                                             <span className="text-gray-500">LOCATION</span>
-                                            <span className="text-gray-300">India</span>
+                                            <span className="text-gray-300">{PROFILE.location}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -340,10 +376,58 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* Footer */}
-                    <footer className="py-12 border-t border-gray-900 text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-black border border-gray-800 rounded-full">
-                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-xs text-gray-500 font-mono">SYSTEM_ONLINE // {new Date().getFullYear()}</span>
+                    <footer className="py-12 border-t border-gray-900">
+                        <div className="flex flex-col items-center gap-6">
+                            {/* Social Icons */}
+                            <div className="flex items-center gap-4">
+                                {PROFILE.socials.map((s) => {
+                                    const icons: Record<string, React.ReactNode> = {
+                                        github: <Github size={18} />,
+                                        linkedin: <Linkedin size={18} />,
+                                        x: <Twitter size={18} />,
+                                        instagram: <Mail size={18} />,
+                                        telegram: <Terminal size={18} />,
+                                        email: <Mail size={18} />,
+                                    };
+                                    return (
+                                        <a
+                                            key={s.platform}
+                                            href={s.url}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            aria-label={s.platform}
+                                            className="w-9 h-9 flex items-center justify-center border border-gray-800 rounded-full text-gray-600 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
+                                        >
+                                            {icons[s.platform] ?? <Mail size={18} />}
+                                        </a>
+                                    );
+                                })}
+                            </div>
+
+                            {/* Nav shortcuts */}
+                            <div className="flex items-center gap-6 flex-wrap justify-center">
+                                {['About', 'Projects', 'Skills', 'Experience', 'Contact'].map(item => (
+                                    <a
+                                        key={item}
+                                        href={`#${item.toLowerCase()}`}
+                                        onClick={(e) => handleNavClick(e, item)}
+                                        className="text-[10px] font-mono text-gray-600 hover:text-cyan-500 transition-colors tracking-widest uppercase"
+                                    >
+                                        {item}
+                                    </a>
+                                ))}
+                            </div>
+
+                            {/* Status + Copyright */}
+                            <div className="flex flex-col items-center gap-2">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-black border border-gray-800 rounded-full">
+                                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                    <span className="text-xs text-gray-500 font-mono">SYSTEM_ONLINE // {new Date().getFullYear()}</span>
+                                </div>
+                                <p className="text-[10px] text-gray-700 font-mono">
+                                    Built by {PROFILE.name} &mdash; {PROFILE.location}
+                                </p>
+                            </div>
                         </div>
                     </footer>
                 </main>

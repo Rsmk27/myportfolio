@@ -5,7 +5,6 @@ import { Project } from '../types';
 import { ExternalLink, Cpu, Info } from 'lucide-react';
 import { ElectricCard } from './ui/electric-card';
 import { Link } from 'react-router-dom';
-import { SystemFlow } from './SystemFlow';
 
 interface ProjectChipProps {
   project: Project;

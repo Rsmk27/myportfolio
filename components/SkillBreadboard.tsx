@@ -156,7 +156,7 @@ const TechPanel: React.FC<{ cat: any; idx: number; isPowered: boolean }> = ({ ca
                   <motion.div
                     className="absolute top-0 bottom-0 right-0 w-4 bg-white/50 blur-[2px]"
                     animate={{ x: [-20, 300] }} // simple sweep
-                    transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: Math.random() }}
+                    transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: sIdx * 0.3 }}
                   />
                 )}
               </motion.div>

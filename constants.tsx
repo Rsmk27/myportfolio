@@ -7,7 +7,7 @@ export const PROFILE: Profile = {
   tagline: "Electrical & Electronics Engineering Student focused on Embedded Systems, IoT, and Smart Energy Solutions",
   heroSubtitle: "Building intelligent systems with a practical engineering mindset and sustainability-driven problem solving.",
   bio: "Background in Electrical & Electronics Engineering with a hands-on interest in embedded systems and IoT. Focused on smart energy, automation, and real-world engineering applications. Motivated to build scalable, sustainable, and intelligent systems.",
-  location: "Vishakhapatnam, IN_NODE",
+  location: "Srikakulam, Andhra Pradesh, India",
   email: "srinivasmanikantarajapantula@gmail.com",
   socials: [
     { platform: 'github', url: 'https://github.com/Rsmk27' },
@@ -47,13 +47,13 @@ export const EDUCATION: Education[] = [
   {
     id: 'edu1',
     degree: "B.Tech, Electrical & Electronics",
-    institution: "Institute_of_Technology", // Placeholder as college wasn't explicitly found
+    institution: "College of Engineering",
     year: "2024 - PRESENT"
   },
   {
     id: 'edu2',
     degree: "Diploma, Electrical & Electronics",
-    institution: "Polytechnic_College",
+    institution: "State Polytechnic College",
     year: "2021 - 2024"
   }
 ];
@@ -122,7 +122,19 @@ export const PROJECTS: Project[] = [
     title: 'Budget Buddy',
     description: 'Fintech expense tracker with real-time visualization and Google Auth integration.',
     tech: ['React', 'Firebase', 'Chart.js', 'Google OAuth'],
-    image: '/assets/budget-buddy-expense-tracker-app.webp'
+    image: '/assets/budget-buddy-expense-tracker-app.webp',
+    details: "Budget Buddy is a full-featured personal finance management application designed to help users track their income, expenses, and savings in real time. Built with React and Firebase, it provides a seamless, cross-device experience with Google OAuth for secure, passwordless sign-in. The dashboard presents a rich overview of spending patterns through Chart.js powered visualizations — including donut charts for category breakdown and line graphs for monthly trends. Users can categorize transactions, set monthly budgets, and receive visual alerts when nearing limits.",
+    features: [
+      "Google OAuth for Secure, Passwordless Sign-In",
+      "Real-time Firestore Sync Across Devices",
+      "Interactive Expense Breakdown with Chart.js Donut & Line Charts",
+      "Category-based Budget Tracking with Limit Alerts",
+      "Monthly Summary Reports with Trend Analysis",
+      "Add, Edit, and Delete Transactions with Instant Updates"
+    ],
+    gallery: [
+      '/assets/budget-buddy-expense-tracker-app.webp'
+    ]
   },
   {
     id: 'p6',

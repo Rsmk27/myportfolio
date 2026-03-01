@@ -78,11 +78,12 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
 
     return (
         <div className="w-full max-w-7xl mx-auto px-4">
-            <div className="mb-16 text-center">
-                <h3 className={`text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 ${isPowered ? 'text-white' : 'text-gray-800'}`}>
-                    Credentials
-                </h3>
-                <div className={`h-1 w-24 mx-auto rounded-full ${isPowered ? 'bg-cyan-500 shadow-[0_0_10px_#22d3ee]' : 'bg-gray-300'}`} />
+            <div className={`flex items-center gap-4 mb-12 md:mb-20 mx-auto px-4`}>
+                <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tighter whitespace-nowrap ${isPowered ? 'text-white' : 'text-gray-900'}`}>
+                    CREDENTIALS
+                </h2>
+                <div className={`h-[1px] flex-grow ${isPowered ? 'bg-gradient-to-r from-cyan-500/50 to-transparent' : 'bg-gray-300'}`} />
+                <span className={`text-xs font-mono tracking-[0.2em] uppercase whitespace-nowrap ${isPowered ? 'text-cyan-500' : 'text-gray-500'}`}>VERIFIED MODULES</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
