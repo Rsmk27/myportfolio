@@ -5,28 +5,41 @@
 :root {
     --bg-depth: #030303;
     --bg-surface: #0a0a0a;
-    --bg-panel: #111111;
+    --bg-panel: #0f0f0f;
     --line-dim: #1f1f1f;
     --line-mid: #2a2a2a;
     --line-bright: #444444;
 
-    --primary-cyan: #00f0ff;
-    --primary-glow: rgba(0, 240, 255, 0.15);
+    --primary-cyan: #00f2ff;
+    --primary-glow: rgba(0, 242, 255, 0.15);
+    --primary-glow-strong: rgba(0, 242, 255, 0.35);
 
+    --accent-lime: #39ff14;
     --accent-amber: #ffae00;
     --accent-red: #ff3333;
 
-    --text-main: #e0e0e0;
+    --text-main: #e2e2e2;
     --text-dim: #888888;
     --text-dark: #444444;
+
+    /* Font stacks */
+    --font-heading: 'Space Grotesk', 'Inter', sans-serif;
+    --font-body: 'DM Sans', 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     background-color: var(--bg-depth);
     color: var(--text-main);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     overflow-x: hidden;
     cursor: crosshair;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code,
