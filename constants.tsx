@@ -138,25 +138,29 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'p6',
-    title: 'Firefighter Monitoring Device',
-    description: "IoT wearable safety device that continuously monitors a firefighter's vital signs, movement, and GPS location in real time — relayed to a live command dashboard.",
-    tech: ['ESP32', 'C++', 'Firebase RTDB', 'Next.js', 'MPU-6050', 'DHT11', 'Neo-6M GPS', 'Solar Power'],
+    title: 'Sustainable Firefighter Monitoring Device (SFMD)',
+    description: "An IoT-based wearable safety device that continuously monitors a firefighter's physical condition, movement, and location in real time, presenting this data on a centralized web dashboard for commanders.",
+    tech: ['ESP32', 'C++', 'Firebase RTDB', 'Next.js 16', 'Tailwind CSS v4', 'MPU-6050', 'DHT11', 'Neo-6M GPS'],
     image: '/assets/firefighter-monitoring-device.webp',
     link: 'https://github.com/Rsmk27/firefighter-monitoring-device',
-    details: "The Sustainable Firefighter Monitoring System (SFMS) is a real-time IoT safety solution for firefighters. A wearable device worn by the firefighter collects sensor data — motion via MPU-6050 accelerometer, ambient temperature via DHT11, and live GPS location via Neo-6M GPS — and transmits it over Wi-Fi using HTTPS to a Firebase backend. A Next.js web dashboard for fire commanders provides instant situational awareness, showing the firefighter's current status, live GPS position on an interactive map, environmental readings, and a complete history of alerts and events. The device operates as a state machine (NORMAL → MAN_DOWN → HIGH_TEMP → SOS) and features solar-assisted Li-ion power for extended field operation.",
+    details: "The Sustainable Firefighter Monitoring Device (SFMD) is a real-time IoT safety solution for firefighters. A wearable device worn by the firefighter collects sensor data (motion, temperature, GPS location) and transmits it over Wi-Fi to a Firebase backend. A web dashboard hosted by fire commanders provides instant situational awareness, showing the firefighter's current status, location on a live map, environmental data, and a history of all alerts and events. The firmware operates as a state machine handling STARTUP, NORMAL, WARNING, EMERGENCY, and SOS states based on sensor logic and time elapsed without movement.",
     features: [
-      "Automatic Man-Down Detection via MPU-6050 Accelerometer (0.03g threshold)",
-      "High Temperature Alert using DHT11 Sensor",
-      "Manual SOS Button for Immediate Distress Signaling",
-      "Live GPS Tracking on an Interactive Map",
-      "Color-coded Status Indicators with Voice Alerts on Dashboard",
-      "Historical Data & Analytics (Temperature Trend, Movement Timeline)",
-      "Firebase Realtime Database + Firestore for Live & Historical Data",
-      "Solar-Assisted Li-ion Power for Extended Field Operation",
-      "Local Buzzer & LED Alerts even when Wi-Fi is Unavailable"
+      "Automatic Emergency Detection — no movement (man-down) & high temperature",
+      "Manual SOS button for immediate distress signaling overriding other states",
+      "Live GPS tracking on an interactive MapLibre GL map with trail history",
+      "Color-coded status indicators with voice alerts on the dashboard",
+      "Historical data and analytics (temperature trend, movement timeline, status distribution)",
+      "Local alerts (Buzzer & LED) that continue functioning even when Wi-Fi is lost",
+      "State-machine based firmware for robust alerting and movement detection logic",
+      "Secure HTTPS data transmission to Firebase Realtime Database and Firestore"
     ],
     gallery: [
-      '/assets/firefighter-monitoring-device.webp'
+      '/assets/firefighter-monitoring-device.webp',
+      '/assets/firefighter-monitoring-device/infographic-poster.jpg',
+      '/assets/firefighter-monitoring-device/hand-drawn-poster.jpg',
+      '/assets/firefighter-monitoring-device/device-demo-1.jpg',
+      '/assets/firefighter-monitoring-device/device-demo-2.jpg',
+      '/assets/firefighter-monitoring-device/dashboard.png'
     ]
   }
 ];
