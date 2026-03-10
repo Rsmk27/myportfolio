@@ -160,8 +160,14 @@ export const PROJECTS: Project[] = [
       '/assets/firefighter-monitoring-device/hand-drawn-poster.jpg',
       '/assets/firefighter-monitoring-device/device-demo-1.jpg',
       '/assets/firefighter-monitoring-device/device-demo-2.jpg',
-      '/assets/firefighter-monitoring-device/dashboard.png'
-    ]
+      '/assets/firefighter-monitoring-device/dashboard.png',
+      '/assets/firefighter-monitoring-device/departmental-first-1.jpg',
+      '/assets/firefighter-monitoring-device/departmental-first-2.jpg',
+      '/assets/firefighter-monitoring-device/departmental-first-3.jpg',
+      '/assets/firefighter-monitoring-device/departmental-first-4.jpg',
+      '/assets/firefighter-monitoring-device/departmental-first-5.jpg'
+    ],
+    award: '🏆 Departmental 1st Prize'
   }
 ];
 

@@ -47,14 +47,24 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
           ${isPowered ? 'bg-[#0f0f0f] border-gray-800' : 'bg-gray-50 border-gray-200'}`}
         >
           <div>
-            <div className={`text-[10px] font-mono mb-1 uppercase tracking-widest ${isPowered ? 'text-gray-500' : 'text-gray-400'}`}>
-              PROJECT_ID: {project.id}
+            <div className="flex items-center gap-2 mb-1">
+              <div className={`text-[10px] font-mono uppercase tracking-widest ${isPowered ? 'text-gray-500' : 'text-gray-400'}`}>
+                PROJECT_ID: {project.id}
+              </div>
+              {project.award && (
+                <span className={`relative overflow-hidden shine-effect text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-sm whitespace-nowrap
+                  ${isPowered
+                    ? 'text-amber-400 bg-amber-500/10 border border-amber-500/30'
+                    : 'text-amber-700 bg-amber-100 border border-amber-300'}`}>
+                  <span className="relative z-10">{project.award}</span>
+                </span>
+              )}
             </div>
-            <h3 className={`text-xl font-bold leading-tight ${isPowered ? 'text-white' : 'text-gray-900'}`}>
+            <h3 className={`text-xl font-bold leading-tight pr-2 ${isPowered ? 'text-white' : 'text-gray-900'}`}>
               {project.title}
             </h3>
           </div>
-          {isPowered && <Cpu size={18} className={`text-gray-700 group-hover:text-cyan-400 transition-colors duration-300`} />}
+          {isPowered && <Cpu size={18} className={`flex-shrink-0 mt-1 text-gray-700 group-hover:text-cyan-400 transition-colors duration-300`} />}
         </div>
 
         {/* Image / Visual Area */}

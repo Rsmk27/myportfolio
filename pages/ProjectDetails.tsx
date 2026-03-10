@@ -47,6 +47,13 @@ const ProjectDetails: React.FC = () => {
                         <span>Back to Dashboard</span>
                     </Link>
 
+                    {project.award && (
+                        <div className="relative overflow-hidden shine-effect mb-4 inline-block px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg shadow-lg shadow-amber-500/10 backdrop-blur-sm">
+                            <span className="relative z-10 text-amber-400 font-bold uppercase tracking-widest text-sm flex items-center gap-2">
+                                {project.award}
+                            </span>
+                        </div>
+                    )}
                     <h1 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tight">
                         {project.title}
                     </h1>
