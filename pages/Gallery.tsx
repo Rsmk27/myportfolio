@@ -7,9 +7,6 @@ import { PCBBackground } from '../components/PCBBackground';
 import { PROFILE } from '../constants';
 
 const GALLERY_ITEMS = [
-    // Profile
-    '/assets/srinivasa-manikanta-profile.webp',
-
     // New Gallery Additions
     '/assets/gallery/img-20251003-102729.jpg',
     '/assets/gallery/img-20251003-102931.jpg',

@@ -143,16 +143,49 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30" style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
             <Helmet>
+                {/* Title */}
                 <title>{PROFILE.name} | Embedded Systems &amp; IoT Engineer</title>
-                <meta name="description" content={PROFILE.tagline} />
-                <meta property="og:title" content={`${PROFILE.name} | Portfolio`} />
-                <meta property="og:description" content={PROFILE.bio} />
-                <meta property="og:image" content={PROFILE.image} />
+
+                {/* Primary SEO */}
+                <meta name="description" content="Srinivasa Manikanta — EEE student specializing in Embedded Systems, IoT, Smart Energy and Industrial Automation. Explore projects, skills and contact." />
+                <meta name="author" content={PROFILE.name} />
+                <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+                <link rel="canonical" href="https://rsmk.me/" />
+
+                {/* Open Graph */}
                 <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://rsmk.me/" />
+                <meta property="og:site_name" content="Srinivasa Manikanta Portfolio" />
+                <meta property="og:title" content={`${PROFILE.name} | Embedded Systems & IoT Engineer`} />
+                <meta property="og:description" content="EEE student specializing in Embedded Systems, IoT, Smart Energy and Industrial Automation. Building intelligent, sustainable real-world systems." />
+                <meta property="og:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:image:alt" content={`Portrait of ${PROFILE.name}, EEE Engineer`} />
+                <meta property="og:locale" content="en_IN" />
+
+                {/* Twitter / X */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={`${PROFILE.name} | Portfolio`} />
-                <meta name="twitter:description" content={PROFILE.tagline} />
-                <meta name="twitter:image" content={PROFILE.image} />
+                <meta name="twitter:site" content="@SrinivasManik20" />
+                <meta name="twitter:creator" content="@SrinivasManik20" />
+                <meta name="twitter:title" content={`${PROFILE.name} | Embedded Systems & IoT Engineer`} />
+                <meta name="twitter:description" content="EEE student specializing in Embedded Systems, IoT, Smart Energy and Industrial Automation." />
+                <meta name="twitter:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
+                <meta name="twitter:image:alt" content={`Portrait of ${PROFILE.name}, EEE Engineer`} />
+
+                {/* JSON-LD: WebSite */}
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "WebSite",
+                    "name": `${PROFILE.name} Portfolio`,
+                    "url": "https://rsmk.me",
+                    "description": "Portfolio of Srinivasa Manikanta, an Electrical & Electronics Engineering student specializing in Embedded Systems, IoT, and Smart Energy.",
+                    "author": {
+                        "@type": "Person",
+                        "name": PROFILE.name,
+                        "url": "https://rsmk.me"
+                    }
+                })}</script>
             </Helmet>
 
             {showLoading && (
@@ -339,9 +372,13 @@ const Home: React.FC = () => {
                                 <div className="relative w-48 h-48 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_60px_rgba(0,242,255,0.18),inset_0_0_30px_rgba(0,242,255,0.05)] bg-black z-10 hover:border-cyan-400/60 transition-colors duration-500 group">
                                     <img
                                         src={PROFILE.image}
-                                        alt={`Portrait of ${PROFILE.name}`}
+                                        alt={`Portrait of ${PROFILE.name}, Embedded Systems & IoT Engineer`}
                                         className="w-full h-full object-cover"
                                         loading="eager"
+                                        fetchPriority="high"
+                                        decoding="sync"
+                                        width="192"
+                                        height="192"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent pointer-events-none" />
                                     {/* Scanline overlay */}
@@ -472,7 +509,11 @@ const Home: React.FC = () => {
                                             <img
                                                 src={PROFILE.image}
                                                 className={`w-full h-full object-cover transition-all duration-500 ${isPowered ? 'opacity-90' : 'grayscale opacity-60'}`}
-                                                alt={`${PROFILE.name} profile`}
+                                                alt={`${PROFILE.name} – Embedded Systems & IoT Engineer`}
+                                                loading="lazy"
+                                                decoding="async"
+                                                width="144"
+                                                height="144"
                                             />
                                         </div>
                                         <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-cyan-500/10 border border-cyan-500/40 flex items-center justify-center">

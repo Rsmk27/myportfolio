@@ -30,11 +30,49 @@ const ProjectDetails: React.FC = () => {
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30 font-mono text-gray-300">
             <Helmet>
-                <title>{`${project.title} | ${PROFILE.name}`}</title>
-                <meta name="description" content={project.details || project.description} />
-                <meta property="og:title" content={project.title} />
-                <meta property="og:description" content={project.details || project.description} />
-                <meta property="og:image" content={project.image} />
+                {/* Title — unique per project */}
+                <title>{`${project.title} | ${PROFILE.name} Portfolio`}</title>
+
+                {/* Primary SEO */}
+                <meta name="description" content={(project.details || project.description).slice(0, 155) + ((project.details || project.description).length > 155 ? '\u2026' : '')} />
+                <meta name="author" content={PROFILE.name} />
+                <meta name="keywords" content={`${project.title}, ${project.tech.join(', ')}, ${PROFILE.name}, RSMK, Portfolio`} />
+                <meta name="robots" content="index, follow, max-image-preview:large" />
+                <link rel="canonical" href={`https://rsmk.me/project/${project.id}`} />
+
+                {/* Open Graph */}
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={`https://rsmk.me/project/${project.id}`} />
+                <meta property="og:site_name" content="Srinivasa Manikanta Portfolio" />
+                <meta property="og:title" content={`${project.title} | ${PROFILE.name}`} />
+                <meta property="og:description" content={(project.details || project.description).slice(0, 155) + '\u2026'} />
+                <meta property="og:image" content={`https://rsmk.me${project.image}`} />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:image:alt" content={`${project.title} project by ${PROFILE.name}`} />
+                <meta property="og:locale" content="en_IN" />
+
+                {/* Twitter / X */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:site" content="@SrinivasManik20" />
+                <meta name="twitter:creator" content="@SrinivasManik20" />
+                <meta name="twitter:title" content={`${project.title} | ${PROFILE.name}`} />
+                <meta name="twitter:description" content={(project.details || project.description).slice(0, 155) + '\u2026'} />
+                <meta name="twitter:image" content={`https://rsmk.me${project.image}`} />
+                <meta name="twitter:image:alt" content={`${project.title} project by ${PROFILE.name}`} />
+
+                {/* JSON-LD: SoftwareApplication per project */}
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "SoftwareApplication",
+                    "name": project.title,
+                    "description": project.details || project.description,
+                    "url": project.link || `https://rsmk.me/project/${project.id}`,
+                    "image": `https://rsmk.me${project.image}`,
+                    "author": { "@type": "Person", "name": PROFILE.name, "url": "https://rsmk.me" },
+                    "keywords": project.tech.join(', '),
+                    ...(project.award ? { "award": project.award } : {})
+                })}</script>
             </Helmet>
 
             <PCBBackground isPowered={isPowered} />
