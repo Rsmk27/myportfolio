@@ -58,9 +58,9 @@ export const Oscilloscope: React.FC<OscilloscopeProps> = ({
             return;
         }
 
-        // Decay spike exponentially over ~500ms
+        // Decay spike exponentially over ~500ms (frame-rate independent)
         if (spikeRef.current > 0) {
-            spikeRef.current = Math.max(0, spikeRef.current * (1 - delta / 500));
+            spikeRef.current = Math.max(0, spikeRef.current * Math.exp(-delta / 500));
         }
 
         // Map scrollVelocity 0-3000 px/s → 0-0.35 extra amplitude

@@ -26,6 +26,7 @@ const CapacitorProgress: React.FC<CapacitorProgressProps> = ({ progress }) => {
     const sparkCount = 6;
     const [sparksState, setSparks] = useState<{ id: number; x: number; size: number }[]>([]);
     const prevProgress = useRef(progress);
+    const sparkTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     // Trigger sparks while filling
     useEffect(() => {
@@ -37,10 +38,13 @@ const CapacitorProgress: React.FC<CapacitorProgressProps> = ({ progress }) => {
                 size: 2 + Math.random() * 3,
             }));
             setSparks(newSparks);
-            const t = setTimeout(() => setSparks([]), 400);
-            return () => clearTimeout(t);
+            if (sparkTimer.current) clearTimeout(sparkTimer.current);
+            sparkTimer.current = setTimeout(() => setSparks([]), 400);
         }
         prevProgress.current = progress;
+        return () => {
+            if (sparkTimer.current) clearTimeout(sparkTimer.current);
+        };
     }, [progress]);
 
     return (

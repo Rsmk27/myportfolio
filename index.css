@@ -510,12 +510,12 @@ pre,
     100% { transform: scale(0) translateY(-8px); opacity: 0; }
 }
 
-/* ── Hide default cursor when MagneticCursor is active (desktop only) ── */
+/* ── Hide default cursor when MagneticCursor is active (desktop pointer devices only) ── */
 @media (hover: hover) and (pointer: fine) {
-    body {
-        cursor: none !important;
-    }
-    a, button, .cursor-magnetic {
-        cursor: none !important;
+    body.magnetic-cursor-active,
+    body.magnetic-cursor-active a,
+    body.magnetic-cursor-active button,
+    body.magnetic-cursor-active .cursor-magnetic {
+        cursor: none;
     }
 }

@@ -56,12 +56,16 @@ export const MagneticCursor: React.FC = () => {
         document.addEventListener('mouseover', onMouseOver);
         document.addEventListener('mouseout', onMouseOut);
 
+        // Activate custom cursor class (scoped CSS hides default cursor)
+        document.body.classList.add('magnetic-cursor-active');
+
         return () => {
             document.removeEventListener('mousemove', onMove);
             document.removeEventListener('mouseleave', onLeave);
             document.removeEventListener('mouseenter', onEnter);
             document.removeEventListener('mouseover', onMouseOver);
             document.removeEventListener('mouseout', onMouseOut);
+            document.body.classList.remove('magnetic-cursor-active');
         };
     }, [x, y, visible]);
 
@@ -127,6 +131,7 @@ export const MagneticCursor: React.FC = () => {
                         boxShadow: '0 0 8px rgba(0,242,255,0.2)',
                     }}
                 >
+                    {/* Decorative multimeter reading label */}
                     Status: Connected&nbsp;&nbsp;Ω: 0
                 </motion.div>
             )}

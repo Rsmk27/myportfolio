@@ -86,15 +86,19 @@ export const VoltageScrollMeter: React.FC<VoltageScrollMeterProps> = ({ isPowere
                     })}
                     {/* Gauge arc */}
                     <path d="M 2 30 A 28 28 0 0 1 58 30" fill="none" stroke="rgba(0,242,255,0.15)" strokeWidth="1.5" />
-                    {/* Needle */}
-                    <motion.line
+                     {/* Needle - use transform rotate to animate smoothly */}
+                    <line
                         x1={cx} y1={cy}
-                        animate={reduced ? { x2: nx, y2: ny } : { x2: nx, y2: ny }}
-                        transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 80, damping: 18 }}
+                        x2={cx} y2={cy - needleLen}
                         stroke="#00f2ff"
                         strokeWidth="1.5"
                         strokeLinecap="round"
-                        style={{ filter: 'drop-shadow(0 0 3px #00f2ff)' }}
+                        style={{
+                            filter: 'drop-shadow(0 0 3px #00f2ff)',
+                            transformOrigin: `${cx}px ${cy}px`,
+                            transform: `rotate(${needleAngle + 90}deg)`,
+                            transition: reduced ? 'none' : 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)',
+                        }}
                     />
                     <circle cx={cx} cy={cy} r="2.5" fill="#00f2ff" style={{ filter: 'drop-shadow(0 0 3px #00f2ff)' }} />
                 </svg>

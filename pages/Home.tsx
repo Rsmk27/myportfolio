@@ -140,14 +140,17 @@ const Home: React.FC = () => {
     /* Scroll velocity tracking */
     useEffect(() => {
         let velTimer: ReturnType<typeof setTimeout>;
+        const MIN_DT = 16; // ~1 frame at 60fps
         const onScroll = () => {
             const now = Date.now();
-            const dt = Math.max(1, now - lastScrollTime.current);
-            const dy = Math.abs(window.scrollY - lastScrollY.current);
-            const vel = (dy / dt) * 1000; // px per second
-            setScrollVelocity(vel);
-            lastScrollY.current = window.scrollY;
-            lastScrollTime.current = now;
+            const dt = now - lastScrollTime.current;
+            if (dt >= MIN_DT) {
+                const dy = Math.abs(window.scrollY - lastScrollY.current);
+                const vel = (dy / dt) * 1000; // px per second
+                setScrollVelocity(vel);
+                lastScrollY.current = window.scrollY;
+                lastScrollTime.current = now;
+            }
             clearTimeout(velTimer);
             velTimer = setTimeout(() => setScrollVelocity(0), 150);
         };
