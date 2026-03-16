@@ -11,7 +11,7 @@ import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import {
     Zap, Code, Globe, Terminal, Mail, Github, Linkedin, Twitter,
     Menu, X, ChevronDown, Activity, Cpu, Radio, BatteryMedium,
-    ExternalLink, ArrowUpRight, MapPin, Briefcase, GraduationCap
+    ExternalLink, ArrowUpRight, MapPin, Briefcase, GraduationCap, Download, Eye
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
@@ -233,15 +233,26 @@ const Home: React.FC = () => {
                             </a>
                         ))}
                         <div className="w-px h-6 bg-gray-800 mx-2" />
-                        <a
-                            href={PROFILE.resume}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="flex items-center gap-1.5 px-4 py-1.5 border border-cyan-500/40 text-cyan-400 text-[11px] font-bold rounded-lg hover:bg-cyan-500/10 hover:border-cyan-400 transition-all duration-200 pointer-events-auto cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
-                        >
-                            <span>RESUME</span>
-                            <ArrowUpRight size={12} />
-                        </a>
+                        <div className="flex items-center gap-1.5 pointer-events-auto">
+                            <a
+                                href={PROFILE.resume}
+                                target="_blank"
+                                rel="noreferrer"
+                                title="View Resume"
+                                className="flex items-center gap-1 px-3 py-1.5 border border-cyan-500/40 text-cyan-400 text-[11px] font-bold rounded-l-lg hover:bg-cyan-500/10 hover:border-cyan-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                            >
+                                <Eye size={11} />
+                                <span>RESUME</span>
+                            </a>
+                            <a
+                                href={PROFILE.resume}
+                                download="Srinivasa_Manikanta_Resume.pdf"
+                                title="Download Resume"
+                                className="flex items-center gap-1 px-2.5 py-1.5 border border-l-0 border-cyan-500/40 text-cyan-400 text-[11px] font-bold rounded-r-lg hover:bg-cyan-500/10 hover:border-cyan-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                            >
+                                <Download size={11} />
+                            </a>
+                        </div>
                     </nav>
 
                     {/* Mobile burger */}
@@ -278,18 +289,30 @@ const Home: React.FC = () => {
                                     {item}
                                 </motion.a>
                             ))}
-                            <motion.a
+                            <motion.div
                                 initial={reduced ? false : { opacity: 0, y: 16 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: navItems.length * 0.06, duration: 0.3 }}
-                                href={PROFILE.resume}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="mt-4 flex items-center gap-2 px-6 py-3 border border-cyan-500/50 text-cyan-400 font-bold rounded-xl hover:bg-cyan-500/10 transition-all duration-200 cursor-pointer"
+                                className="mt-4 flex items-center gap-3"
                             >
-                                <span>RESUME</span>
-                                <ArrowUpRight size={16} />
-                            </motion.a>
+                                <a
+                                    href={PROFILE.resume}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex items-center gap-2 px-6 py-3 border border-cyan-500/50 text-cyan-400 font-bold rounded-xl hover:bg-cyan-500/10 transition-all duration-200 cursor-pointer"
+                                >
+                                    <Eye size={16} />
+                                    <span>VIEW RESUME</span>
+                                </a>
+                                <a
+                                    href={PROFILE.resume}
+                                    download="Srinivasa_Manikanta_Resume.pdf"
+                                    className="flex items-center gap-2 px-4 py-3 border border-cyan-500/30 text-cyan-500 font-bold rounded-xl hover:bg-cyan-500/10 transition-all duration-200 cursor-pointer"
+                                    title="Download Resume"
+                                >
+                                    <Download size={16} />
+                                </a>
+                            </motion.div>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -459,6 +482,14 @@ const Home: React.FC = () => {
                                     <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
                                 </a>
                                 <a
+                                    href={PROFILE.resume}
+                                    download="Srinivasa_Manikanta_Resume.pdf"
+                                    className="group flex items-center gap-2 px-7 py-3 border border-cyan-500/50 text-cyan-400 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.15)] transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                                >
+                                    <Download size={15} className="group-hover:translate-y-0.5 transition-transform duration-200" />
+                                    Download CV
+                                </a>
+                                <a
                                     href="#contact"
                                     onClick={(e) => handleNavClick(e, 'Contact')}
                                     className="flex items-center gap-2 px-7 py-3 border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider rounded-lg hover:border-cyan-500/60 hover:text-cyan-400 hover:bg-cyan-950/20 transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
@@ -533,6 +564,27 @@ const Home: React.FC = () => {
                                                 <span className={`${color} font-semibold text-xs`}>{value}</span>
                                             </div>
                                         ))}
+                                    </div>
+
+                                    {/* Resume buttons */}
+                                    <div className="w-full mt-3 flex gap-2">
+                                        <a
+                                            href={PROFILE.resume}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-cyan-500/30 text-cyan-400 text-[11px] font-bold tracking-widest hover:bg-cyan-500/10 hover:border-cyan-400 transition-all duration-200 cursor-pointer"
+                                        >
+                                            <Eye size={11} />
+                                            VIEW
+                                        </a>
+                                        <a
+                                            href={PROFILE.resume}
+                                            download="Srinivasa_Manikanta_Resume.pdf"
+                                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-cyan-500/20 text-cyan-500/70 text-[11px] font-bold tracking-widest hover:bg-cyan-500/10 hover:border-cyan-500/40 hover:text-cyan-400 transition-all duration-200 cursor-pointer"
+                                        >
+                                            <Download size={11} />
+                                            SAVE
+                                        </a>
                                     </div>
 
                                     {/* Progress bar */}
