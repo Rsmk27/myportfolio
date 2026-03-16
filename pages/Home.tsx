@@ -7,6 +7,9 @@ import { CertificationsBlock } from '../components/CertificationsBlock';
 import { TimelineSystem } from '../components/TimelineSystem';
 import { ContactInterface } from '../components/ContactInterface';
 import { LoadingScreen } from '../components/LoadingScreen';
+import { MagneticCursor } from '../components/MagneticCursor';
+import { VoltageScrollMeter } from '../components/VoltageScrollMeter';
+import { Oscilloscope } from '../components/Oscilloscope';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import {
     Zap, Code, Globe, Terminal, Mail, Github, Linkedin, Twitter,
@@ -99,7 +102,12 @@ const Home: React.FC = () => {
     const [showLoading, setShowLoading] = useState(() => sessionStorage.getItem('isPowered') !== 'true');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+    const [scrollVelocity, setScrollVelocity] = useState(0);
+    const [clickPulse, setClickPulse] = useState(0);
     const isFirstMount = useRef(true);
+    const lastScrollY = useRef(0);
+    const lastScrollTime = useRef(Date.now());
 
     /* Typing animation */
     const [statusText, setStatusText] = useState('');
@@ -127,6 +135,31 @@ const Home: React.FC = () => {
         const onScroll = () => setScrolled(window.scrollY > 40);
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    /* Scroll velocity tracking */
+    useEffect(() => {
+        let velTimer: ReturnType<typeof setTimeout>;
+        const onScroll = () => {
+            const now = Date.now();
+            const dt = Math.max(1, now - lastScrollTime.current);
+            const dy = Math.abs(window.scrollY - lastScrollY.current);
+            const vel = (dy / dt) * 1000; // px per second
+            setScrollVelocity(vel);
+            lastScrollY.current = window.scrollY;
+            lastScrollTime.current = now;
+            clearTimeout(velTimer);
+            velTimer = setTimeout(() => setScrollVelocity(0), 150);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => { window.removeEventListener('scroll', onScroll); clearTimeout(velTimer); };
+    }, []);
+
+    /* Click pulse tracking */
+    useEffect(() => {
+        const onClick = () => setClickPulse(Date.now());
+        document.addEventListener('click', onClick);
+        return () => document.removeEventListener('click', onClick);
     }, []);
 
     const navItems = ['About', 'Projects', 'Skills', 'Certifications', 'Gallery', 'Experience', 'Contact'];
@@ -194,6 +227,8 @@ const Home: React.FC = () => {
 
             <div id="main-content" className={`main-content ${!showLoading ? 'visible' : ''}`}>
                 <PCBBackground isPowered={isPowered} />
+                <MagneticCursor />
+                <VoltageScrollMeter isPowered={isPowered} />
 
                 {/* ── Floating Navbar ─────────────────────────────────── */}
                 <header
@@ -221,16 +256,37 @@ const Home: React.FC = () => {
                     </div>
 
                     {/* Desktop nav */}
-                    <nav className="hidden md:flex items-center gap-7 pointer-events-auto" aria-label="Main navigation">
+                    <nav
+                        className="hidden md:flex items-center gap-7 pointer-events-auto"
+                        aria-label="Main navigation"
+                        onMouseLeave={() => setHoveredNav(null)}
+                    >
                         {navItems.map((item) => (
-                            <a
-                                key={item}
-                                href={item === 'Gallery' ? '/gallery' : `#${item.toLowerCase()}`}
-                                onClick={(e) => handleNavClick(e, item)}
-                                className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-cyan-400 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer"
-                            >
-                                {item}
-                            </a>
+                            <div key={item} className="relative" onMouseEnter={() => setHoveredNav(item)}>
+                                <a
+                                    href={item === 'Gallery' ? '/gallery' : `#${item.toLowerCase()}`}
+                                    onClick={(e) => handleNavClick(e, item)}
+                                    className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-cyan-400 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer"
+                                >
+                                    {item}
+                                </a>
+                                <AnimatePresence>
+                                    {hoveredNav === item && (
+                                        <motion.div
+                                            layoutId="nav-glow"
+                                            className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
+                                            style={{
+                                                background: '#00f2ff',
+                                                boxShadow: '0 0 8px #00f2ff, 0 0 16px rgba(0,242,255,0.4)',
+                                            }}
+                                            initial={{ opacity: 0, scaleX: 0 }}
+                                            animate={{ opacity: 1, scaleX: 1 }}
+                                            exit={{ opacity: 0, scaleX: 0 }}
+                                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                                        />
+                                    )}
+                                </AnimatePresence>
+                            </div>
                         ))}
                         <div className="w-px h-6 bg-gray-800 mx-2" />
                         <div className="flex items-center gap-1.5 pointer-events-auto">
@@ -334,7 +390,15 @@ const Home: React.FC = () => {
                             />
                         </div>
 
-                        <div className="relative z-10 flex flex-col items-center gap-8 max-w-4xl mx-auto w-full px-4">
+                        <motion.div
+                            className="relative z-10 flex flex-col items-center gap-8 max-w-4xl mx-auto w-full px-4"
+                            variants={reduced ? {} : {
+                                hidden: {},
+                                powered: { transition: { staggerChildren: 0.1 } },
+                            }}
+                            initial="hidden"
+                            animate={isPowered ? 'powered' : 'hidden'}
+                        >
 
                             {/* ── Avatar ── */}
                             <motion.div
@@ -499,6 +563,13 @@ const Home: React.FC = () => {
                                 </a>
                             </motion.div>
 
+                            {/* ── Oscilloscope ── */}
+                            {isPowered && (
+                                <div className="w-full max-w-md h-16 rounded-lg overflow-hidden border border-cyan-500/10 bg-black/40">
+                                    <Oscilloscope isPowered={isPowered} scrollVelocity={scrollVelocity} clickPulse={clickPulse} />
+                                </div>
+                            )}
+
                             {/* ── Scroll indicator ── */}
                             {!reduced && (
                                 <motion.button
@@ -515,7 +586,7 @@ const Home: React.FC = () => {
                                     <ChevronDown size={14} className="text-cyan-500/50" />
                                 </motion.button>
                             )}
-                        </div>
+                        </motion.div>
                     </section>
 
                     {/* ══ 2. ABOUT ═══════════════════════════════════════════ */}

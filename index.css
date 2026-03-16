@@ -499,3 +499,23 @@ pre,
 .main-content.visible {
     opacity: 1;
 }
+/* ── Capacitor animations ── */
+@keyframes capBubble {
+    0%, 100% { transform: translateY(0px); opacity: 0.4; }
+    50% { transform: translateY(-4px); opacity: 0.8; }
+}
+
+@keyframes capSpark {
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    100% { transform: scale(0) translateY(-8px); opacity: 0; }
+}
+
+/* ── Hide default cursor when MagneticCursor is active (desktop only) ── */
+@media (hover: hover) and (pointer: fine) {
+    body {
+        cursor: none !important;
+    }
+    a, button, .cursor-magnetic {
+        cursor: none !important;
+    }
+}

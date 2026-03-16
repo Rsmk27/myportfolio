@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useAnimationFrame } from 'framer-motion';
 
 interface OscilloscopeProps {
@@ -6,18 +6,37 @@ interface OscilloscopeProps {
     color?: string;
     frequency?: number;
     amplitude?: number;
+    scrollVelocity?: number;
+    clickPulse?: number;
 }
 
-export const Oscilloscope: React.FC<OscilloscopeProps> = ({ isPowered, color = "#22d3ee", frequency = 0.05, amplitude = 0.35 }) => {
+export const Oscilloscope: React.FC<OscilloscopeProps> = ({
+    isPowered,
+    color = "#22d3ee",
+    frequency = 0.05,
+    amplitude = 0.35,
+    scrollVelocity = 0,
+    clickPulse = 0,
+}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const effectiveAmpRef = useRef(amplitude);
+    const spikeRef = useRef(0); // extra amplitude spike [0-1]
+    const lastClickPulse = useRef(clickPulse);
 
-    useAnimationFrame((t) => {
+    // Watch for clickPulse changes and trigger spike
+    useEffect(() => {
+        if (clickPulse !== lastClickPulse.current) {
+            lastClickPulse.current = clickPulse;
+            spikeRef.current = 0.5; // add 0.5 to amplitude temporarily
+        }
+    }, [clickPulse]);
+
+    useAnimationFrame((t, delta) => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // Resize handling
         if (canvas.width !== canvas.offsetWidth || canvas.height !== canvas.offsetHeight) {
             canvas.width = canvas.offsetWidth;
             canvas.height = canvas.offsetHeight;
@@ -30,7 +49,6 @@ export const Oscilloscope: React.FC<OscilloscopeProps> = ({ isPowered, color = "
         ctx.clearRect(0, 0, width, height);
 
         if (!isPowered) {
-            // Flat line if off
             ctx.beginPath();
             ctx.moveTo(0, centerY);
             ctx.lineTo(width, centerY);
@@ -40,15 +58,26 @@ export const Oscilloscope: React.FC<OscilloscopeProps> = ({ isPowered, color = "
             return;
         }
 
+        // Decay spike exponentially over ~500ms
+        if (spikeRef.current > 0) {
+            spikeRef.current = Math.max(0, spikeRef.current * (1 - delta / 500));
+        }
+
+        // Map scrollVelocity 0-3000 px/s → 0-0.35 extra amplitude
+        const velocityExtra = Math.min(3000, scrollVelocity) / 3000 * 0.35;
+        const targetAmp = amplitude + velocityExtra + spikeRef.current;
+
+        // Smooth effective amplitude
+        effectiveAmpRef.current += (targetAmp - effectiveAmpRef.current) * 0.1;
+
         ctx.beginPath();
         ctx.strokeStyle = color;
         ctx.lineWidth = 2;
         ctx.shadowBlur = 4;
         ctx.shadowColor = color;
 
-        // Use props
         const waveFreq = frequency;
-        const waveAmp = height * amplitude;
+        const waveAmp = height * effectiveAmpRef.current;
         const speed = t * 0.005;
 
         for (let x = 0; x < width; x++) {
@@ -61,7 +90,6 @@ export const Oscilloscope: React.FC<OscilloscopeProps> = ({ isPowered, color = "
         }
         ctx.stroke();
 
-        // Scan line effect
         const scanX = (t * 0.5) % width;
         const gradient = ctx.createLinearGradient(scanX, 0, scanX + 50, 0);
         gradient.addColorStop(0, 'rgba(255,255,255,0)');
@@ -75,3 +103,4 @@ export const Oscilloscope: React.FC<OscilloscopeProps> = ({ isPowered, color = "
         <canvas ref={canvasRef} className="w-full h-full block" />
     );
 };
+

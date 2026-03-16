@@ -11,18 +11,60 @@ interface ProjectChipProps {
   isPowered: boolean;
 }
 
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+}
+
 export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) => {
   const [isHovered, setIsHovered] = React.useState(false);
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  const handleClick = () => {
+    const burst: Particle[] = Array.from({ length: 8 }, (_, i) => ({
+      id: Date.now() + i,
+      x: (Math.random() - 0.5) * 120,
+      y: (Math.random() - 0.5) * 120,
+    }));
+    setParticles(burst);
+    setTimeout(() => setParticles([]), 600);
+  };
 
   return (
     <motion.div
       className="relative group h-full"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
+      onClick={handleClick}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      whileHover={{ scale: 1.03, rotateX: 4, rotateY: 4 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+      style={{ perspective: 1000 }}
     >
+      {/* Particle burst on click */}
+      <AnimatePresence>
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            className="absolute top-1/2 left-1/2 pointer-events-none z-50"
+            initial={{ opacity: 1, scale: 1, x: 0, y: 0, width: 6, height: 6 }}
+            animate={{ opacity: 0, scale: 0.5, x: p.x, y: p.y }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{
+              background: '#00f2ff',
+              borderRadius: 1,
+              boxShadow: '0 0 6px #00f2ff',
+              marginLeft: -3,
+              marginTop: -3,
+            }}
+          />
+        ))}
+      </AnimatePresence>
+
       {/* Resistor/Component Legs (Decorative) */}
       <div className="absolute -left-1 top-4 bottom-4 flex flex-col justify-between py-2 z-0">
         {[...Array(6)].map((_, i) => (
