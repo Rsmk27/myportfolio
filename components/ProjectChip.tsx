@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import { Project } from '../types';
 import { ExternalLink, Cpu, Info } from 'lucide-react';
 import { ElectricCard } from './ui/electric-card';
@@ -12,13 +12,44 @@ interface ProjectChipProps {
 }
 
 export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springX = useSpring(rotateX, { stiffness: 300, damping: 26 });
+  const springY = useSpring(rotateY, { stiffness: 300, damping: 26 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isPowered || !cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    rotateX.set(-dy * 12);
+    rotateY.set(dx * 12);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+    setIsHovered(false);
+  };
 
   return (
     <motion.div
-      className="relative group h-full"
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      ref={cardRef}
+      className="relative group h-full project-card"
+      data-cursor="pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX: springX,
+        rotateY: springY,
+        transformPerspective: 1000,
+      }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

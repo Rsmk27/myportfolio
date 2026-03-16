@@ -7,6 +7,8 @@ import { CertificationsBlock } from '../components/CertificationsBlock';
 import { TimelineSystem } from '../components/TimelineSystem';
 import { ContactInterface } from '../components/ContactInterface';
 import { LoadingScreen } from '../components/LoadingScreen';
+import { CustomCursor } from '../components/CustomCursor';
+import { EasterEgg } from '../components/EasterEgg';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import {
     Zap, Code, Globe, Terminal, Mail, Github, Linkedin, Twitter,
@@ -99,6 +101,8 @@ const Home: React.FC = () => {
     const [showLoading, setShowLoading] = useState(() => sessionStorage.getItem('isPowered') !== 'true');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('');
+    const [clockTime, setClockTime] = useState('');
     const isFirstMount = useRef(true);
 
     /* Typing animation */
@@ -129,6 +133,34 @@ const Home: React.FC = () => {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    /* Active section via IntersectionObserver */
+    useEffect(() => {
+        const sectionIds = ['about', 'projects', 'skills', 'certifications', 'experience', 'contact'];
+        const observers: IntersectionObserver[] = [];
+        sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const obs = new IntersectionObserver(
+                ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+                { rootMargin: '-20% 0px -60% 0px' }
+            );
+            obs.observe(el);
+            observers.push(obs);
+        });
+        return () => observers.forEach(obs => obs.disconnect());
+    }, []);
+
+    /* Live clock */
+    useEffect(() => {
+        const tick = () => {
+            const now = new Date();
+            setClockTime(now.toTimeString().slice(0, 8));
+        };
+        tick();
+        const id = setInterval(tick, 1000);
+        return () => clearInterval(id);
+    }, []);
+
     const navItems = ['About', 'Projects', 'Skills', 'Certifications', 'Gallery', 'Experience', 'Contact'];
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: string) => {
@@ -142,6 +174,8 @@ const Home: React.FC = () => {
 
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30" style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
+            <CustomCursor />
+            <EasterEgg />
             <Helmet>
                 {/* Title */}
                 <title>{PROFILE.name} | Embedded Systems &amp; IoT Engineer</title>
@@ -222,16 +256,25 @@ const Home: React.FC = () => {
 
                     {/* Desktop nav */}
                     <nav className="hidden md:flex items-center gap-7 pointer-events-auto" aria-label="Main navigation">
-                        {navItems.map((item) => (
-                            <a
-                                key={item}
-                                href={item === 'Gallery' ? '/gallery' : `#${item.toLowerCase()}`}
-                                onClick={(e) => handleNavClick(e, item)}
-                                className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-cyan-400 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer"
-                            >
-                                {item}
-                            </a>
-                        ))}
+                        {navItems.map((item) => {
+                            const sectionId = item.toLowerCase();
+                            const isActive = activeSection === sectionId;
+                            return (
+                                <a
+                                    key={item}
+                                    href={item === 'Gallery' ? '/gallery' : `#${sectionId}`}
+                                    onClick={(e) => handleNavClick(e, item)}
+                                    className={`relative text-[11px] font-semibold uppercase tracking-widest transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-0.5 ${isActive ? 'text-cyan-400' : 'text-gray-400 hover:text-cyan-400'}`}
+                                >
+                                    {item}
+                                    <motion.span
+                                        className="absolute bottom-0 left-0 h-px bg-cyan-400"
+                                        animate={{ width: isActive ? '100%' : '0%' }}
+                                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                                    />
+                                </a>
+                            );
+                        })}
                         <div className="w-px h-6 bg-gray-800 mx-2" />
                         <div className="flex items-center gap-1.5 pointer-events-auto">
                             <a
@@ -391,6 +434,67 @@ const Home: React.FC = () => {
                                         </div>
                                     </motion.div>
                                 )}
+
+                                {/* Floating tech orbit icons */}
+                                {!reduced && isPowered && (
+                                    <>
+                                        <motion.div
+                                            initial={{ rotate: 0 }}
+                                            animate={{ rotate: 360 }}
+                                            transition={{ duration: 22, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 290, height: 290 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
+                                                <Cpu size={14} className="text-cyan-300" />
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ rotate: 72 }}
+                                            animate={{ rotate: 432 }}
+                                            transition={{ duration: 17, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 310, height: 310 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
+                                                <Radio size={13} className="text-purple-400" />
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ rotate: 144 }}
+                                            animate={{ rotate: 504 }}
+                                            transition={{ duration: 25, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 330, height: 330 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-65">
+                                                <BatteryMedium size={13} className="text-emerald-400" />
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ rotate: 216 }}
+                                            animate={{ rotate: 576 }}
+                                            transition={{ duration: 14, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 280, height: 280 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
+                                                <Code size={13} className="text-amber-400" />
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ rotate: 288 }}
+                                            animate={{ rotate: 648 }}
+                                            transition={{ duration: 19, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 350, height: 350 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
+                                                <Activity size={14} className="text-cyan-500" />
+                                            </div>
+                                        </motion.div>
+                                    </>
+                                )}
                                 {/* Profile image */}
                                 <div className="relative w-48 h-48 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_60px_rgba(0,242,255,0.18),inset_0_0_30px_rgba(0,242,255,0.05)] bg-black z-10 hover:border-cyan-400/60 transition-colors duration-500 group">
                                     <img
@@ -476,7 +580,7 @@ const Home: React.FC = () => {
                                 <a
                                     href="#projects"
                                     onClick={(e) => handleNavClick(e, 'Projects')}
-                                    className="group flex items-center gap-2 px-7 py-3 bg-cyan-500 text-black text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.5)] transition-all duration-250 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                                    className="btn-ripple group flex items-center gap-2 px-7 py-3 bg-cyan-500 text-black text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.5)] transition-all duration-250 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                                 >
                                     View Projects
                                     <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
@@ -484,7 +588,7 @@ const Home: React.FC = () => {
                                 <a
                                     href={PROFILE.resume}
                                     download="Srinivasa_Manikanta_Resume.pdf"
-                                    className="group flex items-center gap-2 px-7 py-3 border border-cyan-500/50 text-cyan-400 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.15)] transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                                    className="btn-ripple group flex items-center gap-2 px-7 py-3 border border-cyan-500/50 text-cyan-400 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.15)] transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
                                 >
                                     <Download size={15} className="group-hover:translate-y-0.5 transition-transform duration-200" />
                                     Download CV
@@ -692,7 +796,7 @@ const Home: React.FC = () => {
                                         email: <Mail size={17} />,
                                     };
                                     return (
-                                        <a
+                                        <motion.a
                                             key={s.platform}
                                             href={s.url}
                                             target="_blank"
@@ -701,10 +805,12 @@ const Home: React.FC = () => {
                                             role="listitem"
                                             className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-800 text-gray-500
                         hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-cyan-950/20
-                        transition-all duration-250 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                        cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                                            whileHover={{ rotate: 360, scale: 1.2 }}
+                                            transition={{ duration: 0.4, ease: 'easeInOut' }}
                                         >
                                             {icons[s.platform] ?? <Globe size={17} />}
-                                        </a>
+                                        </motion.a>
                                     );
                                 })}
                             </div>
@@ -725,6 +831,28 @@ const Home: React.FC = () => {
 
                             {/* Status pill */}
                             <div className="flex flex-col items-center gap-2">
+                                {/* Live clock */}
+                                {isPowered && clockTime && (
+                                    <div className="font-mono text-[11px] text-cyan-500/60 tracking-[0.15em]">
+                                        {clockTime}
+                                    </div>
+                                )}
+                                {/* Energy pulse */}
+                                {isPowered && (
+                                    <motion.div
+                                        animate={{ scale: [1, 1.08, 1] }}
+                                        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                                        className="flex items-center gap-1.5"
+                                    >
+                                        <span
+                                            className="text-yellow-400"
+                                            style={{ filter: 'drop-shadow(0 0 6px rgba(250,204,21,0.7))' }}
+                                        >⚡</span>
+                                        <span className="text-[9px] font-mono text-gray-600 tracking-widest uppercase">
+                                            Energy Active
+                                        </span>
+                                    </motion.div>
+                                )}
                                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/60 border border-gray-800 rounded-full backdrop-blur-sm">
                                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
                                     <span className="text-[10px] text-gray-500 font-mono tracking-widest">
