@@ -12,6 +12,7 @@ export const CustomCursor: React.FC = () => {
     const ringY = useSpring(mouseY, springCfg);
 
     const [state, setState] = useState<CursorState>('default');
+    const [label, setLabel] = useState('');
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
@@ -23,16 +24,25 @@ export const CustomCursor: React.FC = () => {
 
         const onOver = (e: MouseEvent) => {
             const t = e.target as Element;
+            const customLabelEl = t.closest('[data-cursor-label]') as HTMLElement | null;
             if (t.closest('.project-card')) {
                 setState('project');
+                setLabel('VIEW');
+            } else if (customLabelEl?.dataset.cursorLabel) {
+                setState('pointer');
+                setLabel(customLabelEl.dataset.cursorLabel);
+            } else if (t.closest('a')) {
+                setState('pointer');
+                setLabel('VISIT');
             } else if (
-                t.closest('a') ||
                 t.closest('button') ||
                 t.closest('[data-cursor="pointer"]')
             ) {
                 setState('pointer');
+                setLabel('OPEN');
             } else {
                 setState('default');
+                setLabel('');
             }
         };
 
@@ -52,7 +62,7 @@ export const CustomCursor: React.FC = () => {
         };
     }, [mouseX, mouseY, visible]);
 
-    const ringSize = state === 'project' ? 56 : state === 'pointer' ? 48 : 32;
+    const ringSize = state === 'project' ? 56 : state === 'pointer' ? 52 : 32;
     const ringBgColor = state !== 'default' ? 'rgba(0, 242, 255, 0.12)' : 'transparent';
     const ringBorderColor = state !== 'default' ? 'rgba(0, 242, 255, 1)' : 'rgba(0, 242, 255, 0.55)';
 
@@ -90,9 +100,9 @@ export const CustomCursor: React.FC = () => {
                     }}
                     transition={{ duration: 0.15, ease: 'easeOut' }}
                 >
-                    {state === 'project' && (
+                    {state !== 'default' && label && (
                         <span className="text-cyan-400 text-[9px] font-mono font-bold tracking-widest select-none">
-                            VIEW
+                            {label}
                         </span>
                     )}
                 </motion.div>
