@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { PCB_COLORS } from '../constants';
 
 interface PCBBackgroundProps {
@@ -8,8 +8,38 @@ interface PCBBackgroundProps {
 }
 
 export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20, mass: 0.2 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20, mass: 0.2 });
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      const nx = (e.clientX / window.innerWidth - 0.5) * 20;
+      const ny = (e.clientY / window.innerHeight - 0.5) * 20;
+      mouseX.set(nx);
+      mouseY.set(ny);
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, [mouseX, mouseY]);
+
   return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#050505]">
+    <motion.div
+      className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#050505]"
+      style={{ x: springX, y: springY }}
+    >
+      {isPowered && (
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(400px circle at 50% 50%, rgba(0,242,255,0.08), rgba(0,0,0,0))',
+            x: springX,
+            y: springY,
+          }}
+        />
+      )}
       {/* Grid Pattern */}
       <div
         className="absolute inset-0 opacity-[0.03]"
@@ -69,7 +99,7 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
           delay={2.5}
         />
       </svg>
-    </div>
+    </motion.div>
   );
 };
 

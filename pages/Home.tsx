@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { motion, AnimatePresence, useInView, useScroll, useSpring, useTransform } from 'framer-motion';
 import { PCBBackground } from '../components/PCBBackground';
 import { ProjectChip } from '../components/ProjectChip';
 import { SkillBreadboard } from '../components/SkillBreadboard';
@@ -7,6 +7,8 @@ import { CertificationsBlock } from '../components/CertificationsBlock';
 import { TimelineSystem } from '../components/TimelineSystem';
 import { ContactInterface } from '../components/ContactInterface';
 import { LoadingScreen } from '../components/LoadingScreen';
+import { CustomCursor } from '../components/CustomCursor';
+import { EasterEgg } from '../components/EasterEgg';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import {
     Zap, Code, Globe, Terminal, Mail, Github, Linkedin, Twitter,
@@ -64,9 +66,15 @@ const SectionHeader: React.FC<{
             >
                 {title}
             </h2>
-            <div className={`h-px flex-grow ${isPowered
-                ? 'bg-gradient-to-r from-cyan-500/60 via-cyan-300/20 to-transparent'
-                : 'bg-gray-300'}`}
+            <motion.div
+                className={`h-px flex-grow ${isPowered
+                    ? 'bg-gradient-to-r from-cyan-500/60 via-cyan-300/20 to-transparent'
+                    : 'bg-gray-300'}`}
+                initial={{ scaleX: 0.3, opacity: 0.45 }}
+                whileInView={{ scaleX: 1, opacity: [0.5, 1, 0.7] }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, ease: 'easeOut' }}
+                style={{ transformOrigin: flip ? 'right center' : 'left center' }}
             />
             <span
                 className="text-[10px] font-mono tracking-[0.25em] uppercase shrink-0"
@@ -99,9 +107,19 @@ const Home: React.FC = () => {
     const [showLoading, setShowLoading] = useState(() => sessionStorage.getItem('isPowered') !== 'true');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('');
+    const [clockTime, setClockTime] = useState('');
+    const [statusTickerIndex, setStatusTickerIndex] = useState(0);
+    const [navHoverIndex, setNavHoverIndex] = useState(-1);
+    const [navDirection, setNavDirection] = useState<1 | -1>(1);
     const isFirstMount = useRef(true);
+    const { scrollYProgress } = useScroll();
+    const scrollProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.2 });
+    const ringOffset = useTransform(scrollProgress, [0, 1], [88, 0]);
 
-    /* Typing animation */
+    /* Typing animations */
+    const [heroIntro, setHeroIntro] = useState('');
+    const heroIntroText = "> Hello, I'm RSMK";
     const [statusText, setStatusText] = useState('');
     const fullText = 'INITIALIZING SYSTEM PROFILER...';
     const reduced = usePrefersReducedMotion();
@@ -115,11 +133,24 @@ const Home: React.FC = () => {
         if (isPowered && !reduced) {
             let i = 0;
             const id = setInterval(() => {
+                if (i <= heroIntroText.length) { setHeroIntro(heroIntroText.slice(0, i)); i++; }
+                else clearInterval(id);
+            }, 65);
+            return () => clearInterval(id);
+        }
+        if (isPowered) setHeroIntro(heroIntroText);
+    }, [isPowered, reduced]);
+
+    useEffect(() => {
+        if (isPowered && !reduced) {
+            let i = 0;
+            const id = setInterval(() => {
                 if (i <= fullText.length) { setStatusText(fullText.slice(0, i)); i++; }
                 else clearInterval(id);
             }, 45);
             return () => clearInterval(id);
         }
+        if (isPowered) setStatusText(fullText);
     }, [isPowered, reduced]);
 
     /* Navbar scroll shadow */
@@ -128,6 +159,48 @@ const Home: React.FC = () => {
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
+
+    /* Active section via IntersectionObserver */
+    useEffect(() => {
+        const sectionIds = ['about', 'projects', 'skills', 'certifications', 'experience', 'contact'];
+        const observers: IntersectionObserver[] = [];
+        sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const obs = new IntersectionObserver(
+                ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+                { rootMargin: '-20% 0px -60% 0px' }
+            );
+            obs.observe(el);
+            observers.push(obs);
+        });
+        return () => observers.forEach(obs => obs.disconnect());
+    }, []);
+
+    /* Live clock */
+    useEffect(() => {
+        const tick = () => {
+            const now = new Date();
+            setClockTime(now.toTimeString().slice(0, 8));
+        };
+        tick();
+        const id = setInterval(tick, 1000);
+        return () => clearInterval(id);
+    }, []);
+
+    useEffect(() => {
+        const tickerId = setInterval(() => {
+            setStatusTickerIndex((prev) => (prev + 1) % 4);
+        }, 4200);
+        return () => clearInterval(tickerId);
+    }, []);
+
+    const statusTicker = [
+        'ONLINE | BUILDING SMART ENERGY SYSTEMS',
+        'SYNC | EMBEDDED + IOT WORKFLOWS',
+        'FOCUS | AUTOMATION & POWER SYSTEMS',
+        'MODE | SHIPPING REAL-WORLD SOLUTIONS',
+    ];
 
     const navItems = ['About', 'Projects', 'Skills', 'Certifications', 'Gallery', 'Experience', 'Contact'];
 
@@ -142,6 +215,8 @@ const Home: React.FC = () => {
 
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30" style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
+            <CustomCursor />
+            <EasterEgg />
             <Helmet>
                 {/* Title */}
                 <title>{PROFILE.name} | Embedded Systems &amp; IoT Engineer</title>
@@ -195,6 +270,20 @@ const Home: React.FC = () => {
             <div id="main-content" className={`main-content ${!showLoading ? 'visible' : ''}`}>
                 <PCBBackground isPowered={isPowered} />
 
+                {!reduced && (
+                    <div className="fixed right-4 bottom-10 z-40 hidden md:flex items-center gap-2 pointer-events-none">
+                        <span className="text-[9px] font-mono tracking-[0.2em] text-cyan-600/70 uppercase [writing-mode:vertical-rl]">
+                            scroll
+                        </span>
+                        <div className="h-28 w-1 rounded-full bg-cyan-950/70 border border-cyan-900/60 overflow-hidden origin-bottom">
+                            <motion.div
+                                className="w-full h-full bg-gradient-to-t from-cyan-400 via-cyan-300 to-white origin-bottom"
+                                style={{ scaleY: scrollProgress }}
+                            />
+                        </div>
+                    </div>
+                )}
+
                 {/* ── Floating Navbar ─────────────────────────────────── */}
                 <header
                     className={`fixed top-4 left-4 right-4 z-50 flex justify-between items-center px-5 py-3 rounded-xl
@@ -222,16 +311,36 @@ const Home: React.FC = () => {
 
                     {/* Desktop nav */}
                     <nav className="hidden md:flex items-center gap-7 pointer-events-auto" aria-label="Main navigation">
-                        {navItems.map((item) => (
-                            <a
-                                key={item}
-                                href={item === 'Gallery' ? '/gallery' : `#${item.toLowerCase()}`}
-                                onClick={(e) => handleNavClick(e, item)}
-                                className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-cyan-400 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer"
-                            >
-                                {item}
-                            </a>
-                        ))}
+                        {navItems.map((item) => {
+                            const sectionId = item.toLowerCase();
+                            const isActive = activeSection === sectionId;
+                            return (
+                                <a
+                                    key={item}
+                                    href={item === 'Gallery' ? '/gallery' : `#${sectionId}`}
+                                    onClick={(e) => handleNavClick(e, item)}
+                                    onMouseEnter={() => {
+                                        const currentIndex = navItems.indexOf(item);
+                                        if (navHoverIndex !== -1) {
+                                            setNavDirection(currentIndex >= navHoverIndex ? 1 : -1);
+                                        }
+                                        setNavHoverIndex(currentIndex);
+                                    }}
+                                    className={`relative text-[11px] font-semibold uppercase tracking-widest transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-0.5 ${isActive ? 'text-cyan-400' : 'text-gray-400 hover:text-cyan-400'}`}
+                                >
+                                    {item}
+                                    <motion.span
+                                        className="absolute bottom-0 left-0 h-px bg-cyan-400"
+                                        animate={{
+                                            width: isActive ? '100%' : '0%',
+                                            left: navDirection === 1 ? '0%' : 'auto',
+                                            right: navDirection === -1 ? '0%' : 'auto',
+                                        }}
+                                        transition={{ duration: 0.24, ease: 'easeOut' }}
+                                    />
+                                </a>
+                            );
+                        })}
                         <div className="w-px h-6 bg-gray-800 mx-2" />
                         <div className="flex items-center gap-1.5 pointer-events-auto">
                             <a
@@ -319,6 +428,38 @@ const Home: React.FC = () => {
 
                 <main className="container mx-auto px-4 md:px-6 pt-0 overflow-x-hidden max-w-7xl">
 
+                    <AnimatePresence>
+                        {!reduced && scrolled && (
+                            <motion.button
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 14 }}
+                                transition={{ duration: 0.2 }}
+                                className="fixed bottom-8 left-6 z-40 w-11 h-11 rounded-full border border-cyan-700/60 bg-black/70 backdrop-blur-sm flex items-center justify-center text-cyan-300 hover:text-cyan-100 hover:border-cyan-400 transition-colors"
+                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                                aria-label="Scroll to top"
+                                type="button"
+                                data-cursor-label="BACK"
+                            >
+                                <svg width="38" height="38" className="absolute -rotate-90" viewBox="0 0 32 32" aria-hidden="true">
+                                    <circle cx="16" cy="16" r="14" stroke="rgba(34,211,238,0.15)" strokeWidth="2" fill="none" />
+                                    <motion.circle
+                                        cx="16"
+                                        cy="16"
+                                        r="14"
+                                        stroke="#22d3ee"
+                                        strokeWidth="2"
+                                        fill="none"
+                                        strokeLinecap="round"
+                                        strokeDasharray="88"
+                                        style={{ strokeDashoffset: ringOffset }}
+                                    />
+                                </svg>
+                                <ArrowUpRight size={15} className="rotate-[-45deg]" />
+                            </motion.button>
+                        )}
+                    </AnimatePresence>
+
                     {/* ══ 1. HERO ════════════════════════════════════════════ */}
                     <section className="min-h-[100dvh] flex flex-col items-center justify-center relative pt-24 pb-16 text-center">
 
@@ -391,6 +532,67 @@ const Home: React.FC = () => {
                                         </div>
                                     </motion.div>
                                 )}
+
+                                {/* Floating tech orbit icons */}
+                                {!reduced && isPowered && (
+                                    <>
+                                        <motion.div
+                                            initial={{ rotate: 0 }}
+                                            animate={{ rotate: 360 }}
+                                            transition={{ duration: 22, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 290, height: 290 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
+                                                <Cpu size={14} className="text-cyan-300" />
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ rotate: 72 }}
+                                            animate={{ rotate: 432 }}
+                                            transition={{ duration: 17, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 310, height: 310 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
+                                                <Radio size={13} className="text-purple-400" />
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ rotate: 144 }}
+                                            animate={{ rotate: 504 }}
+                                            transition={{ duration: 25, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 330, height: 330 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-65">
+                                                <BatteryMedium size={13} className="text-emerald-400" />
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ rotate: 216 }}
+                                            animate={{ rotate: 576 }}
+                                            transition={{ duration: 14, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 280, height: 280 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
+                                                <Code size={13} className="text-amber-400" />
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ rotate: 288 }}
+                                            animate={{ rotate: 648 }}
+                                            transition={{ duration: 19, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+                                            className="absolute pointer-events-none"
+                                            style={{ width: 350, height: 350 }}
+                                        >
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
+                                                <Activity size={14} className="text-cyan-500" />
+                                            </div>
+                                        </motion.div>
+                                    </>
+                                )}
                                 {/* Profile image */}
                                 <div className="relative w-48 h-48 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_60px_rgba(0,242,255,0.18),inset_0_0_30px_rgba(0,242,255,0.05)] bg-black z-10 hover:border-cyan-400/60 transition-colors duration-500 group">
                                     <img
@@ -446,58 +648,17 @@ const Home: React.FC = () => {
                                     <h2 className="text-base md:text-xl text-gray-300 font-mono tracking-[0.25em] uppercase">
                                         Electrical &amp; Electronics Engineer
                                     </h2>
-                                    {/* Typing line */}
-                                    <p className="h-5 text-xs font-mono text-cyan-500/70">
-                                        {statusText}<span className="animate-pulse opacity-80">▎</span>
-                                    </p>
+                                    <motion.p
+                                        key={statusTickerIndex}
+                                        initial={reduced ? false : { opacity: 0, y: 5 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.35 }}
+                                        className="text-[10px] md:text-xs font-mono tracking-[0.16em] uppercase text-cyan-500/65"
+                                    >
+                                        {statusTicker[statusTickerIndex]}
+                                    </motion.p>
                                 </motion.div>
                             </div>
-
-                            {/* ── Bento Stats Row ── */}
-                            <motion.div
-                                initial={reduced ? false : { opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5, duration: 0.5 }}
-                                className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-2xl"
-                            >
-                                <StatChip icon={<Cpu size={16} />} label="Specialty" value="Embedded / IoT" delay={0.55} />
-                                <StatChip icon={<MapPin size={16} />} label="Location" value="Srikakulam, AP" delay={0.6} />
-                                <StatChip icon={<Briefcase size={16} />} label="Experience" value="Industrial Intern" delay={0.65} />
-                                <StatChip icon={<GraduationCap size={16} />} label="Degree" value="B.Tech EEE" delay={0.7} />
-                            </motion.div>
-
-                            {/* ── CTA Buttons ── */}
-                            <motion.div
-                                initial={reduced ? false : { opacity: 0, y: 16 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.75, duration: 0.5 }}
-                                className="flex flex-wrap gap-4 justify-center"
-                            >
-                                <a
-                                    href="#projects"
-                                    onClick={(e) => handleNavClick(e, 'Projects')}
-                                    className="group flex items-center gap-2 px-7 py-3 bg-cyan-500 text-black text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.5)] transition-all duration-250 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-                                >
-                                    View Projects
-                                    <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-                                </a>
-                                <a
-                                    href={PROFILE.resume}
-                                    download="Srinivasa_Manikanta_Resume.pdf"
-                                    className="group flex items-center gap-2 px-7 py-3 border border-cyan-500/50 text-cyan-400 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.15)] transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
-                                >
-                                    <Download size={15} className="group-hover:translate-y-0.5 transition-transform duration-200" />
-                                    Download CV
-                                </a>
-                                <a
-                                    href="#contact"
-                                    onClick={(e) => handleNavClick(e, 'Contact')}
-                                    className="flex items-center gap-2 px-7 py-3 border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider rounded-lg hover:border-cyan-500/60 hover:text-cyan-400 hover:bg-cyan-950/20 transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
-                                >
-                                    <Terminal size={15} />
-                                    Initialize Comms
-                                </a>
-                            </motion.div>
 
                             {/* ── Scroll indicator ── */}
                             {!reduced && (
@@ -509,6 +670,7 @@ const Home: React.FC = () => {
                                     aria-label="Scroll to about section"
                                     onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
                                     type="button"
+                                    data-cursor-label="SCROLL"
                                 >
                                     <span className="text-[9px] font-mono text-cyan-500/50 tracking-[0.25em] uppercase">Scroll</span>
                                     <div className="w-px h-8 bg-gradient-to-b from-cyan-500/50 to-transparent" />
@@ -602,6 +764,52 @@ const Home: React.FC = () => {
                                 {/* Right: Bio */}
                                 <div className="lg:col-span-8 p-8 md:p-12 flex flex-col justify-center">
                                     <span className="text-[10px] font-mono text-cyan-500 tracking-widest mb-6">// SYSTEM_BIO_LOGS</span>
+                                    <motion.div
+                                        initial={reduced ? false : { opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.45, ease: 'easeOut' }}
+                                        className="mb-8 space-y-4"
+                                    >
+                                        <p className="min-h-6 w-fit px-3 py-1 rounded border border-cyan-500/30 bg-black/40 text-xs md:text-sm font-mono text-cyan-300 tracking-[0.14em]">
+                                            {heroIntro}<span className="animate-pulse opacity-80">▎</span>
+                                        </p>
+                                        <p className="h-5 text-xs font-mono text-cyan-500/70">
+                                            {statusText}<span className="animate-pulse opacity-80">▎</span>
+                                        </p>
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                            <StatChip icon={<Cpu size={16} />} label="Specialty" value="Embedded / IoT" delay={0.05} />
+                                            <StatChip icon={<MapPin size={16} />} label="Location" value="Srikakulam, AP" delay={0.1} />
+                                            <StatChip icon={<Briefcase size={16} />} label="Experience" value="Industrial Intern" delay={0.15} />
+                                            <StatChip icon={<GraduationCap size={16} />} label="Degree" value="B.Tech EEE" delay={0.2} />
+                                        </div>
+                                        <div className="flex flex-wrap gap-3 pt-1">
+                                            <a
+                                                href="#projects"
+                                                onClick={(e) => handleNavClick(e, 'Projects')}
+                                                className="btn-ripple group flex items-center gap-2 px-5 py-2.5 bg-cyan-500 text-black text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.5)] transition-all duration-250 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                                            >
+                                                View Projects
+                                                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                                            </a>
+                                            <a
+                                                href={PROFILE.resume}
+                                                download="Srinivasa_Manikanta_Resume.pdf"
+                                                className="btn-ripple group flex items-center gap-2 px-5 py-2.5 border border-cyan-500/50 text-cyan-400 text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.15)] transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                                            >
+                                                <Download size={13} className="group-hover:translate-y-0.5 transition-transform duration-200" />
+                                                Download CV
+                                            </a>
+                                            <a
+                                                href="#contact"
+                                                onClick={(e) => handleNavClick(e, 'Contact')}
+                                                className="flex items-center gap-2 px-5 py-2.5 border border-gray-700 text-gray-300 text-xs font-bold uppercase tracking-wider rounded-lg hover:border-cyan-500/60 hover:text-cyan-400 hover:bg-cyan-950/20 transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                                            >
+                                                <Terminal size={13} />
+                                                Initialize Comms
+                                            </a>
+                                        </div>
+                                    </motion.div>
                                     <div
                                         className="space-y-5 text-sm md:text-[15px] leading-relaxed text-gray-300"
                                         style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: 1.75 }}
@@ -692,7 +900,7 @@ const Home: React.FC = () => {
                                         email: <Mail size={17} />,
                                     };
                                     return (
-                                        <a
+                                        <motion.a
                                             key={s.platform}
                                             href={s.url}
                                             target="_blank"
@@ -701,10 +909,12 @@ const Home: React.FC = () => {
                                             role="listitem"
                                             className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-800 text-gray-500
                         hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-cyan-950/20
-                        transition-all duration-250 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                        cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                                            whileHover={{ rotate: 360, scale: 1.2 }}
+                                            transition={{ duration: 0.4, ease: 'easeInOut' }}
                                         >
                                             {icons[s.platform] ?? <Globe size={17} />}
-                                        </a>
+                                        </motion.a>
                                     );
                                 })}
                             </div>
@@ -725,12 +935,46 @@ const Home: React.FC = () => {
 
                             {/* Status pill */}
                             <div className="flex flex-col items-center gap-2">
+                                {/* Live clock */}
+                                {isPowered && clockTime && (
+                                    <div className="font-mono text-[11px] text-cyan-500/60 tracking-[0.15em]">
+                                        {clockTime}
+                                    </div>
+                                )}
+                                {/* Energy pulse */}
+                                {isPowered && (
+                                    <motion.div
+                                        animate={{ scale: [1, 1.08, 1] }}
+                                        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                                        className="flex items-center gap-1.5"
+                                    >
+                                        <span
+                                            className="text-yellow-400"
+                                            style={{ filter: 'drop-shadow(0 0 6px rgba(250,204,21,0.7))' }}
+                                        >⚡</span>
+                                        <span className="text-[9px] font-mono text-gray-600 tracking-widest uppercase">
+                                            Energy Active
+                                        </span>
+                                    </motion.div>
+                                )}
                                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/60 border border-gray-800 rounded-full backdrop-blur-sm">
                                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
                                     <span className="text-[10px] text-gray-500 font-mono tracking-widest">
                                         SYSTEM_ONLINE // {new Date().getFullYear()}
                                     </span>
                                 </div>
+                                {isPowered && (
+                                    <div className="flex items-end gap-1 h-4">
+                                        {[0, 1, 2].map((i) => (
+                                            <motion.div
+                                                key={i}
+                                                className="w-1 rounded-sm bg-cyan-500/70"
+                                                animate={{ height: [3, 8 + i * 2, 4] }}
+                                                transition={{ duration: 0.8 + i * 0.15, repeat: Infinity, repeatType: 'mirror' }}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
                                 <p className="text-[10px] text-gray-700 font-mono">
                                     Built with precision &mdash; {PROFILE.location}
                                 </p>

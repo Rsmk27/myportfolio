@@ -1,9 +1,8 @@
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Project } from '../types';
-import { ExternalLink, Cpu, Info } from 'lucide-react';
-import { ElectricCard } from './ui/electric-card';
+import { ExternalLink, Cpu, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface ProjectChipProps {
@@ -12,13 +11,66 @@ interface ProjectChipProps {
 }
 
 export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [showIntentHints, setShowIntentHints] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const hoverDelayRef = useRef<number | null>(null);
+
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const offsetX = useMotionValue(0);
+  const offsetY = useMotionValue(0);
+  const springX = useSpring(rotateX, { stiffness: 300, damping: 26 });
+  const springY = useSpring(rotateY, { stiffness: 300, damping: 26 });
+  const springOffsetX = useSpring(offsetX, { stiffness: 220, damping: 24 });
+  const springOffsetY = useSpring(offsetY, { stiffness: 220, damping: 24 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isPowered || !cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    rotateX.set(-dy * 12);
+    rotateY.set(dx * 12);
+    offsetX.set(dx * 8);
+    offsetY.set(dy * 8);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+    offsetX.set(0);
+    offsetY.set(0);
+    if (hoverDelayRef.current) window.clearTimeout(hoverDelayRef.current);
+    setShowIntentHints(false);
+    setIsHovered(false);
+  };
+
+  const isGithubProject = Boolean(project.link && project.link.includes('github.com'));
+  const visibleTech = project.tech.slice(0, 4);
+  const hiddenTechCount = Math.max(project.tech.length - visibleTech.length, 0);
 
   return (
     <motion.div
-      className="relative group h-full"
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      ref={cardRef}
+      className="relative group h-full project-card"
+      data-cursor="pointer"
+      onMouseEnter={() => {
+        setIsHovered(true);
+        if (hoverDelayRef.current) window.clearTimeout(hoverDelayRef.current);
+        hoverDelayRef.current = window.setTimeout(() => setShowIntentHints(true), 260);
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX: springX,
+        rotateY: springY,
+        x: springOffsetX,
+        y: springOffsetY,
+        transformPerspective: 1000,
+      }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -73,7 +125,7 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
             />
           )}
           {/* Scanline Overlay */}
@@ -82,10 +134,47 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
           )}
 
           {/* Hover Overlay Actions */}
-          <div className={`absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+          <div className={`absolute inset-0 p-4 flex flex-col justify-between bg-gradient-to-b from-black/70 via-black/55 to-black/75 backdrop-blur-sm transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="flex items-start justify-between">
+              <span className="text-[10px] font-mono tracking-[0.2em] text-cyan-300 uppercase">Live Specs</span>
+              <div className="flex items-center gap-2">
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-8 h-8 rounded-full border border-cyan-500/40 bg-black/60 text-cyan-300 flex items-center justify-center hover:bg-cyan-500/20 hover:text-cyan-100 transition-colors"
+                    aria-label={`Open ${project.title} ${isGithubProject ? 'GitHub' : 'live link'}`}
+                  >
+                    {isGithubProject ? <Github size={14} /> : <ExternalLink size={14} />}
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <motion.div
+              initial={false}
+              animate={{ y: isHovered ? 0 : 12, opacity: isHovered ? 1 : 0 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="grid grid-cols-3 gap-2"
+            >
+              <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2 text-center">
+                <p className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Tech</p>
+                <p className="text-xs text-cyan-300 font-bold">{project.tech.length}</p>
+              </div>
+              <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2 text-center">
+                <p className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Gallery</p>
+                <p className="text-xs text-cyan-300 font-bold">{project.gallery?.length ?? 1}</p>
+              </div>
+              <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2 text-center">
+                <p className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Features</p>
+                <p className="text-xs text-cyan-300 font-bold">{project.features?.length ?? 0}</p>
+              </div>
+            </motion.div>
+
             <Link
               to={`/project/${project.id}`}
-              className="flex items-center gap-2 px-6 py-2 bg-cyan-500 text-black font-bold rounded-full hover:scale-105 transition-transform"
+              className="self-center flex items-center gap-2 px-6 py-2 bg-cyan-500 text-black font-bold rounded-full hover:scale-105 transition-transform"
             >
               <span>View System</span>
               <ExternalLink size={16} />
@@ -99,8 +188,13 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
             {project.description}
           </p>
 
-          <div className="flex flex-wrap gap-2 mt-auto">
-            {project.tech.slice(0, 4).map(t => (
+          <motion.div
+            className="flex flex-wrap gap-2 mt-auto"
+            initial={false}
+            animate={{ opacity: isHovered ? 1 : 0.86, y: isHovered ? 0 : 4 }}
+            transition={{ duration: 0.22 }}
+          >
+            {visibleTech.map(t => (
               <span key={t} className={`text-[10px] px-2 py-1 rounded border font-mono uppercase
                  ${isPowered
                   ? 'border-gray-800 text-cyan-600 bg-cyan-950/10'
@@ -110,12 +204,12 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
                 {t}
               </span>
             ))}
-            {project.tech.length > 4 && (
+            {hiddenTechCount > 0 && (
               <span className={`text-[10px] px-2 py-1 rounded border font-mono uppercase ${isPowered ? 'border-gray-800 text-gray-500' : 'border-gray-200 text-gray-400'}`}>
-                +{project.tech.length - 4}
+                +{hiddenTechCount}
               </span>
             )}
-          </div>
+          </motion.div>
         </div>
 
         {/* Footer Status Bar */}
@@ -124,17 +218,3 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
     </motion.div>
   );
 };
-
-const Pin: React.FC<{ active: boolean; delay: number }> = ({ active, delay }) => (
-  <motion.div
-    className="w-3 h-1.5 bg-gradient-to-r from-gray-700 to-gray-500 rounded-sm relative"
-    animate={active ? {
-      boxShadow: ["0 0 0px #00f2ff", "0 0 8px #00f2ff", "0 0 0px #00f2ff"]
-    } : {}}
-    transition={{
-      duration: 2,
-      repeat: Infinity,
-      delay: delay
-    }}
-  />
-);

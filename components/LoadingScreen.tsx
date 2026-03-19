@@ -5,13 +5,13 @@ interface LoadingScreenProps {
 }
 
 const LOADING_STAGES = [
-    { progress: 0, message: 'Initializing systems...' },
-    { progress: 15, message: 'Loading circuit modules...' },
-    { progress: 30, message: 'Establishing connections...' },
-    { progress: 50, message: 'Compiling components...' },
-    { progress: 70, message: 'Rendering interface...' },
-    { progress: 85, message: 'Optimizing performance...' },
-    { progress: 100, message: 'System ready!' }
+    { progress: 0,   message: '⚡ Powering GridForge...' },
+    { progress: 15,  message: '⚡ Initializing energy nodes...' },
+    { progress: 30,  message: '⚡ Connecting smart grid...' },
+    { progress: 50,  message: '⚡ Loading circuit modules...' },
+    { progress: 70,  message: '⚡ Calibrating sensors...' },
+    { progress: 85,  message: '⚡ Establishing uplink...' },
+    { progress: 100, message: '⚡ System ready!' },
 ];
 
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
