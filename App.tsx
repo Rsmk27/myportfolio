@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 import Gallery from './pages/Gallery';
 import NotFound from './pages/NotFound';
+import { CustomCursor } from './components/CustomCursor';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -41,6 +42,7 @@ const AnimatedRoutes: React.FC = () => {
 const App: React.FC = () => {
     return (
         <HelmetProvider>
+            <CustomCursor />
             <Router>
                 <ScrollToTop />
                 <AnimatedRoutes />

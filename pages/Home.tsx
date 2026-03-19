@@ -7,7 +7,6 @@ import { CertificationsBlock } from '../components/CertificationsBlock';
 import { TimelineSystem } from '../components/TimelineSystem';
 import { ContactInterface } from '../components/ContactInterface';
 import { LoadingScreen } from '../components/LoadingScreen';
-import { CustomCursor } from '../components/CustomCursor';
 import { EasterEgg } from '../components/EasterEgg';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import {
@@ -215,7 +214,6 @@ const Home: React.FC = () => {
 
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30" style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
-            <CustomCursor />
             <EasterEgg />
             <Helmet>
                 {/* Title */}
