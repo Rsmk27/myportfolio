@@ -129,41 +129,547 @@ pre,
     animation: tag-shine 3s infinite linear;
 }
 
-/* Loading Screen Styles */
+/* ════════════════════════════════════════════
+   CUSTOM CURSOR
+   ════════════════════════════════════════════ */
+
+/* Hide native cursor everywhere */
+*,
+*::before,
+*::after {
+    cursor: none !important;
+}
+
+/* The rotating dashed arc that appears around project/zoom cursor */
+@keyframes cursor-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ════════════════════════════════════════════
+   LOADING SCREEN
+   ════════════════════════════════════════════ */
+
 .loading-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #0A0A0A;
+    background: #050505;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    overflow: hidden;
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0.7s ease,
+        transform 0.7s ease;
 }
 
 .loading-screen.fade-out {
     opacity: 0;
     visibility: hidden;
+    transform: scale(1.04);
 }
 
+/* ── Scanlines ── */
+.ls-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 242, 255, 0.018) 2px,
+            rgba(0, 242, 255, 0.018) 4px);
+    pointer-events: none;
+    z-index: 1;
+    animation: ls-scan-drift 8s linear infinite;
+}
+
+@keyframes ls-scan-drift {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 400px;
+    }
+}
+
+/* ── Grid background ── */
+.ls-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, rgba(0, 242, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 242, 255, 0.055) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+    animation: ls-grid-breathe 3s ease-in-out infinite alternate;
+}
+
+@keyframes ls-grid-breathe {
+    from {
+        opacity: 0.35;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ── Falling particles ── */
+.ls-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.ls-particle {
+    position: absolute;
+    top: -24px;
+    color: var(--primary-cyan);
+    opacity: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    animation: ls-particle-fall linear infinite;
+    filter: drop-shadow(0 0 4px var(--primary-cyan));
+}
+
+@keyframes ls-particle-fall {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 0.65;
+    }
+
+    88% {
+        opacity: 0.25;
+    }
+
+    100% {
+        transform: translateY(105vh);
+        opacity: 0;
+    }
+}
+
+/* ── Corner HUD brackets ── */
+.ls-corner {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-color: var(--primary-cyan);
+    border-style: solid;
+    z-index: 5;
+    opacity: 0;
+    animation: ls-appear 0.5s ease forwards 0.2s;
+}
+
+.ls-corner-tl {
+    top: 20px;
+    left: 20px;
+    border-width: 2px 0 0 2px;
+}
+
+.ls-corner-tr {
+    top: 20px;
+    right: 20px;
+    border-width: 2px 2px 0 0;
+}
+
+.ls-corner-bl {
+    bottom: 20px;
+    left: 20px;
+    border-width: 0 0 2px 2px;
+}
+
+.ls-corner-br {
+    bottom: 20px;
+    right: 20px;
+    border-width: 0 2px 2px 0;
+}
+
+@keyframes ls-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ── HUD bars ── */
+.ls-hud-bar {
+    position: absolute;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 5;
+    opacity: 0;
+    animation: ls-appear 0.5s ease forwards 0.4s;
+}
+
+.ls-hud-top {
+    top: 24px;
+}
+
+.ls-hud-bottom {
+    bottom: 24px;
+}
+
+.ls-hud-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: rgba(0, 242, 255, 0.5);
+    text-transform: uppercase;
+}
+
+.ls-blink {
+    animation: blink 1.2s step-end infinite;
+}
+
+/* ── Main content block ── */
 .loading-content {
     text-align: center;
-    max-width: 500px;
+    width: min(520px, 90vw);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 10;
 }
 
-.circuit-logo {
+/* ── Logo wrapper + rotating rings ── */
+.ls-logo-wrapper {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+}
+
+.ls-ring {
+    position: absolute;
+    border-radius: 50%;
+    border-style: solid;
+}
+
+.ls-ring-outer {
+    width: 228px;
+    height: 228px;
+    border-width: 1px;
+    border-color: rgba(0, 242, 255, 0.35) transparent rgba(0, 242, 255, 0.35) transparent;
+    animation: ls-spin-cw 8s linear infinite;
+}
+
+.ls-ring-mid {
     width: 200px;
     height: 200px;
-    margin: 0 auto 40px;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: transparent rgba(0, 242, 255, 0.55) transparent rgba(0, 242, 255, 0.55);
+    animation: ls-spin-ccw 5s linear infinite;
 }
 
+.ls-ring-inner {
+    width: 172px;
+    height: 172px;
+    border-width: 1px;
+    border-color: rgba(0, 242, 255, 0.15);
+    box-shadow:
+        0 0 22px rgba(0, 242, 255, 0.08) inset,
+        0 0 44px rgba(0, 242, 255, 0.04);
+    animation: ls-ring-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ls-spin-cw {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ls-spin-ccw {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes ls-ring-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 22px rgba(0, 242, 255, 0.08) inset, 0 0 44px rgba(0, 242, 255, 0.04);
+    }
+
+    50% {
+        box-shadow: 0 0 36px rgba(0, 242, 255, 0.20) inset, 0 0 64px rgba(0, 242, 255, 0.12);
+    }
+}
+
+/* ── Circuit logo ── */
+.circuit-logo {
+    width: 148px;
+    height: 148px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Glitchy name ── */
+.ls-name {
+    font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+    margin: 0 0 10px;
+    line-height: 1;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards 0.3s;
+    position: relative;
+}
+
+.ls-name-line1 {
+    font-size: clamp(26px, 5.5vw, 44px);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.68) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.ls-name-line2 {
+    font-size: clamp(30px, 6.5vw, 52px);
+    font-weight: 900;
+    letter-spacing: 0.09em;
+    -webkit-text-fill-color: var(--primary-cyan);
+    color: var(--primary-cyan);
+    text-shadow: 0 0 22px rgba(0, 242, 255, 0.55), 0 0 45px rgba(0, 242, 255, 0.22);
+}
+
+/* — Glitch burst animation — */
+.ls-glitch .ls-name-line1 {
+    animation: ls-glitch-top 0.18s steps(2) 1;
+}
+
+.ls-glitch .ls-name-line2 {
+    animation: ls-glitch-bot 0.18s steps(2) 1;
+}
+
+@keyframes ls-glitch-top {
+    0% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(-5px) skewX(-3deg);
+        filter: hue-rotate(40deg) brightness(1.3);
+    }
+
+    50% {
+        transform: translateX(5px) skewX(2deg);
+    }
+
+    75% {
+        transform: translateX(-2px);
+    }
+
+    100% {
+        transform: none;
+        filter: none;
+    }
+}
+
+@keyframes ls-glitch-bot {
+    0% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(6px) skewX(4deg);
+    }
+
+    50% {
+        transform: translateX(-4px) skewX(-2deg);
+    }
+
+    75% {
+        transform: translateX(2px);
+    }
+
+    100% {
+        transform: none;
+    }
+}
+
+/* ── Subtitle tags ── */
+.ls-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards 0.5s;
+}
+
+.ls-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: rgba(0, 242, 255, 0.65);
+    letter-spacing: 0.07em;
+}
+
+.ls-tag-sep {
+    color: rgba(0, 242, 255, 0.28);
+    font-size: 12px;
+}
+
+/* ── Progress block ── */
+.progress-container {
+    width: 100%;
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards 0.6s;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    overflow: visible;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #004f66 0%, var(--primary-cyan) 82%, #9ff8ff 100%);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.25s ease;
+    position: relative;
+    box-shadow: 0 0 12px var(--primary-cyan), 0 0 28px rgba(0, 242, 255, 0.28);
+}
+
+/* Bright leading pip */
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: -1px;
+    width: 3px;
+    height: 9px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--primary-cyan), 0 0 18px var(--primary-cyan);
+}
+
+.ls-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-percentage {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary-cyan);
+    letter-spacing: 0.06em;
+}
+
+/* ── Status text ── */
+.loading-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #777;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.terminal-prompt {
+    color: var(--primary-cyan);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+#status-text::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+}
+
+/* ── Boot log terminal ── */
+.ls-terminal {
+    width: 100%;
+    height: 88px;
+    overflow-y: auto;
+    background: rgba(0, 242, 255, 0.028);
+    border: 1px solid rgba(0, 242, 255, 0.10);
+    border-radius: 4px;
+    padding: 8px 10px;
+    text-align: left;
+    scrollbar-width: none;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards 0.8s;
+}
+
+.ls-terminal::-webkit-scrollbar {
+    display: none;
+}
+
+.ls-log-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(0, 242, 255, 0.42);
+    line-height: 1.75;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: ls-log-slide 0.18s ease forwards;
+}
+
+.ls-log-line:last-child {
+    color: rgba(0, 242, 255, 0.78);
+}
+
+@keyframes ls-log-slide {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ════════════════════════════════════════════
+   CIRCUIT SVG ANIMATION CLASSES
+   ════════════════════════════════════════════ */
 .chip {
     fill: var(--bg-panel);
     stroke: var(--primary-cyan);
@@ -181,7 +687,7 @@ pre,
 
     50% {
         opacity: 0.8;
-        filter: drop-shadow(0 0 12px var(--primary-glow));
+        filter: drop-shadow(0 0 16px rgba(0, 242, 255, 0.45));
     }
 }
 
@@ -297,12 +803,12 @@ pre,
 @keyframes nodeAppear {
     to {
         opacity: 1;
-        filter: drop-shadow(0 0 4px var(--primary-glow));
+        filter: drop-shadow(0 0 6px rgba(0, 242, 255, 0.85));
     }
 }
 
 .signal-dot {
-    fill: #FFFFFF;
+    fill: #fff;
     opacity: 0;
     filter: drop-shadow(0 0 4px var(--primary-cyan));
     animation: signalFlow 2s ease-in-out infinite;
@@ -348,14 +854,6 @@ pre,
     animation-delay: 1.9s;
 }
 
-.signal-dot.dot-3 {
-    animation-delay: 1.6s;
-}
-
-.signal-dot.dot-4 {
-    animation-delay: 1.8s;
-}
-
 @keyframes signalFlow {
 
     0%,
@@ -378,104 +876,19 @@ pre,
     }
 }
 
-.loading-name {
-    font-size: 32px;
-    font-weight: 700;
-    color: #FFFFFF;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeInUp 0.6s ease forwards 0.5s;
-}
-
+/* ════════════════════════════════════════════
+   SHARED KEYFRAMES
+   ════════════════════════════════════════════ */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(16px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.progress-container {
-    margin-bottom: 24px;
-    width: 100%;
-    opacity: 0;
-    animation: fadeInUp 0.6s ease forwards 0.7s;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 4px;
-    background: #1F1F1F;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 8px;
-    position: relative;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-cyan) 0%, #0284C7 100%);
-    border-radius: 2px;
-    width: 0%;
-    transition: width 0.3s ease;
-    position: relative;
-    box-shadow: 0 0 10px var(--primary-glow);
-}
-
-.progress-fill::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 30px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
-    animation: shimmer 1s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-    0% {
-        transform: translateX(-30px);
-    }
-
-    100% {
-        transform: translateX(30px);
-    }
-}
-
-.progress-percentage {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    color: var(--primary-cyan);
-    text-align: right;
-}
-
-.loading-text {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    color: #A3A3A3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    opacity: 0;
-    animation: fadeInUp 0.6s ease forwards 0.9s;
-}
-
-.terminal-prompt {
-    color: var(--primary-cyan);
-    font-weight: 700;
-}
-
-#status-text::after {
-    content: '_';
-    animation: blink 1s step-end infinite;
 }
 
 @keyframes blink {
@@ -490,7 +903,9 @@ pre,
     }
 }
 
-/* Main Content transitions */
+/* ════════════════════════════════════════════
+   MAIN CONTENT TRANSITION
+   ════════════════════════════════════════════ */
 .main-content {
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -500,7 +915,9 @@ pre,
     opacity: 1;
 }
 
-/* Button Ripple Effect */
+/* ════════════════════════════════════════════
+   BUTTON RIPPLE EFFECT
+   ════════════════════════════════════════════ */
 .btn-ripple {
     position: relative;
     overflow: hidden;
