@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, Zap, Fan, Box, Sparkles, LucideIcon, Wifi, Award, ExternalLink, X, ChevronRight } from 'lucide-react';
+import GlareHover from './ui/GlareHover';
 
 interface CertificationsBlockProps {
     isPowered: boolean;
@@ -115,55 +116,65 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
             transition={{ delay: idx * 0.1 }}
             viewport={{ once: true }}
             whileHover={{ y: -5, scale: 1.02 }}
-            onClick={onClick}
-            className={`group relative p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 overflow-hidden
-                ${isPowered
-                    ? 'bg-[#0f0f0f] border-gray-800 hover:border-cyan-500/50 hover:shadow-[0_10px_30px_rgba(0,242,255,0.1)]'
-                    : 'bg-white border-gray-200 hover:shadow-xl'
-                }`}
+            className="group"
         >
-            {/* Decorative Top Border */}
-            <div className={`absolute top-0 left-0 right-0 h-1.5 transition-colors duration-300 ${isPowered ? 'bg-gray-800 group-hover:bg-cyan-500' : 'bg-gray-200 group-hover:bg-gray-800'}`} />
-
-            <div className="flex justify-between items-start mb-6 pt-2">
-                <div className={`p-3 rounded-lg border ${isPowered ? 'bg-black border-gray-800 text-cyan-400' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
-                    <cert.icon size={24} strokeWidth={1.5} />
-                </div>
-                <div className={`flex items-center gap-1.5 px-2 py-1 rounded text-[10px] font-mono font-bold uppercase
-                    ${isPowered ? 'bg-cyan-950/30 text-cyan-300' : 'bg-gray-100 text-gray-600'}`}>
-                    <Award size={12} />
-                    <span>Verified</span>
-                </div>
-            </div>
-
-            <div className="mb-6">
-                <h4 className={`text-lg font-bold leading-tight mb-2 line-clamp-2 ${isPowered ? 'text-white' : 'text-gray-900'}`}>
-                    {cert.title}
-                </h4>
-                <div className="flex items-center justify-between">
-                    <p className={`text-xs font-mono uppercase tracking-wide ${isPowered ? 'text-gray-500' : 'text-gray-500'}`}>
-                        {cert.issuer}
-                    </p>
-                    <p className={`text-xs font-bold ${isPowered ? 'text-gray-600' : 'text-gray-400'}`}>
-                        '{cert.year.slice(-2)}
-                    </p>
-                </div>
-
-            </div>
-
-            {/* View Credential Button - Appears on Hover */}
-            <div className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-all duration-300
-                ${isPowered
-                    ? 'text-cyan-500 opacity-60 group-hover:opacity-100 group-hover:translate-x-1'
-                    : 'text-blue-600 opacity-60 group-hover:opacity-100'
-                }`}
+            <GlareHover
+                width="100%"
+                height="100%"
+                background={isPowered ? '#0f0f0f' : '#ffffff'}
+                borderRadius="0.75rem"
+                borderColor={isPowered ? '#1f2937' : '#e5e7eb'}
+                glareColor={isPowered ? '#22d3ee' : '#ffffff'}
+                glareOpacity={isPowered ? 0.2 : 0.35}
+                glareSize={260}
+                transitionDuration={650}
+                className="relative p-6 transition-all duration-300 overflow-hidden"
+                onClick={onClick}
             >
-                <span>View Credential</span>
-                <ChevronRight size={14} />
-            </div>
+                {/* Decorative Top Border */}
+                <div className={`absolute top-0 left-0 right-0 h-1.5 transition-colors duration-300 ${isPowered ? 'bg-gray-800 group-hover:bg-cyan-500' : 'bg-gray-200 group-hover:bg-gray-800'}`} />
 
-            {/* Watermark Icon */}
-            <cert.icon className={`absolute -bottom-6 -right-6 w-32 h-32 opacity-5 pointer-events-none transition-transform duration-500 group-hover:rotate-12 ${isPowered ? 'text-white' : 'text-black'}`} />
+                <div className="w-full">
+                    <div className="flex justify-between items-start mb-6 pt-2">
+                        <div className={`p-3 rounded-lg border ${isPowered ? 'bg-black border-gray-800 text-cyan-400' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
+                            <cert.icon size={24} strokeWidth={1.5} />
+                        </div>
+                        <div className={`flex items-center gap-1.5 px-2 py-1 rounded text-[10px] font-mono font-bold uppercase
+                    ${isPowered ? 'bg-cyan-950/30 text-cyan-300' : 'bg-gray-100 text-gray-600'}`}>
+                            <Award size={12} />
+                            <span>Verified</span>
+                        </div>
+                    </div>
+
+                    <div className="mb-6">
+                        <h4 className={`text-lg font-bold leading-tight mb-2 line-clamp-2 ${isPowered ? 'text-white' : 'text-gray-900'}`}>
+                            {cert.title}
+                        </h4>
+                        <div className="flex items-center justify-between">
+                            <p className={`text-xs font-mono uppercase tracking-wide ${isPowered ? 'text-gray-500' : 'text-gray-500'}`}>
+                                {cert.issuer}
+                            </p>
+                            <p className={`text-xs font-bold ${isPowered ? 'text-gray-600' : 'text-gray-400'}`}>
+                                '{cert.year.slice(-2)}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* View Credential Button - Appears on Hover */}
+                    <div className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-all duration-300
+                ${isPowered
+                            ? 'text-cyan-500 opacity-60 group-hover:opacity-100 group-hover:translate-x-1'
+                            : 'text-blue-600 opacity-60 group-hover:opacity-100'
+                        }`}
+                    >
+                        <span>View Credential</span>
+                        <ChevronRight size={14} />
+                    </div>
+                </div>
+
+                {/* Watermark Icon */}
+                <cert.icon className={`absolute -bottom-6 -right-6 w-32 h-32 opacity-5 pointer-events-none transition-transform duration-500 group-hover:rotate-12 ${isPowered ? 'text-white' : 'text-black'}`} />
+            </GlareHover>
         </motion.div>
     );
 };
