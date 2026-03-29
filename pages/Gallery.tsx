@@ -49,39 +49,49 @@ const Gallery: React.FC = () => {
         <meta name="description" content="An interactive dome gallery of project snapshots, workshop moments, and build visuals." />
       </Helmet>
 
-      <div className="relative z-10 pt-24 pb-10 container mx-auto px-6 max-w-7xl h-screen">
-        <div className="mb-6">
-          <Link to="/" className="inline-flex items-center gap-2 mb-6 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group">
+      {/* Full-screen layout: header + dome fills remaining height */}
+      <div className="relative z-10 flex flex-col" style={{ height: '100dvh', minHeight: '100vh' }}>
+
+        {/* ── Header ── */}
+        <div className="flex-shrink-0 pt-16 pb-3 px-4 sm:px-6 md:pt-20 md:pb-4 md:px-8 max-w-7xl mx-auto w-full">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 mb-3 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group"
+          >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Dashboard</span>
           </Link>
 
-          <h1 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight flex items-center gap-4">
-            <ImageIcon size={42} className="text-cyan-500" />
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-1 md:mb-2 uppercase tracking-tight flex items-center gap-3">
+            <ImageIcon size={32} className="text-cyan-500 sm:w-10 sm:h-10" />
             Gallery Dome
           </h1>
-          <p className="text-gray-400 max-w-3xl text-base md:text-lg">
-            Drag to rotate the dome. Tap any tile to expand it and inspect details.
+          <p className="text-gray-400 text-sm md:text-base">
+            Drag to rotate the dome.{' '}
+            <span className="hidden sm:inline">Tap</span>
+            <span className="sm:hidden">Touch</span>
+            {' '}any tile to expand it.
           </p>
         </div>
 
-        <div className="relative h-[calc(100vh-220px)] min-h-[500px]">
+        {/* ── Dome (fills remaining viewport height) ── */}
+        <div className="flex-1 relative min-h-0">
           <DomeGallery
             images={GALLERY_IMAGES}
             quality="auto"
             fit={0.48}
             fitBasis="auto"
-            minRadius={360}
+            minRadius={280}
             maxRadius={760}
-            padFactor={0.14}
+            padFactor={0.12}
             overlayBlurColor="#05070d"
             maxVerticalRotationDeg={6}
-            dragSensitivity={22}
+            dragSensitivity={20}
             enlargeTransitionMs={220}
             segments={22}
             dragDampening={0.8}
-            openedImageWidth="420px"
-            openedImageHeight="420px"
+            openedImageWidth="min(420px, 90vw)"
+            openedImageHeight="min(420px, 80vh)"
             imageBorderRadius="18px"
             openedImageBorderRadius="18px"
             grayscale={false}
