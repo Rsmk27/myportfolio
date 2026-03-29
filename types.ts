@@ -10,6 +10,7 @@ export interface Project {
   gallery?: string[];
   features?: string[];
   award?: string;
+  awards?: string[];
 }
 
 export interface Skill {

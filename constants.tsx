@@ -167,7 +167,8 @@ export const PROJECTS: Project[] = [
       '/assets/firefighter-monitoring-device/departmental-first-4.jpg',
       '/assets/firefighter-monitoring-device/departmental-first-5.jpg'
     ],
-    award: '🏆 Departmental 1st Prize'
+    award: '🏆 Departmental 1st Prize',
+    awards: ['🏆 Departmental 1st Prize', '🏅 Hackathon Winner']
   }
 ];
 

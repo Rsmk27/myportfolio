@@ -51,6 +51,19 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
   const isGithubProject = Boolean(project.link && project.link.includes('github.com'));
   const visibleTech = project.tech.slice(0, 4);
   const hiddenTechCount = Math.max(project.tech.length - visibleTech.length, 0);
+  const awardTags = project.awards ?? (project.award ? [project.award] : []);
+  const getAwardBadgeClasses = (awardTag: string) => {
+    const isHackathonTag = awardTag.toLowerCase().includes('hackathon');
+    if (isPowered) {
+      return isHackathonTag
+        ? 'text-lime-300 bg-lime-500/10 border border-lime-500/30'
+        : 'text-amber-400 bg-amber-500/10 border border-amber-500/30';
+    }
+
+    return isHackathonTag
+      ? 'text-lime-800 bg-lime-100 border border-lime-300'
+      : 'text-amber-700 bg-amber-100 border border-amber-300';
+  };
 
   return (
     <motion.div
@@ -99,18 +112,18 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
           ${isPowered ? 'bg-[#0f0f0f] border-gray-800' : 'bg-gray-50 border-gray-200'}`}
         >
           <div>
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex flex-col items-start gap-1 mb-1">
               <div className={`text-[10px] font-mono uppercase tracking-widest ${isPowered ? 'text-gray-500' : 'text-gray-400'}`}>
                 PROJECT_ID: {project.id}
               </div>
-              {project.award && (
-                <span className={`relative overflow-hidden shine-effect text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-sm whitespace-nowrap
-                  ${isPowered
-                    ? 'text-amber-400 bg-amber-500/10 border border-amber-500/30'
-                    : 'text-amber-700 bg-amber-100 border border-amber-300'}`}>
-                  <span className="relative z-10">{project.award}</span>
+              {awardTags.map((awardTag) => (
+                <span
+                  key={awardTag}
+                  className={`relative overflow-hidden shine-effect text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-sm whitespace-nowrap mt-0.5 ${getAwardBadgeClasses(awardTag)}`}
+                >
+                  <span className="relative z-10">{awardTag}</span>
                 </span>
-              )}
+              ))}
             </div>
             <h3 className={`text-xl font-bold leading-tight pr-2 ${isPowered ? 'text-white' : 'text-gray-900'}`}>
               {project.title}
