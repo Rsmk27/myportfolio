@@ -60,90 +60,13 @@ export const EDUCATION: Education[] = [
 
 export const PROJECTS: Project[] = [
   {
-    id: 'p1',
-    title: 'ColorOhm - Resistor Calculator',
-    description: 'A precision tool for decoding resistor color bands. Visual resistor color code calculator supporting 4 & 5 band standards with zero latency.',
-    tech: ['JavaScript', 'CSS3 Variables', 'DOM Manipulation', 'Practical EEE utility'],
-    image: '/assets/color-ohm-resistor-calculator-tool.webp',
-    link: 'https://colorohm.rsmk.me'
-  },
-  {
-    id: 'p2',
-    title: 'Solar Squad (SPDS)',
-    description: 'Solar-Powered Dewatering System. Concept project replacing diesel-based dewatering with solar energy.',
-    tech: ['Solar PV', 'Arduino', 'Power Electronics', 'Sensors'],
-    image: '/assets/ai-chatbot-interface-background.webp',
-    link: 'https://spds.rsmk.me'
-  },
-  {
-    id: 'p3',
-    title: 'Auto Exhaust Fan',
-    description: 'Intelligent ventilation system that automatically detects harmful gases and smoke to ensure safer environments.',
-    tech: ['Arduino', 'C++', 'MQ-2 Sensor', 'Relay Module', 'IoT'],
-    image: '/assets/smart-exhaust-gas-detection-system.webp',
-    link: 'https://autoexhaustfan.rsmk.co.in/',
-    details: "The Auto Exhaust Fan is an intelligent safety system designed to prevent gas-related accidents and ensure fresh air circulation. Built around an Arduino UNO and MQ-2 Gas/Smoke sensor, it continuously monitors air quality. Upon detecting hazardous levels of smoke or gas, the system automatically triggers a 5V relay to switch on a high-power exhaust fan, effectively ventilating the space. This solution addresses the risks of human error in manual ventilation control and is ideal for kitchens, workshops, and chemical storage areas.",
-    features: [
-      "Automatic Detection of Smoke & Gas",
-      "Instant Response via Relay Actuation",
-      "Real-time Sensor Monitoring",
-      "Energy Efficient Operation"
-    ],
-    gallery: [
-      '/assets/auto-exhaust-fan/demo-video.mp4',
-      '/assets/smart-exhaust-gas-detection-system.webp',
-      '/assets/auto-exhaust-fan/image-1.jpg',
-      '/assets/auto-exhaust-fan/image-2.jpg',
-      '/assets/auto-exhaust-fan/image-3.jpg'
-    ]
-  },
-  {
-    id: 'p4',
-    title: 'GridForge',
-    description: 'Full-stack power system simulation platform. Bridges MATLAB computation with web interactivity.',
-    tech: ['MATLAB API', 'Python (Flask)', 'React', 'Power Systems'],
-    image: '/assets/gridforge-power-system-simulation.webp',
-    details: "GridForge is a comprehensive power system simulation platform that bridges the gap between complex MATLAB computations and accessible web interfaces. It allows engineers and students to simulate power grids, analyze load flow, and visualize results in real-time without needing local MATLAB installations. The system uses a Python Flask backend to interface with the MATLAB engine, processing simulation requests and returning data to a modern React frontend.",
-    features: [
-      "Real-time Power Flow Analysis via Web Interface",
-      "MATLAB Integration for High-Precision Computation",
-      "Interactive Graph & Network Visualizations",
-      "Scenario Management & Historical Data Tracking"
-    ],
-    gallery: [
-      '/assets/gridforge/web-dashboard-interface.png',
-      '/assets/gridforge/matlab-simulation-model.png',
-      '/assets/gridforge/simulation-results.png',
-      '/assets/gridforge/backend-api-code.png'
-    ]
-  },
-  {
-    id: 'p5',
-    title: 'Budget Buddy',
-    description: 'Fintech expense tracker with real-time visualization and Google Auth integration.',
-    tech: ['React', 'Firebase', 'Chart.js', 'Google OAuth'],
-    image: '/assets/budget-buddy-expense-tracker-app.webp',
-    details: "Budget Buddy is a full-featured personal finance management application designed to help users track their income, expenses, and savings in real time. Built with React and Firebase, it provides a seamless, cross-device experience with Google OAuth for secure, passwordless sign-in. The dashboard presents a rich overview of spending patterns through Chart.js powered visualizations — including donut charts for category breakdown and line graphs for monthly trends. Users can categorize transactions, set monthly budgets, and receive visual alerts when nearing limits.",
-    features: [
-      "Google OAuth for Secure, Passwordless Sign-In",
-      "Real-time Firestore Sync Across Devices",
-      "Interactive Expense Breakdown with Chart.js Donut & Line Charts",
-      "Category-based Budget Tracking with Limit Alerts",
-      "Monthly Summary Reports with Trend Analysis",
-      "Add, Edit, and Delete Transactions with Instant Updates"
-    ],
-    gallery: [
-      '/assets/budget-buddy-expense-tracker-app.webp'
-    ]
-  },
-  {
     id: 'p6',
-    title: 'Sustainable Firefighter Monitoring Device (SFMD)',
+    title: 'Firefighter Safety Device',
     description: "An IoT-based wearable safety device that continuously monitors a firefighter's physical condition, movement, and location in real time, presenting this data on a centralized web dashboard for commanders.",
     tech: ['ESP32', 'C++', 'Firebase RTDB', 'Next.js 16', 'Tailwind CSS v4', 'MPU-6050', 'DHT11', 'Neo-6M GPS'],
     image: '/assets/firefighter-monitoring-device.webp',
-    link: 'https://github.com/Rsmk27/firefighter-monitoring-device',
-    details: "The Sustainable Firefighter Monitoring Device (SFMD) is a real-time IoT safety solution for firefighters. A wearable device worn by the firefighter collects sensor data (motion, temperature, GPS location) and transmits it over Wi-Fi to a Firebase backend. A web dashboard hosted by fire commanders provides instant situational awareness, showing the firefighter's current status, location on a live map, environmental data, and a history of all alerts and events. The firmware operates as a state machine handling STARTUP, NORMAL, WARNING, EMERGENCY, and SOS states based on sensor logic and time elapsed without movement.",
+    link: 'https://sfmd.rsmk.co.in/',
+    details: "The Firefighter Safety Device is a real-time IoT safety solution for firefighters. A wearable device worn by the firefighter collects sensor data (motion, temperature, GPS location) and transmits it over Wi-Fi to a Firebase backend. A web dashboard hosted by fire commanders provides instant situational awareness, showing the firefighter's current status, location on a live map, environmental data, and a history of all alerts and events. The firmware operates as a state machine handling STARTUP, NORMAL, WARNING, EMERGENCY, and SOS states based on sensor logic and time elapsed without movement.",
     features: [
       "Automatic Emergency Detection — no movement (man-down) & high temperature",
       "Manual SOS button for immediate distress signaling overriding other states",
@@ -169,6 +92,64 @@ export const PROJECTS: Project[] = [
     ],
     award: '🏆 Departmental 1st Prize',
     awards: ['🏆 Departmental 1st Prize', '🏅 Hackathon Winner']
+  },
+  {
+    id: 'p1',
+    title: 'ColorOhm - Resistor Calculator',
+    description: 'A precision tool for decoding resistor color bands. Visual resistor color code calculator supporting 4 & 5 band standards with zero latency. Available as both a website and a mobile app.',
+    tech: ['JavaScript', 'CSS3 Variables', 'DOM Manipulation', 'Practical EEE utility'],
+    image: '/assets/color-ohm-resistor-calculator-tool.webp',
+    link: 'https://colorohm.rsmk.me/'
+  },
+  {
+    id: 'p3',
+    title: 'Auto Exhaust Fan',
+    description: 'Intelligent ventilation system that automatically detects harmful gases and smoke to ensure safer environments.',
+    tech: ['Arduino', 'C++', 'MQ-2 Sensor', 'Relay Module', 'IoT'],
+    image: '/assets/smart-exhaust-gas-detection-system.webp',
+    link: 'https://autoexhaustfan.rsmk.co.in/',
+    details: "The Auto Exhaust Fan is an intelligent safety system designed to prevent gas-related accidents and ensure fresh air circulation. Built around an Arduino UNO and MQ-2 Gas/Smoke sensor, it continuously monitors air quality. Upon detecting hazardous levels of smoke or gas, the system automatically triggers a 5V relay to switch on a high-power exhaust fan, effectively ventilating the space. This solution addresses the risks of human error in manual ventilation control and is ideal for kitchens, workshops, and chemical storage areas.",
+    features: [
+      "Automatic Detection of Smoke & Gas",
+      "Instant Response via Relay Actuation",
+      "Real-time Sensor Monitoring",
+      "Energy Efficient Operation"
+    ],
+    gallery: [
+      '/assets/auto-exhaust-fan/demo-video.mp4',
+      '/assets/smart-exhaust-gas-detection-system.webp',
+      '/assets/auto-exhaust-fan/image-1.jpg',
+      '/assets/auto-exhaust-fan/image-2.jpg',
+      '/assets/auto-exhaust-fan/image-3.jpg'
+    ]
+  },
+  {
+    id: 'p2',
+    title: 'Solar Squad (SPDS)',
+    description: 'Solar-Powered Dewatering System. Concept project replacing diesel-based dewatering with solar energy.',
+    tech: ['Solar PV', 'Arduino', 'Power Electronics', 'Sensors'],
+    image: '/assets/ai-chatbot-interface-background.webp',
+    link: 'https://spds.rsmk.me/'
+  },
+  {
+    id: 'p5',
+    title: 'Budget Buddy',
+    description: 'Fintech expense tracker with real-time visualization and Google Auth integration.',
+    tech: ['React', 'Firebase', 'Chart.js', 'Google OAuth'],
+    image: '/assets/budget-buddy-expense-tracker-app.webp',
+    link: 'https://budgetbuddy.rsmk.co.in/',
+    details: "Budget Buddy is a full-featured personal finance management application designed to help users track their income, expenses, and savings in real time. Built with React and Firebase, it provides a seamless, cross-device experience with Google OAuth for secure, passwordless sign-in. The dashboard presents a rich overview of spending patterns through Chart.js powered visualizations — including donut charts for category breakdown and line graphs for monthly trends. Users can categorize transactions, set monthly budgets, and receive visual alerts when nearing limits.",
+    features: [
+      "Google OAuth for Secure, Passwordless Sign-In",
+      "Real-time Firestore Sync Across Devices",
+      "Interactive Expense Breakdown with Chart.js Donut & Line Charts",
+      "Category-based Budget Tracking with Limit Alerts",
+      "Monthly Summary Reports with Trend Analysis",
+      "Add, Edit, and Delete Transactions with Instant Updates"
+    ],
+    gallery: [
+      '/assets/budget-buddy-expense-tracker-app.webp'
+    ]
   }
 ];
 

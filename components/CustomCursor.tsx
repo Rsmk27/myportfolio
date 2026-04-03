@@ -147,8 +147,8 @@ export const CustomCursor: React.FC = () => {
 
         const onLeave = () => setVisible(false);
         const onEnter = () => setVisible(true);
-        const onDown  = () => setClicking(true);
-        const onUp    = () => setClicking(false);
+        const onDown = () => setClicking(true);
+        const onUp = () => setClicking(false);
 
         window.addEventListener('mousemove', onMove);
         window.addEventListener('mouseover', classify);
@@ -197,8 +197,8 @@ export const CustomCursor: React.FC = () => {
                         scale: clicking
                             ? 0.6
                             : state === 'text'
-                            ? 0      // hide dot in text mode (caret replaces it)
-                            : p.dotScale,
+                                ? 0      // hide dot in text mode (caret replaces it)
+                                : p.dotScale,
                         backgroundColor:
                             state === 'zoom'
                                 ? '#ffffff'
@@ -225,10 +225,10 @@ export const CustomCursor: React.FC = () => {
                     className="relative flex items-center justify-center"
                     style={{ borderRadius: '50%' }}
                     animate={{
-                        width:  rs,
+                        width: rs,
                         height: rs,
                         marginLeft: -rs / 2,
-                        marginTop:  -rs / 2,
+                        marginTop: -rs / 2,
                         borderWidth: clicking ? 2 : 1.5,
                         borderStyle: 'solid',
                         borderColor: p.border,
@@ -308,10 +308,10 @@ function tick(pos: 'tl' | 'tr' | 'bl' | 'br'): React.CSSProperties {
         borderStyle: 'solid',
     };
     const corners: Record<string, React.CSSProperties> = {
-        tl: { top: 2,    left: 2,    borderWidth: '1.5px 0 0 1.5px' },
-        tr: { top: 2,    right: 2,   borderWidth: '1.5px 1.5px 0 0' },
-        bl: { bottom: 2, left: 2,    borderWidth: '0 0 1.5px 1.5px' },
-        br: { bottom: 2, right: 2,   borderWidth: '0 1.5px 1.5px 0' },
+        tl: { top: 2, left: 2, borderWidth: '1.5px 0 0 1.5px' },
+        tr: { top: 2, right: 2, borderWidth: '1.5px 1.5px 0 0' },
+        bl: { bottom: 2, left: 2, borderWidth: '0 0 1.5px 1.5px' },
+        br: { bottom: 2, right: 2, borderWidth: '0 1.5px 1.5px 0' },
     };
     return { ...base, ...corners[pos] };
 }

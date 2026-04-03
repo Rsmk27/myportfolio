@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { HelmetProvider } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import Home from './pages/Home';
-import ProjectDetails from './pages/ProjectDetails';
 import Gallery from './pages/Gallery';
 import NotFound from './pages/NotFound';
 import { CustomCursor } from './components/CustomCursor';
@@ -31,7 +30,6 @@ const AnimatedRoutes: React.FC = () => {
                 <Routes location={location}>
                     <Route path="/" element={<Home />} />
                     <Route path="/gallery" element={<Gallery />} />
-                    <Route path="/project/:id" element={<ProjectDetails />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </motion.div>

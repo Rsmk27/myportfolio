@@ -622,18 +622,51 @@ const Home: React.FC = () => {
                                     transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                                 >
                                     <h1
-                                        className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9]"
+                                        className="w-fit text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] flex flex-col items-center justify-center mx-auto cursor-none"
                                         style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                                        data-cursor-label="HELLO!"
                                     >
-                                        <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-gray-400">
-                                            SRINIVASA
-                                        </span>
-                                        <span
-                                            className="block text-cyan-400"
-                                            style={{ textShadow: '0 0 40px rgba(34,211,238,0.4), 0 0 80px rgba(34,211,238,0.15)' }}
+                                        <div className="flex flex-wrap justify-center pb-2 text-white">
+                                            {"SRINIVASA".split('').map((char, i) => (
+                                                <motion.span
+                                                    key={`s-${i}`}
+                                                    className="inline-block"
+                                                    whileHover={{
+                                                        y: -16,
+                                                        scale: 1.4,
+                                                        rotate: i % 2 === 0 ? 8 : -8,
+                                                        color: '#00f2ff', // Cyan flare
+                                                        textShadow: '0px 10px 20px rgba(0, 242, 255, 0.6)'
+                                                    }}
+                                                    transition={{ type: 'spring', stiffness: 450, damping: 10 }}
+                                                    style={{ display: 'inline-block', transformOrigin: 'bottom center' }}
+                                                >
+                                                    {char}
+                                                </motion.span>
+                                            ))}
+                                        </div>
+                                        <div 
+                                            className="flex flex-wrap justify-center pt-1 text-cyan-400"
+                                            style={{ textShadow: '0 0 40px rgba(34,211,238,0.2)' }}
                                         >
-                                            MANIKANTA
-                                        </span>
+                                            {"MANIKANTA".split('').map((char, i) => (
+                                                <motion.span
+                                                    key={`m-${i}`}
+                                                    className="inline-block"
+                                                    whileHover={{
+                                                        y: 16,
+                                                        scale: 1.4,
+                                                        rotate: i % 2 === 0 ? -8 : 8,
+                                                        color: '#ffffff', // White flare
+                                                        textShadow: '0px -10px 20px rgba(255, 255, 255, 0.6)'
+                                                    }}
+                                                    transition={{ type: 'spring', stiffness: 450, damping: 10 }}
+                                                    style={{ display: 'inline-block', transformOrigin: 'top center' }}
+                                                >
+                                                    {char}
+                                                </motion.span>
+                                            ))}
+                                        </div>
                                     </h1>
                                 </motion.div>
 
@@ -683,7 +716,7 @@ const Home: React.FC = () => {
                         <SectionHeader title="System Overview" subtitle="Identity &amp; Mission" isPowered={isPowered} flip />
 
                         <Reveal>
-                            <div className={`grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-2xl border overflow-hidden relative
+                            <div className={`flex flex-col items-center justify-center max-w-4xl mx-auto gap-0 rounded-2xl border overflow-hidden relative text-center
                 ${isPowered ? 'border-gray-800 bg-black/40 backdrop-blur-sm' : 'border-gray-200 bg-white/5'}`}
                             >
                                 {/* Circuit texture bg */}
@@ -691,97 +724,29 @@ const Home: React.FC = () => {
                                     style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415-.828-.828-.828.828-1.415-1.415.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM22.485 0l.83.828-1.415 1.415-.828-.828-.828.828-1.415-1.415.828-.828-.828-.828 1.415 1.415-.828.828z' fill='%2306b6d4' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")` }}
                                 />
 
-                                {/* Left: Identity Card */}
-                                <div className="lg:col-span-4 p-8 border-b lg:border-b-0 lg:border-r border-gray-800 flex flex-col items-center gap-6">
-                                    <span className="self-start text-[10px] font-mono text-cyan-500 tracking-widest">// IDENTITY_MODULE</span>
-
-                                    <div className="relative">
-                                        <div className="w-36 h-36 rounded-2xl overflow-hidden border border-gray-700 shadow-[0_0_30px_rgba(0,242,255,0.1)]">
-                                            <img
-                                                src={PROFILE.image}
-                                                className={`w-full h-full object-cover transition-all duration-500 ${isPowered ? 'opacity-90' : 'grayscale opacity-60'}`}
-                                                alt={`${PROFILE.name} – Embedded Systems & IoT Engineer`}
-                                                loading="lazy"
-                                                decoding="async"
-                                                width="144"
-                                                height="144"
-                                            />
-                                        </div>
-                                        <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-cyan-500/10 border border-cyan-500/40 flex items-center justify-center">
-                                            <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-emerald-400 animate-pulse' : 'bg-red-500'}`} />
-                                        </div>
-                                    </div>
-
-                                    <div className="w-full space-y-3 font-mono text-sm">
-                                        {[
-                                            { label: 'NAME', value: PROFILE.name, color: 'text-white' },
-                                            { label: 'ROLE', value: 'EEE Engineer', color: 'text-cyan-400' },
-                                            { label: 'STATUS', value: isPowered ? 'OPERATIONAL' : 'STANDBY', color: isPowered ? 'text-emerald-400' : 'text-red-400' },
-                                            { label: 'LOCATION', value: 'Srikakulam, AP', color: 'text-gray-300' },
-                                        ].map(({ label, value, color }) => (
-                                            <div key={label} className="flex justify-between items-center py-2 border-b border-gray-800/60">
-                                                <span className="text-gray-600 text-[10px] tracking-widest">{label}</span>
-                                                <span className={`${color} font-semibold text-xs`}>{value}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    {/* Resume buttons */}
-                                    <div className="w-full mt-3 flex gap-2">
-                                        <a
-                                            href={PROFILE.resume}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-cyan-500/30 text-cyan-400 text-[11px] font-bold tracking-widest hover:bg-cyan-500/10 hover:border-cyan-400 transition-all duration-200 cursor-pointer"
-                                        >
-                                            <Eye size={11} />
-                                            VIEW
-                                        </a>
-                                        <a
-                                            href={PROFILE.resume}
-                                            download="Srinivasa_Manikanta_Resume.pdf"
-                                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-cyan-500/20 text-cyan-500/70 text-[11px] font-bold tracking-widest hover:bg-cyan-500/10 hover:border-cyan-500/40 hover:text-cyan-400 transition-all duration-200 cursor-pointer"
-                                        >
-                                            <Download size={11} />
-                                            SAVE
-                                        </a>
-                                    </div>
-
-                                    {/* Progress bar */}
-                                    <div className="w-full mt-2">
-                                        <div className="flex justify-between text-[9px] font-mono text-gray-600 mb-1.5">
-                                            <span>SYSTEM CAPACITY</span>
-                                            <span className="text-cyan-600">100%</span>
-                                        </div>
-                                        <div className="h-1 bg-gray-800 rounded-full overflow-hidden">
-                                            <div className="h-full bg-gradient-to-r from-cyan-500 to-cyan-300 w-full shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Right: Bio */}
-                                <div className="lg:col-span-8 p-8 md:p-12 flex flex-col justify-center">
+                                {/* Bio Section Centered */}
+                                <div className="p-8 md:p-12 flex flex-col items-center justify-center w-full">
                                     <span className="text-[10px] font-mono text-cyan-500 tracking-widest mb-6">// SYSTEM_BIO_LOGS</span>
                                     <motion.div
                                         initial={reduced ? false : { opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.45, ease: 'easeOut' }}
-                                        className="mb-8 space-y-4"
+                                        className="mb-8 space-y-4 flex flex-col items-center"
                                     >
-                                        <p className="min-h-6 w-fit px-3 py-1 rounded border border-cyan-500/30 bg-black/40 text-xs md:text-sm font-mono text-cyan-300 tracking-[0.14em]">
+                                        <p className="min-h-6 w-fit mx-auto px-3 py-1 rounded border border-cyan-500/30 bg-black/40 text-xs md:text-sm font-mono text-cyan-300 tracking-[0.14em]">
                                             {heroIntro}<span className="animate-pulse opacity-80">▎</span>
                                         </p>
                                         <p className="h-5 text-xs font-mono text-cyan-500/70">
                                             {statusText}<span className="animate-pulse opacity-80">▎</span>
                                         </p>
-                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-2xl mx-auto">
                                             <StatChip icon={<Cpu size={16} />} label="Specialty" value="Embedded / IoT" delay={0.05} />
                                             <StatChip icon={<MapPin size={16} />} label="Location" value="Srikakulam, AP" delay={0.1} />
                                             <StatChip icon={<Briefcase size={16} />} label="Experience" value="Industrial Intern" delay={0.15} />
                                             <StatChip icon={<GraduationCap size={16} />} label="Degree" value="B.Tech EEE" delay={0.2} />
                                         </div>
-                                        <div className="flex flex-wrap gap-3 pt-1">
+                                        <div className="flex flex-wrap justify-center gap-3 pt-1">
                                             <a
                                                 href="#projects"
                                                 onClick={(e) => handleNavClick(e, 'Projects')}
@@ -809,7 +774,7 @@ const Home: React.FC = () => {
                                         </div>
                                     </motion.div>
                                     <div
-                                        className="space-y-5 text-sm md:text-[15px] leading-relaxed text-gray-300"
+                                        className="space-y-5 text-sm md:text-[15px] leading-relaxed text-gray-300 max-w-3xl"
                                         style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: 1.75 }}
                                     >
                                         <p>
@@ -824,7 +789,7 @@ const Home: React.FC = () => {
                                         <p>
                                             Beyond core EEE, I actively build <span className="text-cyan-400 font-medium">modern, web-based engineering tools</span> — bridging the gap between physical systems and intelligent software with scalable, usable solutions.
                                         </p>
-                                        <div className="mt-4 p-4 rounded-xl border-l-2 border-cyan-500 bg-cyan-950/10 backdrop-blur-sm">
+                                        <div className="mt-4 p-4 rounded-xl border-l-2 border-cyan-500 bg-cyan-950/10 backdrop-blur-sm text-left inline-block">
                                             <p className="text-white font-medium text-sm">
                                                 Open to internships, entry-level roles, and collaborative projects where engineering meets impact. Let's build something meaningful.
                                             </p>

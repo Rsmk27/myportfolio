@@ -3,7 +3,6 @@ import React, { useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Project } from '../types';
 import { ExternalLink, Cpu, Github } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 interface ProjectChipProps {
   project: Project;
@@ -138,12 +137,8 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+              className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
             />
-          )}
-          {/* Scanline Overlay */}
-          {isPowered && (
-            <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,242,255,0.05)_50%)] bg-[length:100%_4px] pointer-events-none" />
           )}
 
           {/* Hover Overlay Actions */}
@@ -185,13 +180,15 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
               </div>
             </motion.div>
 
-            <Link
-              to={`/project/${project.id}`}
+            <a
+              href={project.link || '#'}
+              target="_blank"
+              rel="noreferrer"
               className="self-center flex items-center gap-2 px-6 py-2 bg-cyan-500 text-black font-bold rounded-full hover:scale-105 transition-transform"
             >
               <span>View System</span>
               <ExternalLink size={16} />
-            </Link>
+            </a>
           </div>
         </div>
 
