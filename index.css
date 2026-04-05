@@ -569,7 +569,7 @@ pre,
     background: linear-gradient(90deg, #004f66 0%, var(--primary-cyan) 82%, #9ff8ff 100%);
     border-radius: 2px;
     width: 0%;
-    transition: width 0.25s ease;
+    transition: width 0.08s linear;
     position: relative;
     box-shadow: 0 0 12px var(--primary-cyan), 0 0 28px rgba(0, 242, 255, 0.28);
 }

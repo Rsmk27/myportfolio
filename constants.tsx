@@ -108,7 +108,7 @@ export const PROJECTS: Project[] = [
       "Clean, visual color band selector UI",
       "Works offline — no backend required"
     ],
-    awards: ['📱 Published Android App', '🔖 GitHub v1.0.0']
+    awards: ['📱 Published Android App']
   },
   {
     id: 'p3',

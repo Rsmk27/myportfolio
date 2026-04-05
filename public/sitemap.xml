@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
@@ -7,17 +8,137 @@
   <!-- Home / Portfolio -->
   <url>
     <loc>https://rsmk.me/</loc>
-    <lastmod>2026-03-12</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/srinivasa-manikanta-profile.webp</image:loc>
+      <image:title>Srinivasa Manikanta Rajapantula — Embedded Systems and IoT Engineer</image:title>
+      <image:caption>Portrait of Srinivasa Manikanta Rajapantula, EEE student specializing in Embedded Systems, IoT, and Smart Energy</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/firefighter-monitoring-device.webp</image:loc>
+      <image:title>Firefighter Safety Device — IoT Wearable Project by Srinivasa Manikanta</image:title>
+      <image:caption>ESP32-based IoT wearable device for firefighter safety monitoring with real-time dashboard</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/color-ohm-resistor-calculator-tool.webp</image:loc>
+      <image:title>ColorOhm — Resistor Color Code Calculator App</image:title>
+      <image:caption>Android app and web tool for precision 4-band and 5-band resistor color code decoding</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/smart-exhaust-gas-detection-system.webp</image:loc>
+      <image:title>Automatic Exhaust Fan — Gas Detection System</image:title>
+      <image:caption>Arduino-based automatic exhaust fan with MQ-2 gas and smoke detection sensor</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/single-axis-solar-tracker.png</image:loc>
+      <image:title>Single Axis Solar Tracker — Relay Logic Circuit</image:title>
+      <image:caption>Hardware-only solar panel tracker using LDR sensors and relay logic with ~30% efficiency gain</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/automated-street-light-system.webp</image:loc>
+      <image:title>Automatic Streetlight System — Solar Powered IC 555</image:title>
+      <image:caption>Solar-powered automatic streetlight using IC 555 timer and LDR sensor for dusk/dawn switching</image:caption>
+    </image:image>
   </url>
 
   <!-- Gallery -->
   <url>
     <loc>https://rsmk.me/gallery</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <!-- A-Hacks Hackathon images -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/ahacks-banner.jpg</image:loc>
+      <image:title>A-Hacks 24hr Hackathon Banner</image:title>
+      <image:caption>Banner from the A-Hacks 24-hour hardware hackathon where Srinivasa Manikanta won 2nd prize</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/prize-ceremony.jpg</image:loc>
+      <image:title>A-Hacks 2nd Prize Ceremony — Srinivasa Manikanta</image:title>
+      <image:caption>Srinivasa Manikanta receiving 2nd prize at A-Hacks hackathon for the Firefighter Safety Device</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/certificate-2nd-place.jpg</image:loc>
+      <image:title>A-Hacks 2nd Place Certificate</image:title>
+      <image:caption>2nd place certificate from A-Hacks hardware hackathon</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/demo-presentation.jpg</image:loc>
+      <image:title>Firefighter Safety Device Demo Presentation</image:title>
+      <image:caption>Live demo of the IoT firefighter safety device at A-Hacks hackathon</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/judge-evaluation.jpg</image:loc>
+      <image:title>A-Hacks Judge Evaluation</image:title>
+      <image:caption>Judges evaluating the firefighter safety device project at A-Hacks</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/coding-session-1.jpg</image:loc>
+      <image:title>Hackathon Coding Session</image:title>
+      <image:caption>Coding and building the IoT device firmware during the 24-hour hackathon</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/device-strap-front.jpg</image:loc>
+      <image:title>Firefighter Device — Front View</image:title>
+      <image:caption>Front view of the wearable firefighter safety device with sensors mounted on strap</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/device-strap-back.jpg</image:loc>
+      <image:title>Firefighter Device — Back View</image:title>
+      <image:caption>Back view showing ESP32 microcontroller and wiring of the firefighter safety device</image:caption>
+    </image:image>
+    <!-- Firefighter Safety Device project images -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/firefighter-monitoring-device/infographic-poster.jpg</image:loc>
+      <image:title>Firefighter Safety Device Infographic Poster</image:title>
+      <image:caption>Technical infographic poster explaining the firefighter safety device system architecture</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/firefighter-monitoring-device/dashboard.png</image:loc>
+      <image:title>Firefighter Safety Device — Real-Time Dashboard</image:title>
+      <image:caption>Web dashboard showing real-time firefighter telemetry, GPS location, and alert status</image:caption>
+    </image:image>
+    <!-- Exhaust Fan images -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/auto-exhaust-fan/image-1.jpg</image:loc>
+      <image:title>Automatic Exhaust Fan System — Build Photo 1</image:title>
+      <image:caption>Arduino-based automatic exhaust fan with MQ-2 sensor and relay module</image:caption>
+    </image:image>
+    <!-- Coromandel Internship images -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/experience/coromandel/single-line-diagram.jpg</image:loc>
+      <image:title>Industrial Single Line Diagram — Coromandel Internship</image:title>
+      <image:caption>Single line diagram of industrial power distribution from Coromandel International training</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/experience/coromandel/internship-certificate.jpg</image:loc>
+      <image:title>Coromandel International Internship Certificate</image:title>
+      <image:caption>Internship completion certificate from Coromandel International Ltd for electrical engineering training</image:caption>
+    </image:image>
+    <!-- Certification images -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/certifications/drone-technology/certificate.png</image:loc>
+      <image:title>Drone Technology Workshop Certificate</image:title>
+      <image:caption>Certificate from drone technology workshop attended by Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/certifications/3d-printing/certificate.jpg</image:loc>
+      <image:title>3D Printing Workshop Certificate</image:title>
+      <image:caption>Certificate from 3D printing workshop attended by Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/certifications/embedded-systems/certificate.jpg</image:loc>
+      <image:title>Embedded Systems Course Certificate</image:title>
+      <image:caption>Certificate from embedded systems course completed by Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/certifications/electric-vehicle/certificate.jpg</image:loc>
+      <image:title>Electric Vehicle Technology Certificate</image:title>
+      <image:caption>Certificate from electric vehicle technology program completed by Srinivasa Manikanta</image:caption>
+    </image:image>
   </url>
 
 </urlset>

@@ -50,18 +50,22 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
     );
     const logsRef = useRef<HTMLDivElement>(null);
 
+    // Keep a stable ref to onComplete so the animation effect never restarts
+    const onCompleteRef = useRef(onComplete);
+    useEffect(() => { onCompleteRef.current = onComplete; }, [onComplete]);
+
     // Drip boot logs
     useEffect(() => {
         let idx = 0;
+        let cancelled = false;
         const dripLog = () => {
-            if (idx < BOOT_LOGS.length) {
-                setVisibleLogs(prev => [...prev, BOOT_LOGS[idx]]);
-                idx++;
-                setTimeout(dripLog, 230 + Math.random() * 120);
-            }
+            if (cancelled || idx >= BOOT_LOGS.length) return;
+            setVisibleLogs(prev => [...prev, BOOT_LOGS[idx]]);
+            idx++;
+            setTimeout(dripLog, 100 + Math.random() * 60);
         };
-        const t = setTimeout(dripLog, 400);
-        return () => clearTimeout(t);
+        const t = setTimeout(dripLog, 200);
+        return () => { cancelled = true; clearTimeout(t); };
     }, []);
 
     // Auto-scroll logs
@@ -81,44 +85,71 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         return () => clearInterval(id);
     }, []);
 
-    // Progress animation
+    // Progress animation — smooth rAF-driven fill over ~1.8 s
     useEffect(() => {
-        let currentStageIndex = 0;
-        let currentProgress = 0;
+        const DURATION = 1800; // ms to go 0 → 100
+        let startTime: number | null = null;
+        let rafId: number;
+        let cancelled = false;
 
-        const updateProgress = () => {
-            if (currentStageIndex >= LOADING_STAGES.length) return;
-            const stage = LOADING_STAGES[currentStageIndex];
-            setStatusMessage(stage.message);
-
-            const interval = setInterval(() => {
-                if (currentProgress < stage.progress) {
-                    currentProgress++;
-                    setProgress(currentProgress);
-                } else {
-                    clearInterval(interval);
-                    currentStageIndex++;
-                    if (currentStageIndex < LOADING_STAGES.length) {
-                        setTimeout(updateProgress, 300);
-                    } else {
-                        setTimeout(completeLoading, 600);
-                    }
-                }
-            }, 20);
-        };
+        // Stage message thresholds (synced to LOADING_STAGES progress values)
+        const stageThresholds = LOADING_STAGES.map(s => s.progress);
+        let lastStageIdx = 0;
 
         const completeLoading = () => {
+            if (cancelled) return;
             setIsFadingOut(true);
             setTimeout(() => {
-                if (onComplete) onComplete();
+                if (cancelled) return;
+                onCompleteRef.current?.();
                 const mainContent = document.getElementById('main-content');
                 if (mainContent) mainContent.classList.add('visible');
             }, 700);
         };
 
-        const startTimeout = setTimeout(updateProgress, 500);
-        return () => clearTimeout(startTimeout);
-    }, [onComplete]);
+        const tick = (timestamp: number) => {
+            if (cancelled) return;
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            const t = Math.min(elapsed / DURATION, 1);
+
+            // Ease-in-out curve: fast start, slight deceleration near end
+            const eased = t < 0.5
+                ? 4 * t * t * t
+                : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+            const p = Math.round(eased * 100);
+            setProgress(p);
+
+            // Update status message when crossing stage thresholds
+            for (let i = lastStageIdx; i < stageThresholds.length; i++) {
+                if (p >= stageThresholds[i]) {
+                    setStatusMessage(LOADING_STAGES[i].message);
+                    lastStageIdx = i + 1;
+                }
+            }
+
+            if (t < 1) {
+                rafId = requestAnimationFrame(tick);
+            } else {
+                setProgress(100);
+                setTimeout(completeLoading, 200);
+            }
+        };
+
+        // Small initial delay so the screen appears before animating
+        const startTimeout = setTimeout(() => {
+            if (cancelled) return;
+            rafId = requestAnimationFrame(tick);
+        }, 180);
+
+        return () => {
+            cancelled = true;
+            clearTimeout(startTimeout);
+            cancelAnimationFrame(rafId);
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div id="loading-screen" className={`loading-screen ${isFadingOut ? 'fade-out' : ''}`}>

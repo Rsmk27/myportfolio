@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+Allow: /gallery
+Allow: /assets/
+
+User-agent: Googlebot-Image
+Allow: /assets/
+
+User-agent: Bingbot
+Allow: /
+Allow: /gallery
+
 Sitemap: https://rsmk.me/sitemap.xml
