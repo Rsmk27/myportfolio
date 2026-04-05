@@ -6,6 +6,18 @@ import DomeGallery from '../components/ui/DomeGallery';
 import { PROFILE } from '../constants';
 
 const GALLERY_IMAGES = [
+  // A-Hacks 24hr Hackathon — 2nd Place 🥈
+  '/assets/gallery/ahacks/ahacks-banner.jpg',
+  '/assets/gallery/ahacks/prize-ceremony.jpg',
+  '/assets/gallery/ahacks/certificate-2nd-place.jpg',
+  '/assets/gallery/ahacks/demo-presentation.jpg',
+  '/assets/gallery/ahacks/judge-evaluation.jpg',
+  '/assets/gallery/ahacks/coding-session-1.jpg',
+  '/assets/gallery/ahacks/coding-session-2.jpg',
+  '/assets/gallery/ahacks/hackathon-hall.jpg',
+  '/assets/gallery/ahacks/device-strap-front.jpg',
+  '/assets/gallery/ahacks/device-strap-back.jpg',
+  // General gallery
   '/assets/gallery/img-20251003-102729.jpg',
   '/assets/gallery/img-20251003-102931.jpg',
   '/assets/gallery/img-20260128-104328.jpg',

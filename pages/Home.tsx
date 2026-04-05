@@ -603,14 +603,6 @@ const Home: React.FC = () => {
                                         width="192"
                                         height="192"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent pointer-events-none" />
-                                    {/* Scanline overlay */}
-                                    <div
-                                        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-                                        style={{
-                                            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,242,255,1) 2px, rgba(0,242,255,1) 3px)',
-                                        }}
-                                    />
                                 </div>
                             </motion.div>
 
