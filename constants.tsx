@@ -90,8 +90,8 @@ export const PROJECTS: Project[] = [
       '/assets/firefighter-monitoring-device/departmental-first-4.jpg',
       '/assets/firefighter-monitoring-device/departmental-first-5.jpg'
     ],
-    award: '🥈 A-HACKS 2nd Prize — Hardware',
-    awards: ['🥈 A-HACKS 2nd Prize — Hardware', '🏆 Departmental 1st Prize']
+    award: '🥈 Hackathon Winning Project',
+    awards: ['🥈 Hackathon Winning Project', '🏆 Departmental 1st Prize']
   },
   {
     id: 'p2',
@@ -108,7 +108,8 @@ export const PROJECTS: Project[] = [
       "Clean, visual color band selector UI",
       "Works offline — no backend required"
     ],
-    awards: ['📱 Published Android App']
+    award: '📱 Android App',
+    awards: ['📱 Android App', '🌐 Website']
   },
   {
     id: 'p3',
@@ -131,7 +132,9 @@ export const PROJECTS: Project[] = [
       '/assets/auto-exhaust-fan/image-1.jpg',
       '/assets/auto-exhaust-fan/image-2.jpg',
       '/assets/auto-exhaust-fan/image-3.jpg'
-    ]
+    ],
+    award: '⚙️ Hardware Model',
+    awards: ['⚙️ Hardware Model', '🌐 Web Demo']
   },
   {
     id: 'p4',
@@ -149,7 +152,8 @@ export const PROJECTS: Project[] = [
       "Prototype built and demonstrated at college level",
       "SIH (Smart India Hackathon) project"
     ],
-    awards: ['📐 SIH Project — College Level']
+    award: '📐 SIH Project',
+    awards: ['📐 SIH Project — College Level', '⚙️ Prototype']
   },
   {
     id: 'p5',
@@ -164,7 +168,9 @@ export const PROJECTS: Project[] = [
       "Gear motor actuation for smooth panel rotation",
       "~30% efficiency gain over fixed-panel installation",
       "Fully analog control circuit — low cost & robust"
-    ]
+    ],
+    award: '⚡ Analog Control',
+    awards: ['⚡ Analog Control', '⚙️ Hardware Prototype']
   },
   {
     id: 'p6',
@@ -180,7 +186,9 @@ export const PROJECTS: Project[] = [
       "Relay-controlled LED output",
       "Working mini-model prototype built and demonstrated",
       "Zero manual intervention once set up"
-    ]
+    ],
+    award: '💡 Working Prototype',
+    awards: ['💡 Working Prototype', '🔋 Clean Energy']
   }
 ];
 

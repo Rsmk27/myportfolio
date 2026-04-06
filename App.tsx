@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ReactLenis } from 'lenis/react';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import NotFound from './pages/NotFound';
@@ -40,11 +41,13 @@ const AnimatedRoutes: React.FC = () => {
 const App: React.FC = () => {
     return (
         <HelmetProvider>
-            <CustomCursor />
-            <Router>
-                <ScrollToTop />
-                <AnimatedRoutes />
-            </Router>
+            <ReactLenis root options={{ lerp: 0.05, wheelMultiplier: 0.8 }}>
+                <CustomCursor />
+                <Router>
+                    <ScrollToTop />
+                    <AnimatedRoutes />
+                </Router>
+            </ReactLenis>
         </HelmetProvider>
     );
 };

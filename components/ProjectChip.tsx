@@ -52,16 +52,37 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
   const hiddenTechCount = Math.max(project.tech.length - visibleTech.length, 0);
   const awardTags = project.awards ?? (project.award ? [project.award] : []);
   const getAwardBadgeClasses = (awardTag: string) => {
-    const isHackathonTag = awardTag.toLowerCase().includes('hackathon');
-    if (isPowered) {
-      return isHackathonTag
-        ? 'text-lime-300 bg-lime-500/10 border border-lime-500/30'
-        : 'text-amber-400 bg-amber-500/10 border border-amber-500/30';
+    const tag = awardTag.toLowerCase();
+    
+    if (tag.includes('hackathon')) {
+      return isPowered ? 'text-lime-300 bg-lime-500/10 border border-lime-500/30' : 'text-lime-800 bg-lime-100 border border-lime-300';
     }
-
-    return isHackathonTag
-      ? 'text-lime-800 bg-lime-100 border border-lime-300'
-      : 'text-amber-700 bg-amber-100 border border-amber-300';
+    if (tag.includes('app') || tag.includes('android')) {
+      return isPowered ? 'text-emerald-300 bg-emerald-500/10 border border-emerald-500/30' : 'text-emerald-800 bg-emerald-100 border border-emerald-300';
+    }
+    if (tag.includes('web')) {
+      return isPowered ? 'text-blue-300 bg-blue-500/10 border border-blue-500/30' : 'text-blue-800 bg-blue-100 border border-blue-300';
+    }
+    if (tag.includes('sih')) {
+      return isPowered ? 'text-orange-300 bg-orange-500/10 border border-orange-500/30' : 'text-orange-800 bg-orange-100 border border-orange-300';
+    }
+    if (tag.includes('analog')) {
+      return isPowered ? 'text-violet-300 bg-violet-500/10 border border-violet-500/30' : 'text-violet-800 bg-violet-100 border border-violet-300';
+    }
+    if (tag.includes('hardware')) {
+      return isPowered ? 'text-red-300 bg-red-500/10 border border-red-500/30' : 'text-red-800 bg-red-100 border border-red-300';
+    }
+    if (tag.includes('prototype') || tag.includes('model')) {
+      return isPowered ? 'text-fuchsia-300 bg-fuchsia-500/10 border border-fuchsia-500/30' : 'text-fuchsia-800 bg-fuchsia-100 border border-fuchsia-300';
+    }
+    if (tag.includes('energy') || tag.includes('clean') || tag.includes('solar')) {
+      return isPowered ? 'text-teal-300 bg-teal-500/10 border border-teal-500/30' : 'text-teal-800 bg-teal-100 border border-teal-300';
+    }
+    if (tag.includes('departmental')) {
+      return isPowered ? 'text-indigo-300 bg-indigo-500/10 border border-indigo-500/30' : 'text-indigo-800 bg-indigo-100 border border-indigo-300';
+    }
+    
+    return isPowered ? 'text-amber-400 bg-amber-500/10 border border-amber-500/30' : 'text-amber-700 bg-amber-100 border border-amber-300';
   };
 
   return (
