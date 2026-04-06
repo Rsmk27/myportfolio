@@ -57,9 +57,13 @@ const GlareHover: React.FC<GlareHoverProps> = ({
     if (!el) return;
 
     el.style.transition = 'none';
-    el.style.backgroundPosition = '-100% -100%, 0 0';
-    el.style.transition = `${transitionDuration}ms ease`;
-    el.style.backgroundPosition = '100% 100%, 0 0';
+    el.style.backgroundPosition = '-100% -100%';
+    
+    // Force a reflow to start the animation
+    void el.offsetWidth;
+
+    el.style.transition = `background-position ${transitionDuration}ms ease`;
+    el.style.backgroundPosition = '200% 200%';
   };
 
   const animateOut = () => {
@@ -68,10 +72,10 @@ const GlareHover: React.FC<GlareHoverProps> = ({
 
     if (playOnce) {
       el.style.transition = 'none';
-      el.style.backgroundPosition = '-100% -100%, 0 0';
+      el.style.backgroundPosition = '-100% -100%';
     } else {
-      el.style.transition = `${transitionDuration}ms ease`;
-      el.style.backgroundPosition = '-100% -100%, 0 0';
+      el.style.transition = `background-position ${transitionDuration}ms ease`;
+      el.style.backgroundPosition = '-100% -100%';
     }
   };
 
@@ -79,13 +83,14 @@ const GlareHover: React.FC<GlareHoverProps> = ({
     position: 'absolute',
     inset: 0,
     background: `linear-gradient(${glareAngle}deg,
-        hsla(0,0%,0%,0) 60%,
-        ${rgba} 70%,
-        hsla(0,0%,0%,0) 100%)`,
-    backgroundSize: `${glareSize}% ${glareSize}%, 100% 100%`,
+        hsla(0,0%,0%,0) 40%,
+        ${rgba} 50%,
+        hsla(0,0%,0%,0) 60%)`,
+    backgroundSize: `${glareSize}% ${glareSize}%`,
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: '-100% -100%, 0 0',
+    backgroundPosition: '-100% -100%',
     pointerEvents: 'none',
+    zIndex: 10,
   };
 
   return (
