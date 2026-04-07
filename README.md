@@ -292,5 +292,5 @@ This project is open source and available for personal and educational use.
 ---
 
 <div align="center">
-Made with ⚡ by VoltEngineer | Powered by React + TypeScript + Vite
+Made with ⚡ by RSMK| Powered by React + TypeScript + Vite
 </div>
