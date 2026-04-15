@@ -66,20 +66,23 @@ VoltEngineer Portfolio is a modern, interactive portfolio website showcasing ele
 myportfolio/
 ├── components/           # Reusable UI components
 │   ├── ui/              # Base UI components
+│   │   ├── DomeGallery.tsx      # 3D Dome Gallery for project images
+│   │   ├── GlareHover.tsx       # Glare effect wrapper
 │   │   ├── MediaLoader.tsx      # Media loading with fallback
 │   │   └── electric-card.tsx    # Themed card component
 │   ├── CertificationsBlock.tsx  # Certifications display
 │   ├── ContactInterface.tsx     # Contact section with social links
+│   ├── CustomCursor.tsx         # Custom animated cursor
+│   ├── EasterEgg.tsx            # Hidden easter eggs and interactions
 │   ├── EducationBlock.tsx       # Education timeline
 │   ├── ExperienceTimeline.tsx   # Work experience timeline
-│   ├── HeroCircuit.tsx          # Animated hero circuit background
 │   ├── LoadingScreen.tsx        # Initial loading animation
 │   ├── Oscilloscope.tsx         # Oscilloscope-style visualizer
 │   ├── PCBBackground.tsx        # PCB trace background animation
+│   ├── PortfolioChat.tsx        # AI-powered terminal chatbot
 │   ├── PowerSwitch.tsx          # Interactive power switch
 │   ├── ProjectChip.tsx          # Project card with chip design
 │   ├── SkillBreadboard.tsx      # Skills visualization as breadboard
-│   ├── SystemFlow.tsx           # System flow diagram
 │   └── TimelineSystem.tsx       # Combined timeline component
 │
 ├── pages/               # Route page components
@@ -114,10 +117,11 @@ myportfolio/
 | Component | Purpose |
 |-----------|---------|
 | `PCBBackground` | Animated PCB trace background with circuit patterns |
-| `HeroCircuit` | Hero section with animated circuit board design |
 | `PowerSwitch` | Interactive power switch to activate the site |
 | `LoadingScreen` | Initial boot-up loading animation |
 | `Oscilloscope` | Oscilloscope-style wave visualization |
+| `CustomCursor` | Custom animated cursor overlay |
+| `EasterEgg` | Hidden interactions and shortcuts across the app |
 
 ### **Content Components**
 
@@ -130,6 +134,7 @@ myportfolio/
 | `EducationBlock` | Educational background display |
 | `CertificationsBlock` | Certifications and achievements |
 | `ContactInterface` | Contact section with social media links |
+| `PortfolioChat` | AI-powered interactive terminal chatbot interface |
 
 ### **UI Components**
 
@@ -137,6 +142,8 @@ myportfolio/
 |-----------|---------|
 | `electric-card` | Themed card component with electrical styling |
 | `MediaLoader` | Smart media loader with fallback support |
+| `DomeGallery` | 3D dome-style gallery for viewing project assets |
+| `GlareHover` | Adds an interactive glare effect to elements |
 
 ### **Pages**
 
@@ -156,6 +163,8 @@ myportfolio/
 - 📱 **Fully Responsive** - Mobile-first design approach
 - 🌙 **Dark Mode** - Optimized for dark backgrounds
 - 🔌 **Interactive Power Switch** - Boot-up sequence simulation
+- 🤖 **AI Chatbot** - Integrated AI assistant mapped to Hugging Face API
+- ✨ **Interactive Extras** - Custom cursor, 3D Dome Gallery, and hidden easter eggs
 
 ### **Technical Features**
 - 🚀 **Fast Loading** - Optimized with Vite and lazy loading
