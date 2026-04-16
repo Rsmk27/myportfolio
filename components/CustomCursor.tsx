@@ -17,27 +17,35 @@ const RING_PROFILE: Record<CursorState, {
     bg: string;
     dotScale: number;
     mixBlend: 'normal' | 'difference' | 'exclusion';
+    borderRadius: string | number;
+    rotate: number;
 }> = {
     default: {
-        size: 28,
-        border: 'rgba(0,242,255,0.45)',
+        size: 32,
+        border: 'rgba(0,242,255,0.4)',
         bg: 'transparent',
         dotScale: 1,
         mixBlend: 'normal',
+        borderRadius: '50%',
+        rotate: 0,
     },
     pointer: {
-        size: 46,
-        border: 'rgba(0,242,255,0.9)',
-        bg: 'rgba(0,242,255,0.08)',
-        dotScale: 0.5,
+        size: 44,
+        border: 'rgba(0,242,255,0.7)',
+        bg: 'rgba(0,242,255,0.12)',
+        dotScale: 0.1,
         mixBlend: 'normal',
+        borderRadius: '12px',
+        rotate: 45,
     },
     project: {
-        size: 64,
-        border: 'rgba(0,242,255,1)',
-        bg: 'rgba(0,242,255,0.10)',
+        size: 56,
+        border: 'rgba(0,242,255,0)',
+        bg: 'rgba(0,242,255,0.15)',
         dotScale: 0,
         mixBlend: 'normal',
+        borderRadius: '50%',
+        rotate: 0,
     },
     text: {
         size: 4,
@@ -45,20 +53,26 @@ const RING_PROFILE: Record<CursorState, {
         bg: 'rgba(0,242,255,0)',
         dotScale: 1,
         mixBlend: 'difference',
+        borderRadius: 0,
+        rotate: 0,
     },
     zoom: {
-        size: 56,
-        border: 'rgba(255,255,255,0.7)',
-        bg: 'rgba(255,255,255,0.06)',
+        size: 60,
+        border: 'rgba(255,255,255,0.8)',
+        bg: 'rgba(255,255,255,0.1)',
         dotScale: 0,
         mixBlend: 'normal',
+        borderRadius: '50%',
+        rotate: 0,
     },
     label: {
-        size: 56,
-        border: 'rgba(0,242,255,0.85)',
-        bg: 'rgba(0,242,255,0.08)',
+        size: 96,
+        border: 'transparent',
+        bg: '#ffffff',
         dotScale: 0,
-        mixBlend: 'normal',
+        mixBlend: 'difference',
+        borderRadius: '50%',
+        rotate: 0,
     },
 };
 
@@ -68,7 +82,7 @@ export const CustomCursor: React.FC = () => {
     const mouseY = useMotionValue(-300);
 
     // Ring lags behind with spring — feel like a trailing magnifier
-    const springCfg = { stiffness: 320, damping: 26, mass: 0.45 };
+    const springCfg = { stiffness: 400, damping: 28, mass: 0.35 };
     const ringX = useSpring(mouseX, springCfg);
     const ringY = useSpring(mouseY, springCfg);
 
@@ -219,11 +233,11 @@ export const CustomCursor: React.FC = () => {
                     x: ringX,
                     y: ringY,
                     zIndex: 10000,
+                    mixBlendMode: p.mixBlend,
                 }}
             >
                 <motion.div
-                    className="relative flex items-center justify-center"
-                    style={{ borderRadius: '50%' }}
+                    className="relative flex items-center justify-center p-0 m-0"
                     animate={{
                         width: rs,
                         height: rs,
@@ -233,19 +247,27 @@ export const CustomCursor: React.FC = () => {
                         borderStyle: 'solid',
                         borderColor: p.border,
                         backgroundColor: p.bg,
-                        scale: clicking ? 0.9 : 1,
+                        scale: clicking ? 0.85 : 1,
+                        borderRadius: p.borderRadius,
+                        rotate: p.rotate,
                     }}
-                    transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ type: 'spring', stiffness: 450, damping: 25, mass: 0.5 }}
                 >
-                    {/* Corner tick marks on ring — only in default state */}
-                    {state === 'default' && (
-                        <>
-                            <span style={tick('tl')} />
-                            <span style={tick('tr')} />
-                            <span style={tick('bl')} />
-                            <span style={tick('br')} />
-                        </>
-                    )}
+                    {/* Inner counter-rotation wrapper for labels so text remains upright */}
+                    <motion.div
+                        className="absolute inset-0 flex items-center justify-center"
+                        animate={{ rotate: -p.rotate }}
+                        transition={{ duration: 0 }}
+                    >
+                        {/* Corner tick marks on ring — only in default state */}
+                        {state === 'default' && (
+                            <>
+                                <span style={tick('tl')} />
+                                <span style={tick('tr')} />
+                                <span style={tick('bl')} />
+                                <span style={tick('br')} />
+                            </>
+                        )}
 
                     {/* Inner label */}
                     <AnimatePresence mode="wait">
@@ -275,21 +297,41 @@ export const CustomCursor: React.FC = () => {
                             </motion.span>
                         )}
                     </AnimatePresence>
+                    </motion.div>
 
-                    {/* Rotating dashed arc overlay on project / zoom */}
-                    {(state === 'project' || state === 'zoom') && (
+                    {/* Rotating dashed arc overlay on zoom */}
+                    {state === 'zoom' && (
                         <motion.div
                             style={{
                                 position: 'absolute',
                                 inset: -6,
                                 borderRadius: '50%',
-                                border: `1px dashed ${state === 'zoom' ? 'rgba(255,255,255,0.22)' : 'rgba(0,242,255,0.25)'}`,
+                                border: '1px dashed rgba(255,255,255,0.22)',
                                 animation: 'cursor-spin 4s linear infinite',
                                 pointerEvents: 'none',
                             }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
+                        />
+                    )}
+
+                    {/* Sci-Fi Double Arc for Project */}
+                    {state === 'project' && (
+                        <motion.div
+                            style={{
+                                position: 'absolute',
+                                inset: -8,
+                                borderRadius: '50%',
+                                border: '2px solid transparent',
+                                borderTopColor: 'rgba(0,242,255,0.9)',
+                                borderBottomColor: 'rgba(0,242,255,0.9)',
+                                animation: 'cursor-spin 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite',
+                                pointerEvents: 'none',
+                            }}
+                            initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
+                            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                            exit={{ opacity: 0, scale: 0.5, rotate: 90 }}
                         />
                     )}
                 </motion.div>
