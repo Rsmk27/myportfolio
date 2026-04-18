@@ -189,6 +189,30 @@ export const PROJECTS: Project[] = [
     ],
     award: '💡 Working Prototype',
     awards: ['💡 Working Prototype', '🔋 Clean Energy']
+  },
+  {
+    id: 'p7',
+    title: 'Agri Rover',
+    description: 'A web-controlled agricultural rover built with dual ESP32 microcontrollers. Features live MJPEG video streaming, real-time GPS tracking, soil moisture sensing, automated spraying, and an AI-powered AgriChatbot.',
+    tech: ['ESP32', 'ESP32-CAM', 'React 19', 'Vite', 'Firebase RTDB', 'Groq API (Llama 3.3)', 'Leaflet Maps', 'Recharts', 'C++'],
+    image: '/assets/agri-rover-project.webp',
+    link: 'https://github.com/Rsmk27/multi-rover',
+    details: 'Agro-Rover is a full-stack IoT agricultural robot system. A dual ESP32 setup handles all hardware — the main ESP32 DevKit v1 manages rover movement (L298N motor driver), a relay-controlled water/fertilizer pump, a Neo-6M GPS module for real-time location, a soil moisture sensor, and two servos for camera pan and sensor arm actuation. A separate AI-Thinker ESP32-CAM streams a live MJPEG video feed. All data flows through Firebase Realtime Database to a React 19 + Vite web dashboard with Leaflet map integration and Recharts sensor graphs. An integrated AgriChatbot powered by Groq\'s Llama 3.3 model provides crop advice and plant disease identification from images.',
+    features: [
+      'Remote rover control via web UI or Arrow Keys with Space to stop',
+      'Live MJPEG video streaming from onboard ESP32-CAM',
+      'Real-time GPS tracking on an interactive Leaflet map',
+      'Soil moisture sensing with auto-pump trigger at configurable threshold',
+      'Automated water/fertilizer spraying via relay-controlled pump',
+      'AI-powered AgriChatbot (Groq Llama 3.3) for crop advice & disease ID',
+      'Return-to-Base autonomous navigation via Home command',
+      'Dual ESP32 architecture — main logic + dedicated CAM module'
+    ],
+    gallery: [
+      '/assets/agri-rover-project.webp'
+    ],
+    award: '🤖 IoT Robot',
+    awards: ['🤖 IoT Robot', '🌿 AgriAI', '📡 Dual ESP32']
   }
 ];
 
