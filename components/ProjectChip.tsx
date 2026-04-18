@@ -81,7 +81,16 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
     if (tag.includes('departmental')) {
       return isPowered ? 'text-indigo-300 bg-indigo-500/10 border border-indigo-500/30' : 'text-indigo-800 bg-indigo-100 border border-indigo-300';
     }
-    
+    if (tag.includes('iot') || tag.includes('robot')) {
+      return isPowered ? 'text-sky-300 bg-sky-500/10 border border-sky-500/30' : 'text-sky-800 bg-sky-100 border border-sky-300';
+    }
+    if (tag.includes('agriai') || tag.includes('agri') || tag.includes('ai')) {
+      return isPowered ? 'text-green-300 bg-green-500/10 border border-green-500/30' : 'text-green-800 bg-green-100 border border-green-300';
+    }
+    if (tag.includes('dual') || tag.includes('esp32') || tag.includes('esp')) {
+      return isPowered ? 'text-purple-300 bg-purple-500/10 border border-purple-500/30' : 'text-purple-800 bg-purple-100 border border-purple-300';
+    }
+
     return isPowered ? 'text-amber-400 bg-amber-500/10 border border-amber-500/30' : 'text-amber-700 bg-amber-100 border border-amber-300';
   };
 

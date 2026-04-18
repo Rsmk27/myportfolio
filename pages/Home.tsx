@@ -152,9 +152,10 @@ const Home: React.FC = () => {
         if (isPowered) setStatusText(fullText);
     }, [isPowered, reduced]);
 
-    /* Navbar scroll shadow */
+    /* Navbar scroll — trigger liquid glass past hero (80vh) */
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 40);
+        const threshold = window.innerHeight * 0.8;
+        const onScroll = () => setScrolled(window.scrollY > threshold);
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
@@ -285,11 +286,16 @@ const Home: React.FC = () => {
                 {/* ── Floating Navbar ─────────────────────────────────── */}
                 <header
                     className={`fixed top-4 left-4 right-4 z-50 flex justify-between items-center px-5 py-3 rounded-xl
-            transition-all duration-300 pointer-events-none
+            pointer-events-none
             ${scrolled
-                            ? 'bg-black/80 backdrop-blur-xl border border-white/[0.06] shadow-[0_4px_32px_rgba(0,242,255,0.07)]'
+                            ? 'liquid-glass-header'
                             : 'bg-transparent border border-transparent'
                         }`}
+                    style={scrolled ? {
+                        transition: 'background 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s cubic-bezier(0.22,1,0.36,1), border-color 0.5s cubic-bezier(0.22,1,0.36,1), backdrop-filter 0.5s cubic-bezier(0.22,1,0.36,1)'
+                    } : {
+                        transition: 'all 0.5s cubic-bezier(0.22,1,0.36,1)'
+                    }}
                 >
                     {/* Brand */}
                     <div className="flex flex-col pointer-events-auto">
