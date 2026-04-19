@@ -2,7 +2,7 @@ import { Project, Skill, Profile, Experience, Education } from './types';
 import { Zap, Cpu, Radio, BatteryMedium, Layers, ShieldCheck, Database, Code, Activity, Globe } from 'lucide-react';
 
 export const PROFILE: Profile = {
-  name: "Srinivasa Manikanta",
+  name: "Srinivasa Manikanta Rajapantula",
   title: "EEE Student | Embedded Systems | IoT | Smart Energy",
   tagline: "Electrical & Electronics Engineering Student focused on Embedded Systems, IoT, and Smart Energy Solutions",
   heroSubtitle: "Building intelligent systems with a practical engineering mindset and sustainability-driven problem solving.",
@@ -47,14 +47,14 @@ export const EDUCATION: Education[] = [
   {
     id: 'edu1',
     degree: "B.Tech, Electrical & Electronics",
-    institution: "College of Engineering",
-    year: "2024 - PRESENT"
+    institution: "Andhra Loyola Institute of Engineering and Technology",
+    year: "2024 – Present"
   },
   {
     id: 'edu2',
     degree: "Diploma, Electrical & Electronics",
-    institution: "State Polytechnic College",
-    year: "2021 - 2024"
+    institution: "Government Polytechnic Srikakulam",
+    year: "2021 – 2024"
   }
 ];
 

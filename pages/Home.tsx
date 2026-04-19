@@ -221,7 +221,8 @@ const Home: React.FC = () => {
                 <title>{PROFILE.name} | Embedded Systems &amp; IoT Engineer</title>
 
                 {/* Primary SEO */}
-                <meta name="description" content="Srinivasa Manikanta — EEE student specializing in Embedded Systems, IoT, Smart Energy and Industrial Automation. Explore projects, skills and contact." />
+                <meta name="description" content={`${PROFILE.name} (RSMK) — EEE student at Andhra Loyola Institute of Engineering and Technology (ALIET). Specialized in Embedded Systems & IoT. Projects: Firefighter Safety Device, Agri Rover, ColorOhm.`} />
+                <meta name="keywords" content="Srinivasa Manikanta, Srinivasa Manikanta Rajapantula, RSMK, rsmk27, Andhra Loyola Institute of Engineering and Technology, ALIET, ALIET Vijayawada, Government Polytechnic Srikakulam, Srikakulam Engineering, Firefighter Safety Device, ColorOhm, Agri Rover, Embedded Systems, IoT, EEE Engineer" />
                 <meta name="author" content={PROFILE.name} />
                 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
                 <link rel="canonical" href="https://rsmk.me/" />
@@ -229,9 +230,9 @@ const Home: React.FC = () => {
                 {/* Open Graph */}
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://rsmk.me/" />
-                <meta property="og:site_name" content="Srinivasa Manikanta Portfolio" />
+                <meta property="og:site_name" content={`${PROFILE.name} (RSMK) Portfolio`} />
                 <meta property="og:title" content={`${PROFILE.name} | Embedded Systems & IoT Engineer`} />
-                <meta property="og:description" content="EEE student specializing in Embedded Systems, IoT, Smart Energy and Industrial Automation. Building intelligent, sustainable real-world systems." />
+                <meta property="og:description" content="Explore innovative engineering projects by RSMK: Firefighter Safety Device, Agri Rover, ColorOhm, and Smart Energy systems. Specialist in Embedded Systems and IoT." />
                 <meta property="og:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
@@ -243,7 +244,7 @@ const Home: React.FC = () => {
                 <meta name="twitter:site" content="@SrinivasManik20" />
                 <meta name="twitter:creator" content="@SrinivasManik20" />
                 <meta name="twitter:title" content={`${PROFILE.name} | Embedded Systems & IoT Engineer`} />
-                <meta name="twitter:description" content="EEE student specializing in Embedded Systems, IoT, Smart Energy and Industrial Automation." />
+                <meta name="twitter:description" content="EEE student specializing in Embedded Systems, IoT, Smart Energy and Industrial Automation portfolio." />
                 <meta name="twitter:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
                 <meta name="twitter:image:alt" content={`Portrait of ${PROFILE.name}, EEE Engineer`} />
 
@@ -601,7 +602,7 @@ const Home: React.FC = () => {
                                 <div className="relative w-48 h-48 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_60px_rgba(0,242,255,0.18),inset_0_0_30px_rgba(0,242,255,0.05)] bg-black z-10 hover:border-cyan-400/60 transition-colors duration-500 group">
                                     <img
                                         src={PROFILE.image}
-                                        alt={`Portrait of ${PROFILE.name}, Embedded Systems & IoT Engineer`}
+                                        alt={`Srinivasa Manikanta Rajapantula (RSMK) — Embedded Systems & IoT Engineer Portfolio Image`}
                                         className="w-full h-full object-cover"
                                         loading="eager"
                                         fetchPriority="high"
@@ -665,6 +666,27 @@ const Home: React.FC = () => {
                                                 </motion.span>
                                             ))}
                                         </div>
+                                        <div 
+                                            className="flex flex-wrap justify-center pt-2 text-white/90 text-4xl md:text-6xl lg:text-7xl opacity-80"
+                                            style={{ textShadow: '0 0 40px rgba(255,255,255,0.1)' }}
+                                        >
+                                            {"RAJAPANTULA".split('').map((char, i) => (
+                                                <motion.span
+                                                    key={`r-${i}`}
+                                                    className="inline-block"
+                                                    whileHover={{
+                                                        y: -8,
+                                                        scale: 1.2,
+                                                        color: '#00f2ff',
+                                                        textShadow: '0px 10px 20px rgba(0, 242, 255, 0.4)'
+                                                    }}
+                                                    transition={{ type: 'spring', stiffness: 450, damping: 10 }}
+                                                    style={{ display: 'inline-block', transformOrigin: 'bottom center' }}
+                                                >
+                                                    {char}
+                                                </motion.span>
+                                            ))}
+                                        </div>
                                     </h1>
                                 </motion.div>
 
@@ -675,7 +697,7 @@ const Home: React.FC = () => {
                                     className="flex flex-col items-center gap-2"
                                 >
                                     <h2 className="text-base md:text-xl text-gray-300 font-mono tracking-[0.25em] uppercase">
-                                        Electrical &amp; Electronics Engineer
+                                        RSMK | Electrical &amp; Electronics Engineer
                                     </h2>
                                     <motion.p
                                         key={statusTickerIndex}

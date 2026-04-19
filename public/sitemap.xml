@@ -41,6 +41,11 @@
       <image:title>Automatic Streetlight System — Solar Powered IC 555</image:title>
       <image:caption>Solar-powered automatic streetlight using IC 555 timer and LDR sensor for dusk/dawn switching</image:caption>
     </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/agri-rover-project.webp</image:loc>
+      <image:title>Agri Rover — AI Powered Agricultural IoT Robot</image:title>
+      <image:caption>Web-controlled ESP32 rover with MJPEG streaming, GPS tracking, and AI-powered crop advice.</image:caption>
+    </image:image>
   </url>
 
   <!-- Gallery -->
