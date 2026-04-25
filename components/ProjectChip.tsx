@@ -180,7 +180,7 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
                   <a
                     href={project.link}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="w-8 h-8 rounded-full border border-cyan-500/40 bg-black/60 text-cyan-300 flex items-center justify-center hover:bg-cyan-500/20 hover:text-cyan-100 transition-colors"
                     aria-label={`Open ${project.title} ${isGithubProject ? 'GitHub' : 'live link'}`}
                   >
@@ -213,7 +213,7 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
             <a
               href={project.link || '#'}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="self-center flex items-center gap-2 px-6 py-2 bg-cyan-500 text-black font-bold rounded-full hover:scale-105 transition-transform"
             >
               <span>View System</span>

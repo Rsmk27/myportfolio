@@ -351,7 +351,7 @@ const Home: React.FC = () => {
                             <a
                                 href={PROFILE.resume}
                                 target="_blank"
-                                rel="noreferrer"
+                                rel="noopener noreferrer"
                                 title="View Resume"
                                 className="flex items-center gap-1 px-3 py-1.5 border border-cyan-500/40 text-cyan-400 text-[11px] font-bold rounded-l-lg hover:bg-cyan-500/10 hover:border-cyan-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
                             >
@@ -412,7 +412,7 @@ const Home: React.FC = () => {
                                 <a
                                     href={PROFILE.resume}
                                     target="_blank"
-                                    rel="noreferrer"
+                                    rel="noopener noreferrer"
                                     className="flex items-center gap-2 px-6 py-3 border border-cyan-500/50 text-cyan-400 font-bold rounded-xl hover:bg-cyan-500/10 transition-all duration-200 cursor-pointer"
                                 >
                                     <Eye size={16} />
@@ -887,7 +887,7 @@ const Home: React.FC = () => {
                                             key={s.platform}
                                             href={s.url}
                                             target="_blank"
-                                            rel="noreferrer"
+                                            rel="noopener noreferrer"
                                             aria-label={`Visit ${PROFILE.name}'s ${s.platform}`}
                                             role="listitem"
                                             className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-800 text-gray-500
