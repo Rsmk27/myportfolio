@@ -5,10 +5,10 @@ import { Mail, Github, Linkedin, Twitter, Send, Terminal, Wifi, Activity, Instag
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const AI_API_URL     = 'https://rsmk27-rsmk-chatbot-api.hf.space/chat';
-const USAGE_KEY      = 'rsmk_chat_usage';
-const MAX_MSGS       = 20;
-const MAX_ATTEMPTS   = 3;
+const AI_API_URL = 'https://project-mani-c0t3.onrender.com/api/chat';
+const USAGE_KEY = 'rsmk_chat_usage';
+const MAX_MSGS = 20;
+const MAX_ATTEMPTS = 3;
 const RETRY_DELAY_MS = 6000;
 
 function getCount(): number {
@@ -83,7 +83,7 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
                     if (urlEnd !== -1) {
                         flush();
                         const label = text.slice(j + 1, labelEnd);
-                        const url   = text.slice(labelEnd + 2, urlEnd);
+                        const url = text.slice(labelEnd + 2, urlEnd);
                         push(
                             <a key={`${key}-l${j}`} href={url} target="_blank" rel="noopener noreferrer"
                                 className="text-cyan-400 underline hover:text-cyan-200 transition-colors">
@@ -143,8 +143,8 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
         if (headingMatch) {
             const level = headingMatch[1].length;
             const cls = level === 1 ? 'text-base font-bold text-white mt-2 mb-1'
-                      : level === 2 ? 'text-sm  font-bold text-cyan-200 mt-2 mb-1'
-                      :               'text-xs  font-bold text-cyan-300 mt-1 mb-0.5';
+                : level === 2 ? 'text-sm  font-bold text-cyan-200 mt-2 mb-1'
+                    : 'text-xs  font-bold text-cyan-300 mt-1 mb-0.5';
             nodes.push(
                 <p key={`h-${i}`} className={cls}>{inline(headingMatch[2], `h${i}`)}</p>
             );
@@ -196,7 +196,7 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
                 <ol key={`ol-${i}`} className="my-1 space-y-0.5 pl-3">
                     {items.map((item, idx) => (
                         <li key={idx} className="flex gap-1.5 items-start">
-                            <span className="text-cyan-500 flex-shrink-0 font-mono">{num++ }.</span>
+                            <span className="text-cyan-500 flex-shrink-0 font-mono">{num++}.</span>
                             <span>{inline(item, `ol${i}-${idx}`)}</span>
                         </li>
                     ))}
@@ -244,19 +244,19 @@ interface ContactInterfaceProps {
 export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isPowered }) => {
 
     const [consoleInput, setConsoleInput] = useState<string>('');
-    const [messages, setMessages]         = useState<TermMsg[]>([
+    const [messages, setMessages] = useState<TermMsg[]>([
         { id: 'b1', text: '> Booting RSMK AI interface...', type: 'sys' },
         { id: 'b2', text: '> Connection established.', type: 'sys' },
         { id: 'b3', text: "Hey! I'm RSMK's AI assistant. Ask me anything about his projects, skills, or background 👋", type: 'ai' },
     ]);
-    const [isLoading, setIsLoading]       = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [uplinkStatus, setUplinkStatus] = useState<'IDLE' | 'TRANSMITTING' | 'ACKNOWLEDGED'>('IDLE');
-    const [msgCount, setMsgCount]         = useState<number>(() => getCount());
+    const [msgCount, setMsgCount] = useState<number>(() => getCount());
 
-    const scrollRef   = useRef<HTMLDivElement>(null);
+    const scrollRef = useRef<HTMLDivElement>(null);
     const messagesRef = useRef<TermMsg[]>(messages);
 
-    const remaining      = MAX_MSGS - msgCount;
+    const remaining = MAX_MSGS - msgCount;
     const isLimitReached = remaining <= 0;
 
     const barHeights = useMemo(
@@ -290,8 +290,13 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
         const cur = getCount();
         if (cur >= MAX_MSGS) { setMsgCount(cur); return; }
 
-        // HF Space crashes on non-empty history — always send []
-        const history: { role: string; content: string }[] = [];
+        // Build history from existing messages
+        const messageHistory = (retryClean || messagesRef.current)
+            .filter(m => m.type === 'user' || m.type === 'ai')
+            .map(m => ({
+                role: m.type === 'user' ? 'user' : 'assistant',
+                content: m.type === 'user' ? m.text.replace(/^>\s*/, '') : m.text
+            }));
 
         if (!retryClean) {
             addMsg({ text: `> ${trimmed}`, type: 'user' });
@@ -312,11 +317,16 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                 const res = await fetch(AI_API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: trimmed, history }),
+                    body: JSON.stringify({ query: trimmed, history: messageHistory }),
                 });
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
                 const data = await res.json();
-                addMsg({ text: data.reply ?? 'No response received.', type: 'ai' });
+
+                if (!res.ok || !data.success) {
+                    throw new Error(data.error || `HTTP ${res.status}`);
+                }
+
+                addMsg({ text: data.response ?? 'No response received.', type: 'ai' });
                 setUplinkStatus('ACKNOWLEDGED');
                 setTimeout(() => setUplinkStatus('IDLE'), 2000);
                 lastError = null;
@@ -355,14 +365,14 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
 
     const getIcon = (platform: Social['platform']) => {
         switch (platform) {
-            case 'github':    return Github;
-            case 'linkedin':  return Linkedin;
-            case 'twitter':   return Twitter;
-            case 'x':         return Twitter;
+            case 'github': return Github;
+            case 'linkedin': return Linkedin;
+            case 'twitter': return Twitter;
+            case 'x': return Twitter;
             case 'instagram': return Instagram;
-            case 'telegram':  return Send;
-            case 'email':     return Mail;
-            default:          return Mail;
+            case 'telegram': return Send;
+            case 'email': return Mail;
+            default: return Mail;
         }
     };
 
@@ -391,11 +401,10 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                         </div>
                         <div className="flex items-center gap-2 mt-2">
                             <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Status:</span>
-                            <span className={`text-[10px] font-mono font-bold ${
-                                uplinkStatus === 'TRANSMITTING' ? 'text-amber-500 animate-pulse' :
-                                uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-500' :
-                                isPowered ? 'text-cyan-500' : 'text-gray-600'
-                            }`}>
+                            <span className={`text-[10px] font-mono font-bold ${uplinkStatus === 'TRANSMITTING' ? 'text-amber-500 animate-pulse' :
+                                    uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-500' :
+                                        isPowered ? 'text-cyan-500' : 'text-gray-600'
+                                }`}>
                                 {uplinkStatus === 'IDLE' ? (isPowered ? 'READY' : 'OFFLINE') : uplinkStatus}
                             </span>
                         </div>
@@ -408,11 +417,11 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                     {profile.socials.filter(s => s.platform !== 'email').map(social => {
                         const Icon = getIcon(social.platform);
                         let handle = social.url;
-                        if (social.platform === 'linkedin')       handle = 'LinkedIn Profile';
-                        else if (social.platform === 'github')    handle = 'GitHub Profile';
+                        if (social.platform === 'linkedin') handle = 'LinkedIn Profile';
+                        else if (social.platform === 'github') handle = 'GitHub Profile';
                         else if (social.platform === 'instagram') handle = 'Instagram';
-                        else if (social.platform === 'telegram')  handle = 'Telegram';
-                        else if (social.platform === 'x')         handle = 'X (Twitter)';
+                        else if (social.platform === 'telegram') handle = 'Telegram';
+                        else if (social.platform === 'x') handle = 'X (Twitter)';
                         else handle = social.url.replace(/^https?:\/\//, '');
                         return (
                             <ContactCard key={social.platform} href={social.url} icon={Icon}
@@ -423,19 +432,17 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
             </div>
 
             {/* AI Terminal */}
-            <div className={`relative rounded-lg overflow-hidden border transition-all duration-500 flex flex-col h-[480px] ${
-                isPowered
+            <div className={`relative rounded-lg overflow-hidden border transition-all duration-500 flex flex-col h-[480px] ${isPowered
                     ? 'border-cyan-900/50 bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)]'
                     : 'border-gray-900 bg-[#050505]'
-            }`}>
+                }`}>
                 {isPowered && (
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-20 pointer-events-none bg-[length:100%_2px,3px_100%]" />
                 )}
 
                 {/* Header */}
-                <div className={`px-4 py-2 border-b flex justify-between items-center flex-shrink-0 ${
-                    isPowered ? 'bg-cyan-950/20 border-cyan-900/30' : 'bg-[#111] border-gray-800'
-                }`}>
+                <div className={`px-4 py-2 border-b flex justify-between items-center flex-shrink-0 ${isPowered ? 'bg-cyan-950/20 border-cyan-900/30' : 'bg-[#111] border-gray-800'
+                    }`}>
                     <div className="flex items-center gap-2">
                         <Terminal size={14} className={isPowered ? 'text-cyan-400' : 'text-gray-600'} />
                         <span className={`text-xs font-mono font-bold ${isPowered ? 'text-cyan-500' : 'text-gray-600'}`}>
@@ -443,8 +450,8 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                         </span>
                     </div>
                     <div className="flex gap-1.5">
-                        <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-red-500'     : 'bg-gray-800'}`} />
-                        <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-amber-500'   : 'bg-gray-800'}`} />
+                        <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-red-500' : 'bg-gray-800'}`} />
+                        <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-amber-500' : 'bg-gray-800'}`} />
                         <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-emerald-500' : 'bg-gray-800'}`} />
                     </div>
                 </div>
@@ -464,10 +471,10 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             {/* Timestamp + prefix row */}
                             <div className="flex items-center gap-1.5 mb-0.5 select-none">
                                 <span className="opacity-30 text-[10px]">{timeLabel()}</span>
-                                {msg.type === 'ai'    && <span className="text-cyan-500 text-[10px]">[AI]</span>}
+                                {msg.type === 'ai' && <span className="text-cyan-500 text-[10px]">[AI]</span>}
                                 {msg.type === 'error' && <span className="text-amber-500 text-[10px]">[!]</span>}
-                                {msg.type === 'user'  && <span className="text-green-500 text-[10px]">[YOU]</span>}
-                                {msg.type === 'sys'   && <span className="text-cyan-700 text-[10px]">[SYS]</span>}
+                                {msg.type === 'user' && <span className="text-green-500 text-[10px]">[YOU]</span>}
+                                {msg.type === 'sys' && <span className="text-cyan-700 text-[10px]">[SYS]</span>}
                             </div>
 
                             {/* Message body */}
@@ -475,12 +482,11 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                                 initial={{ opacity: 0, y: 6 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.2 }}
-                                className={`ml-1 ${
-                                    msg.type === 'user'  ? 'text-white' :
-                                    msg.type === 'ai'    ? 'text-cyan-200' :
-                                    msg.type === 'error' ? 'text-amber-400' :
-                                                           'text-cyan-700'
-                                }`}
+                                className={`ml-1 ${msg.type === 'user' ? 'text-white' :
+                                        msg.type === 'ai' ? 'text-cyan-200' :
+                                            msg.type === 'error' ? 'text-amber-400' :
+                                                'text-cyan-700'
+                                    }`}
                             >
                                 {msg.type === 'ai'
                                     ? <MiniMarkdown content={msg.text} />
@@ -535,9 +541,8 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                 {/* Input */}
                 <form
                     onSubmit={handleCommand}
-                    className={`p-3 border-t relative z-30 flex-shrink-0 ${
-                        isPowered ? 'border-cyan-900/30 bg-cyan-950/10' : 'border-gray-800'
-                    }`}
+                    className={`p-3 border-t relative z-30 flex-shrink-0 ${isPowered ? 'border-cyan-900/30 bg-cyan-950/10' : 'border-gray-800'
+                        }`}
                 >
                     <div className="flex items-center gap-2">
                         <span className={isPowered ? 'text-green-500' : 'text-gray-600'}>➜</span>
@@ -546,27 +551,25 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             value={consoleInput}
                             onChange={e => setConsoleInput(e.target.value)}
                             placeholder={
-                                !isPowered     ? 'Offline' :
-                                isLimitReached ? 'Session limit reached...' :
-                                isLoading      ? 'Waiting for response...' :
-                                                 'Ask me anything...'
+                                !isPowered ? 'Offline' :
+                                    isLimitReached ? 'Session limit reached...' :
+                                        isLoading ? 'Waiting for response...' :
+                                            'Ask me anything...'
                             }
                             disabled={!isPowered || isLoading || isLimitReached}
-                            className={`flex-1 bg-transparent border-none outline-none font-mono text-sm ${
-                                isPowered
+                            className={`flex-1 bg-transparent border-none outline-none font-mono text-sm ${isPowered
                                     ? 'text-cyan-100 placeholder-cyan-900/50'
                                     : 'text-gray-600 placeholder-gray-800'
-                            }`}
+                                }`}
                             autoComplete="off"
                         />
                         <button
                             type="submit"
                             disabled={!isPowered || isLoading || isLimitReached || !consoleInput.trim()}
-                            className={`p-1.5 rounded transition-all ${
-                                isPowered && !isLoading && !isLimitReached && consoleInput.trim()
+                            className={`p-1.5 rounded transition-all ${isPowered && !isLoading && !isLimitReached && consoleInput.trim()
                                     ? 'text-cyan-400 hover:bg-cyan-900/30 hover:text-cyan-200'
                                     : 'text-gray-700'
-                            }`}
+                                }`}
                         >
                             <Send size={16} />
                         </button>
@@ -590,11 +593,10 @@ const ContactCard: React.FC<{
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group relative overflow-hidden flex items-center gap-4 p-4 border rounded-xl transition-all duration-300 ${
-            isPowered
+        className={`group relative overflow-hidden flex items-center gap-4 p-4 border rounded-xl transition-all duration-300 ${isPowered
                 ? 'bg-[#0a0a0a] border-gray-800 hover:border-cyan-500/50'
                 : 'bg-black border-gray-900'
-        }`}
+            }`}
     >
         {isPowered && (
             <>
@@ -607,11 +609,10 @@ const ContactCard: React.FC<{
                 />
             </>
         )}
-        <div className={`relative z-10 p-2.5 rounded-lg transition-colors ${
-            isPowered
+        <div className={`relative z-10 p-2.5 rounded-lg transition-colors ${isPowered
                 ? 'bg-gray-900 text-cyan-400 group-hover:text-cyan-300 group-hover:shadow-[0_0_15px_rgba(0,242,255,0.2)]'
                 : 'bg-gray-900 text-gray-600'
-        }`}>
+            }`}>
             <Icon size={22} />
         </div>
         <div className="flex-1 relative z-10">
