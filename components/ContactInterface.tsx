@@ -415,8 +415,8 @@ User Query: ${trimmed}`;
                         <div className="flex items-center gap-2 mt-2">
                             <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Status:</span>
                             <span className={`text-[10px] font-mono font-bold ${uplinkStatus === 'TRANSMITTING' ? 'text-amber-500 animate-pulse' :
-                                    uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-500' :
-                                        isPowered ? 'text-cyan-500' : 'text-gray-600'
+                                uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-500' :
+                                    isPowered ? 'text-cyan-500' : 'text-gray-600'
                                 }`}>
                                 {uplinkStatus === 'IDLE' ? (isPowered ? 'READY' : 'OFFLINE') : uplinkStatus}
                             </span>
@@ -446,8 +446,8 @@ User Query: ${trimmed}`;
 
             {/* AI Terminal */}
             <div className={`relative rounded-lg overflow-hidden border transition-all duration-500 flex flex-col h-[480px] ${isPowered
-                    ? 'border-cyan-900/50 bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)]'
-                    : 'border-gray-900 bg-[#050505]'
+                ? 'border-cyan-900/50 bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)]'
+                : 'border-gray-900 bg-[#050505]'
                 }`}>
                 {isPowered && (
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-20 pointer-events-none bg-[length:100%_2px,3px_100%]" />
@@ -496,9 +496,9 @@ User Query: ${trimmed}`;
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.2 }}
                                 className={`ml-1 ${msg.type === 'user' ? 'text-white' :
-                                        msg.type === 'ai' ? 'text-cyan-200' :
-                                            msg.type === 'error' ? 'text-amber-400' :
-                                                'text-cyan-700'
+                                    msg.type === 'ai' ? 'text-cyan-200' :
+                                        msg.type === 'error' ? 'text-amber-400' :
+                                            'text-cyan-700'
                                     }`}
                             >
                                 {msg.type === 'ai'
@@ -571,8 +571,8 @@ User Query: ${trimmed}`;
                             }
                             disabled={!isPowered || isLoading || isLimitReached}
                             className={`flex-1 bg-transparent border-none outline-none font-mono text-sm ${isPowered
-                                    ? 'text-cyan-100 placeholder-cyan-900/50'
-                                    : 'text-gray-600 placeholder-gray-800'
+                                ? 'text-cyan-100 placeholder-cyan-900/50'
+                                : 'text-gray-600 placeholder-gray-800'
                                 }`}
                             autoComplete="off"
                         />
@@ -580,8 +580,8 @@ User Query: ${trimmed}`;
                             type="submit"
                             disabled={!isPowered || isLoading || isLimitReached || !consoleInput.trim()}
                             className={`p-1.5 rounded transition-all ${isPowered && !isLoading && !isLimitReached && consoleInput.trim()
-                                    ? 'text-cyan-400 hover:bg-cyan-900/30 hover:text-cyan-200'
-                                    : 'text-gray-700'
+                                ? 'text-cyan-400 hover:bg-cyan-900/30 hover:text-cyan-200'
+                                : 'text-gray-700'
                                 }`}
                         >
                             <Send size={16} />
@@ -607,8 +607,8 @@ const ContactCard: React.FC<{
         target="_blank"
         rel="noopener noreferrer"
         className={`group relative overflow-hidden flex items-center gap-4 p-4 border rounded-xl transition-all duration-300 ${isPowered
-                ? 'bg-[#0a0a0a] border-gray-800 hover:border-cyan-500/50'
-                : 'bg-black border-gray-900'
+            ? 'bg-[#0a0a0a] border-gray-800 hover:border-cyan-500/50'
+            : 'bg-black border-gray-900'
             }`}
     >
         {isPowered && (
@@ -623,8 +623,8 @@ const ContactCard: React.FC<{
             </>
         )}
         <div className={`relative z-10 p-2.5 rounded-lg transition-colors ${isPowered
-                ? 'bg-gray-900 text-cyan-400 group-hover:text-cyan-300 group-hover:shadow-[0_0_15px_rgba(0,242,255,0.2)]'
-                : 'bg-gray-900 text-gray-600'
+            ? 'bg-gray-900 text-cyan-400 group-hover:text-cyan-300 group-hover:shadow-[0_0_15px_rgba(0,242,255,0.2)]'
+            : 'bg-gray-900 text-gray-600'
             }`}>
             <Icon size={22} />
         </div>
