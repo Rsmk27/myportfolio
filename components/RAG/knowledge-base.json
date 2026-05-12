@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "owner": "Srinivasa Manikanta Rajapantula",
+    "alias": "RSMK",
+    "brand": "RSMK Technologies",
+    "website": "rsmk.me",
+    "last_updated": "2025-05-12"
+  },
+  "chunks": [
+    {
+      "id": "bio_001",
+      "category": "about",
+      "title": "Who is RSMK?",
+      "content": "Srinivasa Manikanta Rajapantula, known as RSMK, is a final-year B.Tech Electrical and Electronics Engineering (EEE) student at Andhra Loyola Institute of Engineering and Technology (ALIET), Vijayawada, affiliated with JNTUK. He has a CGPA of 7.5. RSMK is the founder of RSMK Technologies — a personal tech brand spanning embedded systems, IoT, web/mobile apps, and AI products. He is based in Vijayawada, Andhra Pradesh, India. He identifies as an INFJ personality type and is deeply passionate about Green Tech, smart energy systems, and electronics automation."
+    },
+    {
+      "id": "bio_002",
+      "category": "about",
+      "title": "RSMK's background and interests",
+      "content": "RSMK has a strong interest in renewable energy, decentralized smart grids, and PSU placement targets including BHEL, NTPC, and PGCIL. He is a vibe coder who prefers crafting detailed prompts for AI coding agents (VS Code + GitHub Copilot, Antigravity IDE with Gemini and Claude) over writing code manually. He has taught a 2-day workshop on 'Foundational ML to Advanced Gen AI' covering ML fundamentals through RAG, diffusion models, and AI agents. His reading list includes Deep Work, The 80/20 Principle, I Will Teach You to Be Rich, How to Talk to Anyone, and The Five Love Languages."
+    },
+    {
+      "id": "bio_003",
+      "category": "about",
+      "title": "RSMK's education and internship",
+      "content": "RSMK completed his B.Tech in Electrical and Electronics Engineering at Andhra Loyola Institute of Engineering and Technology (ALIET), Vijayawada, under JNTUK, with a CGPA of 7.5. He completed an industrial internship at Coromandel International Limited, gaining hands-on experience in industrial electrical systems. He also won 2nd Prize (Hardware Category) at A-HACKS 2026 Hackathon for building SFMD — Firefighter Safety Monitoring Device — using ESP32, GPS, gas sensors, and Firebase with a React dashboard and React Native companion app."
+    },
+    {
+      "id": "project_mani",
+      "category": "projects",
+      "title": "Mani — AI Assistant (Flagship)",
+      "content": "Mani is the flagship AI assistant product under RSMK AI, a division of RSMK Technologies. It is an orchestrator-based AI assistant that intelligently routes user queries across multiple AI models, RAG pipelines, and tools. Mani integrates with RSMK's Portfolio (rsmk.me), BudgetBuddy, and GridForge platforms. The backend is hosted on Render using the Groq API, with a Next.js and Node.js stack. Mani is designed to be a personalized, context-aware AI that knows everything about RSMK's work, projects, and brand."
+    },
+    {
+      "id": "project_budgetbuddy",
+      "category": "projects",
+      "title": "BudgetBuddy — Personal Finance App",
+      "content": "BudgetBuddy is a personal finance management app built with React Native, Expo, Firebase, and NativeWind — designed INR-first for Indian users. It reached v1.0.0 Early Access on Android. Key features include expense tracking, budget management, and Razorpay payment gateway integration. The app was launched with a full GitHub release, SECURITY.md, and README documentation. Available on Android."
+    },
+    {
+      "id": "project_colorohm",
+      "category": "projects",
+      "title": "ColorOhm — Resistor Color Code Calculator",
+      "content": "ColorOhm is a React Native and Expo app with a dark navy and green theme, available on Android. It helps electronics engineers and hobbyists decode resistor color codes. Version 1.2.0 added SMD (Surface Mount Device) decoder, History, Favorites, haptic feedback, and share functionality. Version 1.2.1 added easter eggs and animations via react-native-reanimated. Features include Reverse Lookup and a companion site at colorohm.rsmk.me. Built with NativeWind."
+    },
+    {
+      "id": "project_sfmd",
+      "category": "projects",
+      "title": "SFMD — Firefighter Safety Monitoring Device (A-HACKS 2026 Winner)",
+      "content": "SFMD (Firefighter Safety Monitoring Device) is a wearable IoT device built for the A-HACKS 2026 Hackathon, where it won 2nd Prize in the Hardware Category. The device uses an ESP32 microcontroller with DHT11 (temperature/humidity), MPU-6050 (motion/fall detection), NEO-6M GPS, and MQ-2 (gas sensor). Data is pushed to Firebase Realtime Database and visualized on a React and Vite dashboard, with a React Native companion app for real-time monitoring. Key innovations include Safe Exit Guidance, Offline Mode with auto-sync, and Fatigue Detection algorithms. Documentation hosted at sfmd.rsmk.me."
+    },
+    {
+      "id": "project_agrirover",
+      "category": "projects",
+      "title": "AgriRover — Multipurpose Agriculture Rover",
+      "content": "AgriRover is a smart agriculture rover controlled via MQTT over HiveMQ Cloud, built with ESP32 and ESP32-CAM. It features soil moisture sensing, GPS tracking, auto-spray logic, and a React dashboard with a D-pad controller for manual override. Data is synchronized to Firebase Realtime Database via a Node.js bridge server. The rover can autonomously navigate fields and spray fertilizer or water based on sensor readings."
+    },
+    {
+      "id": "project_gridforge",
+      "category": "projects",
+      "title": "GridForge — Smart Grid Simulation Platform",
+      "content": "GridForge is a MATLAB-based smart grid simulation platform developed as part of RSMK's Green Tech focus. It enables simulation and analysis of decentralized smart grid architectures, power flow optimization, and renewable energy integration scenarios. GridForge is part of RSMK's long-term vision for sustainable energy systems and is integrated with Mani for AI-assisted grid analysis."
+    },
+    {
+      "id": "project_taskpulse",
+      "category": "projects",
+      "title": "TaskPulse — Behavior-Focused Task Reminder App",
+      "content": "TaskPulse is a fully offline task reminder app built with Expo React Native, AsyncStorage, and expo-notifications. It focuses on behavior-driven task management with persistent notifications to help users build habits. The app requires no internet connection and stores all data locally on the device."
+    },
+    {
+      "id": "project_trafficvision",
+      "category": "projects",
+      "title": "TrafficVision — Real-Time Traffic Monitoring",
+      "content": "TrafficVision is a real-time traffic monitoring desktop application built using YOLOv8 and OpenCV. It detects and counts vehicles in real time from a video feed or camera input, enabling intelligent traffic analysis. The app was vibe-coded using detailed AI prompts."
+    },
+    {
+      "id": "project_zestfolio",
+      "category": "projects",
+      "title": "ZestFolio — Portfolio Template Collection",
+      "content": "ZestFolio is a collection of distinct, single-file HTML portfolio templates built with Tailwind CSS, available at zestfolio.vercel.app. The project offers multiple aesthetic directions for developers and students to quickly set up a professional portfolio website. Each template is fully self-contained in a single HTML file."
+    },
+    {
+      "id": "project_last_minute_notes",
+      "category": "projects",
+      "title": "Last-Minute Notes Generator — AI Study Tool",
+      "content": "The Last-Minute Notes Generator is an AI-powered React component study tool for students. It uses the Anthropic API to generate concise, exam-ready notes from uploaded documents or typed content. It supports multiple note format options including bullet summaries, cheat sheets, mind maps, and Q&A formats — designed to help students quickly prepare for exams."
+    },
+    {
+      "id": "project_spds",
+      "category": "projects",
+      "title": "SPDS — Solar-Powered Dewatering System for Mines",
+      "content": "SPDS (Solar-Powered Dewatering System for Mines) is a college-level Smart India Hackathon project that proposes using solar energy to power water pumping systems in coal mines, reducing dependency on grid power and improving safety. Documentation and project details are available at spds.rsmk.me."
+    },
+    {
+      "id": "project_solar_tracker",
+      "category": "projects",
+      "title": "Single Axis Solar Tracker",
+      "content": "A single-axis solar tracker built using pure relay logic (no microcontroller) that improved solar panel efficiency by approximately 30% by keeping the panel aligned with the sun throughout the day. This was one of RSMK's early hardware projects demonstrating practical electrical engineering skills."
+    },
+    {
+      "id": "project_auto_fan",
+      "category": "projects",
+      "title": "Automatic Exhaust Fan System",
+      "content": "An automatic exhaust fan system built using an MQ-2 gas sensor and Arduino UNO that automatically activates a fan when harmful gas or smoke is detected above a threshold, improving indoor air safety. One of RSMK's early embedded systems projects."
+    },
+    {
+      "id": "project_streetlight",
+      "category": "projects",
+      "title": "Automatic Streetlight System",
+      "content": "An automatic streetlight system built using IC 555 timer and LDR (Light Dependent Resistor) that automatically turns street lights on at dusk and off at dawn, saving energy. A foundational electronics project by RSMK."
+    },
+    {
+      "id": "skills_tech",
+      "category": "skills",
+      "title": "RSMK's technical skills",
+      "content": "RSMK's technical skills span multiple domains: Embedded Systems (Arduino UNO, Arduino Nano, ESP32, ESP32-CAM, ESP32-WiFi); IoT (MQTT, Firebase Realtime Database, HiveMQ Cloud); Mobile Development (React Native, Expo, NativeWind, AsyncStorage, expo-notifications); Web Development (React, Next.js, Node.js, Vite, Tailwind CSS, HTML, CSS); AI/ML (Groq API, Anthropic Claude API, RAG pipelines, YOLOv8, OpenCV, LLM fine-tuning exploration); Electronics (resistor color codes, solar systems, relay logic, sensor interfacing, PCB design); Data Simulation (MATLAB, Simulink); Hardware prototyping with sensors including DHT11, MPU-6050, NEO-6M GPS, MQ-2, L298N, TP4056."
+    },
+    {
+      "id": "skills_hardware",
+      "category": "skills",
+      "title": "RSMK's hardware inventory",
+      "content": "RSMK's hardware lab inventory includes: Arduino UNO, Arduino Nano, Arduino WiFi; ESP32-WROOM, ESP32-CAM; NEO-6M GPS module; MPU-6050 accelerometer/gyroscope; DHT11 temperature and humidity sensor; MQ-2 gas/smoke sensor; L298N motor driver module; TP4056 lithium battery charging module. He works on an 11th Gen Intel Core i5-1135G7 laptop with 8GB RAM running 64-bit Windows."
+    },
+    {
+      "id": "brand_rsmk",
+      "category": "brand",
+      "title": "RSMK Technologies brand and products",
+      "content": "RSMK Technologies is RSMK's personal tech brand operating at rsmk.me. The brand hierarchy is: RSMK Technologies (parent brand) → RSMK AI (AI division) → Mani (flagship AI assistant). RSMK Technologies builds embedded systems, IoT devices, web and mobile applications, and AI products. The brand is known for its aurora and glassmorphism design aesthetic on the portfolio site. Products include Mani (AI assistant), BudgetBuddy (finance app), ColorOhm (electronics tool), TaskPulse (productivity), ZestFolio (templates), and GridForge (smart grid simulation)."
+    },
+    {
+      "id": "contact_001",
+      "category": "contact",
+      "title": "How to contact RSMK",
+      "content": "RSMK can be contacted through his portfolio website at rsmk.me. His portfolio contains links to all his social profiles and a contact form. He is active on LinkedIn and GitHub. For professional inquiries, collaboration, or hiring, the best approach is through his portfolio website at rsmk.me or via LinkedIn."
+    },
+    {
+      "id": "contact_social",
+      "category": "contact",
+      "title": "RSMK's social profiles and links",
+      "content": "RSMK's online presence: Portfolio — rsmk.me; ColorOhm app site — colorohm.rsmk.me; SFMD project docs — sfmd.rsmk.me; SPDS project docs — spds.rsmk.me; ZestFolio templates — zestfolio.vercel.app; GitHub — github.com/Rsmk27; LinkedIn — linkedin.com/in/rsmk27 (professional profile with resume, projects, and recommendations)."
+    },
+    {
+      "id": "achievements_001",
+      "category": "achievements",
+      "title": "RSMK's achievements and awards",
+      "content": "RSMK won 2nd Prize in the Hardware Category at A-HACKS 2026 Hackathon for building the SFMD (Firefighter Safety Monitoring Device). He has published a full technical paper and documentation on SFMD. He taught a 2-day 'Foundational ML to Advanced Gen AI' workshop covering topics from ML fundamentals through RAG, diffusion models, and AI agents. He completed an internship at Coromandel International Limited. He is a GitHub Student Pack member with GitHub Copilot Pro access."
+    },
+    {
+      "id": "philosophy_001",
+      "category": "about",
+      "title": "RSMK's work philosophy and approach",
+      "content": "RSMK follows a vibe coder workflow — he focuses on crafting highly detailed prompts for AI coding agents rather than writing code line by line. He uses VS Code with GitHub Copilot (agent mode) and Antigravity IDE (with Gemini and Claude Sonnet models) as his primary development tools, with opencode and Gemini CLI as fallbacks. He is deeply influenced by books like Deep Work and The 80/20 Principle, applying focused, high-leverage thinking to his projects. He is interested in long-term systemic change through Green Tech and smart energy innovation."
+    },
+    {
+      "id": "mani_about",
+      "category": "about",
+      "title": "What is Mani?",
+      "content": "Mani is RSMK's personal AI assistant, the flagship product of RSMK AI — a division of RSMK Technologies. Mani is an orchestrator-based assistant that routes your queries across multiple AI models, retrieval systems (RAG), and tools to give you accurate, context-rich answers about RSMK, his projects, skills, and work. Mani is purpose-built to represent RSMK on his portfolio website at rsmk.me. You are currently talking to Mani!"
+    }
+  ]
+}
