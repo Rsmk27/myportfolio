@@ -86,7 +86,7 @@ const INDEX = buildIndex(knowledgeBase.chunks);
 
 // ─── Public API ───────────────────────────────────────────────────────────────
 
-export function retrieveChunks(query: string, { topK = 3, minScore = 0.01 } = {}): any[] {
+function retrieveChunks(query: string, { topK = 3, minScore = 0.01 } = {}): any[] {
   const queryTokens = tokenise(query);
   if (!queryTokens.length) return [];
 
@@ -120,13 +120,3 @@ export function retrieveContext(query: string, opts = {}): string {
   ].join('\n\n');
 }
 
-export function retrieveByCategory(category: string, limit = 10): any[] {
-  return INDEX.chunks
-    .filter((c: any) => c.category === category)
-    .slice(0, limit);
-}
-
-export function listCategories(): string[] {
-  const cats = new Set(INDEX.chunks.map((c: any) => c.category));
-  return Array.from(cats);
-}

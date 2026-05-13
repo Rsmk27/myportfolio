@@ -1,5 +1,4 @@
-import { Project, Skill, Profile, Experience, Education } from './types';
-import { Zap, Cpu, Radio, BatteryMedium, Layers, ShieldCheck, Database, Code, Activity, Globe } from 'lucide-react';
+import { Project, Profile, Experience, Education } from './types';
 
 export const PROFILE: Profile = {
   name: "Srinivasa Manikanta Rajapantula",
@@ -214,36 +213,6 @@ export const PROJECTS: Project[] = [
     award: '🤖 IoT Robot',
     awards: ['🤖 IoT Robot', '🌿 AgriAI', '📡 Dual ESP32']
   }
-];
-
-export const SKILLS: Skill[] = [
-  // Embedded Systems & Hardware
-  { name: 'ESP32', type: 'ic', level: 0 },
-  { name: 'ESP8266', type: 'ic', level: 0 },
-  { name: 'Arduino', type: 'ic', level: 0 },
-  { name: 'UART / I2C / SPI', type: 'ic', level: 0 },
-  { name: 'MQTT', type: 'ic', level: 0 },
-  { name: 'Sensors & Actuators', type: 'ic', level: 0 },
-  // IoT
-  { name: 'IoT System Design', type: 'ic', level: 0 },
-  { name: 'Cloud Integration', type: 'ic', level: 0 },
-  { name: 'Real-time Monitoring', type: 'ic', level: 0 },
-  // Programming
-  { name: 'C / Embedded C', type: 'diode', level: 0 },
-  { name: 'Assembly', type: 'diode', level: 0 },
-  { name: 'Python', type: 'diode', level: 0 },
-  { name: 'MATLAB', type: 'diode', level: 0 },
-  // Power Systems
-  { name: 'Power Generation', type: 'capacitor', level: 0 },
-  { name: 'T&D Systems', type: 'capacitor', level: 0 },
-  { name: 'Smart Grid', type: 'capacitor', level: 0 },
-  // Power Electronics
-  { name: 'Converters / Inverters', type: 'capacitor', level: 0 },
-  { name: 'PWM Control', type: 'capacitor', level: 0 },
-  { name: 'Motor Drives', type: 'capacitor', level: 0 },
-  // Electrical Machines
-  { name: 'DC & AC Machines', type: 'resistor', level: 0 },
-  { name: 'Transformers', type: 'resistor', level: 0 },
 ];
 
 export const PCB_COLORS = {

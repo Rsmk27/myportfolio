@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cpu, Zap, Fan, Box, Sparkles, LucideIcon, Wifi, Award, ExternalLink, X, ChevronRight } from 'lucide-react';
+import { Cpu, Zap, Fan, Box, Sparkles, LucideIcon, Wifi, Award, X, ChevronRight } from 'lucide-react';
 import GlareHover from './ui/GlareHover';
 
 interface CertificationsBlockProps {

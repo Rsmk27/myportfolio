@@ -11,7 +11,6 @@ interface ProjectChipProps {
 
 export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [showIntentHints, setShowIntentHints] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const hoverDelayRef = useRef<number | null>(null);
 
@@ -43,7 +42,6 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
     offsetX.set(0);
     offsetY.set(0);
     if (hoverDelayRef.current) window.clearTimeout(hoverDelayRef.current);
-    setShowIntentHints(false);
     setIsHovered(false);
   };
 
@@ -102,7 +100,6 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
       onMouseEnter={() => {
         setIsHovered(true);
         if (hoverDelayRef.current) window.clearTimeout(hoverDelayRef.current);
-        hoverDelayRef.current = window.setTimeout(() => setShowIntentHints(true), 260);
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}

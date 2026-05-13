@@ -12,7 +12,7 @@ import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import {
     Zap, Code, Globe, Terminal, Mail, Github, Linkedin, Twitter,
     Menu, X, ChevronDown, Activity, Cpu, Radio, BatteryMedium,
-    ExternalLink, ArrowUpRight, MapPin, Briefcase, GraduationCap, Download, Eye
+    ArrowUpRight, MapPin, Briefcase, GraduationCap, Download, Eye
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
