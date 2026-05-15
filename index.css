@@ -3,33 +3,35 @@
 @tailwind utilities;
 
 :root {
-    --bg-depth: #030303;
-    --bg-surface: #0a0a0a;
-    --bg-panel: #0f0f0f;
-    --line-dim: #1f1f1f;
-    --line-mid: #2a2a2a;
+    --bg-depth: #080806;
+    --bg-surface: #111110;
+    --bg-panel: #0d0d0b;
+    --line-dim: #1e1e16;
+    --line-mid: #1e1e16;
     --line-bright: #444444;
 
-    --primary-cyan: #00f2ff;
-    --primary-glow: rgba(0, 242, 255, 0.15);
-    --primary-glow-strong: rgba(0, 242, 255, 0.35);
+    --primary-cyan: #00ffff;
+    --primary-glow: rgba(0, 255, 255, 0.06);
+    --primary-glow-strong: rgba(0, 255, 255, 0.12);
 
     --accent-lime: #39ff14;
     --accent-amber: #ffae00;
     --accent-red: #ff3333;
 
-    --text-main: #e2e2e2;
-    --text-dim: #888888;
-    --text-dark: #444444;
+    --text-main: #d8d4c0;
+    --text-dim: #666660;
+    --text-dark: #333330;
 
     /* Font stacks */
-    --font-heading: 'Space Grotesk', 'Inter', sans-serif;
+    --font-heading: 'Bebas Neue', 'DM Sans', sans-serif;
     --font-body: 'DM Sans', 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --font-mono: 'Space Mono', monospace;
 }
 
 html {
     scroll-behavior: smooth;
+    background: var(--bg-depth);
+    color: var(--text-main);
 }
 
 body {
@@ -45,7 +47,11 @@ body {
 code,
 pre,
 .font-mono {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
+}
+
+.font-display {
+    font-family: var(--font-display);
 }
 
 /* Custom Scrollbar */
@@ -253,7 +259,7 @@ pre,
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #050505;
+    background: var(--bg-depth);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -331,7 +337,7 @@ pre,
     top: -24px;
     color: var(--primary-cyan);
     opacity: 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-weight: 700;
     animation: ls-particle-fall linear infinite;
     filter: drop-shadow(0 0 4px var(--primary-cyan));
@@ -427,7 +433,7 @@ pre,
 }
 
 .ls-hud-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.14em;
     color: rgba(0, 242, 255, 0.5);
@@ -529,7 +535,7 @@ pre,
 
 /* ── Glitchy name ── */
 .ls-name {
-    font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     margin: 0 0 10px;
     line-height: 1;
     text-transform: uppercase;
@@ -627,7 +633,7 @@ pre,
 }
 
 .ls-tag {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10.5px;
     color: rgba(0, 242, 255, 0.65);
     letter-spacing: 0.07em;
@@ -686,7 +692,7 @@ pre,
 }
 
 .progress-percentage {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 13px;
     font-weight: 700;
     color: var(--primary-cyan);
@@ -695,7 +701,7 @@ pre,
 
 /* ── Status text ── */
 .loading-text {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 12px;
     color: #777;
     display: flex;
@@ -734,7 +740,7 @@ pre,
 }
 
 .ls-log-line {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     color: rgba(0, 242, 255, 0.42);
     line-height: 1.75;

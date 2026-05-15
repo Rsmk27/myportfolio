@@ -468,6 +468,81 @@ const Home: React.FC = () => {
                     {/* ══ 1. HERO ════════════════════════════════════════════ */}
                     <section className="min-h-[100dvh] flex flex-col items-center justify-center relative pt-24 pb-16 text-center">
 
+                        {/* PCB trails background */}
+                        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                            <div className="absolute inset-0 bg-[#050505]/90" />
+                            <div
+                                className="absolute inset-0 opacity-30"
+                                style={{
+                                    backgroundImage: 'linear-gradient(rgba(34,211,238,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,0.08) 1px, transparent 1px)',
+                                    backgroundSize: '60px 60px'
+                                }}
+                            />
+                            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1400 1200" preserveAspectRatio="none" aria-hidden="true">
+                                <defs>
+                                    <filter id="hero-glow">
+                                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                                        <feMerge>
+                                            <feMergeNode in="coloredBlur" />
+                                            <feMergeNode in="SourceGraphic" />
+                                        </feMerge>
+                                    </filter>
+                                </defs>
+                                <path d="M 100,0 L 100,200 L 400,200 L 400,600 L 0,600" fill="none" stroke="#111827" strokeWidth="2" />
+                                <motion.path
+                                    d="M 100,0 L 100,200 L 400,200 L 400,600 L 0,600"
+                                    fill="none"
+                                    stroke="#06b6d4"
+                                    strokeWidth="2"
+                                    opacity="0.45"
+                                    filter="url(#hero-glow)"
+                                    strokeDasharray="100, 1000"
+                                    initial={{ strokeDashoffset: 1100 }}
+                                    animate={!reduced ? { strokeDashoffset: -1100 } : {}}
+                                    transition={{ duration: 4, repeat: Infinity, ease: 'linear', delay: 0 }}
+                                />
+                                <path d="M 1200,800 L 800,800 L 800,1200 L 400,1200" fill="none" stroke="#111827" strokeWidth="2" />
+                                <motion.path
+                                    d="M 1200,800 L 800,800 L 800,1200 L 400,1200"
+                                    fill="none"
+                                    stroke="#22c55e"
+                                    strokeWidth="2"
+                                    opacity="0.45"
+                                    filter="url(#hero-glow)"
+                                    strokeDasharray="100, 1000"
+                                    initial={{ strokeDashoffset: 1100 }}
+                                    animate={!reduced ? { strokeDashoffset: -1100 } : {}}
+                                    transition={{ duration: 4, repeat: Infinity, ease: 'linear', delay: 0.5 }}
+                                />
+                                <path d="M 200,800 L 200,1000 L 600,1000" fill="none" stroke="#111827" strokeWidth="2" />
+                                <motion.path
+                                    d="M 200,800 L 200,1000 L 600,1000"
+                                    fill="none"
+                                    stroke="#06b6d4"
+                                    strokeWidth="2"
+                                    opacity="0.45"
+                                    filter="url(#hero-glow)"
+                                    strokeDasharray="100, 1000"
+                                    initial={{ strokeDashoffset: 1100 }}
+                                    animate={!reduced ? { strokeDashoffset: -1100 } : {}}
+                                    transition={{ duration: 4, repeat: Infinity, ease: 'linear', delay: 1 }}
+                                />
+                                <path d="M 1000,100 L 1000,400 L 1400,400" fill="none" stroke="#111827" strokeWidth="2" />
+                                <motion.path
+                                    d="M 1000,100 L 1000,400 L 1400,400"
+                                    fill="none"
+                                    stroke="#22c55e"
+                                    strokeWidth="2"
+                                    opacity="0.45"
+                                    filter="url(#hero-glow)"
+                                    strokeDasharray="100, 1000"
+                                    initial={{ strokeDashoffset: 1100 }}
+                                    animate={!reduced ? { strokeDashoffset: -1100 } : {}}
+                                    transition={{ duration: 4, repeat: Infinity, ease: 'linear', delay: 1.5 }}
+                                />
+                            </svg>
+                        </div>
+
                         {/* Background radial glow */}
                         <div className="absolute inset-0 pointer-events-none overflow-hidden">
                             <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_40%,rgba(6,182,212,0.10)_0%,transparent_70%)]" />
