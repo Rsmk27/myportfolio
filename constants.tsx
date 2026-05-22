@@ -217,7 +217,7 @@ export const PROJECTS: Project[] = [
 
 export const PCB_COLORS = {
   bg: '#0a0a0a',
-  lime: '#39ff14',
+  cyan: '#00f2ff',
   trace: '#1a1a1a',
   dim: '#0d2b2d'
 };

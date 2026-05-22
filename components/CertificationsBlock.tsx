@@ -83,8 +83,8 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
                 <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tighter whitespace-nowrap ${isPowered ? 'text-white' : 'text-gray-900'}`}>
                     CREDENTIALS
                 </h2>
-                <div className={`h-[1px] flex-grow ${isPowered ? 'bg-gradient-to-r from-lime-500/50 to-transparent' : 'bg-gray-300'}`} />
-                <span className={`text-xs font-mono tracking-[0.2em] uppercase whitespace-nowrap ${isPowered ? 'text-lime-500' : 'text-gray-500'}`}>VERIFIED MODULES</span>
+                <div className={`h-[1px] flex-grow ${isPowered ? 'bg-gradient-to-r from-cyan-500/50 to-transparent' : 'bg-gray-300'}`} />
+                <span className={`text-xs font-mono tracking-[0.2em] uppercase whitespace-nowrap ${isPowered ? 'text-cyan-500' : 'text-gray-500'}`}>VERIFIED MODULES</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -124,7 +124,7 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                 background={isPowered ? '#0f0f0f' : '#ffffff'}
                 borderRadius="0.75rem"
                 borderColor={isPowered ? '#1f2937' : '#e5e7eb'}
-                glareColor={isPowered ? '#39ff14' : '#ffffff'}
+                glareColor={isPowered ? '#22d3ee' : '#ffffff'}
                 glareOpacity={isPowered ? 0.2 : 0.35}
                 glareSize={260}
                 transitionDuration={650}
@@ -132,15 +132,15 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                 onClick={onClick}
             >
                 {/* Decorative Top Border */}
-                <div className={`absolute top-0 left-0 right-0 h-1.5 transition-colors duration-300 ${isPowered ? 'bg-gray-800 group-hover:bg-lime-500' : 'bg-gray-200 group-hover:bg-gray-800'}`} />
+                <div className={`absolute top-0 left-0 right-0 h-1.5 transition-colors duration-300 ${isPowered ? 'bg-gray-800 group-hover:bg-cyan-500' : 'bg-gray-200 group-hover:bg-gray-800'}`} />
 
                 <div className="w-full">
                     <div className="flex justify-between items-start mb-6 pt-2">
-                        <div className={`p-3 rounded-lg border ${isPowered ? 'bg-black border-gray-800 text-lime-400' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
+                        <div className={`p-3 rounded-lg border ${isPowered ? 'bg-black border-gray-800 text-cyan-400' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
                             <cert.icon size={24} strokeWidth={1.5} />
                         </div>
                         <div className={`flex items-center gap-1.5 px-2 py-1 rounded text-[10px] font-mono font-bold uppercase
-                    ${isPowered ? 'bg-lime-950/30 text-lime-300' : 'bg-gray-100 text-gray-600'}`}>
+                    ${isPowered ? 'bg-cyan-950/30 text-cyan-300' : 'bg-gray-100 text-gray-600'}`}>
                             <Award size={12} />
                             <span>Verified</span>
                         </div>
@@ -163,8 +163,8 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                     {/* View Credential Button - Appears on Hover */}
                     <div className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-all duration-300
                 ${isPowered
-                            ? 'text-lime-500 opacity-60 group-hover:opacity-100 group-hover:translate-x-1'
-                            : 'text-lime-600 opacity-60 group-hover:opacity-100'
+                            ? 'text-cyan-500 opacity-60 group-hover:opacity-100 group-hover:translate-x-1'
+                            : 'text-blue-600 opacity-60 group-hover:opacity-100'
                         }`}
                     >
                         <span>View Credential</span>
@@ -202,7 +202,7 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                 <div className={`p-4 border-b flex justify-between items-center ${isPowered ? 'border-gray-800 bg-[#111]' : 'border-gray-100 bg-gray-50'}`}>
                     <div>
                         <h3 className={`text-lg font-bold ${isPowered ? 'text-white' : 'text-gray-900'}`}>{cert.title}</h3>
-                        <p className={`text-xs font-mono uppercase ${isPowered ? 'text-lime-500' : 'text-lime-600'}`}>{cert.issuer} // {cert.year}</p>
+                        <p className={`text-xs font-mono uppercase ${isPowered ? 'text-cyan-500' : 'text-blue-600'}`}>{cert.issuer} // {cert.year}</p>
                     </div>
                     <button onClick={onClose} className={`p-2 rounded-full transition-colors ${isPowered ? 'hover:bg-gray-800 text-gray-400' : 'hover:bg-gray-200 text-gray-600'}`}>
                         <X size={20} />

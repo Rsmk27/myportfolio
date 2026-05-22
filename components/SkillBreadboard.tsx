@@ -27,12 +27,12 @@ const CATEGORIES: SkillCategory[] = [
     title: 'Embedded Systems & Hardware',
     icon: Cpu,
     label: 'Core Domain',
-    accent: '#39ff14',
-    textClass: 'text-lime-400',
-    badgeClass: 'bg-lime-500/10 text-lime-300 border-lime-400/25 hover:bg-lime-500/20 hover:border-lime-400/50',
-    glowClass: 'shadow-[0_0_28px_rgba(57,255,20,0.22)]',
-    borderClass: 'border-lime-500/30',
-    bgClass: 'from-lime-950/20 to-transparent',
+    accent: '#22d3ee',
+    textClass: 'text-cyan-400',
+    badgeClass: 'bg-cyan-500/10 text-cyan-300 border-cyan-400/25 hover:bg-cyan-500/20 hover:border-cyan-400/50',
+    glowClass: 'shadow-[0_0_28px_rgba(34,211,238,0.22)]',
+    borderClass: 'border-cyan-500/30',
+    bgClass: 'from-cyan-950/20 to-transparent',
     skills: ['ESP32', 'ESP8266', 'Arduino', 'UART', 'I2C', 'SPI', 'MQTT', 'Sensors & Actuators'],
   },
   {
@@ -301,7 +301,7 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
               key={cat.id}
               onClick={() => setActiveId(cat.id)}
               className={`px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] border rounded-full
-                transition-all duration-250 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500
+                transition-all duration-250 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500
                 ${isActive
                   ? ''
                   : isPowered

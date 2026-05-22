@@ -22,7 +22,7 @@ const RING_PROFILE: Record<CursorState, {
 }> = {
     default: {
         size: 32,
-        border: 'rgba(57,255,20,0.4)',
+        border: 'rgba(0,242,255,0.4)',
         bg: 'transparent',
         dotScale: 1,
         mixBlend: 'normal',
@@ -31,8 +31,8 @@ const RING_PROFILE: Record<CursorState, {
     },
     pointer: {
         size: 44,
-        border: 'rgba(57,255,20,0.7)',
-        bg: 'rgba(57,255,20,0.12)',
+        border: 'rgba(0,242,255,0.7)',
+        bg: 'rgba(0,242,255,0.12)',
         dotScale: 0.1,
         mixBlend: 'normal',
         borderRadius: '12px',
@@ -40,8 +40,8 @@ const RING_PROFILE: Record<CursorState, {
     },
     project: {
         size: 56,
-        border: 'rgba(57,255,20,0)',
-        bg: 'rgba(57,255,20,0.15)',
+        border: 'rgba(0,242,255,0)',
+        bg: 'rgba(0,242,255,0.15)',
         dotScale: 0,
         mixBlend: 'normal',
         borderRadius: '50%',
@@ -49,8 +49,8 @@ const RING_PROFILE: Record<CursorState, {
     },
     text: {
         size: 4,
-        border: 'rgba(57,255,20,0)',
-        bg: 'rgba(57,255,20,0)',
+        border: 'rgba(0,242,255,0)',
+        bg: 'rgba(0,242,255,0)',
         dotScale: 1,
         mixBlend: 'difference',
         borderRadius: 0,
@@ -216,11 +216,11 @@ export const CustomCursor: React.FC = () => {
                         backgroundColor:
                             state === 'zoom'
                                 ? '#ffffff'
-                                : '#39ff14',
+                                : '#00f2ff',
                         boxShadow:
                             state === 'default'
-                                ? '0 0 6px rgba(57,255,20,0.9), 0 0 14px rgba(57,255,20,0.4)'
-                                : '0 0 3px rgba(57,255,20,0.5)',
+                                ? '0 0 6px rgba(0,242,255,0.9), 0 0 14px rgba(0,242,255,0.4)'
+                                : '0 0 3px rgba(0,242,255,0.5)',
                     }}
                     transition={{ duration: 0.12, ease: 'easeOut' }}
                 />
@@ -286,7 +286,7 @@ export const CustomCursor: React.FC = () => {
                                     color:
                                         state === 'zoom'
                                             ? 'rgba(255,255,255,0.85)'
-                                            : 'rgba(57,255,20,0.95)',
+                                            : 'rgba(0,242,255,0.95)',
                                     userSelect: 'none',
                                     textTransform: 'uppercase',
                                     pointerEvents: 'none',
@@ -324,8 +324,8 @@ export const CustomCursor: React.FC = () => {
                                 inset: -8,
                                 borderRadius: '50%',
                                 border: '2px solid transparent',
-                                borderTopColor: 'rgba(57,255,20,0.9)',
-                                borderBottomColor: 'rgba(57,255,20,0.9)',
+                                borderTopColor: 'rgba(0,242,255,0.9)',
+                                borderBottomColor: 'rgba(0,242,255,0.9)',
                                 animation: 'cursor-spin 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite',
                                 pointerEvents: 'none',
                             }}
@@ -346,7 +346,7 @@ function tick(pos: 'tl' | 'tr' | 'bl' | 'br'): React.CSSProperties {
         position: 'absolute',
         width: 5,
         height: 5,
-        borderColor: 'rgba(57,255,20,0.7)',
+        borderColor: 'rgba(0,242,255,0.7)',
         borderStyle: 'solid',
     };
     const corners: Record<string, React.CSSProperties> = {

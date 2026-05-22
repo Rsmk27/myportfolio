@@ -29,7 +29,7 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
     return (
         <div className="relative max-w-5xl mx-auto p-4">
             {/* Central Timeline Line via Gradient */}
-            <div className={`absolute left-4 md:left-1/2 top-0 bottom-0 w-px transform -translate-x-1/2 transition-colors duration-500 ${isPowered ? 'bg-gradient-to-b from-lime-500/0 via-lime-500/50 to-lime-500/0' : 'bg-gray-800'}`} />
+            <div className={`absolute left-4 md:left-1/2 top-0 bottom-0 w-px transform -translate-x-1/2 transition-colors duration-500 ${isPowered ? 'bg-gradient-to-b from-cyan-500/0 via-cyan-500/50 to-cyan-500/0' : 'bg-gray-800'}`} />
 
             <div className="space-y-12">
                 {combined.map((item, index) => {
@@ -48,8 +48,8 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                         >
                             {/* Timeline Node */}
                             <div className="absolute left-4 md:left-1/2 w-4 h-4 -translate-x-1/2 mt-1.5 z-10">
-                                <div className={`w-full h-full rounded-full border-2 transition-all duration-500 ${isPowered ? 'bg-black border-lime-400 shadow-[0_0_10px_#39ff14]' : 'bg-gray-900 border-gray-700'}`}>
-                                    {isPowered && <div className="absolute inset-0 rounded-full animate-ping bg-lime-500/30" />}
+                                <div className={`w-full h-full rounded-full border-2 transition-all duration-500 ${isPowered ? 'bg-black border-cyan-400 shadow-[0_0_10px_#22d3ee]' : 'bg-gray-900 border-gray-700'}`}>
+                                    {isPowered && <div className="absolute inset-0 rounded-full animate-ping bg-cyan-500/30" />}
                                 </div>
                             </div>
 
@@ -57,25 +57,25 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                             <div className="w-full md:w-[calc(50%-2rem)] ml-12 md:ml-0">
                                 <div className={`relative p-6 rounded-xl border backdrop-blur-sm transition-all duration-500 group
                                     ${isPowered
-                                        ? 'bg-black/40 border-lime-900/30 hover:border-lime-500/50 hover:bg-lime-950/10'
+                                        ? 'bg-black/40 border-cyan-900/30 hover:border-cyan-500/50 hover:bg-cyan-950/10'
                                         : 'bg-gray-900/10 border-gray-800 hover:border-gray-700'
                                     }`}
                                 >
                                     {/* Decor corners */}
                                     {isPowered && (
                                         <>
-                                            <div className="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-lime-500/50" />
-                                            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b border-l border-lime-500/50" />
+                                            <div className="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-cyan-500/50" />
+                                            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b border-l border-cyan-500/50" />
                                         </>
                                     )}
 
                                     {/* Header */}
                                     <div className="flex items-start justify-between gap-4 mb-3">
                                         <div className="flex items-center gap-2">
-                                            <div className={`p-2 rounded-lg ${isPowered ? 'bg-lime-500/10 text-lime-400' : 'bg-gray-800 text-gray-500'}`}>
+                                            <div className={`p-2 rounded-lg ${isPowered ? 'bg-cyan-500/10 text-cyan-400' : 'bg-gray-800 text-gray-500'}`}>
                                                 {isExp ? <Briefcase size={16} /> : <GraduationCap size={16} />}
                                             </div>
-                                            <span className={`text-[10px] font-mono tracking-wider uppercase ${isPowered ? 'text-lime-600' : 'text-gray-600'}`}>
+                                            <span className={`text-[10px] font-mono tracking-wider uppercase ${isPowered ? 'text-cyan-600' : 'text-gray-600'}`}>
                                                 {isExp ? 'SYS_LOG: WORK' : 'SYS_LOG: ACADEMIC'}
                                             </span>
                                         </div>
@@ -98,7 +98,7 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                                         <ul className="space-y-2 mb-4">
                                             {expData.description.slice(0, 3).map((item, i) => (
                                                 <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
-                                                    <ChevronRight size={14} className={`mt-0.5 shrink-0 ${isPowered ? 'text-lime-500' : 'text-gray-700'}`} />
+                                                    <ChevronRight size={14} className={`mt-0.5 shrink-0 ${isPowered ? 'text-cyan-500' : 'text-gray-700'}`} />
                                                     <span className="leading-relaxed">{item}</span>
                                                 </li>
                                             ))}
@@ -109,7 +109,7 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                                     {isExp && expData.tech && (
                                         <div className="flex flex-wrap gap-2 pt-2 border-t border-dashed border-gray-800">
                                             {expData.tech.map(t => (
-                                                <span key={t} className={`text-[10px] px-2 py-1 rounded font-mono ${isPowered ? 'bg-lime-950/30 text-lime-300 border border-lime-900/30' : 'bg-gray-200 text-gray-600'
+                                                <span key={t} className={`text-[10px] px-2 py-1 rounded font-mono ${isPowered ? 'bg-cyan-950/30 text-cyan-300 border border-cyan-900/30' : 'bg-gray-200 text-gray-600'
                                                     }`}>
                                                     {t}
                                                 </span>
