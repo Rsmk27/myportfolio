@@ -34,7 +34,7 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(400px circle at 50% 50%, rgba(0,242,255,0.08), rgba(0,0,0,0))',
+              'radial-gradient(400px circle at 50% 50%, rgba(57,255,20,0.08), rgba(0,0,0,0))',
             x: springX,
             y: springY,
           }}
@@ -44,7 +44,7 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(${PCB_COLORS.cyan} 1px, transparent 1px), linear-gradient(90deg, ${PCB_COLORS.cyan} 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(${PCB_COLORS.lime} 1px, transparent 1px), linear-gradient(90deg, ${PCB_COLORS.lime} 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
         }}
       />
@@ -63,7 +63,7 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
 
         <TracePath
           d="M 100,0 L 100,200 L 400,200 L 400,600 L 0,600"
-          color={PCB_COLORS.cyan}
+          color={PCB_COLORS.lime}
           isPowered={isPowered}
           delay={0}
         />
@@ -75,7 +75,7 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
         />
         <TracePath
           d="M 200,800 L 200,1000 L 600,1000"
-          color={PCB_COLORS.cyan}
+          color={PCB_COLORS.lime}
           isPowered={isPowered}
           delay={2}
         />
@@ -94,7 +94,7 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
         />
         <TracePath
           d="M 300,300 L 300,500 L 100,500"
-          color={PCB_COLORS.cyan}
+          color={PCB_COLORS.lime}
           isPowered={isPowered}
           delay={2.5}
         />

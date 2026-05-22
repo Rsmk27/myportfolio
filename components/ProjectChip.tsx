@@ -59,7 +59,7 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
       return isPowered ? 'text-emerald-300 bg-emerald-500/10 border border-emerald-500/30' : 'text-emerald-800 bg-emerald-100 border border-emerald-300';
     }
     if (tag.includes('web')) {
-      return isPowered ? 'text-blue-300 bg-blue-500/10 border border-blue-500/30' : 'text-blue-800 bg-blue-100 border border-blue-300';
+      return isPowered ? 'text-lime-300 bg-lime-500/10 border border-lime-500/30' : 'text-lime-800 bg-lime-100 border border-lime-300';
     }
     if (tag.includes('sih')) {
       return isPowered ? 'text-orange-300 bg-orange-500/10 border border-orange-500/30' : 'text-orange-800 bg-orange-100 border border-orange-300';
@@ -117,19 +117,19 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
       {/* Resistor/Component Legs (Decorative) */}
       <div className="absolute -left-1 top-4 bottom-4 flex flex-col justify-between py-2 z-0">
         {[...Array(6)].map((_, i) => (
-          <div key={i} className={`w-2 h-1 bg-gradient-to-r from-gray-600 to-gray-800 rounded-l ${isPowered ? 'group-hover:bg-cyan-600 transition-colors' : ''}`} />
+          <div key={i} className={`w-2 h-1 bg-gradient-to-r from-gray-600 to-gray-800 rounded-l ${isPowered ? 'group-hover:bg-lime-600 transition-colors' : ''}`} />
         ))}
       </div>
       <div className="absolute -right-1 top-4 bottom-4 flex flex-col justify-between py-2 z-0">
         {[...Array(6)].map((_, i) => (
-          <div key={i} className={`w-2 h-1 bg-gradient-to-l from-gray-600 to-gray-800 rounded-r ${isPowered ? 'group-hover:bg-cyan-600 transition-colors' : ''}`} />
+          <div key={i} className={`w-2 h-1 bg-gradient-to-l from-gray-600 to-gray-800 rounded-r ${isPowered ? 'group-hover:bg-lime-600 transition-colors' : ''}`} />
         ))}
       </div>
 
       {/* Main Chip Body */}
       <div className={`relative z-10 h-full rounded-xl overflow-hidden border transition-all duration-500 flex flex-col
         ${isPowered
-          ? 'bg-[#0a0a0a] border-gray-800 shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:border-cyan-500/50 group-hover:shadow-[0_0_25px_rgba(0,242,255,0.15)]'
+          ? 'bg-[#0a0a0a] border-gray-800 shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:border-lime-500/50 group-hover:shadow-[0_0_25px_rgba(57,255,20,0.15)]'
           : 'bg-white border-gray-200 shadow-sm'
         }`}
       >
@@ -155,7 +155,7 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
               {project.title}
             </h3>
           </div>
-          {isPowered && <Cpu size={18} className={`flex-shrink-0 mt-1 text-gray-700 group-hover:text-cyan-400 transition-colors duration-300`} />}
+          {isPowered && <Cpu size={18} className={`flex-shrink-0 mt-1 text-gray-700 group-hover:text-lime-400 transition-colors duration-300`} />}
         </div>
 
         {/* Image / Visual Area */}
@@ -171,14 +171,14 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
           {/* Hover Overlay Actions */}
           <div className={`absolute inset-0 p-4 flex flex-col justify-between bg-gradient-to-b from-black/70 via-black/55 to-black/75 backdrop-blur-sm transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
             <div className="flex items-start justify-between">
-              <span className="text-[10px] font-mono tracking-[0.2em] text-cyan-300 uppercase">Live Specs</span>
+              <span className="text-[10px] font-mono tracking-[0.2em] text-lime-300 uppercase">Live Specs</span>
               <div className="flex items-center gap-2">
                 {project.link && (
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-8 h-8 rounded-full border border-cyan-500/40 bg-black/60 text-cyan-300 flex items-center justify-center hover:bg-cyan-500/20 hover:text-cyan-100 transition-colors"
+                    className="w-8 h-8 rounded-full border border-lime-500/40 bg-black/60 text-lime-300 flex items-center justify-center hover:bg-lime-500/20 hover:text-lime-100 transition-colors"
                     aria-label={`Open ${project.title} ${isGithubProject ? 'GitHub' : 'live link'}`}
                   >
                     {isGithubProject ? <Github size={14} /> : <ExternalLink size={14} />}
@@ -193,17 +193,17 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
               transition={{ duration: 0.25, ease: 'easeOut' }}
               className="grid grid-cols-3 gap-2"
             >
-              <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2 text-center">
+              <div className="rounded-lg border border-lime-500/30 bg-black/60 p-2 text-center">
                 <p className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Tech</p>
-                <p className="text-xs text-cyan-300 font-bold">{project.tech.length}</p>
+                <p className="text-xs text-lime-300 font-bold">{project.tech.length}</p>
               </div>
-              <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2 text-center">
+              <div className="rounded-lg border border-lime-500/30 bg-black/60 p-2 text-center">
                 <p className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Gallery</p>
-                <p className="text-xs text-cyan-300 font-bold">{project.gallery?.length ?? 1}</p>
+                <p className="text-xs text-lime-300 font-bold">{project.gallery?.length ?? 1}</p>
               </div>
-              <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2 text-center">
+              <div className="rounded-lg border border-lime-500/30 bg-black/60 p-2 text-center">
                 <p className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Features</p>
-                <p className="text-xs text-cyan-300 font-bold">{project.features?.length ?? 0}</p>
+                <p className="text-xs text-lime-300 font-bold">{project.features?.length ?? 0}</p>
               </div>
             </motion.div>
 
@@ -211,7 +211,7 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
               href={project.link || '#'}
               target="_blank"
               rel="noreferrer"
-              className="self-center flex items-center gap-2 px-6 py-2 bg-cyan-500 text-black font-bold rounded-full hover:scale-105 transition-transform"
+              className="self-center flex items-center gap-2 px-6 py-2 bg-lime-500 text-black font-bold rounded-full hover:scale-105 transition-transform"
             >
               <span>View System</span>
               <ExternalLink size={16} />
@@ -234,7 +234,7 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
             {visibleTech.map(t => (
               <span key={t} className={`text-[10px] px-2 py-1 rounded border font-mono uppercase
                  ${isPowered
-                  ? 'border-gray-800 text-cyan-600 bg-cyan-950/10'
+                  ? 'border-gray-800 text-lime-600 bg-lime-950/10'
                   : 'border-gray-200 text-gray-600 bg-gray-100'
                 }`}
               >
@@ -250,7 +250,7 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
         </div>
 
         {/* Footer Status Bar */}
-        <div className={`h-1 w-full transition-colors duration-500 ${isPowered ? 'bg-gray-800 group-hover:bg-cyan-500' : 'bg-gray-200'}`} />
+        <div className={`h-1 w-full transition-colors duration-500 ${isPowered ? 'bg-gray-800 group-hover:bg-lime-500' : 'bg-gray-200'}`} />
       </div>
     </motion.div>
   );

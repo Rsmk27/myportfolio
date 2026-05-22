@@ -90,10 +90,10 @@ const GALLERY_JSON_LD = {
 
 const Gallery: React.FC = () => {
   return (
-    <div className="min-h-screen relative selection:bg-cyan-500/30 font-mono text-gray-300 bg-black overflow-hidden">
+    <div className="min-h-screen relative selection:bg-lime-500/30 font-mono text-gray-300 bg-black overflow-hidden">
       <Helmet>
         <title>Photo Gallery | {PROFILE.name} — Engineering Projects &amp; Hackathon Wins</title>
-        <meta name="description" content="Photo gallery of Srinivasa Manikanta Rajapantula — A-Hacks hackathon 2nd prize, firefighter safety device builds, drone and 3D printing workshops, Coromandel internship, and engineering projects." />
+        <meta name="description" content="Explore Srinivasa Manikanta's engineering gallery: 2nd place A-Hacks Hackathon hardware build, Coromandel industrial internship, and 3D printing workshops." />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link rel="canonical" href="https://rsmk.me/gallery" />
 
@@ -118,14 +118,14 @@ const Gallery: React.FC = () => {
         <div className="flex-shrink-0 pt-16 pb-3 px-4 sm:px-6 md:pt-20 md:pb-4 md:px-8 max-w-7xl mx-auto w-full">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 mb-3 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group"
+            className="inline-flex items-center gap-2 mb-3 text-sm text-lime-500 hover:text-lime-400 transition-colors group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Dashboard</span>
           </Link>
 
           <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-1 md:mb-2 uppercase tracking-tight flex items-center gap-3">
-            <ImageIcon size={32} className="text-cyan-500 sm:w-10 sm:h-10" />
+            <ImageIcon size={32} className="text-lime-500 sm:w-10 sm:h-10" />
             Gallery Dome
           </h1>
           <p className="text-gray-400 text-sm md:text-base">

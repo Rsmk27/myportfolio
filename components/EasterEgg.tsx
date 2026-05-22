@@ -177,8 +177,8 @@ export const EasterEgg: React.FC = () => {
             case 'ls':
             case 'dir':
                 pushLine(<>
-                    <span className="text-blue-400 font-bold">bin/</span> &nbsp;&nbsp;&nbsp;&nbsp; <span className="text-blue-400 font-bold">schematics/</span><br/>
-                    <span className="text-blue-400 font-bold">config/</span> &nbsp;&nbsp;<span className="text-gray-300">grid_logs.txt</span><br/>
+                    <span className="text-lime-400 font-bold">bin/</span> &nbsp;&nbsp;&nbsp;&nbsp; <span className="text-lime-400 font-bold">schematics/</span><br/>
+                    <span className="text-lime-400 font-bold">config/</span> &nbsp;&nbsp;<span className="text-gray-300">grid_logs.txt</span><br/>
                     <span className="text-red-400 font-bold">master_override.sh</span>
                 </>);
                 break;

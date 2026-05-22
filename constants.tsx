@@ -5,7 +5,7 @@ export const PROFILE: Profile = {
   title: "EEE Student | Embedded Systems | IoT | Smart Energy",
   tagline: "Electrical & Electronics Engineering Student focused on Embedded Systems, IoT, and Smart Energy Solutions",
   heroSubtitle: "Building intelligent systems with a practical engineering mindset and sustainability-driven problem solving.",
-  bio: "Background in Electrical & Electronics Engineering with a hands-on interest in embedded systems and IoT. Focused on smart energy, automation, and real-world engineering applications. Motivated to build scalable, sustainable, and intelligent systems.",
+  bio: "Electrical & Electronics Engineering specialist specializing in hardware-software co-design, real-time embedded firmware, and IoT systems. Proven record of developing robust sensor-driven automation, renewable energy tracking prototypes, and industrial power monitoring models. Driven to build high-reliability, low-latency intelligent systems that bridge physical electronics and cloud infrastructure.",
   location: "Srikakulam, Andhra Pradesh, India",
   email: "srinivasmanikantarajapantula@gmail.com",
   socials: [
@@ -65,7 +65,7 @@ export const PROJECTS: Project[] = [
     tech: ['ESP32', 'C++', 'Firebase RTDB', 'React', 'Vite', 'MPU-6050', 'DHT11', 'Neo-6M GPS'],
     image: '/assets/firefighter-monitoring-device.webp',
     link: 'https://sfmd.rsmk.co.in/',
-    details: "The Firefighter Safety Device is a real-time IoT safety solution for firefighters. A wearable device worn by the firefighter collects sensor data (motion, temperature, GPS location) and transmits it over Wi-Fi to a Firebase backend. A web dashboard hosted by fire commanders provides instant situational awareness, showing the firefighter's current status, location on a live map, environmental data, and a history of all alerts and events. The firmware operates as a state machine handling STARTUP, NORMAL, WARNING, EMERGENCY, and SOS states based on sensor logic and time elapsed without movement.",
+    details: "The Firefighter Safety Device is a battle-tested real-time IoT wearable designed for extreme operational environments. Featuring a custom dual-sensor array (MPU-6050 accelerometer/gyroscope for man-down fall detection and DHT11 for thermal ambient tracking) paired with a Neo-6M GPS receiver, the hardware runs a robust C++ state-machine firmware on an ESP32 microcontroller. Real-time telemetry is pushed via secure Wi-Fi protocols to a Firebase Realtime Database. Incident commanders utilize an interactive, low-latency React web interface featuring MapLibre GL for tracking coordinates, custom trailing trails, and immediate audio alert indicators.",
     features: [
       "Automatic Emergency Detection — no movement (man-down) & high temperature",
       "Manual SOS button for immediate distress signaling overriding other states",
@@ -160,7 +160,7 @@ export const PROJECTS: Project[] = [
     description: 'A relay-logic solar panel tracker using LDR sensors to follow sunlight across a single axis with a gear motor. Achieves ~30% efficiency gain over fixed panels — no microcontroller required.',
     tech: ['LDR', 'Relay Logic', 'Gear Motor', 'Comparator Circuit'],
     image: '/assets/single-axis-solar-tracker.png',
-    details: "The Single Axis Solar Tracker is a hardware-only project that uses a pure relay-logic comparator circuit to track the sun across a horizontal axis. Two LDR (Light Dependent Resistor) sensors are placed on either side of the solar panel. The differential resistance between the LDRs drives a relay circuit that activates a gear motor, rotating the panel toward the brighter side. No microcontroller is needed — the entire control loop is analog. Achieves approximately 30% better energy capture compared to a fixed-angle panel.",
+    details: "An elegant, microcontroller-free Single Axis Solar Tracker driven entirely by a custom-designed analog comparator loop. Utilizing two light-dependent resistors (LDRs) in a differential divider bridge, the circuit detects shifts in solar angle. A transistor-driven dual-relay comparator network operates as a hardware H-bridge, reversing polarities to actuate a 12V high-torque gear motor toward the maximum luminous intensity. By bypassing a power-hungry digital microcontroller, this robust system achieves a ~30% increase in PV energy yield while minimizing standby power consumption.",
     features: [
       "Pure relay logic — no microcontroller required",
       "Dual LDR differential sensing for sun position detection",
@@ -217,7 +217,6 @@ export const PROJECTS: Project[] = [
 
 export const PCB_COLORS = {
   bg: '#0a0a0a',
-  cyan: '#00f2ff',
   lime: '#39ff14',
   trace: '#1a1a1a',
   dim: '#0d2b2d'

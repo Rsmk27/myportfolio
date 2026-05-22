@@ -48,7 +48,7 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
                 if (end !== -1) {
                     push(
                         <code key={`${key}-c${j}`}
-                            className="px-1 py-0.5 rounded text-[11px] bg-cyan-950/60 text-cyan-300 font-mono border border-cyan-900/40">
+                            className="px-1 py-0.5 rounded text-[11px] bg-lime-950/60 text-lime-300 font-mono border border-lime-900/40">
                             {text.slice(j + 1, end)}
                         </code>
                     );
@@ -71,7 +71,7 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
                 flush();
                 const end = text.indexOf('*', j + 1);
                 if (end !== -1) {
-                    push(<em key={`${key}-i${j}`} className="italic text-cyan-200">{text.slice(j + 1, end)}</em>);
+                    push(<em key={`${key}-i${j}`} className="italic text-lime-200">{text.slice(j + 1, end)}</em>);
                     j = end + 1;
                     continue;
                 }
@@ -87,7 +87,7 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
                         const url = text.slice(labelEnd + 2, urlEnd);
                         push(
                             <a key={`${key}-l${j}`} href={url} target="_blank" rel="noopener noreferrer"
-                                className="text-cyan-400 underline hover:text-cyan-200 transition-colors">
+                                className="text-lime-400 underline hover:text-lime-200 transition-colors">
                                 {label}
                             </a>
                         );
@@ -117,13 +117,13 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
                 i++;
             }
             nodes.push(
-                <div key={`cb-${i}`} className="my-2 rounded-md overflow-hidden border border-cyan-900/40">
+                <div key={`cb-${i}`} className="my-2 rounded-md overflow-hidden border border-lime-900/40">
                     {lang && (
-                        <div className="px-3 py-1 bg-cyan-950/60 text-[10px] text-cyan-500 font-mono tracking-wider border-b border-cyan-900/40">
+                        <div className="px-3 py-1 bg-lime-950/60 text-[10px] text-lime-500 font-mono tracking-wider border-b border-lime-900/40">
                             {lang}
                         </div>
                     )}
-                    <pre className="px-3 py-2 overflow-x-auto text-[11px] leading-relaxed text-cyan-200 bg-black/60">
+                    <pre className="px-3 py-2 overflow-x-auto text-[11px] leading-relaxed text-lime-200 bg-black/60">
                         <code>{blockLines.join('\n')}</code>
                     </pre>
                 </div>
@@ -134,7 +134,7 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
 
         // Horizontal rule ---
         if (/^(-{3,}|\*{3,}|_{3,})$/.test(trimmed)) {
-            nodes.push(<hr key={`hr-${i}`} className="my-2 border-cyan-900/40" />);
+            nodes.push(<hr key={`hr-${i}`} className="my-2 border-lime-900/40" />);
             i++;
             continue;
         }
@@ -144,8 +144,8 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
         if (headingMatch) {
             const level = headingMatch[1].length;
             const cls = level === 1 ? 'text-base font-bold text-white mt-2 mb-1'
-                : level === 2 ? 'text-sm  font-bold text-cyan-200 mt-2 mb-1'
-                    : 'text-xs  font-bold text-cyan-300 mt-1 mb-0.5';
+                : level === 2 ? 'text-sm  font-bold text-lime-200 mt-2 mb-1'
+                    : 'text-xs  font-bold text-lime-300 mt-1 mb-0.5';
             nodes.push(
                 <p key={`h-${i}`} className={cls}>{inline(headingMatch[2], `h${i}`)}</p>
             );
@@ -157,7 +157,7 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
         if (trimmed.startsWith('> ')) {
             nodes.push(
                 <blockquote key={`bq-${i}`}
-                    className="border-l-2 border-cyan-600 pl-3 my-1 text-cyan-400/80 italic">
+                    className="border-l-2 border-lime-600 pl-3 my-1 text-lime-400/80 italic">
                     {inline(trimmed.slice(2), `bq${i}`)}
                 </blockquote>
             );
@@ -176,7 +176,7 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
                 <ul key={`ul-${i}`} className="my-1 space-y-0.5 pl-3">
                     {items.map((item, idx) => (
                         <li key={idx} className="flex gap-1.5 items-start">
-                            <span className="text-cyan-500 mt-0.5 flex-shrink-0">›</span>
+                            <span className="text-lime-500 mt-0.5 flex-shrink-0">›</span>
                             <span>{inline(item, `ul${i}-${idx}`)}</span>
                         </li>
                     ))}
@@ -197,7 +197,7 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
                 <ol key={`ol-${i}`} className="my-1 space-y-0.5 pl-3">
                     {items.map((item, idx) => (
                         <li key={idx} className="flex gap-1.5 items-start">
-                            <span className="text-cyan-500 flex-shrink-0 font-mono">{num++}.</span>
+                            <span className="text-lime-500 flex-shrink-0 font-mono">{num++}.</span>
                             <span>{inline(item, `ol${i}-${idx}`)}</span>
                         </li>
                     ))}
@@ -396,7 +396,7 @@ User Query: ${trimmed}`;
             <div className="space-y-6">
                 <div className="flex justify-between items-end pb-2 border-b border-gray-800">
                     <div>
-                        <h3 className={`text-xs font-mono tracking-[0.2em] mb-1 ${isPowered ? 'text-cyan-400' : 'text-gray-600'}`}>
+                        <h3 className={`text-xs font-mono tracking-[0.2em] mb-1 ${isPowered ? 'text-lime-400' : 'text-gray-600'}`}>
                             CONTACT CHANNELS
                         </h3>
                         <div className="flex items-center gap-2">
@@ -405,7 +405,7 @@ User Query: ${trimmed}`;
                                 {[...Array(8)].map((_, i) => (
                                     <motion.div
                                         key={i}
-                                        className={`w-1 rounded-sm ${isPowered ? 'bg-cyan-500' : 'bg-gray-800'}`}
+                                        className={`w-1 rounded-sm ${isPowered ? 'bg-lime-500' : 'bg-gray-800'}`}
                                         animate={isPowered ? { height: [4, barHeights[i], 4], opacity: [0.5, 1, 0.5] } : { height: 4 }}
                                         transition={{ duration: 0.5 + barHeights[i] / 24, repeat: Infinity }}
                                     />
@@ -416,13 +416,13 @@ User Query: ${trimmed}`;
                             <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Status:</span>
                             <span className={`text-[10px] font-mono font-bold ${uplinkStatus === 'TRANSMITTING' ? 'text-amber-500 animate-pulse' :
                                 uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-500' :
-                                    isPowered ? 'text-cyan-500' : 'text-gray-600'
+                                    isPowered ? 'text-lime-500' : 'text-gray-600'
                                 }`}>
                                 {uplinkStatus === 'IDLE' ? (isPowered ? 'READY' : 'OFFLINE') : uplinkStatus}
                             </span>
                         </div>
                     </div>
-                    <Wifi size={18} className={isPowered ? 'text-cyan-500 animate-pulse' : 'text-gray-800'} />
+                    <Wifi size={18} className={isPowered ? 'text-lime-500 animate-pulse' : 'text-gray-800'} />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
@@ -446,7 +446,7 @@ User Query: ${trimmed}`;
 
             {/* AI Terminal */}
             <div className={`relative rounded-lg overflow-hidden border transition-all duration-500 flex flex-col h-[480px] ${isPowered
-                ? 'border-cyan-900/50 bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)]'
+                ? 'border-lime-900/50 bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)]'
                 : 'border-gray-900 bg-[#050505]'
                 }`}>
                 {isPowered && (
@@ -454,11 +454,11 @@ User Query: ${trimmed}`;
                 )}
 
                 {/* Header */}
-                <div className={`px-4 py-2 border-b flex justify-between items-center flex-shrink-0 ${isPowered ? 'bg-cyan-950/20 border-cyan-900/30' : 'bg-[#111] border-gray-800'
+                <div className={`px-4 py-2 border-b flex justify-between items-center flex-shrink-0 ${isPowered ? 'bg-lime-950/20 border-lime-900/30' : 'bg-[#111] border-gray-800'
                     }`}>
                     <div className="flex items-center gap-2">
-                        <Terminal size={14} className={isPowered ? 'text-cyan-400' : 'text-gray-600'} />
-                        <span className={`text-xs font-mono font-bold ${isPowered ? 'text-cyan-500' : 'text-gray-600'}`}>
+                        <Terminal size={14} className={isPowered ? 'text-lime-400' : 'text-gray-600'} />
+                        <span className={`text-xs font-mono font-bold ${isPowered ? 'text-lime-500' : 'text-gray-600'}`}>
                             AI ASSISTANT
                         </span>
                     </div>
@@ -484,10 +484,10 @@ User Query: ${trimmed}`;
                             {/* Timestamp + prefix row */}
                             <div className="flex items-center gap-1.5 mb-0.5 select-none">
                                 <span className="opacity-30 text-[10px]">{timeLabel()}</span>
-                                {msg.type === 'ai' && <span className="text-cyan-500 text-[10px]">[AI]</span>}
+                                {msg.type === 'ai' && <span className="text-lime-500 text-[10px]">[AI]</span>}
                                 {msg.type === 'error' && <span className="text-amber-500 text-[10px]">[!]</span>}
                                 {msg.type === 'user' && <span className="text-green-500 text-[10px]">[YOU]</span>}
-                                {msg.type === 'sys' && <span className="text-cyan-700 text-[10px]">[SYS]</span>}
+                                {msg.type === 'sys' && <span className="text-lime-700 text-[10px]">[SYS]</span>}
                             </div>
 
                             {/* Message body */}
@@ -496,9 +496,9 @@ User Query: ${trimmed}`;
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.2 }}
                                 className={`ml-1 ${msg.type === 'user' ? 'text-white' :
-                                    msg.type === 'ai' ? 'text-cyan-200' :
+                                    msg.type === 'ai' ? 'text-lime-200' :
                                         msg.type === 'error' ? 'text-amber-400' :
-                                            'text-cyan-700'
+                                            'text-lime-700'
                                     }`}
                             >
                                 {msg.type === 'ai'
@@ -527,12 +527,12 @@ User Query: ${trimmed}`;
                         <div>
                             <div className="flex items-center gap-1.5 mb-0.5 select-none">
                                 <span className="opacity-30 text-[10px]">{timeLabel()}</span>
-                                <span className="text-cyan-500 text-[10px]">[AI]</span>
+                                <span className="text-lime-500 text-[10px]">[AI]</span>
                             </div>
                             <motion.div
                                 animate={{ opacity: [0.4, 1, 0.4] }}
                                 transition={{ duration: 1.2, repeat: Infinity }}
-                                className="ml-1 text-cyan-500 text-xs font-mono"
+                                className="ml-1 text-lime-500 text-xs font-mono"
                             >
                                 thinking...
                             </motion.div>
@@ -554,7 +554,7 @@ User Query: ${trimmed}`;
                 {/* Input */}
                 <form
                     onSubmit={handleCommand}
-                    className={`p-3 border-t relative z-30 flex-shrink-0 ${isPowered ? 'border-cyan-900/30 bg-cyan-950/10' : 'border-gray-800'
+                    className={`p-3 border-t relative z-30 flex-shrink-0 ${isPowered ? 'border-lime-900/30 bg-lime-950/10' : 'border-gray-800'
                         }`}
                 >
                     <div className="flex items-center gap-2">
@@ -571,7 +571,7 @@ User Query: ${trimmed}`;
                             }
                             disabled={!isPowered || isLoading || isLimitReached}
                             className={`flex-1 bg-transparent border-none outline-none font-mono text-sm ${isPowered
-                                ? 'text-cyan-100 placeholder-cyan-900/50'
+                                ? 'text-lime-100 placeholder-lime-900/50'
                                 : 'text-gray-600 placeholder-gray-800'
                                 }`}
                             autoComplete="off"
@@ -580,7 +580,7 @@ User Query: ${trimmed}`;
                             type="submit"
                             disabled={!isPowered || isLoading || isLimitReached || !consoleInput.trim()}
                             className={`p-1.5 rounded transition-all ${isPowered && !isLoading && !isLimitReached && consoleInput.trim()
-                                ? 'text-cyan-400 hover:bg-cyan-900/30 hover:text-cyan-200'
+                                ? 'text-lime-400 hover:bg-lime-900/30 hover:text-lime-200'
                                 : 'text-gray-700'
                                 }`}
                         >
@@ -607,15 +607,15 @@ const ContactCard: React.FC<{
         target="_blank"
         rel="noopener noreferrer"
         className={`group relative overflow-hidden flex items-center gap-4 p-4 border rounded-xl transition-all duration-300 ${isPowered
-            ? 'bg-[#0a0a0a] border-gray-800 hover:border-cyan-500/50'
+            ? 'bg-[#0a0a0a] border-gray-800 hover:border-lime-500/50'
             : 'bg-black border-gray-900'
             }`}
     >
         {isPowered && (
             <>
-                <div className="absolute inset-0 bg-transparent group-hover:bg-cyan-950/10 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-transparent group-hover:bg-lime-950/10 transition-colors duration-300" />
                 <motion.div
-                    className="absolute bottom-0 left-0 h-[2px] bg-cyan-500"
+                    className="absolute bottom-0 left-0 h-[2px] bg-lime-500"
                     initial={{ width: '0%' }}
                     whileHover={{ width: '100%' }}
                     transition={{ duration: 0.3 }}
@@ -623,7 +623,7 @@ const ContactCard: React.FC<{
             </>
         )}
         <div className={`relative z-10 p-2.5 rounded-lg transition-colors ${isPowered
-            ? 'bg-gray-900 text-cyan-400 group-hover:text-cyan-300 group-hover:shadow-[0_0_15px_rgba(0,242,255,0.2)]'
+            ? 'bg-gray-900 text-lime-400 group-hover:text-lime-300 group-hover:shadow-[0_0_15px_rgba(57,255,20,0.2)]'
             : 'bg-gray-900 text-gray-600'
             }`}>
             <Icon size={22} />
@@ -631,7 +631,7 @@ const ContactCard: React.FC<{
         <div className="flex-1 relative z-10">
             <div className="flex justify-between items-center mb-0.5">
                 <p className="text-[10px] text-gray-500 font-mono tracking-wider uppercase">{label}</p>
-                {isPowered && <Activity size={10} className="text-cyan-500/50 group-hover:animate-pulse" />}
+                {isPowered && <Activity size={10} className="text-lime-500/50 group-hover:animate-pulse" />}
             </div>
             <p className={`font-bold transition-colors ${isPowered ? 'text-gray-200 group-hover:text-white' : 'text-gray-600'}`}>
                 {value}
