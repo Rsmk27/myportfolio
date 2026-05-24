@@ -5,10 +5,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Resource Hints -->
-  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-  <link rel="dns-prefetch" href="//esm.sh" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-44KP7M10FT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-44KP7M10FT');
+  </script>
+
+  <!-- Resource Hints & Preconnects -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
 
   <!-- LCP Preload: Hero profile image -->
   <link rel="preload" as="image" href="/assets/srinivasa-manikanta-profile.webp" fetchpriority="high" />
@@ -27,9 +36,7 @@
   <meta name="geo.placename" content="Srikakulam" />
   <meta name="geo.position" content="18.29;83.89" />
   <meta name="ICBM" content="18.29, 83.89" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="icon" type="image/webp" href="/assets/srinivasa-manikanta-profile.webp" />
   <link rel="apple-touch-icon" href="/assets/srinivasa-manikanta-profile.webp" />
@@ -124,6 +131,36 @@
       "Industrial Automation",
       "Solar Energy",
       "Microcontrollers"
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Embedded Systems Design Certificate",
+        "credentialCategory": "Professional Certification",
+        "recognizedBy": {
+          "@type": "EducationalOrganization",
+          "name": "Arm Education"
+        }
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Electric Vehicle Technology Certificate",
+        "credentialCategory": "Technical Program",
+        "recognizedBy": {
+          "@type": "EducationalOrganization",
+          "name": "NPTEL / IIT Madras"
+        }
+      }
+    ],
+    "knowsLanguage": [
+      {
+        "@type": "Language",
+        "name": "English"
+      },
+      {
+        "@type": "Language",
+        "name": "Telugu"
+      }
     ]
   }
   </script>
@@ -331,15 +368,6 @@
 </script>
   <link rel="stylesheet" href="/index.css">
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-44KP7M10FT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-44KP7M10FT');
-</script>
 <body>
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>

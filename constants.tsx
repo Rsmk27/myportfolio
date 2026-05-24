@@ -5,7 +5,7 @@ export const PROFILE: Profile = {
   title: "EEE Student | Embedded Systems | IoT | Smart Energy",
   tagline: "Electrical & Electronics Engineering Student focused on Embedded Systems, IoT, and Smart Energy Solutions",
   heroSubtitle: "Building intelligent systems with a practical engineering mindset and sustainability-driven problem solving.",
-  bio: "Electrical & Electronics Engineering specialist specializing in hardware-software co-design, real-time embedded firmware, and IoT systems. Proven record of developing robust sensor-driven automation, renewable energy tracking prototypes, and industrial power monitoring models. Driven to build high-reliability, low-latency intelligent systems that bridge physical electronics and cloud infrastructure.",
+  bio: "Electrical & Electronics Engineer focused on the intersection of physical circuitry and cloud infrastructure. I design and build real-time embedded firmware, low-latency IoT systems, and smart grid simulators. From programming ESP32 state-machines for hazard safety devices to maintaining 11kV distribution networks at industrial chemical plants, I convert rigorous hardware engineering into reliable, deployed software systems. Explore my work across hardware, firmware, and Web-based [engineering tool models](#projects).",
   location: "Srikakulam, Andhra Pradesh, India",
   email: "srinivasmanikantarajapantula@gmail.com",
   socials: [
@@ -65,7 +65,7 @@ export const PROJECTS: Project[] = [
     tech: ['ESP32', 'C++', 'Firebase RTDB', 'React', 'Vite', 'MPU-6050', 'DHT11', 'Neo-6M GPS'],
     image: '/assets/firefighter-monitoring-device.webp',
     link: 'https://sfmd.rsmk.co.in/',
-    details: "The Firefighter Safety Device is a battle-tested real-time IoT wearable designed for extreme operational environments. Featuring a custom dual-sensor array (MPU-6050 accelerometer/gyroscope for man-down fall detection and DHT11 for thermal ambient tracking) paired with a Neo-6M GPS receiver, the hardware runs a robust C++ state-machine firmware on an ESP32 microcontroller. Real-time telemetry is pushed via secure Wi-Fi protocols to a Firebase Realtime Database. Incident commanders utilize an interactive, low-latency React web interface featuring MapLibre GL for tracking coordinates, custom trailing trails, and immediate audio alert indicators.",
+    details: "Designed for harsh thermal and physical environments, this wearable safety system runs custom C++ state-machine firmware on an ESP32. By reading real-time telemetry from an MPU-6050 accelerometer (detecting man-down state) and a DHT11 sensor (monitoring heat thresholds), the module automatically logs GPS coordinates and pushes alerts via secure WebSocket routes to a Firebase RTDB dashboard. Developed for emergency incident commanders to track personnel positioning and vital safety alerts without latency. You can view the live assembly layout and team presentation photos in the [Gallery Dome](/gallery).",
     features: [
       "Automatic Emergency Detection — no movement (man-down) & high temperature",
       "Manual SOS button for immediate distress signaling overriding other states",
