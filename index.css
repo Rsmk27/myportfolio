@@ -37,7 +37,7 @@ html {
 }
 
 body {
-    background-color: var(--bg-depth);
+    background-color: transparent;
     color: var(--text-main);
     font-family: var(--font-body);
     overflow-x: hidden;

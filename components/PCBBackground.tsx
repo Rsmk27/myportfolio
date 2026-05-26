@@ -50,7 +50,7 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
       />
 
       {/* SVG Traces */}
-      <svg width="100%" height="100%" className="absolute inset-0">
+      <svg viewBox="0 0 1400 1200" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
         <defs>
           <filter id="glow">
             <feGaussianBlur stdDeviation="3" result="coloredBlur" />

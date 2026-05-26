@@ -10,12 +10,7 @@ interface TimelineSystemProps {
 }
 
 export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, education, isPowered }) => {
-    // Combine and sort entries - simplistic approach for now, or just alternating sections
-    // Since dates can be complex strings ("NOV 2023 - MAY 2024"), exact sorting is hard without parsing.
-    // We will render them in two "Tracks" or a unified list if we can map years.
-    // Let's render them as a "System Log" unified timeline.
-
-    // Helper to extract year for sorting (rough approximation)
+    // Sort logic
     const getYear = (dateStr: string) => {
         const match = dateStr.match(/\d{4}/);
         return match ? parseInt(match[0]) : 0;
@@ -27,100 +22,184 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
     ].sort((a, b) => b.year - a.year);
 
     return (
-        <div className="relative max-w-5xl mx-auto p-4">
-            {/* Central Timeline Line via Gradient */}
-            <div className={`absolute left-4 md:left-1/2 top-0 bottom-0 w-px transform -translate-x-1/2 transition-colors duration-500 ${isPowered ? 'bg-gradient-to-b from-cyan-500/0 via-cyan-500/50 to-cyan-500/0' : 'bg-gray-800'}`} />
+        <div className="relative w-full max-w-6xl mx-auto px-4">
+            
+            {/* Header: SYSTEM TIMELINE on the top right */}
+            <div className="flex justify-between items-start mb-16 border-b border-gray-900 pb-4">
+                <span className="text-[10px] font-mono text-cyan-600 uppercase tracking-widest self-end">
+                    // SYSTEM LOGS
+                </span>
+                <h2 
+                    className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white flex flex-col items-end"
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                    <span>SYSTEM <span className="text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,0.4)]">TIMELINE</span></span>
+                </h2>
+            </div>
 
-            <div className="space-y-12">
-                {combined.map((item, index) => {
-                    const isExp = item.type === 'exp';
-                    const expData = item.data as Experience;
-                    const eduData = item.data as Education;
+            {/* Timeline wrapper */}
+            <div className="relative pl-8 md:pl-16">
+                
+                {/* Vertical Blue Laser Timeline Line */}
+                <div 
+                    className={`absolute left-0 top-2 bottom-2 w-[2px] transition-all duration-500
+                        ${isPowered 
+                            ? 'bg-cyan-500 shadow-[0_0_12px_#06b6d4]' 
+                            : 'bg-gray-800'
+                        }`} 
+                />
 
-                    return (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ delay: index * 0.1 }}
-                            className={`relative flex flex-col md:flex-row gap-8 items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-                        >
-                            {/* Timeline Node */}
-                            <div className="absolute left-4 md:left-1/2 w-4 h-4 -translate-x-1/2 mt-1.5 z-10">
-                                <div className={`w-full h-full rounded-full border-2 transition-all duration-500 ${isPowered ? 'bg-black border-cyan-400 shadow-[0_0_10px_#22d3ee]' : 'bg-gray-900 border-gray-700'}`}>
-                                    {isPowered && <div className="absolute inset-0 rounded-full animate-ping bg-cyan-500/30" />}
+                {/* Timeline entries */}
+                <div className="space-y-12 relative">
+                    {combined.map((item, index) => {
+                        const isExp = item.type === 'exp';
+                        const expData = item.data as Experience;
+                        const eduData = item.data as Education;
+
+                        return (
+                            <div key={index} className="relative group">
+                                
+                                {/* Orbital Timeline Node */}
+                                <div className="absolute -left-8 md:-left-16 w-8 md:w-12 h-12 -translate-x-1/2 -translate-y-1.5 flex items-center justify-center z-10">
+                                    {isPowered ? (
+                                        <>
+                                            {/* Concentric spinning rings */}
+                                            <motion.div 
+                                                animate={{ rotate: 360 }}
+                                                transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+                                                className="absolute w-7 h-7 rounded-full border border-cyan-500/20"
+                                            />
+                                            <motion.div 
+                                                animate={{ rotate: -360 }}
+                                                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                                                className="absolute w-5 h-5 rounded-full border border-dashed border-cyan-500/40"
+                                            />
+                                            {/* Glowing core */}
+                                            <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f2ff] relative">
+                                                <div className="absolute inset-0 rounded-full animate-ping bg-cyan-400/60" />
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div className="w-3 h-3 rounded-full bg-gray-800 border border-gray-700" />
+                                    )}
                                 </div>
-                            </div>
 
-                            {/* Content Card */}
-                            <div className="w-full md:w-[calc(50%-2rem)] ml-12 md:ml-0">
-                                <div className={`relative p-6 rounded-xl border backdrop-blur-sm transition-all duration-500 group
-                                    ${isPowered
-                                        ? 'bg-black/40 border-cyan-900/30 hover:border-cyan-500/50 hover:bg-cyan-950/10'
-                                        : 'bg-gray-900/10 border-gray-800 hover:border-gray-700'
-                                    }`}
+                                {/* Connecting Wires (Horizontal connection line) */}
+                                <div 
+                                    className={`absolute -left-4 md:-left-10 top-4 w-4 md:w-10 h-[1px] transition-all duration-500
+                                        ${isPowered 
+                                            ? 'bg-cyan-500/40' 
+                                            : 'bg-gray-800'
+                                        }`} 
+                                />
+
+                                {/* Card Block */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: '-60px' }}
+                                    transition={{ duration: 0.45, delay: index * 0.08 }}
+                                    className={`relative rounded-xl border p-6 md:p-8 backdrop-blur-sm transition-all duration-500
+                                        ${isPowered
+                                            ? 'bg-black/40 border-gray-900 hover:border-cyan-500/30 hover:bg-cyan-950/5'
+                                            : 'bg-white/5 border-gray-200'
+                                        }`}
                                 >
-                                    {/* Decor corners */}
+                                    {/* Tech details corner ornaments */}
                                     {isPowered && (
                                         <>
-                                            <div className="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-cyan-500/50" />
-                                            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b border-l border-cyan-500/50" />
+                                            <div className="absolute -top-[1px] -right-[1px] w-2 h-2 border-t border-r border-cyan-500/40 rounded-tr-sm" />
+                                            <div className="absolute -bottom-[1px] -left-[1px] w-2 h-2 border-b border-l border-cyan-500/40 rounded-bl-sm" />
                                         </>
                                     )}
 
-                                    {/* Header */}
-                                    <div className="flex items-start justify-between gap-4 mb-3">
-                                        <div className="flex items-center gap-2">
-                                            <div className={`p-2 rounded-lg ${isPowered ? 'bg-cyan-500/10 text-cyan-400' : 'bg-gray-800 text-gray-500'}`}>
-                                                {isExp ? <Briefcase size={16} /> : <GraduationCap size={16} />}
+                                    {/* Card Header */}
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className={`p-2.5 rounded-lg border transition-colors
+                                                ${isPowered 
+                                                    ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-400' 
+                                                    : 'bg-gray-100 border-gray-200 text-gray-600'
+                                                }`}
+                                            >
+                                                {isExp ? <Briefcase size={16} strokeWidth={1.5} /> : <GraduationCap size={16} strokeWidth={1.5} />}
                                             </div>
-                                            <span className={`text-[10px] font-mono tracking-wider uppercase ${isPowered ? 'text-cyan-600' : 'text-gray-600'}`}>
-                                                {isExp ? 'SYS_LOG: WORK' : 'SYS_LOG: ACADEMIC'}
-                                            </span>
+                                            <div>
+                                                <h4 className={`text-lg font-black tracking-tight leading-tight ${isPowered ? 'text-white' : 'text-gray-900'}`}>
+                                                    {isExp ? expData.role : eduData.degree}
+                                                </h4>
+                                                <p className={`text-xs font-mono uppercase mt-0.5 tracking-wider ${isPowered ? 'text-cyan-500/80' : 'text-blue-600'}`}>
+                                                    {isExp ? `at ${expData.company}` : `at ${eduData.institution}`}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div className={`flex items-center gap-1.5 text-xs font-mono font-bold ${isPowered ? 'text-gray-400' : 'text-gray-600'}`}>
-                                            <Calendar size={12} />
-                                            {isExp ? expData.duration : eduData.year}
+
+                                        <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono font-bold w-fit
+                                            ${isPowered 
+                                                ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-300' 
+                                                : 'bg-gray-50 border-gray-200 text-gray-500'
+                                            }`}
+                                        >
+                                            <Calendar size={12} strokeWidth={2} />
+                                            <span>{isExp ? expData.duration : eduData.year}</span>
                                         </div>
                                     </div>
 
-                                    {/* Main Info */}
-                                    <h3 className={`text-xl font-bold mb-1 ${isPowered ? 'text-white' : 'text-gray-800'}`}>
-                                        {isExp ? expData.role : eduData.degree}
-                                    </h3>
-                                    <h4 className={`text-sm font-mono mb-4 ${isPowered ? 'text-gray-400' : 'text-gray-600'}`}>
-                                        {isExp ? `@ ${expData.company}` : `@ ${eduData.institution}`}
-                                    </h4>
-
-                                    {/* Description / List */}
-                                    {isExp && expData.description && (
-                                        <ul className="space-y-2 mb-4">
-                                            {expData.description.slice(0, 3).map((item, i) => (
-                                                <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
-                                                    <ChevronRight size={14} className={`mt-0.5 shrink-0 ${isPowered ? 'text-cyan-500' : 'text-gray-700'}`} />
-                                                    <span className="leading-relaxed">{item}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
+                                    {/* Focus / Core Concepts (Description line or bullets) */}
+                                    {isExp ? (
+                                        expData.description && (
+                                            <ul className="space-y-3 mb-6 pl-1">
+                                                {expData.description.map((bullet, bi) => (
+                                                    <li key={bi} className="flex items-start gap-2.5 text-sm leading-relaxed text-gray-400">
+                                                        <ChevronRight size={14} className="mt-1 shrink-0 text-cyan-500/80" />
+                                                        <span>
+                                                            {bullet.split(' ').map((word, wi) => {
+                                                                // Highlight key words (e.g. numbers, specific technologies)
+                                                                const isHighlight = /^(11kV|440V|thermodynamic|turbine|efficiency|steam|power|transformers|insulation|motors|ISO|50001|dewatering|solar|agricultural)$/i.test(word.replace(/[,.]/g, ''));
+                                                                return (
+                                                                    <span key={wi} className={isHighlight && isPowered ? 'text-cyan-300 font-semibold' : ''}>
+                                                                        {word}{' '}
+                                                                    </span>
+                                                                );
+                                                            })}
+                                                        </span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )
+                                    ) : (
+                                        <p className="text-sm leading-relaxed text-gray-400 pl-1 mb-2">
+                                            Foundational studies in{' '}
+                                            <span className={isPowered ? 'text-cyan-300 font-semibold' : 'text-gray-800'}>electrical principles</span>{' '}
+                                            and{' '}
+                                            <span className={isPowered ? 'text-cyan-300 font-semibold' : 'text-gray-800'}>practical applications</span>.
+                                        </p>
                                     )}
 
                                     {/* Tech Tags for Experience */}
                                     {isExp && expData.tech && (
-                                        <div className="flex flex-wrap gap-2 pt-2 border-t border-dashed border-gray-800">
+                                        <div className="flex flex-wrap gap-2 pt-4 border-t border-dashed border-gray-900">
                                             {expData.tech.map(t => (
-                                                <span key={t} className={`text-[10px] px-2 py-1 rounded font-mono ${isPowered ? 'bg-cyan-950/30 text-cyan-300 border border-cyan-900/30' : 'bg-gray-200 text-gray-600'
-                                                    }`}>
+                                                <span 
+                                                    key={t} 
+                                                    className={`text-[10px] px-2.5 py-1 rounded font-mono uppercase border tracking-wider
+                                                        ${isPowered 
+                                                            ? 'bg-cyan-950/10 border-cyan-900/30 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.02)]' 
+                                                            : 'bg-gray-100 border-gray-200 text-gray-600'
+                                                        }`}
+                                                >
                                                     {t}
                                                 </span>
                                             ))}
                                         </div>
                                     )}
-                                </div>
+
+                                </motion.div>
                             </div>
-                        </motion.div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
+
             </div>
         </div>
     );
