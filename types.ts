@@ -11,6 +11,7 @@ export interface Project {
   features?: string[];
   award?: string;
   awards?: string[];
+  keywords?: string;
 }
 
 export interface Skill {

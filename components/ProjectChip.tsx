@@ -97,6 +97,7 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
       ref={cardRef}
       className="relative group h-full project-card"
       data-cursor="pointer"
+      data-keywords={project.keywords}
       onMouseEnter={() => {
         setIsHovered(true);
         if (hoverDelayRef.current) window.clearTimeout(hoverDelayRef.current);

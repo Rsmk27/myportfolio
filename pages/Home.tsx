@@ -218,21 +218,21 @@ const Home: React.FC = () => {
             <EasterEgg />
             <Helmet>
                 {/* Title */}
-                <title>{PROFILE.name} | Embedded Systems &amp; IoT Engineer</title>
+                <title>RSMK | Embedded Systems, IoT &amp; EEE Projects – Srinivasa Manikanta</title>
 
                 {/* Primary SEO */}
-                <meta name="description" content={`${PROFILE.name} (RSMK) — EEE student at Andhra Loyola Institute of Engineering and Technology (ALIET). Specialized in Embedded Systems & IoT. Projects: Firefighter Safety Device, Agri Rover, ColorOhm.`} />
-                <meta name="keywords" content="Srinivasa Manikanta, Srinivasa Manikanta Rajapantula, RSMK, rsmk27, Andhra Loyola Institute of Engineering and Technology, ALIET, ALIET Vijayawada, Government Polytechnic Srikakulam, Srikakulam Engineering, Firefighter Safety Device, ColorOhm, Agri Rover, Embedded Systems, IoT, EEE Engineer" />
+                <meta name="description" content="RSMK Technologies – Portfolio of Srinivasa Manikanta Rajapantula. ESP32 IoT projects, resistor color code calculator app, solar tracker, firefighter wearable, agricultural rover, and smart energy systems for EEE students in India." />
+                <meta name="keywords" content="resistor color code calculator, arduino vs esp32 india, iot projects for eee students, esp32 firebase tutorial, solar panel tracking system, single axis solar tracker, iot farming robot, agri rover esp32, firefighter monitoring system india, solar dewatering system india, smart energy management, embedded systems internship india, eee fresher jobs hyderabad" />
                 <meta name="author" content={PROFILE.name} />
                 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-                <link rel="canonical" href="https://rsmk.me/" />
+                <link rel="canonical" href="https://rsmk.me" />
 
                 {/* Open Graph */}
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://rsmk.me/" />
+                <meta property="og:url" content="https://rsmk.me" />
                 <meta property="og:site_name" content={`${PROFILE.name} (RSMK) Portfolio`} />
-                <meta property="og:title" content={`${PROFILE.name} | Embedded Systems & IoT Engineer`} />
-                <meta property="og:description" content="Explore innovative engineering projects by RSMK: Firefighter Safety Device, Agri Rover, ColorOhm, and Smart Energy systems. Specialist in Embedded Systems and IoT." />
+                <meta property="og:title" content="RSMK – IoT &amp; EEE Projects Portfolio | India" />
+                <meta property="og:description" content="ESP32 projects, ColorOhm resistor calculator, solar tracker, firefighter wearable IoT, agricultural rover – by Srinivasa Manikanta, EEE engineer." />
                 <meta property="og:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
@@ -243,23 +243,27 @@ const Home: React.FC = () => {
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:site" content="@SrinivasManik20" />
                 <meta name="twitter:creator" content="@SrinivasManik20" />
-                <meta name="twitter:title" content={`${PROFILE.name} | Embedded Systems & IoT Engineer`} />
-                <meta name="twitter:description" content="EEE student specializing in Embedded Systems, IoT, Smart Energy and Industrial Automation portfolio." />
+                <meta name="twitter:title" content="RSMK – IoT &amp; EEE Projects Portfolio | India" />
+                <meta name="twitter:description" content="ESP32 projects, ColorOhm resistor calculator, solar tracker, firefighter wearable IoT, agricultural rover – by Srinivasa Manikanta, EEE engineer." />
                 <meta name="twitter:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
                 <meta name="twitter:image:alt" content={`Portrait of ${PROFILE.name}, EEE Engineer`} />
 
-                {/* JSON-LD: WebSite */}
+                {/* JSON-LD: Person structured data */}
                 <script type="application/ld+json">{JSON.stringify({
                     "@context": "https://schema.org",
-                    "@type": "WebSite",
-                    "name": `${PROFILE.name} Portfolio`,
+                    "@type": "Person",
+                    "name": "Srinivasa Manikanta Rajapantula",
+                    "alternateName": "RSMK",
                     "url": "https://rsmk.me",
-                    "description": "Portfolio of Srinivasa Manikanta, an Electrical & Electronics Engineering student specializing in Embedded Systems, IoT, and Smart Energy.",
-                    "author": {
-                        "@type": "Person",
-                        "name": PROFILE.name,
-                        "url": "https://rsmk.me"
-                    }
+                    "jobTitle": "Embedded Systems & IoT Engineer",
+                    "knowsAbout": [
+                        "ESP32", "Arduino", "IoT Projects", "Resistor Color Code Calculator",
+                        "Solar Tracker", "Smart Energy Systems", "EEE Engineering India"
+                    ],
+                    "sameAs": [
+                        "https://github.com/Rsmk27",
+                        "https://linkedin.com/in/rsmk"
+                    ]
                 })}</script>
             </Helmet>
 

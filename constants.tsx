@@ -60,8 +60,8 @@ export const EDUCATION: Education[] = [
 export const PROJECTS: Project[] = [
   {
     id: 'p1',
-    title: 'Firefighter Safety Device',
-    description: "An IoT-based wearable safety device that continuously monitors a firefighter's physical condition, movement, and location in real time, presenting data on a centralized web dashboard for commanders.",
+    title: 'SFMD – Firefighter Safety Monitoring Wearable IoT Device',
+    description: "An ESP32-based wearable IoT device for firefighter safety monitoring with gas detection, fall detection, GPS tracking, and a real-time Firebase dashboard. Winner, A-HACKS 2026 Hardware Category.",
     tech: ['ESP32', 'C++', 'Firebase RTDB', 'React', 'Vite', 'MPU-6050', 'DHT11', 'Neo-6M GPS'],
     image: '/assets/firefighter-monitoring-device.webp',
     link: 'https://sfmd.rsmk.co.in/',
@@ -89,13 +89,14 @@ export const PROJECTS: Project[] = [
       '/assets/firefighter-monitoring-device/departmental-first-4.jpg',
       '/assets/firefighter-monitoring-device/departmental-first-5.jpg'
     ],
-    award: '🥈 Hackathon Winning Project',
-    awards: ['🥈 Hackathon Winning Project', '🏆 Departmental 1st Prize']
+    award: '🥈 Hackathon Winner',
+    awards: ['🥈 Winner, A-HACKS 2026 Hardware Category', '🏆 Departmental 1st Prize'],
+    keywords: 'firefighter monitoring system india, iot wearable for safety, esp32 wearable device'
   },
   {
     id: 'p2',
-    title: 'ColorOhm',
-    description: 'A precision resistor color code calculator published as an Android app and web tool. Supports 4 & 5 band standards with zero latency decoding — a practical EEE utility.',
+    title: 'ColorOhm – Resistor Color Code Calculator App',
+    description: 'A free Android resistor color code calculator supporting 4-band and 5-band resistors, SMD codes, history, and favorites. The easiest color ohm app for electronics students in India.',
     tech: ['React Native', 'Expo', 'JavaScript', 'CSS3'],
     image: '/assets/color-ohm-resistor-calculator-tool.webp',
     link: 'https://colorohm.rsmk.me/',
@@ -108,12 +109,13 @@ export const PROJECTS: Project[] = [
       "Works offline — no backend required"
     ],
     award: '📱 Android App',
-    awards: ['📱 Android App', '🌐 Website']
+    awards: ['📱 Android App', '🌐 Website'],
+    keywords: 'resistor color code calculator, 4 band resistor calculator, color ohm app india'
   },
   {
     id: 'p3',
-    title: 'Automatic Exhaust Fan',
-    description: 'Intelligent ventilation system that automatically detects harmful gases and smoke. Features an auto-off timer and manual override for flexible, safe operation.',
+    title: 'Automatic Exhaust Fan – Smart Ventilation with MQ-2 Gas Sensor',
+    description: 'An Arduino-based smart ventilation system using MQ-2 gas sensor for automatic exhaust fan control. Detects harmful gas concentrations and activates ventilation automatically.',
     tech: ['Arduino', 'MQ-2 Sensor', 'Relay Module', 'C++'],
     image: '/assets/smart-exhaust-gas-detection-system.webp',
     link: 'https://autoexhaustfan.rsmk.co.in/',
@@ -133,12 +135,13 @@ export const PROJECTS: Project[] = [
       '/assets/auto-exhaust-fan/image-3.jpg'
     ],
     award: '⚙️ Hardware Model',
-    awards: ['⚙️ Hardware Model', '🌐 Web Demo']
+    awards: ['⚙️ Hardware Model', '🌐 Web Demo'],
+    keywords: 'automatic exhaust fan arduino, smart ventilation system india, mq-2 gas sensor project'
   },
   {
     id: 'p4',
-    title: 'Solar-Powered Dewatering System',
-    description: 'SIH project replacing diesel-based agricultural dewatering with solar energy. Arduino-controlled system with soil moisture sensing and LDR-based solar tracking.',
+    title: 'SPDS – Solar Powered Dewatering System India',
+    description: 'A PM-KUSUM aligned solar-powered dewatering system for solar irrigation in India, eliminating grid dependency for agricultural water pumping.',
     tech: ['Arduino', 'LDR', 'Soil Moisture Sensor', 'Solar PV', 'Relay', 'C++'],
     image: '/assets/ai-chatbot-interface-background.webp',
     link: 'https://spds.rsmk.me/',
@@ -152,12 +155,13 @@ export const PROJECTS: Project[] = [
       "SIH (Smart India Hackathon) project"
     ],
     award: '📐 SIH Project',
-    awards: ['📐 SIH Project — College Level', '⚙️ Prototype']
+    awards: ['📐 SIH Project — College Level', '⚙️ Prototype'],
+    keywords: 'solar dewatering system india, solar irrigation india, pm-kusum solar pump'
   },
   {
     id: 'p5',
-    title: 'Single Axis Solar Tracker',
-    description: 'A relay-logic solar panel tracker using LDR sensors to follow sunlight across a single axis with a gear motor. Achieves ~30% efficiency gain over fixed panels — no microcontroller required.',
+    title: 'Single-Axis Solar Tracker – LDR Solar Tracker with Arduino',
+    description: 'An LDR-based single axis solar tracker built with Arduino that maximizes solar panel efficiency by auto-aligning with sunlight. Includes efficiency comparison data.',
     tech: ['LDR', 'Relay Logic', 'Gear Motor', 'Comparator Circuit'],
     image: '/assets/single-axis-solar-tracker.png',
     details: "An elegant, microcontroller-free Single Axis Solar Tracker driven entirely by a custom-designed analog comparator loop. Utilizing two light-dependent resistors (LDRs) in a differential divider bridge, the circuit detects shifts in solar angle. A transistor-driven dual-relay comparator network operates as a hardware H-bridge, reversing polarities to actuate a 12V high-torque gear motor toward the maximum luminous intensity. By bypassing a power-hungry digital microcontroller, this robust system achieves a ~30% increase in PV energy yield while minimizing standby power consumption.",
@@ -169,30 +173,30 @@ export const PROJECTS: Project[] = [
       "Fully analog control circuit — low cost & robust"
     ],
     award: '⚡ Analog Control',
-    awards: ['⚡ Analog Control', '⚙️ Hardware Prototype']
+    awards: ['⚡ Analog Control', '⚙️ Hardware Prototype'],
+    keywords: 'single axis solar tracker, solar panel tracking system, ldr solar tracker arduino'
   },
   {
     id: 'p6',
-    title: 'Automatic Streetlight System',
-    description: 'A fully solar-powered automatic streetlight that switches on at dusk and off at dawn using IC 555 timer and LDR sensing. Built as a working mini-model prototype.',
-    tech: ['IC 555', 'LDR', 'Solar Panel', 'Relay', 'LED'],
+    title: 'GridForge – Smart Energy Management System',
+    description: 'A MATLAB-based smart grid simulation platform for industrial energy monitoring and ISO 50001 energy management — targeted at EEE smart energy systems research.',
+    tech: ['MATLAB', 'Simulink', 'Smart Grid', 'ISO 50001'],
     image: '/assets/automated-street-light-system.webp',
-    details: "The Automatic Streetlight System is a self-contained, fully solar-powered lighting solution. A 555 timer IC in monostable/bistable configuration reads the LDR output — at dusk when ambient light drops below a threshold, the circuit triggers a relay to switch on the street LED. At dawn, rising light levels restore the LDR resistance and cut the relay. The solar panel charges a battery during the day for night-time operation. Built as a working mini-model prototype.",
+    details: "A MATLAB-based smart grid simulation platform for industrial energy monitoring and ISO 50001 energy management. Built to simulate high-voltage power networks, load shedding dynamics, and smart energy optimization algorithms, supporting advanced research into renewable energy integration.",
     features: [
-      "Fully solar powered — charges battery during daylight",
-      "IC 555 timer-based automatic switching circuit",
-      "LDR threshold detection for dusk/dawn triggering",
-      "Relay-controlled LED output",
-      "Working mini-model prototype built and demonstrated",
-      "Zero manual intervention once set up"
+      "MATLAB-based load-flow and power system simulation",
+      "ISO 50001 industrial energy management logic integration",
+      "Real-time load-shedding and distribution grid scenarios",
+      "Designed for EEE smart energy systems research"
     ],
-    award: '💡 Working Prototype',
-    awards: ['💡 Working Prototype', '🔋 Clean Energy']
+    award: '📊 MATLAB Model',
+    awards: ['📊 Simulation Model', '🔋 Smart Grid'],
+    keywords: 'smart energy management, industrial energy monitoring india, smart energy systems eee'
   },
   {
     id: 'p7',
-    title: 'Agri Rover',
-    description: 'A web-controlled agricultural rover built with dual ESP32 microcontrollers. Features live MJPEG video streaming, real-time GPS tracking, soil moisture sensing, automated spraying, and an AI-powered AgriChatbot.',
+    title: 'AgriRover – Agricultural Robot with ESP32',
+    description: 'A web-controlled IoT farming robot built on ESP32 with live video streaming, soil sensors, GPS, and Firebase real-time control. Designed for precision agriculture in India.',
     tech: ['ESP32', 'ESP32-CAM', 'React 19', 'Vite', 'Firebase RTDB', 'Groq API (Llama 3.3)', 'Leaflet Maps', 'Recharts', 'C++'],
     image: '/assets/agri-rover-project.webp',
     link: 'https://github.com/Rsmk27/multi-rover',
@@ -211,7 +215,8 @@ export const PROJECTS: Project[] = [
       '/assets/agri-rover-project.webp'
     ],
     award: '🤖 IoT Robot',
-    awards: ['🤖 IoT Robot', '🌿 AgriAI', '📡 Dual ESP32']
+    awards: ['🤖 IoT Robot', '🌿 AgriAI', '📡 Dual ESP32'],
+    keywords: 'iot farming robot, agri rover esp32, agricultural robot india'
   }
 ];
 
