@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useInView, useScroll, useSpring, useTransform } from 'framer-motion';
 import { PCBBackground } from '../components/PCBBackground';
 import { ProjectChip } from '../components/ProjectChip';
@@ -205,7 +206,7 @@ const Home: React.FC = () => {
     const navItems = ['About', 'Projects', 'Skills', 'Certifications', 'Gallery', 'Experience', 'Contact'];
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: string) => {
-        if (item === 'Gallery') return;
+        if (item === 'Gallery' || item === 'Certifications') return;
         e.preventDefault();
         const id = item.toLowerCase();
         const el = document.getElementById(id);
@@ -323,10 +324,42 @@ const Home: React.FC = () => {
                         {navItems.map((item) => {
                             const sectionId = item.toLowerCase();
                             const isActive = activeSection === sectionId;
+                            const isPageRoute = item === 'Gallery' || item === 'Certifications';
+                            const targetPath = item === 'Gallery' ? '/gallery' : '/certificates';
+
+                            if (isPageRoute) {
+                                return (
+                                    <Link
+                                        key={item}
+                                        to={targetPath}
+                                        onClick={(e) => handleNavClick(e, item)}
+                                        onMouseEnter={() => {
+                                            const currentIndex = navItems.indexOf(item);
+                                            if (navHoverIndex !== -1) {
+                                                setNavDirection(currentIndex >= navHoverIndex ? 1 : -1);
+                                            }
+                                            setNavHoverIndex(currentIndex);
+                                        }}
+                                        className={`relative text-[11px] font-semibold uppercase tracking-widest transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-0.5 ${isActive ? 'text-cyan-400' : 'text-gray-400 hover:text-cyan-400'}`}
+                                    >
+                                        {item}
+                                        <motion.span
+                                            className="absolute bottom-0 left-0 h-px bg-cyan-400"
+                                            animate={{
+                                                width: isActive ? '100%' : '0%',
+                                                left: navDirection === 1 ? '0%' : 'auto',
+                                                right: navDirection === -1 ? '0%' : 'auto',
+                                            }}
+                                            transition={{ duration: 0.24, ease: 'easeOut' }}
+                                        />
+                                    </Link>
+                                );
+                            }
+
                             return (
                                 <a
                                     key={item}
-                                    href={item === 'Gallery' ? '/gallery' : `#${sectionId}`}
+                                    href={`#${sectionId}`}
                                     onClick={(e) => handleNavClick(e, item)}
                                     onMouseEnter={() => {
                                         const currentIndex = navItems.indexOf(item);
@@ -393,20 +426,46 @@ const Home: React.FC = () => {
                             transition={{ duration: 0.2 }}
                             className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-2"
                         >
-                            {navItems.map((item, i) => (
-                                <motion.a
-                                    key={item}
-                                    initial={reduced ? false : { opacity: 0, y: 16 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.06, duration: 0.3 }}
-                                    href={item === 'Gallery' ? '/gallery' : `#${item.toLowerCase()}`}
-                                    onClick={(e) => handleNavClick(e, item)}
-                                    className="text-3xl font-black uppercase tracking-tight text-white hover:text-amber-400 transition-colors duration-200 py-3 cursor-pointer focus:outline-none focus-visible:text-amber-400"
-                                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                                >
-                                    {item}
-                                </motion.a>
-                            ))}
+                            {navItems.map((item, i) => {
+                                const isPageRoute = item === 'Gallery' || item === 'Certifications';
+                                const targetPath = item === 'Gallery' ? '/gallery' : '/certificates';
+
+                                if (isPageRoute) {
+                                    return (
+                                        <motion.div
+                                            key={item}
+                                            initial={reduced ? false : { opacity: 0, y: 16 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: i * 0.06, duration: 0.3 }}
+                                            className="w-full text-center"
+                                        >
+                                            <Link
+                                                to={targetPath}
+                                                onClick={(e) => handleNavClick(e, item)}
+                                                className="text-3xl font-black uppercase tracking-tight text-white hover:text-amber-400 transition-colors duration-200 py-3 cursor-pointer focus:outline-none focus-visible:text-amber-400 block w-full"
+                                                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                                            >
+                                                {item}
+                                            </Link>
+                                        </motion.div>
+                                    );
+                                }
+
+                                return (
+                                    <motion.a
+                                        key={item}
+                                        initial={reduced ? false : { opacity: 0, y: 16 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: i * 0.06, duration: 0.3 }}
+                                        href={`#${item.toLowerCase()}`}
+                                        onClick={(e) => handleNavClick(e, item)}
+                                        className="text-3xl font-black uppercase tracking-tight text-white hover:text-amber-400 transition-colors duration-200 py-3 cursor-pointer focus:outline-none focus-visible:text-amber-400"
+                                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                                    >
+                                        {item}
+                                    </motion.a>
+                                );
+                            })}
                             <motion.div
                                 initial={reduced ? false : { opacity: 0, y: 16 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -832,6 +891,28 @@ const Home: React.FC = () => {
                     {/* ══ 5. CERTIFICATIONS ══════════════════════════════════ */}
                     <section id="certifications" className="mb-24 md:mb-40">
                         <CertificationsBlock isPowered={isPowered} />
+                        <div className="flex justify-center mt-10">
+                            <Link
+                                to="/certificates"
+                                className={`inline-flex items-center gap-2.5 px-6 py-3.5 border font-bold text-xs tracking-wider uppercase rounded-xl transition-all duration-300 relative group overflow-hidden cursor-pointer
+                                    ${isPowered 
+                                        ? 'border-cyan-500/40 text-cyan-400 bg-cyan-950/15 hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]' 
+                                        : 'border-gray-200 text-gray-700 bg-gray-50 hover:bg-gray-100'
+                                    }`}
+                            >
+                                {isPowered && (
+                                    <span 
+                                        className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" 
+                                        style={{
+                                            backgroundImage: 'linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.15), transparent)',
+                                            animation: 'shimmer 2.5s infinite linear'
+                                        }}
+                                    />
+                                )}
+                                <span>Launch Verified Credentials Portal</span>
+                                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </Link>
+                        </div>
                     </section>
 
                     {/* ══ 6. EXPERIENCE / TIMELINE ═══════════════════════════ */}

@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
+import Certificates from './pages/Certificates';
 import NotFound from './pages/NotFound';
 import { CustomCursor } from './components/CustomCursor';
 
@@ -31,6 +32,7 @@ const AnimatedRoutes: React.FC = () => {
                 <Routes location={location}>
                     <Route path="/" element={<Home />} />
                     <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/certificates" element={<Certificates />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </motion.div>
