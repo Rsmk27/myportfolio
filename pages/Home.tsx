@@ -13,7 +13,8 @@ import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import {
     Zap, Code, Globe, Terminal, Mail, Github, Linkedin, Twitter,
     Menu, X, ChevronDown, Activity, Cpu, Radio, BatteryMedium,
-    ArrowUpRight, MapPin, Briefcase, GraduationCap, Download, Eye
+    ArrowUpRight, MapPin, Briefcase, GraduationCap, Download, Eye,
+    ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
@@ -117,6 +118,98 @@ const Home: React.FC = () => {
     const scrollProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.2 });
     const ringOffset = useTransform(scrollProgress, [0, 1], [88, 0]);
 
+    // Projects Carousel States and Refs
+    const projectsScrollRef = useRef<HTMLDivElement>(null);
+    const [isHoveredProjects, setIsHoveredProjects] = useState(false);
+    const [isDraggingProjects, setIsDraggingProjects] = useState(false);
+    const [startXProjects, setStartXProjects] = useState(0);
+    const [scrollLeftProjectsState, setScrollLeftProjectsState] = useState(0);
+
+    // Auto-scroll loop using requestAnimationFrame for Projects
+    useEffect(() => {
+        const container = projectsScrollRef.current;
+        if (!container || !isPowered) return;
+
+        let animationFrameId: number;
+        let lastTime = performance.now();
+        const speed = 35; // pixels per second
+
+        const step = (time: number) => {
+            if (!isHoveredProjects && !isDraggingProjects) {
+                const delta = (time - lastTime) / 1000;
+                container.scrollLeft += speed * delta;
+
+                // Infinite loop: snap back when scrolled past first set of items
+                const halfWidth = container.scrollWidth / 2;
+                if (container.scrollLeft >= halfWidth) {
+                    container.scrollLeft -= halfWidth;
+                }
+            }
+            lastTime = time;
+            animationFrameId = requestAnimationFrame(step);
+        };
+
+        animationFrameId = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(animationFrameId);
+    }, [isHoveredProjects, isDraggingProjects, isPowered]);
+
+    // Manual navigation buttons scroll for Projects
+    const scrollProjects = (direction: 'left' | 'right') => {
+        const container = projectsScrollRef.current;
+        if (container) {
+            const { scrollLeft, clientWidth, scrollWidth } = container;
+            const scrollAmount = clientWidth * 0.75;
+            let target = direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount;
+
+            const halfWidth = scrollWidth / 2;
+            if (target < 0) {
+                container.scrollLeft = halfWidth + target;
+                target = halfWidth + target - scrollAmount;
+            } else if (target >= halfWidth) {
+                container.scrollLeft = target - halfWidth;
+                target = target - halfWidth + scrollAmount;
+            }
+
+            container.scrollTo({
+                left: target,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    // Drag-to-scroll handlers for Projects
+    const handleMouseDownProjects = (e: React.MouseEvent) => {
+        const container = projectsScrollRef.current;
+        if (!container) return;
+        setIsDraggingProjects(true);
+        setStartXProjects(e.pageX - container.offsetLeft);
+        setScrollLeftProjectsState(container.scrollLeft);
+    };
+
+    const handleMouseLeaveOrUpProjects = () => {
+        setIsDraggingProjects(false);
+    };
+
+    const handleMouseMoveProjects = (e: React.MouseEvent) => {
+        const container = projectsScrollRef.current;
+        if (!isDraggingProjects || !container) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startXProjects) * 1.5;
+        container.scrollLeft = scrollLeftProjectsState - walk;
+
+        const halfWidth = container.scrollWidth / 2;
+        if (container.scrollLeft >= halfWidth) {
+            container.scrollLeft -= halfWidth;
+            setStartXProjects(x);
+            setScrollLeftProjectsState(container.scrollLeft);
+        } else if (container.scrollLeft < 0) {
+            container.scrollLeft += halfWidth;
+            setStartXProjects(x);
+            setScrollLeftProjectsState(container.scrollLeft);
+        }
+    };
+
     /* Typing animations */
     const [heroIntro, setHeroIntro] = useState('');
     const heroIntroText = "> Hello, I'm RSMK";
@@ -203,10 +296,9 @@ const Home: React.FC = () => {
         'MODE | SHIPPING REAL-WORLD SOLUTIONS',
     ];
 
-    const navItems = ['About', 'Projects', 'Skills', 'Certifications', 'Gallery', 'Experience', 'Contact'];
+    const navItems = ['About', 'Projects', 'Skills', 'Certifications', 'Experience', 'Contact'];
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: string) => {
-        if (item === 'Gallery' || item === 'Certifications') return;
         e.preventDefault();
         const id = item.toLowerCase();
         const el = document.getElementById(id);
@@ -324,37 +416,6 @@ const Home: React.FC = () => {
                         {navItems.map((item) => {
                             const sectionId = item.toLowerCase();
                             const isActive = activeSection === sectionId;
-                            const isPageRoute = item === 'Gallery' || item === 'Certifications';
-                            const targetPath = item === 'Gallery' ? '/gallery' : '/certificates';
-
-                            if (isPageRoute) {
-                                return (
-                                    <Link
-                                        key={item}
-                                        to={targetPath}
-                                        onClick={(e) => handleNavClick(e, item)}
-                                        onMouseEnter={() => {
-                                            const currentIndex = navItems.indexOf(item);
-                                            if (navHoverIndex !== -1) {
-                                                setNavDirection(currentIndex >= navHoverIndex ? 1 : -1);
-                                            }
-                                            setNavHoverIndex(currentIndex);
-                                        }}
-                                        className={`relative text-[11px] font-semibold uppercase tracking-widest transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-0.5 ${isActive ? 'text-cyan-400' : 'text-gray-400 hover:text-cyan-400'}`}
-                                    >
-                                        {item}
-                                        <motion.span
-                                            className="absolute bottom-0 left-0 h-px bg-cyan-400"
-                                            animate={{
-                                                width: isActive ? '100%' : '0%',
-                                                left: navDirection === 1 ? '0%' : 'auto',
-                                                right: navDirection === -1 ? '0%' : 'auto',
-                                            }}
-                                            transition={{ duration: 0.24, ease: 'easeOut' }}
-                                        />
-                                    </Link>
-                                );
-                            }
 
                             return (
                                 <a
@@ -427,30 +488,6 @@ const Home: React.FC = () => {
                             className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-2"
                         >
                             {navItems.map((item, i) => {
-                                const isPageRoute = item === 'Gallery' || item === 'Certifications';
-                                const targetPath = item === 'Gallery' ? '/gallery' : '/certificates';
-
-                                if (isPageRoute) {
-                                    return (
-                                        <motion.div
-                                            key={item}
-                                            initial={reduced ? false : { opacity: 0, y: 16 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: i * 0.06, duration: 0.3 }}
-                                            className="w-full text-center"
-                                        >
-                                            <Link
-                                                to={targetPath}
-                                                onClick={(e) => handleNavClick(e, item)}
-                                                className="text-3xl font-black uppercase tracking-tight text-white hover:text-amber-400 transition-colors duration-200 py-3 cursor-pointer focus:outline-none focus-visible:text-amber-400 block w-full"
-                                                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                                            >
-                                                {item}
-                                            </Link>
-                                        </motion.div>
-                                    );
-                                }
-
                                 return (
                                     <motion.a
                                         key={item}
@@ -872,14 +909,53 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* ══ 3. PROJECTS ════════════════════════════════════════ */}
-                    <section id="projects" className="mb-24 md:mb-40">
+                    <section id="projects" className="mb-24 md:mb-40 relative">
                         <SectionHeader title="Projects" subtitle="Deployed Modules" isPowered={isPowered} />
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 xl:gap-7">
-                            {PROJECTS.map((proj, i) => (
-                                <Reveal key={proj.id} delay={i * 0.07}>
-                                    <ProjectChip project={proj} isPowered={isPowered} />
-                                </Reveal>
-                            ))}
+                        
+                        {/* Control Arrows for Projects */}
+                        <div className="flex justify-end gap-2 max-w-7xl mx-auto px-4 -mt-16 mb-8 relative z-30">
+                            <button
+                                onClick={() => scrollProjects('left')}
+                                className="p-2 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
+                                title="Scroll Left"
+                            >
+                                <ChevronLeft size={16} strokeWidth={2.5} />
+                            </button>
+                            <button
+                                onClick={() => scrollProjects('right')}
+                                className="p-2 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
+                                title="Scroll Right"
+                            >
+                                <ChevronRight size={16} strokeWidth={2.5} />
+                            </button>
+                        </div>
+
+                        {/* Carousel Container - Infinite Scrolling Marquee (Full Viewport Breakout) */}
+                        <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden py-4 mt-4 select-none">
+                            <div 
+                                ref={projectsScrollRef}
+                                className="flex gap-6 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-12 md:px-24"
+                                onMouseEnter={() => setIsHoveredProjects(true)}
+                                onMouseLeave={() => {
+                                    setIsHoveredProjects(false);
+                                    handleMouseLeaveOrUpProjects();
+                                }}
+                                onMouseDown={handleMouseDownProjects}
+                                onMouseUp={handleMouseLeaveOrUpProjects}
+                                onMouseMove={handleMouseMoveProjects}
+                            >
+                                {PROJECTS.map((proj, i) => (
+                                    <div key={`${proj.id}-1`} className="w-[310px] md:w-[380px] flex-shrink-0">
+                                        <ProjectChip project={proj} isPowered={isPowered} />
+                                    </div>
+                                ))}
+                                {/* Duplicate for seamless infinite loop */}
+                                {PROJECTS.map((proj, i) => (
+                                    <div key={`${proj.id}-2`} className="w-[310px] md:w-[380px] flex-shrink-0">
+                                        <ProjectChip project={proj} isPowered={isPowered} />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </section>
 
@@ -891,28 +967,7 @@ const Home: React.FC = () => {
                     {/* ══ 5. CERTIFICATIONS ══════════════════════════════════ */}
                     <section id="certifications" className="mb-24 md:mb-40">
                         <CertificationsBlock isPowered={isPowered} />
-                        <div className="flex justify-center mt-10">
-                            <Link
-                                to="/certificates"
-                                className={`inline-flex items-center gap-2.5 px-6 py-3.5 border font-bold text-xs tracking-wider uppercase rounded-xl transition-all duration-300 relative group overflow-hidden cursor-pointer
-                                    ${isPowered 
-                                        ? 'border-cyan-500/40 text-cyan-400 bg-cyan-950/15 hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]' 
-                                        : 'border-gray-200 text-gray-700 bg-gray-50 hover:bg-gray-100'
-                                    }`}
-                            >
-                                {isPowered && (
-                                    <span 
-                                        className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" 
-                                        style={{
-                                            backgroundImage: 'linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.15), transparent)',
-                                            animation: 'shimmer 2.5s infinite linear'
-                                        }}
-                                    />
-                                )}
-                                <span>Launch Verified Credentials Portal</span>
-                                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                            </Link>
-                        </div>
+
                     </section>
 
                     {/* ══ 6. EXPERIENCE / TIMELINE ═══════════════════════════ */}

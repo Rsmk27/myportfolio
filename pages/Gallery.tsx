@@ -18,8 +18,8 @@ const GALLERY_IMAGES = [
   { src: '/assets/gallery/ahacks/device-strap-front.jpg', alt: 'Firefighter safety wearable device — front view with sensors' },
   { src: '/assets/gallery/ahacks/device-strap-back.jpg', alt: 'Firefighter safety wearable device — back view with ESP32 wiring' },
   // General gallery
-  { src: '/assets/gallery/img-20251003-102729.jpg', alt: 'Srinivasa Manikanta — college engineering lab session' },
-  { src: '/assets/gallery/img-20251003-102931.jpg', alt: 'Srinivasa Manikanta — engineering workshop activity' },
+  { src: '/assets/certifications/Chefronics certificate.jpg', alt: 'Srinivasa Manikanta — college engineering lab session' },
+  { src: '/assets/certifications/Firesafety Certificate.jpg', alt: 'Srinivasa Manikanta — engineering workshop activity' },
   { src: '/assets/gallery/img-20260128-104328.jpg', alt: 'Srinivasa Manikanta — campus life at engineering college' },
   { src: '/assets/gallery/img-20250311-WA0009.jpg', alt: 'Srinivasa Manikanta — team project collaboration' },
   { src: '/assets/gallery/img-20251010-WA0001.jpg', alt: 'Srinivasa Manikanta — academic event participation' },
@@ -44,17 +44,17 @@ const GALLERY_IMAGES = [
   { src: '/assets/experience/coromandel/internship-certificate.jpg', alt: 'Coromandel International electrical engineering internship certificate' },
   { src: '/assets/experience/coromandel/training-site.jpg', alt: 'Industrial training site at Coromandel International Ltd' },
   // Certifications
-  { src: '/assets/certifications/drone-technology/certificate.png', alt: 'Drone technology workshop completion certificate' },
+  { src: '/assets/certifications/Drone technology certificate.png', alt: 'Drone technology workshop completion certificate' },
   { src: '/assets/certifications/drone-technology/training-1.jpg', alt: 'Drone technology hands-on training session' },
   { src: '/assets/certifications/drone-technology/training-2.jpg', alt: 'Drone assembly and flight training workshop' },
-  { src: '/assets/certifications/3d-printing/certificate.jpg', alt: '3D printing workshop completion certificate' },
+  { src: '/assets/certifications/3D Printing.jpg', alt: '3D printing workshop completion certificate' },
   { src: '/assets/certifications/3d-printing/workshop-1.jpg', alt: '3D printing workshop — learning additive manufacturing' },
   { src: '/assets/certifications/3d-printing/workshop-2.jpg', alt: '3D printing workshop — printer operation training' },
   { src: '/assets/certifications/3d-printing/workshop-3.jpg', alt: '3D printing workshop — designing 3D models' },
   { src: '/assets/certifications/3d-printing/workshop-4.jpg', alt: '3D printing workshop — printed prototype output' },
   { src: '/assets/certifications/3d-printing/workshop-5.jpg', alt: '3D printing workshop — group activity session' },
-  { src: '/assets/certifications/embedded-systems/certificate.jpg', alt: 'Embedded systems course completion certificate' },
-  { src: '/assets/certifications/electric-vehicle/certificate.jpg', alt: 'Electric vehicle technology program certificate' },
+  { src: '/assets/certifications/Embedded systems certificate.png', alt: 'Embedded systems course completion certificate' },
+  { src: '/assets/certifications/EV technology.jpg', alt: 'Electric vehicle technology program certificate' },
 ];
 
 const GALLERY_JSON_LD = {

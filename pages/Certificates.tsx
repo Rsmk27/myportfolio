@@ -5,13 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Cpu, Zap, Fan, Box, Sparkles, Wifi,
     Award, X, ChevronRight, ShieldCheck, ArrowLeft, Search,
-    CheckCircle2, ExternalLink, RefreshCw, Copy, Code
+    CheckCircle2, ExternalLink, RefreshCw, Copy, Code, FileText
 } from 'lucide-react';
 import { PCBBackground } from '../components/PCBBackground';
 import GlareHover from '../components/ui/GlareHover';
 import { PROFILE } from '../constants';
 
-interface Certification {
+export interface Certification {
     id: string;
     title: string;
     issuer: string;
@@ -27,7 +27,7 @@ interface Certification {
     verificationHash: string;
 }
 
-const CERTS: Certification[] = [
+export const CERTS: Certification[] = [
     {
         id: "CERT-001",
         title: "Embedded Systems Design",
@@ -416,6 +416,160 @@ const CERTS: Certification[] = [
     }
 ];
 
+const CertificateCard: React.FC<{
+    cert: Certification;
+    isPowered: boolean;
+    onSelect: (cert: Certification) => void;
+}> = ({ cert, isPowered, onSelect }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    // Reset loaded state when active cert changes
+    useEffect(() => {
+        setIsLoaded(false);
+    }, [cert.id]);
+
+    const previewImage = cert.image?.endsWith('.pdf')
+        ? cert.image.slice(0, -4) + '.png'
+        : cert.image;
+
+    return (
+        <div
+            className="group"
+            onClick={() => isPowered && onSelect(cert)}
+        >
+            <GlareHover
+                width="100%"
+                height="100%"
+                background={isPowered ? '#070708' : '#121212'}
+                borderRadius="0.75rem"
+                borderColor={isPowered ? (cert.isVerifiedBadge ? 'rgba(6,182,212,0.3)' : '#18181b') : '#1e1e1e'}
+                glareColor={isPowered ? '#00f2ff' : '#222222'}
+                glareOpacity={isPowered ? 0.12 : 0.05}
+                glareSize={280}
+                className={`p-6 transition-all duration-300 relative h-full flex flex-col justify-between cursor-pointer border min-h-[380px]
+                    ${isPowered && cert.isVerifiedBadge ? 'shadow-[0_0_15px_rgba(6,182,212,0.03)] border-cyan-500/25' : ''}
+                    ${!isPowered ? 'opacity-40 cursor-not-allowed pointer-events-none' : ''}`}
+            >
+                {/* Watermark Year Background */}
+                <div
+                    className="absolute right-4 bottom-2 text-8xl font-black font-mono select-none tracking-tighter pointer-events-none opacity-[0.02] transition-all duration-500 group-hover:scale-105 group-hover:opacity-[0.05]"
+                    style={{ color: isPowered ? '#ffffff' : '#444444' }}
+                >
+                    {cert.year}
+                </div>
+
+                <div className="w-full relative z-10 flex flex-col h-full justify-between gap-4">
+                    <div className="flex flex-col gap-4">
+                        {/* Preview Container with fixed aspect ratio */}
+                        <div className="w-full aspect-[4/3] rounded-lg overflow-hidden border border-zinc-900 bg-black flex items-center justify-center relative group-hover:border-cyan-500/30 transition-colors">
+                            {/* Loading Shimmer / Spinner */}
+                            {!isLoaded && previewImage && (
+                                <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-900/50 to-zinc-950 animate-pulse flex items-center justify-center z-10">
+                                    <div className="w-6 h-6 border-2 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin" />
+                                </div>
+                            )}
+
+                            {previewImage ? (
+                                /* Image Preview (handles both original images and rendered PDF thumbnails) */
+                                <img
+                                    src={previewImage}
+                                    alt={cert.title}
+                                    className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105
+                                        ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                    loading="lazy"
+                                    onLoad={() => setIsLoaded(true)}
+                                />
+                            ) : (
+                                /* Fallback */
+                                <div className="w-full h-full flex flex-col items-center justify-center bg-zinc-950 text-zinc-700">
+                                    <Award size={24} className="opacity-30" />
+                                    <span className="text-[9px] mt-1 font-mono">NO IMAGE PREVIEW</span>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Header: Icon & Verification */}
+                        <div className="flex justify-between items-center">
+                            <div
+                                className={`p-2 rounded-lg border transition-all duration-300
+                                    ${isPowered
+                                        ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.08)]'
+                                        : 'bg-zinc-900 border-zinc-800 text-zinc-600'
+                                    }`}
+                            >
+                                <cert.icon size={16} strokeWidth={1.5} />
+                            </div>
+
+                            {isPowered && cert.isVerifiedBadge ? (
+                                <div className="flex items-center gap-1 text-[9px] font-mono font-black text-cyan-400 bg-cyan-950/40 border border-cyan-500/20 px-2 py-0.5 rounded shadow-[0_0_6px_rgba(6,182,212,0.15)]">
+                                    <ShieldCheck size={11} strokeWidth={2} />
+                                    <span>VERIFIED</span>
+                                </div>
+                            ) : (
+                                <div className={`flex items-center gap-1 text-[9px] font-mono font-bold px-2 py-0.5 rounded border
+                                    ${isPowered
+                                        ? 'bg-zinc-950/30 border-zinc-900/80 text-zinc-500'
+                                        : 'bg-zinc-950 border-zinc-900 text-zinc-700'
+                                    }`}
+                                >
+                                    <Award size={10} strokeWidth={2} />
+                                    <span>SECURE</span>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Title & Info */}
+                        <div>
+                            <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 border rounded uppercase mb-2 inline-block
+                                ${isPowered
+                                    ? 'text-amber-500/80 border-amber-500/20 bg-amber-950/10'
+                                    : 'text-zinc-600 border-zinc-900 bg-zinc-950'
+                                }`}
+                            >
+                                {cert.category}
+                            </span>
+                            <h4 className={`text-base font-black tracking-tight leading-snug mb-1 line-clamp-2 ${isPowered ? 'text-white' : 'text-zinc-500'}`}>
+                                {cert.title}
+                            </h4>
+                            <p className={`text-xs font-mono uppercase tracking-wider ${isPowered ? 'text-gray-500' : 'text-zinc-600'}`}>
+                                {cert.issuer}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        {/* Gained Skills Preview */}
+                        <div className="mt-2 flex flex-wrap gap-1 relative z-10">
+                            {cert.skills.slice(0, 3).map((skill, index) => (
+                                <span key={index} className="text-[9px] px-1.5 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
+                                    {skill}
+                                </span>
+                            ))}
+                            {cert.skills.length > 3 && (
+                                <span className="text-[9px] px-1 py-0.5 text-zinc-600">
+                                    +{cert.skills.length - 3} more
+                                </span>
+                            )}
+                        </div>
+
+                        {/* Action link */}
+                        <div
+                            className={`flex items-center gap-1 text-[9px] font-mono font-black uppercase tracking-widest transition-all duration-300 mt-4 relative z-10
+                                ${isPowered
+                                    ? 'text-cyan-500/80 group-hover:text-cyan-300 group-hover:translate-x-1'
+                                    : 'text-zinc-700'
+                                }`}
+                        >
+                            <span>Inspect Module</span>
+                            <ChevronRight size={10} strokeWidth={3} />
+                        </div>
+                    </div>
+                </div>
+            </GlareHover>
+        </div>
+    );
+};
+
 const Certificates: React.FC = () => {
     const [isPowered, setIsPowered] = useState(true);
     const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
@@ -580,109 +734,12 @@ const Certificates: React.FC = () => {
                             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                         >
                             {filteredCerts.map((cert, idx) => (
-                                <div
+                                <CertificateCard
                                     key={cert.id}
-                                    className="group"
-                                    onClick={() => isPowered && setSelectedCert(cert)}
-                                >
-                                    <GlareHover
-                                        width="100%"
-                                        height="100%"
-                                        background={isPowered ? '#070708' : '#121212'}
-                                        borderRadius="0.75rem"
-                                        borderColor={isPowered ? (cert.isVerifiedBadge ? 'rgba(6,182,212,0.3)' : '#18181b') : '#1e1e1e'}
-                                        glareColor={isPowered ? '#00f2ff' : '#222222'}
-                                        glareOpacity={isPowered ? 0.12 : 0.05}
-                                        glareSize={280}
-                                        className={`p-6 transition-all duration-300 relative h-full flex flex-col justify-between cursor-pointer border min-h-[220px]
-                                            ${isPowered && cert.isVerifiedBadge ? 'shadow-[0_0_15px_rgba(6,182,212,0.03)] border-cyan-500/25' : ''}
-                                            ${!isPowered ? 'opacity-40 cursor-not-allowed pointer-events-none' : ''}`}
-                                    >
-                                        {/* Watermark Year Background */}
-                                        <div
-                                            className="absolute right-4 bottom-2 text-8xl font-black font-mono select-none tracking-tighter pointer-events-none opacity-[0.02] transition-all duration-500 group-hover:scale-105 group-hover:opacity-[0.05]"
-                                            style={{ color: isPowered ? '#ffffff' : '#444444' }}
-                                        >
-                                            {cert.year}
-                                        </div>
-
-                                        <div className="w-full relative z-10">
-                                            {/* Header: Icon & Verification */}
-                                            <div className="flex justify-between items-start mb-6">
-                                                <div
-                                                    className={`p-3 rounded-lg border transition-all duration-300
-                                                        ${isPowered
-                                                            ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.08)]'
-                                                            : 'bg-zinc-900 border-zinc-800 text-zinc-600'
-                                                        }`}
-                                                >
-                                                    <cert.icon size={20} strokeWidth={1.5} />
-                                                </div>
-
-                                                {isPowered && cert.isVerifiedBadge ? (
-                                                    <div className="flex items-center gap-1 text-[9px] font-mono font-black text-cyan-400 bg-cyan-950/40 border border-cyan-500/20 px-2 py-0.5 rounded shadow-[0_0_6px_rgba(6,182,212,0.15)]">
-                                                        <ShieldCheck size={11} strokeWidth={2} />
-                                                        <span>VERIFIED</span>
-                                                    </div>
-                                                ) : (
-                                                    <div className={`flex items-center gap-1 text-[9px] font-mono font-bold px-2 py-0.5 rounded border
-                                                        ${isPowered
-                                                            ? 'bg-zinc-950/30 border-zinc-900/80 text-zinc-500'
-                                                            : 'bg-zinc-950 border-zinc-900 text-zinc-700'
-                                                        }`}
-                                                    >
-                                                        <Award size={10} strokeWidth={2} />
-                                                        <span>SECURE</span>
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            {/* Title & Info */}
-                                            <div>
-                                                <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 border rounded uppercase mb-2 inline-block
-                                                    ${isPowered
-                                                        ? 'text-amber-500/80 border-amber-500/20 bg-amber-950/10'
-                                                        : 'text-zinc-600 border-zinc-900 bg-zinc-950'
-                                                    }`}
-                                                >
-                                                    {cert.category}
-                                                </span>
-                                                <h4 className={`text-base font-black tracking-tight leading-snug mb-1 line-clamp-2 ${isPowered ? 'text-white' : 'text-zinc-500'}`}>
-                                                    {cert.title}
-                                                </h4>
-                                                <p className={`text-xs font-mono uppercase tracking-wider ${isPowered ? 'text-gray-500' : 'text-zinc-600'}`}>
-                                                    {cert.issuer}
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        {/* Gained Skills Preview */}
-                                        <div className="mt-4 flex flex-wrap gap-1 relative z-10">
-                                            {cert.skills.slice(0, 3).map((skill, index) => (
-                                                <span key={index} className="text-[9px] px-1.5 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
-                                                    {skill}
-                                                </span>
-                                            ))}
-                                            {cert.skills.length > 3 && (
-                                                <span className="text-[9px] px-1 py-0.5 text-zinc-600">
-                                                    +{cert.skills.length - 3} more
-                                                </span>
-                                            )}
-                                        </div>
-
-                                        {/* Action link */}
-                                        <div
-                                            className={`flex items-center gap-1 text-[9px] font-mono font-black uppercase tracking-widest transition-all duration-300 mt-4 relative z-10
-                                                ${isPowered
-                                                    ? 'text-cyan-500/80 group-hover:text-cyan-300 group-hover:translate-x-1'
-                                                    : 'text-zinc-700'
-                                                }`}
-                                        >
-                                            <span>Inspect Module</span>
-                                            <ChevronRight size={10} strokeWidth={3} />
-                                        </div>
-                                    </GlareHover>
-                                </div>
+                                    cert={cert}
+                                    isPowered={isPowered}
+                                    onSelect={setSelectedCert}
+                                />
                             ))}
                         </motion.div>
                     ) : (
