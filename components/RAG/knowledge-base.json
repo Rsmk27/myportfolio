@@ -4,7 +4,7 @@
     "alias": "RSMK",
     "brand": "RSMK Technologies",
     "website": "rsmk.me",
-    "last_updated": "2025-05-12"
+    "last_updated": "2026-07-02"
   },
   "chunks": [
     {
@@ -23,7 +23,7 @@
       "id": "bio_003",
       "category": "about",
       "title": "RSMK's education and internship",
-      "content": "RSMK completed his B.Tech in Electrical and Electronics Engineering at Andhra Loyola Institute of Engineering and Technology (ALIET), Vijayawada, under JNTUK, with a CGPA of 7.5. He completed an industrial internship at Coromandel International Limited, gaining hands-on experience in industrial electrical systems. He also won 2nd Prize (Hardware Category) at A-HACKS 2026 Hackathon for building SFMD — Firefighter Safety Monitoring Device — using ESP32, GPS, gas sensors, and Firebase with a React dashboard and React Native companion app."
+      "content": "RSMK completed his B.Tech in Electrical and Electronics Engineering at Andhra Loyola Institute of Engineering and Technology (ALIET), Vijayawada, under JNTUK, with a CGPA of 7.5. He completed an industrial internship at Coromandel International Limited, gaining hands-on experience in industrial electrical systems, and a short-term Embedded Systems internship at Datavalley India in collaboration with APSCHE. He also won 2nd Prize (Hardware Category) at A-HACKS 2026 Hackathon for building SFMD — Firefighter Safety Monitoring Device — using ESP32, GPS, gas sensors, and Firebase with a React dashboard and React Native companion app."
     },
     {
       "id": "project_mani",
@@ -110,6 +110,12 @@
       "content": "An automatic streetlight system built using IC 555 timer and LDR (Light Dependent Resistor) that automatically turns street lights on at dusk and off at dawn, saving energy. A foundational electronics project by RSMK."
     },
     {
+      "id": "project_datavalley",
+      "category": "projects",
+      "title": "Embedded Systems Internship — Datavalley India",
+      "content": "RSMK completed a short-term online internship in Embedded Systems from May 4, 2026, to June 27, 2026, organized by Datavalley India Pvt. Ltd. in collaboration with APSCHE (Andhra Pradesh State Council of Higher Education). The internship focused on microcontroller programming, C/C++ development for embedded systems, hardware interfacing, and firmware development, culminating in a verified certificate (ID: DV-86d2fed3)."
+    },
+    {
       "id": "skills_tech",
       "category": "skills",
       "title": "RSMK's technical skills",
@@ -143,7 +149,7 @@
       "id": "achievements_001",
       "category": "achievements",
       "title": "RSMK's achievements and awards",
-      "content": "RSMK won 2nd Prize in the Hardware Category at A-HACKS 2026 Hackathon for building the SFMD (Firefighter Safety Monitoring Device). He has published a full technical paper and documentation on SFMD. He taught a 2-day 'Foundational ML to Advanced Gen AI' workshop covering topics from ML fundamentals through RAG, diffusion models, and AI agents. He completed an internship at Coromandel International Limited. He is a GitHub Student Pack member with GitHub Copilot Pro access."
+      "content": "RSMK won 2nd Prize in the Hardware Category at A-HACKS 2026 Hackathon for building the SFMD (Firefighter Safety Monitoring Device). He has published a full technical paper and documentation on SFMD. He taught a 2-day 'Foundational ML to Advanced Gen AI' workshop covering topics from ML fundamentals through RAG, diffusion models, and AI agents. He completed internships at Coromandel International Limited and Datavalley India. He is a GitHub Student Pack member with GitHub Copilot Pro access."
     },
     {
       "id": "philosophy_001",

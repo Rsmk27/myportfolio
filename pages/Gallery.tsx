@@ -55,6 +55,7 @@ const GALLERY_IMAGES = [
   { src: '/assets/certifications/3d-printing/workshop-5.jpg', alt: '3D printing workshop — group activity session' },
   { src: '/assets/certifications/Embedded systems certificate.png', alt: 'Embedded systems course completion certificate' },
   { src: '/assets/certifications/EV technology.jpg', alt: 'Electric vehicle technology program certificate' },
+  { src: '/assets/certifications/Datavalley  Embedded system intership.png', alt: 'Datavalley Embedded Systems short-term internship certificate' },
 ];
 
 const GALLERY_JSON_LD = {

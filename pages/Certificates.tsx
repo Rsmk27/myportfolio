@@ -413,6 +413,21 @@ export const CERTS: Certification[] = [
         skills: ["Power Distribution", "Industrial Maintenance", "Single Line Diagrams", "Switchgears", "Substation Operations"],
         description: "Hands-on industrial training on power systems, electrical machines, switchgears, single line diagrams, and electrical maintenance operations at a fertilizer manufacturing plant.",
         verificationHash: "sha256-5d6c7b8a9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f"
+    },
+    {
+        id: "CERT-027",
+        title: "Embedded Systems Internship",
+        issuer: "Datavalley India",
+        year: "2026",
+        category: "Embedded & IoT",
+        icon: Cpu,
+        image: '/assets/certifications/Datavalley  Embedded system intership.pdf',
+        gallery: ['/assets/certifications/Datavalley  Embedded system intership.pdf'],
+        isVerifiedBadge: true,
+        credentialId: "DV-86d2fed3",
+        skills: ["Embedded Systems", "C Programming", "Microcontrollers", "Firmware Development", "APSCHE"],
+        description: "Completed an online short-term internship in Embedded Systems organized by Datavalley India in collaboration with APSCHE, focusing on microcontroller programming, firmware development, and hardware interfacing.",
+        verificationHash: "sha256-3a5bdc5df77ab4a042b0e8398d5318403713e0ed523ce9af84147cf79e991e65"
     }
 ];
 
