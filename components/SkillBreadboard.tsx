@@ -253,9 +253,6 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
 
             {/* Section heading */}
             <div className="relative mb-14 text-center">
-                <p className={`text-[10px] uppercase tracking-[0.35em] mb-3 font-mono ${isPowered ? 'text-gray-500' : 'text-gray-500'}`}>
-          // domain_map.json
-                </p>
                 <h2
                     className={`text-4xl md:text-5xl font-black uppercase tracking-tight mb-4 ${isPowered ? 'text-white' : 'text-gray-900'}`}
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}

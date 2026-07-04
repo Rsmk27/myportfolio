@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Image as ImageIcon } from 'lucide-react';
-import DomeGallery from '../components/ui/DomeGallery';
+import { ArrowLeft, Image as ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Masonry from '../components/ui/Masonry';
 import { PROFILE } from '../constants';
 
 const GALLERY_IMAGES = [
@@ -90,6 +91,60 @@ const GALLERY_JSON_LD = {
 };
 
 const Gallery: React.FC = () => {
+  const heights = [450, 600, 750, 500, 650, 550, 700];
+
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+
+  const masonryItems = useMemo(() => {
+    return GALLERY_IMAGES.map((img, idx) => ({
+      id: String(idx + 1),
+      img: img.src,
+      url: img.src,
+      height: heights[idx % heights.length]
+    }));
+  }, []);
+
+  const openImage = (item: any) => {
+    const idx = GALLERY_IMAGES.findIndex(img => img.src === item.img);
+    if (idx !== -1) {
+      setSelectedImg(item.img);
+      setSelectedIdx(idx);
+    }
+  };
+
+  const closeImage = () => {
+    setSelectedImg(null);
+    setSelectedIdx(null);
+  };
+
+  const nextImage = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (selectedIdx === null) return;
+    const nextIdx = (selectedIdx + 1) % GALLERY_IMAGES.length;
+    setSelectedImg(GALLERY_IMAGES[nextIdx].src);
+    setSelectedIdx(nextIdx);
+  };
+
+  const prevImage = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (selectedIdx === null) return;
+    const prevIdx = (selectedIdx - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+    setSelectedImg(GALLERY_IMAGES[prevIdx].src);
+    setSelectedIdx(prevIdx);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIdx === null) return;
+      if (e.key === 'Escape') closeImage();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIdx]);
+
   return (
     <div className="min-h-screen relative selection:bg-cyan-500/30 font-mono text-gray-300 bg-black overflow-hidden">
       <Helmet>
@@ -112,11 +167,11 @@ const Gallery: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(GALLERY_JSON_LD)}</script>
       </Helmet>
 
-      {/* Full-screen layout: header + dome fills remaining height */}
+      {/* Full-screen layout: header + masonry flows vertically */}
       <div className="relative z-10 flex flex-col" style={{ height: '100dvh', minHeight: '100vh' }}>
 
         {/* ── Header ── */}
-        <div className="flex-shrink-0 pt-16 pb-3 px-4 sm:px-6 md:pt-20 md:pb-4 md:px-8 max-w-7xl mx-auto w-full">
+        <div className="flex-shrink-0 pt-16 pb-3 px-4 sm:px-6 md:pt-20 md:pb-6 md:px-8 max-w-7xl mx-auto w-full">
           <Link
             to="/"
             className="inline-flex items-center gap-2 mb-3 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group"
@@ -126,41 +181,94 @@ const Gallery: React.FC = () => {
           </Link>
 
           <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-1 md:mb-2 uppercase tracking-tight flex items-center gap-3">
-            <ImageIcon size={32} className="text-cyan-500 sm:w-10 sm:h-10" />
-            Gallery Dome
+            <ImageIcon size={32} className="text-cyan-500 sm:w-10 sm:h-10 animate-pulse" />
+            Gallery
           </h1>
           <p className="text-gray-400 text-sm md:text-base">
-            Drag to rotate the dome.{' '}
-            <span className="hidden sm:inline">Tap</span>
-            <span className="sm:hidden">Touch</span>
-            {' '}any tile to expand it.
+            Click any tile to expand the image in a slideshow overlay.
           </p>
         </div>
 
-        {/* ── Dome (fills remaining viewport height) ── */}
-        <div className="flex-1 relative min-h-0">
-          <DomeGallery
-            images={GALLERY_IMAGES}
-            quality="auto"
-            fit={0.48}
-            fitBasis="auto"
-            minRadius={280}
-            maxRadius={760}
-            padFactor={0.12}
-            overlayBlurColor="#05070d"
-            maxVerticalRotationDeg={6}
-            dragSensitivity={20}
-            enlargeTransitionMs={220}
-            segments={22}
-            dragDampening={0.8}
-            openedImageWidth="min(420px, 90vw)"
-            openedImageHeight="min(420px, 80vh)"
-            imageBorderRadius="18px"
-            openedImageBorderRadius="18px"
-            grayscale={false}
+        {/* ── Masonry Grid ── */}
+        <div className="flex-1 relative min-h-0 overflow-y-auto px-4 sm:px-6 md:px-8 max-w-7xl mx-auto w-full pb-16" data-lenis-prevent>
+          <Masonry
+            items={masonryItems}
+            ease="power3.out"
+            duration={0.6}
+            stagger={0.03}
+            animateFrom="bottom"
+            scaleOnHover={true}
+            hoverScale={0.97}
+            blurToFocus={true}
+            colorShiftOnHover={true}
+            onItemClick={openImage}
           />
         </div>
       </div>
+
+      {/* Lightbox / Popup Modal */}
+      <AnimatePresence>
+        {selectedImg && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={closeImage}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 sm:p-6 md:p-10"
+          >
+            {/* Close Button */}
+            <button
+              onClick={closeImage}
+              className="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer z-50 p-2 bg-zinc-900/60 border border-zinc-800/40 rounded-full"
+              aria-label="Close image popup"
+            >
+              <X size={20} />
+            </button>
+
+            {/* Prev Button */}
+            <button
+              onClick={prevImage}
+              className="absolute left-4 md:left-8 text-zinc-400 hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer z-50 p-3 bg-zinc-900/60 border border-zinc-800/40 rounded-full"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            {/* Image Container with Title / Alt Text */}
+            <motion.div
+              initial={{ scale: 0.93, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.93, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 220 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl max-h-[80vh] flex flex-col items-center select-none"
+            >
+              <img
+                src={selectedImg}
+                alt={selectedIdx !== null ? GALLERY_IMAGES[selectedIdx].alt : ''}
+                className="max-w-full max-h-[72vh] object-contain rounded-xl border border-zinc-800 shadow-2xl"
+              />
+              
+              {/* Caption */}
+              {selectedIdx !== null && (
+                <p className="mt-4 text-xs md:text-sm text-zinc-400 font-mono text-center max-w-2xl px-4">
+                  {GALLERY_IMAGES[selectedIdx].alt}
+                </p>
+              )}
+            </motion.div>
+
+            {/* Next Button */}
+            <button
+              onClick={nextImage}
+              className="absolute right-4 md:right-8 text-zinc-400 hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer z-50 p-3 bg-zinc-900/60 border border-zinc-800/40 rounded-full"
+              aria-label="Next image"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

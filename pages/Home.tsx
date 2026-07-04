@@ -94,12 +94,14 @@ const SectionHeader: React.FC<{
                 transition={{ duration: 0.55, ease: 'easeOut' }}
                 style={{ transformOrigin: flip ? 'right center' : 'left center' }}
             />
-            <span
-                className="text-[10px] font-mono tracking-[0.25em] uppercase shrink-0"
-                style={{ color: isPowered ? '#22d3ee' : '#6b7280' }}
-            >
-        // {subtitle}
-            </span>
+            {subtitle && (
+                <span
+                    className="text-[10px] font-mono tracking-[0.25em] uppercase shrink-0"
+                    style={{ color: isPowered ? '#22d3ee' : '#6b7280' }}
+                >
+            // {subtitle}
+                </span>
+            )}
         </div>
     </Reveal>
 );
@@ -454,6 +456,12 @@ const Home: React.FC = () => {
                                 </a>
                             );
                         })}
+                        <Link
+                            to="/gallery"
+                            className="relative text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-cyan-400 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-0.5"
+                        >
+                            Gallery
+                        </Link>
                         <div className="w-px h-6 bg-gray-800 mx-2" />
                         <div className="flex items-center gap-1.5 pointer-events-auto">
                             <a
@@ -517,6 +525,20 @@ const Home: React.FC = () => {
                                 initial={reduced ? false : { opacity: 0, y: 16 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: navItems.length * 0.06, duration: 0.3 }}
+                            >
+                                <Link
+                                    to="/gallery"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="text-3xl font-black uppercase tracking-tight text-white hover:text-amber-400 transition-colors duration-200 py-3 cursor-pointer focus:outline-none focus-visible:text-amber-400 block"
+                                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                                >
+                                    Gallery
+                                </Link>
+                            </motion.div>
+                            <motion.div
+                                initial={reduced ? false : { opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: (navItems.length + 1) * 0.06, duration: 0.3 }}
                                 className="mt-4 flex items-center gap-3"
                             >
                                 <a
@@ -772,7 +794,7 @@ const Home: React.FC = () => {
 
                     {/* ══ 2. ABOUT ═══════════════════════════════════════════ */}
                     <section id="about" className="py-24 max-w-6xl mx-auto">
-                        <SectionHeader title="System Overview" subtitle="Identity &amp; Mission" isPowered={isPowered} flip />
+                        <SectionHeader title="About Me" subtitle="" isPowered={isPowered} />
 
                         <Reveal>
                             <div className={`flex flex-col items-center justify-center max-w-4xl mx-auto gap-0 rounded-2xl border overflow-hidden relative text-center
@@ -785,20 +807,13 @@ const Home: React.FC = () => {
 
                                 {/* Bio Section Centered */}
                                 <div className="p-8 md:p-12 flex flex-col items-center justify-center w-full">
-                                    <span className="text-[10px] font-mono text-amber-500 tracking-widest mb-6">// SYSTEM_BIO_LOGS</span>
                                     <motion.div
                                         initial={reduced ? false : { opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.45, ease: 'easeOut' }}
-                                        className="mb-8 space-y-4 flex flex-col items-center"
+                                        className="mb-8 space-y-4 flex flex-col items-center w-full"
                                     >
-                                        <p className="min-h-6 w-fit mx-auto px-3 py-1 rounded border border-cyan-500/30 bg-black/40 text-xs md:text-sm font-mono text-cyan-300 tracking-[0.14em]">
-                                            {heroIntro}<span className="animate-pulse opacity-80">▎</span>
-                                        </p>
-                                        <p className="h-5 text-xs font-mono text-cyan-500/70">
-                                            {statusText}<span className="animate-pulse opacity-80">▎</span>
-                                        </p>
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-2xl mx-auto">
                                             <StatChip icon={<Cpu size={16} />} label="Specialty" value="Embedded / IoT" delay={0.05} />
                                             <StatChip icon={<MapPin size={16} />} label="Location" value="Srikakulam, AP" delay={0.1} />
@@ -837,22 +852,14 @@ const Home: React.FC = () => {
                                         style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: 1.75 }}
                                     >
                                         <p>
-                                            I am an <span className="text-white font-semibold">Electrical and Electronics Engineering student</span> focused on Embedded Systems, IoT, Smart Energy Technologies, and Industrial Automation — turning real-world engineering problems into reliable, scalable solutions.
+                                            I’m <span className="text-white font-semibold">Srinivasa Manikanta Rajapantula (RSMK)</span>, an Electrical and Electronics Engineering student driven by a passion for building practical technology that solves real-world problems. My core interests span <span className="text-cyan-400 font-medium">Electrical Engineering, Embedded Systems, Industrial Automation, PLC Programming, Microcontrollers, Internet of Things (IoT), Artificial Intelligence, and Full-Stack Development</span>. I enjoy combining electrical engineering principles with modern software and intelligent hardware to design systems that are reliable, efficient, and built with a clear purpose.
                                         </p>
                                         <p>
-                                            I work at the intersection of <span className="text-cyan-400 font-medium">hardware, software, and energy systems</span>. My experience spans designing sensor-driven automation systems, building IoT-based control platforms, and developing renewable-energy solutions including solar-powered dewatering systems and automated monitoring platforms.
+                                            Over the years, I have developed projects ranging from IoT monitoring systems and engineering tools to AI-powered applications and modern web platforms. My technical experience includes working with <span className="text-cyan-400 font-medium">Arduino, ESP32, MATLAB, PLCs, C/C++, Python, JavaScript, React, Firebase, GitHub, and modern development workflows</span>. I continuously expand my knowledge through hands-on experimentation, technical courses, and personal projects because I believe engineering is best learned by designing, building, testing, and improving. My goal is to contribute to technologies that advance electrical engineering, industrial automation, embedded intelligence, and AI-driven engineering solutions.
                                         </p>
                                         <p>
-                                            Through industrial training at <span className="text-white font-medium">Coromandel International Limited</span>, I built a strong foundation in power systems, electrical machines, control systems, and industrial maintenance — with the discipline for real production environments.
+                                            I also embrace <span className="text-amber-400 font-semibold animate-pulse-slow">vibe coding</span> as part of my development workflow. Rather than relying solely on traditional coding methods, I leverage modern AI tools to accelerate development, explore new ideas, automate repetitive tasks, and rapidly prototype solutions. For me, AI is not a replacement for engineering knowledge—it is a powerful collaborator that allows me to focus more on system design, problem-solving, and innovation while maintaining a strong understanding of the technologies behind every project I build.
                                         </p>
-                                        <p>
-                                            Beyond core EEE, I actively build <span className="text-cyan-400 font-medium">modern, web-based engineering tools</span> — bridging the gap between physical systems and intelligent software with scalable, usable solutions.
-                                        </p>
-                                        <div className="mt-4 p-4 rounded-xl border-l-2 border-cyan-500 bg-cyan-950/10 backdrop-blur-sm text-left inline-block">
-                                            <p className="text-white font-medium text-sm">
-                                                Open to internships, entry-level roles, and collaborative projects where engineering meets impact. Let's build something meaningful.
-                                            </p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -861,7 +868,7 @@ const Home: React.FC = () => {
 
                     {/* ══ 3. PROJECTS ════════════════════════════════════════ */}
                     <section id="projects" className="mb-24 md:mb-40 relative">
-                        <SectionHeader title="Projects" subtitle="Deployed Modules" isPowered={isPowered} />
+                        <SectionHeader title="Projects" subtitle="" isPowered={isPowered} />
                         
                         {/* Control Arrows for Projects */}
                         <div className="flex justify-end gap-2 max-w-7xl mx-auto px-4 -mt-16 mb-8 relative z-30">
@@ -923,7 +930,7 @@ const Home: React.FC = () => {
 
                     {/* ══ 6. EXPERIENCE / TIMELINE ═══════════════════════════ */}
                     <section id="experience" className="mb-24 md:mb-40">
-                        <SectionHeader title="Timeline" subtitle="System Logs" isPowered={isPowered} flip />
+                        <SectionHeader title="Timeline" subtitle="" isPowered={isPowered} flip />
                         <TimelineSystem experience={EXPERIENCE} education={EDUCATION} isPowered={isPowered} />
                     </section>
 
@@ -950,36 +957,6 @@ const Home: React.FC = () => {
                                 </span>
                             </div>
 
-                            {/* Social icons */}
-                            <div className="flex items-center gap-3" role="list" aria-label="Social links">
-                                {PROFILE.socials.map((s) => {
-                                    const icons: Record<string, React.ReactNode> = {
-                                        github: <Github size={17} />,
-                                        linkedin: <Linkedin size={17} />,
-                                        x: <Twitter size={17} />,
-                                        instagram: <Mail size={17} />,
-                                        telegram: <Terminal size={17} />,
-                                        email: <Mail size={17} />,
-                                    };
-                                    return (
-                                        <motion.a
-                                            key={s.platform}
-                                            href={s.url}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            aria-label={`Visit ${PROFILE.name}'s ${s.platform}`}
-                                            role="listitem"
-                                            className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-800 text-gray-500
-                        hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-cyan-950/20
-                        cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
-                                            whileHover={{ rotate: 360, scale: 1.2 }}
-                                            transition={{ duration: 0.4, ease: 'easeInOut' }}
-                                        >
-                                            {icons[s.platform] ?? <Globe size={17} />}
-                                        </motion.a>
-                                    );
-                                })}
-                            </div>
 
                             {/* Nav links */}
                             <nav className="flex items-center gap-5 flex-wrap justify-center" aria-label="Footer navigation">
@@ -993,6 +970,12 @@ const Home: React.FC = () => {
                                         {item}
                                     </a>
                                 ))}
+                                <Link
+                                    to="/gallery"
+                                    className="text-[10px] font-mono text-gray-600 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
+                                >
+                                    Gallery
+                                </Link>
                             </nav>
 
                             {/* Status pill */}

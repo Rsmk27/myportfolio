@@ -24,18 +24,6 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
     return (
         <div className="relative w-full max-w-6xl mx-auto px-4">
             
-            {/* Header: SYSTEM TIMELINE on the top right */}
-            <div className="flex justify-between items-start mb-16 border-b border-gray-900 pb-4">
-                <span className="text-[10px] font-mono text-cyan-600 uppercase tracking-widest self-end">
-                    // SYSTEM LOGS
-                </span>
-                <h2 
-                    className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white flex flex-col items-end"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                >
-                    <span>SYSTEM <span className="text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,0.4)]">TIMELINE</span></span>
-                </h2>
-            </div>
 
             {/* Timeline wrapper */}
             <div className="relative pl-8 md:pl-16">
