@@ -1,6 +1,6 @@
 
-import React, { useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Project } from '../types';
 import { ExternalLink, Cpu, Github } from 'lucide-react';
 
@@ -11,40 +11,6 @@ interface ProjectChipProps {
 
 export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const hoverDelayRef = useRef<number | null>(null);
-
-  const rotateX = useMotionValue(0);
-  const rotateY = useMotionValue(0);
-  const offsetX = useMotionValue(0);
-  const offsetY = useMotionValue(0);
-  const springX = useSpring(rotateX, { stiffness: 300, damping: 26 });
-  const springY = useSpring(rotateY, { stiffness: 300, damping: 26 });
-  const springOffsetX = useSpring(offsetX, { stiffness: 220, damping: 24 });
-  const springOffsetY = useSpring(offsetY, { stiffness: 220, damping: 24 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isPowered || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = (e.clientX - cx) / (rect.width / 2);
-    const dy = (e.clientY - cy) / (rect.height / 2);
-    rotateX.set(-dy * 12);
-    rotateY.set(dx * 12);
-    offsetX.set(dx * 8);
-    offsetY.set(dy * 8);
-  };
-
-  const handleMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-    offsetX.set(0);
-    offsetY.set(0);
-    if (hoverDelayRef.current) window.clearTimeout(hoverDelayRef.current);
-    setIsHovered(false);
-  };
-
   const isGithubProject = Boolean(project.link && project.link.includes('github.com'));
   const visibleTech = project.tech.slice(0, 4);
   const hiddenTechCount = Math.max(project.tech.length - visibleTech.length, 0);
@@ -94,23 +60,11 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
 
   return (
     <motion.div
-      ref={cardRef}
       className="relative group h-full project-card"
       data-cursor="pointer"
       data-keywords={project.keywords}
-      onMouseEnter={() => {
-        setIsHovered(true);
-        if (hoverDelayRef.current) window.clearTimeout(hoverDelayRef.current);
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX: springX,
-        rotateY: springY,
-        x: springOffsetX,
-        y: springOffsetY,
-        transformPerspective: 1000,
-      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

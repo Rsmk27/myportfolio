@@ -8,7 +8,7 @@ import { retrieveContext } from './RAG/RAG';
 
 const AI_API_URL = 'https://project-mani-c0t3.onrender.com/api/chat';
 const USAGE_KEY = 'rsmk_chat_usage';
-const MAX_MSGS = 20;
+const MAX_MSGS = 999999;
 const MAX_ATTEMPTS = 3;
 const RETRY_DELAY_MS = 6000;
 
@@ -315,15 +315,10 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
 
         const context = retrieveContext(trimmed, { topK: 3 });
         const systemPrompt = `You are Mani, the personal AI assistant of RSMK (Srinivasa Manikanta Rajapantula).
-Answer concisely based ONLY on this context if provided:
-${context}
+${context ? `Use this context to help answer the query:\n${context}\n` : ''}
+Please answer the query. You are not strictly restricted to the context, so use your general knowledge and the conversation history to provide a helpful, natural response.`;
 
-User Query: ${trimmed}`;
-
-        // The old backend might just use 'query' directly as the last message.
-        // We inject the system prompt as the query, or prepend it to history.
-        // Let's prepend it as a system message in history, or just use it as the query.
-        const enhancedQuery = context ? systemPrompt : trimmed;
+        const enhancedQuery = `${systemPrompt}\n\nUser Query: ${trimmed}`;
 
         for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
             try {

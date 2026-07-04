@@ -7,7 +7,6 @@ import { SkillBreadboard } from '../components/SkillBreadboard';
 import { CertificationsBlock } from '../components/CertificationsBlock';
 import { TimelineSystem } from '../components/TimelineSystem';
 import { ContactInterface } from '../components/ContactInterface';
-import { LoadingScreen } from '../components/LoadingScreen';
 import { EasterEgg } from '../components/EasterEgg';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import {
@@ -36,16 +35,16 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number; className?: 
     children, delay = 0, className = ''
 }) => {
     const ref = useRef<HTMLDivElement>(null);
-    const inView = useInView(ref, { once: true, margin: '-60px' });
+    const inView = useInView(ref, { once: true, margin: '-45px' });
     const reduced = usePrefersReducedMotion();
 
     return (
         <motion.div
             ref={ref}
             className={className}
-            initial={reduced ? false : { opacity: 0, y: 32 }}
+            initial={reduced ? false : { opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay }}
+            transition={{ duration: 0.38, ease: 'easeOut', delay }}
         >
             {children}
         </motion.div>
@@ -104,8 +103,7 @@ const StatChip: React.FC<{ icon: React.ReactNode; label: string; value: string; 
 
 /* ════════════════════════════════════════════════════════════════ */
 const Home: React.FC = () => {
-    const [isPowered, setIsPowered] = useState(() => sessionStorage.getItem('isPowered') === 'true');
-    const [showLoading, setShowLoading] = useState(() => sessionStorage.getItem('isPowered') !== 'true');
+    const [isPowered, setIsPowered] = useState(true);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('');
@@ -217,10 +215,7 @@ const Home: React.FC = () => {
     const fullText = 'INITIALIZING SYSTEM PROFILER...';
     const reduced = usePrefersReducedMotion();
 
-    useEffect(() => {
-        sessionStorage.setItem('isPowered', isPowered.toString());
-        if (isFirstMount.current) { isFirstMount.current = false; return; }
-    }, [isPowered]);
+
 
     useEffect(() => {
         if (isPowered && !reduced) {
@@ -360,11 +355,7 @@ const Home: React.FC = () => {
                 })}</script>
             </Helmet>
 
-            {showLoading && (
-                <LoadingScreen onComplete={() => { setIsPowered(true); setShowLoading(false); }} />
-            )}
-
-            <div id="main-content" className={`main-content ${!showLoading ? 'visible' : ''}`}>
+            <div id="main-content" className="main-content visible">
                 <PCBBackground isPowered={isPowered} />
 
                 {!reduced && (
@@ -583,7 +574,7 @@ const Home: React.FC = () => {
                                     <motion.div
                                         animate={{ rotate: 360 }}
                                         transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-                                        className="absolute rounded-full border-2 border-dashed border-cyan-500/20 pointer-events-none"
+                                        className="absolute rounded-full border-2 border-dashed border-cyan-500/20 pointer-events-none hidden md:block"
                                         style={{ width: 260, height: 260 }}
                                     />
                                 )}
@@ -592,7 +583,7 @@ const Home: React.FC = () => {
                                     <motion.div
                                         animate={{ rotate: -360 }}
                                         transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
-                                        className="absolute rounded-full border border-cyan-500/30 pointer-events-none"
+                                        className="absolute rounded-full border border-cyan-500/30 pointer-events-none hidden md:block"
                                         style={{ width: 226, height: 226 }}
                                     >
                                         {[0, 90, 180, 270].map((deg) => (
@@ -617,7 +608,7 @@ const Home: React.FC = () => {
                                     <motion.div
                                         animate={{ rotate: 360 }}
                                         transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
-                                        className="absolute pointer-events-none"
+                                        className="absolute pointer-events-none hidden md:block"
                                         style={{ width: 240, height: 240 }}
                                     >
                                         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -633,7 +624,7 @@ const Home: React.FC = () => {
                                             initial={{ rotate: 0 }}
                                             animate={{ rotate: 360 }}
                                             transition={{ duration: 22, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none"
+                                            className="absolute pointer-events-none hidden md:block"
                                             style={{ width: 290, height: 290 }}
                                         >
                                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
@@ -644,7 +635,7 @@ const Home: React.FC = () => {
                                             initial={{ rotate: 72 }}
                                             animate={{ rotate: 432 }}
                                             transition={{ duration: 17, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none"
+                                            className="absolute pointer-events-none hidden md:block"
                                             style={{ width: 310, height: 310 }}
                                         >
                                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
@@ -655,7 +646,7 @@ const Home: React.FC = () => {
                                             initial={{ rotate: 144 }}
                                             animate={{ rotate: 504 }}
                                             transition={{ duration: 25, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none"
+                                            className="absolute pointer-events-none hidden md:block"
                                             style={{ width: 330, height: 330 }}
                                         >
                                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-65">
@@ -666,7 +657,7 @@ const Home: React.FC = () => {
                                             initial={{ rotate: 216 }}
                                             animate={{ rotate: 576 }}
                                             transition={{ duration: 14, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none"
+                                            className="absolute pointer-events-none hidden md:block"
                                             style={{ width: 280, height: 280 }}
                                         >
                                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
@@ -677,7 +668,7 @@ const Home: React.FC = () => {
                                             initial={{ rotate: 288 }}
                                             animate={{ rotate: 648 }}
                                             transition={{ duration: 19, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none"
+                                            className="absolute pointer-events-none hidden md:block"
                                             style={{ width: 350, height: 350 }}
                                         >
                                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
@@ -709,71 +700,18 @@ const Home: React.FC = () => {
                                     transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                                 >
                                     <h1
-                                        className="w-fit text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] flex flex-col items-center justify-center mx-auto cursor-none"
+                                        className="w-fit text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] flex flex-col items-center justify-center mx-auto"
                                         style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                                         data-cursor-label="HELLO!"
                                     >
-                                        <div className="flex flex-wrap justify-center pb-2 text-white">
-                                            {"SRINIVASA".split('').map((char, i) => (
-                                                <motion.span
-                                                    key={`s-${i}`}
-                                                    className="inline-block"
-                                                    whileHover={{
-                                                        y: -16,
-                                                        scale: 1.4,
-                                                        rotate: i % 2 === 0 ? 8 : -8,
-                                                        color: '#00f2ff', // Cyan flare
-                                                        textShadow: '0px 10px 20px rgba(0, 242, 255, 0.6)'
-                                                    }}
-                                                    transition={{ type: 'spring', stiffness: 450, damping: 10 }}
-                                                    style={{ display: 'inline-block', transformOrigin: 'bottom center' }}
-                                                >
-                                                    {char}
-                                                </motion.span>
-                                            ))}
+                                        <div className="pb-2 text-white select-none">
+                                            SRINIVASA
                                         </div>
-                                        <div
-                                            className="flex flex-wrap justify-center pt-1 text-cyan-400"
-                                            style={{ textShadow: '0 0 40px rgba(0,242,255,0.2)' }}
-                                        >
-                                            {"MANIKANTA".split('').map((char, i) => (
-                                                <motion.span
-                                                    key={`m-${i}`}
-                                                    className="inline-block"
-                                                    whileHover={{
-                                                        y: 16,
-                                                        scale: 1.4,
-                                                        rotate: i % 2 === 0 ? -8 : 8,
-                                                        color: '#ffae00', // Amber flare
-                                                        textShadow: '0px -10px 20px rgba(255, 174, 0, 0.6)'
-                                                    }}
-                                                    transition={{ type: 'spring', stiffness: 450, damping: 10 }}
-                                                    style={{ display: 'inline-block', transformOrigin: 'top center' }}
-                                                >
-                                                    {char}
-                                                </motion.span>
-                                            ))}
+                                        <div className="pt-1 text-cyan-400 select-none" style={{ textShadow: '0 0 40px rgba(0,242,255,0.2)' }}>
+                                            MANIKANTA
                                         </div>
-                                        <div
-                                            className="flex flex-wrap justify-center pt-2 text-white/90 text-4xl md:text-6xl lg:text-7xl opacity-80"
-                                            style={{ textShadow: '0 0 40px rgba(255,255,255,0.1)' }}
-                                        >
-                                            {"RAJAPANTULA".split('').map((char, i) => (
-                                                <motion.span
-                                                    key={`r-${i}`}
-                                                    className="inline-block"
-                                                    whileHover={{
-                                                        y: -8,
-                                                        scale: 1.2,
-                                                        color: '#00f2ff',
-                                                        textShadow: '0px 10px 20px rgba(0, 242, 255, 0.4)'
-                                                    }}
-                                                    transition={{ type: 'spring', stiffness: 450, damping: 10 }}
-                                                    style={{ display: 'inline-block', transformOrigin: 'bottom center' }}
-                                                >
-                                                    {char}
-                                                </motion.span>
-                                            ))}
+                                        <div className="pt-2 text-white/90 text-4xl md:text-6xl lg:text-7xl opacity-80 select-none" style={{ textShadow: '0 0 40px rgba(255,255,255,0.1)' }}>
+                                            RAJAPANTULA
                                         </div>
                                     </h1>
                                 </motion.div>

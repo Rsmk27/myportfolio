@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import Certificates from './pages/Certificates';
 import NotFound from './pages/NotFound';
-import { CustomCursor } from './components/CustomCursor';
+
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -44,7 +44,6 @@ const App: React.FC = () => {
     return (
         <HelmetProvider>
             <ReactLenis root options={{ lerp: 0.05, wheelMultiplier: 0.8 }}>
-                <CustomCursor />
                 <Router>
                     <ScrollToTop />
                     <AnimatedRoutes />

@@ -41,7 +41,6 @@ body {
     color: var(--text-main);
     font-family: var(--font-body);
     overflow-x: hidden;
-    cursor: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -229,16 +228,7 @@ pre,
     animation: tag-shine 3s infinite linear;
 }
 
-/* ════════════════════════════════════════════
-   CUSTOM CURSOR
-   ════════════════════════════════════════════ */
 
-/* Hide native cursor everywhere */
-*,
-*::before,
-*::after {
-    cursor: none !important;
-}
 
 /* The rotating dashed arc that appears around project/zoom cursor */
 @keyframes cursor-spin {

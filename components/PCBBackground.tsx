@@ -1,6 +1,5 @@
-
-import React, { useEffect } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { PCB_COLORS } from '../constants';
 
 interface PCBBackgroundProps {
@@ -8,35 +7,14 @@ interface PCBBackgroundProps {
 }
 
 export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 50, damping: 20, mass: 0.2 });
-  const springY = useSpring(mouseY, { stiffness: 50, damping: 20, mass: 0.2 });
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const nx = (e.clientX / window.innerWidth - 0.5) * 20;
-      const ny = (e.clientY / window.innerHeight - 0.5) * 20;
-      mouseX.set(nx);
-      mouseY.set(ny);
-    };
-    window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
-  }, [mouseX, mouseY]);
-
   return (
-    <motion.div
-      className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#050505]"
-      style={{ x: springX, y: springY }}
-    >
+    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#050505]">
       {isPowered && (
-        <motion.div
+        <div
           className="absolute inset-0"
           style={{
             background:
               'radial-gradient(400px circle at 50% 50%, rgba(0,242,255,0.08), rgba(0,0,0,0))',
-            x: springX,
-            y: springY,
           }}
         />
       )}
@@ -51,16 +29,6 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
 
       {/* SVG Traces */}
       <svg viewBox="0 0 1400 1200" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
         <TracePath
           d="M 100,0 L 100,200 L 400,200 L 400,600 L 0,600"
           color={PCB_COLORS.cyan}
@@ -99,7 +67,7 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
           delay={2.5}
         />
       </svg>
-    </motion.div>
+    </div>
   );
 };
 
@@ -120,7 +88,6 @@ const TracePath: React.FC<{ d: string, color: string, isPowered: boolean, delay:
         stroke={color}
         strokeWidth="2"
         strokeDasharray="100, 1000"
-        filter="url(#glow)"
         initial={{ strokeDashoffset: 1100 }}
         animate={{ strokeDashoffset: -1100 }}
         transition={{

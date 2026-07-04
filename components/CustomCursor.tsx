@@ -95,6 +95,9 @@ export const CustomCursor: React.FC = () => {
     stateRef.current = state;
 
     useEffect(() => {
+        const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+        if (isTouchDevice) return;
+
         const onMove = (e: MouseEvent) => {
             mouseX.set(e.clientX);
             mouseY.set(e.clientY);
@@ -181,7 +184,8 @@ export const CustomCursor: React.FC = () => {
         };
     }, [mouseX, mouseY, visible]);
 
-    if (!visible) return null;
+    const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+    if (isTouchDevice || !visible) return null;
 
     const p = RING_PROFILE[state];
     const rs = clicking ? p.size * 0.82 : p.size;
