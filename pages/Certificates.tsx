@@ -619,6 +619,49 @@ const Certificates: React.FC = () => {
                 <title>Verified Credentials &amp; Certifications | {PROFILE.name}</title>
                 <meta name="description" content="Browse verified engineering credentials, specialized certifications and training records of Srinivasa Manikanta in Embedded Systems, IoT, EV, and AI." />
                 <link rel="canonical" href="https://rsmk.me/certificates" />
+
+                {/* Open Graph */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://rsmk.me/certificates" />
+                <meta property="og:title" content={`Verified Credentials & Certifications | ${PROFILE.name}`} />
+                <meta property="og:description" content="Browse verified engineering credentials, specialized certifications and training records of Srinivasa Manikanta in Embedded Systems, IoT, EV, and AI." />
+                <meta property="og:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
+                <meta property="og:locale" content="en_IN" />
+
+                {/* Twitter / X */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={`Verified Credentials & Certifications | ${PROFILE.name}`} />
+                <meta name="twitter:description" content="Browse verified engineering credentials, specialized certifications and training records of Srinivasa Manikanta in Embedded Systems, IoT, EV, and AI." />
+                <meta name="twitter:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
+
+                {/* JSON-LD Structured Data */}
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "ItemList",
+                    "name": `Verified Credentials & Certifications | ${PROFILE.name}`,
+                    "description": "Educational credentials, industry certifications, and technical training records of Srinivasa Manikanta Rajapantula.",
+                    "url": "https://rsmk.me/certificates",
+                    "numberOfItems": CERTS.length,
+                    "itemListElement": CERTS.map((cert, index) => ({
+                        "@type": "ListItem",
+                        "position": index + 1,
+                        "item": {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": cert.title,
+                            "credentialCategory": "Certification",
+                            "recognizedBy": {
+                                "@type": "Organization",
+                                "name": cert.issuer
+                            },
+                            "educationalLevel": "Professional",
+                            "about": cert.skills.map(s => ({
+                                "@type": "Thing",
+                                "name": s
+                            })),
+                            "image": cert.image ? `https://rsmk.me${cert.image}` : undefined
+                        }
+                    }))
+                })}</script>
             </Helmet>
 
             <PCBBackground isPowered={isPowered} />

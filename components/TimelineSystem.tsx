@@ -64,16 +64,8 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                                     {isPowered ? (
                                         <>
                                             {/* Concentric spinning rings */}
-                                            <motion.div 
-                                                animate={{ rotate: 360 }}
-                                                transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-                                                className="absolute w-7 h-7 rounded-full border border-cyan-500/20"
-                                            />
-                                            <motion.div 
-                                                animate={{ rotate: -360 }}
-                                                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                                                className="absolute w-5 h-5 rounded-full border border-dashed border-cyan-500/40"
-                                            />
+                                            <div className="absolute w-7 h-7 rounded-full border border-cyan-500/20 animate-[spin_6s_linear_infinite]" />
+                                            <div className="absolute w-5 h-5 rounded-full border border-dashed border-cyan-500/40 animate-spin-reverse" />
                                             {/* Glowing core */}
                                             <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f2ff] relative">
                                                 <div className="absolute inset-0 rounded-full animate-ping bg-cyan-400/60" />

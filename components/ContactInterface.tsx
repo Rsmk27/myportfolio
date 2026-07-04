@@ -398,11 +398,14 @@ Please answer the query. You are not strictly restricted to the context, so use 
                             <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Signal</span>
                             <div className="flex gap-0.5 items-end h-4">
                                 {[...Array(8)].map((_, i) => (
-                                    <motion.div
+                                    <div
                                         key={i}
-                                        className={`w-1 rounded-sm ${isPowered ? 'bg-cyan-500' : 'bg-gray-800'}`}
-                                        animate={isPowered ? { height: [4, barHeights[i], 4], opacity: [0.5, 1, 0.5] } : { height: 4 }}
-                                        transition={{ duration: 0.5 + barHeights[i] / 24, repeat: Infinity }}
+                                        className={`w-1 rounded-sm ${isPowered ? 'bg-cyan-500 animate-signal-pulse' : 'bg-gray-800'}`}
+                                        style={isPowered ? {
+                                            '--signal-height': `${barHeights[i]}px`,
+                                            animationDelay: `${i * 0.1}s`,
+                                            animationDuration: `${0.6 + barHeights[i] / 24}s`
+                                        } as React.CSSProperties : { height: '4px' }}
                                     />
                                 ))}
                             </div>
@@ -524,13 +527,9 @@ Please answer the query. You are not strictly restricted to the context, so use 
                                 <span className="opacity-30 text-[10px]">{timeLabel()}</span>
                                 <span className="text-cyan-500 text-[10px]">[AI]</span>
                             </div>
-                            <motion.div
-                                animate={{ opacity: [0.4, 1, 0.4] }}
-                                transition={{ duration: 1.2, repeat: Infinity }}
-                                className="ml-1 text-cyan-500 text-xs font-mono"
-                            >
+                            <div className="ml-1 text-cyan-500 text-xs font-mono animate-pulse">
                                 thinking...
-                            </motion.div>
+                            </div>
                         </div>
                     )}
 
@@ -609,11 +608,8 @@ const ContactCard: React.FC<{
         {isPowered && (
             <>
                 <div className="absolute inset-0 bg-transparent group-hover:bg-cyan-950/10 transition-colors duration-300" />
-                <motion.div
-                    className="absolute bottom-0 left-0 h-[2px] bg-cyan-500"
-                    initial={{ width: '0%' }}
-                    whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.3 }}
+                <div
+                    className="absolute bottom-0 left-0 h-[2px] bg-cyan-500 w-0 group-hover:w-full transition-all duration-300"
                 />
             </>
         )}

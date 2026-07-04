@@ -30,6 +30,19 @@ function usePrefersReducedMotion() {
     return reduced;
 }
 
+/* ─── Mobile detection hook ─────────────────────────────────────── */
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 768px)');
+        setIsMobile(mq.matches);
+        const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+        mq.addEventListener('change', handler);
+        return () => mq.removeEventListener('change', handler);
+    }, []);
+    return isMobile;
+}
+
 /* ─── Scroll-reveal wrapper ─────────────────────────────────────── */
 const Reveal: React.FC<{ children: React.ReactNode; delay?: number; className?: string }> = ({
     children, delay = 0, className = ''
@@ -37,6 +50,11 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number; className?: 
     const ref = useRef<HTMLDivElement>(null);
     const inView = useInView(ref, { once: true, margin: '-45px' });
     const reduced = usePrefersReducedMotion();
+    const isMobile = useIsMobile();
+
+    if (isMobile) {
+        return <div className={className}>{children}</div>;
+    }
 
     return (
         <motion.div
@@ -103,6 +121,7 @@ const StatChip: React.FC<{ icon: React.ReactNode; label: string; value: string; 
 
 /* ════════════════════════════════════════════════════════════════ */
 const Home: React.FC = () => {
+    const isMobile = useIsMobile();
     const [isPowered, setIsPowered] = useState(true);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -125,6 +144,7 @@ const Home: React.FC = () => {
 
     // Auto-scroll loop using requestAnimationFrame for Projects
     useEffect(() => {
+        if (isMobile) return; // Disable auto-scroll on mobile
         const container = projectsScrollRef.current;
         if (!container || !isPowered) return;
 
@@ -149,7 +169,7 @@ const Home: React.FC = () => {
 
         animationFrameId = requestAnimationFrame(step);
         return () => cancelAnimationFrame(animationFrameId);
-    }, [isHoveredProjects, isDraggingProjects, isPowered]);
+    }, [isHoveredProjects, isDraggingProjects, isPowered, isMobile]);
 
     // Manual navigation buttons scroll for Projects
     const scrollProjects = (direction: 'left' | 'right') => {
@@ -358,7 +378,7 @@ const Home: React.FC = () => {
             <div id="main-content" className="main-content visible">
                 <PCBBackground isPowered={isPowered} />
 
-                {!reduced && (
+                {!reduced && !isMobile && (
                     <div className="fixed right-4 bottom-10 z-40 hidden md:flex items-center gap-2 pointer-events-none">
                         <span className="text-[9px] font-mono tracking-[0.2em] text-cyan-600/70 uppercase [writing-mode:vertical-rl]">
                             scroll
@@ -525,7 +545,7 @@ const Home: React.FC = () => {
                 <main className="container mx-auto px-4 md:px-6 pt-0 overflow-x-hidden max-w-7xl">
 
                     <AnimatePresence>
-                        {!reduced && scrolled && (
+                        {!reduced && scrolled && !isMobile && (
                             <motion.button
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -570,21 +590,17 @@ const Home: React.FC = () => {
                                 style={{ width: 200, height: 200 }}
                             >
                                 {/* Outer dashed ring */}
-                                {!reduced && (
-                                    <motion.div
-                                        animate={{ rotate: 360 }}
-                                        transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-                                        className="absolute rounded-full border-2 border-dashed border-cyan-500/20 pointer-events-none hidden md:block"
+                                {!reduced && !isMobile && (
+                                    <div
+                                        className="absolute rounded-full border-2 border-dashed border-cyan-500/20 pointer-events-none hidden md:block animate-[spin_28s_linear_infinite]"
                                         style={{ width: 260, height: 260 }}
                                     />
                                 )}
                                 {/* Inner ring with ticks */}
-                                {!reduced && (
-                                    <motion.div
-                                        animate={{ rotate: -360 }}
-                                        transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
-                                        className="absolute rounded-full border border-cyan-500/30 pointer-events-none hidden md:block"
-                                        style={{ width: 226, height: 226 }}
+                                {!reduced && !isMobile && (
+                                    <div
+                                        className="absolute rounded-full border border-cyan-500/30 pointer-events-none hidden md:block animate-spin-reverse"
+                                        style={{ width: 226, height: 226, animationDuration: '14s' }}
                                     >
                                         {[0, 90, 180, 270].map((deg) => (
                                             <div
@@ -601,80 +617,78 @@ const Home: React.FC = () => {
                                                 }}
                                             />
                                         ))}
-                                    </motion.div>
+                                    </div>
                                 )}
                                 {/* Orbiting zap */}
-                                {!reduced && (
-                                    <motion.div
-                                        animate={{ rotate: 360 }}
-                                        transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
-                                        className="absolute pointer-events-none hidden md:block"
+                                {!reduced && !isMobile && (
+                                    <div
+                                        className="absolute pointer-events-none hidden md:block animate-[spin_9s_linear_infinite]"
                                         style={{ width: 240, height: 240 }}
                                     >
                                         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
                                             <Zap size={18} className="text-cyan-400 fill-cyan-400/30 drop-shadow-[0_0_6px_rgba(0,242,255,0.8)]" />
                                         </div>
-                                    </motion.div>
+                                    </div>
                                 )}
 
                                 {/* Floating tech orbit icons */}
-                                {!reduced && isPowered && (
+                                {!reduced && !isMobile && isPowered && (
                                     <>
-                                        <motion.div
-                                            initial={{ rotate: 0 }}
-                                            animate={{ rotate: 360 }}
-                                            transition={{ duration: 22, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none hidden md:block"
+                                        {/* CPU (0deg) */}
+                                        <div
+                                            className="absolute pointer-events-none hidden md:block animate-[spin_22s_linear_infinite]"
                                             style={{ width: 290, height: 290 }}
                                         >
-                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
-                                                <Cpu size={14} className="text-cyan-300" />
+                                            <div className="w-full h-full relative">
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
+                                                    <Cpu size={14} className="text-cyan-300" />
+                                                </div>
                                             </div>
-                                        </motion.div>
-                                        <motion.div
-                                            initial={{ rotate: 72 }}
-                                            animate={{ rotate: 432 }}
-                                            transition={{ duration: 17, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none hidden md:block"
+                                        </div>
+                                        {/* Radio (72deg) */}
+                                        <div
+                                            className="absolute pointer-events-none hidden md:block animate-[spin_17s_linear_infinite]"
                                             style={{ width: 310, height: 310 }}
                                         >
-                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
-                                                <Radio size={13} className="text-purple-400" />
+                                            <div className="w-full h-full relative" style={{ transform: 'rotate(72deg)' }}>
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
+                                                    <Radio size={13} className="text-purple-400" />
+                                                </div>
                                             </div>
-                                        </motion.div>
-                                        <motion.div
-                                            initial={{ rotate: 144 }}
-                                            animate={{ rotate: 504 }}
-                                            transition={{ duration: 25, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none hidden md:block"
+                                        </div>
+                                        {/* BatteryMedium (144deg) */}
+                                        <div
+                                            className="absolute pointer-events-none hidden md:block animate-[spin_25s_linear_infinite]"
                                             style={{ width: 330, height: 330 }}
                                         >
-                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-65">
-                                                <BatteryMedium size={13} className="text-emerald-400" />
+                                            <div className="w-full h-full relative" style={{ transform: 'rotate(144deg)' }}>
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-65">
+                                                    <BatteryMedium size={13} className="text-emerald-400" />
+                                                </div>
                                             </div>
-                                        </motion.div>
-                                        <motion.div
-                                            initial={{ rotate: 216 }}
-                                            animate={{ rotate: 576 }}
-                                            transition={{ duration: 14, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none hidden md:block"
+                                        </div>
+                                        {/* Code (216deg) */}
+                                        <div
+                                            className="absolute pointer-events-none hidden md:block animate-[spin_14s_linear_infinite]"
                                             style={{ width: 280, height: 280 }}
                                         >
-                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
-                                                <Code size={13} className="text-amber-400" />
+                                            <div className="w-full h-full relative" style={{ transform: 'rotate(216deg)' }}>
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
+                                                    <Code size={13} className="text-amber-400" />
+                                                </div>
                                             </div>
-                                        </motion.div>
-                                        <motion.div
-                                            initial={{ rotate: 288 }}
-                                            animate={{ rotate: 648 }}
-                                            transition={{ duration: 19, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
-                                            className="absolute pointer-events-none hidden md:block"
+                                        </div>
+                                        {/* Activity (288deg) */}
+                                        <div
+                                            className="absolute pointer-events-none hidden md:block animate-[spin_19s_linear_infinite]"
                                             style={{ width: 350, height: 350 }}
                                         >
-                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
-                                                <Activity size={14} className="text-cyan-500" />
+                                            <div className="w-full h-full relative" style={{ transform: 'rotate(288deg)' }}>
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
+                                                    <Activity size={14} className="text-cyan-500" />
+                                                </div>
                                             </div>
-                                        </motion.div>
+                                        </div>
                                     </>
                                 )}
                                 {/* Profile image */}

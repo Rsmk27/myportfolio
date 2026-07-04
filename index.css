@@ -1039,3 +1039,28 @@ pre,
         opacity: 0;
     }
 }
+
+/* ── Custom CSS Animations for Performance Optimization ── */
+@keyframes spin-reverse {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes signal-bar-pulse {
+    0%, 100% {
+        height: 4px;
+        opacity: 0.5;
+    }
+    50% {
+        height: var(--signal-height, 12px);
+        opacity: 1;
+    }
+}
+
+.animate-signal-pulse {
+    animation: signal-bar-pulse 1s ease-in-out infinite;
+}

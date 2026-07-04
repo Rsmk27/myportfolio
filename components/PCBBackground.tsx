@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { PCB_COLORS } from '../constants';
 
@@ -7,6 +7,16 @@ interface PCBBackgroundProps {
 }
 
 export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
+
   return (
     <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#050505]">
       {isPowered && (
@@ -34,24 +44,28 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
           color={PCB_COLORS.cyan}
           isPowered={isPowered}
           delay={0}
+          isMobile={isMobile}
         />
         <TracePath
           d="M 1200,800 L 800,800 L 800,1200 L 400,1200"
           color={PCB_COLORS.cyan}
           isPowered={isPowered}
           delay={1}
+          isMobile={isMobile}
         />
         <TracePath
           d="M 200,800 L 200,1000 L 600,1000"
           color={PCB_COLORS.cyan}
           isPowered={isPowered}
           delay={2}
+          isMobile={isMobile}
         />
         <TracePath
           d="M 1000,100 L 1000,400 L 1400,400"
           color={PCB_COLORS.cyan}
           isPowered={isPowered}
           delay={0.5}
+          isMobile={isMobile}
         />
         {/* Mobile Friendly Traces */}
         <TracePath
@@ -59,19 +73,21 @@ export const PCBBackground: React.FC<PCBBackgroundProps> = ({ isPowered }) => {
           color={PCB_COLORS.cyan}
           isPowered={isPowered}
           delay={1.5}
+          isMobile={isMobile}
         />
         <TracePath
           d="M 300,300 L 300,500 L 100,500"
           color={PCB_COLORS.cyan}
           isPowered={isPowered}
           delay={2.5}
+          isMobile={isMobile}
         />
       </svg>
     </div>
   );
 };
 
-const TracePath: React.FC<{ d: string, color: string, isPowered: boolean, delay: number }> = ({ d, color, isPowered, delay }) => (
+const TracePath: React.FC<{ d: string, color: string, isPowered: boolean, delay: number, isMobile: boolean }> = ({ d, color, isPowered, delay, isMobile }) => (
   <>
     {/* Permanent dim trace */}
     <path
@@ -81,7 +97,7 @@ const TracePath: React.FC<{ d: string, color: string, isPowered: boolean, delay:
       strokeWidth="2"
     />
     {/* Pulse effect */}
-    {isPowered && (
+    {isPowered && !isMobile && (
       <motion.path
         d={d}
         fill="none"
