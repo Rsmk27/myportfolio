@@ -144,7 +144,6 @@ const Home: React.FC = () => {
 
     // Auto-scroll loop using requestAnimationFrame for Projects
     useEffect(() => {
-        if (isMobile) return; // Disable auto-scroll on mobile
         const container = projectsScrollRef.current;
         if (!container || !isPowered) return;
 
@@ -169,7 +168,7 @@ const Home: React.FC = () => {
 
         animationFrameId = requestAnimationFrame(step);
         return () => cancelAnimationFrame(animationFrameId);
-    }, [isHoveredProjects, isDraggingProjects, isPowered, isMobile]);
+    }, [isHoveredProjects, isDraggingProjects, isPowered]);
 
     // Manual navigation buttons scroll for Projects
     const scrollProjects = (direction: 'left' | 'right') => {
@@ -698,7 +697,7 @@ const Home: React.FC = () => {
                                         alt={`Srinivasa Manikanta Rajapantula (RSMK) — Embedded Systems & IoT Engineer Portfolio Image`}
                                         className="w-full h-full object-cover"
                                         loading="eager"
-                                        fetchPriority="high"
+                                        fetchpriority="high"
                                         decoding="sync"
                                         width="192"
                                         height="192"

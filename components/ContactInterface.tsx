@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion';
 import { Profile, Social } from '../types';
 import { Mail, Github, Linkedin, Twitter, Send, Terminal, Wifi, Activity, Instagram, RefreshCw } from 'lucide-react';
-import { retrieveContext } from './RAG/RAG';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -313,19 +312,12 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
 
         let lastError: Error | null = null;
 
-        const context = retrieveContext(trimmed, { topK: 3 });
-        const systemPrompt = `You are Mani, the personal AI assistant of RSMK (Srinivasa Manikanta Rajapantula).
-${context ? `Use this context to help answer the query:\n${context}\n` : ''}
-Please answer the query. You are not strictly restricted to the context, so use your general knowledge and the conversation history to provide a helpful, natural response.`;
-
-        const enhancedQuery = `${systemPrompt}\n\nUser Query: ${trimmed}`;
-
         for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
             try {
                 const res = await fetch(AI_API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ query: enhancedQuery, history: messageHistory }),
+                    body: JSON.stringify({ query: trimmed, history: messageHistory }),
                 });
 
                 const data = await res.json();

@@ -18,9 +18,6 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
 
     // Auto-scroll loop using requestAnimationFrame
     useEffect(() => {
-        const isMobileDevice = window.matchMedia('(max-width: 768px)').matches;
-        if (isMobileDevice) return; // Disable auto-scroll on mobile
-
         const container = scrollRef.current;
         if (!container || !isPowered) return;
 
