@@ -428,6 +428,104 @@ export const CERTS: Certification[] = [
         skills: ["Embedded Systems", "C Programming", "Microcontrollers", "Firmware Development", "APSCHE"],
         description: "Completed an online short-term internship in Embedded Systems organized by Datavalley India in collaboration with APSCHE, focusing on microcontroller programming, firmware development, and hardware interfacing.",
         verificationHash: "sha256-3a5bdc5df77ab4a042b0e8398d5318403713e0ed523ce9af84147cf79e991e65"
+    },
+    {
+        id: "CERT-028",
+        title: "Basics of Robotics",
+        issuer: "Siemens",
+        year: "2026",
+        category: "Robotics & Hardware",
+        icon: Cpu,
+        image: '/assets/certifications/Basics of Robotics.pdf',
+        gallery: ['/assets/certifications/Basics of Robotics.pdf'],
+        credentialId: "45YNRZT5FH95",
+        skills: ["Robotics Fundamentals", "Kinematics", "Robot Programming", "Industrial Automation", "Siemens Software"],
+        description: "Foundational course authorized by Siemens covering robotic structures, coordinate systems, kinematic designs, and robotic automation systems.",
+        verificationHash: "sha256-75f23eb2544f7bc2dd65a52024f74be0de9fa2cdc070fe98122033b2630148ed"
+    },
+    {
+        id: "CERT-029",
+        title: "AI for Autonomous Vehicles and Robotics",
+        issuer: "University of Michigan",
+        year: "2026",
+        category: "Robotics & Hardware",
+        icon: Cpu,
+        image: '/assets/certifications/AI for Autonomous Vehicles and Robotics.pdf',
+        gallery: ['/assets/certifications/AI for Autonomous Vehicles and Robotics.pdf'],
+        credentialId: "NCG7UCSW2CEO",
+        skills: ["Autonomous Vehicles", "Computer Vision", "Sensor Fusion", "Robotics AI", "Path Planning"],
+        description: "Specialized course authorized by the University of Michigan covering AI algorithms, perception, localization, and decision-making for self-driving vehicles and robotic agents.",
+        verificationHash: "sha256-80c465457b39e4fee35ffbc01a7239ae51170dd76e4ac88e961b73ef7c05db3e"
+    },
+    {
+        id: "CERT-030",
+        title: "Powering the Future with Electrification",
+        issuer: "MathWorks",
+        year: "2026",
+        category: "Power & Electrical",
+        icon: Zap,
+        image: '/assets/certifications/Powering the Future with Electrification.pdf',
+        gallery: ['/assets/certifications/Powering the Future with Electrification.pdf'],
+        credentialId: "SP7WDPFIC9EB",
+        skills: ["Electrification", "Electric Vehicles", "Power Electronics", "Battery Systems", "MATLAB", "Simulink"],
+        description: "Authorized by MathWorks, exploring electrification technologies, battery systems, power conversion, motor drives, and electrification grid modeling.",
+        verificationHash: "sha256-c6df6e39a4953b8071833f9302c124d56bf3da3af43c3d9d1e467907c5eee473"
+    },
+    {
+        id: "CERT-031",
+        title: "Interfacing with the Arduino",
+        issuer: "University of California, Irvine",
+        year: "2026",
+        category: "Embedded & IoT",
+        icon: Cpu,
+        image: '/assets/certifications/Interfacing with the Arduino.pdf',
+        gallery: ['/assets/certifications/Interfacing with the Arduino.pdf'],
+        credentialId: "BKTUOFUAW359",
+        skills: ["Arduino", "Sensors Interfacing", "Actuators", "Hardware Prototyping", "C/C++ Programming"],
+        description: "Authorized by University of California, Irvine, focusing on connecting sensors and actuators, signal conditioning, shield design, and software integration.",
+        verificationHash: "sha256-19808c8f2702b431aed74b20b881c6264b826d1fc63c18cb85d1f6a302cbfd19"
+    },
+    {
+        id: "CERT-032",
+        title: "Modeling and Simulation with Simulink",
+        issuer: "MathWorks",
+        year: "2026",
+        category: "Power & Electrical",
+        icon: Cpu,
+        image: '/assets/certifications/Modeling and Simulation with Simulink.pdf',
+        gallery: ['/assets/certifications/Modeling and Simulation with Simulink.pdf'],
+        credentialId: "2UBTY4UL2XJ3",
+        skills: ["Simulink", "System Modeling", "Dynamic Simulation", "Control Systems", "MATLAB"],
+        description: "Authorized by MathWorks, covering dynamic system design, block-diagram modeling, system simulation, and feedback control verification.",
+        verificationHash: "sha256-1c1bb22bd9a5e105d03674ac6d858ced499dffd6fca4060c379517e8c67ec041"
+    },
+    {
+        id: "CERT-033",
+        title: "Learn PLC and HMI from Scratch (Basic)",
+        issuer: "Coursera",
+        year: "2026",
+        category: "Embedded & IoT",
+        icon: Cpu,
+        image: '/assets/certifications/PLC, HMI.pdf',
+        gallery: ['/assets/certifications/PLC, HMI.pdf'],
+        credentialId: "LWCPAV54265H",
+        skills: ["Siemens PLC", "TIA Portal", "HMI Design", "SCADA", "Ladder Logic", "Industrial Automation"],
+        description: "Comprehensive 3-course specialization covering Siemens PLC wiring, TIA Portal programming, HMI interface layouts, SCADA systems, and industrial control loops.",
+        verificationHash: "sha256-2fbea33a0e68b8576c2b83447b56068de664ac78186bbbad4e08f766af516f8c"
+    },
+    {
+        id: "CERT-034",
+        title: "Designing and Simulating Physical Models",
+        issuer: "MathWorks",
+        year: "2026",
+        category: "Power & Electrical",
+        icon: Cpu,
+        image: '/assets/certifications/Designing and Simulating Physical Models.pdf',
+        gallery: ['/assets/certifications/Designing and Simulating Physical Models.pdf'],
+        credentialId: "EFF3H17UVJM4",
+        skills: ["Physical Modeling", "Simscape", "Simulink Simulation", "Multidomain Systems", "MATLAB"],
+        description: "Authorized by MathWorks, covering physical model designs, multidomain fluid/thermal/mechanical simulations, and dynamic Simscape modeling.",
+        verificationHash: "sha256-2e0bbb20aab3d4c2176dd453b2be69d8c10afc7675dbb68712c4c6b43bb45626"
     }
 ];
 
@@ -592,8 +690,18 @@ const Certificates: React.FC = () => {
     const [activeFilter, setActiveFilter] = useState<'All' | 'Embedded & IoT' | 'AI & Software' | 'Robotics & Hardware' | 'Power & Electrical'>('All');
     const [copiedHash, setCopiedHash] = useState<string | null>(null);
 
+    // Jumble/Shuffle the CERTS array once per session
+    const jumbledCerts = React.useMemo(() => {
+        const shuffled = [...CERTS];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }, []);
+
     // Filter logic
-    const filteredCerts = CERTS.filter(cert => {
+    const filteredCerts = jumbledCerts.filter(cert => {
         const matchesFilter = activeFilter === 'All' || cert.category === activeFilter;
         const matchesSearch =
             cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

@@ -57,6 +57,13 @@ const GALLERY_IMAGES = [
   { src: '/assets/certifications/Embedded systems certificate.png', alt: 'Embedded systems course completion certificate' },
   { src: '/assets/certifications/EV technology.jpg', alt: 'Electric vehicle technology program certificate' },
   { src: '/assets/certifications/Datavalley  Embedded system intership.png', alt: 'Datavalley Embedded Systems short-term internship certificate' },
+  { src: '/assets/certifications/Basics of Robotics.png', alt: 'Siemens — Basics of Robotics course completion certificate' },
+  { src: '/assets/certifications/AI for Autonomous Vehicles and Robotics.png', alt: 'University of Michigan — AI for Autonomous Vehicles and Robotics course completion certificate' },
+  { src: '/assets/certifications/Powering the Future with Electrification.png', alt: 'MathWorks — Powering the Future with Electrification course completion certificate' },
+  { src: '/assets/certifications/Interfacing with the Arduino.png', alt: 'University of California, Irvine — Interfacing with the Arduino course completion certificate' },
+  { src: '/assets/certifications/Modeling and Simulation with Simulink.png', alt: 'MathWorks — Modeling and Simulation with Simulink course completion certificate' },
+  { src: '/assets/certifications/PLC, HMI.png', alt: 'Siemens PLC and TIA Portal (Learn PLC and HMI from Scratch) specialization certificate' },
+  { src: '/assets/certifications/Designing and Simulating Physical Models.png', alt: 'MathWorks — Designing and Simulating Physical Models course completion certificate' },
 ];
 
 const GALLERY_JSON_LD = {

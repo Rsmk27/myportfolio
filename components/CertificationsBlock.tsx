@@ -16,6 +16,16 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
     const [startX, setStartX] = useState(0);
     const [scrollLeftState, setScrollLeftState] = useState(0);
 
+    // Jumble/Shuffle the CERTS array once per session
+    const jumbledCerts = React.useMemo(() => {
+        const shuffled = [...CERTS];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }, []);
+
     // Auto-scroll loop using requestAnimationFrame
     useEffect(() => {
         const container = scrollRef.current;
@@ -150,7 +160,7 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
                     onMouseUp={handleMouseLeaveOrUp}
                     onMouseMove={handleMouseMove}
                 >
-                    {CERTS.map((cert, idx) => (
+                    {jumbledCerts.map((cert, idx) => (
                         <div key={`${cert.id}-1`} className="w-[285px] md:w-[320px] flex-shrink-0">
                             <CertificateCard
                                 cert={cert}
@@ -161,7 +171,7 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
                         </div>
                     ))}
                     {/* Duplicate for seamless infinite loop */}
-                    {CERTS.map((cert, idx) => (
+                    {jumbledCerts.map((cert, idx) => (
                         <div key={`${cert.id}-2`} className="w-[285px] md:w-[320px] flex-shrink-0">
                             <CertificateCard
                                 cert={cert}
