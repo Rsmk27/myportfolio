@@ -29,21 +29,6 @@ export interface Certification {
 
 export const CERTS: Certification[] = [
     {
-        id: "CERT-001",
-        title: "Embedded Systems Design",
-        issuer: "Arm Education",
-        year: "2020",
-        category: "Embedded & IoT",
-        icon: Cpu,
-        image: '/assets/certifications/Embedded systems certificate.png',
-        gallery: ['/assets/certifications/Embedded systems certificate.png'],
-        isVerifiedBadge: true,
-        credentialId: "ARM-ESD-2020-0081",
-        skills: ["Cortex-M", "RTOS", "Peripherals", "C/C++", "Keil MDK"],
-        description: "Specialized training on ARM Cortex-M architecture, memory mapping, interrupt handling, and real-time operating systems (RTOS) integrations.",
-        verificationHash: "sha256-8a9d8c7b6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c"
-    },
-    {
         id: "CERT-002",
         title: "Electric Vehicle Technology",
         issuer: "NPTEL / IIT Madras",
@@ -283,34 +268,6 @@ export const CERTS: Certification[] = [
         verificationHash: "sha256-c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2"
     },
     {
-        id: "CERT-018",
-        title: "Fire Safety & Response",
-        issuer: "National Safety Council",
-        year: "2023",
-        category: "Robotics & Hardware",
-        icon: ShieldCheck,
-        image: '/assets/certifications/Firesafety Certificate.jpg',
-        gallery: ['/assets/certifications/Firesafety Certificate.jpg'],
-        credentialId: "NSC-FS-2023-F18",
-        skills: ["Emergency Response", "Hazard Identification", "Fire Extinguishment", "Safety Protocols", "Risk Control"],
-        description: "Certified emergency response training covering electrical fire safety, prevention protocols, fire suppression techniques, and hazard containment.",
-        verificationHash: "sha256-9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b"
-    },
-    {
-        id: "CERT-019",
-        title: "Amplify Communication Skills with GenAI",
-        issuer: "Microsoft / LinkedIn",
-        year: "2024",
-        category: "AI & Software",
-        icon: Sparkles,
-        image: '/assets/certifications/CertificateOfCompletion_Amplify Your Communication Skills with Generative AI.pdf',
-        gallery: ['/assets/certifications/CertificateOfCompletion_Amplify Your Communication Skills with Generative AI.pdf'],
-        credentialId: "MS-LIL-2024-A19",
-        skills: ["Generative Writing", "Communication Strategy", "GenAI Editing", "Prompt Systems"],
-        description: "Explored how to utilize Large Language Models to improve professional writing, technical reports, and dynamic communication layouts.",
-        verificationHash: "sha256-8a9d8c7b6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c"
-    },
-    {
         id: "CERT-020",
         title: "Design Thinking for Innovators",
         issuer: "LinkedIn Learning",
@@ -351,34 +308,6 @@ export const CERTS: Certification[] = [
         skills: ["IoT Networks", "Gateway Routing", "Cybersecurity", "Arduino Interfacing", "Python Telemetry"],
         description: "Introduction to IoT frameworks, microcontroller interfacing, network setups, packet transmission, and data analytics.",
         verificationHash: "sha256-7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f"
-    },
-    {
-        id: "CERT-023",
-        title: "Statement of Accomplishment",
-        issuer: "Coursera / Stanford",
-        year: "2023",
-        category: "Embedded & IoT",
-        icon: Award,
-        image: '/assets/certifications/STATEMENT OF ACCOMPLISHMENT.pdf',
-        gallery: ['/assets/certifications/STATEMENT OF ACCOMPLISHMENT.pdf'],
-        credentialId: "COUR-SOA-2023-S23",
-        skills: ["Technical Writing", "Academic Research", "Systems Engineering", "Data Modeling"],
-        description: "Verified academic accomplishment demonstrating proficiency in systems engineering, documentation, and technical modeling.",
-        verificationHash: "sha256-2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c"
-    },
-    {
-        id: "CERT-024",
-        title: "ITP Engineering Certification",
-        issuer: "Technical Board",
-        year: "2024",
-        category: "Embedded & IoT",
-        icon: Award,
-        image: '/assets/certifications/ITP0017198099584.png',
-        gallery: ['/assets/certifications/ITP0017198099584.png'],
-        credentialId: "ITP-ENG-2024-C24",
-        skills: ["Industrial Operations", "Technical Safety", "Machine Maintenance", "Instruments"],
-        description: "Certified engineering training credential documenting standard industrial machine operations and instrument calibrations.",
-        verificationHash: "sha256-4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d"
     },
     {
         id: "CERT-025",
@@ -526,6 +455,63 @@ export const CERTS: Certification[] = [
         skills: ["Physical Modeling", "Simscape", "Simulink Simulation", "Multidomain Systems", "MATLAB"],
         description: "Authorized by MathWorks, covering physical model designs, multidomain fluid/thermal/mechanical simulations, and dynamic Simscape modeling.",
         verificationHash: "sha256-2e0bbb20aab3d4c2176dd453b2be69d8c10afc7675dbb68712c4c6b43bb45626"
+    },
+    {
+        id: "CERT-035",
+        title: "Battery Design and Management",
+        issuer: "MathWorks",
+        year: "2026",
+        category: "Power & Electrical",
+        icon: Zap,
+        image: '/assets/certifications/Battery Design and Management.pdf',
+        gallery: ['/assets/certifications/Battery Design and Management.pdf'],
+        credentialId: "FZF15DP9FSHQ",
+        skills: ["Battery Design", "BMS", "Battery Modeling", "Thermal Management", "State of Charge", "Simulink"],
+        description: "Authorized by MathWorks, covering battery cell characterization, state estimation, thermal modeling, battery pack design, and BMS simulation.",
+        verificationHash: "sha256-a98e6aa30ebd89d3be777a6e1b060f08dd033fe39b364701f76841b6fc7de3c7"
+    },
+    {
+        id: "CERT-036",
+        title: "Electric Motor Modeling and Control",
+        issuer: "MathWorks",
+        year: "2026",
+        category: "Power & Electrical",
+        icon: Fan,
+        image: '/assets/certifications/Electric Motor Modeling and Control.pdf',
+        gallery: ['/assets/certifications/Electric Motor Modeling and Control.pdf'],
+        credentialId: "58JN1U27RASY",
+        skills: ["Motor Control", "Electric Motors", "Field-Oriented Control", "MATLAB", "Simulink", "Parameter Estimation"],
+        description: "Authorized by MathWorks, covering electric motor modeling, parameter estimation, speed and torque control design, and simulation of motor drives.",
+        verificationHash: "sha256-9334a77e95e90d2afd57dbf7dd6318216746d28bad8ec87e36983521ca4ed8a9"
+    },
+    {
+        id: "CERT-037",
+        title: "Power Conversion for Electronic Devices",
+        issuer: "MathWorks",
+        year: "2026",
+        category: "Power & Electrical",
+        icon: Zap,
+        image: '/assets/certifications/Power Conversion for Electronic Devices.pdf',
+        gallery: ['/assets/certifications/Power Conversion for Electronic Devices.pdf'],
+        credentialId: "RODEPZ0BL7HN",
+        skills: ["Power Conversion", "DC-DC Converters", "Power Electronics", "Feedback Control", "MATLAB", "Simulink"],
+        description: "Authorized by MathWorks, covering power electronic converter design, DC-DC converter modeling, feedback control loop design, and switching simulation.",
+        verificationHash: "sha256-eec8d77c966834c5c73f445faf2a165cd8589a38c2e6e3b410e93988fdfb05d8"
+    },
+    {
+        id: "CERT-038",
+        title: "Electrified Systems Design Engineer",
+        issuer: "MathWorks",
+        year: "2026",
+        category: "Power & Electrical",
+        icon: Award,
+        image: '/assets/certifications/Electrified Systems Design Engineer.pdf',
+        gallery: ['/assets/certifications/Electrified Systems Design Engineer.pdf'],
+        isVerifiedBadge: true,
+        credentialId: "ECURKPFR1H2Z",
+        skills: ["System Modeling", "Simulink", "Power Electronics", "Electric Motors", "Battery Systems", "MATLAB", "Simscape"],
+        description: "Authorized by MathWorks, covering system-level modeling, simulation, and design of electrified systems. Integrates power electronics, electric motors, and battery systems using MATLAB and Simulink.",
+        verificationHash: "sha256-567ee5af12904d6b57f10847746fe37dc61b802d12755759e5fb7ad6219f0514"
     }
 ];
 

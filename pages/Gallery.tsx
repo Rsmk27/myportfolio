@@ -20,7 +20,6 @@ const GALLERY_IMAGES = [
   { src: '/assets/gallery/ahacks/device-strap-back.jpg', alt: 'Firefighter safety wearable device — back view with ESP32 wiring' },
   // General gallery
   { src: '/assets/certifications/Chefronics certificate.jpg', alt: 'Srinivasa Manikanta — college engineering lab session' },
-  { src: '/assets/certifications/Firesafety Certificate.jpg', alt: 'Srinivasa Manikanta — engineering workshop activity' },
   { src: '/assets/gallery/img-20260128-104328.jpg', alt: 'Srinivasa Manikanta — campus life at engineering college' },
   { src: '/assets/gallery/img-20250311-WA0009.jpg', alt: 'Srinivasa Manikanta — team project collaboration' },
   { src: '/assets/gallery/img-20251010-WA0001.jpg', alt: 'Srinivasa Manikanta — academic event participation' },
@@ -54,7 +53,6 @@ const GALLERY_IMAGES = [
   { src: '/assets/certifications/3d-printing/workshop-3.jpg', alt: '3D printing workshop — designing 3D models' },
   { src: '/assets/certifications/3d-printing/workshop-4.jpg', alt: '3D printing workshop — printed prototype output' },
   { src: '/assets/certifications/3d-printing/workshop-5.jpg', alt: '3D printing workshop — group activity session' },
-  { src: '/assets/certifications/Embedded systems certificate.png', alt: 'Embedded systems course completion certificate' },
   { src: '/assets/certifications/EV technology.jpg', alt: 'Electric vehicle technology program certificate' },
   { src: '/assets/certifications/Datavalley  Embedded system intership.png', alt: 'Datavalley Embedded Systems short-term internship certificate' },
   { src: '/assets/certifications/Basics of Robotics.png', alt: 'Siemens — Basics of Robotics course completion certificate' },
@@ -64,6 +62,10 @@ const GALLERY_IMAGES = [
   { src: '/assets/certifications/Modeling and Simulation with Simulink.png', alt: 'MathWorks — Modeling and Simulation with Simulink course completion certificate' },
   { src: '/assets/certifications/PLC, HMI.png', alt: 'Siemens PLC and TIA Portal (Learn PLC and HMI from Scratch) specialization certificate' },
   { src: '/assets/certifications/Designing and Simulating Physical Models.png', alt: 'MathWorks — Designing and Simulating Physical Models course completion certificate' },
+  { src: '/assets/certifications/Battery Design and Management.png', alt: 'MathWorks — Battery Design and Management course completion certificate' },
+  { src: '/assets/certifications/Electric Motor Modeling and Control.png', alt: 'MathWorks — Electric Motor Modeling and Control course completion certificate' },
+  { src: '/assets/certifications/Power Conversion for Electronic Devices.png', alt: 'MathWorks — Power Conversion for Electronic Devices course completion certificate' },
+  { src: '/assets/certifications/Electrified Systems Design Engineer.png', alt: 'MathWorks — Electrified Systems Design Engineer professional certificate' },
 ];
 
 const GALLERY_JSON_LD = {
