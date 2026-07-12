@@ -32,17 +32,34 @@ const useMeasure = <T extends HTMLElement>() => {
   return [ref, size] as const;
 };
 
-const preloadImages = async (urls: string[]): Promise<void> => {
+interface ImageDimensions {
+  width: number;
+  height: number;
+}
+
+const preloadImagesWithDimensions = async (urls: string[]): Promise<Record<string, ImageDimensions>> => {
+  const results: Record<string, ImageDimensions> = {};
   await Promise.all(
     urls.map(
       src =>
         new Promise<void>(resolve => {
           const img = new Image();
           img.src = src;
-          img.onload = img.onerror = () => resolve();
+          img.onload = () => {
+            results[src] = {
+              width: img.naturalWidth || 1,
+              height: img.naturalHeight || 1,
+            };
+            resolve();
+          };
+          img.onerror = () => {
+            results[src] = { width: 1, height: 1 };
+            resolve();
+          };
         })
     )
   );
+  return results;
 };
 
 interface Item {
@@ -92,6 +109,7 @@ const Masonry: React.FC<MasonryProps> = ({
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
   const [imagesReady, setImagesReady] = useState(false);
+  const [dimensions, setDimensions] = useState<Record<string, ImageDimensions>>({});
 
   const getInitialPosition = (item: GridItem) => {
     const containerRect = containerRef.current?.getBoundingClientRect();
@@ -123,33 +141,45 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   useEffect(() => {
-    preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
+    setImagesReady(false);
+    preloadImagesWithDimensions(items.map(i => i.img)).then(dims => {
+      setDimensions(dims);
+      setImagesReady(true);
+    });
   }, [items]);
 
-  const grid = useMemo<GridItem[]>(() => {
-    if (!width) return [];
+  const { gridItems, maxHeight } = useMemo(() => {
+    if (!width || !imagesReady) return { gridItems: [], maxHeight: 0 };
     const colHeights = new Array(columns).fill(0);
     const gap = 16;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
 
-    return items.map(child => {
+    const itemsMapped = items.map(child => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
-      const height = child.height / 2;
+      
+      const dims = dimensions[child.img];
+      let height = child.height / 2;
+      if (dims && dims.width > 0 && dims.height > 0) {
+        height = columnWidth * (dims.height / dims.width);
+      }
+      
       const y = colHeights[col];
 
       colHeights[col] += height + gap;
       return { ...child, x, y, w: columnWidth, h: height };
     });
-  }, [columns, items, width]);
+
+    return { gridItems: itemsMapped, maxHeight: Math.max(...colHeights) };
+  }, [columns, items, width, dimensions, imagesReady]);
 
   const hasMounted = useRef(false);
 
   useLayoutEffect(() => {
     if (!imagesReady) return;
 
-    grid.forEach((item, index) => {
+    gridItems.forEach((item, index) => {
       const selector = `[data-key="${item.id}"]`;
       const animProps = { x: item.x, y: item.y, width: item.w, height: item.h };
 
@@ -185,7 +215,7 @@ const Masonry: React.FC<MasonryProps> = ({
     });
 
     hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [gridItems, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 
   const handleMouseEnter = (id: string, element: HTMLElement) => {
     if (scaleOnHover) {
@@ -216,8 +246,12 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   return (
-    <div ref={containerRef} className="relative w-full h-full">
-      {grid.map(item => (
+    <div
+      ref={containerRef}
+      className="relative w-full"
+      style={{ height: maxHeight ? `${maxHeight}px` : 'auto' }}
+    >
+      {gridItems.map(item => (
         <div
           key={item.id}
           data-key={item.id}
@@ -235,7 +269,7 @@ const Masonry: React.FC<MasonryProps> = ({
         >
           <div
             className="relative w-full h-full bg-cover bg-center rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] uppercase text-[10px] leading-[10px] cursor-pointer"
-            style={{ backgroundImage: `url(${item.img})` }}
+            style={{ backgroundImage: `url("${encodeURI(item.img)}")` }}
           >
             {colorShiftOnHover && (
               <div className="color-overlay absolute inset-0 rounded-[10px] bg-gradient-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
