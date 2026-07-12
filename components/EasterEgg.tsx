@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const KONAMI_SEQUENCE = [
@@ -15,22 +15,95 @@ const BOOT_SEQUENCE = [
     { text: 'Type "help" for a list of commands.', delay: 100 },
 ];
 
-const ASCII_ART = `
-  ██████╗ ███████╗███╗   ███╗██╗  ██╗
-  ██╔══██╗██╔════╝████╗ ████║██║ ██╔╝
-  ██████╔╝███████╗██╔████╔██║█████╔╝ 
-  ██╔══██╗╚════██║██║╚██╔╝██║██╔═██╗ 
-  ██║  ██║███████║██║ ╚═╝ ██║██║  ██╗
-  ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝
-  ─── ROOT TERMINAL ACCESS GRANTED ──
-`.trim();
-
 interface HistoryLine {
-    id: number;
+    id: number | string;
     text: React.ReactNode;
     isCommand?: boolean;
     color?: string;
 }
+
+const THEMES = {
+    green: {
+        text: 'text-emerald-400',
+        textLight: 'text-emerald-300',
+        textDark: 'text-emerald-500',
+        border: 'border-emerald-500/40',
+        bg: '#020703',
+        titleBg: 'bg-[#041207]',
+        titleBorder: 'border-emerald-500/20',
+        shadow: 'shadow-[0_0_80px_rgba(16,185,129,0.15),inset_0_0_30px_rgba(16,185,129,0.05)]',
+        caret: 'caret-emerald-400',
+        glow: 'rgba(16, 185, 129, 0.6)'
+    },
+    amber: {
+        text: 'text-amber-500',
+        textLight: 'text-amber-400',
+        textDark: 'text-amber-600',
+        border: 'border-amber-500/40',
+        bg: '#080500',
+        titleBg: 'bg-[#140b00]',
+        titleBorder: 'border-amber-500/20',
+        shadow: 'shadow-[0_0_80px_rgba(245,158,11,0.15),inset_0_0_30px_rgba(245,158,11,0.05)]',
+        caret: 'caret-amber-500',
+        glow: 'rgba(245, 158, 11, 0.6)'
+    },
+    blue: {
+        text: 'text-cyan-400',
+        textLight: 'text-cyan-300',
+        textDark: 'text-cyan-500',
+        border: 'border-cyan-500/40',
+        bg: '#00070a',
+        titleBg: 'bg-[#00131c]',
+        titleBorder: 'border-cyan-500/20',
+        shadow: 'shadow-[0_0_80px_rgba(6,182,212,0.15),inset_0_0_30px_rgba(6,182,212,0.05)]',
+        caret: 'caret-cyan-400',
+        glow: 'rgba(6, 182, 212, 0.6)'
+    },
+    red: {
+        text: 'text-red-500',
+        textLight: 'text-red-400',
+        textDark: 'text-red-600',
+        border: 'border-red-500/40',
+        bg: '#070000',
+        titleBg: 'bg-[#1c0000]',
+        titleBorder: 'border-red-500/20',
+        shadow: 'shadow-[0_0_80px_rgba(239,68,68,0.15),inset_0_0_30px_rgba(239,68,68,0.05)]',
+        caret: 'caret-red-500',
+        glow: 'rgba(239, 68, 68, 0.6)'
+    }
+};
+
+const GridLogo: React.FC<{ theme: keyof typeof THEMES }> = ({ theme }) => {
+    // 5 rows x 23 columns
+    const gridData = [
+        [1,1,1,1,0, 0, 0,1,1,1,0, 0, 1,0,0,0,1, 0, 1,0,0,0,1],
+        [1,0,0,0,1, 0, 1,0,0,0,0, 0, 1,1,0,1,1, 0, 1,0,0,1,0],
+        [1,1,1,1,0, 0, 0,1,1,1,0, 0, 1,0,1,0,1, 0, 1,1,1,0,0],
+        [1,0,0,1,0, 0, 0,0,0,0,1, 0, 1,0,0,0,1, 0, 1,0,0,1,0],
+        [1,0,0,0,1, 0, 0,1,1,1,0, 0, 1,0,0,0,1, 0, 1,0,0,0,1]
+    ];
+    
+    const colors = THEMES[theme];
+
+    return (
+        <div className={`flex flex-col gap-[3px] xs:gap-[4px] md:gap-[5px] my-3 select-none ${colors.text}`}>
+            {gridData.map((row, rIdx) => (
+                <div key={rIdx} className="flex gap-[3px] xs:gap-[4px] md:gap-[5px]">
+                    {row.map((cell, cIdx) => (
+                        <div
+                            key={cIdx}
+                            className={`w-[8px] h-[8px] xs:w-[10px] xs:h-[10px] sm:w-[12px] sm:h-[12px] md:w-[15px] md:h-[15px] rounded-[1px] md:rounded-[2px] transition-all duration-300 ${
+                                cell 
+                                    ? 'bg-current shadow-[0_0_8px_currentColor]' 
+                                    : 'bg-zinc-900/40 border border-zinc-800/10'
+                            }`}
+                        />
+                    ))}
+                </div>
+            ))}
+        </div>
+    );
+};
 
 export const EasterEgg: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -38,10 +111,13 @@ export const EasterEgg: React.FC = () => {
     const [input, setInput] = useState('');
     const [isBooting, setIsBooting] = useState(true);
     const [isGlitching, setIsGlitching] = useState(false);
+    const [themeName, setThemeName] = useState<'green' | 'amber' | 'blue' | 'red'>('green');
     
     const seqRef = useRef<string[]>([]);
     const terminalEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const currentTheme = useMemo(() => THEMES[themeName], [themeName]);
 
     // Konami code listener
     useEffect(() => {
@@ -84,7 +160,10 @@ export const EasterEgg: React.FC = () => {
         let currentDelay = 0;
         
         setTimeout(() => {
-            setHistory([{ id: Date.now(), text: <pre className="text-[10px] md:text-xs leading-tight text-emerald-400 select-none pb-2">{ASCII_ART}</pre> }]);
+            setHistory([{ 
+                id: 'logo', 
+                text: '' 
+            }]);
         }, 100);
 
         BOOT_SEQUENCE.forEach((step, index) => {
@@ -102,7 +181,7 @@ export const EasterEgg: React.FC = () => {
 
     const handleCommand = (e: React.FormEvent) => {
         e.preventDefault();
-        const cmd = input.trim().toLowerCase();
+        const cmd = input.trim();
         if (!cmd) return;
 
         setInput('');
@@ -112,11 +191,15 @@ export const EasterEgg: React.FC = () => {
         setTimeout(() => processCommand(cmd), 150);
     };
 
-    const processCommand = (cmd: string) => {
+    const processCommand = (inputLine: string) => {
         const timestamp = Date.now();
         const pushLine = (text: React.ReactNode, color?: string) => {
             setHistory(prev => [...prev, { id: timestamp + Math.random(), text, color }]);
         };
+
+        const tokens = inputLine.trim().split(/\s+/);
+        const cmd = tokens[0].toLowerCase();
+        const arg = tokens[1]?.toLowerCase();
 
         switch (cmd) {
             case 'help':
@@ -126,24 +209,26 @@ export const EasterEgg: React.FC = () => {
                     &nbsp;&nbsp;<span className="text-white">status</span>   - Run diagnostics on grid<br/>
                     &nbsp;&nbsp;<span className="text-white">overload</span> - Initiate controlled system overload<br/>
                     &nbsp;&nbsp;<span className="text-white">matrix</span>   - Toggle visual matrix stream<br/>
+                    &nbsp;&nbsp;<span className="text-white">hack</span>     - Initiate grid override simulator<br/>
+                    &nbsp;&nbsp;<span className="text-white">theme</span>    - Change terminal tint theme (green/amber/blue/red)<br/>
                     &nbsp;&nbsp;<span className="text-white">clear</span>    - Clear terminal History<br/>
                     &nbsp;&nbsp;<span className="text-white">exit</span>     - Drop connection
-                </>, 'text-emerald-300');
+                </>, currentTheme.textLight);
                 break;
             case 'status':
                 pushLine(<>
-                    DIAGNOSTICS SEQUENCE INITIATED...<br/>
+                    DIAGNOSTICS SEQUENCE IN INITIATED...<br/>
                     [████████████░░] 85% VOLTAGE CAPACITY<br/>
                     [██████████████] 100% ROUTING EFFICIENCY<br/>
                     [████░░░░░░░░░░] 25% THERMAL STRESS<br/>
-                    GRID STATUS: <span className="text-emerald-400 font-bold drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]">NOMINAL</span>
+                    GRID STATUS: <span className={`${currentTheme.text} font-bold drop-shadow-[0_0_8px_${currentTheme.glow}]`}>NOMINAL</span>
                 </>);
                 break;
             case 'clear':
                 setHistory([{ id: Date.now(), text: 'Terminal cleared.' }]);
                 break;
             case 'exit':
-                pushLine('Disconnecting from root mainframe...', 'text-emerald-500');
+                pushLine('Disconnecting from root mainframe...', currentTheme.textDark);
                 setTimeout(() => handleClose(), 800);
                 break;
             case 'overload':
@@ -157,15 +242,53 @@ export const EasterEgg: React.FC = () => {
                 }, 1600);
                 setTimeout(() => {
                     setIsGlitching(false);
-                    pushLine('AUTO-RECOVERY ENGAGED. Overload purged.', 'text-emerald-400 mt-2');
+                    pushLine('AUTO-RECOVERY ENGAGED. Overload purged.', `${currentTheme.text} mt-2`);
                 }, 3500);
                 break;
             case 'matrix':
-                pushLine('Accessing the construct...', 'text-emerald-500');
-                const generateStream = () => Array.from({length:6}).map(() => Math.random().toString(36).substring(2, 10).toUpperCase()).join(' ');
-                pushLine(<div className="break-all tracking-widest mt-2">
-                    {generateStream()}<br/>{generateStream()}<br/>{generateStream()}
-                </div>, 'text-[#10b981] opacity-70 drop-shadow-[0_0_5px_rgba(16,185,129,0.6)]');
+                pushLine('Accessing the construct...', currentTheme.textDark);
+                setTimeout(() => {
+                    const generateStream = () => Array.from({length:12}).map(() => String.fromCharCode(33 + Math.floor(Math.random() * 93))).join(' ');
+                    pushLine(<div className="break-all tracking-widest leading-relaxed opacity-70 mt-1 select-none">
+                        {generateStream()}<br/>
+                        {generateStream()}<br/>
+                        {generateStream()}<br/>
+                        {generateStream()}
+                    </div>, `${currentTheme.text} drop-shadow-[0_0_5px_${currentTheme.glow}]`);
+                }, 150);
+                break;
+            case 'hack':
+                pushLine('INITIATING GRID OVERRIDE SIMULATOR...', 'text-yellow-500 font-bold');
+                setTimeout(() => {
+                    pushLine('Scanning local grid relays... found 12 nodes', currentTheme.text);
+                }, 500);
+                setTimeout(() => {
+                    pushLine('Injecting payload into nodes 1-4... [SUCCESS]', currentTheme.text);
+                }, 1200);
+                setTimeout(() => {
+                    pushLine('Injecting payload into nodes 5-8... [SUCCESS]', currentTheme.text);
+                }, 1900);
+                setTimeout(() => {
+                    pushLine('Bypassing firewall defense grid... [BYPASSED]', 'text-red-400 font-bold');
+                }, 2600);
+                setTimeout(() => {
+                    pushLine('Extracting energy distribution keys... [DONE]', currentTheme.text);
+                }, 3300);
+                setTimeout(() => {
+                    pushLine('ACCESS GRANTED: You are now in full grid control.', 'text-white font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]');
+                }, 4000);
+                break;
+            case 'theme':
+                if (arg === 'green' || arg === 'amber' || arg === 'blue' || arg === 'red') {
+                    setThemeName(arg as 'green' | 'amber' | 'blue' | 'red');
+                    const colorMap = { green: 'GREEN', amber: 'AMBER', blue: 'BLUE', red: 'RED' };
+                    pushLine(`Terminal theme changed to ${colorMap[arg as 'green' | 'amber' | 'blue' | 'red']}.`);
+                } else {
+                    pushLine(<>
+                        Usage: <span className="text-white">theme [green|amber|blue|red]</span><br/>
+                        Current theme: <span className="text-white font-bold">{themeName.toUpperCase()}</span>
+                    </>);
+                }
                 break;
             case 'sudo':
             case 'su':
@@ -211,22 +334,22 @@ export const EasterEgg: React.FC = () => {
                                 : { scale: 1, opacity: 1, y: 0, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } }
                         }
                         exit={{ scale: 0.88, opacity: 0, y: 20 }}
-                        className={`relative w-full max-w-3xl rounded-xl overflow-hidden border ${isGlitching ? 'border-red-500/80 shadow-[0_0_100px_rgba(239,68,68,0.4)]' : 'border-emerald-500/40 shadow-[0_0_80px_rgba(16,185,129,0.15),inset_0_0_30px_rgba(16,185,129,0.05)]'}`}
-                        style={{ background: '#020703' }}
+                        className={`relative w-full max-w-3xl rounded-xl overflow-hidden border ${isGlitching ? 'border-red-500/80 shadow-[0_0_100px_rgba(239,68,68,0.4)]' : `${currentTheme.border} ${currentTheme.shadow}`}`}
+                        style={{ background: currentTheme.bg }}
                     >
                         {/* Title bar */}
-                        <div className={`flex items-center justify-between px-4 py-2.5 border-b ${isGlitching ? 'border-red-500/40 bg-red-950/30' : 'border-emerald-500/20 bg-[#041207]'}`}>
+                        <div className={`flex items-center justify-between px-4 py-2.5 border-b ${isGlitching ? 'border-red-500/40 bg-red-950/30' : `${currentTheme.titleBorder} ${currentTheme.titleBg}`}`}>
                             <div className="flex items-center gap-1.5">
                                 <div className="w-3 h-3 rounded-full bg-red-500/70" />
                                 <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
                                 <div className="w-3 h-3 rounded-full bg-emerald-500/70" />
                             </div>
-                            <span className={`text-[10px] font-mono tracking-[0.2em] font-bold uppercase ${isGlitching ? 'text-red-500 drop-shadow-[0_0_6px_rgba(239,68,68,0.8)]' : 'text-emerald-500/70'}`}>
+                            <span className={`text-[10px] font-mono tracking-[0.2em] font-bold uppercase ${isGlitching ? 'text-red-500 drop-shadow-[0_0_6px_rgba(239,68,68,0.8)]' : `${currentTheme.text} drop-shadow-[0_0_6px_${currentTheme.glow}]`}`}>
                                 {isGlitching ? 'CRITICAL FAILURE' : 'ROOT SECURE TERMINAL'}
                             </span>
                             <button
                                 onClick={handleClose}
-                                className="text-emerald-500/50 hover:text-emerald-400 transition-colors text-sm focus:outline-none"
+                                className={`${currentTheme.text} opacity-50 hover:opacity-100 transition-opacity text-sm focus:outline-none`}
                             >
                                 ✕
                             </button>
@@ -236,26 +359,38 @@ export const EasterEgg: React.FC = () => {
                         <div 
                             className="px-5 py-4 h-[65vh] max-h-[500px] overflow-y-auto font-mono text-sm leading-relaxed"
                             style={{ 
-                                textShadow: isGlitching ? '0 0 8px rgba(239,68,68,0.8)' : '0 0 5px rgba(16,185,129,0.6)',
+                                textShadow: isGlitching ? '0 0 8px rgba(239,68,68,0.8)' : `0 0 5px ${currentTheme.glow}`,
                                 fontFamily: "'JetBrains Mono', 'Fira Code', monospace"
                             }}
                             onClick={() => !isBooting && inputRef.current?.focus()}
                         >
                             <div className="space-y-1.5 flex flex-col pb-4">
-                                {history.map((line) => (
-                                    <div 
-                                        key={line.id} 
-                                        className={`${line.color || (isGlitching ? 'text-red-400' : 'text-emerald-400/95')} ${line.isCommand ? 'opacity-80 mt-2' : ''}`}
-                                    >
-                                        {line.text}
-                                    </div>
-                                ))}
+                                {history.map((line) => {
+                                    if (line.id === 'logo') {
+                                        return (
+                                            <div key={line.id} className="pb-2">
+                                                <GridLogo theme={themeName} />
+                                                <div className={`text-xs opacity-80 ${currentTheme.text} tracking-[0.2em] font-bold mt-3`}>
+                                                    ─── ROOT TERMINAL ACCESS GRANTED ───
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                    return (
+                                        <div 
+                                            key={line.id} 
+                                            className={`${line.color || (isGlitching ? 'text-red-400' : currentTheme.text)} ${line.isCommand ? 'opacity-80 mt-2' : ''}`}
+                                        >
+                                            {line.text}
+                                        </div>
+                                    );
+                                })}
                                 
                                 <div ref={terminalEndRef} />
                                 
                                 {!isBooting && (
                                     <form onSubmit={handleCommand} className="flex items-center mt-3 group">
-                                        <span className={`${isGlitching ? 'text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]' : 'text-emerald-300 drop-shadow-[0_0_6px_rgba(110,231,183,0.8)]'} font-bold mr-2`}>
+                                        <span className={`${isGlitching ? 'text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]' : `${currentTheme.textLight} drop-shadow-[0_0_6px_${currentTheme.glow}]`} font-bold mr-2`}>
                                             ADMIN&gt;
                                         </span>
                                         <input
@@ -263,7 +398,7 @@ export const EasterEgg: React.FC = () => {
                                             type="text"
                                             value={input}
                                             onChange={(e) => setInput(e.target.value)}
-                                            className={`flex-1 bg-transparent border-none outline-none text-white font-mono ${isGlitching ? 'caret-red-500' : 'caret-emerald-400'} focus:ring-0 placeholder-transparent`}
+                                            className={`flex-1 bg-transparent border-none outline-none text-white font-mono ${isGlitching ? 'caret-red-500' : currentTheme.caret} focus:ring-0 placeholder-transparent`}
                                             spellCheck="false"
                                             autoComplete="off"
                                             autoFocus
@@ -279,4 +414,3 @@ export const EasterEgg: React.FC = () => {
         </AnimatePresence>
     );
 };
-

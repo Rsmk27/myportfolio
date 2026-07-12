@@ -41,6 +41,21 @@ const AnimatedRoutes: React.FC = () => {
 };
 
 const App: React.FC = () => {
+    useEffect(() => {
+        const consoleAscii = `
+%c  ____  ____  __  __ _  __
+ |  _ \\/ ___||  \\/  | |/ /
+ | |_) \\___ \\| |\\/| | ' / 
+ |  _ < ___) | |  | | . \\ 
+ |_| \\_\\____/|_|  |_|_|\\_\\
+
+%c     ⚡  Passionate about Hardware, IoT & EEE?
+     🛠️  Let's collaborate or build projects!
+     🚀  https://rsmk.me
+`;
+        console.log(consoleAscii, 'color: #00f2ff; font-weight: bold; font-family: monospace;', 'color: #ffae00; font-weight: bold;');
+    }, []);
+
     return (
         <HelmetProvider>
             <ReactLenis root options={{ lerp: 0.05, wheelMultiplier: 0.8 }}>

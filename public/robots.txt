@@ -1,3 +1,13 @@
+#   ____  ____  __  __ _  __
+#  |  _ \/ ___||  \/  | |/ /
+#  | |_) \___ \| |\/| | ' / 
+#  |  _ < ___) | |  | | . \ 
+#  |_| \_\____/|_|  |_|_|\_\
+# 
+#  ⚡ Passionate about Hardware, IoT & EEE?
+#  🛠️ Let's collaborate or build projects!
+#  🚀 https://rsmk.me
+
 User-agent: *
 Allow: /
 Sitemap: https://rsmk.me/sitemap.xml
