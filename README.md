@@ -195,7 +195,7 @@ This project is open source and available for personal and educational use.
 **Srinivasa Manikanta**
 
 - GitHub: [@Rsmk27](https://github.com/Rsmk27)
-- LinkedIn: [rsmk27](https://linkedin.com/in/rsmk27)
+- LinkedIn: [srinivasamanikanta](https://www.linkedin.com/in/srinivasamanikanta/)
 - Email: srinivasmanikantarajapantula@gmail.com
 
 ---

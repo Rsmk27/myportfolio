@@ -371,7 +371,7 @@ const Home: React.FC = () => {
                     ],
                     "sameAs": [
                         "https://github.com/Rsmk27",
-                        "https://linkedin.com/in/rsmk"
+                        "https://www.linkedin.com/in/srinivasamanikanta/"
                     ]
                 })}</script>
             </Helmet>

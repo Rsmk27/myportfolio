@@ -10,7 +10,7 @@ export const PROFILE: Profile = {
   email: "srinivasmanikantarajapantula@gmail.com",
   socials: [
     { platform: 'github', url: 'https://github.com/Rsmk27' },
-    { platform: 'linkedin', url: 'https://in.linkedin.com/in/rsmk27' },
+    { platform: 'linkedin', url: 'https://www.linkedin.com/in/srinivasamanikanta/' },
     { platform: 'telegram', url: 'https://t.me/RSMK_27' },
     { platform: 'instagram', url: 'https://instagram.com/rsmk_27' },
     { platform: 'x', url: 'https://x.com/SrinivasManik20' },
