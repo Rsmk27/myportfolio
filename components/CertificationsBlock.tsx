@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Cpu, Zap, Fan, Box, Sparkles, LucideIcon, Wifi, Award, X, ChevronRight, ChevronLeft, ShieldCheck, Code, ExternalLink, FileText } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { Cpu, Zap, Fan, Box, Sparkles, LucideIcon, Wifi, Award, X, ChevronRight, ChevronLeft, ShieldCheck, Code, ExternalLink, FileText, Briefcase, BookOpen } from 'lucide-react';
 import GlareHover from './ui/GlareHover';
 export interface Certification {
     id: string;
@@ -8,6 +8,7 @@ export interface Certification {
     issuer: string;
     year: string;
     category: 'Embedded & IoT' | 'AI & Software' | 'Robotics & Hardware' | 'Power & Electrical';
+    type?: 'Course' | 'Professional' | 'Internship';
     icon: React.ComponentType<any>;
     image?: string;
     gallery?: string[];
@@ -137,6 +138,7 @@ export const CERTS: Certification[] = [
         issuer: "Skill Dzire",
         year: "2023",
         category: "Power & Electrical",
+        type: "Internship",
         icon: Zap,
         image: '/assets/certifications/Solar PV design certificate.pdf',
         gallery: ['/assets/certifications/Solar PV design certificate.pdf'],
@@ -151,6 +153,7 @@ export const CERTS: Certification[] = [
         issuer: "Google / Coursera",
         year: "2024",
         category: "AI & Software",
+        type: "Professional",
         icon: Sparkles,
         image: '/assets/certifications/Google AI.pdf',
         gallery: ['/assets/certifications/Google AI.pdf'],
@@ -166,6 +169,7 @@ export const CERTS: Certification[] = [
         issuer: "Microsoft & LinkedIn",
         year: "2024",
         category: "AI & Software",
+        type: "Course",
         icon: Sparkles,
         image: '/assets/certifications/CertificateOfCompletion_Career Essentials in Generative AI by Microsoft and LinkedIn.pdf',
         gallery: ['/assets/certifications/CertificateOfCompletion_Career Essentials in Generative AI by Microsoft and LinkedIn.pdf'],
@@ -180,6 +184,7 @@ export const CERTS: Certification[] = [
         issuer: "GitHub & LinkedIn",
         year: "2024",
         category: "AI & Software",
+        type: "Course",
         icon: Code,
         image: '/assets/certifications/CertificateOfCompletion_Career Essentials in GitHub Professional Certificate.pdf',
         gallery: ['/assets/certifications/CertificateOfCompletion_Career Essentials in GitHub Professional Certificate.pdf'],
@@ -194,6 +199,7 @@ export const CERTS: Certification[] = [
         issuer: "Chefronics Technologies",
         year: "2022",
         category: "Embedded & IoT",
+        type: "Course",
         icon: Cpu,
         image: '/assets/certifications/Chefronics certificate.jpg',
         gallery: ['/assets/certifications/Chefronics certificate.jpg'],
@@ -208,6 +214,7 @@ export const CERTS: Certification[] = [
         issuer: "MathWorks",
         year: "2023",
         category: "Power & Electrical",
+        type: "Course",
         icon: Zap,
         image: '/assets/certifications/MATLAB onramp.pdf',
         gallery: ['/assets/certifications/MATLAB onramp.pdf'],
@@ -222,6 +229,7 @@ export const CERTS: Certification[] = [
         issuer: "MathWorks",
         year: "2023",
         category: "Power & Electrical",
+        type: "Course",
         icon: Cpu,
         image: '/assets/certifications/Simulink onramp.pdf',
         gallery: ['/assets/certifications/Simulink onramp.pdf'],
@@ -236,6 +244,7 @@ export const CERTS: Certification[] = [
         issuer: "DIY Guru",
         year: "2023",
         category: "Power & Electrical",
+        type: "Course",
         icon: Zap,
         image: '/assets/certifications/BMS.pdf',
         gallery: ['/assets/certifications/BMS.pdf'],
@@ -250,6 +259,7 @@ export const CERTS: Certification[] = [
         issuer: "DIY Guru",
         year: "2023",
         category: "Power & Electrical",
+        type: "Course",
         icon: Zap,
         image: '/assets/certifications/EV fundamentals.pdf',
         gallery: ['/assets/certifications/EV fundamentals.pdf'],
@@ -264,6 +274,7 @@ export const CERTS: Certification[] = [
         issuer: "LinkedIn Learning",
         year: "2023",
         category: "AI & Software",
+        type: "Course",
         icon: Sparkles,
         image: '/assets/certifications/Design thinking for innovators.pdf',
         gallery: ['/assets/certifications/Design thinking for innovators.pdf'],
@@ -278,6 +289,7 @@ export const CERTS: Certification[] = [
         issuer: "Cisco Networking Academy",
         year: "2023",
         category: "Embedded & IoT",
+        type: "Course",
         icon: Wifi,
         image: '/assets/certifications/Introduction to IoT and Digital Transformation.pdf',
         gallery: ['/assets/certifications/Introduction to IoT and Digital Transformation.pdf'],
@@ -292,6 +304,7 @@ export const CERTS: Certification[] = [
         issuer: "NPTEL",
         year: "2023",
         category: "Embedded & IoT",
+        type: "Course",
         icon: Wifi,
         image: '/assets/certifications/Introduction to Internet of Things.pdf',
         gallery: ['/assets/certifications/Introduction to Internet of Things.pdf'],
@@ -306,6 +319,7 @@ export const CERTS: Certification[] = [
         issuer: "IBM",
         year: "2023",
         category: "AI & Software",
+        type: "Course",
         icon: Box,
         image: '/assets/certifications/Getting Started with Data.pdf',
         gallery: ['/assets/certifications/Getting Started with Data.pdf'],
@@ -320,6 +334,7 @@ export const CERTS: Certification[] = [
         issuer: "Coromandel International Limited",
         year: "2023",
         category: "Power & Electrical",
+        type: "Internship",
         icon: Zap,
         image: '/assets/experience/coromandel/internship-certificate.jpg',
         gallery: [
@@ -340,6 +355,7 @@ export const CERTS: Certification[] = [
         issuer: "Datavalley India",
         year: "2026",
         category: "Embedded & IoT",
+        type: "Internship",
         icon: Cpu,
         image: '/assets/certifications/Datavalley  Embedded system intership.pdf',
         gallery: ['/assets/certifications/Datavalley  Embedded system intership.pdf'],
@@ -355,6 +371,7 @@ export const CERTS: Certification[] = [
         issuer: "Siemens",
         year: "2026",
         category: "Robotics & Hardware",
+        type: "Course",
         icon: Cpu,
         image: '/assets/certifications/Basics of Robotics.pdf',
         gallery: ['/assets/certifications/Basics of Robotics.pdf'],
@@ -369,6 +386,7 @@ export const CERTS: Certification[] = [
         issuer: "University of Michigan",
         year: "2026",
         category: "Robotics & Hardware",
+        type: "Course",
         icon: Cpu,
         image: '/assets/certifications/AI for Autonomous Vehicles and Robotics.pdf',
         gallery: ['/assets/certifications/AI for Autonomous Vehicles and Robotics.pdf'],
@@ -383,6 +401,7 @@ export const CERTS: Certification[] = [
         issuer: "MathWorks",
         year: "2026",
         category: "Power & Electrical",
+        type: "Course",
         icon: Zap,
         image: '/assets/certifications/Powering the Future with Electrification.pdf',
         gallery: ['/assets/certifications/Powering the Future with Electrification.pdf'],
@@ -397,6 +416,7 @@ export const CERTS: Certification[] = [
         issuer: "University of California, Irvine",
         year: "2026",
         category: "Embedded & IoT",
+        type: "Course",
         icon: Cpu,
         image: '/assets/certifications/Interfacing with the Arduino.pdf',
         gallery: ['/assets/certifications/Interfacing with the Arduino.pdf'],
@@ -411,6 +431,7 @@ export const CERTS: Certification[] = [
         issuer: "MathWorks",
         year: "2026",
         category: "Power & Electrical",
+        type: "Course",
         icon: Cpu,
         image: '/assets/certifications/Modeling and Simulation with Simulink.pdf',
         gallery: ['/assets/certifications/Modeling and Simulation with Simulink.pdf'],
@@ -425,6 +446,7 @@ export const CERTS: Certification[] = [
         issuer: "Coursera",
         year: "2026",
         category: "Embedded & IoT",
+        type: "Professional",
         icon: Cpu,
         image: '/assets/certifications/PLC, HMI.pdf',
         gallery: ['/assets/certifications/PLC, HMI.pdf'],
@@ -439,6 +461,7 @@ export const CERTS: Certification[] = [
         issuer: "MathWorks",
         year: "2026",
         category: "Power & Electrical",
+        type: "Course",
         icon: Cpu,
         image: '/assets/certifications/Designing and Simulating Physical Models.pdf',
         gallery: ['/assets/certifications/Designing and Simulating Physical Models.pdf'],
@@ -453,6 +476,7 @@ export const CERTS: Certification[] = [
         issuer: "MathWorks",
         year: "2026",
         category: "Power & Electrical",
+        type: "Course",
         icon: Zap,
         image: '/assets/certifications/Battery Design and Management.pdf',
         gallery: ['/assets/certifications/Battery Design and Management.pdf'],
@@ -467,6 +491,7 @@ export const CERTS: Certification[] = [
         issuer: "MathWorks",
         year: "2026",
         category: "Power & Electrical",
+        type: "Course",
         icon: Fan,
         image: '/assets/certifications/Electric Motor Modeling and Control.pdf',
         gallery: ['/assets/certifications/Electric Motor Modeling and Control.pdf'],
@@ -481,6 +506,7 @@ export const CERTS: Certification[] = [
         issuer: "MathWorks",
         year: "2026",
         category: "Power & Electrical",
+        type: "Course",
         icon: Zap,
         image: '/assets/certifications/Power Conversion for Electronic Devices.pdf',
         gallery: ['/assets/certifications/Power Conversion for Electronic Devices.pdf'],
@@ -495,6 +521,7 @@ export const CERTS: Certification[] = [
         issuer: "MathWorks",
         year: "2026",
         category: "Power & Electrical",
+        type: "Professional",
         icon: Award,
         image: '/assets/certifications/Electrified Systems Design Engineer.pdf',
         gallery: ['/assets/certifications/Electrified Systems Design Engineer.pdf'],
@@ -510,181 +537,189 @@ interface CertificationsBlockProps {
     isPowered: boolean;
 }
 
-export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowered }) => {
-    const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const [isHovered, setIsHovered] = useState(false);
+interface CredentialRowProps {
+    title: string;
+    badgeLabel: string;
+    badgeCount: number;
+    certs: Certification[];
+    isPowered: boolean;
+    onSelectCert: (cert: Certification) => void;
+    direction?: 'normal' | 'reverse';
+}
+
+const CredentialRow: React.FC<CredentialRowProps> = ({
+    title,
+    badgeLabel,
+    badgeCount,
+    certs,
+    isPowered,
+    onSelectCert,
+    direction = 'normal'
+}) => {
+    const rowRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeftState, setScrollLeftState] = useState(0);
 
-    // Jumble/Shuffle the CERTS array once per session
-    const jumbledCerts = React.useMemo(() => {
-        const shuffled = [...CERTS];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        return shuffled;
-    }, []);
+    // Parallax scroll animation driven by page scroll
+    const { scrollYProgress } = useScroll({
+        target: rowRef,
+        offset: ["start end", "end start"]
+    });
 
-    // Auto-scroll loop using requestAnimationFrame
-    useEffect(() => {
-        const container = scrollRef.current;
-        if (!container || !isPowered) return;
+    const xShift = useTransform(
+        scrollYProgress,
+        [0, 1],
+        direction === 'normal' ? [50, -90] : [-70, 50]
+    );
 
-        let animationFrameId: number;
-        let lastTime = performance.now();
-        const speed = 35; // pixels per second
-
-        const step = (time: number) => {
-            if (!isHovered && !isDragging) {
-                const delta = (time - lastTime) / 1000;
-                container.scrollLeft += speed * delta;
-
-                // Infinite loop: if we scrolled past the first set of items, snap back
-                const halfWidth = container.scrollWidth / 2;
-                if (container.scrollLeft >= halfWidth) {
-                    container.scrollLeft -= halfWidth;
-                }
-            }
-            lastTime = time;
-            animationFrameId = requestAnimationFrame(step);
-        };
-
-        animationFrameId = requestAnimationFrame(step);
-        return () => cancelAnimationFrame(animationFrameId);
-    }, [isHovered, isDragging, isPowered]);
-
-    // Manual navigation buttons scroll
-    const scroll = (direction: 'left' | 'right') => {
-        const container = scrollRef.current;
+    const scroll = (dir: 'left' | 'right') => {
+        const container = containerRef.current;
         if (container) {
-            const { scrollLeft, clientWidth, scrollWidth } = container;
-            const scrollAmount = clientWidth * 0.75;
-            let target = direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount;
-
-            // Handle boundary loops
-            const halfWidth = scrollWidth / 2;
-            if (target < 0) {
-                container.scrollLeft = halfWidth + target;
-                target = halfWidth + target - scrollAmount;
-            } else if (target >= halfWidth) {
-                container.scrollLeft = target - halfWidth;
-                target = target - halfWidth + scrollAmount;
-            }
-
-            container.scrollTo({
-                left: target,
-                behavior: 'smooth'
-            });
+            const scrollAmount = container.clientWidth * 0.75;
+            const target = dir === 'left' ? container.scrollLeft - scrollAmount : container.scrollLeft + scrollAmount;
+            container.scrollTo({ left: target, behavior: 'smooth' });
         }
     };
 
-    // Drag-to-scroll handlers
     const handleMouseDown = (e: React.MouseEvent) => {
-        const container = scrollRef.current;
+        const container = containerRef.current;
         if (!container) return;
         setIsDragging(true);
         setStartX(e.pageX - container.offsetLeft);
         setScrollLeftState(container.scrollLeft);
     };
 
-    const handleMouseLeaveOrUp = () => {
-        setIsDragging(false);
-    };
+    const handleMouseLeaveOrUp = () => setIsDragging(false);
 
     const handleMouseMove = (e: React.MouseEvent) => {
-        const container = scrollRef.current;
+        const container = containerRef.current;
         if (!isDragging || !container) return;
         e.preventDefault();
         const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 1.5; // scroll speed multiplier
+        const walk = (x - startX) * 1.5;
         container.scrollLeft = scrollLeftState - walk;
-
-        // Loop handling during active dragging
-        const halfWidth = container.scrollWidth / 2;
-        if (container.scrollLeft >= halfWidth) {
-            container.scrollLeft -= halfWidth;
-            setStartX(x);
-            setScrollLeftState(container.scrollLeft);
-        } else if (container.scrollLeft < 0) {
-            container.scrollLeft += halfWidth;
-            setStartX(x);
-            setScrollLeftState(container.scrollLeft);
-        }
     };
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 overflow-hidden">
-            
-            {/* Header section matching mockup */}
-            <div className="flex justify-between items-end mb-12 border-b border-zinc-900 pb-4">
+        <div ref={rowRef} className="w-full mb-16 last:mb-0">
+            {/* Row Sub-header */}
+            <div className="flex justify-between items-center mb-6 pb-3 border-b border-zinc-900">
                 <div className="flex items-center gap-3">
-                    <h2 
-                        className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white"
-                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                    >
-                        CREDENTIALS
-                    </h2>
+                    <span className="px-2.5 py-1 rounded bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 font-mono text-xs font-bold uppercase tracking-wider">
+                        {badgeLabel}
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                        {title}
+                    </h3>
+                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-zinc-900 text-cyan-400 border border-zinc-800">
+                        {badgeCount}
+                    </span>
                 </div>
-                {/* Arrow buttons for manual scroll */}
-                <div className="flex items-center gap-2 pb-1">
-                    <button 
+
+                <div className="flex items-center gap-2">
+                    <button
                         onClick={() => scroll('left')}
-                        className="p-2 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
+                        className="p-1.5 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
                         title="Scroll Left"
                     >
-                        <ChevronLeft size={16} strokeWidth={2.5} />
+                        <ChevronLeft size={16} />
                     </button>
-                    <button 
+                    <button
                         onClick={() => scroll('right')}
-                        className="p-2 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
+                        className="p-1.5 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
                         title="Scroll Right"
                     >
-                        <ChevronRight size={16} strokeWidth={2.5} />
+                        <ChevronRight size={16} />
                     </button>
                 </div>
             </div>
 
-            {/* Carousel Container - Infinite Scrolling Marquee (Full Viewport Breakout) */}
-            <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden py-4 mt-4 select-none">
-                
-                <div 
-                    ref={scrollRef}
-                    className="flex gap-6 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-12 md:px-24"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => {
-                        setIsHovered(false);
-                        handleMouseLeaveOrUp();
-                    }}
-                    onMouseDown={handleMouseDown}
-                    onMouseUp={handleMouseLeaveOrUp}
-                    onMouseMove={handleMouseMove}
-                >
-                    {jumbledCerts.map((cert, idx) => (
-                        <div key={`${cert.id}-1`} className="w-[285px] md:w-[320px] flex-shrink-0">
-                            <CertificateCard
-                                cert={cert}
-                                idx={idx}
-                                isPowered={isPowered}
-                                onClick={() => setSelectedCert(cert)}
-                            />
-                        </div>
-                    ))}
-                    {/* Duplicate for seamless infinite loop */}
-                    {jumbledCerts.map((cert, idx) => (
-                        <div key={`${cert.id}-2`} className="w-[285px] md:w-[320px] flex-shrink-0">
-                            <CertificateCard
-                                cert={cert}
-                                idx={idx}
-                                isPowered={isPowered}
-                                onClick={() => setSelectedCert(cert)}
-                            />
-                        </div>
-                    ))}
+            {/* Scroll/Drag Track with Page-Scroll Parallax Motion */}
+            <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden py-2 select-none">
+                <motion.div style={{ x: xShift }}>
+                    <div
+                        ref={containerRef}
+                        className="flex gap-6 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-12 md:px-24"
+                        onMouseDown={handleMouseDown}
+                        onMouseUp={handleMouseLeaveOrUp}
+                        onMouseLeave={handleMouseLeaveOrUp}
+                        onMouseMove={handleMouseMove}
+                    >
+                        {certs.map((cert, idx) => (
+                            <div key={cert.id} className="w-[285px] md:w-[320px] flex-shrink-0">
+                                <CertificateCard
+                                    cert={cert}
+                                    idx={idx}
+                                    isPowered={isPowered}
+                                    onClick={() => onSelectCert(cert)}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+            </div>
+        </div>
+    );
+};
+
+export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowered }) => {
+    const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
+
+    const professionalCerts = React.useMemo(() => CERTS.filter(c => c.type === 'Professional'), []);
+    const internshipCerts = React.useMemo(() => CERTS.filter(c => c.type === 'Internship'), []);
+    const courseCerts = React.useMemo(() => CERTS.filter(c => (c.type || 'Course') === 'Course'), []);
+
+    return (
+        <div className="w-full max-w-7xl mx-auto px-4 overflow-hidden py-8">
+            {/* Main Section Header */}
+            <div className="flex justify-between items-end mb-12 border-b border-zinc-900 pb-6">
+                <div>
+                    <h2 
+                        className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white mb-2"
+                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    >
+                        CREDENTIALS & VERIFICATIONS
+                    </h2>
+                    <p className="text-zinc-400 text-sm md:text-base font-mono">
+                        Industry Recognized Specializations, Industrial Internships & Technical Certifications
+                    </p>
                 </div>
             </div>
+
+            {/* Subsection 1: Professional Certifications */}
+            <CredentialRow
+                title="Professional Certifications"
+                badgeLabel="Specialization"
+                badgeCount={professionalCerts.length}
+                certs={professionalCerts}
+                isPowered={isPowered}
+                onSelectCert={setSelectedCert}
+                direction="normal"
+            />
+
+            {/* Subsection 2: Industrial Internships */}
+            <CredentialRow
+                title="Industrial Internships"
+                badgeLabel="Hands-on Industry"
+                badgeCount={internshipCerts.length}
+                certs={internshipCerts}
+                isPowered={isPowered}
+                onSelectCert={setSelectedCert}
+                direction="reverse"
+            />
+
+            {/* Subsection 3: Technical Course Certifications */}
+            <CredentialRow
+                title="Technical Course Certifications"
+                badgeLabel="Coursework"
+                badgeCount={courseCerts.length}
+                certs={courseCerts}
+                isPowered={isPowered}
+                onSelectCert={setSelectedCert}
+                direction="normal"
+            />
 
             <AnimatePresence>
                 {selectedCert && (
