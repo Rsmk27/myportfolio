@@ -713,6 +713,9 @@ const getIssuerLogos = (issuer: string): string[] => {
     if (issuer.includes('Skill Dzire') || issuer.includes('SkillDzire')) logos.push('/assets/issuers/skilldzire.png');
     if (issuer.includes('ISTE')) logos.push('/assets/issuers/iste.png');
     if (issuer.includes('Datavalley')) logos.push('/assets/issuers/datavalley.png');
+    if (issuer.includes('Chefronics')) logos.push('/assets/issuers/chefronics.png');
+    if (issuer.includes('Michigan')) logos.push('/assets/issuers/umichigan.png');
+    if (issuer.includes('Irvine') || issuer.includes('UC Irvine')) logos.push('/assets/issuers/ucirvine.png');
     return logos;
 };
 
