@@ -562,17 +562,17 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
     const [startX, setStartX] = useState(0);
     const [scrollLeftState, setScrollLeftState] = useState(0);
 
-    // Parallax scroll animation driven by page scroll
+    // Parallax scroll animation driven by page scroll (starts at 0 so first card is always 100% visible)
     const { scrollYProgress } = useScroll({
         target: rowRef,
         offset: ["start end", "end start"]
     });
 
-    const xShift = useTransform(
-        scrollYProgress,
-        [0, 1],
-        direction === 'normal' ? [50, -90] : [-70, 50]
-    );
+    const maxShift = certs.length <= 3 
+        ? (direction === 'normal' ? -60 : 40)
+        : (direction === 'normal' ? -140 : -90);
+
+    const xShift = useTransform(scrollYProgress, [0.15, 0.85], [0, maxShift]);
 
     const scroll = (dir: 'left' | 'right') => {
         const container = containerRef.current;
@@ -603,52 +603,52 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
     };
 
     return (
-        <div ref={rowRef} className="w-full mb-16 last:mb-0">
+        <div ref={rowRef} className="w-full mb-10 last:mb-0">
             {/* Row Sub-header */}
-            <div className="flex justify-between items-center mb-6 pb-3 border-b border-zinc-900">
+            <div className="flex justify-between items-center mb-4 pb-2.5 border-b border-zinc-900">
                 <div className="flex items-center gap-3">
-                    <span className="px-2.5 py-1 rounded bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 font-mono text-xs font-bold uppercase tracking-wider">
+                    <span className="px-2.5 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 font-mono text-[11px] font-bold uppercase tracking-wider">
                         {badgeLabel}
                     </span>
-                    <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    <h3 className="text-lg md:text-xl font-bold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                         {title}
                     </h3>
-                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-zinc-900 text-cyan-400 border border-zinc-800">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-cyan-400 border border-zinc-800">
                         {badgeCount}
                     </span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                     <button
                         onClick={() => scroll('left')}
-                        className="p-1.5 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
+                        className="p-1 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
                         title="Scroll Left"
                     >
-                        <ChevronLeft size={16} />
+                        <ChevronLeft size={15} />
                     </button>
                     <button
                         onClick={() => scroll('right')}
-                        className="p-1.5 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
+                        className="p-1 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
                         title="Scroll Right"
                     >
-                        <ChevronRight size={16} />
+                        <ChevronRight size={15} />
                     </button>
                 </div>
             </div>
 
             {/* Scroll/Drag Track with Page-Scroll Parallax Motion */}
-            <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden py-2 select-none">
+            <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden py-1 select-none">
                 <motion.div style={{ x: xShift }}>
                     <div
                         ref={containerRef}
-                        className="flex gap-6 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-12 md:px-24"
+                        className="flex gap-4 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-8 md:px-20"
                         onMouseDown={handleMouseDown}
                         onMouseUp={handleMouseLeaveOrUp}
                         onMouseLeave={handleMouseLeaveOrUp}
                         onMouseMove={handleMouseMove}
                     >
                         {certs.map((cert, idx) => (
-                            <div key={cert.id} className="w-[285px] md:w-[320px] flex-shrink-0">
+                            <div key={cert.id} className="w-[220px] md:w-[250px] flex-shrink-0">
                                 <CertificateCard
                                     cert={cert}
                                     idx={idx}
@@ -781,27 +781,27 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                 borderColor={isPowered ? (cert.isVerifiedBadge ? 'rgba(6,182,212,0.3)' : '#18181b') : '#1e1e1e'}
                 glareColor={isPowered ? '#00f2ff' : '#222222'}
                 glareOpacity={isPowered ? 0.12 : 0.05}
-                glareSize={240}
-                className={`relative p-6 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between cursor-pointer border min-h-[380px]
+                glareSize={200}
+                className={`relative p-4 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between cursor-pointer border min-h-[290px]
                     ${isPowered && cert.isVerifiedBadge ? 'shadow-[0_0_15px_rgba(6,182,212,0.03)] border-cyan-500/25' : ''}
                     ${!isPowered ? 'opacity-40 cursor-not-allowed pointer-events-none' : ''}`}
             >
                 {/* Translucent Watermark Year */}
                 <div 
-                    className="absolute right-4 bottom-2 text-8xl font-black font-mono select-none tracking-tighter pointer-events-none opacity-[0.02] transition-all duration-500 group-hover:scale-105 group-hover:opacity-[0.05]"
+                    className="absolute right-3 bottom-1 text-7xl font-black font-mono select-none tracking-tighter pointer-events-none opacity-[0.02] transition-all duration-500 group-hover:scale-105 group-hover:opacity-[0.05]"
                     style={{ color: isPowered ? '#ffffff' : '#444444' }}
                 >
                     {cert.year}
                 </div>
 
-                <div className="w-full relative z-10 flex flex-col h-full justify-between gap-4">
-                    <div className="flex flex-col gap-4">
-                        {/* Preview Container with fixed aspect ratio */}
-                        <div className="w-full aspect-[4/3] rounded-lg overflow-hidden border border-zinc-900 bg-black flex items-center justify-center relative group-hover:border-cyan-500/30 transition-colors">
+                <div className="w-full relative z-10 flex flex-col h-full justify-between gap-3">
+                    <div className="flex flex-col gap-3">
+                        {/* Preview Container with compact aspect ratio */}
+                        <div className="w-full aspect-[16/10] rounded-lg overflow-hidden border border-zinc-900 bg-black flex items-center justify-center relative group-hover:border-cyan-500/30 transition-colors">
                             {/* Loading Shimmer / Spinner */}
                             {!isLoaded && previewImage && (
                                 <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-900/50 to-zinc-950 animate-pulse flex items-center justify-center z-10">
-                                    <div className="w-6 h-6 border-2 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin" />
+                                    <div className="w-5 h-5 border-2 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin" />
                                 </div>
                             )}
 
@@ -816,52 +816,52 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                                 />
                             ) : (
                                 <div className="w-full h-full flex flex-col items-center justify-center bg-zinc-950 text-zinc-700">
-                                    <Award size={24} className="opacity-30" />
-                                    <span className="text-[9px] mt-1 font-mono">NO IMAGE PREVIEW</span>
+                                    <Award size={20} className="opacity-30" />
+                                    <span className="text-[8px] mt-1 font-mono">NO IMAGE PREVIEW</span>
                                 </div>
                             )}
                         </div>
 
-                        {/* Header Row: Issuer Logos (or Category Icon fallback) and verified badge */}
-                        <div className="flex justify-between items-center gap-2 min-h-[36px]">
+                        {/* Header Row: Issuer Logos and verified badge */}
+                        <div className="flex justify-between items-center gap-2 min-h-[30px]">
                             <div className="flex items-center gap-2">
                                 {issuerLogos.length > 0 ? (
-                                    <div className="flex items-center gap-3 h-9 px-0.5">
+                                    <div className="flex items-center gap-2 h-7 px-0.5">
                                         {issuerLogos.map((logo, i) => (
                                             <img
                                                 key={i}
                                                 src={logo}
                                                 alt={cert.issuer}
-                                                className="h-7 md:h-8 w-auto max-w-[110px] object-contain opacity-95 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
+                                                className="h-5 md:h-6 w-auto max-w-[90px] object-contain opacity-95 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
                                             />
                                         ))}
                                     </div>
                                 ) : (
                                     <div 
-                                        className={`p-2 rounded-lg border transition-all duration-300
+                                        className={`p-1.5 rounded-lg border transition-all duration-300
                                             ${isPowered 
                                                 ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.08)]' 
                                                 : 'bg-zinc-900 border-zinc-800 text-zinc-600'
                                             }`}
                                     >
-                                        <cert.icon size={18} strokeWidth={1.5} />
+                                        <cert.icon size={16} strokeWidth={1.5} />
                                     </div>
                                 )}
                             </div>
 
                             {isPowered && cert.isVerifiedBadge ? (
-                                <div className="flex items-center gap-1 text-[9px] font-mono font-black text-cyan-400 bg-cyan-950/40 border border-cyan-500/20 px-2 py-0.5 rounded shadow-[0_0_6px_rgba(6,182,212,0.15)]">
-                                    <ShieldCheck size={11} strokeWidth={2} />
+                                <div className="flex items-center gap-1 text-[8px] font-mono font-black text-cyan-400 bg-cyan-950/40 border border-cyan-500/20 px-1.5 py-0.5 rounded shadow-[0_0_6px_rgba(6,182,212,0.15)]">
+                                    <ShieldCheck size={10} strokeWidth={2} />
                                     <span>VERIFIED</span>
                                 </div>
                             ) : (
-                                <div className={`flex items-center gap-1 text-[9px] font-mono font-bold px-2 py-0.5 rounded border
+                                <div className={`flex items-center gap-1 text-[8px] font-mono font-bold px-1.5 py-0.5 rounded border
                                     ${isPowered 
                                         ? 'bg-zinc-950/30 border-zinc-900/80 text-zinc-500' 
                                         : 'bg-zinc-950 border-zinc-900 text-zinc-700'
                                     }`}
                                 >
-                                    <Award size={10} strokeWidth={2} />
+                                    <Award size={9} strokeWidth={2} />
                                     <span>SECURE</span>
                                 </div>
                             )}
@@ -869,7 +869,7 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
 
                         {/* Title & Info */}
                         <div>
-                            <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 border rounded uppercase mb-2 inline-block
+                            <span className={`text-[8px] font-mono font-bold px-1.5 py-0.5 border rounded uppercase mb-1 inline-block
                                 ${isPowered
                                     ? 'text-amber-500/80 border-amber-500/20 bg-amber-950/10'
                                     : 'text-zinc-600 border-zinc-900 bg-zinc-950'
@@ -877,10 +877,10 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                             >
                                 {cert.category || 'Engineering'}
                             </span>
-                            <h4 className={`text-base font-black tracking-tight leading-snug mb-1 line-clamp-2 ${isPowered ? 'text-white' : 'text-zinc-500'}`}>
+                            <h4 className={`text-xs md:text-sm font-bold tracking-tight leading-snug mb-0.5 line-clamp-2 ${isPowered ? 'text-white' : 'text-zinc-500'}`}>
                                 {cert.title}
                             </h4>
-                            <p className={`text-xs font-mono uppercase tracking-wider ${isPowered ? 'text-zinc-500' : 'text-zinc-600'}`}>
+                            <p className={`text-[10px] font-mono uppercase tracking-wider ${isPowered ? 'text-zinc-500' : 'text-zinc-600'}`}>
                                 {cert.issuer}
                             </p>
                         </div>
@@ -888,33 +888,33 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
 
                     <div>
                         {/* Gained Skills Preview */}
-                        <div className="mt-2 flex flex-wrap gap-1 relative z-10">
-                            {cert.skills?.slice(0, 3).map((skill, index) => (
-                                <span key={index} className="text-[9px] px-1.5 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
+                        <div className="mt-1 flex flex-wrap gap-1 relative z-10">
+                            {cert.skills?.slice(0, 2).map((skill, index) => (
+                                <span key={index} className="text-[8px] px-1 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
                                     {skill}
                                 </span>
                             )) || (
-                                <span className="text-[9px] px-1.5 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
+                                <span className="text-[8px] px-1 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
                                     Engineering
                                 </span>
                             )}
-                            {cert.skills && cert.skills.length > 3 && (
-                                <span className="text-[9px] px-1 py-0.5 text-zinc-600">
-                                    +{cert.skills.length - 3} more
+                            {cert.skills && cert.skills.length > 2 && (
+                                <span className="text-[8px] px-1 py-0.5 text-zinc-600">
+                                    +{cert.skills.length - 2} more
                                 </span>
                             )}
                         </div>
 
                         {/* View Credential CTA Link */}
                         <div 
-                            className={`flex items-center gap-1.5 text-[10px] font-mono font-black uppercase tracking-widest transition-all duration-300 mt-4 relative z-10
+                            className={`flex items-center gap-1 text-[9px] font-mono font-black uppercase tracking-widest transition-all duration-300 mt-2 relative z-10
                                 ${isPowered
                                     ? 'text-cyan-500/80 group-hover:text-cyan-300 group-hover:translate-x-1'
                                     : 'text-zinc-700'
                                 }`}
                         >
                             <span>View Credential</span>
-                            <ChevronRight size={12} strokeWidth={3.5} />
+                            <ChevronRight size={11} strokeWidth={3.5} />
                         </div>
                     </div>
                 </div>
