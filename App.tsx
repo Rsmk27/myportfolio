@@ -60,7 +60,7 @@ const App: React.FC = () => {
 
     return (
         <HelmetProvider>
-            <ReactLenis root options={{ lerp: 0.08, wheelMultiplier: 0.8, smoothTouch: false, syncTouch: false }}>
+            <ReactLenis root options={{ lerp: 0.08, wheelMultiplier: 0.8, syncTouch: false }}>
                 <Router>
                     <ScrollToTop />
                     <AnimatedRoutes />

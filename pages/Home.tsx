@@ -728,7 +728,7 @@ const Home: React.FC = () => {
                                         alt={`Srinivasa Manikanta Rajapantula (RSMK) — Embedded Systems & IoT Engineer Portfolio Image`}
                                         className="w-full h-full object-cover"
                                         loading="eager"
-                                        fetchpriority="high"
+                                        fetchPriority="high"
                                         decoding="sync"
                                         width="192"
                                         height="192"
