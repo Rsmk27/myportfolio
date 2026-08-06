@@ -9,8 +9,12 @@ import Gallery from './pages/Gallery';
 import NotFound from './pages/NotFound';
 
 
+import { usePageTracking } from './hooks/useAnalytics';
+
 const ScrollToTop = () => {
     const { pathname } = useLocation();
+    usePageTracking();
+    
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
@@ -56,7 +60,7 @@ const App: React.FC = () => {
 
     return (
         <HelmetProvider>
-            <ReactLenis root options={{ lerp: 0.05, wheelMultiplier: 0.8 }}>
+            <ReactLenis root options={{ lerp: 0.08, wheelMultiplier: 0.8, smoothTouch: false, syncTouch: false }}>
                 <Router>
                     <ScrollToTop />
                     <AnimatedRoutes />

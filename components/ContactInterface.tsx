@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion';
 import { Profile, Social } from '../types';
 import { Mail, Github, Linkedin, Twitter, Send, Terminal, Wifi, Activity, Instagram, RefreshCw } from 'lucide-react';
+import { trackInteraction } from '../utils/analytics';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -398,6 +399,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
     const handleCommand = (e: React.FormEvent): void => {
         e.preventDefault();
         if (!consoleInput.trim() || isLoading || isLimitReached) return;
+        trackInteraction('ai_chat_send', 'ai_terminal', consoleInput.slice(0, 50));
         sendToAI(consoleInput);
     };
 
@@ -659,6 +661,7 @@ const ContactCard: React.FC<{
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackInteraction('contact_click', 'contact', `${label}: ${value}`)}
         style={isPowered ? {
             '--hover-border': `${brandColor}80`,
         } as React.CSSProperties : {}}

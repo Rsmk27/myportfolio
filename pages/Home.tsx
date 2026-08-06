@@ -16,6 +16,8 @@ import {
     ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { useSectionObserver, useScrollDepthTracking } from '../hooks/useAnalytics';
+import { trackInteraction } from '../utils/analytics';
 
 /* ─── Reduced-motion hook ───────────────────────────────────────── */
 function usePrefersReducedMotion() {
@@ -270,9 +272,13 @@ const Home: React.FC = () => {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    // Automatically track scroll depth and section entry / dwell time for GA4 & Microsoft Clarity
+    useSectionObserver();
+    useScrollDepthTracking();
+
     /* Active section via IntersectionObserver */
     useEffect(() => {
-        const sectionIds = ['about', 'projects', 'skills', 'certifications', 'experience', 'contact'];
+        const sectionIds = ['hero', 'about', 'projects', 'skills', 'certifications', 'experience', 'contact'];
         const observers: IntersectionObserver[] = [];
         sectionIds.forEach(id => {
             const el = document.getElementById(id);
@@ -317,6 +323,7 @@ const Home: React.FC = () => {
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: string) => {
         e.preventDefault();
         const id = item.toLowerCase();
+        trackInteraction('nav_click', 'navigation', item);
         const el = document.getElementById(id);
         if (el) { el.scrollIntoView({ behavior: 'smooth' }); window.history.pushState(null, '', `#${id}`); }
         setMobileMenuOpen(false);
@@ -469,6 +476,7 @@ const Home: React.FC = () => {
                                 target="_blank"
                                 rel="noreferrer"
                                 title="View Resume"
+                                onClick={() => trackInteraction('view_resume', 'resume', 'Header')}
                                 className="flex items-center gap-1 px-3 py-1.5 border border-amber-500/40 text-amber-400 text-[11px] font-bold rounded-l-lg hover:bg-amber-500/10 hover:border-amber-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
                             >
                                 <Eye size={11} />
@@ -478,6 +486,7 @@ const Home: React.FC = () => {
                                 href={PROFILE.resume}
                                 download="Srinivasa_Manikanta_Resume.pdf"
                                 title="Download Resume"
+                                onClick={() => trackInteraction('download_resume', 'resume', 'Header')}
                                 className="flex items-center gap-1 px-2.5 py-1.5 border border-l-0 border-amber-500/40 text-amber-400 text-[11px] font-bold rounded-r-lg hover:bg-amber-500/10 hover:border-amber-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
                             >
                                 <Download size={11} />
@@ -598,7 +607,7 @@ const Home: React.FC = () => {
                     </AnimatePresence>
 
                     {/* ══ 1. HERO ════════════════════════════════════════════ */}
-                    <section className="min-h-[100dvh] flex flex-col items-center justify-center relative pt-24 pb-16 text-center">
+                    <section id="hero" data-clarity-region="hero" className="min-h-[100dvh] flex flex-col items-center justify-center relative pt-24 pb-16 text-center">
 
                         <div className="relative z-10 flex flex-col items-center gap-8 max-w-4xl mx-auto w-full px-4">
 
@@ -793,7 +802,7 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* ══ 2. ABOUT ═══════════════════════════════════════════ */}
-                    <section id="about" className="py-24 max-w-6xl mx-auto">
+                    <section id="about" data-clarity-region="about" className="py-24 max-w-6xl mx-auto">
                         <SectionHeader title="About Me" subtitle="" isPowered={isPowered} />
 
                         <Reveal>
@@ -867,7 +876,7 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* ══ 3. PROJECTS ════════════════════════════════════════ */}
-                    <section id="projects" className="mb-24 md:mb-40 relative">
+                    <section id="projects" data-clarity-region="projects" className="mb-24 md:mb-40 relative">
                         <SectionHeader title="Projects" subtitle="" isPowered={isPowered} />
                         
                         {/* Control Arrows for Projects */}
@@ -918,24 +927,24 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* ══ 4. SKILLS ══════════════════════════════════════════ */}
-                    <section id="skills" className="mb-24 md:mb-40">
+                    <section id="skills" data-clarity-region="skills" className="mb-24 md:mb-40">
                         <SkillBreadboard isPowered={isPowered} />
                     </section>
 
                     {/* ══ 5. CERTIFICATIONS ══════════════════════════════════ */}
-                    <section id="certifications" className="mb-24 md:mb-40">
+                    <section id="certifications" data-clarity-region="certifications" className="mb-24 md:mb-40">
                         <CertificationsBlock isPowered={isPowered} />
 
                     </section>
 
                     {/* ══ 6. EXPERIENCE / TIMELINE ═══════════════════════════ */}
-                    <section id="experience" className="mb-24 md:mb-40">
+                    <section id="experience" data-clarity-region="experience" className="mb-24 md:mb-40">
                         <SectionHeader title="Timeline" subtitle="" isPowered={isPowered} flip />
                         <TimelineSystem experience={EXPERIENCE} education={EDUCATION} isPowered={isPowered} />
                     </section>
 
                     {/* ══ 7. CONTACT ══════════════════════════════════════════ */}
-                    <section id="contact" className="mb-20 max-w-6xl mx-auto">
+                    <section id="contact" data-clarity-region="contact" className="mb-20 max-w-6xl mx-auto">
                         <SectionHeader title="Contact" subtitle="Establish Uplink" isPowered={isPowered} />
                         <ContactInterface profile={PROFILE} isPowered={isPowered} />
                     </section>

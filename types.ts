@@ -54,3 +54,12 @@ export interface Social {
   platform: 'github' | 'linkedin' | 'twitter' | 'email' | 'telegram' | 'instagram' | 'x';
   url: string;
 }
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+    clarity?: (...args: any[]) => void;
+    dataLayer?: any[];
+  }
+}
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, Zap, Fan, Box, Sparkles, LucideIcon, Wifi, Award, X, ChevronRight, ChevronLeft, ShieldCheck, Code, ExternalLink, FileText, Briefcase, BookOpen } from 'lucide-react';
 import GlareHover from './ui/GlareHover';
 export interface Certification {
@@ -554,25 +554,11 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
     certs,
     isPowered,
     onSelectCert,
-    direction = 'normal'
 }) => {
-    const rowRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeftState, setScrollLeftState] = useState(0);
-
-    // Parallax scroll animation driven by page scroll (starts at 0 so first card is always 100% visible)
-    const { scrollYProgress } = useScroll({
-        target: rowRef,
-        offset: ["start end", "end start"]
-    });
-
-    const maxShift = certs.length <= 3 
-        ? (direction === 'normal' ? -60 : 40)
-        : (direction === 'normal' ? -140 : -90);
-
-    const xShift = useTransform(scrollYProgress, [0.15, 0.85], [0, maxShift]);
 
     const scroll = (dir: 'left' | 'right') => {
         const container = containerRef.current;
@@ -603,7 +589,7 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
     };
 
     return (
-        <div ref={rowRef} className="w-full mb-10 last:mb-0">
+        <div className="w-full mb-10 last:mb-0">
             {/* Row Sub-header */}
             <div className="flex justify-between items-center mb-4 pb-2.5 border-b border-zinc-900">
                 <div className="flex items-center gap-3">
@@ -636,29 +622,27 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
                 </div>
             </div>
 
-            {/* Scroll/Drag Track with Page-Scroll Parallax Motion */}
+            {/* Scroll/Drag Track */}
             <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden py-1 select-none">
-                <motion.div style={{ x: xShift }}>
-                    <div
-                        ref={containerRef}
-                        className="flex gap-4 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-8 md:px-20"
-                        onMouseDown={handleMouseDown}
-                        onMouseUp={handleMouseLeaveOrUp}
-                        onMouseLeave={handleMouseLeaveOrUp}
-                        onMouseMove={handleMouseMove}
-                    >
-                        {certs.map((cert, idx) => (
-                            <div key={cert.id} className="w-[220px] md:w-[250px] flex-shrink-0">
-                                <CertificateCard
-                                    cert={cert}
-                                    idx={idx}
-                                    isPowered={isPowered}
-                                    onClick={() => onSelectCert(cert)}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
+                <div
+                    ref={containerRef}
+                    className="flex gap-4 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-8 md:px-20"
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseLeaveOrUp}
+                    onMouseLeave={handleMouseLeaveOrUp}
+                    onMouseMove={handleMouseMove}
+                >
+                    {certs.map((cert, idx) => (
+                        <div key={cert.id} className="w-[220px] md:w-[250px] flex-shrink-0">
+                            <CertificateCard
+                                cert={cert}
+                                idx={idx}
+                                isPowered={isPowered}
+                                onClick={() => onSelectCert(cert)}
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

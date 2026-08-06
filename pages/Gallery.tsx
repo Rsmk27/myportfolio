@@ -5,6 +5,7 @@ import { ArrowLeft, Image as ImageIcon, X, ChevronLeft, ChevronRight } from 'luc
 import { motion, AnimatePresence } from 'framer-motion';
 import Masonry from '../components/ui/Masonry';
 import { PROFILE } from '../constants';
+import { trackInteraction } from '../utils/analytics';
 
 const GALLERY_IMAGES = [
   // A-Hacks 24hr Hackathon — 2nd Place 🥈
@@ -119,6 +120,7 @@ const Gallery: React.FC = () => {
     if (idx !== -1) {
       setSelectedImg(item.img);
       setSelectedIdx(idx);
+      trackInteraction('gallery_view_image', 'gallery', GALLERY_IMAGES[idx].alt || item.img);
     }
   };
 
@@ -155,7 +157,7 @@ const Gallery: React.FC = () => {
   }, [selectedIdx]);
 
   return (
-    <div className="min-h-screen relative selection:bg-cyan-500/30 font-mono text-gray-300 bg-black overflow-hidden">
+    <div data-clarity-region="gallery-page" className="min-h-screen relative selection:bg-cyan-500/30 font-mono text-gray-300 bg-black overflow-hidden">
       <Helmet>
         <title>Photo Gallery | {PROFILE.name} — Engineering Projects &amp; Hackathon Wins</title>
         <meta name="description" content="Explore Srinivasa Manikanta's engineering gallery: 2nd place A-Hacks Hackathon hardware build, Coromandel industrial internship, and 3D printing workshops." />

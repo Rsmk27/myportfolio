@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Wifi, Code2, Zap, BatteryCharging, Cog, Globe, type LucideIcon } from 'lucide-react';
+import { trackInteraction } from '../utils/analytics';
 
 interface SkillBreadboardProps {
     isPowered: boolean;
@@ -296,7 +297,10 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
                     return (
                         <button
                             key={cat.id}
-                            onClick={() => setActiveId(cat.id)}
+                            onClick={() => {
+                                setActiveId(cat.id);
+                                trackInteraction('skill_filter_click', 'skills', cat.title);
+                            }}
                             className={`px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] border rounded-full
                 transition-all duration-250 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500
                 ${isActive
