@@ -5,7 +5,7 @@
  * scroll depth logging, and interactive user action analytics.
  */
 
-export const GA_MEASUREMENT_ID = 'G-44KP7M10FT';
+export const GA_MEASUREMENT_ID = 'GT-NGWZVS9N';
 export const CLARITY_ID = 'xu4xh3aqb9';
 
 /**
