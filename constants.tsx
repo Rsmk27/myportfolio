@@ -99,23 +99,24 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'p2',
-    title: 'Industrial Automation & Control – CODESYS & Factory I/O Simulation',
-    description: "Hands-on industrial automation project implementing PLC ladder logic, Factory I/O 3D plant simulation, Modbus TCP communication, and HMI control screens.",
-    tech: ['CODESYS', 'Factory I/O', 'Modbus TCP', 'Siemens PLC', 'TIA Portal', 'Ladder Logic', 'HMI', 'Control Systems'],
+    title: 'Industrial Automation & Control – CODESYS, CCW & Factory I/O Simulation',
+    description: "Hands-on industrial automation projects implementing PLC ladder logic, 1-way traffic light controls, Factory I/O 3D plant simulation, Modbus TCP, and Optix Studio HMI interfaces.",
+    tech: ['CODESYS', 'CCW', 'Optix Studio', 'Factory I/O', 'Modbus TCP', 'Siemens PLC', 'TIA Portal', 'Ladder Logic', 'HMI'],
     image: '/assets/certifications/PLC, HMI.png',
-    link: 'https://github.com/Rsmk27',
-    details: "A comprehensive control systems project demonstrating industrial automation principles through simulation. Using CODESYS (IEC 61131-3 standard) and Siemens TIA Portal, ladder logic routines were developed to control automated sorting lines, conveyor systems, and motor interlocks modeled inside Factory I/O's 3D real-time simulation environment. Data exchange between the soft-PLC and 3D plant sensors/actuators was established via Modbus TCP protocols. Designed to bridge theoretical control systems engineering with practical industrial automation workflows.",
+    link: 'https://www.youtube.com/watch?v=2pnFLqmh6X4',
+    videoUrl: 'https://www.youtube.com/embed/2pnFLqmh6X4?si=bMa0rI5bS4guHmpI',
+    details: "A comprehensive control systems project demonstrating industrial automation principles through multi-platform simulation. Using CODESYS (IEC 61131-3 standard), Connected Components Workbench (CCW), and Siemens TIA Portal, ladder logic routines were developed for automated sorting lines, 1-way traffic light sequence controls, and motor interlocks. Designed HMI screens using FactoryTalk Optix Studio and Factory I/O 3D real-time simulation environments connected via Modbus TCP protocols.",
     features: [
-      "PLC Ladder Logic development following IEC 61131-3 standards in CODESYS & TIA Portal",
+      "PLC Ladder Logic development in CODESYS, Connected Components Workbench (CCW) & TIA Portal",
+      "1-Way Traffic Light control system simulation built with CCW and Optix Studio HMI",
       "3D industrial plant environment simulation using Factory I/O",
       "Modbus TCP communication bridge linking virtual PLC controllers to 3D actuators",
-      "HMI interface design for real-time process monitoring, manual overrides, and alarm status",
-      "Conveyor sorting logic, emergency stop circuits, and motor interlock sequence design",
+      "HMI interface layout design in Optix Studio for real-time process monitoring and manual overrides",
       "Hands-on project work focused on industrial automation and control engineering"
     ],
     award: '⚙️ Industrial Automation',
-    awards: ['⚙️ Control Systems', '🕹️ CODESYS & Factory I/O', '📡 Modbus TCP'],
-    keywords: 'codesys plc simulation, factory io modbus tcp, industrial automation project, ladder logic hmi control'
+    awards: ['⚙️ Control Systems', '🕹️ CODESYS & CCW', '📡 Modbus TCP', '🎥 Video Demos'],
+    keywords: 'codesys plc simulation, ccw optix studio traffic light, factory io modbus tcp, industrial automation project'
   },
   {
     id: 'p3',

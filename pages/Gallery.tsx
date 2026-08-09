@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Image as ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Image as ImageIcon, X, ChevronLeft, ChevronRight, Video } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Masonry from '../components/ui/Masonry';
 import { PROFILE } from '../constants';
@@ -202,6 +202,76 @@ const Gallery: React.FC = () => {
 
         {/* ── Masonry Grid ── */}
         <div className="flex-1 relative min-h-0 overflow-y-auto px-4 sm:px-6 md:px-8 max-w-7xl mx-auto w-full pb-16" data-lenis-prevent>
+          {/* Featured Video Showcase */}
+          <div className="mb-10 w-full rounded-2xl border border-cyan-500/30 bg-zinc-950/80 p-4 md:p-6 backdrop-blur-md shadow-[0_0_30px_rgba(0,242,255,0.1)]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 border-b border-zinc-800/80 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+                  <Video size={20} />
+                </div>
+                <div>
+                  <h2 className="text-base sm:text-lg font-bold text-white uppercase tracking-tight flex items-center gap-2">
+                    Industrial Automation &amp; PLC Video Demos
+                  </h2>
+                  <p className="text-xs text-zinc-400 font-mono">
+                    Hands-on control system simulations, CODESYS, CCW &amp; Optix Studio HMI walkthroughs by Srinivasa Manikanta
+                  </p>
+                </div>
+              </div>
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-mono text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-3 py-1 rounded-full uppercase tracking-wider self-start sm:self-auto">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                Featured Demos
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Video 1: CODESYS */}
+              <div className="flex flex-col gap-2">
+                <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-zinc-800 bg-black shadow-2xl">
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/2pnFLqmh6X4?si=bMa0rI5bS4guHmpI"
+                    title="Industrial Automation Learning on CODESYS — Srinivasa Manikanta Rajapantula"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="px-1">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wide">
+                    CODESYS &amp; Factory I/O Automation
+                  </h3>
+                  <p className="text-[11px] text-zinc-400 font-mono">
+                    PLC ladder logic and 3D plant simulation walkthrough
+                  </p>
+                </div>
+              </div>
+
+              {/* Video 2: CCW & Optix Studio Traffic Light */}
+              <div className="flex flex-col gap-2">
+                <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-zinc-800 bg-black shadow-2xl">
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/qIJbTBcBfjE?si=dHV9mN0rskOJEg3J"
+                    title="1-Way Traffic Light Control using CCW and Optix Studio — Srinivasa Manikanta Rajapantula"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="px-1">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wide">
+                    1-Way Traffic Light Control — CCW &amp; Optix Studio
+                  </h3>
+                  <p className="text-[11px] text-zinc-400 font-mono">
+                    Traffic light sequence logic in CCW &amp; FactoryTalk Optix Studio HMI
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
           <Masonry
             items={masonryItems}
             ease="power3.out"
