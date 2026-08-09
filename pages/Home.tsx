@@ -312,10 +312,10 @@ const Home: React.FC = () => {
     }, []);
 
     const statusTicker = [
-        'ONLINE | BUILDING SMART ENERGY SYSTEMS',
-        'SYNC | EMBEDDED + IOT WORKFLOWS',
-        'FOCUS | AUTOMATION & POWER SYSTEMS',
-        'MODE | SHIPPING REAL-WORLD SOLUTIONS',
+        'ONLINE | EMBEDDED SYSTEMS & INDUSTRIAL AUTOMATION',
+        'FOCUS | PLC, CODESYS & CONTROL SYSTEMS',
+        'SYNC | ESP32, IOT & SMART ENERGY',
+        'MODE | SHIPPING REAL-WORLD ENGINEERING PROJECTS',
     ];
 
     const navItems = ['About', 'Projects', 'Skills', 'Certifications', 'Experience', 'Contact'];
@@ -334,11 +334,11 @@ const Home: React.FC = () => {
             <EasterEgg />
             <Helmet>
                 {/* Title */}
-                <title>RSMK | Embedded Systems, IoT &amp; EEE Projects – Srinivasa Manikanta</title>
+                <title>Srinivasa Manikanta Rajapantula | EEE Student – Embedded Systems, Industrial Automation &amp; IoT</title>
 
                 {/* Primary SEO */}
-                <meta name="description" content="RSMK Technologies – Portfolio of Srinivasa Manikanta Rajapantula. ESP32 IoT projects, resistor color code calculator app, solar tracker, firefighter wearable, agricultural rover, and smart energy systems for EEE students in India." />
-                <meta name="keywords" content="resistor color code calculator, arduino vs esp32 india, iot projects for eee students, esp32 firebase tutorial, solar panel tracking system, single axis solar tracker, iot farming robot, agri rover esp32, firefighter monitoring system india, solar dewatering system india, smart energy management, embedded systems internship india, eee fresher jobs hyderabad" />
+                <meta name="description" content="Portfolio of Srinivasa Manikanta Rajapantula — Electrical &amp; Electronics Engineering Student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy." />
+                <meta name="keywords" content="Srinivasa Manikanta Rajapantula, RSMK, Electrical Engineering, EEE student, Embedded Systems, Industrial Automation, PLC programming, CODESYS, Factory IO, Modbus TCP, Smart Energy, ESP32, SFMD, ColorOhm, Vijayawada" />
                 <meta name="author" content={PROFILE.name} />
                 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
                 <link rel="canonical" href="https://rsmk.me" />
@@ -347,20 +347,20 @@ const Home: React.FC = () => {
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://rsmk.me" />
                 <meta property="og:site_name" content={`${PROFILE.name} (RSMK) Portfolio`} />
-                <meta property="og:title" content="RSMK – IoT &amp; EEE Projects Portfolio | India" />
-                <meta property="og:description" content="ESP32 projects, ColorOhm resistor calculator, solar tracker, firefighter wearable IoT, agricultural rover – by Srinivasa Manikanta, EEE engineer." />
+                <meta property="og:title" content="Srinivasa Manikanta Rajapantula | Embedded Systems, Industrial Automation &amp; IoT" />
+                <meta property="og:description" content="EEE student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy. Featured projects: SFMD, CODESYS simulation, ColorOhm, and AgriRover." />
                 <meta property="og:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
-                <meta property="og:image:alt" content={`Portrait of ${PROFILE.name}, EEE Engineer`} />
+                <meta property="og:image:alt" content={`Portrait of ${PROFILE.name}, Electrical & Electronics Engineer`} />
                 <meta property="og:locale" content="en_IN" />
 
                 {/* Twitter / X */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:site" content="@SrinivasManik20" />
                 <meta name="twitter:creator" content="@SrinivasManik20" />
-                <meta name="twitter:title" content="RSMK – IoT &amp; EEE Projects Portfolio | India" />
-                <meta name="twitter:description" content="ESP32 projects, ColorOhm resistor calculator, solar tracker, firefighter wearable IoT, agricultural rover – by Srinivasa Manikanta, EEE engineer." />
+                <meta name="twitter:title" content="Srinivasa Manikanta Rajapantula | Embedded Systems &amp; Industrial Automation" />
+                <meta name="twitter:description" content="EEE student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Modbus TCP), IoT, and Smart Energy." />
                 <meta name="twitter:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
                 <meta name="twitter:image:alt" content={`Portrait of ${PROFILE.name}, EEE Engineer`} />
 
@@ -371,10 +371,11 @@ const Home: React.FC = () => {
                     "name": "Srinivasa Manikanta Rajapantula",
                     "alternateName": "RSMK",
                     "url": "https://rsmk.me",
-                    "jobTitle": "Embedded Systems & IoT Engineer",
+                    "jobTitle": "Electrical & Electronics Engineering Student",
                     "knowsAbout": [
-                        "ESP32", "Arduino", "IoT Projects", "Resistor Color Code Calculator",
-                        "Solar Tracker", "Smart Energy Systems", "EEE Engineering India"
+                        "Embedded Systems", "Industrial Automation", "PLC Programming", "CODESYS",
+                        "Factory I/O", "Modbus TCP", "ESP32", "Arduino", "IoT Projects",
+                        "Resistor Color Code Calculator", "Solar Tracker", "Smart Energy Systems"
                     ],
                     "sameAs": [
                         "https://github.com/Rsmk27",
@@ -824,8 +825,8 @@ const Home: React.FC = () => {
                                         className="mb-8 space-y-4 flex flex-col items-center w-full"
                                     >
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-2xl mx-auto">
-                                            <StatChip icon={<Cpu size={16} />} label="Specialty" value="Embedded / IoT" delay={0.05} />
-                                            <StatChip icon={<MapPin size={16} />} label="Location" value="Srikakulam, AP" delay={0.1} />
+                                            <StatChip icon={<Cpu size={16} />} label="Specialty" value="Embedded / Automation" delay={0.05} />
+                                            <StatChip icon={<MapPin size={16} />} label="Location" value="Vijayawada, AP" delay={0.1} />
                                             <StatChip icon={<Briefcase size={16} />} label="Experience" value="Industrial Intern" delay={0.15} />
                                             <StatChip icon={<GraduationCap size={16} />} label="Degree" value="B.Tech EEE" delay={0.2} />
                                         </div>
@@ -861,13 +862,13 @@ const Home: React.FC = () => {
                                         style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: 1.75 }}
                                     >
                                         <p>
-                                            I’m <span className="text-white font-semibold">Srinivasa Manikanta Rajapantula (RSMK)</span>, an Electrical and Electronics Engineering student driven by a passion for building practical technology that solves real-world problems. My core interests span <span className="text-cyan-400 font-medium">Electrical Engineering, Embedded Systems, Industrial Automation, PLC Programming, Microcontrollers, Internet of Things (IoT), Artificial Intelligence, and Full-Stack Development</span>. I enjoy combining electrical engineering principles with modern software and intelligent hardware to design systems that are reliable, efficient, and built with a clear purpose.
+                                            I’m <span className="text-white font-semibold">Srinivasa Manikanta Rajapantula (RSMK)</span>, an Electrical &amp; Electronics Engineering student based in <span className="text-cyan-400 font-medium">Vijayawada, Andhra Pradesh, India</span> (with diploma education background from Government Polytechnic Srikakulam). My core engineering work focuses on <span className="text-cyan-400 font-medium">Electrical Engineering, Embedded Systems, Industrial Automation (PLC Programming, CODESYS, Factory I/O, Modbus TCP), IoT, Smart Energy Systems, and Control Engineering</span>.
                                         </p>
                                         <p>
-                                            Over the years, I have developed projects ranging from IoT monitoring systems and engineering tools to AI-powered applications and modern web platforms. My technical experience includes working with <span className="text-cyan-400 font-medium">Arduino, ESP32, MATLAB, PLCs, C/C++, Python, JavaScript, React, Firebase, GitHub, and modern development workflows</span>. I continuously expand my knowledge through hands-on experimentation, technical courses, and personal projects because I believe engineering is best learned by designing, building, testing, and improving. My goal is to contribute to technologies that advance electrical engineering, industrial automation, embedded intelligence, and AI-driven engineering solutions.
+                                            Over the years, I have built real-world engineering hardware prototypes and control simulations ranging from wearable safety devices (SFMD) and 3D industrial sorting lines to solar trackers and agricultural robotics. I utilize Web Development as a supporting skill to create low-latency telemetry dashboards, responsive operator control interfaces, and calculation software for hardware systems.
                                         </p>
                                         <p>
-                                            I also embrace <span className="text-amber-400 font-semibold animate-pulse-slow">vibe coding</span> as part of my development workflow. Rather than relying solely on traditional coding methods, I leverage modern AI tools to accelerate development, explore new ideas, automate repetitive tasks, and rapidly prototype solutions. For me, AI is not a replacement for engineering knowledge—it is a powerful collaborator that allows me to focus more on system design, problem-solving, and innovation while maintaining a strong understanding of the technologies behind every project I build.
+                                            Through my industrial internship at Coromandel International Limited, I gained hands-on field experience with 11kV distribution networks, steam turbine thermodynamic analysis, induction motor diagnostics, and ISO 50001 energy management. I also leverage AI tools and modern workflows to accelerate system design, rapidly prototype software interfaces, and automate repetitive tasks while maintaining strict engineering rigor.
                                         </p>
                                     </div>
                                 </div>
