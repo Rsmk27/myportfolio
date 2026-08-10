@@ -559,6 +559,9 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeftState, setScrollLeftState] = useState(0);
+    // Track whether the user actually dragged (vs just clicked)
+    const hasDragged = useRef(false);
+    const mouseDownX = useRef(0);
 
     const scroll = (dir: 'left' | 'right') => {
         const container = containerRef.current;
@@ -573,6 +576,8 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
         const container = containerRef.current;
         if (!container) return;
         setIsDragging(true);
+        hasDragged.current = false;
+        mouseDownX.current = e.pageX;
         setStartX(e.pageX - container.offsetLeft);
         setScrollLeftState(container.scrollLeft);
     };
@@ -586,6 +591,16 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
         const x = e.pageX - container.offsetLeft;
         const walk = (x - startX) * 1.5;
         container.scrollLeft = scrollLeftState - walk;
+        // Mark as dragged if moved more than 5px horizontally
+        if (Math.abs(e.pageX - mouseDownX.current) > 5) {
+            hasDragged.current = true;
+        }
+    };
+
+    // Guard: only open modal on a genuine click, not after a drag
+    const handleCardClick = (cert: Certification) => {
+        if (hasDragged.current) return;
+        onSelectCert(cert);
     };
 
     return (
@@ -637,7 +652,7 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
                             cert={cert}
                             idx={idx}
                             isPowered={isPowered}
-                            onClick={() => onSelectCert(cert)}
+                            onClick={() => handleCardClick(cert)}
                         />
                     </div>
                 ))}
@@ -740,6 +755,9 @@ const getIssuerLogos = (issuer: string): string[] => {
 
 const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: boolean; onClick: () => void }> = ({ cert, idx, isPowered, onClick }) => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const touchStartX = useRef(0);
+    const touchStartY = useRef(0);
+    const touchMoved = useRef(false);
 
     // Reset loaded state when active cert changes
     useEffect(() => {
@@ -752,10 +770,33 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
 
     const issuerLogos = getIssuerLogos(cert.issuer);
 
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+        touchStartY.current = e.touches[0].clientY;
+        touchMoved.current = false;
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
+        const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
+        if (dx > 8 || dy > 8) touchMoved.current = true;
+    };
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        if (touchMoved.current) {
+            e.preventDefault(); // suppress synthetic click after scroll
+            return;
+        }
+        onClick();
+    };
+
     return (
         <div
             className="group h-full transition-transform duration-300 hover:-translate-y-1.5"
             onClick={onClick}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
         >
             <GlareHover
                 width="100%"
@@ -915,92 +956,136 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
         setActiveImageIndex(0);
     }, [cert]);
 
+    // Close on Escape key
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+        window.addEventListener('keydown', handler);
+        return () => window.removeEventListener('keydown', handler);
+    }, [onClose]);
+
     const mainSrc = cert.gallery ? cert.gallery[activeImageIndex] : cert.image;
     const modalIssuerLogos = getIssuerLogos(cert.issuer);
+    const hasMultiple = cert.gallery && cert.gallery.length > 1;
 
     return (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md"
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm p-2 md:p-4"
             onClick={onClose}
         >
             <motion.div
-                initial={{ scale: 0.92, opacity: 0 }}
+                initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.92, opacity: 0 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
                 onClick={(e) => e.stopPropagation()}
-                className={`w-full max-w-4xl rounded-2xl overflow-hidden border shadow-2xl flex flex-col max-h-[90vh]
-                    ${isPowered ? 'bg-[#09090b] border-cyan-950/60' : 'bg-white border-gray-200'}`}
+                className={`relative w-full max-w-6xl rounded-2xl border shadow-2xl flex flex-col
+                    overflow-y-auto max-h-[95vh]
+                    md:overflow-hidden md:h-[min(95vh,900px)]
+                    ${isPowered ? 'bg-[#09090b] border-zinc-800' : 'bg-white border-gray-200'}
+                `}
             >
-                <div className={`p-4 border-b flex justify-between items-center ${isPowered ? 'border-cyan-950/40 bg-black/40' : 'border-gray-100 bg-gray-50'}`}>
-                    <div className="flex items-center gap-3">
+                {/* ── Header bar ── */}
+                <div className={`flex-shrink-0 flex items-center justify-between gap-3 px-4 py-3 border-b
+                    ${isPowered ? 'border-zinc-800 bg-zinc-950/80' : 'border-gray-100 bg-gray-50'}`}
+                >
+                    <div className="flex items-center gap-3 min-w-0">
                         {modalIssuerLogos.length > 0 && (
-                            <div className="flex items-center gap-3 h-10 px-1">
+                            <div className="flex items-center gap-2 flex-shrink-0">
                                 {modalIssuerLogos.map((logo, i) => (
                                     <img
                                         key={i}
                                         src={logo}
                                         alt={cert.issuer}
-                                        className="h-8 md:h-9 w-auto max-w-[120px] object-contain drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
+                                        className="h-7 w-auto max-w-[90px] object-contain opacity-95 drop-shadow"
                                     />
                                 ))}
                             </div>
                         )}
-                        <div>
-                            <h3 className={`text-lg font-black tracking-tight ${isPowered ? 'text-white' : 'text-gray-950'}`}>{cert.title}</h3>
-                            <p className={`text-xs font-mono uppercase tracking-widest ${isPowered ? 'text-cyan-400' : 'text-blue-600'}`}>{cert.issuer} // {cert.year}</p>
+                        <div className="min-w-0">
+                            <h3 className={`text-sm md:text-base font-black tracking-tight truncate ${isPowered ? 'text-white' : 'text-gray-900'}`}>
+                                {cert.title}
+                            </h3>
+                            <p className={`text-[10px] font-mono uppercase tracking-widest truncate ${isPowered ? 'text-cyan-400' : 'text-blue-600'}`}>
+                                {cert.issuer} · {cert.year}
+                                {cert.credentialId && <span className="ml-2 opacity-60">#{cert.credentialId}</span>}
+                            </p>
                         </div>
                     </div>
-                    <button onClick={onClose} className={`p-2 rounded-full transition-colors cursor-pointer ${isPowered ? 'hover:bg-cyan-950/20 text-gray-500 hover:text-cyan-400' : 'hover:bg-gray-100 text-gray-600'}`}>
+                    <button
+                        onClick={onClose}
+                        className={`flex-shrink-0 p-2 rounded-full transition-colors cursor-pointer
+                            ${isPowered ? 'hover:bg-zinc-800 text-zinc-400 hover:text-cyan-400' : 'hover:bg-gray-100 text-gray-500'}`}
+                        aria-label="Close"
+                    >
                         <X size={20} />
                     </button>
                 </div>
 
-                <div className="flex-1 overflow-auto p-6 bg-black flex items-center justify-center min-h-[50vh]">
+                {/* ── Main certificate display ── */}
+                {/* Mobile: content height, capped so it doesn't overflow */}
+                {/* Desktop: flex-1 fills all remaining space */}
+                <div className={`flex items-center justify-center overflow-hidden
+                    ${isPowered ? 'bg-black' : 'bg-gray-100'}
+                    md:flex-1 md:min-h-0
+                `}
+                >
                     {mainSrc ? (
                         mainSrc.endsWith('.mp4') ? (
-                            <video src={mainSrc} controls autoPlay muted loop className="max-w-full max-h-[60vh] object-contain rounded border border-cyan-950/40 shadow-[0_0_40px_rgba(0,242,255,0.05)]" />
+                            <video
+                                src={mainSrc}
+                                controls
+                                autoPlay
+                                muted
+                                loop
+                                className="max-w-full max-h-[70vw] md:w-full md:h-full md:max-h-none object-contain"
+                            />
                         ) : mainSrc.endsWith('.pdf') ? (
-                            <iframe 
-                                src={`${mainSrc}#toolbar=0&navpanes=0&scrollbar=0`} 
+                            <iframe
+                                src={`${mainSrc}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
                                 title={cert.title}
-                                className="w-full h-full min-h-[44vh] lg:min-h-[54vh] rounded border border-cyan-950/30 bg-zinc-950"
+                                className="w-full border-0"
+                                style={{ height: 'clamp(260px, 65vw, 100%)' }}
                             />
                         ) : (
-                            <img src={mainSrc} alt={cert.title} className="max-w-full max-h-[60vh] object-contain rounded border border-cyan-950/40 shadow-[0_0_40px_rgba(0,242,255,0.05)]" />
+                            <img
+                                src={mainSrc}
+                                alt={cert.title}
+                                className="max-w-full max-h-[70vw] md:w-full md:h-full md:max-h-none object-contain"
+                            />
                         )
                     ) : (
-                        <div className="text-gray-600 flex flex-col items-center">
-                            <Box size={44} className="mb-2 opacity-30" />
+                        <div className="text-gray-600 flex flex-col items-center gap-2">
+                            <Box size={44} className="opacity-30" />
                             <p className="font-mono text-xs">Certificate Preview Not Available</p>
                         </div>
                     )}
                 </div>
 
-                {cert.gallery && cert.gallery.length > 1 && (
-                    <div className={`p-4 border-t flex gap-3 overflow-x-auto justify-center ${isPowered ? 'border-cyan-950/40 bg-[#050506]' : 'border-gray-100 bg-gray-50'}`}>
-                        {cert.gallery.map((src, i) => (
+                {/* ── Thumbnail strip — only shown when multiple gallery items ── */}
+                {hasMultiple && (
+                    <div className={`flex-shrink-0 flex gap-2 px-4 py-2.5 border-t overflow-x-auto
+                        ${isPowered ? 'border-zinc-800 bg-zinc-950/80' : 'border-gray-100 bg-gray-50'}`}
+                    >
+                        {cert.gallery!.map((src, i) => (
                             <button
                                 key={i}
                                 onClick={() => setActiveImageIndex(i)}
-                                className={`w-20 h-14 rounded overflow-hidden border flex-shrink-0 transition-all duration-300 cursor-pointer
-                                    ${activeImageIndex === i 
-                                        ? 'border-cyan-500 scale-105 opacity-100 shadow-[0_0_8px_rgba(6,182,212,0.25)]' 
-                                        : isPowered 
-                                            ? 'border-cyan-950/60 opacity-60 hover:opacity-100' 
+                                className={`w-16 h-11 rounded overflow-hidden border flex-shrink-0 transition-all duration-200 cursor-pointer
+                                    ${activeImageIndex === i
+                                        ? 'border-cyan-500 scale-105 opacity-100 shadow-[0_0_8px_rgba(6,182,212,0.3)]'
+                                        : isPowered
+                                            ? 'border-zinc-800 opacity-50 hover:opacity-80 hover:border-zinc-600'
                                             : 'border-gray-300 opacity-60 hover:opacity-100'
                                     }`}
                             >
                                 {src.endsWith('.mp4') ? (
-                                    <div className="w-full h-full bg-zinc-950 flex items-center justify-center text-cyan-500 text-[10px] font-bold font-mono">
-                                        VIDEO
-                                    </div>
+                                    <div className="w-full h-full bg-zinc-950 flex items-center justify-center text-cyan-500 text-[9px] font-bold font-mono">▶ VID</div>
                                 ) : src.endsWith('.pdf') ? (
-                                    <div className="w-full h-full bg-zinc-900 flex items-center justify-center text-red-500 text-[10px] font-bold font-mono border border-red-950/20">
-                                        PDF
-                                    </div>
+                                    <div className="w-full h-full bg-zinc-900 flex items-center justify-center text-red-400 text-[9px] font-bold font-mono">PDF</div>
                                 ) : (
                                     <img src={src} className="w-full h-full object-cover" alt="" />
                                 )}
@@ -1012,3 +1097,4 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
         </motion.div>
     );
 };
+
