@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Wifi, Code2, Zap, BatteryCharging, Cog, Globe, type LucideIcon } from 'lucide-react';
+import { Cpu, Wifi, Code2, Zap, Cog, type LucideIcon } from 'lucide-react';
 import { trackInteraction } from '../utils/analytics';
 
 interface SkillBreadboardProps {
@@ -19,120 +19,139 @@ interface SkillCategory {
     borderClass: string;
     bgClass: string;
     skills: string[];
-    note?: string;         // optional footnote e.g. "AI-assisted"
+    note?: string;         // optional footnote
 }
+
+// Map skill names to their PNG/SVG logo URLs
+const SKILL_LOGO_MAP: Record<string, string> = {
+    'PLC Programming': '/assets/logos/codesys.svg',
+    'CODESYS': '/assets/logos/codesys.svg',
+    'Factory I/O': '/assets/logos/factoryio.svg',
+    'Connected Components Workbench': '/assets/logos/ccw.svg',
+    'Optix Studio HMI': '/assets/logos/optix-studio.svg',
+    'Optix Studio': '/assets/logos/optix-studio.svg',
+    'Modbus TCP': '/assets/logos/modbus.svg',
+    'SCADA': '/assets/logos/factoryio.svg',
+    'Ladder Logic': '/assets/logos/codesys.svg',
+    'ESP32': '/assets/logos/esp32.svg',
+    'Arduino': '/assets/logos/arduino.svg',
+    'Embedded C/C++': '/assets/logos/cplusplus.svg',
+    'UART / I2C / SPI': '/assets/logos/modbus.svg',
+    'Wokwi': '/assets/logos/wokwi.svg',
+    'TinkerCAD': '/assets/logos/tinkercad.svg',
+    'IoT System Design': '/assets/logos/mqtt.svg',
+    'MQTT': '/assets/logos/mqtt.svg',
+    'Firebase RTDB': '/assets/logos/firebase.svg',
+    'Firebase': '/assets/logos/firebase.svg',
+    'Telemetry & Dashboards': '/assets/logos/thingspeak.svg',
+    'ThingSpeak Cloud': '/assets/logos/thingspeak.svg',
+    'Blynk IoT': '/assets/logos/blynk.svg',
+    'Substation Transformers': '/assets/issuers/coromandel.png',
+    'Generation, Transmission & Distribution': '/assets/logos/power-grid.svg',
+    'Generation, Transmission and Distribution': '/assets/logos/power-grid.svg',
+    'Electrical Machines': '/assets/logos/modbus.svg',
+    'Converters & Inverters': '/assets/logos/esp32.svg',
+    'MATLAB / Simulink': '/assets/issuers/mathworks.png',
+    'MATLAB': '/assets/issuers/mathworks.png',
+    'Simulink': '/assets/issuers/mathworks.png',
+    'Python': '/assets/logos/python.svg',
+    'C/C++': '/assets/logos/cplusplus.svg',
+    'GitHub': '/assets/issuers/github.png',
+    'VS Code': '/assets/logos/vscode.svg',
+};
 
 const CATEGORIES: SkillCategory[] = [
     {
         id: 'automation',
-        title: 'Electrical & Industrial Automation',
+        title: 'Industrial Automation & Control',
         icon: Cog,
-        label: 'Industrial Domain',
+        label: 'Automation Domain',
         accent: '#22d3ee',
         textClass: 'text-cyan-400',
         badgeClass: 'bg-cyan-500/10 text-cyan-300 border-cyan-400/25 hover:bg-cyan-500/20 hover:border-cyan-400/50',
         glowClass: 'shadow-[0_0_28px_rgba(34,211,238,0.22)]',
         borderClass: 'border-cyan-500/30',
         bgClass: 'from-cyan-950/20 to-transparent',
-        skills: ['PLC Programming', 'CODESYS', 'Factory I/O', 'Modbus TCP', 'Siemens TIA Portal', 'HMI Systems', 'SCADA', 'Control Systems', 'Ladder Logic'],
+        skills: ['PLC Programming', 'CODESYS', 'Factory I/O', 'Connected Components Workbench', 'Optix Studio HMI', 'Modbus TCP', 'SCADA', 'Ladder Logic'],
         note: 'Hands-on project & simulation-based control learning'
     },
     {
         id: 'embedded',
         title: 'Embedded Systems & Firmware',
         icon: Cpu,
-        label: 'Hardware & Microcontrollers',
+        label: 'Hardware & Firmware',
         accent: '#38bdf8',
         textClass: 'text-sky-400',
         badgeClass: 'bg-sky-500/10 text-sky-300 border-sky-400/25 hover:bg-sky-500/20 hover:border-sky-400/50',
         glowClass: 'shadow-[0_0_28px_rgba(56,189,248,0.22)]',
         borderClass: 'border-sky-500/30',
         bgClass: 'from-sky-950/20 to-transparent',
-        skills: ['ESP32', 'Arduino', 'Embedded C', 'Embedded C++', 'UART', 'I2C', 'SPI', 'Sensors & Actuators'],
+        skills: ['ESP32', 'Arduino', 'Embedded C/C++', 'UART / I2C / SPI', 'Wokwi', 'TinkerCAD'],
     },
     {
         id: 'iot',
-        title: 'Internet of Things (IoT)',
+        title: 'Internet of Things (IoT) & Telemetry',
         icon: Wifi,
-        label: 'Telemetry & Connectivity',
+        label: 'IoT & Telemetry',
         accent: '#34d399',
         textClass: 'text-emerald-400',
         badgeClass: 'bg-emerald-500/10 text-emerald-300 border-emerald-400/25 hover:bg-emerald-500/20 hover:border-emerald-400/50',
         glowClass: 'shadow-[0_0_28px_rgba(52,211,153,0.22)]',
         borderClass: 'border-emerald-500/30',
         bgClass: 'from-emerald-950/20 to-transparent',
-        skills: ['IoT System Design', 'MQTT', 'Cloud Integration', 'Firebase RTDB', 'Real-time Telemetry Dashboards'],
-    },
-    {
-        id: 'software',
-        title: 'Engineering Software & Simulation',
-        icon: Code2,
-        label: 'Modeling & Analytics',
-        accent: '#a78bfa',
-        textClass: 'text-violet-400',
-        badgeClass: 'bg-violet-500/10 text-violet-300 border-violet-400/25 hover:bg-violet-500/20 hover:border-violet-400/50',
-        glowClass: 'shadow-[0_0_28px_rgba(167,139,250,0.22)]',
-        borderClass: 'border-violet-500/30',
-        bgClass: 'from-violet-950/20 to-transparent',
-        skills: ['MATLAB', 'Simulink', 'Power System Simulation', 'ISO 50001 Energy Modeling', 'Circuit Analysis'],
+        skills: ['IoT System Design', 'MQTT', 'Firebase RTDB', 'Telemetry & Dashboards', 'ThingSpeak Cloud', 'Blynk IoT'],
     },
     {
         id: 'power',
-        title: 'Power Systems & Distribution',
+        title: 'Power Systems & Power Electronics',
         icon: Zap,
-        label: 'Electrical Utility',
+        label: 'Power & Energy',
         accent: '#f59e0b',
         textClass: 'text-amber-400',
         badgeClass: 'bg-amber-500/10 text-amber-300 border-amber-400/25 hover:bg-amber-500/20 hover:border-amber-400/50',
         glowClass: 'shadow-[0_0_28px_rgba(245,158,11,0.22)]',
         borderClass: 'border-amber-500/30',
         bgClass: 'from-amber-950/20 to-transparent',
-        skills: ['Power Generation', 'Transmission & Distribution', '11kV/440V Networks', 'Substation Transformers', 'Electrical Machines'],
+        skills: ['Generation, Transmission & Distribution', 'Substation Transformers', 'Electrical Machines', 'Converters & Inverters'],
     },
     {
-        id: 'electronics',
-        title: 'Power Electronics & Motor Drives',
-        icon: BatteryCharging,
-        label: 'Conversion & Drives',
-        accent: '#f97316',
-        textClass: 'text-orange-400',
-        badgeClass: 'bg-orange-500/10 text-orange-300 border-orange-400/25 hover:bg-orange-500/20 hover:border-orange-400/50',
-        glowClass: 'shadow-[0_0_28px_rgba(249,115,22,0.22)]',
-        borderClass: 'border-orange-500/30',
-        bgClass: 'from-orange-950/20 to-transparent',
-        skills: ['Converters', 'Inverters', 'Motor Drives', 'Thyristors', 'Choppers', 'PWM Control'],
-    },
-    {
-        id: 'supporting',
-        title: 'Supporting Software & Web Tooling',
-        icon: Globe,
-        label: 'Interfaces & Dashboards',
-        accent: '#6b7280',
-        textClass: 'text-gray-400',
-        badgeClass: 'bg-gray-700/30 text-gray-400 border-gray-600/30 hover:bg-gray-700/50 hover:border-gray-500/50',
-        glowClass: 'shadow-[0_0_28px_rgba(107,114,128,0.14)]',
-        borderClass: 'border-gray-700/30',
-        bgClass: 'from-gray-900/30 to-transparent',
-        skills: ['Python', 'C/C++', 'JavaScript', 'React.js', 'React Native', 'Expo', 'Vite', 'Firebase'],
-        note: 'Supporting tools used to build web interfaces, monitoring dashboards & mobile utilities',
+        id: 'software',
+        title: 'Engineering Software & Tools',
+        icon: Code2,
+        label: 'Software & Tools',
+        accent: '#818cf8',
+        textClass: 'text-indigo-400',
+        badgeClass: 'bg-indigo-500/10 text-indigo-300 border-indigo-400/25 hover:bg-indigo-500/20 hover:border-indigo-400/50',
+        glowClass: 'shadow-[0_0_28px_rgba(129,140,248,0.22)]',
+        borderClass: 'border-indigo-500/30',
+        bgClass: 'from-indigo-950/20 to-transparent',
+        skills: ['MATLAB / Simulink', 'Python', 'C/C++', 'GitHub', 'VS Code'],
+        note: 'Engineering simulation tools, version control & development environments'
     },
 ];
 
-/* ── Skill Chip ────────────────────────────────────────── */
+/* ── Skill Chip with PNG/SVG Logo ───────────────────────── */
 const SkillChip: React.FC<{ label: string; badgeClass: string; delay: number; isPowered: boolean }> = ({
     label, badgeClass, delay, isPowered
-}) => (
-    <motion.span
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.25, delay }}
-        className={`inline-flex items-center px-3 py-1.5 rounded-lg border text-[11px] md:text-xs font-mono
-      tracking-wide cursor-default transition-all duration-200 select-none
-      ${isPowered ? badgeClass : 'bg-gray-100 text-gray-600 border-gray-300 hover:bg-gray-200'}`}
-    >
-        {label}
-    </motion.span>
-);
+}) => {
+    const logoUrl = SKILL_LOGO_MAP[label];
+
+    return (
+        <motion.span
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.25, delay }}
+            className={`inline-flex items-center px-3 py-1.5 rounded-lg border text-[11px] md:text-xs font-mono
+      tracking-wide cursor-default transition-all duration-200 select-none gap-1.5
+      ${isPowered ? badgeClass : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'}`}
+        >
+            {logoUrl && (
+                <img src={logoUrl} alt={label} className="w-4 h-4 object-contain inline-block shrink-0" />
+            )}
+            <span>{label}</span>
+        </motion.span>
+    );
+};
 
 /* ── Category Card ─────────────────────────────────────── */
 const CategoryCard: React.FC<{
@@ -141,7 +160,8 @@ const CategoryCard: React.FC<{
     isActive: boolean;
     isPowered: boolean;
     onActivate: () => void;
-}> = ({ cat, idx, isActive, isPowered, onActivate }) => {
+    className?: string;
+}> = ({ cat, idx, isActive, isPowered, onActivate, className = '' }) => {
     const Icon = cat.icon;
 
     return (
@@ -149,9 +169,9 @@ const CategoryCard: React.FC<{
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: idx * 0.06 }}
+            transition={{ duration: 0.4, delay: idx * 0.05 }}
             onClick={onActivate}
-            className={`relative rounded-2xl border overflow-hidden cursor-pointer group transition-all duration-400
+            className={`relative rounded-2xl border overflow-hidden cursor-pointer group transition-all duration-400 flex flex-col justify-between h-full ${className}
         ${isPowered
                     ? `bg-black/50 backdrop-blur-sm ${isActive ? `border-[${cat.accent}]/40 ${cat.glowClass}` : 'border-gray-800 hover:border-gray-600'}`
                     : `bg-white border-gray-200 hover:border-gray-400 ${isActive ? 'shadow-md' : ''}`
@@ -210,7 +230,7 @@ const CategoryCard: React.FC<{
             </div>
 
             {/* Skills Chips */}
-            <div className="relative p-5">
+            <div className="relative p-5 flex-1 flex flex-col justify-between">
                 <div className="flex flex-wrap gap-2">
                     {cat.skills.map((skill, si) => (
                         <SkillChip
@@ -237,9 +257,6 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
     const [activeId, setActiveId] = useState(CATEGORIES[0].id);
     const activeCategory = CATEGORIES.find((c) => c.id === activeId) ?? CATEGORIES[0];
 
-    const coreCategories = CATEGORIES.filter((c) => c.id !== 'supporting');
-    const additionalCategory = CATEGORIES.find((c) => c.id === 'supporting')!;
-
     return (
         <div className="relative w-full max-w-7xl mx-auto px-4">
 
@@ -262,13 +279,13 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
                     Skills Engine
                 </h2>
                 <p className={`text-sm font-mono max-w-xl mx-auto ${isPowered ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Domain expertise across hardware, firmware, power systems &amp; more.
+                    Domain expertise across hardware, firmware, power systems, software &amp; protocols.
                 </p>
             </div>
 
-            {/* Core 6 categories — 2-col grid */}
-            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 mb-4">
-                {coreCategories.map((cat, idx) => (
+            {/* 5 Grouped Categories Grid */}
+            <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6 items-stretch">
+                {CATEGORIES.map((cat, idx) => (
                     <CategoryCard
                         key={cat.id}
                         cat={cat}
@@ -278,17 +295,6 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
                         onActivate={() => setActiveId(cat.id)}
                     />
                 ))}
-            </div>
-
-            {/* Additional / AI-Assisted — full width, visually distinct */}
-            <div className="relative">
-                <CategoryCard
-                    cat={additionalCategory}
-                    idx={6}
-                    isActive={additionalCategory.id === activeId}
-                    isPowered={isPowered}
-                    onActivate={() => setActiveId(additionalCategory.id)}
-                />
             </div>
 
             {/* Domain filter pills at bottom */}

@@ -1079,7 +1079,7 @@ export default function DomeGallery({
                         alt={it.alt}
                         loading={imgLoading}
                         decoding="async"
-                        fetchpriority={imgPriority}
+                        fetchPriority={imgPriority}
                         className="w-full h-full object-cover pointer-events-none"
                         style={{
                           backfaceVisibility: 'hidden',
