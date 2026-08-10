@@ -98,27 +98,6 @@ export const PROJECTS: Project[] = [
     keywords: 'firefighter monitoring system india, esp32 wearable safety device, mpu6050 fall detection, iot firefighter telemetry'
   },
   {
-    id: 'p2',
-    title: 'Industrial Automation & Control – CODESYS, CCW & Factory I/O Simulation',
-    description: "Hands-on industrial automation projects implementing PLC ladder logic, 1-way traffic light controls, Factory I/O 3D plant simulation, Modbus TCP, and Optix Studio HMI interfaces.",
-    tech: ['CODESYS', 'CCW', 'Optix Studio', 'Factory I/O', 'Modbus TCP', 'Siemens PLC', 'TIA Portal', 'Ladder Logic', 'HMI'],
-    image: '/assets/certifications/PLC, HMI.png',
-    link: 'https://www.youtube.com/watch?v=2pnFLqmh6X4',
-    videoUrl: 'https://www.youtube.com/embed/2pnFLqmh6X4?si=bMa0rI5bS4guHmpI',
-    details: "A comprehensive control systems project demonstrating industrial automation principles through multi-platform simulation. Using CODESYS (IEC 61131-3 standard), Connected Components Workbench (CCW), and Siemens TIA Portal, ladder logic routines were developed for automated sorting lines, 1-way traffic light sequence controls, and motor interlocks. Designed HMI screens using FactoryTalk Optix Studio and Factory I/O 3D real-time simulation environments connected via Modbus TCP protocols.",
-    features: [
-      "PLC Ladder Logic development in CODESYS, Connected Components Workbench (CCW) & TIA Portal",
-      "1-Way Traffic Light control system simulation built with CCW and Optix Studio HMI",
-      "3D industrial plant environment simulation using Factory I/O",
-      "Modbus TCP communication bridge linking virtual PLC controllers to 3D actuators",
-      "HMI interface layout design in Optix Studio for real-time process monitoring and manual overrides",
-      "Hands-on project work focused on industrial automation and control engineering"
-    ],
-    award: '⚙️ Industrial Automation',
-    awards: ['⚙️ Control Systems', '🕹️ CODESYS & CCW', '📡 Modbus TCP', '🎥 Video Demos'],
-    keywords: 'codesys plc simulation, ccw optix studio traffic light, factory io modbus tcp, industrial automation project'
-  },
-  {
     id: 'p3',
     title: 'ColorOhm – Resistor Color Code Calculator App',
     description: 'A precision resistor color band decoder available as a published Android app (v1.0.0) and web utility, supporting 4-band, 5-band, and SMD resistor standards for engineering students.',

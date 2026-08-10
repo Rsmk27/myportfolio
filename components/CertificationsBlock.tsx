@@ -623,26 +623,26 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
             </div>
 
             {/* Scroll/Drag Track */}
-            <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden py-1 select-none">
-                <div
-                    ref={containerRef}
-                    className="flex gap-4 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-8 md:px-20"
-                    onMouseDown={handleMouseDown}
-                    onMouseUp={handleMouseLeaveOrUp}
-                    onMouseLeave={handleMouseLeaveOrUp}
-                    onMouseMove={handleMouseMove}
-                >
-                    {certs.map((cert, idx) => (
-                        <div key={cert.id} className="w-[220px] md:w-[250px] flex-shrink-0">
-                            <CertificateCard
-                                cert={cert}
-                                idx={idx}
-                                isPowered={isPowered}
-                                onClick={() => onSelectCert(cert)}
-                            />
-                        </div>
-                    ))}
-                </div>
+            <div
+                ref={containerRef}
+                className="flex gap-4 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing py-2 select-none -mx-4 px-4"
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseLeaveOrUp}
+                onMouseLeave={handleMouseLeaveOrUp}
+                onMouseMove={handleMouseMove}
+            >
+                {certs.map((cert, idx) => (
+                    <div key={cert.id} className="w-[220px] md:w-[250px] flex-shrink-0">
+                        <CertificateCard
+                            cert={cert}
+                            idx={idx}
+                            isPowered={isPowered}
+                            onClick={() => onSelectCert(cert)}
+                        />
+                    </div>
+                ))}
+                {/* Trailing spacer so last card doesn't flush to edge */}
+                <div className="w-4 flex-shrink-0" />
             </div>
         </div>
     );
@@ -656,7 +656,7 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
     const courseCerts = React.useMemo(() => CERTS.filter(c => (c.type || 'Course') === 'Course'), []);
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 overflow-hidden py-8">
+        <div className="w-full max-w-7xl mx-auto px-4 py-8">
             {/* Main Section Header */}
             <div className="flex justify-between items-end mb-12 border-b border-zinc-900 pb-6">
                 <div>
