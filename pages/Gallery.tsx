@@ -67,6 +67,7 @@ const GALLERY_IMAGES = [
   { src: '/assets/certifications/Electric Motor Modeling and Control.png', alt: 'MathWorks — Electric Motor Modeling and Control course completion certificate' },
   { src: '/assets/certifications/Power Conversion for Electronic Devices.png', alt: 'MathWorks — Power Conversion for Electronic Devices course completion certificate' },
   { src: '/assets/certifications/Electrified Systems Design Engineer.png', alt: 'MathWorks — Electrified Systems Design Engineer professional certificate' },
+  { src: '/assets/certifications/AIFundamentalsFoundationsforUnderstandingAI.png', alt: 'IBM SkillsBuild — AI Fundamentals: Foundations for Understanding AI course completion certificate' },
 ];
 
 const GALLERY_JSON_LD = {

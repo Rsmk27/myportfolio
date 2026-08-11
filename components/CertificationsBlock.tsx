@@ -530,6 +530,22 @@ export const CERTS: Certification[] = [
         skills: ["System Modeling", "Simulink", "Power Electronics", "Electric Motors", "Battery Systems", "MATLAB", "Simscape"],
         description: "Authorized by MathWorks, covering system-level modeling, simulation, and design of electrified systems. Integrates power electronics, electric motors, and battery systems using MATLAB and Simulink.",
         verificationHash: "sha256-567ee5af12904d6b57f10847746fe37dc61b802d12755759e5fb7ad6219f0514"
+    },
+    {
+        id: "CERT-039",
+        title: "AI Fundamentals: Foundations for Understanding AI",
+        issuer: "IBM SkillsBuild",
+        year: "2026",
+        category: "AI & Software",
+        type: "Course",
+        icon: Sparkles,
+        image: '/assets/certifications/AIFundamentalsFoundationsforUnderstandingAI.pdf',
+        gallery: ['/assets/certifications/AIFundamentalsFoundationsforUnderstandingAI.pdf'],
+        isVerifiedBadge: true,
+        credentialId: "IBM-AIF-2026",
+        skills: ["AI Fundamentals", "Artificial Intelligence", "Machine Learning", "AI Ethics", "Generative AI"],
+        description: "Authorized course by IBM SkillsBuild covering fundamental artificial intelligence principles, neural networks, machine learning models, AI ethics, and practical applications.",
+        verificationHash: "sha256-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"
     }
 ];
 
@@ -675,7 +691,7 @@ export const CertificationsBlock: React.FC<CertificationsBlockProps> = ({ isPowe
             {/* Main Section Header */}
             <div className="flex justify-between items-end mb-12 border-b border-zinc-900 pb-6">
                 <div>
-                    <h2 
+                    <h2
                         className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white mb-2"
                         style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                     >
@@ -812,7 +828,7 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                     ${!isPowered ? 'opacity-40 cursor-not-allowed pointer-events-none' : ''}`}
             >
                 {/* Translucent Watermark Year */}
-                <div 
+                <div
                     className="absolute right-3 bottom-1 text-7xl font-black font-mono select-none tracking-tighter pointer-events-none opacity-[0.02] transition-all duration-500 group-hover:scale-105 group-hover:opacity-[0.05]"
                     style={{ color: isPowered ? '#ffffff' : '#444444' }}
                 >
@@ -862,10 +878,10 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                                         ))}
                                     </div>
                                 ) : (
-                                    <div 
+                                    <div
                                         className={`p-1.5 rounded-lg border transition-all duration-300
-                                            ${isPowered 
-                                                ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.08)]' 
+                                            ${isPowered
+                                                ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.08)]'
                                                 : 'bg-zinc-900 border-zinc-800 text-zinc-600'
                                             }`}
                                     >
@@ -881,8 +897,8 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                                 </div>
                             ) : (
                                 <div className={`flex items-center gap-1 text-[8px] font-mono font-bold px-1.5 py-0.5 rounded border
-                                    ${isPowered 
-                                        ? 'bg-zinc-950/30 border-zinc-900/80 text-zinc-500' 
+                                    ${isPowered
+                                        ? 'bg-zinc-950/30 border-zinc-900/80 text-zinc-500'
                                         : 'bg-zinc-950 border-zinc-900 text-zinc-700'
                                     }`}
                                 >
@@ -919,10 +935,10 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                                     {skill}
                                 </span>
                             )) || (
-                                <span className="text-[8px] px-1 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
-                                    Engineering
-                                </span>
-                            )}
+                                    <span className="text-[8px] px-1 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
+                                        Engineering
+                                    </span>
+                                )}
                             {cert.skills && cert.skills.length > 2 && (
                                 <span className="text-[8px] px-1 py-0.5 text-zinc-600">
                                     +{cert.skills.length - 2} more
@@ -931,7 +947,7 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                         </div>
 
                         {/* View Credential CTA Link */}
-                        <div 
+                        <div
                             className={`flex items-center gap-1 text-[9px] font-mono font-black uppercase tracking-widest transition-all duration-300 mt-2 relative z-10
                                 ${isPowered
                                     ? 'text-cyan-500/80 group-hover:text-cyan-300 group-hover:translate-x-1'
