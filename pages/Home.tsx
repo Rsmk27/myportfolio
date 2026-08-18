@@ -15,7 +15,7 @@ import {
     ArrowUpRight, MapPin, Briefcase, GraduationCap, Download, Eye,
     ChevronLeft, ChevronRight
 } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/common/SEO';
 import { useSectionObserver, useScrollDepthTracking } from '../hooks/useAnalytics';
 import { trackInteraction } from '../utils/analytics';
 
@@ -332,57 +332,83 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30" style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
             <EasterEgg />
-            <Helmet>
-                {/* Title */}
-                <title>Srinivasa Manikanta Rajapantula | EEE Student – Embedded Systems, Industrial Automation &amp; IoT</title>
-
-                {/* Primary SEO */}
-                <meta name="description" content="Portfolio of Srinivasa Manikanta Rajapantula — Electrical &amp; Electronics Engineering Student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy." />
-                <meta name="keywords" content="Srinivasa Manikanta Rajapantula, RSMK, Electrical Engineering, EEE student, Embedded Systems, Industrial Automation, PLC programming, CODESYS, Factory IO, Modbus TCP, Smart Energy, ESP32, SFMD, ColorOhm, Vijayawada" />
-                <meta name="author" content={PROFILE.name} />
-                <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-                <link rel="canonical" href="https://rsmk.me" />
-
-                {/* Open Graph */}
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://rsmk.me" />
-                <meta property="og:site_name" content={`${PROFILE.name} (RSMK) Portfolio`} />
-                <meta property="og:title" content="Srinivasa Manikanta Rajapantula | Embedded Systems, Industrial Automation &amp; IoT" />
-                <meta property="og:description" content="EEE student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy. Featured projects: SFMD, CODESYS simulation, ColorOhm, and AgriRover." />
-                <meta property="og:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
-                <meta property="og:image:width" content="1200" />
-                <meta property="og:image:height" content="630" />
-                <meta property="og:image:alt" content={`Portrait of ${PROFILE.name}, Electrical & Electronics Engineer`} />
-                <meta property="og:locale" content="en_IN" />
-
-                {/* Twitter / X */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:site" content="@SrinivasManik20" />
-                <meta name="twitter:creator" content="@SrinivasManik20" />
-                <meta name="twitter:title" content="Srinivasa Manikanta Rajapantula | Embedded Systems &amp; Industrial Automation" />
-                <meta name="twitter:description" content="EEE student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Modbus TCP), IoT, and Smart Energy." />
-                <meta name="twitter:image" content="https://rsmk.me/assets/srinivasa-manikanta-profile.webp" />
-                <meta name="twitter:image:alt" content={`Portrait of ${PROFILE.name}, EEE Engineer`} />
-
-                {/* JSON-LD: Person structured data */}
-                <script type="application/ld+json">{JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "Person",
-                    "name": "Srinivasa Manikanta Rajapantula",
-                    "alternateName": "RSMK",
-                    "url": "https://rsmk.me",
-                    "jobTitle": "Electrical & Electronics Engineering Student",
-                    "knowsAbout": [
-                        "Embedded Systems", "Industrial Automation", "PLC Programming", "CODESYS",
-                        "Factory I/O", "Modbus TCP", "ESP32", "Arduino", "IoT Projects",
-                        "Resistor Color Code Calculator", "Solar Tracker", "Smart Energy Systems"
-                    ],
-                    "sameAs": [
-                        "https://github.com/Rsmk27",
-                        "https://www.linkedin.com/in/srinivasamanikanta/"
-                    ]
-                })}</script>
-            </Helmet>
+            <SEO
+                title="Srinivasa Manikanta Rajapantula | EEE Student – Embedded Systems, Industrial Automation & IoT"
+                description="Portfolio of Srinivasa Manikanta Rajapantula — Electrical & Electronics Engineering Student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy."
+                keywords="Srinivasa Manikanta Rajapantula, RSMK, Electrical Engineering, EEE student, Embedded Systems, Industrial Automation, PLC programming, CODESYS, Factory IO, Modbus TCP, Smart Energy, ESP32, SFMD, ColorOhm, Vijayawada"
+                url="/"
+                schema={[
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "Person",
+                        "name": "Srinivasa Manikanta Rajapantula",
+                        "alternateName": ["RSMK", "Srinivasa Manikanta", "RSMK Technologies"],
+                        "url": "https://rsmk.me",
+                        "image": "https://rsmk.me/assets/srinivasa-manikanta-profile.webp",
+                        "jobTitle": "Electrical & Electronics Engineering Student",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "addressLocality": "Vijayawada",
+                            "addressRegion": "Andhra Pradesh",
+                            "addressCountry": "India"
+                        },
+                        "knowsAbout": [
+                            "Electrical Engineering", "Embedded Systems", "Industrial Automation",
+                            "PLC Programming", "CODESYS", "Factory I/O", "Modbus TCP", "ESP32",
+                            "Arduino", "IoT Projects", "Resistor Color Code Calculator", "Smart Energy Systems"
+                        ],
+                        "sameAs": [
+                            "https://github.com/Rsmk27",
+                            "https://www.linkedin.com/in/srinivasamanikanta/",
+                            "https://x.com/SrinivasManik20"
+                        ]
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "WebSite",
+                        "name": "Srinivasa Manikanta Rajapantula — Portfolio",
+                        "alternateName": "RSMK Portfolio",
+                        "url": "https://rsmk.me",
+                        "description": "Personal engineering portfolio of Srinivasa Manikanta Rajapantula — Embedded Systems, Industrial Automation, IoT, and Smart Energy projects.",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Srinivasa Manikanta Rajapantula",
+                            "url": "https://rsmk.me"
+                        },
+                        "inLanguage": "en"
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "DigitalDocument",
+                        "name": "Srinivasa Manikanta Rajapantula - Engineering Resume",
+                        "description": "Comprehensive engineering resume covering Embedded Systems, Industrial Automation (PLC, CODESYS, Modbus TCP), IoT development, and power distribution internship experience.",
+                        "url": "https://rsmk.me/assets/Srinivasa_Manikanta_Resume.pdf",
+                        "fileFormat": "application/pdf",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Srinivasa Manikanta Rajapantula"
+                        }
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "VideoObject",
+                        "name": "Automatic Exhaust Fan Prototype Video",
+                        "description": "Demonstration video showing gas detection trigger and automatic ventilation fan activation using Arduino and MQ-2 sensor.",
+                        "thumbnailUrl": "https://rsmk.me/assets/auto-exhaust-fan/image-1.jpg",
+                        "uploadDate": "2026-01-01T00:00:00+05:30",
+                        "contentUrl": "https://rsmk.me/assets/auto-exhaust-fan/demo-video.mp4"
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "VideoObject",
+                        "name": "Drone Flight & Telemetry Testing",
+                        "description": "Flight stabilization and quadcopter maneuvering workshop demonstration.",
+                        "thumbnailUrl": "https://rsmk.me/assets/certifications/drone-technology/training-1.jpg",
+                        "uploadDate": "2026-01-01T00:00:00+05:30",
+                        "contentUrl": "https://rsmk.me/assets/certifications/drone-technology/flight-1.mp4"
+                    }
+                ]}
+            />
 
             <div id="main-content" className="main-content visible">
                 <PCBBackground isPowered={isPowered} />

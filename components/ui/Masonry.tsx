@@ -67,6 +67,7 @@ interface Item {
   img: string;
   url: string;
   height: number;
+  alt?: string;
 }
 
 interface GridItem extends Item {
@@ -268,9 +269,17 @@ const Masonry: React.FC<MasonryProps> = ({
           onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
         >
           <div
-            className="relative w-full h-full bg-cover bg-center rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] uppercase text-[10px] leading-[10px] cursor-pointer"
-            style={{ backgroundImage: `url("${encodeURI(item.img)}")` }}
+            className="relative w-full h-full overflow-hidden rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] uppercase text-[10px] leading-[10px] cursor-pointer bg-zinc-900"
+            role="img"
+            aria-label={item.alt || 'Gallery photo'}
           >
+            <img
+              src={encodeURI(item.img)}
+              alt={item.alt || 'Engineering gallery photo'}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover rounded-[10px] pointer-events-none"
+            />
             {colorShiftOnHover && (
               <div className="color-overlay absolute inset-0 rounded-[10px] bg-gradient-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
             )}

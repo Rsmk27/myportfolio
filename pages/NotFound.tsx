@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PCBBackground } from '../components/PCBBackground';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/common/SEO';
 import { PROFILE } from '../constants';
 
 const NotFound: React.FC = () => {
     return (
         <div className="min-h-screen relative selection:bg-cyan-500/30 font-mono text-gray-300">
-            <Helmet>
-                <title>404 — Page Not Found | {PROFILE.name}</title>
-                <meta name="robots" content="noindex" />
-            </Helmet>
+            <SEO
+                title="404 — Page Not Found"
+                description="The requested page could not be found."
+                noindex={true}
+            />
 
             <PCBBackground isPowered={true} />
 

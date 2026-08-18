@@ -7,6 +7,30 @@
     ],
     "headers": [
         {
+            "source": "/assets/(.*)\\.pdf",
+            "headers": [
+                { "key": "Content-Type", "value": "application/pdf" },
+                { "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" },
+                { "key": "X-Robots-Tag", "value": "index, follow, max-snippet:-1" }
+            ]
+        },
+        {
+            "source": "/assets/(.*)\\.mp4",
+            "headers": [
+                { "key": "Content-Type", "value": "video/mp4" },
+                { "key": "Accept-Ranges", "value": "bytes" },
+                { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+                { "key": "X-Robots-Tag", "value": "index, follow" }
+            ]
+        },
+        {
+            "source": "/assets/(.*)\\.(webp|jpg|jpeg|png|svg|ico)",
+            "headers": [
+                { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+                { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large" }
+            ]
+        },
+        {
             "source": "/assets/(.*)",
             "headers": [
                 { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },

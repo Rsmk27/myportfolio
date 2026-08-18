@@ -1053,6 +1053,8 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                         mainSrc.endsWith('.mp4') ? (
                             <video
                                 src={mainSrc}
+                                title={`${cert.title} video demonstration`}
+                                aria-label={`${cert.title} video demonstration`}
                                 controls
                                 autoPlay
                                 muted
@@ -1062,14 +1064,16 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                         ) : mainSrc.endsWith('.pdf') ? (
                             <iframe
                                 src={`${mainSrc}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                                title={cert.title}
+                                title={`${cert.title} - Official Verification PDF`}
                                 className="w-full border-0"
                                 style={{ height: 'clamp(260px, 65vw, 100%)' }}
                             />
                         ) : (
                             <img
                                 src={mainSrc}
-                                alt={cert.title}
+                                alt={`${cert.title} - ${cert.issuer} Certificate`}
+                                loading="lazy"
+                                decoding="async"
                                 className="max-w-full max-h-[70vw] md:w-full md:h-full md:max-h-none object-contain"
                             />
                         )
@@ -1103,7 +1107,13 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                                 ) : src.endsWith('.pdf') ? (
                                     <div className="w-full h-full bg-zinc-900 flex items-center justify-center text-red-400 text-[9px] font-bold font-mono">PDF</div>
                                 ) : (
-                                    <img src={src} className="w-full h-full object-cover" alt="" />
+                                    <img
+                                        src={src}
+                                        className="w-full h-full object-cover"
+                                        alt={`${cert.title} gallery thumbnail ${i + 1}`}
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
                                 )}
                             </button>
                         ))}

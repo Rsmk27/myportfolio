@@ -1,10 +1,236 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://rsmk.me/</loc><priority>1.0</priority></url>
-  <url><loc>https://rsmk.me/gallery</loc><priority>0.8</priority></url>
-  <url><loc>https://colorohm.rsmk.me/</loc><priority>0.8</priority></url>
-  <url><loc>https://sfmd.rsmk.co.in/</loc><priority>0.8</priority></url>
-  <url><loc>https://spds.rsmk.me/</loc><priority>0.7</priority></url>
-  <url><loc>https://budgetbuddy.rsmk.me/</loc><priority>0.6</priority></url>
-  <url><loc>https://autoexhaustfan.rsmk.co.in/</loc><priority>0.6</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <!-- Homepage with Featured Images and Demo Videos -->
+  <url>
+    <loc>https://rsmk.me/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+
+    <!-- Profile & Hero Images -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/srinivasa-manikanta-profile.webp</image:loc>
+      <image:title>Srinivasa Manikanta Rajapantula — Electrical and Electronics Engineer</image:title>
+      <image:caption>Portrait of Srinivasa Manikanta Rajapantula, EEE student and Embedded Systems Developer</image:caption>
+    </image:image>
+
+    <!-- SFMD Project Images -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/firefighter-monitoring-device/infographic-poster.jpg</image:loc>
+      <image:title>SFMD Firefighter Monitoring Device Infographic Poster</image:title>
+      <image:caption>Technical architecture and system overview of the Sustainable Firefighter Monitoring Device</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/firefighter-monitoring-device/hand-drawn-poster.jpg</image:loc>
+      <image:title>SFMD Conceptual Circuit Schematic Design</image:title>
+      <image:caption>Hand-drawn circuit layout and sensor integration concept for the firefighter safety wearable</image:caption>
+    </image:image>
+
+    <!-- GridForge Images -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gridforge/web-dashboard-interface.png</image:loc>
+      <image:title>GridForge Smart Energy Management Web Interface</image:title>
+      <image:caption>Real-time telemetry and power metrics monitoring dashboard</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gridforge/matlab-simulation-model.png</image:loc>
+      <image:title>GridForge MATLAB Simulink Power Grid Simulation</image:title>
+      <image:caption>Simulink model simulating load distribution and smart grid optimization</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gridforge/simulation-results.png</image:loc>
+      <image:title>GridForge Simulation Waveforms and Power Analysis</image:title>
+      <image:caption>Analysis graphs illustrating voltage stability and harmonic reduction</image:caption>
+    </image:image>
+
+    <!-- Automatic Exhaust Fan -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/auto-exhaust-fan/image-1.jpg</image:loc>
+      <image:title>Automatic Exhaust Fan MQ-2 Gas Sensing Prototype</image:title>
+      <image:caption>Arduino microcontroller breadboard prototype with gas sensor and relay control</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/auto-exhaust-fan/image-2.jpg</image:loc>
+      <image:title>Automatic Exhaust Fan Circuit Relay and Enclosure</image:title>
+      <image:caption>Hardware wiring harness connecting power relay and exhaust fan unit</image:caption>
+    </image:image>
+
+    <!-- Industrial Internship Experience -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/experience/coromandel/single-line-diagram.jpg</image:loc>
+      <image:title>Coromandel International Industrial Single Line Diagram</image:title>
+      <image:caption>11kV/440V electrical distribution network SLD analyzed during internship</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/experience/coromandel/internship-certificate.jpg</image:loc>
+      <image:title>Coromandel International Industrial Internship Certificate</image:title>
+      <image:caption>Certificate of completion for electrical engineering internship at Coromandel International Limited</image:caption>
+    </image:image>
+
+    <!-- Hackathon & Awards -->
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/prize-ceremony.jpg</image:loc>
+      <image:title>A-Hacks 24hr Hackathon Hardware Category 2nd Place Award</image:title>
+      <image:caption>Award ceremony honoring Srinivasa Manikanta and team for SFMD wearable hardware</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/certificate-2nd-place.jpg</image:loc>
+      <image:title>A-Hacks 2nd Place Certificate — Hardware Innovation</image:title>
+      <image:caption>Official certificate awarded at A-Hacks 2026 hackathon</image:caption>
+    </image:image>
+
+    <!-- Videos -->
+    <video:video>
+      <video:thumbnail_loc>https://rsmk.me/assets/auto-exhaust-fan/image-1.jpg</video:thumbnail_loc>
+      <video:title>Automatic Exhaust Fan Working Prototype Demonstration</video:title>
+      <video:description>Demonstration video showing gas detection trigger and automatic ventilation fan activation.</video:description>
+      <video:content_loc>https://rsmk.me/assets/auto-exhaust-fan/demo-video.mp4</video:content_loc>
+      <video:publication_date>2026-01-01T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+
+    <video:video>
+      <video:thumbnail_loc>https://rsmk.me/assets/certifications/drone-technology/training-1.jpg</video:thumbnail_loc>
+      <video:title>Drone Flight Test &amp; Telemetry Demonstration</video:title>
+      <video:description>Hands-on quadcopter flight testing and stabilization control demonstration.</video:description>
+      <video:content_loc>https://rsmk.me/assets/certifications/drone-technology/flight-1.mp4</video:content_loc>
+      <video:publication_date>2026-01-01T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+
+  <!-- Photo & Media Gallery with Gallery Image Sitemap -->
+  <url>
+    <loc>https://rsmk.me/gallery</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/ahacks-banner.jpg</image:loc>
+      <image:title>A-Hacks 24-hour Hardware Hackathon Banner</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/demo-presentation.jpg</image:loc>
+      <image:title>SFMD Hardware Presentation to Hackathon Jury</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/judge-evaluation.jpg</image:loc>
+      <image:title>Hackathon Judges Evaluating Firefighter Wearable</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/coding-session-1.jpg</image:loc>
+      <image:title>Coding Embedded Firmware for ESP32 Wearable Device</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/device-strap-front.jpg</image:loc>
+      <image:title>SFMD Wearable Strap Front Enclosure &amp; Sensors</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/gallery/ahacks/device-strap-back.jpg</image:loc>
+      <image:title>SFMD Wearable Back Layout &amp; Power Circuitry</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/certifications/Chefronics%20certificate.jpg</image:loc>
+      <image:title>Chefronics Robotics Certification &amp; Lab Work</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/certifications/Drone%20technology%20certificate.png</image:loc>
+      <image:title>Drone Technology &amp; Flight Certification</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/certifications/3D%20Printing.jpg</image:loc>
+      <image:title>3D Printing &amp; Additive Manufacturing Certification</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/certifications/EV%20technology.jpg</image:loc>
+      <image:title>Electric Vehicle Technology Program Certificate</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.me/assets/certifications/Datavalley%20%20Embedded%20system%20intership.png</image:loc>
+      <image:title>Datavalley Embedded Systems Internship Certificate</image:title>
+    </image:image>
+  </url>
+
+  <!-- PDF Documents for Direct Search Indexing -->
+  <url>
+    <loc>https://rsmk.me/assets/Srinivasa_Manikanta_Resume.pdf</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Key Certification PDFs -->
+  <url>
+    <loc>https://rsmk.me/assets/certifications/CertificateOfCompletion_Become%20a%20PLC%20Developer.pdf</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rsmk.me/assets/certifications/Datavalley%20%20Embedded%20system%20intership.pdf</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rsmk.me/assets/certifications/Interfacing%20with%20the%20Arduino.pdf</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rsmk.me/assets/certifications/Electric%20Motor%20Modeling%20and%20Control.pdf</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rsmk.me/assets/certifications/Power%20Conversion%20for%20Electronic%20Devices.pdf</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rsmk.me/assets/certifications/Solar%20PV%20design%20certificate.pdf</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Live Subdomain Projects -->
+  <url>
+    <loc>https://colorohm.rsmk.me/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sfmd.rsmk.co.in/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://spds.rsmk.me/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://budgetbuddy.rsmk.me/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autoexhaustfan.rsmk.co.in/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
 </urlset>

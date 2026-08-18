@@ -119,7 +119,9 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
           {project.image && (
             <img
               src={project.image}
-              alt={project.title}
+              alt={`${project.title} — ${project.description || 'Engineering project'}`}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
             />
           )}

@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/common/SEO';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Image as ImageIcon, X, ChevronLeft, ChevronRight, Video } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -111,6 +111,7 @@ const Gallery: React.FC = () => {
     return GALLERY_IMAGES.map((img, idx) => ({
       id: String(idx + 1),
       img: img.src,
+      alt: img.alt,
       url: img.src,
       height: heights[idx % heights.length]
     }));
@@ -159,25 +160,14 @@ const Gallery: React.FC = () => {
 
   return (
     <div data-clarity-region="gallery-page" className="min-h-screen relative selection:bg-cyan-500/30 font-mono text-gray-300 bg-black overflow-hidden">
-      <Helmet>
-        <title>Photo Gallery | {PROFILE.name} — Engineering Projects &amp; Hackathon Wins</title>
-        <meta name="description" content="Explore Srinivasa Manikanta's engineering gallery: 2nd place A-Hacks Hackathon hardware build, Coromandel industrial internship, and 3D printing workshops." />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="canonical" href="https://rsmk.me/gallery" />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://rsmk.me/gallery" />
-        <meta property="og:title" content={`Photo Gallery | ${PROFILE.name}`} />
-        <meta property="og:description" content="Hackathon wins, project builds, certifications, and engineering experiences." />
-        <meta property="og:image" content="https://rsmk.me/assets/gallery/ahacks/prize-ceremony.jpg" />
-        <meta property="og:locale" content="en_IN" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Photo Gallery | ${PROFILE.name}`} />
-        <meta name="twitter:image" content="https://rsmk.me/assets/gallery/ahacks/prize-ceremony.jpg" />
-
-        <script type="application/ld+json">{JSON.stringify(GALLERY_JSON_LD)}</script>
-      </Helmet>
+      <SEO
+        title={`Photo Gallery | ${PROFILE.name} — Engineering Projects & Hackathon Wins`}
+        description="Explore Srinivasa Manikanta's engineering gallery: 2nd place A-Hacks Hackathon hardware build, Coromandel industrial internship, and 3D printing workshops."
+        keywords="Srinivasa Manikanta gallery, engineering projects photos, hackathon hardware, A-Hacks, EEE lab, Coromandel internship"
+        url="/gallery"
+        image="https://rsmk.me/assets/gallery/ahacks/prize-ceremony.jpg"
+        schema={GALLERY_JSON_LD}
+      />
 
       {/* Full-screen layout: header + masonry flows vertically */}
       <div className="relative z-10 flex flex-col" style={{ height: '100dvh', minHeight: '100vh' }}>
