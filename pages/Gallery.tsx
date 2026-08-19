@@ -54,7 +54,14 @@ const GALLERY_IMAGES = [
   { src: '/assets/certifications/3d-printing/workshop-3.jpg', alt: '3D printing workshop — designing 3D models' },
   { src: '/assets/certifications/3d-printing/workshop-4.jpg', alt: '3D printing workshop — printed prototype output' },
   { src: '/assets/certifications/3d-printing/workshop-5.jpg', alt: '3D printing workshop — group activity session' },
+  // Electric Vehicle Technology & Battery Management System (BMS)
   { src: '/assets/certifications/EV technology.jpg', alt: 'Electric vehicle technology program certificate' },
+  { src: '/assets/gallery/ev-battery/bms-battery-monitor-prototype.jpeg', alt: 'EV Battery Management System (BMS) prototype with 18650 Li-ion cells, telemetry LCD and relay control' },
+  { src: '/assets/gallery/ev-battery/bms-over-temperature-protection.jpeg', alt: 'BMS thermal management cutoff test displaying over-temperature protection alert' },
+  { src: '/assets/gallery/ev-battery/igk-brushless-motor-controller.jpeg', alt: '250W Sine wave brushless DC (BLDC) motor controller unit for electric vehicles' },
+  { src: '/assets/gallery/ev-battery/khetaan-smart-wireless-controller.jpeg', alt: 'Khetaan smart wireless BLDC EV motor controller with 48V-72V operational range' },
+  { src: '/assets/gallery/ev-battery/ev-workshop-seminar.webp', alt: 'Electric vehicle systems and battery development workshop seminar at ALIET' },
+  { src: '/assets/gallery/ev-battery/ev-technology-classroom.jpg', alt: 'Electric Vehicle Technology hands-on departmental workshop training session' },
   { src: '/assets/certifications/Datavalley  Embedded system intership.png', alt: 'Datavalley Embedded Systems short-term internship certificate' },
   { src: '/assets/certifications/Basics of Robotics.png', alt: 'Siemens — Basics of Robotics course completion certificate' },
   { src: '/assets/certifications/AI for Autonomous Vehicles and Robotics.png', alt: 'University of Michigan — AI for Autonomous Vehicles and Robotics course completion certificate' },
@@ -162,8 +169,8 @@ const Gallery: React.FC = () => {
     <div data-clarity-region="gallery-page" className="min-h-screen relative selection:bg-cyan-500/30 font-mono text-gray-300 bg-black overflow-hidden">
       <SEO
         title={`Photo Gallery | ${PROFILE.name} — Engineering Projects & Hackathon Wins`}
-        description="Explore Srinivasa Manikanta's engineering gallery: 2nd place A-Hacks Hackathon hardware build, Coromandel industrial internship, and 3D printing workshops."
-        keywords="Srinivasa Manikanta gallery, engineering projects photos, hackathon hardware, A-Hacks, EEE lab, Coromandel internship"
+        description="Explore Srinivasa Manikanta's engineering gallery: 2nd place A-Hacks Hackathon hardware build, Coromandel industrial internship, EV battery management systems, BLDC motor controllers, and 3D printing workshops."
+        keywords="Srinivasa Manikanta gallery, engineering projects photos, hackathon hardware, A-Hacks, EV battery management system, BMS prototype, BLDC motor controller, EEE lab, Coromandel internship"
         url="/gallery"
         image="https://rsmk.me/assets/gallery/ahacks/prize-ceremony.jpg"
         schema={GALLERY_JSON_LD}

@@ -28,7 +28,15 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         icon: Zap,
         image: '/assets/certifications/EV technology.jpg',
-        gallery: ['/assets/certifications/EV technology.jpg'],
+        gallery: [
+            '/assets/certifications/EV technology.jpg',
+            '/assets/gallery/ev-battery/bms-battery-monitor-prototype.jpeg',
+            '/assets/gallery/ev-battery/bms-over-temperature-protection.jpeg',
+            '/assets/gallery/ev-battery/igk-brushless-motor-controller.jpeg',
+            '/assets/gallery/ev-battery/khetaan-smart-wireless-controller.jpeg',
+            '/assets/gallery/ev-battery/ev-workshop-seminar.webp',
+            '/assets/gallery/ev-battery/ev-technology-classroom.jpg'
+        ],
         credentialId: "NPTEL-EV-2023-M504",
         skills: ["Battery Pack Design", "BMS", "BLDC Motors", "Motor Controllers", "Thermal Management"],
         description: "Learned powertrain architecture, battery management systems (BMS), motor control circuits, and thermal management for electric vehicles.",
