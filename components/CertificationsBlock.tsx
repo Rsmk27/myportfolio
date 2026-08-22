@@ -899,37 +899,37 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                             </div>
 
                             {isPowered && cert.isVerifiedBadge ? (
-                                <div className="flex items-center gap-1 text-[8px] font-mono font-black text-cyan-400 bg-cyan-950/40 border border-cyan-500/20 px-1.5 py-0.5 rounded shadow-[0_0_6px_rgba(6,182,212,0.15)]">
-                                    <ShieldCheck size={10} strokeWidth={2} />
+                                <div className="flex items-center gap-1 text-[11px] font-mono font-bold text-cyan-300 bg-cyan-950/60 border border-cyan-500/40 px-2 py-0.5 rounded shadow-[0_0_8px_rgba(6,182,212,0.2)]">
+                                    <ShieldCheck size={12} strokeWidth={2} className="text-cyan-400" />
                                     <span>VERIFIED</span>
                                 </div>
                             ) : (
-                                <div className={`flex items-center gap-1 text-[8px] font-mono font-bold px-1.5 py-0.5 rounded border
+                                <div className={`flex items-center gap-1 text-[11px] font-mono font-medium px-2 py-0.5 rounded border
                                     ${isPowered
-                                        ? 'bg-zinc-950/30 border-zinc-900/80 text-zinc-500'
-                                        : 'bg-zinc-950 border-zinc-900 text-zinc-700'
+                                        ? 'bg-zinc-950/60 border-zinc-800 text-zinc-400'
+                                        : 'bg-zinc-100 border-zinc-300 text-zinc-700'
                                     }`}
                                 >
-                                    <Award size={9} strokeWidth={2} />
-                                    <span>SECURE</span>
+                                    <Award size={12} strokeWidth={2} className="text-zinc-400" />
+                                    <span>CREDENTIAL</span>
                                 </div>
                             )}
                         </div>
 
                         {/* Title & Info */}
                         <div>
-                            <span className={`text-[8px] font-mono font-bold px-1.5 py-0.5 border rounded uppercase mb-1 inline-block
+                            <span className={`text-[11px] font-mono font-bold px-2 py-0.5 border rounded uppercase mb-1 inline-block
                                 ${isPowered
-                                    ? 'text-amber-500/80 border-amber-500/20 bg-amber-950/10'
-                                    : 'text-zinc-600 border-zinc-900 bg-zinc-950'
+                                    ? 'text-amber-400 border-amber-500/30 bg-amber-950/20'
+                                    : 'text-zinc-700 border-zinc-300 bg-zinc-100'
                                 }`}
                             >
                                 {cert.category || 'Engineering'}
                             </span>
-                            <h4 className={`text-xs md:text-sm font-bold tracking-tight leading-snug mb-0.5 line-clamp-2 ${isPowered ? 'text-white' : 'text-zinc-500'}`}>
+                            <h4 className={`text-sm md:text-base font-bold tracking-tight leading-snug mb-0.5 line-clamp-2 ${isPowered ? 'text-white' : 'text-zinc-900'}`}>
                                 {cert.title}
                             </h4>
-                            <p className={`text-[10px] font-mono uppercase tracking-wider ${isPowered ? 'text-zinc-500' : 'text-zinc-600'}`}>
+                            <p className={`text-xs font-mono uppercase tracking-wider ${isPowered ? 'text-zinc-400' : 'text-zinc-600'}`}>
                                 {cert.issuer}
                             </p>
                         </div>
@@ -937,18 +937,18 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
 
                     <div>
                         {/* Gained Skills Preview */}
-                        <div className="mt-1 flex flex-wrap gap-1 relative z-10">
+                        <div className="mt-1.5 flex flex-wrap gap-1 relative z-10">
                             {cert.skills?.slice(0, 2).map((skill, index) => (
-                                <span key={index} className="text-[8px] px-1 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
+                                <span key={index} className="text-[11px] px-2 py-0.5 bg-black/60 border border-zinc-800 rounded text-zinc-300 font-mono">
                                     {skill}
                                 </span>
                             )) || (
-                                    <span className="text-[8px] px-1 py-0.5 bg-black/40 border border-zinc-900 rounded text-zinc-500">
+                                    <span className="text-[11px] px-2 py-0.5 bg-black/60 border border-zinc-800 rounded text-zinc-300 font-mono">
                                         Engineering
                                     </span>
                                 )}
                             {cert.skills && cert.skills.length > 2 && (
-                                <span className="text-[8px] px-1 py-0.5 text-zinc-600">
+                                <span className="text-[11px] px-1.5 py-0.5 text-cyan-400/80 font-mono font-semibold">
                                     +{cert.skills.length - 2} more
                                 </span>
                             )}
@@ -956,14 +956,14 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
 
                         {/* View Credential CTA Link */}
                         <div
-                            className={`flex items-center gap-1 text-[9px] font-mono font-black uppercase tracking-widest transition-all duration-300 mt-2 relative z-10
+                            className={`flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 mt-2.5 relative z-10
                                 ${isPowered
-                                    ? 'text-cyan-500/80 group-hover:text-cyan-300 group-hover:translate-x-1'
+                                    ? 'text-cyan-400 group-hover:text-cyan-300 group-hover:translate-x-1'
                                     : 'text-zinc-700'
                                 }`}
                         >
                             <span>View Credential</span>
-                            <ChevronRight size={11} strokeWidth={3.5} />
+                            <ChevronRight size={13} strokeWidth={3} />
                         </div>
                     </div>
                 </div>
@@ -1033,20 +1033,35 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                             <h3 className={`text-sm md:text-base font-black tracking-tight truncate ${isPowered ? 'text-white' : 'text-gray-900'}`}>
                                 {cert.title}
                             </h3>
-                            <p className={`text-[10px] font-mono uppercase tracking-widest truncate ${isPowered ? 'text-cyan-400' : 'text-blue-600'}`}>
+                            <p className={`text-[11px] font-mono uppercase tracking-widest truncate ${isPowered ? 'text-cyan-400' : 'text-blue-600'}`}>
                                 {cert.issuer} · {cert.year}
                                 {cert.credentialId && <span className="ml-2 opacity-60">#{cert.credentialId}</span>}
                             </p>
                         </div>
                     </div>
-                    <button
-                        onClick={onClose}
-                        className={`flex-shrink-0 p-2 rounded-full transition-colors cursor-pointer
-                            ${isPowered ? 'hover:bg-zinc-800 text-zinc-400 hover:text-cyan-400' : 'hover:bg-gray-100 text-gray-500'}`}
-                        aria-label="Close"
-                    >
-                        <X size={20} />
-                    </button>
+                    
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                        {mainSrc && mainSrc.endsWith('.pdf') && (
+                            <a
+                                href={mainSrc}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/40 bg-cyan-950/40 text-cyan-300 hover:bg-cyan-500 hover:text-black text-xs font-mono font-bold transition-all shadow-[0_0_8px_rgba(0,242,255,0.15)]"
+                                title="Open / Download Full PDF Document"
+                            >
+                                <FileText size={13} />
+                                <span className="hidden sm:inline">FULL PDF</span>
+                            </a>
+                        )}
+                        <button
+                            onClick={onClose}
+                            className={`flex-shrink-0 p-2 rounded-full transition-colors cursor-pointer
+                                ${isPowered ? 'hover:bg-zinc-800 text-zinc-400 hover:text-cyan-400' : 'hover:bg-gray-100 text-gray-500'}`}
+                            aria-label="Close"
+                        >
+                            <X size={20} />
+                        </button>
+                    </div>
                 </div>
 
                 {/* ── Main certificate display ── */}

@@ -209,10 +209,10 @@ const CategoryCard: React.FC<{
                             <Icon size={16} style={{ color: isPowered ? cat.accent : '#374151' }} />
                         </div>
                         <div>
-                            <p className={`text-[9px] uppercase tracking-[0.25em] mb-0.5 font-mono ${isPowered ? 'text-gray-500' : 'text-gray-400'}`}>
+                            <p className={`text-[11px] uppercase tracking-[0.2em] mb-0.5 font-mono ${isPowered ? 'text-gray-400' : 'text-gray-500'}`}>
                                 {cat.label}
                             </p>
-                            <h4 className={`text-sm font-bold tracking-tight leading-tight ${isPowered ? 'text-gray-100' : 'text-gray-800'}`}>
+                            <h4 className={`text-base font-bold tracking-tight leading-tight ${isPowered ? 'text-gray-100' : 'text-gray-800'}`}>
                                 {cat.title}
                             </h4>
                         </div>
@@ -222,7 +222,7 @@ const CategoryCard: React.FC<{
                         <motion.div
                             animate={isActive ? { opacity: [0.4, 1, 0.4] } : { opacity: 0.25 }}
                             transition={{ duration: 1.6, repeat: Infinity }}
-                            className="flex-shrink-0 w-2 h-2 rounded-full"
+                            className="flex-shrink-0 w-2.5 h-2.5 rounded-full"
                             style={{ backgroundColor: cat.accent }}
                         />
                     )}
@@ -243,7 +243,7 @@ const CategoryCard: React.FC<{
                     ))}
                 </div>
                 {cat.note && (
-                    <p className={`mt-3 text-[10px] font-mono tracking-wide italic ${isPowered ? 'text-gray-600' : 'text-gray-400'}`}>
+                    <p className={`mt-3 text-xs font-mono tracking-wide italic ${isPowered ? 'text-gray-400' : 'text-gray-500'}`}>
                         ※ {cat.note}
                     </p>
                 )}
@@ -278,12 +278,12 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
                 >
                     Skills Engine
                 </h2>
-                <p className={`text-sm font-mono max-w-xl mx-auto ${isPowered ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Domain expertise across hardware, firmware, power systems, software &amp; protocols.
+                <p className={`text-sm md:text-base font-mono max-w-xl mx-auto ${isPowered ? 'text-gray-300' : 'text-gray-600'}`}>
+                    Domain expertise across hardware, firmware, power systems, software &amp; industrial protocols.
                 </p>
             </div>
 
-            {/* 5 Grouped Categories Grid */}
+            {/* 5 Grouped Categories Grid - Bento balanced */}
             <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6 items-stretch">
                 {CATEGORIES.map((cat, idx) => (
                     <CategoryCard
@@ -293,6 +293,7 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
                         isActive={cat.id === activeId}
                         isPowered={isPowered}
                         onActivate={() => setActiveId(cat.id)}
+                        className={idx === 0 ? "lg:col-span-2" : ""}
                     />
                 ))}
             </div>
@@ -308,7 +309,7 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
                                 setActiveId(cat.id);
                                 trackInteraction('skill_filter_click', 'skills', cat.title);
                             }}
-                            className={`px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] border rounded-full
+                            className={`px-3.5 py-1.5 text-xs font-mono uppercase tracking-[0.16em] border rounded-full
                 transition-all duration-250 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500
                 ${isActive
                                     ? ''

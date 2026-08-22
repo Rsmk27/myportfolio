@@ -13,7 +13,7 @@ import {
     Zap, Code, Globe, Terminal, Mail, Github, Linkedin, Twitter,
     Menu, X, ChevronDown, Activity, Cpu, Radio, BatteryMedium,
     ArrowUpRight, MapPin, Briefcase, GraduationCap, Download, Eye,
-    ChevronLeft, ChevronRight
+    ChevronLeft, ChevronRight, Pause, Play
 } from 'lucide-react';
 import SEO from '../components/common/SEO';
 import { useSectionObserver, useScrollDepthTracking } from '../hooks/useAnalytics';
@@ -140,8 +140,11 @@ const Home: React.FC = () => {
     const ringOffset = useTransform(scrollProgress, [0, 1], [88, 0]);
 
     // Projects Carousel States and Refs
+    const projectsSectionRef = useRef<HTMLElement>(null);
     const projectsScrollRef = useRef<HTMLDivElement>(null);
+    const projectsInView = useInView(projectsSectionRef, { margin: '200px' });
     const [isHoveredProjects, setIsHoveredProjects] = useState(false);
+    const [isProjectsPaused, setIsProjectsPaused] = useState(false);
     const [isDraggingProjects, setIsDraggingProjects] = useState(false);
     const [startXProjects, setStartXProjects] = useState(0);
     const [scrollLeftProjectsState, setScrollLeftProjectsState] = useState(0);
@@ -149,14 +152,14 @@ const Home: React.FC = () => {
     // Auto-scroll loop using requestAnimationFrame for Projects
     useEffect(() => {
         const container = projectsScrollRef.current;
-        if (!container || !isPowered) return;
+        if (!container || !isPowered || !projectsInView || isProjectsPaused) return;
 
         let animationFrameId: number;
         let lastTime = performance.now();
         const speed = 35; // pixels per second
 
         const step = (time: number) => {
-            if (!isHoveredProjects && !isDraggingProjects) {
+            if (!isHoveredProjects && !isDraggingProjects && !isProjectsPaused) {
                 const delta = (time - lastTime) / 1000;
                 container.scrollLeft += speed * delta;
 
@@ -172,7 +175,7 @@ const Home: React.FC = () => {
 
         animationFrameId = requestAnimationFrame(step);
         return () => cancelAnimationFrame(animationFrameId);
-    }, [isHoveredProjects, isDraggingProjects, isPowered]);
+    }, [isHoveredProjects, isDraggingProjects, isPowered, projectsInView, isProjectsPaused]);
 
     // Manual navigation buttons scroll for Projects
     const scrollProjects = (direction: 'left' | 'right') => {
@@ -441,7 +444,7 @@ const Home: React.FC = () => {
                         transition: 'all 0.5s cubic-bezier(0.22,1,0.36,1)'
                     }}
                 >
-                    {/* Brand */}
+                    {/* Brand & Power Toggle */}
                     <div className="flex flex-col pointer-events-auto">
                         <span
                             className={`text-xl font-black tracking-tighter transition-all duration-500 ${isPowered ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(0,242,255,0.7)]' : 'text-gray-600'}`}
@@ -449,16 +452,23 @@ const Home: React.FC = () => {
                         >
                             RSMK
                         </span>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                            <span className={`w-1.5 h-1.5 rounded-full ${isPowered ? 'bg-cyan-400 animate-pulse' : 'bg-red-500'}`} />
-                            <span className="text-[9px] font-mono text-gray-500 tracking-widest">
-                                {isPowered ? 'ONLINE' : 'OFFLINE'}
+                        <button
+                            onClick={() => {
+                                setIsPowered(!isPowered);
+                                trackInteraction('toggle_power_grid', 'header', isPowered ? 'OFFLINE' : 'ONLINE');
+                            }}
+                            className="flex items-center gap-1.5 mt-0.5 px-1 py-0.5 -ml-1 rounded hover:bg-cyan-500/10 transition-colors cursor-pointer group"
+                            title={`Click to switch power grid (Currently: ${isPowered ? 'ONLINE' : 'STANDBY'})`}
+                        >
+                            <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isPowered ? 'bg-cyan-400 animate-pulse' : 'bg-red-500'}`} />
+                            <span className="text-[10px] font-mono text-gray-400 group-hover:text-cyan-300 tracking-widest transition-colors">
+                                {isPowered ? 'ONLINE' : 'STANDBY'}
                             </span>
-                        </div>
+                        </button>
                     </div>
 
                     {/* Desktop nav */}
-                    <nav className="hidden md:flex items-center gap-7 pointer-events-auto" aria-label="Main navigation">
+                    <nav className="hidden lg:flex items-center gap-7 pointer-events-auto" aria-label="Main navigation">
                         {navItems.map((item) => {
                             const sectionId = item.toLowerCase();
                             const isActive = activeSection === sectionId;
@@ -525,7 +535,7 @@ const Home: React.FC = () => {
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-                        className="md:hidden pointer-events-auto p-2 text-gray-400 hover:text-cyan-400 transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded"
+                        className="lg:hidden pointer-events-auto p-2 text-gray-400 hover:text-cyan-400 transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded"
                     >
                         {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
@@ -771,17 +781,17 @@ const Home: React.FC = () => {
                                     transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                                 >
                                     <h1
-                                        className="w-fit text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] flex flex-col items-center justify-center mx-auto"
+                                        className="w-fit text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.92] flex flex-col items-center justify-center mx-auto max-w-full px-2"
                                         style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                                         data-cursor-label="HELLO!"
                                     >
-                                        <div className="pb-2 text-white select-none">
+                                        <div className="pb-1 sm:pb-2 text-white select-none">
                                             SRINIVASA
                                         </div>
                                         <div className="pt-1 text-cyan-400 select-none" style={{ textShadow: '0 0 40px rgba(0,242,255,0.2)' }}>
                                             MANIKANTA
                                         </div>
-                                        <div className="pt-2 text-white/90 text-4xl md:text-6xl lg:text-7xl opacity-80 select-none" style={{ textShadow: '0 0 40px rgba(255,255,255,0.1)' }}>
+                                        <div className="pt-1.5 sm:pt-2 text-white/90 text-3xl sm:text-5xl md:text-6xl lg:text-7xl opacity-80 select-none" style={{ textShadow: '0 0 40px rgba(255,255,255,0.1)' }}>
                                             RAJAPANTULA
                                         </div>
                                     </h1>
@@ -871,7 +881,7 @@ const Home: React.FC = () => {
                                                 className="btn-ripple group flex items-center gap-2 px-5 py-2.5 border border-cyan-500/50 text-cyan-400 text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.15)] transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
                                             >
                                                 <Download size={13} className="group-hover:translate-y-0.5 transition-transform duration-200" />
-                                                Download CV
+                                                Download Resume
                                             </a>
                                             <a
                                                 href="#contact"
@@ -903,15 +913,38 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* ══ 3. PROJECTS ════════════════════════════════════════ */}
-                    <section id="projects" data-clarity-region="projects" className="mb-24 md:mb-40 relative">
+                    <section id="projects" ref={projectsSectionRef} data-clarity-region="projects" className="mb-24 md:mb-40 relative">
                         <SectionHeader title="Projects" subtitle="" isPowered={isPowered} />
                         
-                        {/* Control Arrows for Projects */}
-                        <div className="flex justify-end gap-2 max-w-7xl mx-auto px-4 -mt-16 mb-8 relative z-30">
+                        {/* Controls for Projects (Arrows + Pause/Play) */}
+                        <div className="flex justify-end items-center gap-2 max-w-7xl mx-auto px-4 -mt-16 mb-8 relative z-30">
+                            <button
+                                onClick={() => setIsProjectsPaused(!isProjectsPaused)}
+                                className={`p-2 border rounded-lg transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono
+                                    ${isProjectsPaused 
+                                        ? 'border-amber-500/50 bg-amber-950/20 text-amber-300' 
+                                        : 'border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400'
+                                    }`}
+                                title={isProjectsPaused ? "Resume Auto-Scroll" : "Pause Auto-Scroll"}
+                                aria-label={isProjectsPaused ? "Resume Auto-Scroll" : "Pause Auto-Scroll"}
+                            >
+                                {isProjectsPaused ? (
+                                    <>
+                                        <Play size={15} strokeWidth={2.5} />
+                                        <span className="hidden sm:inline">RESUME</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Pause size={15} strokeWidth={2.5} />
+                                        <span className="hidden sm:inline">PAUSE</span>
+                                    </>
+                                )}
+                            </button>
                             <button
                                 onClick={() => scrollProjects('left')}
                                 className="p-2 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
                                 title="Scroll Left"
+                                aria-label="Scroll projects left"
                             >
                                 <ChevronLeft size={16} strokeWidth={2.5} />
                             </button>
@@ -919,6 +952,7 @@ const Home: React.FC = () => {
                                 onClick={() => scrollProjects('right')}
                                 className="p-2 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
                                 title="Scroll Right"
+                                aria-label="Scroll projects right"
                             >
                                 <ChevronRight size={16} strokeWidth={2.5} />
                             </button>

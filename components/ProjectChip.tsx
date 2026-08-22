@@ -93,25 +93,44 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
         <div className={`p-4 border-b flex justify-between items-start
           ${isPowered ? 'bg-[#0f0f0f] border-gray-800' : 'bg-gray-50 border-gray-200'}`}
         >
-          <div>
-            <div className="flex flex-col items-start gap-1 mb-1">
-              <div className={`text-[10px] font-mono uppercase tracking-widest ${isPowered ? 'text-gray-500' : 'text-gray-400'}`}>
+          <div className="flex-1 pr-2">
+            <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+              <span className={`text-[11px] font-mono uppercase tracking-widest ${isPowered ? 'text-gray-400' : 'text-gray-500'}`}>
                 PROJECT_ID: {project.id}
-              </div>
+              </span>
               {awardTags.map((awardTag) => (
                 <span
                   key={awardTag}
-                  className={`relative overflow-hidden shine-effect text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-sm whitespace-nowrap mt-0.5 ${getAwardBadgeClasses(awardTag)}`}
+                  className={`relative overflow-hidden shine-effect text-[11px] uppercase font-bold px-2 py-0.5 rounded whitespace-nowrap ${getAwardBadgeClasses(awardTag)}`}
                 >
                   <span className="relative z-10">{awardTag}</span>
                 </span>
               ))}
             </div>
-            <h3 className={`text-xl font-bold leading-tight pr-2 ${isPowered ? 'text-white' : 'text-gray-900'}`}>
+            <h3 className={`text-lg md:text-xl font-bold leading-tight ${isPowered ? 'text-white' : 'text-gray-900'}`}>
               {project.title}
             </h3>
           </div>
-          {isPowered && <Cpu size={18} className={`flex-shrink-0 mt-1 text-gray-700 group-hover:text-cyan-400 transition-colors duration-300`} />}
+          
+          <div className="flex items-center gap-2 flex-shrink-0 mt-0.5">
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  trackInteraction('project_click', 'projects', `${project.title} (${isGithubProject ? 'GitHub' : 'Live'})`);
+                }}
+                className="p-2 rounded-lg border border-cyan-500/40 bg-cyan-950/40 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all duration-200 flex items-center justify-center shadow-[0_0_10px_rgba(0,242,255,0.15)]"
+                title={`Open ${project.title} (${isGithubProject ? 'GitHub' : 'Live Website'})`}
+                aria-label={`Open ${project.title}`}
+              >
+                {isGithubProject ? <Github size={15} /> : <ExternalLink size={15} />}
+              </a>
+            )}
+            {isPowered && <Cpu size={18} className="text-gray-600 group-hover:text-cyan-400 transition-colors duration-300 hidden sm:block" />}
+          </div>
         </div>
 
         {/* Image / Visual Area */}
@@ -122,87 +141,89 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
               alt={`${project.title} — ${project.description || 'Engineering project'}`}
               loading="lazy"
               decoding="async"
-              className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
+              className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
             />
           )}
 
           {/* Hover Overlay Actions */}
-          <div className={`absolute inset-0 p-4 flex flex-col justify-between bg-gradient-to-b from-black/70 via-black/55 to-black/75 backdrop-blur-sm transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+          <div className={`absolute inset-0 p-4 flex flex-col justify-between bg-gradient-to-b from-black/80 via-black/65 to-black/85 backdrop-blur-sm transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
             <div className="flex items-start justify-between">
-              <span className="text-[10px] font-mono tracking-[0.2em] text-cyan-300 uppercase">Live Specs</span>
-              <div className="flex items-center gap-2">
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() => trackInteraction('project_click', 'projects', `${project.title} (${isGithubProject ? 'GitHub' : 'Live'})`)}
-                    className="w-8 h-8 rounded-full border border-cyan-500/40 bg-black/60 text-cyan-300 flex items-center justify-center hover:bg-cyan-500/20 hover:text-cyan-100 transition-colors"
-                    aria-label={`Open ${project.title} ${isGithubProject ? 'GitHub' : 'live link'}`}
-                  >
-                    {isGithubProject ? <Github size={14} /> : <ExternalLink size={14} />}
-                  </a>
-                )}
-              </div>
+              <span className="text-[11px] font-mono tracking-[0.2em] text-cyan-300 uppercase font-semibold">Live System Specs</span>
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackInteraction('project_click', 'projects', `${project.title} (${isGithubProject ? 'GitHub' : 'Live'})`)}
+                  className="w-8 h-8 rounded-full border border-cyan-500/40 bg-black/80 text-cyan-300 flex items-center justify-center hover:bg-cyan-500 hover:text-black transition-colors"
+                  aria-label={`Open ${project.title} link`}
+                >
+                  {isGithubProject ? <Github size={14} /> : <ExternalLink size={14} />}
+                </a>
+              )}
             </div>
 
             <motion.div
               initial={false}
-              animate={{ y: isHovered ? 0 : 12, opacity: isHovered ? 1 : 0 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
+              animate={{ y: isHovered ? 0 : 8, opacity: isHovered ? 1 : 0 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
               className="grid grid-cols-3 gap-2"
             >
-              <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2 text-center">
-                <p className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Tech</p>
+              <div className="rounded-lg border border-cyan-500/30 bg-black/70 p-2 text-center">
+                <p className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">Tech</p>
                 <p className="text-xs text-cyan-300 font-bold">{project.tech.length}</p>
               </div>
-              <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2 text-center">
-                <p className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Gallery</p>
+              <div className="rounded-lg border border-cyan-500/30 bg-black/70 p-2 text-center">
+                <p className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">Gallery</p>
                 <p className="text-xs text-cyan-300 font-bold">{project.gallery?.length ?? 1}</p>
               </div>
-              <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2 text-center">
-                <p className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Features</p>
+              <div className="rounded-lg border border-cyan-500/30 bg-black/70 p-2 text-center">
+                <p className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">Features</p>
                 <p className="text-xs text-cyan-300 font-bold">{project.features?.length ?? 0}</p>
               </div>
             </motion.div>
 
-            <a
-              href={project.link || '#'}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => trackInteraction('project_click', 'projects', project.title)}
-              className="self-center flex items-center gap-2 px-6 py-2 bg-cyan-500 text-black font-bold rounded-full hover:scale-105 transition-transform"
-            >
-              <span>View System</span>
-              <ExternalLink size={16} />
-            </a>
+            {project.link ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackInteraction('project_click', 'projects', project.title)}
+                className="self-center flex items-center gap-2 px-5 py-2 bg-cyan-500 text-black text-xs font-bold uppercase tracking-wider rounded-full hover:scale-105 hover:bg-cyan-400 transition-all shadow-[0_0_15px_rgba(0,242,255,0.4)]"
+              >
+                <span>{isGithubProject ? 'View Repository' : 'Launch System'}</span>
+                {isGithubProject ? <Github size={14} /> : <ExternalLink size={14} />}
+              </a>
+            ) : (
+              <span className="self-center text-xs font-mono text-gray-400">Simulation / Prototype</span>
+            )}
           </div>
         </div>
 
         {/* Specs / Tech Stack */}
         <div className={`p-4 flex-grow flex flex-col justify-between ${isPowered ? 'bg-[#0a0a0a]' : 'bg-white'}`}>
-          <p className={`text-sm mb-4 line-clamp-3 ${isPowered ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-sm mb-4 line-clamp-3 leading-relaxed ${isPowered ? 'text-gray-300' : 'text-gray-600'}`}>
             {project.description}
           </p>
 
           <motion.div
-            className="flex flex-wrap gap-2 mt-auto"
+            className="flex flex-wrap gap-1.5 mt-auto"
             initial={false}
-            animate={{ opacity: isHovered ? 1 : 0.86, y: isHovered ? 0 : 4 }}
-            transition={{ duration: 0.22 }}
+            animate={{ opacity: isHovered ? 1 : 0.9, y: isHovered ? 0 : 2 }}
+            transition={{ duration: 0.2 }}
           >
             {visibleTech.map(t => (
-              <span key={t} className={`text-[10px] px-2 py-1 rounded border font-mono uppercase
+              <span key={t} className={`text-[11px] px-2 py-0.5 rounded border font-mono uppercase font-medium
                  ${isPowered
-                  ? 'border-gray-800 text-cyan-600 bg-cyan-950/10'
-                  : 'border-gray-200 text-gray-600 bg-gray-100'
+                  ? 'border-cyan-900/40 text-cyan-300 bg-cyan-950/30'
+                  : 'border-gray-200 text-gray-700 bg-gray-100'
                 }`}
               >
                 {t}
               </span>
             ))}
             {hiddenTechCount > 0 && (
-              <span className={`text-[10px] px-2 py-1 rounded border font-mono uppercase ${isPowered ? 'border-gray-800 text-gray-500' : 'border-gray-200 text-gray-400'}`}>
+              <span className={`text-[11px] px-2 py-0.5 rounded border font-mono uppercase ${isPowered ? 'border-gray-800 text-gray-400 bg-gray-900/50' : 'border-gray-200 text-gray-500 bg-gray-100'}`}>
                 +{hiddenTechCount}
               </span>
             )}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Profile, Social } from '../types';
-import { Mail, Github, Linkedin, Twitter, Send, Terminal, Wifi, Activity, Instagram, RefreshCw } from 'lucide-react';
+import { Mail, Github, Linkedin, Twitter, Send, Terminal, Wifi, Activity, Instagram, RefreshCw, Copy, Check } from 'lucide-react';
 import { trackInteraction } from '../utils/analytics';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -424,18 +424,29 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
         }
     };
 
+    const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
+
+    const handleCopyEmail = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigator.clipboard.writeText(profile.email);
+        setCopiedEmail(true);
+        trackInteraction('copy_email', 'contact', profile.email);
+        setTimeout(() => setCopiedEmail(false), 2200);
+    };
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-            {/* Social Links */}
+            {/* Social Links & Direct Channels */}
             <div className="space-y-6">
                 <div className="flex justify-between items-end pb-2 border-b border-gray-800">
                     <div>
-                        <h3 className={`text-xs font-mono tracking-[0.2em] mb-1 ${isPowered ? 'text-cyan-400' : 'text-gray-600'}`}>
-                            CONTACT CHANNELS
+                        <h3 className={`text-xs font-mono tracking-[0.2em] mb-1 font-bold ${isPowered ? 'text-cyan-400' : 'text-gray-600'}`}>
+                            DIRECT CHANNELS &amp; COMMS
                         </h3>
                         <div className="flex items-center gap-2">
-                            <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Signal</span>
+                            <span className={`text-[11px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Signal:</span>
                             <div className="flex gap-0.5 items-end h-4">
                                 {[...Array(8)].map((_, i) => (
                                     <div
@@ -451,16 +462,16 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             </div>
                         </div>
                         <div className="flex items-center gap-2 mt-2">
-                            <span className={`text-[10px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Status:</span>
-                            <span className={`text-[10px] font-mono font-bold ${uplinkStatus === 'TRANSMITTING' ? 'text-amber-500 animate-pulse' :
-                                uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-500' :
-                                    isPowered ? 'text-cyan-500' : 'text-gray-600'
+                            <span className={`text-[11px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Status:</span>
+                            <span className={`text-xs font-mono font-bold ${uplinkStatus === 'TRANSMITTING' ? 'text-amber-400 animate-pulse' :
+                                uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-400' :
+                                    isPowered ? 'text-cyan-400' : 'text-gray-600'
                                 }`}>
-                                {uplinkStatus === 'IDLE' ? (isPowered ? 'READY' : 'OFFLINE') : uplinkStatus}
+                                {uplinkStatus === 'IDLE' ? (isPowered ? 'READY FOR UPLINK' : 'OFFLINE') : uplinkStatus}
                             </span>
                         </div>
                     </div>
-                    <Wifi size={18} className={isPowered ? 'text-cyan-500 animate-pulse' : 'text-gray-800'} />
+                    <Wifi size={18} className={isPowered ? 'text-cyan-400 animate-pulse' : 'text-gray-800'} />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
@@ -472,6 +483,26 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                         isPowered={isPowered} 
                         brandColor="#ea4335"
                         brandGlow="rgba(234, 67, 53, 0.08)"
+                        extraAction={
+                            <button
+                                type="button"
+                                onClick={handleCopyEmail}
+                                className="flex items-center gap-1 px-2.5 py-1 rounded bg-black/60 border border-gray-700 hover:border-cyan-400 hover:text-cyan-300 text-gray-300 text-xs font-mono transition-all duration-200"
+                                title="Copy Email to Clipboard"
+                            >
+                                {copiedEmail ? (
+                                    <>
+                                        <Check size={12} className="text-emerald-400" />
+                                        <span className="text-emerald-400 font-bold">COPIED</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Copy size={12} />
+                                        <span>COPY</span>
+                                    </>
+                                )}
+                            </button>
+                        }
                     />
                     {profile.socials.filter(s => s.platform !== 'email').map(social => {
                         const Icon = getIcon(social.platform);
@@ -656,58 +687,68 @@ const ContactCard: React.FC<{
     isPowered: boolean;
     brandColor?: string;
     brandGlow?: string;
-}> = ({ href, icon: Icon, label, value, isPowered, brandColor = '#22d3ee', brandGlow = 'rgba(34, 211, 238, 0.08)' }) => (
-    <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => trackInteraction('contact_click', 'contact', `${label}: ${value}`)}
-        style={isPowered ? {
-            '--hover-border': `${brandColor}80`,
-        } as React.CSSProperties : {}}
-        className={`group relative overflow-hidden flex items-center gap-4 p-4 border rounded-xl transition-all duration-300 ${isPowered
+    extraAction?: React.ReactNode;
+}> = ({ href, icon: Icon, label, value, isPowered, brandColor = '#22d3ee', brandGlow = 'rgba(34, 211, 238, 0.08)', extraAction }) => (
+    <div
+        className={`group relative overflow-hidden flex items-center justify-between gap-4 p-4 border rounded-xl transition-all duration-300 ${isPowered
             ? 'bg-[#0a0a0a] border-gray-800 hover:border-[var(--hover-border)]'
             : 'bg-black border-gray-900'
             }`}
+        style={isPowered ? {
+            '--hover-border': `${brandColor}80`,
+        } as React.CSSProperties : {}}
     >
         {isPowered && (
             <>
                 <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
                     style={{ backgroundColor: brandGlow }}
                 />
                 <div
-                    className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-300"
+                    className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-300 pointer-events-none"
                     style={{ backgroundColor: brandColor }}
                 />
             </>
         )}
-        <div 
-            className={`relative z-10 p-2.5 rounded-lg transition-all duration-300 ${isPowered
-                ? 'bg-gray-900 group-hover:shadow-[0_0_15px_var(--brand-glow-shadow)]'
-                : 'bg-gray-900 text-gray-600'
-                }`}
-            style={isPowered ? {
-                color: brandColor,
-                '--brand-glow-shadow': `${brandColor}40`
-            } as React.CSSProperties : {}}
+        <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackInteraction('contact_click', 'contact', `${label}: ${value}`)}
+            className="flex items-center gap-4 flex-1 min-w-0"
         >
-            <Icon size={22} />
-        </div>
-        <div className="flex-1 relative z-10">
-            <div className="flex justify-between items-center mb-0.5">
-                <p className="text-[10px] text-gray-500 font-mono tracking-wider uppercase">{label}</p>
-                {isPowered && (
-                    <Activity 
-                        size={10} 
-                        className="group-hover:animate-pulse" 
-                        style={{ color: isPowered ? brandColor : undefined, opacity: 0.5 }} 
-                    />
-                )}
+            <div 
+                className={`relative z-10 p-2.5 rounded-lg transition-all duration-300 flex-shrink-0 ${isPowered
+                    ? 'bg-gray-900 group-hover:shadow-[0_0_15px_var(--brand-glow-shadow)]'
+                    : 'bg-gray-900 text-gray-600'
+                    }`}
+                style={isPowered ? {
+                    color: brandColor,
+                    '--brand-glow-shadow': `${brandColor}40`
+                } as React.CSSProperties : {}}
+            >
+                <Icon size={22} />
             </div>
-            <p className={`font-bold transition-colors ${isPowered ? 'text-gray-200 group-hover:text-white' : 'text-gray-600'}`}>
-                {value}
-            </p>
-        </div>
-    </a>
+            <div className="flex-1 relative z-10 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                    <p className="text-[11px] text-gray-400 font-mono tracking-wider uppercase">{label}</p>
+                    {isPowered && (
+                        <Activity 
+                            size={10} 
+                            className="group-hover:animate-pulse" 
+                            style={{ color: isPowered ? brandColor : undefined, opacity: 0.6 }} 
+                        />
+                    )}
+                </div>
+                <p className={`font-bold text-sm md:text-base truncate transition-colors ${isPowered ? 'text-gray-200 group-hover:text-white' : 'text-gray-600'}`}>
+                    {value}
+                </p>
+            </div>
+        </a>
+        {extraAction && (
+            <div className="relative z-20 flex-shrink-0">
+                {extraAction}
+            </div>
+        )}
+    </div>
 );

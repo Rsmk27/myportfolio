@@ -12,7 +12,7 @@ export const PROFILE: Profile = {
     { platform: 'github', url: 'https://github.com/Rsmk27' },
     { platform: 'linkedin', url: 'https://www.linkedin.com/in/srinivasamanikanta/' },
     { platform: 'telegram', url: 'https://t.me/RSMK_27' },
-    { platform: 'instagram', url: 'https://instagram.com/rsmk_27' },
+    { platform: 'instagram', url: 'https://www.instagram.com/rsmk.me/' },
     { platform: 'x', url: 'https://x.com/SrinivasManik20' },
     { platform: 'email', url: 'mailto:srinivasmanikantarajapantula@gmail.com' }
   ],
@@ -86,8 +86,7 @@ export const PROJECTS: Project[] = [
       '/assets/firefighter-monitoring-device/departmental-first-1.jpg',
       '/assets/firefighter-monitoring-device/departmental-first-2.jpg',
       '/assets/firefighter-monitoring-device/departmental-first-3.jpg',
-      '/assets/firefighter-monitoring-device/departmental-first-4.jpg',
-      '/assets/firefighter-monitoring-device/departmental-first-5.jpg'
+      '/assets/firefighter-monitoring-device/departmental-first-4.jpg'
     ],
     award: '🥈 Hackathon Winner',
     awards: [
@@ -115,24 +114,6 @@ export const PROJECTS: Project[] = [
     award: '📱 Android App',
     awards: ['📱 Android App', '🌐 Web Utility'],
     keywords: 'resistor color code calculator, 4 band resistor calculator, color ohm app india, smd resistor calculator'
-  },
-  {
-    id: 'p4',
-    title: 'GridForge – Smart Energy Management System',
-    description: 'A MATLAB/Simulink smart grid simulation platform for industrial energy monitoring, load shedding analysis, and ISO 50001 energy management compliance.',
-    tech: ['MATLAB', 'Simulink', 'Power Systems', 'ISO 50001', 'Smart Grid'],
-    image: '/assets/automated-street-light-system.webp',
-    details: "GridForge is a simulation framework developed in MATLAB and Simulink for analyzing industrial power distribution systems. Built to model high-voltage industrial grid behavior, load shedding dynamics under peak conditions, and power factor correction algorithms. Integrates ISO 50001 energy management protocols to simulate energy efficiency improvements in heavy manufacturing environments.",
-    features: [
-      "MATLAB/Simulink load-flow analysis and power distribution modeling",
-      "ISO 50001 industrial energy management protocol implementation",
-      "Dynamic load-shedding and demand-response simulation algorithms",
-      "Power factor monitoring and reactive power compensation models",
-      "Targeted at EEE smart energy research and industrial power optimization"
-    ],
-    award: '📊 MATLAB Model',
-    awards: ['📊 MATLAB Simulation', '🔋 Smart Energy'],
-    keywords: 'smart energy management matlab, industrial energy monitoring, iso 50001 simulation, smart grid power systems'
   },
   {
     id: 'p5',
