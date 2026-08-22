@@ -333,7 +333,7 @@ const Home: React.FC = () => {
         <div className="min-h-screen relative selection:bg-cyan-500/30" style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
             <EasterEgg />
             <SEO
-                title="Srinivasa Manikanta Rajapantula | EEE Student – Embedded Systems, Industrial Automation & IoT"
+                title="Srinivasa Manikanta Rajapantula (RSMK) – Portfolio"
                 description="Portfolio of Srinivasa Manikanta Rajapantula — Electrical & Electronics Engineering Student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy."
                 keywords="Srinivasa Manikanta Rajapantula, RSMK, Electrical Engineering, EEE student, Embedded Systems, Industrial Automation, PLC programming, CODESYS, Factory IO, Modbus TCP, Smart Energy, ESP32, SFMD, ColorOhm, Vijayawada"
                 url="/"
