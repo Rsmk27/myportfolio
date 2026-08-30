@@ -82,11 +82,11 @@ const GALLERY_JSON_LD = {
   "@type": "ImageGallery",
   "name": "Srinivasa Manikanta — Engineering Portfolio Gallery",
   "description": "Photo gallery showcasing hackathon wins, project builds, certifications, internship experiences, and engineering activities of Srinivasa Manikanta Rajapantula.",
-  "url": "https://rsmk.me/gallery",
+  "url": "https://rsmk.tech/gallery",
   "author": {
     "@type": "Person",
     "name": "Srinivasa Manikanta Rajapantula",
-    "url": "https://rsmk.me"
+    "url": "https://rsmk.tech"
   },
   "mainEntity": {
     "@type": "ItemList",
@@ -96,7 +96,7 @@ const GALLERY_JSON_LD = {
       "position": i + 1,
       "item": {
         "@type": "ImageObject",
-        "contentUrl": `https://rsmk.me${img.src}`,
+        "contentUrl": `https://rsmk.tech${img.src}`,
         "name": img.alt,
         "description": img.alt,
         "author": {
@@ -172,7 +172,7 @@ const Gallery: React.FC = () => {
         description="Explore Srinivasa Manikanta's engineering gallery: 2nd place A-Hacks Hackathon hardware build, Coromandel industrial internship, EV battery management systems, BLDC motor controllers, and 3D printing workshops."
         keywords="Srinivasa Manikanta gallery, engineering projects photos, hackathon hardware, A-Hacks, EV battery management system, BMS prototype, BLDC motor controller, EEE lab, Coromandel internship"
         url="/gallery"
-        image="https://rsmk.me/assets/gallery/ahacks/prize-ceremony.jpg"
+        image="https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg"
         schema={GALLERY_JSON_LD}
       />
 

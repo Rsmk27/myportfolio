@@ -28,8 +28,8 @@ export const SEO: React.FC<SEOProps> = ({
   const siteTitle = "Srinivasa Manikanta Rajapantula (RSMK) – Portfolio";
   const defaultDescription = "Portfolio of Srinivasa Manikanta Rajapantula — Electrical & Electronics Engineering Student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy in Vijayawada, India.";
   const defaultKeywords = "Srinivasa Manikanta Rajapantula, RSMK, Electrical and Electronics Engineering, EEE student, Embedded Systems, Industrial Automation, PLC programming, CODESYS, Factory IO, Modbus TCP, Smart Energy, ESP32 IoT projects, SFMD firefighter monitoring device, ColorOhm resistor calculator, solar panel tracker, AgriRover ESP32, Vijayawada Andhra Pradesh";
-  const defaultImage = "https://rsmk.me/assets/srinivasa-manikanta-profile.webp";
-  const siteUrl = "https://rsmk.me";
+  const defaultImage = "https://rsmk.tech/assets/srinivasa-manikanta-profile.webp";
+  const siteUrl = "https://rsmk.tech";
 
   const fullTitle = title ? (title.includes(PROFILE.name) ? title : `${title} | ${PROFILE.name}`) : siteTitle;
   const finalDescription = description || defaultDescription;

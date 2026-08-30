@@ -346,8 +346,8 @@ const Home: React.FC = () => {
                         "@type": "Person",
                         "name": "Srinivasa Manikanta Rajapantula",
                         "alternateName": ["RSMK", "Srinivasa Manikanta", "RSMK Technologies"],
-                        "url": "https://rsmk.me",
-                        "image": "https://rsmk.me/assets/srinivasa-manikanta-profile.webp",
+                        "url": "https://rsmk.tech",
+                        "image": "https://rsmk.tech/assets/srinivasa-manikanta-profile.webp",
                         "jobTitle": "Electrical & Electronics Engineering Student",
                         "address": {
                             "@type": "PostalAddress",
@@ -371,12 +371,12 @@ const Home: React.FC = () => {
                         "@type": "WebSite",
                         "name": "Srinivasa Manikanta Rajapantula — Portfolio",
                         "alternateName": "RSMK Portfolio",
-                        "url": "https://rsmk.me",
+                        "url": "https://rsmk.tech",
                         "description": "Personal engineering portfolio of Srinivasa Manikanta Rajapantula — Embedded Systems, Industrial Automation, IoT, and Smart Energy projects.",
                         "author": {
                             "@type": "Person",
                             "name": "Srinivasa Manikanta Rajapantula",
-                            "url": "https://rsmk.me"
+                            "url": "https://rsmk.tech"
                         },
                         "inLanguage": "en"
                     },
@@ -385,7 +385,7 @@ const Home: React.FC = () => {
                         "@type": "DigitalDocument",
                         "name": "Srinivasa Manikanta Rajapantula - Engineering Resume",
                         "description": "Comprehensive engineering resume covering Embedded Systems, Industrial Automation (PLC, CODESYS, Modbus TCP), IoT development, and power distribution internship experience.",
-                        "url": "https://rsmk.me/assets/Srinivasa_Manikanta_Resume.pdf",
+                        "url": "https://rsmk.tech/assets/Srinivasa_Manikanta_Resume.pdf",
                         "fileFormat": "application/pdf",
                         "author": {
                             "@type": "Person",
@@ -397,18 +397,18 @@ const Home: React.FC = () => {
                         "@type": "VideoObject",
                         "name": "Automatic Exhaust Fan Prototype Video",
                         "description": "Demonstration video showing gas detection trigger and automatic ventilation fan activation using Arduino and MQ-2 sensor.",
-                        "thumbnailUrl": "https://rsmk.me/assets/auto-exhaust-fan/image-1.jpg",
+                        "thumbnailUrl": "https://rsmk.tech/assets/auto-exhaust-fan/image-1.jpg",
                         "uploadDate": "2026-01-01T00:00:00+05:30",
-                        "contentUrl": "https://rsmk.me/assets/auto-exhaust-fan/demo-video.mp4"
+                        "contentUrl": "https://rsmk.tech/assets/auto-exhaust-fan/demo-video.mp4"
                     },
                     {
                         "@context": "https://schema.org",
                         "@type": "VideoObject",
                         "name": "Drone Flight & Telemetry Testing",
                         "description": "Flight stabilization and quadcopter maneuvering workshop demonstration.",
-                        "thumbnailUrl": "https://rsmk.me/assets/certifications/drone-technology/training-1.jpg",
+                        "thumbnailUrl": "https://rsmk.tech/assets/certifications/drone-technology/training-1.jpg",
                         "uploadDate": "2026-01-01T00:00:00+05:30",
-                        "contentUrl": "https://rsmk.me/assets/certifications/drone-technology/flight-1.mp4"
+                        "contentUrl": "https://rsmk.tech/assets/certifications/drone-technology/flight-1.mp4"
                     }
                 ]}
             />

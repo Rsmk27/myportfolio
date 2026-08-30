@@ -64,7 +64,7 @@ const App: React.FC = () => {
 
 %c     ⚡  Passionate about Hardware, IoT & EEE?
      🛠️  Let's collaborate or build projects!
-     🚀  https://rsmk.me
+     🚀  https://rsmk.tech
 `;
         console.log(consoleAscii, 'color: #00f2ff; font-weight: bold; font-family: monospace;', 'color: #ffae00; font-weight: bold;');
     }, []);
