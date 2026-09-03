@@ -2,10 +2,10 @@ import { Project, Profile, Experience, Education } from './types';
 
 export const PROFILE: Profile = {
   name: "Srinivasa Manikanta Rajapantula",
-  title: "Electrical & Electronics Engineering Student | Embedded Systems | Industrial Automation | IoT | Smart Energy",
-  tagline: "EEE Student focused on Embedded Systems, Industrial Automation, IoT, and Smart Energy Solutions",
+  title: "Electrical & Electronics Engineering Student at ALIET | Embedded Systems | Industrial Automation | IoT | Smart Energy",
+  tagline: "EEE Student at ALIET focused on Embedded Systems, Industrial Automation, IoT, and Smart Energy Solutions",
   heroSubtitle: "Building intelligent physical systems, embedded firmware, and industrial control simulations with a rigorous engineering mindset.",
-  bio: "I am an Electrical & Electronics Engineering (EEE) student specializing in Embedded Systems, Industrial Automation, Microcontrollers, IoT, and Smart Energy Systems. My engineering work spans designing custom ESP32 state-machine firmware, simulating PLC control sequences in CODESYS and Factory I/O over Modbus TCP, modeling power distribution in MATLAB/Simulink, and maintaining 11kV distribution networks during industrial internship training at Coromandel International Limited. I utilize Web Development as a supporting engineering tool to build real-time monitoring dashboards, control interfaces, and calculation software for hardware systems.",
+  bio: "I am Srinivasa Manikanta Rajapantula (RSMK), an Electrical & Electronics Engineering (EEE) student at Andhra Loyola Institute of Engineering and Technology (ALIET), Vijayawada. I specialize in Embedded Systems, Industrial Automation, Microcontrollers, IoT (Internet of Things), and Smart Energy Systems. My engineering work spans designing custom ESP32 state-machine firmware, simulating PLC control sequences in CODESYS and Factory I/O over Modbus TCP, modeling power distribution in MATLAB/Simulink, and maintaining 11kV distribution networks during industrial internship training at Coromandel International Limited. I utilize Web Development as a supporting engineering tool to build real-time monitoring dashboards, control interfaces, and calculation software for hardware systems.",
   location: "Vijayawada, Andhra Pradesh, India",
   email: "srinivasmanikantarajapantula@gmail.com",
   socials: [

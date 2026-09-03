@@ -138,7 +138,8 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
           {project.image && (
             <img
               src={project.image}
-              alt={`${project.title} — ${project.description || 'Engineering project'}`}
+              alt={`${project.title} — ${project.description || 'Engineering project by Srinivasa Manikanta Rajapantula'}`}
+              title={`${project.title} — Engineering Project by Srinivasa Manikanta`}
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"

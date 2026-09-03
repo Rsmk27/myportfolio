@@ -336,19 +336,36 @@ const Home: React.FC = () => {
         <div className="min-h-screen relative selection:bg-cyan-500/30" style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
             <EasterEgg />
             <SEO
-                title="Srinivasa Manikanta Rajapantula (RSMK) – Portfolio"
-                description="Portfolio of Srinivasa Manikanta Rajapantula — Electrical & Electronics Engineering Student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy."
-                keywords="Srinivasa Manikanta Rajapantula, RSMK, Electrical Engineering, EEE student, Embedded Systems, Industrial Automation, PLC programming, CODESYS, Factory IO, Modbus TCP, Smart Energy, ESP32, SFMD, ColorOhm, Vijayawada"
+                title="Srinivasa Manikanta Rajapantula (RSMK) – Portfolio | Embedded Systems, Industrial Automation & IoT"
+                description="Portfolio of Srinivasa Manikanta Rajapantula (RSMK) — Electrical & Electronics Engineering Student at ALIET (Andhra Loyola Institute of Engineering and Technology) specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy in Vijayawada, India."
+                keywords="Srinivasa Manikanta, Manikanta, Rajapantula, Srinivasa Manikanta Rajapantula, RSMK, RSMK Tech, ALIET, Andhra Loyola Institute of Engineering and Technology, ALIET Vijayawada, ALIET EEE, Industrial Automation, Embedded Systems, IoT, Internet of Things, PLC programming, CODESYS, Factory IO, Modbus TCP, Smart Energy, ESP32 IoT projects, SFMD firefighter monitoring device, ColorOhm resistor calculator, solar panel tracker, AgriRover ESP32, Vijayawada Andhra Pradesh, EEE student, Electrical and Electronics Engineering, Coromandel International Limited, SCADA, HMI, Arduino, Firmware Engineer, Automation Engineer"
                 url="/"
                 schema={[
                     {
                         "@context": "https://schema.org",
                         "@type": "Person",
                         "name": "Srinivasa Manikanta Rajapantula",
-                        "alternateName": ["RSMK", "Srinivasa Manikanta", "RSMK Technologies"],
+                        "alternateName": [
+                            "RSMK",
+                            "Srinivasa Manikanta",
+                            "Manikanta",
+                            "Rajapantula",
+                            "Manikanta Rajapantula",
+                            "RSMK Technologies",
+                            "Srinivasa Manikanta ALIET"
+                        ],
                         "url": "https://rsmk.tech",
                         "image": "https://rsmk.tech/assets/srinivasa-manikanta-profile.webp",
                         "jobTitle": "Electrical & Electronics Engineering Student",
+                        "affiliation": {
+                            "@type": "EducationalOrganization",
+                            "name": "Andhra Loyola Institute of Engineering and Technology",
+                            "alternateName": "ALIET"
+                        },
+                        "alumniOf": {
+                            "@type": "EducationalOrganization",
+                            "name": "Government Polytechnic Srikakulam"
+                        },
                         "address": {
                             "@type": "PostalAddress",
                             "addressLocality": "Vijayawada",
@@ -356,9 +373,25 @@ const Home: React.FC = () => {
                             "addressCountry": "India"
                         },
                         "knowsAbout": [
-                            "Electrical Engineering", "Embedded Systems", "Industrial Automation",
-                            "PLC Programming", "CODESYS", "Factory I/O", "Modbus TCP", "ESP32",
-                            "Arduino", "IoT Projects", "Resistor Color Code Calculator", "Smart Energy Systems"
+                            "Industrial Automation",
+                            "Embedded Systems",
+                            "Internet of Things (IoT)",
+                            "PLC Programming",
+                            "CODESYS",
+                            "Factory I/O",
+                            "Modbus TCP",
+                            "ESP32",
+                            "Arduino",
+                            "Smart Energy Systems",
+                            "Electrical and Electronics Engineering",
+                            "Control Systems",
+                            "Power Systems",
+                            "SCADA",
+                            "HMI",
+                            "Robotics",
+                            "Sensors & Actuators",
+                            "Resistor Color Code Calculator",
+                            "Vijayawada ALIET"
                         ],
                         "sameAs": [
                             "https://github.com/Rsmk27",
@@ -396,7 +429,7 @@ const Home: React.FC = () => {
                         "@context": "https://schema.org",
                         "@type": "VideoObject",
                         "name": "Automatic Exhaust Fan Prototype Video",
-                        "description": "Demonstration video showing gas detection trigger and automatic ventilation fan activation using Arduino and MQ-2 sensor.",
+                        "description": "Demonstration video showing gas detection trigger and automatic ventilation fan activation using Arduino and MQ-2 sensor by Srinivasa Manikanta Rajapantula.",
                         "thumbnailUrl": "https://rsmk.tech/assets/auto-exhaust-fan/image-1.jpg",
                         "uploadDate": "2026-01-01T00:00:00+05:30",
                         "contentUrl": "https://rsmk.tech/assets/auto-exhaust-fan/demo-video.mp4"
@@ -405,10 +438,74 @@ const Home: React.FC = () => {
                         "@context": "https://schema.org",
                         "@type": "VideoObject",
                         "name": "Drone Flight & Telemetry Testing",
-                        "description": "Flight stabilization and quadcopter maneuvering workshop demonstration.",
+                        "description": "Flight stabilization and quadcopter maneuvering workshop demonstration at ALIET.",
                         "thumbnailUrl": "https://rsmk.tech/assets/certifications/drone-technology/training-1.jpg",
                         "uploadDate": "2026-01-01T00:00:00+05:30",
                         "contentUrl": "https://rsmk.tech/assets/certifications/drone-technology/flight-1.mp4"
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "VideoObject",
+                        "name": "Industrial Automation Learning on CODESYS — Srinivasa Manikanta Rajapantula",
+                        "description": "PLC ladder logic and 3D plant simulation walkthrough using CODESYS, Factory I/O, and Modbus TCP by Srinivasa Manikanta Rajapantula.",
+                        "thumbnailUrl": "https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg",
+                        "uploadDate": "2026-01-15T00:00:00+05:30",
+                        "embedUrl": "https://www.youtube.com/embed/2pnFLqmh6X4",
+                        "contentUrl": "https://www.youtube.com/watch?v=2pnFLqmh6X4"
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "VideoObject",
+                        "name": "1-Way Traffic Light Control using CCW and Optix Studio — Srinivasa Manikanta Rajapantula",
+                        "description": "1-Way Traffic Light PLC control logic simulation built with Connected Components Workbench (CCW) and FactoryTalk Optix Studio HMI by Srinivasa Manikanta Rajapantula.",
+                        "thumbnailUrl": "https://rsmk.tech/assets/gallery/ahacks/demo-presentation.jpg",
+                        "uploadDate": "2026-02-10T00:00:00+05:30",
+                        "embedUrl": "https://www.youtube.com/embed/qIJbTBcBfjE",
+                        "contentUrl": "https://www.youtube.com/watch?v=qIJbTBcBfjE"
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "ImageObject",
+                        "contentUrl": "https://rsmk.tech/assets/srinivasa-manikanta-profile.webp",
+                        "name": "Portrait of Srinivasa Manikanta Rajapantula",
+                        "caption": "Srinivasa Manikanta Rajapantula (RSMK) — Electrical & Electronics Engineering Student at ALIET specializing in Embedded Systems, Industrial Automation, and IoT",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Srinivasa Manikanta Rajapantula"
+                        }
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "ImageObject",
+                        "contentUrl": "https://rsmk.tech/assets/firefighter-monitoring-device.webp",
+                        "name": "SFMD Sustainable Firefighter Monitoring Device Hardware",
+                        "caption": "ESP32 wearable firefighter safety monitor with fall detection, gas sensing, and GPS tracking by Srinivasa Manikanta",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Srinivasa Manikanta Rajapantula"
+                        }
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "ImageObject",
+                        "contentUrl": "https://rsmk.tech/assets/color-ohm-resistor-calculator-tool.webp",
+                        "name": "ColorOhm Resistor Color Code Calculator App",
+                        "caption": "Precision resistor color code calculator Android application by Srinivasa Manikanta Rajapantula",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Srinivasa Manikanta Rajapantula"
+                        }
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "ImageObject",
+                        "contentUrl": "https://rsmk.tech/assets/agri-rover-project.webp",
+                        "name": "AgriRover Multi-Functional Agricultural Robot",
+                        "caption": "Dual ESP32 IoT agricultural robot with live video streaming and sensor telemetry by Srinivasa Manikanta Rajapantula",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Srinivasa Manikanta Rajapantula"
+                        }
                     }
                 ]}
             />
@@ -762,7 +859,8 @@ const Home: React.FC = () => {
                                 <div className="relative w-48 h-48 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_60px_rgba(0,242,255,0.18),inset_0_0_30px_rgba(0,242,255,0.05)] bg-black z-10 hover:border-cyan-400/60 transition-colors duration-500 group">
                                     <img
                                         src={PROFILE.image}
-                                        alt={`Srinivasa Manikanta Rajapantula (RSMK) — Embedded Systems & IoT Engineer Portfolio Image`}
+                                        alt="Srinivasa Manikanta Rajapantula (RSMK) — Electrical &amp; Electronics Engineering Student at ALIET, Embedded Systems, Industrial Automation &amp; IoT"
+                                        title="Srinivasa Manikanta Rajapantula (RSMK) — Electrical &amp; Electronics Engineering Student at ALIET"
                                         className="w-full h-full object-cover"
                                         loading="eager"
                                         fetchPriority="high"

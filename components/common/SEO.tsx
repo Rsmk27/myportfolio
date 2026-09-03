@@ -26,8 +26,8 @@ export const SEO: React.FC<SEOProps> = ({
   schema,
 }) => {
   const siteTitle = "Srinivasa Manikanta Rajapantula (RSMK) – Portfolio";
-  const defaultDescription = "Portfolio of Srinivasa Manikanta Rajapantula — Electrical & Electronics Engineering Student specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy in Vijayawada, India.";
-  const defaultKeywords = "Srinivasa Manikanta Rajapantula, RSMK, Electrical and Electronics Engineering, EEE student, Embedded Systems, Industrial Automation, PLC programming, CODESYS, Factory IO, Modbus TCP, Smart Energy, ESP32 IoT projects, SFMD firefighter monitoring device, ColorOhm resistor calculator, solar panel tracker, AgriRover ESP32, Vijayawada Andhra Pradesh";
+  const defaultDescription = "Portfolio of Srinivasa Manikanta Rajapantula (RSMK) — Electrical & Electronics Engineering Student at ALIET (Andhra Loyola Institute of Engineering and Technology) specializing in Embedded Systems, Industrial Automation (PLC, CODESYS, Factory I/O, Modbus TCP), IoT, and Smart Energy in Vijayawada, India.";
+  const defaultKeywords = "Srinivasa Manikanta, Manikanta, Rajapantula, Srinivasa Manikanta Rajapantula, RSMK, RSMK Tech, ALIET, Andhra Loyola Institute of Engineering and Technology, ALIET Vijayawada, ALIET EEE, Electrical and Electronics Engineering, EEE student, Embedded Systems, Industrial Automation, IoT, Internet of Things, PLC programming, CODESYS, Factory IO, Modbus TCP, Smart Energy, ESP32 IoT projects, SFMD firefighter monitoring device, ColorOhm resistor calculator, solar panel tracker, AgriRover ESP32, Vijayawada Andhra Pradesh";
   const defaultImage = "https://rsmk.tech/assets/srinivasa-manikanta-profile.webp";
   const siteUrl = "https://rsmk.tech";
 

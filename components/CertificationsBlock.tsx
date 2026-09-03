@@ -1076,25 +1076,28 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                         mainSrc.endsWith('.mp4') ? (
                             <video
                                 src={mainSrc}
-                                title={`${cert.title} video demonstration`}
-                                aria-label={`${cert.title} video demonstration`}
+                                title={`${cert.title} video demonstration — Srinivasa Manikanta Rajapantula`}
+                                aria-label={`${cert.title} video demonstration by Srinivasa Manikanta`}
                                 controls
                                 autoPlay
                                 muted
                                 loop
+                                playsInline
+                                preload="metadata"
                                 className="max-w-full max-h-[70vw] md:w-full md:h-full md:max-h-none object-contain"
                             />
                         ) : mainSrc.endsWith('.pdf') ? (
                             <iframe
                                 src={`${mainSrc}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                                title={`${cert.title} - Official Verification PDF`}
+                                title={`${cert.title} - Official Verification PDF — Srinivasa Manikanta`}
                                 className="w-full border-0"
                                 style={{ height: 'clamp(260px, 65vw, 100%)' }}
                             />
                         ) : (
                             <img
                                 src={mainSrc}
-                                alt={`${cert.title} - ${cert.issuer} Certificate`}
+                                alt={`${cert.title} - ${cert.issuer} Engineering Certificate — Srinivasa Manikanta`}
+                                title={`${cert.title} (${cert.issuer})`}
                                 loading="lazy"
                                 decoding="async"
                                 className="max-w-full max-h-[70vw] md:w-full md:h-full md:max-h-none object-contain"

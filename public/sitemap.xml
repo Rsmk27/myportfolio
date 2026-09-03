@@ -6,18 +6,20 @@
   <!-- Homepage with Featured Images and Demo Videos -->
   <url>
     <loc>https://rsmk.tech/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
 
-    <!-- Profile & Hero Images -->
     <image:image>
       <image:loc>https://rsmk.tech/assets/srinivasa-manikanta-profile.webp</image:loc>
-      <image:title>Srinivasa Manikanta Rajapantula — Electrical and Electronics Engineer</image:title>
-      <image:caption>Portrait of Srinivasa Manikanta Rajapantula, EEE student and Embedded Systems Developer</image:caption>
+      <image:title>Srinivasa Manikanta Rajapantula — Electrical and Electronics Engineer at ALIET</image:title>
+      <image:caption>Portrait of Srinivasa Manikanta Rajapantula (RSMK), EEE student specializing in Embedded Systems, Industrial Automation, and IoT at ALIET Vijayawada</image:caption>
     </image:image>
-
-    <!-- SFMD Project Images -->
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/firefighter-monitoring-device.webp</image:loc>
+      <image:title>SFMD Sustainable Firefighter Monitoring Device Hardware</image:title>
+      <image:caption>ESP32 wearable firefighter safety monitor with fall detection, gas sensing, and GPS tracking by Srinivasa Manikanta Rajapantula</image:caption>
+    </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/firefighter-monitoring-device/infographic-poster.jpg</image:loc>
       <image:title>SFMD Firefighter Monitoring Device Infographic Poster</image:title>
@@ -28,12 +30,65 @@
       <image:title>SFMD Conceptual Circuit Schematic Design</image:title>
       <image:caption>Hand-drawn circuit layout and sensor integration concept for the firefighter safety wearable</image:caption>
     </image:image>
-
-    <!-- GridForge Images -->
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/firefighter-monitoring-device/device-demo-1.jpg</image:loc>
+      <image:title>SFMD Firefighter Safety Wearable Hardware Prototype</image:title>
+      <image:caption>Hardware prototype demonstration of the wearable firefighter safety monitoring device</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/firefighter-monitoring-device/device-demo-2.jpg</image:loc>
+      <image:title>SFMD Sensor Array and ESP32 Wearable Enclosure</image:title>
+      <image:caption>Close-up of sensor integration, emergency distress button, and microcontroller wiring</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/firefighter-monitoring-device/dashboard.png</image:loc>
+      <image:title>SFMD Real-Time Firebase Web Monitoring Dashboard</image:title>
+      <image:caption>Live telemetry web dashboard with GPS map tracking and biometric sensor graphs</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/color-ohm-resistor-calculator-tool.webp</image:loc>
+      <image:title>ColorOhm Resistor Color Code Calculator App</image:title>
+      <image:caption>ColorOhm Android app and web utility for resistor color code and SMD calculations by Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/smart-exhaust-gas-detection-system.webp</image:loc>
+      <image:title>Automatic Exhaust Fan Smart Gas Detection System</image:title>
+      <image:caption>Arduino UNO and MQ-2 gas sensor automatic ventilation control system by Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/auto-exhaust-fan/image-1.jpg</image:loc>
+      <image:title>Automatic Exhaust Fan MQ-2 Gas Sensing Prototype</image:title>
+      <image:caption>Arduino microcontroller breadboard prototype with gas sensor and relay control</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/auto-exhaust-fan/image-2.jpg</image:loc>
+      <image:title>Automatic Exhaust Fan Circuit Relay and Enclosure</image:title>
+      <image:caption>Hardware wiring harness connecting power relay and exhaust fan unit</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/auto-exhaust-fan/image-3.jpg</image:loc>
+      <image:title>Automatic Exhaust Fan Completed Enclosure</image:title>
+      <image:caption>Finished hardware model with safety indicators and auto-off timer controls</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/single-axis-solar-tracker.png</image:loc>
+      <image:title>Single Axis Solar Tracker with Analog Comparator Circuit</image:title>
+      <image:caption>Microcontroller-free solar tracker using LDR bridge and relay comparator logic by Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/ai-chatbot-interface-background.webp</image:loc>
+      <image:title>Solar Powered Dewatering System (SPDS)</image:title>
+      <image:caption>PM-KUSUM aligned solar powered irrigation and dewatering prototype by Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/agri-rover-project.webp</image:loc>
+      <image:title>AgriRover Multi-Functional Agricultural Robot</image:title>
+      <image:caption>Dual ESP32 IoT agricultural robot with live video stream, GPS, and soil sensing by Srinivasa Manikanta</image:caption>
+    </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gridforge/web-dashboard-interface.png</image:loc>
       <image:title>GridForge Smart Energy Management Web Interface</image:title>
-      <image:caption>Real-time telemetry and power metrics monitoring dashboard</image:caption>
+      <image:caption>Real-time telemetry and power metrics monitoring dashboard for industrial energy management</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gridforge/matlab-simulation-model.png</image:loc>
@@ -45,32 +100,31 @@
       <image:title>GridForge Simulation Waveforms and Power Analysis</image:title>
       <image:caption>Analysis graphs illustrating voltage stability and harmonic reduction</image:caption>
     </image:image>
-
-    <!-- Automatic Exhaust Fan -->
     <image:image>
-      <image:loc>https://rsmk.tech/assets/auto-exhaust-fan/image-1.jpg</image:loc>
-      <image:title>Automatic Exhaust Fan MQ-2 Gas Sensing Prototype</image:title>
-      <image:caption>Arduino microcontroller breadboard prototype with gas sensor and relay control</image:caption>
+      <image:loc>https://rsmk.tech/assets/gridforge/backend-api-code.png</image:loc>
+      <image:title>GridForge Backend API Data Pipeline</image:title>
+      <image:caption>Backend telemetry processing code for industrial smart grid analytics</image:caption>
     </image:image>
-    <image:image>
-      <image:loc>https://rsmk.tech/assets/auto-exhaust-fan/image-2.jpg</image:loc>
-      <image:title>Automatic Exhaust Fan Circuit Relay and Enclosure</image:title>
-      <image:caption>Hardware wiring harness connecting power relay and exhaust fan unit</image:caption>
-    </image:image>
-
-    <!-- Industrial Internship Experience -->
     <image:image>
       <image:loc>https://rsmk.tech/assets/experience/coromandel/single-line-diagram.jpg</image:loc>
       <image:title>Coromandel International Industrial Single Line Diagram</image:title>
       <image:caption>11kV/440V electrical distribution network SLD analyzed during internship</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://rsmk.tech/assets/experience/coromandel/internship-certificate.jpg</image:loc>
-      <image:title>Coromandel International Industrial Internship Certificate</image:title>
-      <image:caption>Certificate of completion for electrical engineering internship at Coromandel International Limited</image:caption>
+      <image:loc>https://rsmk.tech/assets/experience/coromandel/site-photo.jpg</image:loc>
+      <image:title>Coromandel International Ltd Industrial Plant Site</image:title>
+      <image:caption>Industrial fertilizer manufacturing plant site during electrical engineering internship</image:caption>
     </image:image>
-
-    <!-- Hackathon & Awards -->
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/experience/coromandel/internship-certificate.jpg</image:loc>
+      <image:title>Coromandel International Electrical Engineering Internship Certificate</image:title>
+      <image:caption>Certificate of completion for electrical engineering internship at Coromandel International Limited awarded to Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/experience/coromandel/training-site.jpg</image:loc>
+      <image:title>Industrial Substation Training Site at Coromandel</image:title>
+      <image:caption>High-voltage substation and motor testing facility at Coromandel International Limited</image:caption>
+    </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg</image:loc>
       <image:title>A-Hacks 24hr Hackathon Hardware Category 2nd Place Award</image:title>
@@ -79,110 +133,371 @@
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/certificate-2nd-place.jpg</image:loc>
       <image:title>A-Hacks 2nd Place Certificate — Hardware Innovation</image:title>
-      <image:caption>Official certificate awarded at A-Hacks 2026 hackathon</image:caption>
+      <image:caption>Official certificate awarded at A-Hacks 2026 hackathon to Srinivasa Manikanta Rajapantula</image:caption>
     </image:image>
-
-    <!-- Videos -->
     <video:video>
       <video:thumbnail_loc>https://rsmk.tech/assets/auto-exhaust-fan/image-1.jpg</video:thumbnail_loc>
       <video:title>Automatic Exhaust Fan Working Prototype Demonstration</video:title>
-      <video:description>Demonstration video showing gas detection trigger and automatic ventilation fan activation.</video:description>
+      <video:description>Demonstration video showing gas detection trigger and automatic ventilation fan activation by Srinivasa Manikanta.</video:description>
       <video:content_loc>https://rsmk.tech/assets/auto-exhaust-fan/demo-video.mp4</video:content_loc>
       <video:publication_date>2026-01-01T00:00:00+05:30</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
-
     <video:video>
       <video:thumbnail_loc>https://rsmk.tech/assets/certifications/drone-technology/training-1.jpg</video:thumbnail_loc>
-      <video:title>Drone Flight Test &amp; Telemetry Demonstration</video:title>
-      <video:description>Hands-on quadcopter flight testing and stabilization control demonstration.</video:description>
+      <video:title>Drone Flight Test and Telemetry Demonstration</video:title>
+      <video:description>Hands-on quadcopter flight testing, motor calibration, and stabilization control demonstration at ALIET.</video:description>
       <video:content_loc>https://rsmk.tech/assets/certifications/drone-technology/flight-1.mp4</video:content_loc>
+      <video:publication_date>2026-01-01T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://rsmk.tech/assets/certifications/drone-technology/training-2.jpg</video:thumbnail_loc>
+      <video:title>Quadcopter Drone Maneuvering and Yaw Stability Test</video:title>
+      <video:description>Quadcopter flight stability testing and PID tuning demonstration at ALIET Vijayawada.</video:description>
+      <video:content_loc>https://rsmk.tech/assets/certifications/drone-technology/flight-2.mp4</video:content_loc>
+      <video:publication_date>2026-01-01T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://rsmk.tech/assets/certifications/drone-technology/training-1.jpg</video:thumbnail_loc>
+      <video:title>Drone Assembly and Pre-flight Inspection</video:title>
+      <video:description>Pre-flight safety inspection, telemetry connection, and rotor balancing for drone technology workshop.</video:description>
+      <video:content_loc>https://rsmk.tech/assets/certifications/drone-technology/flight-3.mp4</video:content_loc>
       <video:publication_date>2026-01-01T00:00:00+05:30</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
   </url>
 
-  <!-- Photo & Media Gallery with Gallery Image Sitemap -->
+  <!-- Photo & Media Gallery with Complete Image & Video Sitemap -->
   <url>
     <loc>https://rsmk.tech/gallery</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
 
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/ahacks-banner.jpg</image:loc>
       <image:title>A-Hacks 24-hour Hardware Hackathon Banner</image:title>
+      <image:caption>Official event banner for A-Hacks 24-hour national hackathon participated by Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg</image:loc>
+      <image:title>Srinivasa Manikanta Receiving 2nd Prize at A-Hacks Hackathon</image:title>
+      <image:caption>Award ceremony honoring Srinivasa Manikanta Rajapantula for SFMD wearable hardware device</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/ahacks/certificate-2nd-place.jpg</image:loc>
+      <image:title>A-Hacks Hackathon 2nd Place Certificate — Hardware Category</image:title>
+      <image:caption>Certificate of excellence awarded to Srinivasa Manikanta for hardware innovation</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/demo-presentation.jpg</image:loc>
-      <image:title>SFMD Hardware Presentation to Hackathon Jury</image:title>
+      <image:title>Live Demo of Firefighter Safety IoT Wearable Device</image:title>
+      <image:caption>Hardware demonstration of the SFMD prototype to the hackathon evaluation committee</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/judge-evaluation.jpg</image:loc>
-      <image:title>Hackathon Judges Evaluating Firefighter Wearable</image:title>
+      <image:title>Hackathon Judges Evaluating Firefighter IoT Wearable</image:title>
+      <image:caption>Jury panel reviewing ESP32 fall detection, gas sensing, and GPS telemetry accuracy</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/coding-session-1.jpg</image:loc>
-      <image:title>Coding Embedded Firmware for ESP32 Wearable Device</image:title>
+      <image:title>Coding Firmware for ESP32 Wearable Device</image:title>
+      <image:caption>Srinivasa Manikanta developing state-machine firmware in Embedded C++ during 24-hour sprint</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/ahacks/coding-session-2.jpg</image:loc>
+      <image:title>Hardware Prototyping During A-Hacks Hackathon</image:title>
+      <image:caption>Circuit debugging and sensor wiring during A-Hacks 24-hour hackathon</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/ahacks/hackathon-hall.jpg</image:loc>
+      <image:title>A-Hacks National Hackathon Event Hall</image:title>
+      <image:caption>Wide angle view of teams developing embedded hardware and software systems</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/device-strap-front.jpg</image:loc>
-      <image:title>SFMD Wearable Strap Front Enclosure &amp; Sensors</image:title>
+      <image:title>SFMD Wearable Strap Front Enclosure &amp;amp; Sensors</image:title>
+      <image:caption>Front enclosure showing gas sensor port, status display, and distress button</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/device-strap-back.jpg</image:loc>
-      <image:title>SFMD Wearable Back Layout &amp; Power Circuitry</image:title>
+      <image:title>SFMD Wearable Back Layout &amp;amp; Power Circuitry</image:title>
+      <image:caption>Rear wiring layout with ESP32 board, battery protection harness, and MPU6050</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/Chefronics%20certificate.jpg</image:loc>
-      <image:title>Chefronics Robotics Certification &amp; Lab Work</image:title>
+      <image:title>Chefronics Robotics Laboratory Session at ALIET</image:title>
+      <image:caption>Hands-on robotics and electrical engineering lab session by Srinivasa Manikanta at ALIET</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/img-20260128-104328.jpg</image:loc>
+      <image:title>Campus Life at Andhra Loyola Institute of Engineering and Technology (ALIET)</image:title>
+      <image:caption>Engineering campus moment with Srinivasa Manikanta at ALIET Vijayawada</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/img-20250311-WA0009.jpg</image:loc>
+      <image:title>EEE Department Team Project Collaboration at ALIET</image:title>
+      <image:caption>Srinivasa Manikanta collaborating on hardware and robotics project development</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/img-20251010-WA0001.jpg</image:loc>
+      <image:title>Academic Technical Event and Seminar Participation at ALIET</image:title>
+      <image:caption>Technical presentation and symposium participation at ALIET</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/img-20260107-WA0035.jpg</image:loc>
+      <image:title>Electrical &amp;amp; Electronics Engineering Department Event at ALIET</image:title>
+      <image:caption>Departmental tech fest and project exhibition at ALIET Vijayawada</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/img-20260107-WA0033.jpg</image:loc>
+      <image:title>EEE Departmental Group Photo at ALIET</image:title>
+      <image:caption>Group photo of Electrical &amp;amp; Electronics Engineering students and faculty at ALIET</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/img-20260107-WA0050.jpg</image:loc>
+      <image:title>College Campus Life at ALIET Vijayawada</image:title>
+      <image:caption>Campus life and student activities at Andhra Loyola Institute of Engineering and Technology</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/img-20260128-WA0010.jpg</image:loc>
+      <image:title>Student Technical Activities &amp;amp; Robotics Projects at ALIET</image:title>
+      <image:caption>Hands-on technical activities and circuit design at ALIET</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/img-20260130-WA0007.jpg</image:loc>
+      <image:title>Engineering Project Showcase and Demonstration at ALIET</image:title>
+      <image:caption>Student hardware project demonstration and review by faculty at ALIET</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gallery/img-20260131-WA0011.jpg</image:loc>
+      <image:title>Hands-On Engineering Lab Learning Experience at ALIET</image:title>
+      <image:caption>Practical workbench testing and oscilloscope diagnostics by Srinivasa Manikanta</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/auto-exhaust-fan/image-1.jpg</image:loc>
+      <image:title>Automatic Exhaust Fan MQ-2 Gas Sensing Prototype</image:title>
+      <image:caption>Arduino UNO breadboard circuit with MQ-2 gas sensor and relay module</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/auto-exhaust-fan/image-2.jpg</image:loc>
+      <image:title>Automatic Exhaust Fan Relay Module &amp;amp; Fan Wiring</image:title>
+      <image:caption>5V optocoupler relay switching high-power exhaust fan unit</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/auto-exhaust-fan/image-3.jpg</image:loc>
+      <image:title>Automatic Exhaust Fan Completed Build with Enclosure</image:title>
+      <image:caption>Enclosed prototype with status LEDs and manual override switches</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gridforge/web-dashboard-interface.png</image:loc>
+      <image:title>GridForge Smart Grid Real-Time Web Interface</image:title>
+      <image:caption>Telemetry interface displaying grid load, voltage fluctuations, and harmonics</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gridforge/matlab-simulation-model.png</image:loc>
+      <image:title>GridForge MATLAB Simulink Smart Grid Model</image:title>
+      <image:caption>Complete power system simulation with renewable integration and load distribution</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gridforge/simulation-results.png</image:loc>
+      <image:title>GridForge Simulation Waveforms &amp;amp; Power Analysis</image:title>
+      <image:caption>Simulation results proving voltage regulation and reactive power compensation</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/gridforge/backend-api-code.png</image:loc>
+      <image:title>GridForge Backend API Processing Engine</image:title>
+      <image:caption>Data processing code for high-throughput grid telemetry metrics</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/experience/coromandel/single-line-diagram.jpg</image:loc>
+      <image:title>Industrial Single Line Diagram (SLD) 11kV/440V — Coromandel</image:title>
+      <image:caption>11kV/440V plant power distribution single line diagram analyzed during internship</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/experience/coromandel/site-photo.jpg</image:loc>
+      <image:title>Coromandel International Limited Industrial Plant Site</image:title>
+      <image:caption>Plant infrastructure during electrical engineering internship</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/experience/coromandel/internship-certificate.jpg</image:loc>
+      <image:title>Coromandel International Internship Certificate</image:title>
+      <image:caption>Internship completion certificate awarded to Srinivasa Manikanta Rajapantula</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/experience/coromandel/training-site.jpg</image:loc>
+      <image:title>Coromandel Substation and Distribution Site</image:title>
+      <image:caption>Industrial transformers and motor control center (MCC) training site</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/Drone%20technology%20certificate.png</image:loc>
-      <image:title>Drone Technology &amp; Flight Certification</image:title>
+      <image:title>Drone Technology Workshop Completion Certificate</image:title>
+      <image:caption>Certified in quadcopter assembly, motor calibration, and flight control</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/drone-technology/training-1.jpg</image:loc>
+      <image:title>Drone Technology Hands-On Flight Training Session</image:title>
+      <image:caption>Flight maneuvers and telemetry logging in open-field testing at ALIET</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/drone-technology/training-2.jpg</image:loc>
+      <image:title>Drone Assembly &amp;amp; Flight Calibration Workshop</image:title>
+      <image:caption>Assembling ESCs, brushless motors, and flight controllers</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/3D%20Printing.jpg</image:loc>
-      <image:title>3D Printing &amp; Additive Manufacturing Certification</image:title>
+      <image:title>3D Printing &amp;amp; Additive Manufacturing Certificate</image:title>
+      <image:caption>Certificate of completion for additive manufacturing and 3D prototyping</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/3d-printing/workshop-1.jpg</image:loc>
+      <image:title>3D Printing Workshop — CAD Modeling at ALIET</image:title>
+      <image:caption>Designing functional 3D enclosures and sensor brackets using CAD software</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/3d-printing/workshop-2.jpg</image:loc>
+      <image:title>3D Printing Workshop — Printer Calibration &amp;amp; Slicing</image:title>
+      <image:caption>Configuring layer heights, temperatures, and infill densities for FDM printing</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/3d-printing/workshop-3.jpg</image:loc>
+      <image:title>3D Printing Workshop — 3D Prototype Output</image:title>
+      <image:caption>Inspecting printed mechanical components and electronic enclosures</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/3d-printing/workshop-4.jpg</image:loc>
+      <image:title>3D Printing Workshop — Finished Prototype Parts</image:title>
+      <image:caption>Custom 3D printed mechanical hardware parts produced during workshop</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/3d-printing/workshop-5.jpg</image:loc>
+      <image:title>3D Printing Workshop — Team Activity Session at ALIET</image:title>
+      <image:caption>Collaborative group prototyping and design review session</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/EV%20technology.jpg</image:loc>
       <image:title>Electric Vehicle Technology Program Certificate</image:title>
+      <image:caption>Certified in EV powertrain architecture, battery chemistry, and motor controllers</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ev-battery/bms-battery-monitor-prototype.jpeg</image:loc>
-      <image:title>EV Battery Management System (BMS) Prototype with 18650 Li-ion Cells</image:title>
+      <image:title>EV Battery Management System (BMS) Prototype</image:title>
+      <image:caption>BMS prototype with 18650 Li-ion cells, telemetry LCD, and relay protection cutoff</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ev-battery/bms-over-temperature-protection.jpeg</image:loc>
-      <image:title>BMS Over-Temperature Protection and Safety Cutoff Testing</image:title>
+      <image:title>BMS Over-Temperature Protection Test</image:title>
+      <image:caption>Thermal safety cutoff testing demonstrating instant shutdown under thermal stress</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ev-battery/igk-brushless-motor-controller.jpeg</image:loc>
-      <image:title>250W Sine Wave Brushless EV Motor Controller Unit</image:title>
+      <image:title>250W Sine Wave BLDC Motor Controller Unit</image:title>
+      <image:caption>Brushless DC motor speed controller unit tested for electric bicycle propulsion</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ev-battery/khetaan-smart-wireless-controller.jpeg</image:loc>
       <image:title>Khetaan Smart Wireless BLDC Motor Controller (48V-72V)</image:title>
+      <image:caption>High-voltage wireless BLDC motor controller for light electric vehicles</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ev-battery/ev-workshop-seminar.webp</image:loc>
-      <image:title>Electric Vehicle Systems &amp; Battery Development Seminar</image:title>
+      <image:title>Electric Vehicle Systems &amp;amp; Battery Development Seminar</image:title>
+      <image:caption>Technical presentation on EV battery safety, regenerative braking, and BMS design</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ev-battery/ev-technology-classroom.jpg</image:loc>
-      <image:title>Electric Vehicle Technology Departmental Workshop Training</image:title>
+      <image:title>EV Technology Departmental Workshop Training at ALIET</image:title>
+      <image:caption>Hands-on training session on electric mobility systems at ALIET</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/Datavalley%20%20Embedded%20system%20intership.png</image:loc>
       <image:title>Datavalley Embedded Systems Internship Certificate</image:title>
+      <image:caption>Short-term internship certificate in Embedded Systems and C programming</image:caption>
     </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Basics%20of%20Robotics.png</image:loc>
+      <image:title>Siemens — Basics of Robotics Course Certificate</image:title>
+      <image:caption>Industrial robotics fundamentals and kinematics certificate from Siemens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/AI%20for%20Autonomous%20Vehicles%20and%20Robotics.png</image:loc>
+      <image:title>University of Michigan — AI for Autonomous Vehicles Certificate</image:title>
+      <image:caption>Certificate in sensor fusion, path planning, and autonomous perception</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Powering%20the%20Future%20with%20Electrification.png</image:loc>
+      <image:title>MathWorks — Electrification Specialization Certificate</image:title>
+      <image:caption>Simulating electric powertrains, battery packs, and renewable grid integration</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Interfacing%20with%20the%20Arduino.png</image:loc>
+      <image:title>UC Irvine — Interfacing with the Arduino Certificate</image:title>
+      <image:caption>Hardware interfacing, timers, interrupts, and serial communication certificate</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Modeling%20and%20Simulation%20with%20Simulink.png</image:loc>
+      <image:title>MathWorks — Modeling and Simulation with Simulink</image:title>
+      <image:caption>Stateflow modeling, continuous/discrete system simulation certificate</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/PLC%2C%20HMI.png</image:loc>
+      <image:title>Siemens PLC &amp;amp; TIA Portal Specialization Certificate</image:title>
+      <image:caption>PLC ladder programming, industrial networking, and HMI screen development</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Designing%20and%20Simulating%20Physical%20Models.png</image:loc>
+      <image:title>MathWorks — Physical Modeling Course Certificate</image:title>
+      <image:caption>Simscape multi-domain mechanical and electrical system modeling certificate</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Battery%20Design%20and%20Management.png</image:loc>
+      <image:title>MathWorks — Battery Design and Management Certificate</image:title>
+      <image:caption>State-of-charge (SoC) estimation, cell balancing, and thermal management simulation</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Electric%20Motor%20Modeling%20and%20Control.png</image:loc>
+      <image:title>MathWorks — Electric Motor Modeling &amp;amp; Control</image:title>
+      <image:caption>Field-oriented control (FOC) and motor drive simulation certificate</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Power%20Conversion%20for%20Electronic%20Devices.png</image:loc>
+      <image:title>MathWorks — Power Conversion Course Certificate</image:title>
+      <image:caption>DC-DC buck/boost converters and inverter circuit simulation certificate</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Electrified%20Systems%20Design%20Engineer.png</image:loc>
+      <image:title>MathWorks — Electrified Systems Design Engineer Professional Certificate</image:title>
+      <image:caption>Comprehensive professional certification covering electrified propulsion and power systems</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/AIFundamentalsFoundationsforUnderstandingAI.png</image:loc>
+      <image:title>IBM SkillsBuild — AI Fundamentals Certificate</image:title>
+      <image:caption>Foundations of artificial intelligence, neural networks, and machine learning</image:caption>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg</video:thumbnail_loc>
+      <video:title>Industrial Automation Learning on CODESYS — Srinivasa Manikanta Rajapantula</video:title>
+      <video:description>PLC ladder logic and 3D plant simulation walkthrough using CODESYS, Factory I/O, and Modbus TCP by Srinivasa Manikanta.</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=2pnFLqmh6X4</video:content_loc>
+      <video:publication_date>2026-01-15T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://rsmk.tech/assets/gallery/ahacks/demo-presentation.jpg</video:thumbnail_loc>
+      <video:title>1-Way Traffic Light Control using CCW and Optix Studio — Srinivasa Manikanta</video:title>
+      <video:description>1-Way Traffic Light PLC control logic simulation built with Connected Components Workbench (CCW) and FactoryTalk Optix Studio HMI.</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=qIJbTBcBfjE</video:content_loc>
+      <video:publication_date>2026-02-10T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <!-- PDF Documents for Direct Search Indexing -->
   <url>
     <loc>https://rsmk.tech/assets/Srinivasa_Manikanta_Resume.pdf</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -190,37 +505,37 @@
   <!-- Key Certification PDFs -->
   <url>
     <loc>https://rsmk.tech/assets/certifications/CertificateOfCompletion_Become%20a%20PLC%20Developer.pdf</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://rsmk.tech/assets/certifications/Datavalley%20%20Embedded%20system%20intership.pdf</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://rsmk.tech/assets/certifications/Interfacing%20with%20the%20Arduino.pdf</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://rsmk.tech/assets/certifications/Electric%20Motor%20Modeling%20and%20Control.pdf</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://rsmk.tech/assets/certifications/Power%20Conversion%20for%20Electronic%20Devices.pdf</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://rsmk.tech/assets/certifications/Solar%20PV%20design%20certificate.pdf</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -228,31 +543,31 @@
   <!-- Live Subdomain Projects -->
   <url>
     <loc>https://colorohm.rsmk.me/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sfmd.rsmk.co.in/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://spds.rsmk.me/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://budgetbuddy.rsmk.me/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://autoexhaustfan.rsmk.co.in/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

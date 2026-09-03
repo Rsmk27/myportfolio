@@ -276,6 +276,7 @@ const Masonry: React.FC<MasonryProps> = ({
             <img
               src={encodeURI(item.img)}
               alt={item.alt || 'Engineering gallery photo'}
+              title={item.alt || 'Engineering gallery photo'}
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover rounded-[10px] pointer-events-none"
