@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Profile, Social } from '../types';
-import { Mail, Github, Linkedin, Twitter, Send, Terminal, Wifi, Activity, Instagram, RefreshCw, Copy, Check } from 'lucide-react';
+import { Mail, Github, Linkedin, Twitter, Send, Terminal, Wifi, Activity, Instagram, RefreshCw, Copy, Check, Clock, Sparkles } from 'lucide-react';
 import { trackInteraction } from '../utils/analytics';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -11,6 +11,21 @@ const USAGE_KEY = 'rsmk_chat_usage';
 const MAX_MSGS = 999999;
 const MAX_ATTEMPTS = 3;
 const RETRY_DELAY_MS = 6000;
+
+const WAITING_JOKES = [
+    { joke: "Waking up the server Hamster and brewing fresh coffee... 🐹☕", author: "Server Warmup" },
+    { joke: "Why do programmers prefer dark mode? Because light attracts bugs! 🐛", author: "Dev Humor" },
+    { joke: "There are 10 types of people: those who understand binary, and those who don't. 🤖", author: "Binary Logic" },
+    { joke: "Why did the JavaScript developer wear glasses? Because they didn't C#. 👓", author: "Runtime Banter" },
+    { joke: "A SQL query walks into a bar, walks up to two tables and asks: 'Can I join you?' 🍺", author: "DB Lore" },
+    { joke: "Spinning up cloud dynos and establishing neural link... Almost ready! 🚀", author: "Uplink Protocol" },
+    { joke: "Real programmers count from 0. ⌨️", author: "Index Protocol" },
+    { joke: "Why do Java developers wear glasses? Because they don't see sharp. 🔍", author: "Compiler Gossip" },
+    { joke: "Heating up CPU circuits and routing packets... 🌐", author: "Hardware Dispatch" },
+    { joke: "Algorithm: A word used by programmers when they don't want to explain what they did. 💡", author: "Tech Truths" },
+    { joke: "Server warming up from power-save mode... Thanks for waiting! ⏳", author: "Cold Start Buffer" },
+    { joke: "Why was the computer cold? It forgot to close its Windows! ❄️", author: "Operating System Fun" },
+];
 
 function getCount(): number {
     return parseInt(sessionStorage.getItem(USAGE_KEY) ?? '0', 10);
@@ -295,8 +310,11 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
         { id: 'b1', text: '> Booting RSMK AI interface...', type: 'sys' },
         { id: 'b2', text: '> Connection established.', type: 'sys' },
         { id: 'b3', text: "Hey! I'm RSMK's AI assistant. Ask me anything about his projects, skills, or background 👋", type: 'ai' },
+        { id: 'b4', text: "ℹ️ First message may take up to 10 seconds due to traffic. Subsequent replies will be instant!", type: 'sys' },
     ]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [hasReceivedFirstReply, setHasReceivedFirstReply] = useState<boolean>(false);
+    const [jokeIndex, setJokeIndex] = useState<number>(0);
     const [uplinkStatus, setUplinkStatus] = useState<'IDLE' | 'TRANSMITTING' | 'ACKNOWLEDGED'>('IDLE');
     const [msgCount, setMsgCount] = useState<number>(() => getCount());
 
@@ -313,11 +331,20 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
 
     useEffect(() => { messagesRef.current = messages; }, [messages]);
 
+    // Cycle through entertaining jokes / quotes every 2.6s while waiting for first reply
+    useEffect(() => {
+        if (!isLoading || hasReceivedFirstReply) return;
+        const interval = setInterval(() => {
+            setJokeIndex(prev => (prev + 1) % WAITING_JOKES.length);
+        }, 2600);
+        return () => clearInterval(interval);
+    }, [isLoading, hasReceivedFirstReply]);
+
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
-    }, [messages, isLoading]);
+    }, [messages, isLoading, jokeIndex]);
 
     const uid = (): string => `${Date.now()}-${Math.random()}`;
 
@@ -374,6 +401,8 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                 }
 
                 addMsg({ text: data.response ?? 'No response received.', type: 'ai' });
+                setHasReceivedFirstReply(true);
+                setMessages(prev => prev.filter(m => m.id !== 'b4'));
                 setUplinkStatus('ACKNOWLEDGED');
                 setTimeout(() => setUplinkStatus('IDLE'), 2000);
                 lastError = null;
@@ -537,10 +566,6 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                 ? 'border-cyan-900/50 bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)]'
                 : 'border-gray-900 bg-[#050505]'
                 }`}>
-                {isPowered && (
-                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-20 pointer-events-none bg-[length:100%_2px,3px_100%]" />
-                )}
-
                 {/* Header */}
                 <div className={`px-4 py-2 border-b flex justify-between items-center flex-shrink-0 ${isPowered ? 'bg-cyan-950/20 border-cyan-900/30' : 'bg-[#111] border-gray-800'
                     }`}>
@@ -556,6 +581,36 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                         <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-emerald-500' : 'bg-gray-800'}`} />
                     </div>
                 </div>
+
+                {/* Traffic / Latency info notice — automatically removed once first reply arrives */}
+                <AnimatePresence>
+                    {!hasReceivedFirstReply && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className={`px-3.5 py-1.5 border-b flex items-center justify-between gap-2 text-[10px] font-mono select-none overflow-hidden ${
+                                isPowered ? 'bg-cyan-950/30 border-cyan-900/40 text-cyan-300/90' : 'bg-black/60 border-gray-900 text-gray-600'
+                            }`}
+                        >
+                            <div className="flex items-center gap-1.5 min-w-0">
+                                <Clock size={11} className={isPowered ? 'text-cyan-400 flex-shrink-0 animate-pulse' : 'text-gray-600'} />
+                                <span className="truncate">
+                                    First message may take up to 10 seconds due to traffic
+                                </span>
+                            </div>
+                            <span className={`hidden sm:inline-flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded border flex-shrink-0 ${
+                                isPowered 
+                                    ? 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20' 
+                                    : 'bg-gray-900 text-gray-600 border-gray-800'
+                            }`}>
+                                <Sparkles size={9} className={isPowered ? 'text-cyan-400' : 'text-gray-600'} />
+                                Instant thereafter
+                            </span>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* Messages — scrollable */}
                 <div
@@ -610,14 +665,74 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                         </div>
                     ))}
 
-                    {/* Thinking indicator */}
-                    {isLoading && (
+                    {/* Thinking indicator / First Message Jokes & Quotes */}
+                    {isLoading && !hasReceivedFirstReply && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="ml-1 my-1.5 rounded-lg border border-cyan-500/30 bg-cyan-950/20 p-3 relative overflow-hidden backdrop-blur-sm shadow-[0_0_15px_rgba(6,182,212,0.05)]"
+                        >
+                            {/* Animated scanning bar */}
+                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse" />
+
+                            <div className="flex items-center justify-between gap-2 mb-2 pb-1.5 border-b border-cyan-900/50">
+                                <div className="flex items-center gap-1.5 text-cyan-400 text-[10px] font-mono font-semibold tracking-wide">
+                                    <Clock size={12} className="animate-spin text-cyan-400" style={{ animationDuration: '4s' }} />
+                                    <span>WARMING UP SERVER (~10s INITIAL DELAY)</span>
+                                </div>
+                                <span className="text-[9px] text-cyan-400/80 font-mono flex items-center gap-1">
+                                    <Sparkles size={10} className="text-cyan-400" />
+                                    Next replies instant
+                                </span>
+                            </div>
+
+                            {/* Animated joke / quote carousel */}
+                            <div className="min-h-[44px] flex flex-col justify-center py-0.5">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={jokeIndex}
+                                        initial={{ opacity: 0, y: 4 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -4 }}
+                                        transition={{ duration: 0.25 }}
+                                        className="space-y-1"
+                                    >
+                                        <p className="text-cyan-100 text-[11px] leading-relaxed font-sans italic">
+                                            "{WAITING_JOKES[jokeIndex].joke}"
+                                        </p>
+                                        <p className="text-[9px] text-cyan-500/80 font-mono text-right">
+                                            // {WAITING_JOKES[jokeIndex].author}
+                                        </p>
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+
+                            {/* Progress bar simulation */}
+                            <div className="mt-2 pt-1 border-t border-cyan-950/60">
+                                <div className="w-full bg-black/60 rounded-full h-1.5 overflow-hidden border border-cyan-900/40">
+                                    <motion.div
+                                        className="bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-300 h-full rounded-full"
+                                        initial={{ width: '8%' }}
+                                        animate={{ width: '95%' }}
+                                        transition={{ duration: 10, ease: "easeInOut" }}
+                                    />
+                                </div>
+                                <div className="flex justify-between items-center mt-1 text-[9px] text-cyan-400/70 font-mono">
+                                    <span>Passing time with geek humor...</span>
+                                    <span>Connecting...</span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {isLoading && hasReceivedFirstReply && (
                         <div>
                             <div className="flex items-center gap-1.5 mb-0.5 select-none">
                                 <span className="opacity-30 text-[10px]">{timeLabel()}</span>
                                 <span className="text-cyan-500 text-[10px]">[AI]</span>
                             </div>
-                            <div className="ml-1 text-cyan-500 text-xs font-mono animate-pulse">
+                            <div className="ml-1 text-cyan-400 text-xs font-mono animate-pulse flex items-center gap-1.5">
+                                <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
                                 thinking...
                             </div>
                         </div>
@@ -651,7 +766,8 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                                 !isPowered ? 'Offline' :
                                     isLimitReached ? 'Session limit reached...' :
                                         isLoading ? 'Waiting for response...' :
-                                            'Ask me anything...'
+                                            !hasReceivedFirstReply ? 'Ask me anything... (1st reply ~10s due to traffic)' :
+                                                'Ask me anything...'
                             }
                             disabled={!isPowered || isLoading || isLimitReached}
                             className={`flex-1 bg-transparent border-none outline-none font-mono text-sm ${isPowered
