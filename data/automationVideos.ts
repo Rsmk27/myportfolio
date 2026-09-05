@@ -103,6 +103,70 @@ export const AUTOMATION_VIDEOS: AutomationVideoItem[] = [
     githubUrl: 'https://github.com/Rsmk27'
   },
   {
+    id: 'plc-pick-and-place',
+    title: 'Pick and Place Automation using PLC',
+    subtitle: 'Pneumatic Robotic Gantry Pick & Place Sequence with PLC Ladder Logic',
+    category: 'PLC & 3D Simulation',
+    type: 'youtube',
+    videoUrl: 'https://www.youtube.com/watch?v=dYKsfDnsj9A',
+    embedUrl: 'https://www.youtube.com/embed/dYKsfDnsj9A',
+    youtubeId: 'dYKsfDnsj9A',
+    thumbnailUrl: 'https://img.youtube.com/vi/dYKsfDnsj9A/maxresdefault.jpg',
+    durationBadge: 'PLC Simulation',
+    date: '2026',
+    featured: true,
+    description:
+      'Industrial pick-and-place robotic gantry automation controlled via PLC ladder logic. Features precision multi-axis pneumatic positioning (X, Y, Z motion), vacuum suction gripper actuation, conveyor synchronization, part arrival detection, and fail-safe interlocking.',
+    highlights: [
+      'Multi-axis pneumatic manipulator sequencing (horizontal traverse, vertical stroke, and vacuum pickup)',
+      'Part presence detection via optical sensors with conveyor station latching',
+      'IEC 61131-3 Ladder Diagram (LD) state machine coordinating transfer cycles',
+      'Vacuum gripper release and place verification with safety boundary interlocks',
+      'Cycle reset and fault recovery logic for uninterrupted automated workcell operation'
+    ],
+    techStack: ['PLC Programming', 'Ladder Logic (LD)', 'Pick & Place Gantry', 'Pneumatic Actuators', 'Virtual Commissioning', 'Factory I/O'],
+    specs: {
+      controlPlatform: 'PLC Simulator / Soft-PLC',
+      softwareTools: ['PLC Development Suite', 'Factory I/O 3D Engine', 'Ladder Logic Studio'],
+      communicationProtocols: ['Modbus TCP / Digital I/O Bus'],
+      ioInterfacing: ['X/Y/Z Axis Limit Sensors', 'Vacuum Cup Pressure Switch', 'Conveyor Infeed/Outfeed Photoeyes'],
+      controlPhilosophy: 'Step-based sequential state sequence ensuring pick conditions are satisfied before arm traverse and safe release'
+    },
+    githubUrl: 'https://github.com/Rsmk27'
+  },
+  {
+    id: 'plc-box-sorting',
+    title: 'Sorting Boxes Automation using PLC',
+    subtitle: 'Multi-Lane Conveyor Box Classification & Diverter Routing with PLC Logic',
+    category: 'PLC & 3D Simulation',
+    type: 'youtube',
+    videoUrl: 'https://www.youtube.com/watch?v=pPgJaU0IWfU',
+    embedUrl: 'https://www.youtube.com/embed/pPgJaU0IWfU',
+    youtubeId: 'pPgJaU0IWfU',
+    thumbnailUrl: 'https://img.youtube.com/vi/pPgJaU0IWfU/maxresdefault.jpg',
+    durationBadge: 'PLC Simulation',
+    date: '2026',
+    featured: true,
+    description:
+      'Automated high-throughput box sorting conveyor system controlled by PLC ladder logic. Implements height/dimension optical sensing, pneumatic pusher sorting gates, dual-lane diverting, and queue management to route packages efficiently to destination chutes.',
+    highlights: [
+      'Optical sensor array classifying boxes by dimension/height on the infeed line',
+      'Timed pneumatic pusher gate triggering to divert classified boxes into respective discharge lanes',
+      'Conveyor indexing and anti-collision spacing logic to prevent box jams',
+      'Throughput tracking and real-time sensor latching in PLC memory',
+      'Emergency stop interlock with auto-resume queue state preservation'
+    ],
+    techStack: ['PLC Programming', 'Ladder Logic', 'Box Sorting', 'Pneumatic Pushers', 'Conveyor Control', 'Sensor Interfacing'],
+    specs: {
+      controlPlatform: 'PLC Control System',
+      softwareTools: ['PLC Programming Software', '3D Plant Simulator', 'Virtual Commissioning Engine'],
+      communicationProtocols: ['Modbus TCP / Industrial Ethernet'],
+      ioInterfacing: ['Optical Height/Dimension Sensors', 'Pneumatic Diverter Cylinders', 'Conveyor Drive Coils', 'Jam Detectors'],
+      controlPhilosophy: 'First-In First-Out (FIFO) conveyor tracking with synchronized sensor trigger delay for accurate pusher actuation'
+    },
+    githubUrl: 'https://github.com/Rsmk27'
+  },
+  {
     id: 'auto-exhaust-fan',
     title: 'Automatic Exhaust Fan — Smart Toxic Gas Extraction Prototype',
     subtitle: 'Arduino UNO with MQ-2 Gas Sensor & 5V Optocoupler Relay Actuation',

@@ -519,6 +519,24 @@
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
     <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/dYKsfDnsj9A/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Pick and Place Automation using PLC — Srinivasa Manikanta</video:title>
+      <video:description>Industrial pick-and-place robotic gantry automation and sequence simulation with PLC ladder logic by Srinivasa Manikanta.</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=dYKsfDnsj9A</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/dYKsfDnsj9A</video:player_loc>
+      <video:publication_date>2026-03-01T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/pPgJaU0IWfU/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Sorting Boxes Automation using PLC — Srinivasa Manikanta</video:title>
+      <video:description>Conveyor box classification and pneumatic diverter sorting simulation controlled by PLC ladder logic by Srinivasa Manikanta.</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=pPgJaU0IWfU</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/pPgJaU0IWfU</video:player_loc>
+      <video:publication_date>2026-03-01T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
       <video:thumbnail_loc>https://rsmk.tech/assets/auto-exhaust-fan/image-1.jpg</video:thumbnail_loc>
       <video:title>Automatic Exhaust Fan Working Prototype Demonstration</video:title>
       <video:description>Demonstration video showing gas detection trigger and automatic ventilation fan activation by Srinivasa Manikanta.</video:description>
