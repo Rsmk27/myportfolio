@@ -10,6 +10,7 @@ import { CustomCursor } from './components/CustomCursor';
 import { usePageTracking } from './hooks/useAnalytics';
 
 const Gallery = lazy(() => import('./pages/Gallery'));
+const Automation = lazy(() => import('./pages/Automation'));
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -45,6 +46,8 @@ const AnimatedRoutes: React.FC = () => {
                     <Routes location={location}>
                         <Route path="/" element={<Home />} />
                         <Route path="/gallery" element={<Gallery />} />
+                        <Route path="/automation" element={<Automation />} />
+                        <Route path="/videos" element={<Automation />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Suspense>

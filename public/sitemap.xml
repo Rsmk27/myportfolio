@@ -494,6 +494,40 @@
     </video:video>
   </url>
 
+  <!-- Dedicated Industrial Automation & PLC Videos Showcase -->
+  <url>
+    <loc>https://rsmk.tech/automation</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/2pnFLqmh6X4/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Industrial Automation Learning on CODESYS — Srinivasa Manikanta Rajapantula</video:title>
+      <video:description>PLC ladder logic and 3D plant simulation walkthrough using CODESYS, Factory I/O, and Modbus TCP by Srinivasa Manikanta.</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=2pnFLqmh6X4</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/2pnFLqmh6X4</video:player_loc>
+      <video:publication_date>2026-01-15T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/qIJbTBcBfjE/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>1-Way Traffic Light Control using CCW and Optix Studio — Srinivasa Manikanta</video:title>
+      <video:description>1-Way Traffic Light PLC control logic simulation built with Connected Components Workbench (CCW) and FactoryTalk Optix Studio HMI.</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=qIJbTBcBfjE</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/qIJbTBcBfjE</video:player_loc>
+      <video:publication_date>2026-02-10T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://rsmk.tech/assets/auto-exhaust-fan/image-1.jpg</video:thumbnail_loc>
+      <video:title>Automatic Exhaust Fan Working Prototype Demonstration</video:title>
+      <video:description>Demonstration video showing gas detection trigger and automatic ventilation fan activation by Srinivasa Manikanta.</video:description>
+      <video:content_loc>https://rsmk.tech/assets/auto-exhaust-fan/demo-video.mp4</video:content_loc>
+      <video:publication_date>2026-01-01T00:00:00+05:30</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+
   <!-- PDF Documents for Direct Search Indexing -->
   <url>
     <loc>https://rsmk.tech/assets/Srinivasa_Manikanta_Resume.pdf</loc>

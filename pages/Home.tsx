@@ -603,6 +603,13 @@ const Home: React.FC = () => {
                         >
                             Gallery
                         </Link>
+                        <Link
+                            to="/automation"
+                            className="relative text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-cyan-400 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-0.5 flex items-center gap-1.5"
+                        >
+                            <span>Automation</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                        </Link>
                         <div className="w-px h-6 bg-gray-800 mx-2" />
                         <div className="flex items-center gap-1.5 pointer-events-auto">
                             <a
@@ -676,6 +683,20 @@ const Home: React.FC = () => {
                                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                                 >
                                     Gallery
+                                </Link>
+                            </motion.div>
+                            <motion.div
+                                initial={reduced ? false : { opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: (navItems.length + 1) * 0.06, duration: 0.3 }}
+                            >
+                                <Link
+                                    to="/automation"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="text-3xl font-black uppercase tracking-tight text-white hover:text-cyan-400 transition-colors duration-200 py-3 cursor-pointer focus:outline-none focus-visible:text-cyan-400 block"
+                                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                                >
+                                    Automation Videos
                                 </Link>
                             </motion.div>
                             <motion.div
@@ -1143,6 +1164,12 @@ const Home: React.FC = () => {
                                     className="text-[10px] font-mono text-gray-600 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
                                 >
                                     Gallery
+                                </Link>
+                                <Link
+                                    to="/automation"
+                                    className="text-[10px] font-mono text-gray-600 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
+                                >
+                                    Automation
                                 </Link>
                             </nav>
 
