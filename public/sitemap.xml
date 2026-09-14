@@ -6,9 +6,7 @@
   <!-- Homepage with Featured Images and Demo Videos -->
   <url>
     <loc>https://rsmk.tech/</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-09-14</lastmod>
 
     <image:image>
       <image:loc>https://rsmk.tech/assets/srinivasa-manikanta-profile.webp</image:loc>
@@ -172,9 +170,7 @@
   <!-- Photo & Media Gallery with Complete Image & Video Sitemap -->
   <url>
     <loc>https://rsmk.tech/gallery</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-09-14</lastmod>
 
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/ahacks-banner.jpg</image:loc>
@@ -218,12 +214,12 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/device-strap-front.jpg</image:loc>
-      <image:title>SFMD Wearable Strap Front Enclosure &amp;amp; Sensors</image:title>
+      <image:title>SFMD Wearable Strap Front Enclosure &amp; Sensors</image:title>
       <image:caption>Front enclosure showing gas sensor port, status display, and distress button</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ahacks/device-strap-back.jpg</image:loc>
-      <image:title>SFMD Wearable Back Layout &amp;amp; Power Circuitry</image:title>
+      <image:title>SFMD Wearable Back Layout &amp; Power Circuitry</image:title>
       <image:caption>Rear wiring layout with ESP32 board, battery protection harness, and MPU6050</image:caption>
     </image:image>
     <image:image>
@@ -248,13 +244,13 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/img-20260107-WA0035.jpg</image:loc>
-      <image:title>Electrical &amp;amp; Electronics Engineering Department Event at ALIET</image:title>
+      <image:title>Electrical &amp; Electronics Engineering Department Event at ALIET</image:title>
       <image:caption>Departmental tech fest and project exhibition at ALIET Vijayawada</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/img-20260107-WA0033.jpg</image:loc>
       <image:title>EEE Departmental Group Photo at ALIET</image:title>
-      <image:caption>Group photo of Electrical &amp;amp; Electronics Engineering students and faculty at ALIET</image:caption>
+      <image:caption>Group photo of Electrical &amp; Electronics Engineering students and faculty at ALIET</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/img-20260107-WA0050.jpg</image:loc>
@@ -263,7 +259,7 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/img-20260128-WA0010.jpg</image:loc>
-      <image:title>Student Technical Activities &amp;amp; Robotics Projects at ALIET</image:title>
+      <image:title>Student Technical Activities &amp; Robotics Projects at ALIET</image:title>
       <image:caption>Hands-on technical activities and circuit design at ALIET</image:caption>
     </image:image>
     <image:image>
@@ -283,7 +279,7 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/auto-exhaust-fan/image-2.jpg</image:loc>
-      <image:title>Automatic Exhaust Fan Relay Module &amp;amp; Fan Wiring</image:title>
+      <image:title>Automatic Exhaust Fan Relay Module &amp; Fan Wiring</image:title>
       <image:caption>5V optocoupler relay switching high-power exhaust fan unit</image:caption>
     </image:image>
     <image:image>
@@ -303,7 +299,7 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gridforge/simulation-results.png</image:loc>
-      <image:title>GridForge Simulation Waveforms &amp;amp; Power Analysis</image:title>
+      <image:title>GridForge Simulation Waveforms &amp; Power Analysis</image:title>
       <image:caption>Simulation results proving voltage regulation and reactive power compensation</image:caption>
     </image:image>
     <image:image>
@@ -343,12 +339,12 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/drone-technology/training-2.jpg</image:loc>
-      <image:title>Drone Assembly &amp;amp; Flight Calibration Workshop</image:title>
+      <image:title>Drone Assembly &amp; Flight Calibration Workshop</image:title>
       <image:caption>Assembling ESCs, brushless motors, and flight controllers</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/3D%20Printing.jpg</image:loc>
-      <image:title>3D Printing &amp;amp; Additive Manufacturing Certificate</image:title>
+      <image:title>3D Printing &amp; Additive Manufacturing Certificate</image:title>
       <image:caption>Certificate of completion for additive manufacturing and 3D prototyping</image:caption>
     </image:image>
     <image:image>
@@ -358,7 +354,7 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/3d-printing/workshop-2.jpg</image:loc>
-      <image:title>3D Printing Workshop — Printer Calibration &amp;amp; Slicing</image:title>
+      <image:title>3D Printing Workshop — Printer Calibration &amp; Slicing</image:title>
       <image:caption>Configuring layer heights, temperatures, and infill densities for FDM printing</image:caption>
     </image:image>
     <image:image>
@@ -403,7 +399,7 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/gallery/ev-battery/ev-workshop-seminar.webp</image:loc>
-      <image:title>Electric Vehicle Systems &amp;amp; Battery Development Seminar</image:title>
+      <image:title>Electric Vehicle Systems &amp; Battery Development Seminar</image:title>
       <image:caption>Technical presentation on EV battery safety, regenerative braking, and BMS design</image:caption>
     </image:image>
     <image:image>
@@ -443,7 +439,7 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/PLC%2C%20HMI.png</image:loc>
-      <image:title>Siemens PLC &amp;amp; TIA Portal Specialization Certificate</image:title>
+      <image:title>Siemens PLC &amp; TIA Portal Specialization Certificate</image:title>
       <image:caption>PLC ladder programming, industrial networking, and HMI screen development</image:caption>
     </image:image>
     <image:image>
@@ -458,7 +454,7 @@
     </image:image>
     <image:image>
       <image:loc>https://rsmk.tech/assets/certifications/Electric%20Motor%20Modeling%20and%20Control.png</image:loc>
-      <image:title>MathWorks — Electric Motor Modeling &amp;amp; Control</image:title>
+      <image:title>MathWorks — Electric Motor Modeling &amp; Control</image:title>
       <image:caption>Field-oriented control (FOC) and motor drive simulation certificate</image:caption>
     </image:image>
     <image:image>
@@ -490,7 +486,7 @@
       <video:thumbnail_loc>https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg</video:thumbnail_loc>
       <video:title>Industrial Automation Learning on CODESYS — Srinivasa Manikanta Rajapantula</video:title>
       <video:description>PLC ladder logic and 3D plant simulation walkthrough using CODESYS, Factory I/O, and Modbus TCP by Srinivasa Manikanta.</video:description>
-      <video:content_loc>https://www.youtube.com/watch?v=2pnFLqmh6X4</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/2pnFLqmh6X4</video:player_loc>
       <video:publication_date>2026-01-15T00:00:00+05:30</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
@@ -498,7 +494,7 @@
       <video:thumbnail_loc>https://rsmk.tech/assets/gallery/ahacks/demo-presentation.jpg</video:thumbnail_loc>
       <video:title>1-Way Traffic Light Control using CCW and Optix Studio — Srinivasa Manikanta</video:title>
       <video:description>1-Way Traffic Light PLC control logic simulation built with Connected Components Workbench (CCW) and FactoryTalk Optix Studio HMI.</video:description>
-      <video:content_loc>https://www.youtube.com/watch?v=qIJbTBcBfjE</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/qIJbTBcBfjE</video:player_loc>
       <video:publication_date>2026-02-10T00:00:00+05:30</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
@@ -507,14 +503,11 @@
   <!-- Dedicated Industrial Automation & PLC Videos Showcase -->
   <url>
     <loc>https://rsmk.tech/automation</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-09-14</lastmod>
     <video:video>
       <video:thumbnail_loc>https://img.youtube.com/vi/2pnFLqmh6X4/maxresdefault.jpg</video:thumbnail_loc>
       <video:title>Industrial Automation Learning on CODESYS — Srinivasa Manikanta Rajapantula</video:title>
       <video:description>PLC ladder logic and 3D plant simulation walkthrough using CODESYS, Factory I/O, and Modbus TCP by Srinivasa Manikanta.</video:description>
-      <video:content_loc>https://www.youtube.com/watch?v=2pnFLqmh6X4</video:content_loc>
       <video:player_loc>https://www.youtube.com/embed/2pnFLqmh6X4</video:player_loc>
       <video:publication_date>2026-01-15T00:00:00+05:30</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
@@ -523,7 +516,6 @@
       <video:thumbnail_loc>https://img.youtube.com/vi/qIJbTBcBfjE/maxresdefault.jpg</video:thumbnail_loc>
       <video:title>1-Way Traffic Light Control using CCW and Optix Studio — Srinivasa Manikanta</video:title>
       <video:description>1-Way Traffic Light PLC control logic simulation built with Connected Components Workbench (CCW) and FactoryTalk Optix Studio HMI.</video:description>
-      <video:content_loc>https://www.youtube.com/watch?v=qIJbTBcBfjE</video:content_loc>
       <video:player_loc>https://www.youtube.com/embed/qIJbTBcBfjE</video:player_loc>
       <video:publication_date>2026-02-10T00:00:00+05:30</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
@@ -532,7 +524,6 @@
       <video:thumbnail_loc>https://img.youtube.com/vi/dYKsfDnsj9A/maxresdefault.jpg</video:thumbnail_loc>
       <video:title>Pick and Place Automation using PLC — Srinivasa Manikanta</video:title>
       <video:description>Industrial pick-and-place robotic gantry automation and sequence simulation with PLC ladder logic by Srinivasa Manikanta.</video:description>
-      <video:content_loc>https://www.youtube.com/watch?v=dYKsfDnsj9A</video:content_loc>
       <video:player_loc>https://www.youtube.com/embed/dYKsfDnsj9A</video:player_loc>
       <video:publication_date>2026-03-01T00:00:00+05:30</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
@@ -541,7 +532,6 @@
       <video:thumbnail_loc>https://img.youtube.com/vi/pPgJaU0IWfU/maxresdefault.jpg</video:thumbnail_loc>
       <video:title>Sorting Boxes Automation using PLC — Srinivasa Manikanta</video:title>
       <video:description>Conveyor box classification and pneumatic diverter sorting simulation controlled by PLC ladder logic by Srinivasa Manikanta.</video:description>
-      <video:content_loc>https://www.youtube.com/watch?v=pPgJaU0IWfU</video:content_loc>
       <video:player_loc>https://www.youtube.com/embed/pPgJaU0IWfU</video:player_loc>
       <video:publication_date>2026-03-01T00:00:00+05:30</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
@@ -554,96 +544,6 @@
       <video:publication_date>2026-01-01T00:00:00+05:30</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
-  </url>
-
-  <!-- PDF Documents for Direct Search Indexing -->
-  <url>
-    <loc>https://rsmk.tech/assets/Srinivasa_Manikanta_Resume.pdf</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Key Certification PDFs -->
-  <url>
-    <loc>https://rsmk.tech/assets/certifications/CertificateOfCompletion_Become%20a%20PLC%20Developer.pdf</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://rsmk.tech/assets/certifications/Datavalley%20%20Embedded%20system%20intership.pdf</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://rsmk.tech/assets/certifications/Interfacing%20with%20the%20Arduino.pdf</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://rsmk.tech/assets/certifications/Electric%20Motor%20Modeling%20and%20Control.pdf</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://rsmk.tech/assets/certifications/Power%20Conversion%20for%20Electronic%20Devices.pdf</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://rsmk.tech/assets/certifications/Solar%20PV%20design%20certificate.pdf</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://rsmk.tech/assets/certifications/GitHub%20Foundations.pdf</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://rsmk.tech/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.pdf</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Live Subdomain Projects -->
-  <url>
-    <loc>https://colorohm.rsmk.me/</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://sfmd.rsmk.co.in/</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://spds.rsmk.me/</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://budgetbuddy.rsmk.me/</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://autoexhaustfan.rsmk.co.in/</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
 
 </urlset>

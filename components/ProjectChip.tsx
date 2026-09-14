@@ -122,11 +122,12 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
                   e.stopPropagation();
                   trackInteraction('project_click', 'projects', `${project.title} (${isGithubProject ? 'GitHub' : 'Live'})`);
                 }}
-                className="p-2 rounded-lg border border-cyan-500/40 bg-cyan-950/40 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all duration-200 flex items-center justify-center shadow-[0_0_10px_rgba(0,242,255,0.15)]"
-                title={`Open ${project.title} (${isGithubProject ? 'GitHub' : 'Live Website'})`}
-                aria-label={`Open ${project.title}`}
+                className="px-2.5 py-1.5 rounded-lg border border-cyan-500/40 bg-cyan-950/40 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all duration-200 flex items-center gap-1.5 justify-center shadow-[0_0_10px_rgba(0,242,255,0.15)] text-[11px] font-mono font-bold uppercase tracking-wider"
+                title={`Open ${project.title} (${isGithubProject ? 'GitHub Repository' : 'Live Application'})`}
+                aria-label={`Open ${project.title} ${isGithubProject ? 'GitHub Repository' : 'Live Application'}`}
               >
-                {isGithubProject ? <Github size={15} /> : <ExternalLink size={15} />}
+                {isGithubProject ? <Github size={13} /> : <ExternalLink size={13} />}
+                <span>{isGithubProject ? 'Code' : 'Live'}</span>
               </a>
             )}
             {isPowered && <Cpu size={18} className="text-gray-600 group-hover:text-cyan-400 transition-colors duration-300 hidden sm:block" />}

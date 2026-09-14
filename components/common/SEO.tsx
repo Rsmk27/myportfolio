@@ -44,7 +44,6 @@ export const SEO: React.FC<SEOProps> = ({
 
       {/* Primary Meta Tags */}
       <meta name="description" content={finalDescription} />
-      <meta name="keywords" content={finalKeywords} />
       <meta name="author" content={author} />
       <meta
         name="robots"
@@ -63,6 +62,9 @@ export const SEO: React.FC<SEOProps> = ({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={finalDescription} />
       <meta property="og:image" content={finalImage} />
+      <meta property="og:image:url" content={finalImage} />
+      <meta property="og:image:secure_url" content={finalImage} />
+      <meta property="og:image:type" content={finalImage.endsWith('.png') ? 'image/png' : finalImage.endsWith('.jpg') || finalImage.endsWith('.jpeg') ? 'image/jpeg' : 'image/webp'} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={`Portrait of ${PROFILE.name}, Electrical & Electronics Engineer`} />
@@ -76,6 +78,8 @@ export const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={finalDescription} />
       <meta name="twitter:image" content={finalImage} />
+      <meta name="twitter:image:width" content="1200" />
+      <meta name="twitter:image:height" content="630" />
       <meta name="twitter:image:alt" content={`Portrait of ${PROFILE.name}, EEE Engineer`} />
 
       {/* JSON-LD Structured Data Schema */}

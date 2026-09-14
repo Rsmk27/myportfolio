@@ -98,7 +98,6 @@ const GALLERY_JSON_LD = [
     "thumbnailUrl": "https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg",
     "uploadDate": "2026-01-15T00:00:00+05:30",
     "embedUrl": "https://www.youtube.com/embed/2pnFLqmh6X4",
-    "contentUrl": "https://www.youtube.com/watch?v=2pnFLqmh6X4",
     "author": {
       "@type": "Person",
       "name": "Srinivasa Manikanta Rajapantula"
@@ -112,7 +111,6 @@ const GALLERY_JSON_LD = [
     "thumbnailUrl": "https://rsmk.tech/assets/gallery/ahacks/demo-presentation.jpg",
     "uploadDate": "2026-02-10T00:00:00+05:30",
     "embedUrl": "https://www.youtube.com/embed/qIJbTBcBfjE",
-    "contentUrl": "https://www.youtube.com/watch?v=qIJbTBcBfjE",
     "author": {
       "@type": "Person",
       "name": "Srinivasa Manikanta Rajapantula"
@@ -182,7 +180,6 @@ const Gallery: React.FC = () => {
       <SEO
         title={`Photo Gallery | ${PROFILE.name} — Engineering Projects, Industrial Automation & IoT`}
         description="Explore Srinivasa Manikanta Rajapantula's engineering gallery: ALIET college projects, 2nd place A-Hacks Hardware Hackathon build, Industrial Automation & PLC simulations, Coromandel industrial internship, EV battery management systems, and 3D printing workshops."
-        keywords="Srinivasa Manikanta, Manikanta, Rajapantula, ALIET, Industrial Automation, Embedded Systems, IoT, Srinivasa Manikanta gallery, engineering projects photos, hackathon hardware, A-Hacks, EV battery management system, BMS prototype, BLDC motor controller, EEE lab, Coromandel internship, CODESYS PLC simulation"
         url="/gallery"
         image="https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg"
         schema={GALLERY_JSON_LD}

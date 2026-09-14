@@ -7,6 +7,3 @@ Disallow: /admin
 
 # Sitemap location
 Sitemap: https://rsmk.tech/sitemap.xml
-
-# Crawl delay
-Crawl-delay: 1

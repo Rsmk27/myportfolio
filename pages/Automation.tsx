@@ -105,20 +105,26 @@ const Automation: React.FC = () => {
 
   // Structured Schema for SEO
   const jsonLdSchema = useMemo(() => {
-    const videoObjects = AUTOMATION_VIDEOS.map(v => ({
-      '@type': 'VideoObject',
-      name: v.title,
-      description: v.description,
-      thumbnailUrl: v.thumbnailUrl.startsWith('http') ? v.thumbnailUrl : `https://rsmk.tech${v.thumbnailUrl}`,
-      embedUrl: v.type === 'youtube' ? v.embedUrl : `https://rsmk.tech${v.videoUrl}`,
-      contentUrl: v.type === 'youtube' ? v.videoUrl : `https://rsmk.tech${v.videoUrl}`,
-      uploadDate: v.date === 'Jan 2026' ? '2026-01-15T00:00:00+05:30' : '2026-02-10T00:00:00+05:30',
-      author: {
-        '@type': 'Person',
-        name: PROFILE.name,
-        url: 'https://rsmk.tech'
+    const videoObjects = AUTOMATION_VIDEOS.map(v => {
+      const obj: any = {
+        '@type': 'VideoObject',
+        name: v.title,
+        description: v.description,
+        thumbnailUrl: v.thumbnailUrl.startsWith('http') ? v.thumbnailUrl : `https://rsmk.tech${v.thumbnailUrl}`,
+        uploadDate: v.date === 'Jan 2026' ? '2026-01-15T00:00:00+05:30' : '2026-02-10T00:00:00+05:30',
+        author: {
+          '@type': 'Person',
+          name: PROFILE.name,
+          url: 'https://rsmk.tech'
+        }
+      };
+      if (v.type === 'youtube' && v.embedUrl) {
+        obj.embedUrl = v.embedUrl;
+      } else if (v.videoUrl) {
+        obj.contentUrl = v.videoUrl.startsWith('http') ? v.videoUrl : `https://rsmk.tech${v.videoUrl}`;
       }
-    }));
+      return obj;
+    });
 
     return [
       {
@@ -146,7 +152,6 @@ const Automation: React.FC = () => {
       <SEO
         title={`Industrial Automation & PLC Videos | ${PROFILE.name} — CODESYS & HMI Walkthroughs`}
         description="Watch industrial automation, PLC ladder logic, and control system video demonstrations by Srinivasa Manikanta: CODESYS V3.5 3D virtual commissioning with Factory I/O over Modbus TCP, CCW traffic light control with Optix Studio HMI, and embedded hardware safety systems."
-        keywords="industrial automation videos, PLC simulation video, CODESYS Factory IO demonstration, Modbus TCP ladder logic, Connected Components Workbench traffic light, FactoryTalk Optix Studio HMI, Srinivasa Manikanta automation, EEE projects video, Arduino ventilation automation, ALIET drone flight test"
         url="/automation"
         image="https://img.youtube.com/vi/2pnFLqmh6X4/maxresdefault.jpg"
         schema={jsonLdSchema}
