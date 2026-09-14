@@ -554,6 +554,38 @@ export const CERTS: Certification[] = [
         skills: ["AI Fundamentals", "Artificial Intelligence", "Machine Learning", "AI Ethics", "Generative AI"],
         description: "Authorized course by IBM SkillsBuild covering fundamental artificial intelligence principles, neural networks, machine learning models, AI ethics, and practical applications.",
         verificationHash: "sha256-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"
+    },
+    {
+        id: "CERT-040",
+        title: "GitHub Foundations",
+        issuer: "GitHub",
+        year: "2026",
+        category: "AI & Software",
+        type: "Professional",
+        icon: Code,
+        image: '/assets/certifications/GitHub Foundations.pdf',
+        gallery: ['/assets/certifications/GitHub Foundations.pdf'],
+        isVerifiedBadge: true,
+        credentialId: "B2C10F1061A881DD",
+        skills: ["Git", "GitHub", "GitHub Actions", "Version Control", "Repository Management", "CI/CD & Workflows"],
+        description: "Official GitHub Foundations certification validating core proficiencies in Git version control, collaborative development, repository administration, GitHub Actions workflow automation, and project security.",
+        verificationHash: "sha256-70725f5f8d81b2f171980ba7c85bd3e3ad345aa10322b28e33312ac2e4d0157a"
+    },
+    {
+        id: "CERT-041",
+        title: "Basics of PLC",
+        issuer: "Siemens",
+        year: "2026",
+        category: "Embedded & IoT",
+        type: "Course",
+        icon: Cpu,
+        image: '/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.pdf',
+        gallery: ['/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.pdf'],
+        isVerifiedBadge: true,
+        credentialId: "SIEMENS-SITRAIN-PLC-2026",
+        skills: ["Siemens PLC", "Programmable Logic Controllers", "Ladder Logic", "Industrial Automation", "SITRAIN", "I/O Modules", "Control Systems"],
+        description: "Authorized by Siemens SITRAIN quickSTEP program, covering fundamental principles of Programmable Logic Controllers (PLCs), hardware architecture, CPU scan cycles, I/O modules, and ladder logic programming for industrial control.",
+        verificationHash: "sha256-db7ddd34ba0e37417c400719f583ecaaec3e5e7d9b7ee09f9787537b87e1bafe"
     }
 ];
 

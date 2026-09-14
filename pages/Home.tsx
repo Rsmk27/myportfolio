@@ -129,6 +129,8 @@ const Home: React.FC = () => {
     const [isPowered, setIsPowered] = useState(true);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [showBackToTop, setShowBackToTop] = useState(false);
+    const [isNavVisible, setIsNavVisible] = useState(true);
     const [activeSection, setActiveSection] = useState('');
     const [clockTime, setClockTime] = useState('');
     const [statusTickerIndex, setStatusTickerIndex] = useState(0);
@@ -267,13 +269,52 @@ const Home: React.FC = () => {
         if (isPowered) setStatusText(fullText);
     }, [isPowered, reduced]);
 
-    /* Navbar scroll — trigger liquid glass past hero (80vh) */
+    /* Navbar scroll handling:
+       - Show on scroll up at any section
+       - Hide on scroll down past hero/top threshold
+       - Always show when near top or when mobile menu is open
+       - Trigger liquid glass past top threshold
+    */
     useEffect(() => {
-        const threshold = window.innerHeight * 0.8;
-        const onScroll = () => setScrolled(window.scrollY > threshold);
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const currentY = window.scrollY;
+                    const diff = currentY - lastY;
+                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+                    // Trigger liquid glass past top
+                    setScrolled(currentY > 60);
+
+                    // Back to top button past hero (70vh)
+                    setShowBackToTop(currentY > window.innerHeight * 0.7);
+
+                    // Always show navbar near top or if mobile menu is open
+                    if (currentY <= 60 || mobileMenuOpen) {
+                        setIsNavVisible(true);
+                    } else if (currentY > 0 && currentY < maxScroll) {
+                        if (diff > 10) {
+                            // Scrolling down -> hide navbar
+                            setIsNavVisible(false);
+                        } else if (diff < -5) {
+                            // Scrolling up at any section -> show navbar
+                            setIsNavVisible(true);
+                        }
+                    }
+
+                    lastY = currentY <= 0 ? 0 : currentY;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
-    }, []);
+    }, [mobileMenuOpen]);
 
     // Automatically track scroll depth and section entry / dwell time for GA4 & Microsoft Clarity
     useSectionObserver();
@@ -529,16 +570,17 @@ const Home: React.FC = () => {
 
                 {/* ── Floating Navbar ─────────────────────────────────── */}
                 <header
-                    className={`fixed top-4 left-4 right-4 z-50 flex justify-between items-center px-5 py-3 rounded-xl
-            pointer-events-none
+                    className={`!fixed fixed top-4 left-4 right-4 z-50 flex justify-between items-center px-5 py-3 rounded-xl
+            ${isNavVisible || mobileMenuOpen
+                            ? 'translate-y-0 opacity-100'
+                            : '-translate-y-28 opacity-0 pointer-events-none'
+                        }
             ${scrolled
-                            ? 'liquid-glass-header'
-                            : 'bg-transparent border border-transparent'
+                            ? 'liquid-glass-header pointer-events-none'
+                            : 'bg-transparent border border-transparent pointer-events-none'
                         }`}
-                    style={scrolled ? {
-                        transition: 'background 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s cubic-bezier(0.22,1,0.36,1), border-color 0.5s cubic-bezier(0.22,1,0.36,1), backdrop-filter 0.5s cubic-bezier(0.22,1,0.36,1)'
-                    } : {
-                        transition: 'all 0.5s cubic-bezier(0.22,1,0.36,1)'
+                    style={{
+                        transition: 'transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease, background 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s cubic-bezier(0.22,1,0.36,1), backdrop-filter 0.4s cubic-bezier(0.22,1,0.36,1)'
                     }}
                 >
                     {/* Brand & Power Toggle */}
@@ -730,7 +772,7 @@ const Home: React.FC = () => {
                 <main className="container mx-auto px-4 md:px-6 pt-0 overflow-x-hidden max-w-7xl">
 
                     <AnimatePresence>
-                        {!reduced && scrolled && !isMobile && (
+                        {!reduced && showBackToTop && !isMobile && (
                             <motion.button
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}

@@ -110,7 +110,6 @@ pre,
         0 0 40px  rgba(0, 242, 255, 0.06),          /* cyan ambient glow */
         0 0 80px  rgba(0, 242, 255, 0.03);
 
-    position: relative;
     overflow: hidden;
 }
 

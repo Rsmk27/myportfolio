@@ -476,6 +476,16 @@
       <image:title>IBM SkillsBuild — AI Fundamentals Certificate</image:title>
       <image:caption>Foundations of artificial intelligence, neural networks, and machine learning</image:caption>
     </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/GitHub%20Foundations.png</image:loc>
+      <image:title>GitHub — GitHub Foundations Professional Certificate</image:title>
+      <image:caption>Official certification verifying Git version control, collaboration, repository architecture, and GitHub Actions</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rsmk.tech/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.png</image:loc>
+      <image:title>Siemens SITRAIN — quickSTEP Basics of PLCs Certificate</image:title>
+      <image:caption>Foundational Programmable Logic Controller hardware, I/O modules, and ladder logic automation</image:caption>
+    </image:image>
     <video:video>
       <video:thumbnail_loc>https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg</video:thumbnail_loc>
       <video:title>Industrial Automation Learning on CODESYS — Srinivasa Manikanta Rajapantula</video:title>
@@ -588,6 +598,18 @@
   <url>
     <loc>https://rsmk.tech/assets/certifications/Solar%20PV%20design%20certificate.pdf</loc>
     <lastmod>2026-09-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rsmk.tech/assets/certifications/GitHub%20Foundations.pdf</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rsmk.tech/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.pdf</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
