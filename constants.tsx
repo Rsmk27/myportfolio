@@ -17,7 +17,7 @@ export const PROFILE: Profile = {
     { platform: 'email', url: 'mailto:srinivasmanikantarajapantula@gmail.com' }
   ],
   image: '/assets/srinivasa-manikanta-profile.webp',
-  resume: '/assets/Srinivasa_Manikanta_Resume.pdf'
+  resume: 'https://drive.google.com/file/d/16dnRtfom5Hyk8tf-ZLjxVzwrA7mN5mTM/view?usp=drive_link'
 };
 
 export const EXPERIENCE: Experience[] = [

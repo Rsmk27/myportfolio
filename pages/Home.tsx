@@ -12,7 +12,7 @@ import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
 import {
     Zap, Code, Globe, Terminal, Mail, Github, Linkedin, Twitter,
     Menu, X, ChevronDown, Activity, Cpu, Radio, BatteryMedium,
-    ArrowUpRight, MapPin, Briefcase, GraduationCap, Download, Eye,
+    ArrowUpRight, MapPin, Briefcase, GraduationCap, Eye,
     ChevronLeft, ChevronRight, Pause, Play
 } from 'lucide-react';
 import SEO from '../components/common/SEO';
@@ -491,19 +491,10 @@ const Home: React.FC = () => {
                                 rel="noreferrer"
                                 title="View Resume"
                                 onClick={() => trackInteraction('view_resume', 'resume', 'Header')}
-                                className="flex items-center gap-1 px-3 py-1.5 border border-amber-500/40 text-amber-400 text-[11px] font-bold rounded-l-lg hover:bg-amber-500/10 hover:border-amber-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+                                className="flex items-center gap-1.5 px-3 py-1.5 border border-amber-500/40 text-amber-400 text-[11px] font-bold rounded-lg hover:bg-amber-500/10 hover:border-amber-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
                             >
                                 <Eye size={11} />
                                 <span>RESUME</span>
-                            </a>
-                            <a
-                                href={PROFILE.resume}
-                                download="Srinivasa_Manikanta_Resume.pdf"
-                                title="Download Resume"
-                                onClick={() => trackInteraction('download_resume', 'resume', 'Header')}
-                                className="flex items-center gap-1 px-2.5 py-1.5 border border-l-0 border-amber-500/40 text-amber-400 text-[11px] font-bold rounded-r-lg hover:bg-amber-500/10 hover:border-amber-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
-                            >
-                                <Download size={11} />
                             </a>
                         </div>
                     </nav>
@@ -582,18 +573,11 @@ const Home: React.FC = () => {
                                     href={PROFILE.resume}
                                     target="_blank"
                                     rel="noreferrer"
+                                    onClick={() => trackInteraction('view_resume', 'resume', 'MobileMenu')}
                                     className="flex items-center gap-2 px-6 py-3 border border-amber-500/50 text-amber-400 font-bold rounded-xl hover:bg-amber-500/10 transition-all duration-200 cursor-pointer"
                                 >
                                     <Eye size={16} />
                                     <span>VIEW RESUME</span>
-                                </a>
-                                <a
-                                    href={PROFILE.resume}
-                                    download="Srinivasa_Manikanta_Resume.pdf"
-                                    className="flex items-center gap-2 px-4 py-3 border border-amber-500/30 text-amber-500 font-bold rounded-xl hover:bg-amber-500/10 transition-all duration-200 cursor-pointer"
-                                    title="Download Resume"
-                                >
-                                    <Download size={16} />
                                 </a>
                             </motion.div>
                         </motion.div>
@@ -869,11 +853,13 @@ const Home: React.FC = () => {
                                             </a>
                                             <a
                                                 href={PROFILE.resume}
-                                                download="Srinivasa_Manikanta_Resume.pdf"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                onClick={() => trackInteraction('view_resume', 'resume', 'Hero')}
                                                 className="btn-ripple group flex items-center gap-2 px-5 py-2.5 border border-cyan-500/50 text-cyan-400 text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.15)] transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
                                             >
-                                                <Download size={13} className="group-hover:translate-y-0.5 transition-transform duration-200" />
-                                                Download Resume
+                                                <Eye size={13} className="group-hover:scale-110 transition-transform duration-200" />
+                                                View Resume
                                             </a>
                                             <a
                                                 href="#contact"
