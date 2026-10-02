@@ -123,10 +123,10 @@ function injectRouteMetadata(html, {
 
 // 1. Gallery Route Config
 const galleryRoute = {
-  title: 'Photo Gallery | Srinivasa Manikanta Rajapantula — Engineering Projects, Industrial Automation &amp; IoT',
-  description: "Explore Srinivasa Manikanta Rajapantula's engineering gallery: ALIET college projects, 2nd place A-Hacks Hardware Hackathon build, Industrial Automation & PLC simulations, Coromandel industrial internship, EV battery management systems, and 3D printing workshops.",
+  title: 'Photo Gallery | Srinivasa Manikanta Rajapantula — 400kV Substation, Industrial Automation &amp; IoT',
+  description: "Explore Srinivasa Manikanta Rajapantula's engineering gallery: 400/220kV Gas Insulated Substation (GIS) industrial visit at APTRANSCO Thallayapalem, ALIET college projects, 2nd place A-Hacks Hardware Hackathon build, Industrial Automation & PLC simulations, Coromandel industrial internship, and EV battery management systems.",
   url: 'https://rsmk.tech/gallery',
-  image: 'https://rsmk.tech/assets/gallery/ahacks/prize-ceremony.jpg',
+  image: 'https://rsmk.tech/assets/gallery/gis-substation/gis-substation-manikanta-signboard.jpeg',
   imageType: 'image/jpeg',
   schema: {
     '@context': 'https://schema.org',
@@ -136,13 +136,13 @@ const galleryRoute = {
         '@id': 'https://rsmk.tech/gallery#page',
         url: 'https://rsmk.tech/gallery',
         name: 'Engineering Photo & Media Gallery — Srinivasa Manikanta Rajapantula',
-        description: "Visual documentation of engineering prototypes, hardware hackathons, and industrial automation work by Srinivasa Manikanta Rajapantula.",
+        description: "Visual documentation of 400/220kV Gas Insulated Substation (GIS) visit, engineering prototypes, hardware hackathons, and industrial automation work by Srinivasa Manikanta Rajapantula.",
         isPartOf: { '@type': 'WebSite', '@id': 'https://rsmk.tech/#website', url: 'https://rsmk.tech' },
         author: { '@type': 'Person', '@id': 'https://rsmk.tech/#person', name: 'Srinivasa Manikanta Rajapantula' }
       },
       {
         '@type': 'ImageGallery',
-        name: 'Hardware & Engineering Prototype Photo Gallery',
+        name: 'Hardware, 400kV Substation & Engineering Prototype Photo Gallery',
         url: 'https://rsmk.tech/gallery'
       },
       {
@@ -173,8 +173,9 @@ const galleryRoute = {
         <p><strong>Srinivasa Manikanta Rajapantula (RSMK)</strong> — Electrical &amp; Electronics Engineer at ALIET</p>
       </header>
       <section>
-        <h2>Featured Hardware &amp; Hackathon Highlights</h2>
+        <h2>Featured Engineering Highlights &amp; Field Visits</h2>
         <ul>
+          <li><strong>400/220 kV Gas Insulated Substation (GIS) Industrial Visit:</strong> Comprehensive technical study of APTRANSCO Thallayapalem 400kV GIS station, SF6 encapsulated switchgear, SIFANG SCADA telemetry SLDs, and Crompton Greaves 400kV autotransformers.</li>
           <li><strong>A-Hacks 2026 National Hackathon:</strong> 2nd Place in Hardware Innovation for the Sustainable Firefighter Monitoring Device (SFMD).</li>
           <li><strong>Industrial Automation:</strong> CODESYS V3.5 3D virtual commissioning with Factory I/O over Modbus TCP protocol.</li>
           <li><strong>Coromandel International Ltd:</strong> Electrical Engineering Internship analyzing 11kV/440V plant distribution networks, SLDs, and induction motor testing.</li>
@@ -184,6 +185,18 @@ const galleryRoute = {
       </section>
       <section>
         <h2>Featured Gallery Images</h2>
+        <img src="/assets/gallery/gis-substation/gis-substation-manikanta-signboard.jpeg" alt="Srinivasa Manikanta at APTRANSCO 400/220kV GIS Substation Thallayapalem" width="500" height="300" loading="lazy" />
+        <p>Srinivasa Manikanta Rajapantula at the APTRANSCO 400/220KV GIS Substation Thallayapalem industrial visit.</p>
+
+        <img src="/assets/gallery/gis-substation/gis-indoor-switchgear-hall-bays.jpeg" alt="Indoor 400kV Gas Insulated Switchgear Hall" width="500" height="300" loading="lazy" />
+        <p>Indoor Gas Insulated Switchgear (GIS) hall with SF6 circuit breakers, Bay-24 Bus Reactor, and Bay-23 Tie Bay.</p>
+
+        <img src="/assets/gallery/gis-substation/gis-scada-hmi-single-line-diagram.jpeg" alt="SIFANG SCADA Single Line Diagram Screen" width="500" height="300" loading="lazy" />
+        <p>SIFANG Substation Automation System (SAS) SCADA monitor displaying real-time 400kV Single Line Diagram.</p>
+
+        <img src="/assets/gallery/gis-substation/gis-crompton-greaves-autotransformer.jpeg" alt="400/220 kV Crompton Greaves Power Autotransformer" width="500" height="300" loading="lazy" />
+        <p>400/220 kV Crompton Greaves power autotransformer with EHV bushings and deluge fire protection system.</p>
+
         <img src="/assets/gallery/ahacks/prize-ceremony.jpg" alt="A-Hacks 24hr Hackathon Hardware Category 2nd Place Award Ceremony" width="500" height="300" loading="lazy" />
         <p>A-Hacks 2026 Hackathon Hardware Category 2nd Place Award Ceremony honoring Srinivasa Manikanta.</p>
 
