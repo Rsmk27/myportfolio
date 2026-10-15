@@ -64,7 +64,7 @@ export const PROJECTS: Project[] = [
     description: "An ESP32-based wearable IoT safety device for firefighters featuring gas/air-quality sensing, MPU6050 fall detection, Neo-6M GPS tracking, and a real-time web dashboard.",
     tech: ['ESP32', 'Embedded C++', 'Firebase RTDB', 'React', 'MapLibre GL', 'MPU-6050', 'DHT11', 'Neo-6M GPS'],
     image: '/assets/firefighter-monitoring-device.webp',
-    link: 'https://sfmd.rsmk.co.in/',
+    link: 'https://sfmd.rsmk.tech/',
     details: "The Sustainable Firefighter Monitoring Device (SFMD) is a high-reliability wearable IoT system engineered to protect emergency response personnel in hazardous thermal environments. Built around an ESP32 microcontroller running state-machine firmware, the unit integrates an MPU-6050 6-axis motion sensor to detect firefighter collapse (man-down condition), a DHT11 sensor for ambient temperature/humidity monitoring, gas sensors for hazardous atmosphere detection, and a Neo-6M GPS module for real-time location tracking. Critical alerts trigger local buzzer/LED distress alarms while pushing low-latency telemetry to a live Firebase Realtime Database dashboard with MapLibre GL mapping. Recognitions include 2nd Place in the A-HACKS 2026 Hardware Category, Departmental 1st Prize, and technical paper presentation recognition at the IEI Student Chapter.",
     features: [
       "Automatic man-down & fall detection using MPU6050 accelerometer/gyroscope algorithms",
@@ -102,7 +102,7 @@ export const PROJECTS: Project[] = [
     description: 'A precision resistor color band decoder available as a published Android app (v1.0.0) and web utility, supporting 4-band, 5-band, and SMD resistor standards for engineering students.',
     tech: ['React Native', 'Expo', 'JavaScript', 'CSS3', 'Android SDK'],
     image: '/assets/color-ohm-resistor-calculator-tool.webp',
-    link: 'https://colorohm.rsmk.me/',
+    link: 'https://colorohm.rsmk.tech/',
     details: "ColorOhm is a dedicated electrical engineering utility designed for lab work and circuit prototyping. Built as both an Android application (published v1.0.0 release) and an instant web tool, it decodes 4-band and 5-band color codes, calculates component tolerances, and converts SMD resistor markings. Engineered for zero latency and offline availability to assist EEE students and technicians on the workbench.",
     features: [
       "Instant 4-band & 5-band resistor color code decoding",
@@ -121,7 +121,7 @@ export const PROJECTS: Project[] = [
     description: 'An Arduino-based safety system utilizing MQ-2 gas sensors to automatically trigger high-power exhaust ventilation upon detecting hazardous smoke or gas concentrations.',
     tech: ['Arduino UNO', 'MQ-2 Gas Sensor', 'Relay Module', 'Embedded C++'],
     image: '/assets/smart-exhaust-gas-detection-system.webp',
-    link: 'https://autoexhaustfan.rsmk.co.in/',
+    link: 'https://autoexhaustfan.rsmk.tech/',
     details: "The Automatic Exhaust Fan is an automated environmental safety control system designed to prevent toxic gas accumulation in enclosed spaces. Controlled by an Arduino UNO running custom Embedded C++ code, the system continuously samples air quality via an MQ-2 gas/smoke sensor. When gas levels breach configurable threshold limits, a 5V optocoupler relay switches on an industrial ventilation fan. Includes auto-off timer logic and manual override switches.",
     features: [
       "Real-time smoke and flammable gas detection via calibrated MQ-2 sensor",
@@ -165,7 +165,7 @@ export const PROJECTS: Project[] = [
     description: 'A PM-KUSUM aligned solar-powered agricultural dewatering system replacing diesel pumps with solar PV power, soil moisture sensing, and light-driven pump switching.',
     tech: ['Arduino UNO', 'Solar PV', 'Soil Moisture Sensor', 'LDR', 'Relay Switching', 'C++'],
     image: '/assets/ai-chatbot-interface-background.webp',
-    link: 'https://spds.rsmk.me/',
+    link: 'https://spds.rsmk.tech/',
     details: "The Solar-Powered Dewatering System (SPDS) is an engineering prototype designed for grid-independent agricultural irrigation aligned with India's PM-KUSUM initiative. Built around an Arduino controller, the system integrates soil moisture probes and ambient LDR sensing to control a DC water pump via relay logic, activating irrigation only when daylight conditions and soil dryness coincide.",
     features: [
       "100% solar PV driven water pumping — zero fossil fuel dependency",

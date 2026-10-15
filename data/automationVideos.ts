@@ -194,7 +194,7 @@ export const AUTOMATION_VIDEOS: AutomationVideoItem[] = [
       ioInterfacing: ['MQ-2 Analog In (A0)', 'Optocoupler Relay Digital Out (D7)', 'Status LEDs (D12/D13)'],
       controlPhilosophy: 'Hysteresis threshold filtering to prevent relay chatter, coupled with delayed fan shutdown'
     },
-    relatedProjectUrl: 'https://autoexhaustfan.rsmk.co.in/'
+    relatedProjectUrl: 'https://autoexhaustfan.rsmk.tech/'
   },
   {
     id: 'drone-flight-stabilization',
