@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- EtherCAT official red / black / white branding -->
+  <!-- Triangle device / data frame chevron -->
+  <polygon points="12,14 54,40 12,66" fill="#CC0000"/>
+  <polygon points="26,24 54,40 26,56" fill="#FFFFFF"/>
+  <polygon points="34,30 50,40 34,50" fill="#CC0000"/>
+  <!-- EtherCAT text -->
+  <text x="68" y="49" font-family="'Arial Black', 'DM Sans', sans-serif" font-weight="900" font-size="34" fill="#FFFFFF" letter-spacing="0.5">EtherCAT</text>
+  <circle cx="258" cy="26" r="3" fill="#CC0000"/>
+  <text x="70" y="68" font-family="'Space Mono', monospace" font-weight="700" font-size="10" fill="#E0A0A0" letter-spacing="2">REAL-TIME ETHERNET</text>
+</svg>

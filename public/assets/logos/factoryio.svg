@@ -1,6 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-  <path d="M4 7l8-4 8 4v10l-8 4-8-4V7z" stroke="#00f2ff" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M4 7l8 4 8-4" stroke="#00f2ff" stroke-width="2"/>
-  <path d="M12 11v10" stroke="#00f2ff" stroke-width="2"/>
-  <circle cx="12" cy="11" r="2" fill="#00f2ff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
+  <!-- Factory I/O official branding colorway (Vibrant Orange / Amber & White / Charcoal) -->
+  <rect x="10" y="15" width="90" height="90" rx="18" fill="#F36F21"/>
+  <!-- Factory stylized 3D Isometric building / blocks -->
+  <path d="M55 28 L85 45 L55 62 L25 45 Z" fill="#FFFFFF"/>
+  <path d="M25 45 L55 62 L55 94 L25 77 Z" fill="#FFE0B2"/>
+  <path d="M85 45 L55 62 L55 94 L85 77 Z" fill="#E65100"/>
+  <!-- Gear / automation teeth inside top facet -->
+  <path d="M55 42 L65 47 L65 52 L55 57 L45 52 L45 47 Z" fill="#F36F21"/>
+  <!-- Factory I/O Text -->
+  <text x="120" y="65" font-family="'Space Grotesk', 'Arial Black', sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" letter-spacing="1">FACTORY</text>
+  <text x="325" y="65" font-family="'Space Grotesk', 'Arial Black', sans-serif" font-weight="900" font-size="46" fill="#F36F21" letter-spacing="1">I/O</text>
+  <text x="122" y="92" font-family="'Space Mono', monospace" font-weight="700" font-size="16" fill="#94A3B8" letter-spacing="4">3D SIMULATION</text>
 </svg>

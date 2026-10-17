@@ -1,5 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-  <rect x="3" y="3" width="18" height="18" rx="3" stroke="#e11d48" stroke-width="2"/>
-  <path d="M7 12h10M12 7v10" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round"/>
-  <circle cx="12" cy="12" r="3" fill="#e11d48"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- Rockwell Automation CCW (Connected Components Workbench) branded badge -->
+  <rect x="10" y="14" width="52" height="52" rx="10" fill="#CC0000"/>
+  <!-- Integrated circuit with gear / wrench for workbench -->
+  <rect x="22" y="26" width="28" height="28" rx="4" fill="#FFFFFF"/>
+  <rect x="28" y="32" width="16" height="16" rx="2" fill="#CC0000"/>
+  <!-- Pinouts -->
+  <line x1="26" y1="22" x2="26" y2="26" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="36" y1="22" x2="36" y2="26" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="46" y1="22" x2="46" y2="26" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="26" y1="54" x2="26" y2="58" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="36" y1="54" x2="36" y2="58" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="46" y1="54" x2="46" y2="58" stroke="#FFFFFF" stroke-width="2"/>
+  <!-- Text -->
+  <text x="74" y="42" font-family="'DM Sans', 'Arial Black', sans-serif" font-weight="900" font-size="26" fill="#FFFFFF" letter-spacing="1">CCW</text>
+  <text x="74" y="64" font-family="'Space Mono', monospace" font-weight="700" font-size="11" fill="#FECACA" letter-spacing="1">ROCKWELL AUTOMATION</text>
 </svg>

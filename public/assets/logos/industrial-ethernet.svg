@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- Industrial Ethernet / IEEE 802.3 RJ45 and network matrix -->
+  <rect x="10" y="14" width="52" height="52" rx="10" fill="#0284C7"/>
+  <!-- RJ45 Plug silhouette -->
+  <path d="M22 28 H50 V48 H44 V54 H28 V48 H22 Z" fill="#FFFFFF"/>
+  <rect x="28" y="32" width="4" height="8" fill="#0284C7"/>
+  <rect x="34" y="32" width="4" height="8" fill="#0284C7"/>
+  <rect x="40" y="32" width="4" height="8" fill="#0284C7"/>
+  <!-- Text -->
+  <text x="74" y="44" font-family="'DM Sans', 'Arial Black', sans-serif" font-weight="900" font-size="24" fill="#FFFFFF" letter-spacing="0.5">INDUSTRIAL</text>
+  <text x="74" y="66" font-family="'DM Sans', 'Arial Black', sans-serif" font-weight="900" font-size="20" fill="#38BDF8" letter-spacing="1">ETHERNET &amp; TCP/IP</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- PROFIBUS official Purple (DP Cable Color) & White -->
+  <rect x="10" y="14" width="52" height="52" rx="10" fill="#78237B"/>
+  <circle cx="36" cy="40" r="16" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+  <circle cx="36" cy="40" r="6" fill="#F4B41A"/>
+  <line x1="20" y1="40" x2="14" y2="40" stroke="#FFFFFF" stroke-width="3"/>
+  <line x1="52" y1="40" x2="58" y2="40" stroke="#FFFFFF" stroke-width="3"/>
+  <!-- Text -->
+  <text x="74" y="48" font-family="'Arial Black', 'DM Sans', sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" letter-spacing="1">PROFIBUS<tspan fill="#F4B41A" font-size="20"> DP</tspan></text>
+  <text x="76" y="66" font-family="'Space Mono', monospace" font-weight="700" font-size="10" fill="#E9D5FF" letter-spacing="2">PROCESS FIELDBUS // PI</text>
+</svg>

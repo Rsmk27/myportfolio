@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- Inductive Automation Ignition brand icon: dynamic orange ignition spark -->
+  <rect x="10" y="10" width="60" height="60" rx="14" fill="#FF5500"/>
+  <!-- Stylized ignition combustion spark / gear -->
+  <path d="M40 18 L46 32 L60 34 L49 44 L53 58 L40 50 L27 58 L31 44 L20 34 L34 32 Z" fill="#FFFFFF"/>
+  <circle cx="40" cy="40" r="6" fill="#FF5500"/>
+  <!-- Ignition Text -->
+  <text x="85" y="47" font-family="'DM Sans', 'Inter', sans-serif" font-weight="900" font-size="34" fill="#FFFFFF" letter-spacing="0.5">Ignition</text>
+  <text x="87" y="66" font-family="'Space Mono', monospace" font-weight="700" font-size="11" fill="#FFAA80" letter-spacing="2">SCADA // INDUCTIVE</text>
+</svg>

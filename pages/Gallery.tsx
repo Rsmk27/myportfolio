@@ -316,7 +316,7 @@ const Gallery: React.FC = () => {
               className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-zinc-400 hover:text-cyan-300 transition-colors group px-3 py-1.5 rounded-lg border border-zinc-800 hover:border-cyan-500/30 bg-zinc-900/60"
             >
               <Video size={14} className="text-cyan-400" />
-              <span>Automation Videos</span>
+              <span>Automation Journey</span>
             </Link>
           </div>
 
@@ -408,10 +408,10 @@ const Gallery: React.FC = () => {
                     <span className="text-xs text-zinc-500 font-mono">// CODESYS &amp; Rockwell CCW</span>
                   </div>
                   <h2 className="text-base sm:text-lg font-bold text-white uppercase tracking-tight">
-                    Industrial Automation &amp; PLC Video Demos
+                    Automation Journey
                   </h2>
                   <p className="text-xs text-zinc-400 font-mono mt-0.5">
-                    High-definition walkthroughs of PLC ladder programming, Factory I/O 3D simulation, and Optix Studio HMI design.
+                    Engineering journey from electrical schematics and PLC ladder programming to 3D virtual commissioning, HMI, and predictive maintenance.
                   </p>
                 </div>
               </div>
@@ -420,7 +420,7 @@ const Gallery: React.FC = () => {
                 to="/automation"
                 className="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 hover:text-white text-xs font-mono uppercase tracking-wider transition-all shrink-0 flex items-center gap-2"
               >
-                <span>Watch Automation Demos</span>
+                <span>Explore Automation Journey</span>
                 <ArrowLeft size={14} className="rotate-180" />
               </Link>
             </div>
