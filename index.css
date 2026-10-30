@@ -103,12 +103,10 @@ pre,
 
     /* Outer glow: cyan halo + inner shadow for depth */
     box-shadow:
-        0 0 0 0.5px rgba(255, 255, 255, 0.06),   /* hairline rim */
-        0 4px 24px rgba(0, 0, 0, 0.45),           /* depth shadow */
+        0 4px 20px rgba(0, 0, 0, 0.45),           /* depth shadow */
         0 1px 0   rgba(255, 255, 255, 0.10) inset, /* top specular */
         0 -1px 0  rgba(0, 0, 0, 0.20) inset,       /* bottom edge */
-        0 0 40px  rgba(0, 242, 255, 0.06),          /* cyan ambient glow */
-        0 0 80px  rgba(0, 242, 255, 0.03);
+        0 0 32px  rgba(0, 242, 255, 0.05);         /* cyan ambient glow */
 
     overflow: hidden;
 }
@@ -129,14 +127,16 @@ pre,
     z-index: 0;
 }
 
-/* Sliding shimmer — like light refracting across liquid glass */
+/* Sliding shimmer — like light refracting across liquid glass (GPU transform-accelerated) */
 .liquid-glass-header::after {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 60%;
     height: 100%;
+    transform: translate3d(-150%, 0, 0);
+    will-change: transform;
     background: linear-gradient(
         105deg,
         transparent                0%,
@@ -145,7 +145,7 @@ pre,
         rgba(255, 255, 255, 0.035) 55%,
         transparent                100%
     );
-    animation: glass-shimmer 5s ease-in-out infinite 1.5s;
+    animation: glass-shimmer 6s ease-in-out infinite 1.5s;
     pointer-events: none;
     z-index: 0;
 }
@@ -157,10 +157,19 @@ pre,
 }
 
 @keyframes glass-shimmer {
-    0%   { left: -80%; opacity: 0; }
+    0%   { transform: translate3d(-150%, 0, 0); opacity: 0; }
     10%  { opacity: 1; }
     60%  { opacity: 1; }
-    100% { left: 140%; opacity: 0; }
+    100% { transform: translate3d(350%, 0, 0); opacity: 0; }
+}
+
+/* Section rendering optimization — skip layout and paint when offscreen */
+#skills,
+#certifications,
+#experience,
+#contact {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
 }
 
 /* Utility Classes for "Technical" look */

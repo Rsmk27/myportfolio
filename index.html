@@ -28,6 +28,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="dns-prefetch" href="https://project-mani-c0t3.onrender.com" />
+  <link rel="preconnect" href="https://project-mani-c0t3.onrender.com" crossorigin />
+
+  <!-- Instant Chatbot Backend Wakeup on Site Entry (Zero-delay background dispatch) -->
+  <script>
+    (function() {
+      try {
+        var k = 'rsmk_ai_warmup_ts';
+        var last = sessionStorage.getItem(k);
+        var now = Date.now();
+        if (!last || (now - parseInt(last, 10)) > 600000) {
+          fetch('https://project-mani-c0t3.onrender.com/', {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-store',
+            priority: 'low'
+          }).then(function(r) {
+            if (r && r.ok) {
+              sessionStorage.setItem('rsmk_ai_warmup_status', 'ready');
+            }
+          }).catch(function() {});
+          sessionStorage.setItem(k, String(now));
+          sessionStorage.setItem('rsmk_ai_warmup_status', 'warming');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- LCP Preload: Hero profile image -->
   <link rel="preload" as="image" href="/assets/srinivasa-manikanta-profile.webp" fetchpriority="high" />

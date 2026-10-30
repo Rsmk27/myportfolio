@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Experience, Education } from '../types';
 import { Calendar, Briefcase, GraduationCap, ChevronRight } from 'lucide-react';
@@ -11,15 +11,17 @@ interface TimelineSystemProps {
 
 export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, education, isPowered }) => {
     // Sort logic
-    const getYear = (dateStr: string) => {
-        const match = dateStr.match(/\d{4}/);
-        return match ? parseInt(match[0]) : 0;
-    };
+    const combined = useMemo(() => {
+        const getYear = (dateStr: string) => {
+            const match = dateStr.match(/\d{4}/);
+            return match ? parseInt(match[0]) : 0;
+        };
 
-    const combined = [
-        ...experience.map(e => ({ type: 'exp', data: e, year: getYear(e.duration) })),
-        ...education.map(e => ({ type: 'edu', data: e, year: getYear(e.year) }))
-    ].sort((a, b) => b.year - a.year);
+        return [
+            ...experience.map(e => ({ type: 'exp', data: e, year: getYear(e.duration) })),
+            ...education.map(e => ({ type: 'edu', data: e, year: getYear(e.year) }))
+        ].sort((a, b) => b.year - a.year);
+    }, [experience, education]);
 
     return (
         <div className="relative w-full max-w-6xl mx-auto px-4">

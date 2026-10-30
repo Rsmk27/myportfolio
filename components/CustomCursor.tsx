@@ -52,7 +52,7 @@ const RING_PROFILE: Record<CursorState, {
         border: 'rgba(0,242,255,0)',
         bg: 'rgba(0,242,255,0)',
         dotScale: 1,
-        mixBlend: 'difference',
+        mixBlend: 'normal',
         borderRadius: 0,
         rotate: 0,
     },
@@ -67,10 +67,10 @@ const RING_PROFILE: Record<CursorState, {
     },
     label: {
         size: 96,
-        border: 'transparent',
-        bg: '#ffffff',
+        border: 'rgba(0,242,255,0.6)',
+        bg: 'rgba(0,242,255,0.15)',
         dotScale: 0,
-        mixBlend: 'difference',
+        mixBlend: 'normal',
         borderRadius: '50%',
         rotate: 0,
     },
@@ -90,6 +90,7 @@ export const CustomCursor: React.FC = () => {
     const [label, setLabel] = useState('');
     const [visible, setVisible] = useState(false);
     const [clicking, setClicking] = useState(false);
+    const visibleRef = useRef(false);
 
     const stateRef = useRef(state);
     stateRef.current = state;
@@ -98,14 +99,24 @@ export const CustomCursor: React.FC = () => {
         const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
         if (isTouchDevice) return;
 
+        let moveRaf: number | null = null;
         const onMove = (e: MouseEvent) => {
-            mouseX.set(e.clientX);
-            mouseY.set(e.clientY);
-            if (!visible) setVisible(true);
+            if (!visibleRef.current) {
+                visibleRef.current = true;
+                setVisible(true);
+            }
+            if (moveRaf !== null) cancelAnimationFrame(moveRaf);
+            moveRaf = requestAnimationFrame(() => {
+                mouseX.set(e.clientX);
+                mouseY.set(e.clientY);
+            });
         };
 
+        let lastTarget: Element | null = null;
         const classify = (e: MouseEvent) => {
             const t = e.target as Element;
+            if (!t || t === lastTarget) return;
+            lastTarget = t;
 
             // — zoom-out: lightbox backdrop
             if (t.closest('[class*="cursor-zoom"]') || (t as HTMLElement).style?.cursor === 'zoom-out') {
@@ -162,19 +173,26 @@ export const CustomCursor: React.FC = () => {
             setLabel('');
         };
 
-        const onLeave = () => setVisible(false);
-        const onEnter = () => setVisible(true);
+        const onLeave = () => {
+            visibleRef.current = false;
+            setVisible(false);
+        };
+        const onEnter = () => {
+            visibleRef.current = true;
+            setVisible(true);
+        };
         const onDown = () => setClicking(true);
         const onUp = () => setClicking(false);
 
-        window.addEventListener('mousemove', onMove);
-        window.addEventListener('mouseover', classify);
-        window.addEventListener('mousedown', onDown);
-        window.addEventListener('mouseup', onUp);
-        document.documentElement.addEventListener('mouseleave', onLeave);
-        document.documentElement.addEventListener('mouseenter', onEnter);
+        window.addEventListener('mousemove', onMove, { passive: true });
+        window.addEventListener('mouseover', classify, { passive: true });
+        window.addEventListener('mousedown', onDown, { passive: true });
+        window.addEventListener('mouseup', onUp, { passive: true });
+        document.documentElement.addEventListener('mouseleave', onLeave, { passive: true });
+        document.documentElement.addEventListener('mouseenter', onEnter, { passive: true });
 
         return () => {
+            if (moveRaf !== null) cancelAnimationFrame(moveRaf);
             window.removeEventListener('mousemove', onMove);
             window.removeEventListener('mouseover', classify);
             window.removeEventListener('mousedown', onDown);
@@ -182,7 +200,7 @@ export const CustomCursor: React.FC = () => {
             document.documentElement.removeEventListener('mouseleave', onLeave);
             document.documentElement.removeEventListener('mouseenter', onEnter);
         };
-    }, [mouseX, mouseY, visible]);
+    }, [mouseX, mouseY]);
 
     const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
     if (isTouchDevice || !visible) return null;
@@ -200,7 +218,7 @@ export const CustomCursor: React.FC = () => {
                     x: mouseX,
                     y: mouseY,
                     zIndex: 10001,
-                    mixBlendMode: p.mixBlend,
+                    willChange: 'transform',
                 }}
             >
                 <motion.div
@@ -237,7 +255,7 @@ export const CustomCursor: React.FC = () => {
                     x: ringX,
                     y: ringY,
                     zIndex: 10000,
-                    mixBlendMode: p.mixBlend,
+                    willChange: 'transform',
                 }}
             >
                 <motion.div

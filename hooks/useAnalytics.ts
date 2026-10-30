@@ -92,21 +92,28 @@ export const useScrollDepthTracking = () => {
 
     useEffect(() => {
         const milestones = [25, 50, 75, 90, 100];
+        let ticking = false;
 
         const handleScroll = () => {
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-            if (scrollHeight <= 0) return;
+                    if (scrollHeight > 0) {
+                        const currentDepth = Math.round((scrollTop / scrollHeight) * 100);
 
-            const currentDepth = Math.round((scrollTop / scrollHeight) * 100);
-
-            milestones.forEach((milestone) => {
-                if (currentDepth >= milestone && !trackedDepths.current.has(milestone)) {
-                    trackedDepths.current.add(milestone);
-                    trackScrollDepth(milestone);
-                }
-            });
+                        milestones.forEach((milestone) => {
+                            if (currentDepth >= milestone && !trackedDepths.current.has(milestone)) {
+                                trackedDepths.current.add(milestone);
+                                trackScrollDepth(milestone);
+                            }
+                        });
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });

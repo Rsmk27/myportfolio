@@ -703,7 +703,11 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
                 onMouseMove={handleMouseMove}
             >
                 {certs.map((cert, idx) => (
-                    <div key={cert.id} className="w-[220px] md:w-[250px] flex-shrink-0">
+                    <div
+                        key={cert.id}
+                        className="w-[220px] md:w-[250px] flex-shrink-0"
+                        style={{ contentVisibility: 'auto', containIntrinsicSize: '250px 320px' }}
+                    >
                         <CertificateCard
                             cert={cert}
                             idx={idx}
@@ -893,6 +897,7 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                                     className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105
                                         ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                                     loading="lazy"
+                                    decoding="async"
                                     onLoad={() => setIsLoaded(true)}
                                 />
                             ) : (
@@ -913,6 +918,8 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                                                 key={i}
                                                 src={logo}
                                                 alt={cert.issuer}
+                                                loading="lazy"
+                                                decoding="async"
                                                 className="h-5 md:h-6 w-auto max-w-[90px] object-contain opacity-95 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
                                             />
                                         ))}

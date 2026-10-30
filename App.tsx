@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import { CustomCursor } from './components/CustomCursor';
 import { usePageTracking } from './hooks/useAnalytics';
+import { initChatbotWarmup } from './utils/chatbotWarmup';
 
 const Gallery = lazy(() => import('./pages/Gallery'));
 const IndustrialPortfolio = lazy(() => import('./pages/IndustrialPortfolio'));
@@ -70,12 +71,14 @@ const App: React.FC = () => {
      🚀  https://rsmk.tech
 `;
         console.log(consoleAscii, 'color: #00f2ff; font-weight: bold; font-family: monospace;', 'color: #ffae00; font-weight: bold;');
+        // Warm up AI chatbot backend as soon as user enters the site
+        initChatbotWarmup();
     }, []);
 
     return (
         <HelmetProvider>
             <CustomCursor />
-            <ReactLenis root options={{ lerp: 0.08, wheelMultiplier: 0.8, syncTouch: false }}>
+            <ReactLenis root options={{ lerp: 0.1, wheelMultiplier: 1.0, syncTouch: false }}>
                 <Router>
                     <ScrollToTop />
                     <AnimatedRoutes />

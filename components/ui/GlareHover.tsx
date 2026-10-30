@@ -55,21 +55,15 @@ const GlareHover: React.FC<GlareHoverProps> = ({
   const animateIn = () => {
     const el = overlayRef.current;
     if (!el) return;
-
-    el.style.transition = 'none';
-    el.style.backgroundPosition = '-100% -100%';
-    
-    // Force a reflow to start the animation
-    void el.offsetWidth;
-
-    el.style.transition = `background-position ${transitionDuration}ms ease`;
-    el.style.backgroundPosition = '200% 200%';
+    requestAnimationFrame(() => {
+      el.style.transition = `background-position ${transitionDuration}ms ease`;
+      el.style.backgroundPosition = '200% 200%';
+    });
   };
 
   const animateOut = () => {
     const el = overlayRef.current;
     if (!el) return;
-
     if (playOnce) {
       el.style.transition = 'none';
       el.style.backgroundPosition = '-100% -100%';

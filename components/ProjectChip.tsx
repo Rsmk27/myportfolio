@@ -71,16 +71,20 @@ export const ProjectChip: React.FC<ProjectChipProps> = ({ project, isPowered }) 
       viewport={{ once: true }}
     >
       {/* Resistor/Component Legs (Decorative) */}
-      <div className="absolute -left-1 top-4 bottom-4 flex flex-col justify-between py-2 z-0">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className={`w-2 h-1 bg-gradient-to-r from-gray-600 to-gray-800 rounded-l ${isPowered ? 'group-hover:bg-cyan-600 transition-colors' : ''}`} />
-        ))}
-      </div>
-      <div className="absolute -right-1 top-4 bottom-4 flex flex-col justify-between py-2 z-0">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className={`w-2 h-1 bg-gradient-to-l from-gray-600 to-gray-800 rounded-r ${isPowered ? 'group-hover:bg-cyan-600 transition-colors' : ''}`} />
-        ))}
-      </div>
+      <div 
+        className="absolute -left-1 top-4 bottom-4 w-2 pointer-events-none z-0"
+        style={{
+          backgroundImage: 'linear-gradient(to bottom, #4b5563 4px, transparent 4px)',
+          backgroundSize: '100% 16px',
+        }}
+      />
+      <div 
+        className="absolute -right-1 top-4 bottom-4 w-2 pointer-events-none z-0"
+        style={{
+          backgroundImage: 'linear-gradient(to bottom, #4b5563 4px, transparent 4px)',
+          backgroundSize: '100% 16px',
+        }}
+      />
 
       {/* Main Chip Body */}
       <div className={`relative z-10 h-full rounded-xl overflow-hidden border transition-all duration-500 flex flex-col

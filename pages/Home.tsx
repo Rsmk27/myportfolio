@@ -18,6 +18,7 @@ import {
 import SEO from '../components/common/SEO';
 import { useSectionObserver, useScrollDepthTracking } from '../hooks/useAnalytics';
 import { trackInteraction } from '../utils/analytics';
+import { triggerChatbotWarmup } from '../utils/chatbotWarmup';
 
 /* ─── Reduced-motion hook ───────────────────────────────────────── */
 function usePrefersReducedMotion() {
@@ -138,8 +139,6 @@ const Home: React.FC = () => {
     const [navDirection, setNavDirection] = useState<1 | -1>(1);
     const isFirstMount = useRef(true);
     const { scrollYProgress } = useScroll();
-    const scrollProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.2 });
-    const ringOffset = useTransform(scrollProgress, [0, 1], [88, 0]);
 
     // Projects Carousel States and Refs
     const projectsSectionRef = useRef<HTMLElement>(null);
@@ -159,6 +158,15 @@ const Home: React.FC = () => {
         let animationFrameId: number;
         let lastTime = performance.now();
         const speed = 35; // pixels per second
+        let halfWidth = container.scrollWidth > 0 ? container.scrollWidth / 2 : 2400;
+
+        const updateHalfWidth = () => {
+            if (container && container.scrollWidth > 0) {
+                halfWidth = container.scrollWidth / 2;
+            }
+        };
+
+        window.addEventListener('resize', updateHalfWidth, { passive: true });
 
         const step = (time: number) => {
             if (!isHoveredProjects && !isDraggingProjects && !isProjectsPaused) {
@@ -166,7 +174,6 @@ const Home: React.FC = () => {
                 container.scrollLeft += speed * delta;
 
                 // Infinite loop: snap back when scrolled past first set of items
-                const halfWidth = container.scrollWidth / 2;
                 if (container.scrollLeft >= halfWidth) {
                     container.scrollLeft -= halfWidth;
                 }
@@ -176,7 +183,10 @@ const Home: React.FC = () => {
         };
 
         animationFrameId = requestAnimationFrame(step);
-        return () => cancelAnimationFrame(animationFrameId);
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener('resize', updateHalfWidth);
+        };
     }, [isHoveredProjects, isDraggingProjects, isPowered, projectsInView, isProjectsPaused]);
 
     // Manual navigation buttons scroll for Projects
@@ -367,6 +377,9 @@ const Home: React.FC = () => {
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: string) => {
         e.preventDefault();
         const id = item.toLowerCase();
+        if (id === 'contact') {
+            triggerChatbotWarmup({ source: 'nav_contact_click' });
+        }
         trackInteraction('nav_click', 'navigation', item);
         const el = document.getElementById(id);
         if (el) { el.scrollIntoView({ behavior: 'smooth' }); window.history.pushState(null, '', `#${id}`); }
@@ -393,7 +406,7 @@ const Home: React.FC = () => {
                         <div className="h-28 w-1 rounded-full bg-cyan-950/70 border border-cyan-900/60 overflow-hidden origin-bottom">
                             <motion.div
                                 className="w-full h-full bg-gradient-to-t from-cyan-400 via-cyan-300 to-white origin-bottom"
-                                style={{ scaleY: scrollProgress }}
+                                style={{ scaleY: scrollYProgress }}
                             />
                         </div>
                     </div>
@@ -411,7 +424,7 @@ const Home: React.FC = () => {
                             : 'bg-transparent border border-transparent pointer-events-none'
                         }`}
                     style={{
-                        transition: 'transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease, background 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s cubic-bezier(0.22,1,0.36,1), backdrop-filter 0.4s cubic-bezier(0.22,1,0.36,1)'
+                        transition: 'transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease'
                     }}
                 >
                     {/* Brand & Power Toggle */}
