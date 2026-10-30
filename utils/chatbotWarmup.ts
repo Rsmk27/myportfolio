@@ -153,8 +153,7 @@ export async function triggerChatbotWarmup(options?: {
                 cache: 'no-store',
                 signal: controller.signal,
                 // Priority hint for browsers that support it
-                // @ts-expect-error fetch priority is supported in modern Chrome/Edge/Firefox
-                priority: 'low',
+                priority: 'low' as any,
             });
 
             clearTimeout(timeoutId);
@@ -211,8 +210,9 @@ export function initChatbotWarmup(): void {
         triggerChatbotWarmup({ source: 'site_entry' });
     };
 
-    if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(() => startPing(), { timeout: 1500 });
+    const win = window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void };
+    if (typeof win.requestIdleCallback === 'function') {
+        win.requestIdleCallback(() => startPing(), { timeout: 1500 });
     } else {
         window.setTimeout(startPing, 200);
     }

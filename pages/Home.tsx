@@ -139,6 +139,8 @@ const Home: React.FC = () => {
     const [navDirection, setNavDirection] = useState<1 | -1>(1);
     const isFirstMount = useRef(true);
     const { scrollYProgress } = useScroll();
+    const scrollProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.2 });
+    const ringOffset = useTransform(scrollProgress, [0, 1], [88, 0]);
 
     // Projects Carousel States and Refs
     const projectsSectionRef = useRef<HTMLElement>(null);
