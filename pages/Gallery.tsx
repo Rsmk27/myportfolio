@@ -1,9 +1,11 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef, useCallback } from 'react';
 import SEO from '../components/common/SEO';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Image as ImageIcon, X, ChevronLeft, ChevronRight, Video, Zap } from 'lucide-react';
+import {
+  ArrowLeft, Image as ImageIcon, X, ChevronLeft, ChevronRight,
+  Video, Zap, Maximize2, Crosshair, Camera,
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Masonry from '../components/ui/Masonry';
 import { PROFILE } from '../constants';
 import { trackInteraction } from '../utils/analytics';
 
@@ -217,12 +219,196 @@ const GALLERY_JSON_LD = [
   }
 ];
 
-const Gallery: React.FC = () => {
-  const heights = [450, 600, 750, 500, 650, 550, 700];
+const CATEGORY_SHORT_TAG: Record<GalleryItem['category'], string> = {
+  '400/220kV GIS Substation': 'HV-GIS',
+  'A-Hacks Hackathon 🥈': 'HACK-02',
+  'Projects & Hardware': 'HW-LAB',
+  'Workshops & Industry': 'IND-OPS',
+  'Campus Life': 'ALIET',
+};
 
+const GalleryModal: React.FC<{
+  items: GalleryItem[];
+  selectedIdx: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}> = ({ items, selectedIdx, onClose, onPrev, onNext }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const activeItem = items[selectedIdx];
+
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeBtnRef.current?.focus();
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key === 'ArrowRight') {
+        onNext();
+        return;
+      }
+      if (e.key === 'ArrowLeft') {
+        onPrev();
+        return;
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose, onNext, onPrev]);
+
+  if (!activeItem) return null;
+
+  const frameCode = `FRM-${String(selectedIdx + 1).padStart(2, '0')}`;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/92 backdrop-blur-md p-3 sm:p-6 md:p-10"
+    >
+      <motion.div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Gallery inspection: ${activeItem.alt}`}
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.95, opacity: 0 }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-5xl rounded-2xl border border-zinc-800 bg-[#0d0d0b] shadow-[0_24px_80px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col max-h-[92vh]"
+      >
+        {/* Top optical calibration rail */}
+        <div className="h-[2px] w-full bg-gradient-to-r from-cyan-400 via-amber-400/70 to-transparent" />
+
+        {/* Header telemetry bar */}
+        <div className="flex items-center justify-between gap-3 px-4 sm:px-6 py-3 border-b border-zinc-800/90 bg-[#111110]">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-cyan-300 tracking-widest uppercase">
+              <Crosshair size={13} className="text-cyan-400" />
+              {frameCode}
+            </span>
+            <span className="text-zinc-600 text-xs">/</span>
+            <span className="text-[11px] font-mono text-zinc-300">
+              {selectedIdx + 1} OF {items.length}
+            </span>
+            <span className="hidden sm:inline-flex text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300">
+              {activeItem.category}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="hidden md:inline text-[10px] font-mono text-zinc-400 tracking-wider uppercase mr-2">
+              ESC // ← → NAV
+            </span>
+            <button
+              ref={closeBtnRef}
+              type="button"
+              onClick={onClose}
+              className="min-w-[44px] min-h-[44px] p-2.5 flex items-center justify-center rounded-lg bg-zinc-900/80 border border-zinc-700/70 text-zinc-300 hover:text-white hover:border-cyan-400/60 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              aria-label="Close image popup"
+            >
+              <X size={18} />
+            </button>
+          </div>
+        </div>
+
+        {/* Viewport stage */}
+        <div className="relative flex-1 min-h-0 flex items-center justify-center bg-[#070706] p-4 sm:p-6">
+          {/* Calibration grid background */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[linear-gradient(to_right,#1e1e16_1px,transparent_1px),linear-gradient(to_bottom,#1e1e16_1px,transparent_1px)] bg-[size:32px_32px] opacity-30 pointer-events-none"
+          />
+
+          <button
+            type="button"
+            onClick={onPrev}
+            className="absolute left-2 sm:left-4 z-20 min-w-[44px] min-h-[44px] p-2.5 flex items-center justify-center rounded-full bg-[#111110]/90 border border-zinc-700/80 text-zinc-200 hover:text-cyan-300 hover:border-cyan-400/60 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            aria-label="Previous image"
+          >
+            <ChevronLeft size={22} />
+          </button>
+
+          <div className="relative z-10 flex items-center justify-center max-w-full max-h-[64vh] p-2 rounded-xl border border-zinc-800/80 bg-[#0b0b09]">
+            {/* Corner fiducials */}
+            <span className="pointer-events-none absolute top-1 left-1 w-3 h-3 border-t-2 border-l-2 border-cyan-400/60" />
+            <span className="pointer-events-none absolute top-1 right-1 w-3 h-3 border-t-2 border-r-2 border-cyan-400/60" />
+            <span className="pointer-events-none absolute bottom-1 left-1 w-3 h-3 border-b-2 border-l-2 border-amber-400/60" />
+            <span className="pointer-events-none absolute bottom-1 right-1 w-3 h-3 border-b-2 border-r-2 border-amber-400/60" />
+
+            <img
+              src={encodeURI(activeItem.src)}
+              alt={activeItem.alt || 'Engineering photo preview'}
+              title={activeItem.alt}
+              decoding="async"
+              className="max-w-full max-h-[60vh] object-contain rounded-lg select-none"
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={onNext}
+            className="absolute right-2 sm:right-4 z-20 min-w-[44px] min-h-[44px] p-2.5 flex items-center justify-center rounded-full bg-[#111110]/90 border border-zinc-700/80 text-zinc-200 hover:text-cyan-300 hover:border-cyan-400/60 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            aria-label="Next image"
+          >
+            <ChevronRight size={22} />
+          </button>
+        </div>
+
+        {/* Bottom metadata caption bar */}
+        <div className="px-4 sm:px-6 py-3.5 border-t border-zinc-800/90 bg-[#111110] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="space-y-1">
+            <span className="sm:hidden inline-flex text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300">
+              {activeItem.category}
+            </span>
+            <p className="text-xs sm:text-sm text-zinc-200 font-sans leading-relaxed">
+              {activeItem.alt}
+            </p>
+          </div>
+          <span className="shrink-0 text-[10px] font-mono text-amber-400 uppercase tracking-widest">
+            TAG // {CATEGORY_SHORT_TAG[activeItem.category]}
+          </span>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+const Gallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('All');
-  const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { All: GALLERY_IMAGES.length };
@@ -237,59 +423,34 @@ const Gallery: React.FC = () => {
     return GALLERY_IMAGES.filter(img => img.category === activeCategory);
   }, [activeCategory]);
 
-  const masonryItems = useMemo(() => {
-    return filteredImages.map((img, idx) => ({
-      id: `${activeCategory}-${idx + 1}`,
-      img: img.src,
-      alt: img.alt,
-      url: img.src,
-      height: heights[idx % heights.length]
-    }));
-  }, [filteredImages, activeCategory]);
+  const openImage = useCallback((idx: number, triggerEl?: HTMLElement | null) => {
+    const item = filteredImages[idx];
+    if (!item) return;
+    lastFocusedRef.current = triggerEl ?? (document.activeElement as HTMLElement | null);
+    setSelectedIdx(idx);
+    trackInteraction('gallery_view_image', 'gallery', item.alt || item.src);
+  }, [filteredImages]);
 
-  const openImage = (item: any) => {
-    const idx = filteredImages.findIndex(img => img.src === item.img);
-    if (idx !== -1) {
-      setSelectedImg(item.img);
-      setSelectedIdx(idx);
-      trackInteraction('gallery_view_image', 'gallery', filteredImages[idx].alt || item.img);
-    }
-  };
-
-  const closeImage = () => {
-    setSelectedImg(null);
+  const closeImage = useCallback(() => {
     setSelectedIdx(null);
-  };
+    requestAnimationFrame(() => {
+      lastFocusedRef.current?.focus();
+    });
+  }, []);
 
-  const nextImage = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    if (selectedIdx === null) return;
-    const nextIdx = (selectedIdx + 1) % filteredImages.length;
-    setSelectedImg(filteredImages[nextIdx].src);
-    setSelectedIdx(nextIdx);
-  };
+  const nextImage = useCallback(() => {
+    setSelectedIdx(prev => (prev === null ? null : (prev + 1) % filteredImages.length));
+  }, [filteredImages.length]);
 
-  const prevImage = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    if (selectedIdx === null) return;
-    const prevIdx = (selectedIdx - 1 + filteredImages.length) % filteredImages.length;
-    setSelectedImg(filteredImages[prevIdx].src);
-    setSelectedIdx(prevIdx);
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedIdx === null) return;
-      if (e.key === 'Escape') closeImage();
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIdx, filteredImages]);
+  const prevImage = useCallback(() => {
+    setSelectedIdx(prev => (prev === null ? null : (prev - 1 + filteredImages.length) % filteredImages.length));
+  }, [filteredImages.length]);
 
   return (
-    <div data-clarity-region="gallery-page" className="min-h-screen relative selection:bg-cyan-500/30 font-mono text-gray-300 bg-black overflow-hidden">
+    <div
+      data-clarity-region="gallery-page"
+      className="min-h-screen bg-[#080806] text-zinc-300 font-mono selection:bg-cyan-500/30 selection:text-white relative overflow-x-hidden"
+    >
       <SEO
         title={`Photo Gallery | ${PROFILE.name} — 400kV Substation, Industrial Automation & Hardware`}
         description="Explore Srinivasa Manikanta Rajapantula's engineering gallery: 400/220kV Gas Insulated Substation (GIS) industrial visit at APTRANSCO Thallayapalem, ALIET college projects, 2nd place A-Hacks Hardware Hackathon build, Industrial Automation & PLC simulations, and EV battery systems."
@@ -298,58 +459,87 @@ const Gallery: React.FC = () => {
         schema={GALLERY_JSON_LD}
       />
 
-      {/* Full-screen layout: header + masonry flows vertically */}
-      <div className="relative z-10 flex flex-col" style={{ height: '100dvh', minHeight: '100vh' }}>
+      {/* Background blueprint grid & subtle copper/cyan ambient field */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e1e16_1px,transparent_1px),linear-gradient(to_bottom,#1e1e16_1px,transparent_1px)] bg-[size:48px_48px] opacity-35 [mask-image:radial-gradient(ellipse_75%_60%_at_50%_0%,#000_60%,transparent_100%)]" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/8 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 right-10 w-80 h-80 bg-amber-500/8 rounded-full blur-3xl" />
+      </div>
 
-        {/* ── Header ── */}
-        <div className="flex-shrink-0 pt-16 pb-2 px-4 sm:px-6 md:pt-20 md:pb-4 md:px-8 max-w-7xl mx-auto w-full">
-          <div className="flex items-center justify-between gap-4 mb-3">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-14">
+
+        {/* ── Top Navigation Rack ── */}
+        <nav
+          aria-label="Gallery navigation"
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-800/80"
+        >
+          <div className="flex items-center gap-3 flex-wrap">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-300 hover:text-cyan-300 transition-colors group px-3.5 py-2 rounded-lg border border-zinc-800 hover:border-cyan-500/40 bg-[#0d0d0b]"
             >
-              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform text-cyan-400" />
               <span>Back to Dashboard</span>
             </Link>
             <Link
               to="/automation"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-zinc-400 hover:text-cyan-300 transition-colors group px-3 py-1.5 rounded-lg border border-zinc-800 hover:border-cyan-500/30 bg-zinc-900/60"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-zinc-300 hover:text-cyan-300 transition-colors px-3.5 py-2 rounded-lg border border-zinc-800 hover:border-cyan-500/40 bg-[#0d0d0b]"
             >
-              <Video size={14} className="text-cyan-400" />
+              <Video size={14} className="text-amber-400" />
               <span>Automation Journey</span>
             </Link>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-1 md:mb-2 uppercase tracking-tight flex items-center gap-3">
-            <ImageIcon size={32} className="text-cyan-500 sm:w-10 sm:h-10 animate-pulse" />
-            Gallery
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-mono tracking-wider uppercase text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 self-start sm:self-auto">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(0,242,255,0.8)]" />
+            <Camera size={12} />
+            <span>Optical Archive // {GALLERY_IMAGES.length} Frames</span>
+          </div>
+        </nav>
+
+        {/* ── Header & Filter Rack ── */}
+        <header className="pt-8 pb-8">
+          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-3">
+            <ImageIcon size={15} />
+            <span>SYS.02 // Hardware &amp; Substation Field Log</span>
+          </div>
+          <h1
+            className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-3 uppercase tracking-tight leading-none"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+          >
+            Engineering{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-400">
+              Lab Gallery
+            </span>
           </h1>
-          <p className="text-gray-400 text-sm md:text-base mb-4">
-            Click any tile to expand the image in a slideshow overlay. Filter by category below.
+          <p className="text-zinc-400 text-sm md:text-base font-sans max-w-3xl mb-6 leading-relaxed">
+            Calibrated field documentation spanning 400/220kV GIS substation inspections, hackathon hardware builds, EV battery telemetry, and industrial automation trials. Select any frame to inspect in high detail.
           </p>
 
-          {/* ── Category Filter Pills ── */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          {/* Category Filter Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none flex-wrap">
             {CATEGORIES.map(cat => {
               const isActive = activeCategory === cat;
               return (
                 <button
                   key={cat}
+                  type="button"
                   onClick={() => {
                     setActiveCategory(cat);
+                    setSelectedIdx(null);
                     trackInteraction('gallery_filter_category', 'gallery', cat);
                   }}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 shrink-0 flex items-center gap-2 cursor-pointer border ${
+                  className={`px-3.5 py-2 rounded-xl text-[11px] font-mono uppercase tracking-wider transition-all duration-200 shrink-0 flex items-center gap-2 cursor-pointer border focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     isActive
-                      ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500 shadow-[0_0_12px_rgba(0,242,255,0.25)]'
-                      : 'bg-zinc-900/70 text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-white'
+                      ? 'bg-cyan-500/20 text-cyan-200 border-cyan-400 shadow-[0_0_16px_rgba(0,242,255,0.2)]'
+                      : 'bg-[#0d0d0b] text-zinc-300 border-zinc-800 hover:border-zinc-600 hover:text-white'
                   }`}
                 >
                   {cat === '400/220kV GIS Substation' && <Zap size={12} className="text-cyan-400" />}
                   <span>{cat}</span>
                   <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                      isActive ? 'bg-cyan-500/30 text-cyan-200' : 'bg-zinc-800 text-zinc-400'
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
+                      isActive ? 'bg-cyan-400/30 text-cyan-100' : 'bg-zinc-800 text-zinc-300'
                     }`}
                   >
                     {categoryCounts[cat] || 0}
@@ -358,161 +548,177 @@ const Gallery: React.FC = () => {
               );
             })}
           </div>
-        </div>
+        </header>
 
-        {/* ── Masonry Grid ── */}
-        <div className="flex-1 relative min-h-0 overflow-y-auto px-4 sm:px-6 md:px-8 max-w-7xl mx-auto w-full pb-16" data-lenis-prevent>
-          {/* Substation Featured Highlight Banner */}
-          {(activeCategory === 'All' || activeCategory === '400/220kV GIS Substation') && (
-            <div className="mb-6 w-full rounded-2xl border border-cyan-500/30 bg-zinc-950/80 p-5 md:p-6 backdrop-blur-md shadow-[0_0_30px_rgba(0,242,255,0.08)] flex flex-col md:flex-row items-center justify-between gap-5">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shrink-0">
+        {/* ── Substation Featured Highlight Banner ── */}
+        {(activeCategory === 'All' || activeCategory === '400/220kV GIS Substation') && (
+          <section
+            aria-label="Featured substation visit"
+            className="relative mb-6 w-full rounded-2xl border border-cyan-500/35 bg-[#0d0d0b]/95 p-5 md:p-6 backdrop-blur-md shadow-[0_0_32px_rgba(0,242,255,0.08)] overflow-hidden"
+          >
+            <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-cyan-400 via-amber-400/60 to-transparent" />
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+              <div className="flex items-start sm:items-center gap-4">
+                <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/35 text-cyan-400 shrink-0">
                   <Zap size={24} />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-mono text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/70 border border-cyan-500/35 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                       Industrial Technical Visit
                     </span>
-                    <span className="text-xs text-zinc-500 font-mono">// APTRANSCO — Amaravati</span>
+                    <span className="text-xs text-zinc-400 font-mono">// APTRANSCO — Amaravati</span>
                   </div>
-                  <h2 className="text-base sm:text-lg font-bold text-white uppercase tracking-tight">
+                  <h2
+                    className="text-base sm:text-xl font-bold text-white uppercase tracking-tight"
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                  >
                     400/220 kV Gas Insulated Substation (GIS) — Thallayapalem
                   </h2>
-                  <p className="text-xs text-zinc-400 font-mono mt-0.5 max-w-2xl">
+                  <p className="text-xs text-zinc-300 font-sans mt-1 max-w-2xl leading-relaxed">
                     Field visit and technical study of SF6 gas-insulated switchgear, 400kV Crompton Greaves autotransformers, Bay-23 tie bay, SIFANG SCADA telemetry single line diagrams, and automated deluge fire protection systems.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 shrink-0">
-                <span className="text-xs font-mono text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1.5 rounded-lg">
-                  16 Photos Documented
+                <span className="text-xs font-mono text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 px-3.5 py-1.5 rounded-lg">
+                  {categoryCounts['400/220kV GIS Substation']} Frames Logged
                 </span>
               </div>
             </div>
-          )}
+          </section>
+        )}
 
-          {/* Dedicated Automation Videos Showcase Banner */}
-          {activeCategory === 'All' && (
-            <div className="mb-10 w-full rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 md:p-6 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-5">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-cyan-400 shrink-0">
-                  <Video size={24} />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                      Dedicated Page
-                    </span>
-                    <span className="text-xs text-zinc-500 font-mono">// CODESYS &amp; Rockwell CCW</span>
-                  </div>
-                  <h2 className="text-base sm:text-lg font-bold text-white uppercase tracking-tight">
-                    Automation Journey
-                  </h2>
-                  <p className="text-xs text-zinc-400 font-mono mt-0.5">
-                    Engineering journey from electrical schematics and PLC ladder programming to 3D virtual commissioning, HMI, and predictive maintenance.
-                  </p>
-                </div>
+        {/* ── Dedicated Automation Showcase Cross-Link ── */}
+        {activeCategory === 'All' && (
+          <section
+            aria-label="Automation portfolio link"
+            className="mb-10 w-full rounded-2xl border border-zinc-800 bg-[#0d0d0b]/85 p-5 md:p-6 backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
+          >
+            <div className="flex items-start sm:items-center gap-4">
+              <div className="p-3 rounded-xl bg-[#111110] border border-amber-500/30 text-amber-400 shrink-0">
+                <Video size={24} />
               </div>
-
-              <Link
-                to="/automation"
-                className="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 hover:text-white text-xs font-mono uppercase tracking-wider transition-all shrink-0 flex items-center gap-2"
-              >
-                <span>Explore Automation Journey</span>
-                <ArrowLeft size={14} className="rotate-180" />
-              </Link>
+              <div>
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <span className="text-[10px] font-mono text-amber-300 bg-amber-950/50 border border-amber-500/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                    Dedicated Showcase
+                  </span>
+                  <span className="text-xs text-zinc-400 font-mono">// CODESYS &amp; Rockwell CCW</span>
+                </div>
+                <h2
+                  className="text-base sm:text-xl font-bold text-white uppercase tracking-tight"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  Industrial Automation Journey
+                </h2>
+                <p className="text-xs text-zinc-300 font-sans mt-1 leading-relaxed">
+                  Engineering journey from electrical schematics and PLC ladder programming to 3D virtual commissioning, HMI, and predictive maintenance.
+                </p>
+              </div>
             </div>
-          )}
-          <Masonry
-            items={masonryItems}
-            ease="power3.out"
-            duration={0.6}
-            stagger={0.03}
-            animateFrom="bottom"
-            scaleOnHover={true}
-            hoverScale={0.97}
-            blurToFocus={true}
-            colorShiftOnHover={true}
-            onItemClick={openImage}
-          />
-        </div>
+
+            <Link
+              to="/automation"
+              className="px-5 py-2.5 rounded-xl bg-[#111110] hover:bg-cyan-500/15 border border-zinc-700 hover:border-cyan-400/60 text-zinc-200 hover:text-cyan-300 text-xs font-mono uppercase tracking-wider transition-all shrink-0 flex items-center gap-2"
+            >
+              <span>Explore Automation Journey</span>
+              <ArrowLeft size={14} className="rotate-180" />
+            </Link>
+          </section>
+        )}
+
+        {/* ── Precision Calibration-Frame Masonry Grid ── */}
+        <section aria-label="Calibration photo frames" className="pb-16">
+          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-5 space-y-5">
+            {filteredImages.map((item, idx) => {
+              const frameId = `FRM-${String(idx + 1).padStart(2, '0')}`;
+              const shortTag = CATEGORY_SHORT_TAG[item.category];
+              return (
+                <article
+                  key={`${activeCategory}-${item.src}`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Inspect ${frameId}: ${item.alt}`}
+                  onClick={(e) => openImage(idx, e.currentTarget)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      openImage(idx, e.currentTarget);
+                    }
+                  }}
+                  className="group relative break-inside-avoid rounded-xl border border-zinc-800/90 hover:border-cyan-400/60 bg-[#0d0d0b] overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_12px_36px_rgba(0,0,0,0.65),0_0_20px_rgba(0,242,255,0.1)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                >
+                  {/* Top Calibration Bar */}
+                  <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-800/80 bg-[#111110] text-[10px] font-mono">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.9)]" />
+                      <span className="text-zinc-200 font-bold tracking-wider">{frameId}</span>
+                    </div>
+                    <span className="text-amber-300/90 tracking-widest uppercase">{shortTag}</span>
+                  </div>
+
+                  {/* Image Container with Corner Calibration Reticles */}
+                  <div className="relative overflow-hidden bg-[#070706]">
+                    <img
+                      src={encodeURI(item.src)}
+                      alt={item.alt}
+                      title={item.alt}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-auto block object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+
+                    {/* Calibration corner brackets on hover/focus */}
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyan-400/80 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyan-400/80 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-amber-400/80 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-amber-400/80 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200"
+                    />
+
+                    {/* Inspect pill */}
+                    <div className="pointer-events-none absolute top-2.5 right-2.5 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200">
+                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-black/80 border border-cyan-500/40 text-cyan-300 text-[9px] font-mono uppercase tracking-wider backdrop-blur-sm">
+                        <Maximize2 size={10} /> Inspect
+                      </span>
+                    </div>
+
+                    {/* Clean metadata scrim overlay */}
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent pt-8 pb-3 px-3 opacity-90 group-hover:opacity-100 transition-opacity">
+                      <p className="text-[11px] text-zinc-200 font-sans leading-snug line-clamp-2">
+                        {item.alt}
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
       </div>
 
-      {/* Lightbox / Popup Modal */}
+      {/* Lightbox / Calibration Inspection Modal */}
       <AnimatePresence>
-        {selectedImg && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={closeImage}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 sm:p-6 md:p-10"
-          >
-            {/* Close Button */}
-            <button
-              onClick={closeImage}
-              className="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer z-50 p-2 bg-zinc-900/60 border border-zinc-800/40 rounded-full"
-              aria-label="Close image popup"
-            >
-              <X size={20} />
-            </button>
-
-            {/* Prev Button */}
-            <button
-              onClick={prevImage}
-              className="absolute left-4 md:left-8 text-zinc-400 hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer z-50 p-3 bg-zinc-900/60 border border-zinc-800/40 rounded-full"
-              aria-label="Previous image"
-            >
-              <ChevronLeft size={24} />
-            </button>
-
-            {/* Image Container with Title / Alt Text */}
-            <motion.div
-              initial={{ scale: 0.93, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.93, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl max-h-[80vh] flex flex-col items-center select-none"
-            >
-              <img
-                src={selectedImg}
-                alt={selectedIdx !== null ? (filteredImages[selectedIdx]?.alt || 'Engineering photo preview') : 'Engineering photo preview'}
-                title={selectedIdx !== null ? filteredImages[selectedIdx]?.alt : undefined}
-                decoding="async"
-                className="max-w-full max-h-[72vh] object-contain rounded-xl border border-zinc-800 shadow-2xl"
-              />
-              
-              {/* Caption */}
-              {selectedIdx !== null && filteredImages[selectedIdx] && (
-                <div className="mt-4 flex flex-col items-center gap-2 max-w-2xl px-4 text-center">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">
-                      {filteredImages[selectedIdx].category}
-                    </span>
-                    <span className="text-[11px] font-mono text-zinc-500">
-                      {selectedIdx + 1} / {filteredImages.length}
-                    </span>
-                  </div>
-                  <p className="text-xs md:text-sm text-zinc-300 font-mono">
-                    {filteredImages[selectedIdx].alt}
-                  </p>
-                </div>
-              )}
-            </motion.div>
-
-            {/* Next Button */}
-            <button
-              onClick={nextImage}
-              className="absolute right-4 md:right-8 text-zinc-400 hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer z-50 p-3 bg-zinc-900/60 border border-zinc-800/40 rounded-full"
-              aria-label="Next image"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </motion.div>
+        {selectedIdx !== null && (
+          <GalleryModal
+            items={filteredImages}
+            selectedIdx={selectedIdx}
+            onClose={closeImage}
+            onPrev={prevImage}
+            onNext={nextImage}
+          />
         )}
       </AnimatePresence>
     </div>
