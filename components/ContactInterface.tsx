@@ -449,56 +449,81 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-            {/* Social Links & Direct Channels */}
-            <div className="space-y-6">
-                <div className="flex justify-between items-end pb-2 border-b border-gray-800">
+            {/* Social Links & Direct Channels — RF / UART Patchbay */}
+            <div className="space-y-5">
+                <div className={`flex justify-between items-end pb-3 border-b transition-colors ${
+                    isPowered ? 'border-zinc-800/90' : 'border-zinc-900'
+                }`}>
                     <div>
-                        <h3 className={`text-xs font-mono tracking-[0.2em] mb-1 font-bold ${isPowered ? 'text-cyan-400' : 'text-zinc-400'}`}>
-                            DIRECT CHANNELS &amp; COMMS
-                        </h3>
-                        <div className="flex items-center gap-2">
-                            <span className={`text-[11px] font-bold ${isPowered ? 'text-gray-300' : 'text-zinc-300'}`}>Signal:</span>
-                            <div className="flex gap-0.5 items-end h-4">
-                                {[...Array(8)].map((_, i) => (
-                                    <div
-                                        key={i}
-                                        className={`w-1 rounded-sm ${isPowered ? 'bg-cyan-500 animate-signal-pulse' : 'bg-gray-800'}`}
-                                        style={isPowered ? {
-                                            '--signal-height': `${barHeights[i]}px`,
-                                            animationDelay: `${i * 0.1}s`,
-                                            animationDuration: `${0.6 + barHeights[i] / 24}s`
-                                        } as React.CSSProperties : { height: '4px' }}
-                                    />
-                                ))}
+                        <div className="flex items-center gap-2 mb-1.5">
+                            <span className={`w-1.5 h-1.5 rounded-full ${isPowered ? 'bg-cyan-400 animate-pulse' : 'bg-amber-400'}`} />
+                            <h3 className={`text-xs font-mono tracking-[0.2em] font-bold ${isPowered ? 'text-cyan-400' : 'text-amber-400'}`}>
+                                DIRECT CHANNELS &amp; COMMS
+                            </h3>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                            <div className="flex items-center gap-2">
+                                <span className="text-[11px] font-mono font-semibold text-zinc-300">Signal:</span>
+                                <div className="flex gap-0.5 items-end h-4">
+                                    {[...Array(8)].map((_, i) => (
+                                        <div
+                                            key={i}
+                                            className={`w-1 rounded-sm ${isPowered ? 'bg-cyan-400 animate-signal-pulse' : 'bg-zinc-700'}`}
+                                            style={isPowered ? {
+                                                '--signal-height': `${barHeights[i]}px`,
+                                                animationDelay: `${i * 0.1}s`,
+                                                animationDuration: `${0.6 + barHeights[i] / 24}s`
+                                            } as React.CSSProperties : { height: '4px' }}
+                                        />
+                                    ))}
+                                </div>
                             </div>
+                            <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${
+                                isPowered
+                                    ? 'bg-cyan-950/40 border-cyan-500/30 text-cyan-300'
+                                    : 'bg-amber-950/20 border-amber-500/30 text-amber-400'
+                            }`}>
+                                {isPowered ? '115200 BAUD' : 'STANDBY RAIL'}
+                            </span>
                         </div>
                         <div className="flex items-center gap-2 mt-2">
-                            <span className={`text-[11px] font-bold ${isPowered ? 'text-gray-300' : 'text-zinc-300'}`}>Status:</span>
-                            <span className={`text-xs font-mono font-bold ${uplinkStatus === 'TRANSMITTING' ? 'text-amber-400 animate-pulse' :
+                            <span className="text-[11px] font-mono font-semibold text-zinc-300">Status:</span>
+                            <span className={`text-xs font-mono font-bold tracking-wider ${
+                                uplinkStatus === 'TRANSMITTING' ? 'text-amber-400 animate-pulse' :
                                 uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-400' :
-                                    isPowered ? 'text-cyan-400' : 'text-zinc-400'
-                                }`}>
+                                isPowered ? 'text-cyan-300' : 'text-amber-400'
+                            }`}>
                                 {uplinkStatus === 'IDLE' ? (isPowered ? 'READY FOR UPLINK' : 'OFFLINE') : uplinkStatus}
                             </span>
                         </div>
                     </div>
-                    <Wifi size={18} className={isPowered ? 'text-cyan-400 animate-pulse' : 'text-zinc-600'} />
+
+                    <div className={`p-2 rounded-lg border ${
+                        isPowered ? 'bg-cyan-950/30 border-cyan-500/30' : 'bg-zinc-950 border-zinc-800'
+                    }`}>
+                        <Wifi size={18} className={isPowered ? 'text-cyan-400 animate-pulse' : 'text-zinc-400'} />
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4">
-                    <ContactCard 
-                        href={`mailto:${profile.email}`} 
-                        icon={EmailRealIcon} 
-                        label="EMAIL" 
-                        value={profile.email} 
-                        isPowered={isPowered} 
+                <div className="grid grid-cols-1 gap-3.5">
+                    <ContactCard
+                        href={`mailto:${profile.email}`}
+                        icon={EmailRealIcon}
+                        label="EMAIL"
+                        channelTag="CH-00 // SMTP"
+                        value={profile.email}
+                        isPowered={isPowered}
                         brandColor="#ea4335"
                         brandGlow="rgba(234, 67, 53, 0.08)"
                         extraAction={
                             <button
                                 type="button"
                                 onClick={handleCopyEmail}
-                                className="min-h-[44px] min-w-[44px] px-3 py-2 flex items-center justify-center gap-1.5 rounded bg-black/60 border border-gray-700 hover:border-cyan-400 hover:text-cyan-300 text-gray-300 text-xs font-mono transition-all duration-200 cursor-pointer"
+                                className={`min-h-[44px] min-w-[44px] px-3 py-2 flex items-center justify-center gap-1.5 rounded-lg border text-xs font-mono transition-all duration-200 cursor-pointer ${
+                                    isPowered
+                                        ? 'bg-zinc-950/90 border-zinc-700 hover:border-cyan-400 hover:text-cyan-300 text-zinc-200'
+                                        : 'bg-zinc-950 border-zinc-800 hover:border-amber-400 hover:text-amber-300 text-zinc-300'
+                                }`}
                                 title="Copy Email to Clipboard"
                                 aria-label="Copy Email to Clipboard"
                             >
@@ -516,7 +541,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             </button>
                         }
                     />
-                    {profile.socials.filter(s => s.platform !== 'email').map(social => {
+                    {profile.socials.filter(s => s.platform !== 'email').map((social, idx) => {
                         const Icon = getIcon(social.platform);
                         let handle = social.url;
                         if (social.platform === 'linkedin') handle = 'LinkedIn Profile';
@@ -525,16 +550,17 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                         else if (social.platform === 'telegram') handle = 'Telegram';
                         else if (social.platform === 'x') handle = 'X (Twitter)';
                         else handle = social.url.replace(/^https?:\/\//, '');
-                        
+
                         const brand = BRAND_DATA[social.platform] || { color: '#22d3ee', glow: 'rgba(34, 211, 238, 0.08)' };
-                        
+
                         return (
-                            <ContactCard 
-                                key={social.platform} 
-                                href={social.url} 
+                            <ContactCard
+                                key={social.platform}
+                                href={social.url}
                                 icon={Icon}
-                                label={social.platform.toUpperCase()} 
-                                value={handle} 
+                                label={social.platform.toUpperCase()}
+                                channelTag={`CH-0${idx + 1} // LINK`}
+                                value={handle}
                                 isPowered={isPowered}
                                 brandColor={brand.color}
                                 brandGlow={brand.glow}
@@ -544,52 +570,84 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                 </div>
             </div>
 
-            {/* AI Terminal */}
-            <div className={`relative rounded-lg overflow-hidden border transition-all duration-500 flex flex-col h-[480px] ${isPowered
-                ? 'border-cyan-900/50 bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)]'
-                : 'border-gray-900 bg-[#050505]'
+            {/* AI Diagnostic UART Serial Console */}
+            <div className={`relative rounded-xl overflow-hidden border transition-all duration-500 flex flex-col h-[500px] ${
+                isPowered
+                    ? 'border-cyan-500/35 bg-[#07090c] shadow-[0_0_40px_rgba(0,242,255,0.07)]'
+                    : 'border-zinc-800 bg-[#090908]'
+            }`}>
+                {/* Instrument Bezel Header */}
+                <div className={`px-4 py-2.5 border-b flex justify-between items-center flex-shrink-0 ${
+                    isPowered ? 'bg-cyan-950/25 border-cyan-900/40' : 'bg-zinc-950 border-zinc-800'
                 }`}>
-                {/* Header */}
-                <div className={`px-4 py-2 border-b flex justify-between items-center flex-shrink-0 ${isPowered ? 'bg-cyan-950/20 border-cyan-900/30' : 'bg-[#111] border-gray-800'
-                    }`}>
-                    <div className="flex items-center gap-2">
-                        <Terminal size={14} className={isPowered ? 'text-cyan-400' : 'text-gray-600'} />
-                        <span className={`text-xs font-mono font-bold ${isPowered ? 'text-cyan-500' : 'text-gray-600'}`}>
+                    <div className="flex items-center gap-2.5 min-w-0">
+                        <div className={`p-1 rounded border ${
+                            isPowered ? 'bg-cyan-950/60 border-cyan-500/30 text-cyan-400' : 'bg-zinc-900 border-zinc-800 text-amber-400'
+                        }`}>
+                            <Terminal size={13} />
+                        </div>
+                        <span className={`text-xs font-mono font-bold tracking-wider ${isPowered ? 'text-cyan-300' : 'text-zinc-200'}`}>
                             AI ASSISTANT
                         </span>
-                        {isPowered && (
-                            <span className="text-[9px] font-mono px-2 py-0.5 rounded-full border border-emerald-500/40 bg-emerald-950/40 text-emerald-400 flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.15)]">
+                        {isPowered ? (
+                            <span className="text-[9px] font-mono px-2 py-0.5 rounded-full border border-emerald-500/40 bg-emerald-950/50 text-emerald-300 flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.15)]">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
                                 ONLINE
                             </span>
+                        ) : (
+                            <span className="text-[9px] font-mono px-2 py-0.5 rounded-full border border-amber-500/35 bg-amber-950/30 text-amber-400">
+                                STANDBY
+                            </span>
                         )}
                     </div>
-                    <div className="flex gap-1.5">
-                        <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-red-500' : 'bg-gray-800'}`} />
-                        <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-amber-500' : 'bg-gray-800'}`} />
-                        <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-emerald-500' : 'bg-gray-800'}`} />
+
+                    <div className="flex items-center gap-3 flex-shrink-0">
+                        <span className={`hidden sm:inline text-[10px] font-mono px-2 py-0.5 rounded border ${
+                            isPowered
+                                ? 'border-zinc-800 bg-black/50 text-zinc-300'
+                                : 'border-zinc-800 bg-black/50 text-zinc-400'
+                        }`}>
+                            TX {Math.max(0, remaining)}/{MAX_MSGS}
+                        </span>
+                        <div className="flex gap-1.5">
+                            <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-red-500/90' : 'bg-zinc-700'}`} />
+                            <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-amber-400/90' : 'bg-amber-500/50'}`} />
+                            <div className={`w-2 h-2 rounded-full ${isPowered ? 'bg-emerald-400/90' : 'bg-zinc-700'}`} />
+                        </div>
                     </div>
                 </div>
 
-                {/* Messages — scrollable */}
+                {/* UART Telemetry Sub-bar */}
+                <div className={`px-4 py-1.5 border-b flex items-center justify-between text-[10px] font-mono flex-shrink-0 ${
+                    isPowered ? 'border-cyan-950/60 bg-black/50 text-zinc-400' : 'border-zinc-900 bg-black/40 text-zinc-400'
+                }`}>
+                    <span>PORT: UART0 // 8N1</span>
+                    <span className={isPowered ? 'text-cyan-400' : 'text-amber-400'}>
+                        {isLoading ? 'RX STREAM ACTIVE' : 'PROTO: HTTPS/JSON'}
+                    </span>
+                </div>
+
+                {/* Messages — scrollable diagnostic stream */}
                 <div
                     ref={scrollRef}
                     data-lenis-prevent
-                    className="flex-1 p-4 font-mono text-xs overflow-y-auto relative z-10 space-y-3"
+                    className="flex-1 p-4 font-mono text-xs overflow-y-auto relative z-10 space-y-3.5"
                     style={{
                         scrollbarWidth: 'thin',
-                        scrollbarColor: 'rgba(8,145,178,0.3) transparent',
+                        scrollbarColor: 'rgba(8,145,178,0.35) transparent',
+                        backgroundImage: 'radial-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px)',
+                        backgroundSize: '18px 18px',
                     }}
                 >
                     {messages.map(msg => (
-                        <div key={msg.id}>
+                        <div key={msg.id} className={msg.type === 'user' ? 'flex flex-col items-end' : ''}>
                             {/* Timestamp + prefix row */}
-                            <div className="flex items-center gap-1.5 mb-0.5 select-none">
-                                <span className="opacity-30 text-[10px]">{timeLabel()}</span>
-                                {msg.type === 'ai' && <span className="text-cyan-500 text-[10px]">[AI]</span>}
-                                {msg.type === 'error' && <span className="text-amber-500 text-[10px]">[!]</span>}
-                                {msg.type === 'user' && <span className="text-green-500 text-[10px]">[YOU]</span>}
-                                {msg.type === 'sys' && <span className="text-cyan-700 text-[10px]">[SYS]</span>}
+                            <div className="flex items-center gap-1.5 mb-1 select-none">
+                                <span className="text-zinc-400 text-[10px]">{timeLabel()}</span>
+                                {msg.type === 'ai' && <span className="text-cyan-400 font-bold text-[10px]">[AI]</span>}
+                                {msg.type === 'error' && <span className="text-amber-400 font-bold text-[10px]">[!]</span>}
+                                {msg.type === 'user' && <span className="text-emerald-400 font-bold text-[10px]">[YOU]</span>}
+                                {msg.type === 'sys' && <span className="text-cyan-500 text-[10px]">[SYS]</span>}
                             </div>
 
                             {/* Message body */}
@@ -597,11 +655,15 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                                 initial={{ opacity: 0, y: 6 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.2 }}
-                                className={`ml-1 ${msg.type === 'user' ? 'text-white' :
-                                    msg.type === 'ai' ? 'text-cyan-200' :
-                                        msg.type === 'error' ? 'text-amber-400' :
-                                            'text-cyan-700'
-                                    }`}
+                                className={
+                                    msg.type === 'user'
+                                        ? 'max-w-[90%] rounded-lg px-3 py-2 bg-emerald-950/30 border border-emerald-500/30 text-white'
+                                        : msg.type === 'ai'
+                                            ? 'rounded-lg px-3.5 py-2.5 bg-zinc-900/75 border border-cyan-500/20 text-cyan-100'
+                                            : msg.type === 'error'
+                                                ? 'rounded-lg px-3 py-2 bg-amber-950/30 border border-amber-500/35 text-amber-300'
+                                                : 'ml-1 text-cyan-400/90'
+                                }
                             >
                                 {msg.type === 'ai'
                                     ? <MiniMarkdown content={msg.text} />
@@ -612,10 +674,11 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             {/* Retry button */}
                             {msg.failed && (
                                 <motion.button
+                                    type="button"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     onClick={() => handleRetry(msg.id)}
-                                    className="mt-1.5 ml-1 flex items-center gap-1.5 text-amber-400 border border-amber-800/50 rounded px-2 py-0.5 hover:bg-amber-900/20 transition-colors text-[10px] font-mono"
+                                    className="mt-1.5 ml-1 flex items-center gap-1.5 text-amber-300 bg-amber-950/40 border border-amber-500/40 rounded-md px-2.5 py-1 hover:bg-amber-900/40 transition-colors text-[10px] font-mono cursor-pointer"
                                 >
                                     <RefreshCw size={10} />
                                     retry
@@ -627,13 +690,13 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                     {/* Thinking indicator */}
                     {isLoading && (
                         <div>
-                            <div className="flex items-center gap-1.5 mb-0.5 select-none">
-                                <span className="opacity-30 text-[10px]">{timeLabel()}</span>
-                                <span className="text-cyan-500 text-[10px]">[AI]</span>
+                            <div className="flex items-center gap-1.5 mb-1 select-none">
+                                <span className="text-zinc-400 text-[10px]">{timeLabel()}</span>
+                                <span className="text-cyan-400 font-bold text-[10px]">[AI]</span>
                             </div>
-                            <div className="ml-1 text-cyan-400 text-xs font-mono animate-pulse flex items-center gap-1.5">
-                                <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-                                thinking...
+                            <div className="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-zinc-900/75 border border-cyan-500/25 text-cyan-300 text-xs font-mono">
+                                <span className="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                                <span>thinking...</span>
                             </div>
                         </div>
                     )}
@@ -643,21 +706,26 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="ml-1 text-emerald-400 font-mono text-xs border border-emerald-900/40 rounded px-3 py-2 bg-emerald-950/20"
+                            className="text-emerald-300 font-mono text-xs border border-emerald-500/35 rounded-lg px-3.5 py-2.5 bg-emerald-950/25"
                         >
                             You've reached the 20-message session limit. Refresh the page to start a new session 🔄
                         </motion.div>
                     )}
                 </div>
 
-                {/* Input */}
+                {/* Input — UART TX Command Prompt */}
                 <form
                     onSubmit={handleCommand}
-                    className={`p-3 border-t relative z-30 flex-shrink-0 ${isPowered ? 'border-cyan-900/30 bg-cyan-950/10' : 'border-gray-800'
-                        }`}
+                    className={`p-3 border-t relative z-30 flex-shrink-0 ${
+                        isPowered ? 'border-cyan-900/40 bg-zinc-950/90' : 'border-zinc-800 bg-zinc-950'
+                    }`}
                 >
-                    <div className="flex items-center gap-2">
-                        <span className={isPowered ? 'text-green-500' : 'text-gray-600'}>➜</span>
+                    <div className={`flex items-center gap-2 rounded-lg px-3 py-1 border transition-colors ${
+                        isPowered
+                            ? 'bg-black/70 border-zinc-800 focus-within:border-cyan-500/60'
+                            : 'bg-black/60 border-zinc-800'
+                    }`}>
+                        <span className={`font-mono font-bold ${isPowered ? 'text-emerald-400' : 'text-zinc-500'}`}>➜</span>
                         <input
                             type="text"
                             value={consoleInput}
@@ -670,22 +738,29 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                                             'Ask me anything...'
                             }
                             disabled={!isPowered || isLoading || isLimitReached}
-                            className={`flex-1 bg-transparent border-none outline-none font-mono text-sm ${isPowered
-                                ? 'text-cyan-100 placeholder-cyan-900/50'
-                                : 'text-gray-600 placeholder-gray-800'
-                                }`}
+                            className={`flex-1 bg-transparent border-none outline-none font-mono text-sm py-1 ${
+                                isPowered
+                                    ? 'text-cyan-100 placeholder-zinc-500'
+                                    : 'text-zinc-400 placeholder-zinc-500'
+                            }`}
                             autoComplete="off"
                         />
+                        {consoleInput.length > 0 && (
+                            <span className="text-[10px] font-mono text-zinc-400 flex-shrink-0">
+                                {consoleInput.length}/500
+                            </span>
+                        )}
                         <button
                             type="submit"
                             disabled={!isPowered || isLoading || isLimitReached || !consoleInput.trim()}
                             aria-label="Send message"
-                            className={`min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded transition-all ${isPowered && !isLoading && !isLimitReached && consoleInput.trim()
-                                ? 'text-cyan-400 hover:bg-cyan-900/30 hover:text-cyan-200 cursor-pointer'
-                                : 'text-zinc-600'
-                                }`}
+                            className={`min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-md transition-all ${
+                                isPowered && !isLoading && !isLimitReached && consoleInput.trim()
+                                    ? 'text-cyan-300 bg-cyan-950/50 border border-cyan-500/40 hover:bg-cyan-500 hover:text-black cursor-pointer'
+                                    : 'text-zinc-500 border border-transparent'
+                            }`}
                         >
-                            <Send size={18} />
+                            <Send size={17} />
                         </button>
                     </div>
                 </form>
@@ -700,25 +775,33 @@ const ContactCard: React.FC<{
     href: string;
     icon: React.ElementType;
     label: string;
+    channelTag: string;
     value: string;
     isPowered: boolean;
     brandColor?: string;
     brandGlow?: string;
     extraAction?: React.ReactNode;
-}> = ({ href, icon: Icon, label, value, isPowered, brandColor = '#22d3ee', brandGlow = 'rgba(34, 211, 238, 0.08)', extraAction }) => (
+}> = ({ href, icon: Icon, label, channelTag, value, isPowered, brandColor = '#22d3ee', brandGlow = 'rgba(34, 211, 238, 0.08)', extraAction }) => (
     <div
-        className={`group relative overflow-hidden flex items-center justify-between gap-4 p-4 border rounded-xl transition-all duration-300 ${isPowered
-            ? 'bg-[#0a0a0a] border-gray-800 hover:border-[var(--hover-border)]'
-            : 'bg-black border-gray-900'
-            }`}
+        className={`group relative overflow-hidden flex items-center justify-between gap-4 p-4 border rounded-xl transition-all duration-300 ${
+            isPowered
+                ? 'bg-[#0a0b0e] border-zinc-800/90 hover:border-[var(--hover-border)] shadow-[0_6px_20px_rgba(0,0,0,0.4)]'
+                : 'bg-[#0b0b09] border-zinc-800'
+        }`}
         style={isPowered ? {
             '--hover-border': `${brandColor}80`,
         } as React.CSSProperties : {}}
     >
+        {/* Left hardware pin indicator bar */}
+        <div
+            className="absolute left-0 top-3 bottom-3 w-[3px] rounded-r transition-all duration-300"
+            style={{ backgroundColor: isPowered ? `${brandColor}70` : '#52525b' }}
+        />
+
         {isPowered && (
             <>
-                <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
+                <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{ backgroundColor: brandGlow }}
                 />
                 <div
@@ -732,32 +815,40 @@ const ContactCard: React.FC<{
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackInteraction('contact_click', 'contact', `${label}: ${value}`)}
-            className="flex items-center gap-4 flex-1 min-w-0"
+            className="flex items-center gap-4 flex-1 min-w-0 pl-1"
         >
-            <div 
-                className={`relative z-10 p-2.5 rounded-lg transition-all duration-300 flex-shrink-0 ${isPowered
-                    ? 'bg-gray-900 group-hover:shadow-[0_0_15px_var(--brand-glow-shadow)]'
-                    : 'bg-gray-900 text-gray-600'
-                    }`}
+            <div
+                className={`relative z-10 p-2.5 rounded-lg border transition-all duration-300 flex-shrink-0 ${
+                    isPowered
+                        ? 'bg-zinc-950 border-zinc-800 group-hover:shadow-[0_0_15px_var(--brand-glow-shadow)]'
+                        : 'bg-zinc-900 border-zinc-800 text-zinc-300'
+                }`}
                 style={isPowered ? {
                     color: brandColor,
                     '--brand-glow-shadow': `${brandColor}40`
                 } as React.CSSProperties : {}}
             >
-                <Icon size={22} />
+                <Icon size={21} />
             </div>
             <div className="flex-1 relative z-10 min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
-                    <p className="text-[11px] text-gray-400 font-mono tracking-wider uppercase">{label}</p>
-                    {isPowered && (
-                        <Activity 
-                            size={10} 
-                            className="group-hover:animate-pulse" 
-                            style={{ color: isPowered ? brandColor : undefined, opacity: 0.6 }} 
-                        />
-                    )}
+                <div className="flex items-center justify-between gap-2 mb-0.5">
+                    <div className="flex items-center gap-2">
+                        <p className="text-[11px] text-zinc-300 font-mono font-bold tracking-wider uppercase">{label}</p>
+                        {isPowered && (
+                            <Activity
+                                size={10}
+                                className="group-hover:animate-pulse"
+                                style={{ color: brandColor, opacity: 0.75 }}
+                            />
+                        )}
+                    </div>
+                    <span className="hidden sm:inline text-[9px] font-mono text-zinc-400 tracking-wider">
+                        {channelTag}
+                    </span>
                 </div>
-                <p className={`font-bold text-sm md:text-base truncate transition-colors ${isPowered ? 'text-gray-200 group-hover:text-white' : 'text-zinc-300'}`}>
+                <p className={`font-bold text-sm md:text-base truncate transition-colors ${
+                    isPowered ? 'text-zinc-100 group-hover:text-white' : 'text-zinc-200'
+                }`}>
                     {value}
                 </p>
             </div>
