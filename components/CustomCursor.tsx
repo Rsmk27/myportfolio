@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useReducedMotion, AnimatePresence } from 'framer-motion';
 
 // ── Cursor state ─────────────────────────────────────────────────────────────
 type CursorState =
-    | 'default'   // bare crosshair
+    | 'default'   // oscilloscope probe reticle
     | 'pointer'   // interactive element (button / link)
     | 'project'   // project card hover
     | 'text'      // text inputs / textareas
@@ -16,73 +16,72 @@ const RING_PROFILE: Record<CursorState, {
     border: string;
     bg: string;
     dotScale: number;
-    mixBlend: 'normal' | 'difference' | 'exclusion';
     borderRadius: string | number;
     rotate: number;
 }> = {
     default: {
-        size: 32,
-        border: 'rgba(0,242,255,0.4)',
-        bg: 'transparent',
+        size: 34,
+        border: 'rgba(0, 242, 255, 0.36)',
+        bg: 'rgba(0, 242, 255, 0.02)',
         dotScale: 1,
-        mixBlend: 'normal',
         borderRadius: '50%',
         rotate: 0,
     },
     pointer: {
         size: 44,
-        border: 'rgba(0,242,255,0.7)',
-        bg: 'rgba(0,242,255,0.12)',
-        dotScale: 0.1,
-        mixBlend: 'normal',
-        borderRadius: '12px',
+        border: 'rgba(0, 242, 255, 0.78)',
+        bg: 'rgba(0, 242, 255, 0.10)',
+        dotScale: 0.45,
+        borderRadius: '10px',
         rotate: 45,
     },
     project: {
-        size: 56,
-        border: 'rgba(0,242,255,0)',
-        bg: 'rgba(0,242,255,0.15)',
+        size: 58,
+        border: 'rgba(0, 242, 255, 0.25)',
+        bg: 'rgba(0, 242, 255, 0.12)',
         dotScale: 0,
-        mixBlend: 'normal',
         borderRadius: '50%',
         rotate: 0,
     },
     text: {
         size: 4,
-        border: 'rgba(0,242,255,0)',
-        bg: 'rgba(0,242,255,0)',
-        dotScale: 1,
-        mixBlend: 'normal',
+        border: 'rgba(0, 242, 255, 0)',
+        bg: 'rgba(0, 242, 255, 0)',
+        dotScale: 0,
         borderRadius: 0,
         rotate: 0,
     },
     zoom: {
         size: 60,
-        border: 'rgba(255,255,255,0.8)',
-        bg: 'rgba(255,255,255,0.1)',
+        border: 'rgba(255, 255, 255, 0.8)',
+        bg: 'rgba(8, 12, 16, 0.45)',
         dotScale: 0,
-        mixBlend: 'normal',
         borderRadius: '50%',
         rotate: 0,
     },
     label: {
-        size: 96,
-        border: 'rgba(0,242,255,0.6)',
-        bg: 'rgba(0,242,255,0.15)',
+        size: 92,
+        border: 'rgba(0, 242, 255, 0.65)',
+        bg: 'rgba(0, 242, 255, 0.14)',
         dotScale: 0,
-        mixBlend: 'normal',
         borderRadius: '50%',
         rotate: 0,
     },
 };
 
+const CARDINAL_TICKS: Array<'n' | 's' | 'e' | 'w'> = ['n', 's', 'e', 'w'];
+const CORNER_TICKS: Array<'tl' | 'tr' | 'bl' | 'br'> = ['tl', 'tr', 'bl', 'br'];
+
 // ── Component ─────────────────────────────────────────────────────────────────
 export const CustomCursor: React.FC = () => {
     const mouseX = useMotionValue(-300);
     const mouseY = useMotionValue(-300);
+    const prefersReducedMotion = useReducedMotion() ?? false;
 
-    // Ring lags behind with spring — feel like a trailing magnifier
-    const springCfg = { stiffness: 400, damping: 28, mass: 0.35 };
+    // Ring trails with precision damped spring — feels like an optical probe magnifier
+    const springCfg = prefersReducedMotion
+        ? { stiffness: 1200, damping: 60, mass: 0.2 }
+        : { stiffness: 420, damping: 28, mass: 0.34 };
     const ringX = useSpring(mouseX, springCfg);
     const ringY = useSpring(mouseY, springCfg);
 
@@ -91,9 +90,6 @@ export const CustomCursor: React.FC = () => {
     const [visible, setVisible] = useState(false);
     const [clicking, setClicking] = useState(false);
     const visibleRef = useRef(false);
-
-    const stateRef = useRef(state);
-    stateRef.current = state;
 
     useEffect(() => {
         const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
@@ -114,12 +110,15 @@ export const CustomCursor: React.FC = () => {
 
         let lastTarget: Element | null = null;
         const classify = (e: MouseEvent) => {
-            const t = e.target as Element;
-            if (!t || t === lastTarget) return;
-            lastTarget = t;
+            const rawTarget = e.target;
+            if (!(rawTarget instanceof Element) || rawTarget === lastTarget) return;
+            lastTarget = rawTarget;
 
             // — zoom-out: lightbox backdrop
-            if (t.closest('[class*="cursor-zoom"]') || (t as HTMLElement).style?.cursor === 'zoom-out') {
+            if (
+                rawTarget.closest('[class*="cursor-zoom"]') ||
+                (rawTarget as HTMLElement).style?.cursor === 'zoom-out'
+            ) {
                 setState('zoom');
                 setLabel('CLOSE');
                 return;
@@ -127,9 +126,9 @@ export const CustomCursor: React.FC = () => {
 
             // — text / textarea / contenteditable
             if (
-                t.closest('input') ||
-                t.closest('textarea') ||
-                (t as HTMLElement).isContentEditable
+                rawTarget.closest('input') ||
+                rawTarget.closest('textarea') ||
+                (rawTarget as HTMLElement).isContentEditable
             ) {
                 setState('text');
                 setLabel('');
@@ -137,14 +136,14 @@ export const CustomCursor: React.FC = () => {
             }
 
             // — project card
-            if (t.closest('.project-card')) {
+            if (rawTarget.closest('.project-card')) {
                 setState('project');
                 setLabel('VIEW');
                 return;
             }
 
             // — data-cursor-label (custom labels from JSX)
-            const labelEl = t.closest('[data-cursor-label]') as HTMLElement | null;
+            const labelEl = rawTarget.closest('[data-cursor-label]') as HTMLElement | null;
             if (labelEl?.dataset.cursorLabel) {
                 setState('label');
                 setLabel(labelEl.dataset.cursorLabel);
@@ -153,17 +152,14 @@ export const CustomCursor: React.FC = () => {
 
             // — generic interactive (button, link, data-cursor=pointer)
             if (
-                t.closest('a') ||
-                t.closest('button') ||
-                t.closest('[data-cursor="pointer"]') ||
-                t.closest('[role="button"]') ||
-                t.closest('[tabindex]') ||
-                (t as HTMLElement).tagName === 'SELECT'
+                rawTarget.closest('a') ||
+                rawTarget.closest('button') ||
+                rawTarget.closest('[data-cursor="pointer"]') ||
+                rawTarget.closest('[role="button"]') ||
+                rawTarget.closest('[tabindex]') ||
+                rawTarget.tagName === 'SELECT'
             ) {
-                // pick a context-aware micro-label
-                let micro = '';
-                if (t.closest('a')) micro = 'VISIT';
-                else if (t.closest('button')) micro = '';
+                const micro = rawTarget.closest('a') ? 'VISIT' : '';
                 setState('pointer');
                 setLabel(micro);
                 return;
@@ -206,13 +202,14 @@ export const CustomCursor: React.FC = () => {
     if (isTouchDevice || !visible) return null;
 
     const p = RING_PROFILE[state];
-    const rs = clicking ? p.size * 0.82 : p.size;
-    const dotPx = 5; // core dot size
+    const rs = clicking ? p.size * 0.84 : p.size;
+    const dotPx = 5;
 
     return (
         <>
-            {/* ── Core dot — snaps exactly to cursor ── */}
+            {/* ── Precision Probe Tip — snaps directly to cursor ── */}
             <motion.div
+                aria-hidden="true"
                 className="fixed top-0 left-0 pointer-events-none"
                 style={{
                     x: mouseX,
@@ -231,25 +228,30 @@ export const CustomCursor: React.FC = () => {
                     }}
                     animate={{
                         scale: clicking
-                            ? 0.6
+                            ? 0.65
                             : state === 'text'
-                                ? 0      // hide dot in text mode (caret replaces it)
+                                ? 0
                                 : p.dotScale,
                         backgroundColor:
                             state === 'zoom'
                                 ? '#ffffff'
-                                : '#00f2ff',
+                                : clicking
+                                    ? '#ffae00'
+                                    : '#00f2ff',
                         boxShadow:
-                            state === 'default'
-                                ? '0 0 6px rgba(0,242,255,0.9), 0 0 14px rgba(0,242,255,0.4)'
-                                : '0 0 3px rgba(0,242,255,0.5)',
+                            clicking
+                                ? '0 0 8px rgba(255,174,0,0.95), 0 0 16px rgba(255,174,0,0.45)'
+                                : state === 'default'
+                                    ? '0 0 6px rgba(0,242,255,0.9), 0 0 14px rgba(0,242,255,0.4)'
+                                    : '0 0 4px rgba(0,242,255,0.6)',
                     }}
-                    transition={{ duration: 0.12, ease: 'easeOut' }}
+                    transition={{ duration: 0.1, ease: 'easeOut' }}
                 />
             </motion.div>
 
-            {/* ── Ring — spring-lagged ── */}
+            {/* ── Oscilloscope Reticle Ring — spring-lagged ── */}
             <motion.div
+                aria-hidden="true"
                 className="fixed top-0 left-0 pointer-events-none"
                 style={{
                     x: ringX,
@@ -265,60 +267,80 @@ export const CustomCursor: React.FC = () => {
                         height: rs,
                         marginLeft: -rs / 2,
                         marginTop: -rs / 2,
-                        borderWidth: clicking ? 2 : 1.5,
+                        borderWidth: clicking ? 2 : 1.25,
                         borderStyle: 'solid',
-                        borderColor: p.border,
+                        borderColor: clicking && state !== 'zoom' ? 'rgba(255, 174, 0, 0.85)' : p.border,
                         backgroundColor: p.bg,
-                        scale: clicking ? 0.85 : 1,
+                        scale: clicking ? 0.88 : 1,
                         borderRadius: p.borderRadius,
                         rotate: p.rotate,
                     }}
                     transition={{ type: 'spring', stiffness: 450, damping: 25, mass: 0.5 }}
                 >
-                    {/* Inner counter-rotation wrapper for labels so text remains upright */}
+                    {/* Counter-rotated inner layer so telemetry labels stay upright */}
                     <motion.div
                         className="absolute inset-0 flex items-center justify-center"
                         animate={{ rotate: -p.rotate }}
                         transition={{ duration: 0 }}
                     >
-                        {/* Corner tick marks on ring — only in default state */}
+                        {/* Default state: oscilloscope corner brackets + cardinal probe crosshairs */}
                         {state === 'default' && (
                             <>
-                                <span style={tick('tl')} />
-                                <span style={tick('tr')} />
-                                <span style={tick('bl')} />
-                                <span style={tick('br')} />
+                                {CORNER_TICKS.map((pos) => (
+                                    <span key={pos} style={cornerTick(pos)} />
+                                ))}
+                                {CARDINAL_TICKS.map((dir) => (
+                                    <span key={dir} style={cardinalTick(dir, clicking)} />
+                                ))}
                             </>
                         )}
 
-                    {/* Inner label */}
-                    <AnimatePresence mode="wait">
-                        {(state === 'project' || state === 'label' || state === 'zoom') && label && (
-                            <motion.span
-                                key={label}
-                                initial={{ opacity: 0, scale: 0.7 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.7 }}
-                                transition={{ duration: 0.15 }}
+                        {/* Pointer state: precision target-lock corner accents */}
+                        {state === 'pointer' && (
+                            <span
                                 style={{
-                                    fontFamily: "'Space Mono', monospace",
-                                    fontSize: 9,
-                                    fontWeight: 700,
-                                    letterSpacing: '0.14em',
-                                    color:
-                                        state === 'zoom'
-                                            ? 'rgba(255,255,255,0.85)'
-                                            : 'rgba(0,242,255,0.95)',
-                                    userSelect: 'none',
-                                    textTransform: 'uppercase',
-                                    pointerEvents: 'none',
                                     position: 'absolute',
+                                    width: 4,
+                                    height: 4,
+                                    borderRadius: '50%',
+                                    border: '1px solid rgba(255, 174, 0, 0.75)',
+                                    pointerEvents: 'none',
                                 }}
-                            >
-                                {state === 'zoom' ? '✕' : label}
-                            </motion.span>
+                            />
                         )}
-                    </AnimatePresence>
+
+                        {/* Inner telemetry label */}
+                        <AnimatePresence mode="wait">
+                            {(state === 'project' || state === 'label' || state === 'zoom') && label && (
+                                <motion.span
+                                    key={label}
+                                    initial={{ opacity: 0, scale: 0.75 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.75 }}
+                                    transition={{ duration: 0.14 }}
+                                    style={{
+                                        fontFamily: "'Space Mono', monospace",
+                                        fontSize: 9,
+                                        fontWeight: 700,
+                                        letterSpacing: '0.16em',
+                                        color:
+                                            state === 'zoom'
+                                                ? 'rgba(255,255,255,0.92)'
+                                                : 'rgba(0,242,255,0.96)',
+                                        textShadow:
+                                            state === 'zoom'
+                                                ? 'none'
+                                                : '0 0 8px rgba(0,242,255,0.45)',
+                                        userSelect: 'none',
+                                        textTransform: 'uppercase',
+                                        pointerEvents: 'none',
+                                        position: 'absolute',
+                                    }}
+                                >
+                                    {state === 'zoom' ? '✕' : label}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
                     </motion.div>
 
                     {/* Rotating dashed arc overlay on zoom */}
@@ -328,8 +350,8 @@ export const CustomCursor: React.FC = () => {
                                 position: 'absolute',
                                 inset: -6,
                                 borderRadius: '50%',
-                                border: '1px dashed rgba(255,255,255,0.22)',
-                                animation: 'cursor-spin 4s linear infinite',
+                                border: '1px dashed rgba(255,255,255,0.28)',
+                                animation: prefersReducedMotion ? undefined : 'cursor-spin 5s linear infinite',
                                 pointerEvents: 'none',
                             }}
                             initial={{ opacity: 0 }}
@@ -338,23 +360,40 @@ export const CustomCursor: React.FC = () => {
                         />
                     )}
 
-                    {/* Sci-Fi Double Arc for Project */}
+                    {/* Dual-channel oscilloscope capture ring for Project hover */}
                     {state === 'project' && (
-                        <motion.div
-                            style={{
-                                position: 'absolute',
-                                inset: -8,
-                                borderRadius: '50%',
-                                border: '2px solid transparent',
-                                borderTopColor: 'rgba(0,242,255,0.9)',
-                                borderBottomColor: 'rgba(0,242,255,0.9)',
-                                animation: 'cursor-spin 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite',
-                                pointerEvents: 'none',
-                            }}
-                            initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
-                            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                            exit={{ opacity: 0, scale: 0.5, rotate: 90 }}
-                        />
+                        <>
+                            <motion.div
+                                style={{
+                                    position: 'absolute',
+                                    inset: -7,
+                                    borderRadius: '50%',
+                                    border: '1.5px solid transparent',
+                                    borderTopColor: 'rgba(0,242,255,0.9)',
+                                    borderBottomColor: 'rgba(0,242,255,0.9)',
+                                    animation: prefersReducedMotion ? undefined : 'cursor-spin 2.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite',
+                                    pointerEvents: 'none',
+                                }}
+                                initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
+                                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                                exit={{ opacity: 0, scale: 0.5, rotate: 90 }}
+                            />
+                            <motion.div
+                                style={{
+                                    position: 'absolute',
+                                    inset: -11,
+                                    borderRadius: '50%',
+                                    border: '1px solid transparent',
+                                    borderLeftColor: 'rgba(255,174,0,0.55)',
+                                    borderRightColor: 'rgba(255,174,0,0.55)',
+                                    animation: prefersReducedMotion ? undefined : 'spin-reverse 3.5s linear infinite',
+                                    pointerEvents: 'none',
+                                }}
+                                initial={{ opacity: 0, scale: 0.6 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.6 }}
+                            />
+                        </>
                     )}
                 </motion.div>
             </motion.div>
@@ -362,20 +401,36 @@ export const CustomCursor: React.FC = () => {
     );
 };
 
-// ── Tick mark helper ─────────────────────────────────────────────────────────
-function tick(pos: 'tl' | 'tr' | 'bl' | 'br'): React.CSSProperties {
+// ── Corner bracket helper ────────────────────────────────────────────────────
+function cornerTick(pos: 'tl' | 'tr' | 'bl' | 'br'): React.CSSProperties {
     const base: React.CSSProperties = {
         position: 'absolute',
         width: 5,
         height: 5,
-        borderColor: 'rgba(0,242,255,0.7)',
+        borderColor: 'rgba(0, 242, 255, 0.68)',
         borderStyle: 'solid',
     };
-    const corners: Record<string, React.CSSProperties> = {
-        tl: { top: 2, left: 2, borderWidth: '1.5px 0 0 1.5px' },
-        tr: { top: 2, right: 2, borderWidth: '1.5px 1.5px 0 0' },
-        bl: { bottom: 2, left: 2, borderWidth: '0 0 1.5px 1.5px' },
-        br: { bottom: 2, right: 2, borderWidth: '0 1.5px 1.5px 0' },
+    const corners: Record<'tl' | 'tr' | 'bl' | 'br', React.CSSProperties> = {
+        tl: { top: 2, left: 2, borderWidth: '1.25px 0 0 1.25px' },
+        tr: { top: 2, right: 2, borderWidth: '1.25px 1.25px 0 0' },
+        bl: { bottom: 2, left: 2, borderWidth: '0 0 1.25px 1.25px' },
+        br: { bottom: 2, right: 2, borderWidth: '0 1.25px 1.25px 0' },
     };
     return { ...base, ...corners[pos] };
+}
+
+// ── Cardinal oscilloscope crosshair tick helper ──────────────────────────────
+function cardinalTick(dir: 'n' | 's' | 'e' | 'w', active: boolean): React.CSSProperties {
+    const color = active ? 'rgba(255, 174, 0, 0.85)' : 'rgba(0, 242, 255, 0.55)';
+    const positions: Record<'n' | 's' | 'e' | 'w', React.CSSProperties> = {
+        n: { top: -4, left: '50%', width: 1, height: 5, marginLeft: -0.5, backgroundColor: color },
+        s: { bottom: -4, left: '50%', width: 1, height: 5, marginLeft: -0.5, backgroundColor: color },
+        e: { right: -4, top: '50%', width: 5, height: 1, marginTop: -0.5, backgroundColor: color },
+        w: { left: -4, top: '50%', width: 5, height: 1, marginTop: -0.5, backgroundColor: color },
+    };
+    return {
+        position: 'absolute',
+        pointerEvents: 'none',
+        ...positions[dir],
+    };
 }
