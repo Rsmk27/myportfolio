@@ -143,7 +143,7 @@ const SkillChip: React.FC<{ label: string; badgeClass: string; delay: number; is
             transition={{ duration: 0.25, delay }}
             className={`inline-flex items-center px-3 py-1.5 rounded-lg border text-[11px] md:text-xs font-mono
       tracking-wide cursor-default transition-all duration-200 select-none gap-1.5
-      ${isPowered ? badgeClass : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'}`}
+      ${isPowered ? badgeClass : 'bg-zinc-900/60 text-zinc-300 border-zinc-700 hover:bg-zinc-800'}`}
         >
             {logoUrl && (
                 <img src={logoUrl} alt={label} className="w-4 h-4 object-contain inline-block shrink-0" />
@@ -174,7 +174,7 @@ const CategoryCard: React.FC<{
             className={`relative rounded-2xl border overflow-hidden cursor-pointer group transition-all duration-400 flex flex-col justify-between h-full ${className}
         ${isPowered
                     ? `bg-black/50 backdrop-blur-sm ${isActive ? `border-[${cat.accent}]/40 ${cat.glowClass}` : 'border-gray-800 hover:border-gray-600'}`
-                    : `bg-white border-gray-200 hover:border-gray-400 ${isActive ? 'shadow-md' : ''}`
+                    : `bg-zinc-950/60 border-zinc-800 hover:border-zinc-700 ${isActive ? 'shadow-md' : ''}`
                 }`}
             style={isPowered && isActive ? { borderColor: `${cat.accent}50` } : {}}
         >
@@ -195,24 +195,24 @@ const CategoryCard: React.FC<{
             )}
 
             {/* Header */}
-            <div className={`relative px-5 pt-5 pb-4 border-b ${isPowered ? 'border-gray-800/70' : 'border-gray-100'}`}>
+            <div className={`relative px-5 pt-5 pb-4 border-b ${isPowered ? 'border-gray-800/70' : 'border-zinc-800/60'}`}>
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
                         <div
                             className={`p-2 rounded-xl border transition-all duration-300
                 ${isPowered
                                     ? `border-[${cat.accent}]/20 bg-[${cat.accent}]/10`
-                                    : 'border-gray-200 bg-gray-50'
+                                    : 'border-zinc-800 bg-zinc-900'
                                 }`}
                             style={isPowered ? { borderColor: `${cat.accent}30`, background: `${cat.accent}12` } : {}}
                         >
-                            <Icon size={16} style={{ color: isPowered ? cat.accent : '#374151' }} />
+                            <Icon size={16} style={{ color: isPowered ? cat.accent : '#a1a1aa' }} />
                         </div>
                         <div>
-                            <p className={`text-[11px] uppercase tracking-[0.2em] mb-0.5 font-mono ${isPowered ? 'text-gray-400' : 'text-gray-500'}`}>
+                            <p className={`text-[11px] uppercase tracking-[0.2em] mb-0.5 font-mono ${isPowered ? 'text-gray-400' : 'text-zinc-400'}`}>
                                 {cat.label}
                             </p>
-                            <h4 className={`text-base font-bold tracking-tight leading-tight ${isPowered ? 'text-gray-100' : 'text-gray-800'}`}>
+                            <h4 className={`text-base font-bold tracking-tight leading-tight ${isPowered ? 'text-gray-100' : 'text-zinc-300'}`}>
                                 {cat.title}
                             </h4>
                         </div>
@@ -243,7 +243,7 @@ const CategoryCard: React.FC<{
                     ))}
                 </div>
                 {cat.note && (
-                    <p className={`mt-3 text-xs font-mono tracking-wide italic ${isPowered ? 'text-gray-400' : 'text-gray-500'}`}>
+                    <p className={`mt-3 text-xs font-mono tracking-wide italic ${isPowered ? 'text-gray-400' : 'text-zinc-400'}`}>
                         ※ {cat.note}
                     </p>
                 )}
@@ -273,12 +273,12 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
             {/* Section heading */}
             <div className="relative mb-14 text-center">
                 <h2
-                    className={`text-4xl md:text-5xl font-black uppercase tracking-tight mb-4 ${isPowered ? 'text-white' : 'text-gray-900'}`}
+                    className={`text-4xl md:text-5xl font-black uppercase tracking-tight mb-4 ${isPowered ? 'text-white' : 'text-zinc-300'}`}
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
                     Skills Engine
                 </h2>
-                <p className={`text-sm md:text-base font-mono max-w-xl mx-auto ${isPowered ? 'text-gray-300' : 'text-gray-600'}`}>
+                <p className={`text-sm md:text-base font-mono max-w-xl mx-auto ${isPowered ? 'text-gray-300' : 'text-zinc-400'}`}>
                     Domain expertise across hardware, firmware, power systems, software &amp; industrial protocols.
                 </p>
             </div>
@@ -315,12 +315,12 @@ export const SkillBreadboard: React.FC<SkillBreadboardProps> = ({ isPowered }) =
                                     ? ''
                                     : isPowered
                                         ? 'border-gray-700/60 text-gray-500 hover:border-gray-500 hover:text-gray-300'
-                                        : 'border-gray-300 text-gray-500 hover:border-gray-400'
+                                        : 'border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300'
                                 }`}
                             style={isActive && isPowered
                                 ? { borderColor: `${cat.accent}60`, color: cat.accent, background: `${cat.accent}12` }
                                 : isActive
-                                    ? { borderColor: '#374151', color: '#111827', background: '#f3f4f6' }
+                                    ? { borderColor: '#52525b', color: '#d4d4d8', background: '#27272a' }
                                     : {}
                             }
                             aria-label={`Filter to ${cat.title}`}

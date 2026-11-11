@@ -91,8 +91,11 @@ export const CERTS: Certification[] = [
         year: "2023",
         category: "Embedded & IoT",
         icon: Code,
-        image: '/assets/certifications/CertificateOfCompletion_C Programming for Embedded Applications.pdf',
-        gallery: ['/assets/certifications/CertificateOfCompletion_C Programming for Embedded Applications.pdf'],
+        image: '/assets/certifications/CertificateOfCompletion_C Programming for Embedded Applications.png',
+        gallery: [
+            '/assets/certifications/CertificateOfCompletion_C Programming for Embedded Applications.png',
+            '/assets/certifications/CertificateOfCompletion_C Programming for Embedded Applications.pdf'
+        ],
         credentialId: "LIL-CPE-2023-A01",
         skills: ["C Programming", "Embedded C", "Memory Management", "Pointers", "Bitwise Operations"],
         description: "Comprehensive study of C programming methodologies tailored for memory-constrained embedded architectures and microcontroller systems.",
@@ -105,8 +108,11 @@ export const CERTS: Certification[] = [
         year: "2023",
         category: "Embedded & IoT",
         icon: Cpu,
-        image: '/assets/certifications/CertificateOfCompletion_Learning Arduino Foundations.pdf',
-        gallery: ['/assets/certifications/CertificateOfCompletion_Learning Arduino Foundations.pdf'],
+        image: '/assets/certifications/CertificateOfCompletion_Learning Arduino Foundations.png',
+        gallery: [
+            '/assets/certifications/CertificateOfCompletion_Learning Arduino Foundations.png',
+            '/assets/certifications/CertificateOfCompletion_Learning Arduino Foundations.pdf'
+        ],
         credentialId: "LIL-ARD-2023-F02",
         skills: ["Arduino IDE", "Prototyping", "GPIO Control", "Analog Sensors", "Serial Communication"],
         description: "Foundational training in hardware prototyping, sensor interfacing, and code development using the Arduino ecosystem.",
@@ -119,8 +125,11 @@ export const CERTS: Certification[] = [
         year: "2023",
         category: "Embedded & IoT",
         icon: Wifi,
-        image: '/assets/certifications/CertificateOfCompletion_IoT Foundations Fundamentals.pdf',
-        gallery: ['/assets/certifications/CertificateOfCompletion_IoT Foundations Fundamentals.pdf'],
+        image: '/assets/certifications/CertificateOfCompletion_IoT Foundations Fundamentals.png',
+        gallery: [
+            '/assets/certifications/CertificateOfCompletion_IoT Foundations Fundamentals.png',
+            '/assets/certifications/CertificateOfCompletion_IoT Foundations Fundamentals.pdf'
+        ],
         credentialId: "LIL-IOT-2023-F03",
         skills: ["IoT Networks", "Cloud Integration", "Sensors", "Data Telemetry", "MQTT"],
         description: "Study of IoT architectures, sensing layers, communications protocols, and cloud-to-device telemetry pipelines.",
@@ -133,8 +142,11 @@ export const CERTS: Certification[] = [
         year: "2024",
         category: "Embedded & IoT",
         icon: Cpu,
-        image: '/assets/certifications/CertificateOfCompletion_Become a PLC Developer.pdf',
-        gallery: ['/assets/certifications/CertificateOfCompletion_Become a PLC Developer.pdf'],
+        image: '/assets/certifications/CertificateOfCompletion_Become a PLC Developer.png',
+        gallery: [
+            '/assets/certifications/CertificateOfCompletion_Become a PLC Developer.png',
+            '/assets/certifications/CertificateOfCompletion_Become a PLC Developer.pdf'
+        ],
         credentialId: "LIL-PLC-2024-D04",
         skills: ["PLC Coding", "Ladder Logic", "Industrial Automation", "HMI Systems", "SCADA"],
         description: "Learned PLC programming structures, ladder diagram modeling, industrial sensor calibration, and automation control loops.",
@@ -148,8 +160,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Internship",
         icon: Zap,
-        image: '/assets/certifications/Solar PV design certificate.pdf',
-        gallery: ['/assets/certifications/Solar PV design certificate.pdf'],
+        image: '/assets/certifications/Solar PV design certificate.png',
+        gallery: [
+            '/assets/certifications/Solar PV design certificate.png',
+            '/assets/certifications/Solar PV design certificate.pdf'
+        ],
         credentialId: "NPTEL-PV-2023-S09",
         skills: ["PV Modeling", "Solar Grid Design", "Inverters", "Energy Calculation", "Site Analysis"],
         description: "Techniques for designing solar photovoltaic power grids, specifying inverters, sizing battery arrays, and performing solar yield analysis.",
@@ -163,8 +178,11 @@ export const CERTS: Certification[] = [
         category: "AI & Software",
         type: "Professional",
         icon: Sparkles,
-        image: '/assets/certifications/Google AI.pdf',
-        gallery: ['/assets/certifications/Google AI.pdf'],
+        image: '/assets/certifications/Google AI.png',
+        gallery: [
+            '/assets/certifications/Google AI.png',
+            '/assets/certifications/Google AI.pdf'
+        ],
         isVerifiedBadge: true,
         credentialId: "GOOG-AI-2024-E10",
         skills: ["Machine Learning", "Generative AI", "AI Ethics", "Data Processing", "Prompting"],
@@ -179,8 +197,11 @@ export const CERTS: Certification[] = [
         category: "AI & Software",
         type: "Course",
         icon: Sparkles,
-        image: '/assets/certifications/CertificateOfCompletion_Career Essentials in Generative AI by Microsoft and LinkedIn.pdf',
-        gallery: ['/assets/certifications/CertificateOfCompletion_Career Essentials in Generative AI by Microsoft and LinkedIn.pdf'],
+        image: '/assets/certifications/CertificateOfCompletion_Career Essentials in Generative AI by Microsoft and LinkedIn.png',
+        gallery: [
+            '/assets/certifications/CertificateOfCompletion_Career Essentials in Generative AI by Microsoft and LinkedIn.png',
+            '/assets/certifications/CertificateOfCompletion_Career Essentials in Generative AI by Microsoft and LinkedIn.pdf'
+        ],
         credentialId: "MS-GAI-2024-C11",
         skills: ["GenAI Essentials", "Copilot", "Prompt Design", "AI Productivity", "Ethics"],
         description: "Introduction to Large Language Models, prompt crafting, Microsoft Copilot utilities, and ethical guidelines for implementing generative AI in workflows.",
@@ -194,8 +215,11 @@ export const CERTS: Certification[] = [
         category: "AI & Software",
         type: "Course",
         icon: Code,
-        image: '/assets/certifications/CertificateOfCompletion_Career Essentials in GitHub Professional Certificate.pdf',
-        gallery: ['/assets/certifications/CertificateOfCompletion_Career Essentials in GitHub Professional Certificate.pdf'],
+        image: '/assets/certifications/CertificateOfCompletion_Career Essentials in GitHub Professional Certificate.png',
+        gallery: [
+            '/assets/certifications/CertificateOfCompletion_Career Essentials in GitHub Professional Certificate.png',
+            '/assets/certifications/CertificateOfCompletion_Career Essentials in GitHub Professional Certificate.pdf'
+        ],
         credentialId: "GH-LIL-2024-P12",
         skills: ["Git Version Control", "GitHub Actions", "Pull Requests", "CI/CD", "Branching Strategies"],
         description: "Mastery of version control systems, GitHub collaborative operations, actions automation, and codebase repository hygiene.",
@@ -224,8 +248,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Zap,
-        image: '/assets/certifications/MATLAB onramp.pdf',
-        gallery: ['/assets/certifications/MATLAB onramp.pdf'],
+        image: '/assets/certifications/MATLAB onramp.png',
+        gallery: [
+            '/assets/certifications/MATLAB onramp.png',
+            '/assets/certifications/MATLAB onramp.pdf'
+        ],
         credentialId: "MATH-MAT-2023-O14",
         skills: ["MATLAB Syntax", "Matrix Math", "Data Visualization", "Numerical Analysis", "Scripting"],
         description: "Foundational scripting, mathematical computing, data visualization, and matrix manipulations in the MATLAB environment.",
@@ -239,8 +266,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Cpu,
-        image: '/assets/certifications/Simulink onramp.pdf',
-        gallery: ['/assets/certifications/Simulink onramp.pdf'],
+        image: '/assets/certifications/Simulink onramp.png',
+        gallery: [
+            '/assets/certifications/Simulink onramp.png',
+            '/assets/certifications/Simulink onramp.pdf'
+        ],
         credentialId: "MATH-SIM-2023-O15",
         skills: ["Simulink Modeling", "Dynamic Systems", "Block Diagrams", "Simulation Control", "Electrical Modeling"],
         description: "Learned physical system modeling, signal flow simulations, feedback control design, and electrical power grid simulations.",
@@ -254,8 +284,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Zap,
-        image: '/assets/certifications/BMS.pdf',
-        gallery: ['/assets/certifications/BMS.pdf'],
+        image: '/assets/certifications/BMS.png',
+        gallery: [
+            '/assets/certifications/BMS.png',
+            '/assets/certifications/BMS.pdf'
+        ],
         credentialId: "NPTEL-BMS-2023-B16",
         skills: ["BMS Architecture", "Cell Balancing", "State of Charge (SoC)", "Thermal Safety", "Battery Pack Design"],
         description: "In-depth analysis of battery management systems, cell balancing topologies, safe operating area limits, and SoC estimation methods.",
@@ -269,8 +302,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Zap,
-        image: '/assets/certifications/EV fundamentals.pdf',
-        gallery: ['/assets/certifications/EV fundamentals.pdf'],
+        image: '/assets/certifications/EV fundamentals.png',
+        gallery: [
+            '/assets/certifications/EV fundamentals.png',
+            '/assets/certifications/EV fundamentals.pdf'
+        ],
         credentialId: "LIL-EV-2023-F17",
         skills: ["EV Powertrain", "Braking Systems", "Hybrid Vehicles", "Electrical Motors", "EV Chargers"],
         description: "Overview of EV architecture, electric drive motors, regenerative braking, battery charging protocols, and hybrid configurations.",
@@ -284,8 +320,11 @@ export const CERTS: Certification[] = [
         category: "AI & Software",
         type: "Course",
         icon: Sparkles,
-        image: '/assets/certifications/Design thinking for innovators.pdf',
-        gallery: ['/assets/certifications/Design thinking for innovators.pdf'],
+        image: '/assets/certifications/Design thinking for innovators.png',
+        gallery: [
+            '/assets/certifications/Design thinking for innovators.png',
+            '/assets/certifications/Design thinking for innovators.pdf'
+        ],
         credentialId: "LIL-DT-2023-D20",
         skills: ["Design Thinking", "Problem Reframing", "Prototyping", "User Empathy", "Innovation Loops"],
         description: "Learned iterative problem solving frameworks, user empathy mapping, prototyping, and validation feedback loops.",
@@ -299,8 +338,11 @@ export const CERTS: Certification[] = [
         category: "Embedded & IoT",
         type: "Course",
         icon: Wifi,
-        image: '/assets/certifications/Introduction to IoT and Digital Transformation.pdf',
-        gallery: ['/assets/certifications/Introduction to IoT and Digital Transformation.pdf'],
+        image: '/assets/certifications/Introduction to IoT and Digital Transformation.png',
+        gallery: [
+            '/assets/certifications/Introduction to IoT and Digital Transformation.png',
+            '/assets/certifications/Introduction to IoT and Digital Transformation.pdf'
+        ],
         credentialId: "CSCO-IDT-2023-I21",
         skills: ["Digital Transformation", "Big Data", "Edge Computing", "IoT Security", "Automation"],
         description: "Learned the role of IoT in business automation, cloud orchestration, edge device configurations, and digital system integration.",
@@ -314,8 +356,11 @@ export const CERTS: Certification[] = [
         category: "Embedded & IoT",
         type: "Course",
         icon: Wifi,
-        image: '/assets/certifications/Introduction to Internet of Things.pdf',
-        gallery: ['/assets/certifications/Introduction to Internet of Things.pdf'],
+        image: '/assets/certifications/Introduction to Internet of Things.png',
+        gallery: [
+            '/assets/certifications/Introduction to Internet of Things.png',
+            '/assets/certifications/Introduction to Internet of Things.pdf'
+        ],
         credentialId: "CSCO-IOT-2023-I22",
         skills: ["IoT Networks", "Gateway Routing", "Cybersecurity", "Arduino Interfacing", "Python Telemetry"],
         description: "Introduction to IoT frameworks, microcontroller interfacing, network setups, packet transmission, and data analytics.",
@@ -329,8 +374,11 @@ export const CERTS: Certification[] = [
         category: "AI & Software",
         type: "Course",
         icon: Box,
-        image: '/assets/certifications/Getting Started with Data.pdf',
-        gallery: ['/assets/certifications/Getting Started with Data.pdf'],
+        image: '/assets/certifications/Getting Started with Data.png',
+        gallery: [
+            '/assets/certifications/Getting Started with Data.png',
+            '/assets/certifications/Getting Started with Data.pdf'
+        ],
         credentialId: "LIL-DAT-2023-G25",
         skills: ["Data Analysis", "SQL Basics", "Data Cleaning", "Analytics Dashboards"],
         description: "Learned basic data modeling, structured query language, cleaning data, and generating reporting charts.",
@@ -365,8 +413,11 @@ export const CERTS: Certification[] = [
         category: "Embedded & IoT",
         type: "Internship",
         icon: Cpu,
-        image: '/assets/certifications/Datavalley  Embedded system intership.pdf',
-        gallery: ['/assets/certifications/Datavalley  Embedded system intership.pdf'],
+        image: '/assets/certifications/Datavalley  Embedded system intership.png',
+        gallery: [
+            '/assets/certifications/Datavalley  Embedded system intership.png',
+            '/assets/certifications/Datavalley  Embedded system intership.pdf'
+        ],
         isVerifiedBadge: true,
         credentialId: "DV-86d2fed3",
         skills: ["Embedded Systems", "C Programming", "Microcontrollers", "Firmware Development", "APSCHE"],
@@ -381,8 +432,11 @@ export const CERTS: Certification[] = [
         category: "Robotics & Hardware",
         type: "Course",
         icon: Cpu,
-        image: '/assets/certifications/Basics of Robotics.pdf',
-        gallery: ['/assets/certifications/Basics of Robotics.pdf'],
+        image: '/assets/certifications/Basics of Robotics.png',
+        gallery: [
+            '/assets/certifications/Basics of Robotics.png',
+            '/assets/certifications/Basics of Robotics.pdf'
+        ],
         credentialId: "45YNRZT5FH95",
         skills: ["Robotics Fundamentals", "Kinematics", "Robot Programming", "Industrial Automation", "Siemens Software"],
         description: "Foundational course authorized by Siemens covering robotic structures, coordinate systems, kinematic designs, and robotic automation systems.",
@@ -396,8 +450,11 @@ export const CERTS: Certification[] = [
         category: "Robotics & Hardware",
         type: "Course",
         icon: Cpu,
-        image: '/assets/certifications/AI for Autonomous Vehicles and Robotics.pdf',
-        gallery: ['/assets/certifications/AI for Autonomous Vehicles and Robotics.pdf'],
+        image: '/assets/certifications/AI for Autonomous Vehicles and Robotics.png',
+        gallery: [
+            '/assets/certifications/AI for Autonomous Vehicles and Robotics.png',
+            '/assets/certifications/AI for Autonomous Vehicles and Robotics.pdf'
+        ],
         credentialId: "NCG7UCSW2CEO",
         skills: ["Autonomous Vehicles", "Computer Vision", "Sensor Fusion", "Robotics AI", "Path Planning"],
         description: "Specialized course authorized by the University of Michigan covering AI algorithms, perception, localization, and decision-making for self-driving vehicles and robotic agents.",
@@ -411,8 +468,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Zap,
-        image: '/assets/certifications/Powering the Future with Electrification.pdf',
-        gallery: ['/assets/certifications/Powering the Future with Electrification.pdf'],
+        image: '/assets/certifications/Powering the Future with Electrification.png',
+        gallery: [
+            '/assets/certifications/Powering the Future with Electrification.png',
+            '/assets/certifications/Powering the Future with Electrification.pdf'
+        ],
         credentialId: "SP7WDPFIC9EB",
         skills: ["Electrification", "Electric Vehicles", "Power Electronics", "Battery Systems", "MATLAB", "Simulink"],
         description: "Authorized by MathWorks, exploring electrification technologies, battery systems, power conversion, motor drives, and electrification grid modeling.",
@@ -426,8 +486,11 @@ export const CERTS: Certification[] = [
         category: "Embedded & IoT",
         type: "Course",
         icon: Cpu,
-        image: '/assets/certifications/Interfacing with the Arduino.pdf',
-        gallery: ['/assets/certifications/Interfacing with the Arduino.pdf'],
+        image: '/assets/certifications/Interfacing with the Arduino.png',
+        gallery: [
+            '/assets/certifications/Interfacing with the Arduino.png',
+            '/assets/certifications/Interfacing with the Arduino.pdf'
+        ],
         credentialId: "BKTUOFUAW359",
         skills: ["Arduino", "Sensors Interfacing", "Actuators", "Hardware Prototyping", "C/C++ Programming"],
         description: "Authorized by University of California, Irvine, focusing on connecting sensors and actuators, signal conditioning, shield design, and software integration.",
@@ -441,8 +504,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Cpu,
-        image: '/assets/certifications/Modeling and Simulation with Simulink.pdf',
-        gallery: ['/assets/certifications/Modeling and Simulation with Simulink.pdf'],
+        image: '/assets/certifications/Modeling and Simulation with Simulink.png',
+        gallery: [
+            '/assets/certifications/Modeling and Simulation with Simulink.png',
+            '/assets/certifications/Modeling and Simulation with Simulink.pdf'
+        ],
         credentialId: "2UBTY4UL2XJ3",
         skills: ["Simulink", "System Modeling", "Dynamic Simulation", "Control Systems", "MATLAB"],
         description: "Authorized by MathWorks, covering dynamic system design, block-diagram modeling, system simulation, and feedback control verification.",
@@ -456,8 +522,11 @@ export const CERTS: Certification[] = [
         category: "Embedded & IoT",
         type: "Professional",
         icon: Cpu,
-        image: '/assets/certifications/PLC, HMI.pdf',
-        gallery: ['/assets/certifications/PLC, HMI.pdf'],
+        image: '/assets/certifications/PLC, HMI.png',
+        gallery: [
+            '/assets/certifications/PLC, HMI.png',
+            '/assets/certifications/PLC, HMI.pdf'
+        ],
         credentialId: "LWCPAV54265H",
         skills: ["Siemens PLC", "TIA Portal", "HMI Design", "SCADA", "Ladder Logic", "Industrial Automation"],
         description: "Comprehensive 3-course specialization covering Siemens PLC wiring, TIA Portal programming, HMI interface layouts, SCADA systems, and industrial control loops.",
@@ -471,8 +540,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Cpu,
-        image: '/assets/certifications/Designing and Simulating Physical Models.pdf',
-        gallery: ['/assets/certifications/Designing and Simulating Physical Models.pdf'],
+        image: '/assets/certifications/Designing and Simulating Physical Models.png',
+        gallery: [
+            '/assets/certifications/Designing and Simulating Physical Models.png',
+            '/assets/certifications/Designing and Simulating Physical Models.pdf'
+        ],
         credentialId: "EFF3H17UVJM4",
         skills: ["Physical Modeling", "Simscape", "Simulink Simulation", "Multidomain Systems", "MATLAB"],
         description: "Authorized by MathWorks, covering physical model designs, multidomain fluid/thermal/mechanical simulations, and dynamic Simscape modeling.",
@@ -486,8 +558,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Zap,
-        image: '/assets/certifications/Battery Design and Management.pdf',
-        gallery: ['/assets/certifications/Battery Design and Management.pdf'],
+        image: '/assets/certifications/Battery Design and Management.png',
+        gallery: [
+            '/assets/certifications/Battery Design and Management.png',
+            '/assets/certifications/Battery Design and Management.pdf'
+        ],
         credentialId: "FZF15DP9FSHQ",
         skills: ["Battery Design", "BMS", "Battery Modeling", "Thermal Management", "State of Charge", "Simulink"],
         description: "Authorized by MathWorks, covering battery cell characterization, state estimation, thermal modeling, battery pack design, and BMS simulation.",
@@ -501,8 +576,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Fan,
-        image: '/assets/certifications/Electric Motor Modeling and Control.pdf',
-        gallery: ['/assets/certifications/Electric Motor Modeling and Control.pdf'],
+        image: '/assets/certifications/Electric Motor Modeling and Control.png',
+        gallery: [
+            '/assets/certifications/Electric Motor Modeling and Control.png',
+            '/assets/certifications/Electric Motor Modeling and Control.pdf'
+        ],
         credentialId: "58JN1U27RASY",
         skills: ["Motor Control", "Electric Motors", "Field-Oriented Control", "MATLAB", "Simulink", "Parameter Estimation"],
         description: "Authorized by MathWorks, covering electric motor modeling, parameter estimation, speed and torque control design, and simulation of motor drives.",
@@ -516,8 +594,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Course",
         icon: Zap,
-        image: '/assets/certifications/Power Conversion for Electronic Devices.pdf',
-        gallery: ['/assets/certifications/Power Conversion for Electronic Devices.pdf'],
+        image: '/assets/certifications/Power Conversion for Electronic Devices.png',
+        gallery: [
+            '/assets/certifications/Power Conversion for Electronic Devices.png',
+            '/assets/certifications/Power Conversion for Electronic Devices.pdf'
+        ],
         credentialId: "RODEPZ0BL7HN",
         skills: ["Power Conversion", "DC-DC Converters", "Power Electronics", "Feedback Control", "MATLAB", "Simulink"],
         description: "Authorized by MathWorks, covering power electronic converter design, DC-DC converter modeling, feedback control loop design, and switching simulation.",
@@ -531,8 +612,11 @@ export const CERTS: Certification[] = [
         category: "Power & Electrical",
         type: "Professional",
         icon: Award,
-        image: '/assets/certifications/Electrified Systems Design Engineer.pdf',
-        gallery: ['/assets/certifications/Electrified Systems Design Engineer.pdf'],
+        image: '/assets/certifications/Electrified Systems Design Engineer.png',
+        gallery: [
+            '/assets/certifications/Electrified Systems Design Engineer.png',
+            '/assets/certifications/Electrified Systems Design Engineer.pdf'
+        ],
         isVerifiedBadge: true,
         credentialId: "ECURKPFR1H2Z",
         skills: ["System Modeling", "Simulink", "Power Electronics", "Electric Motors", "Battery Systems", "MATLAB", "Simscape"],
@@ -547,8 +631,11 @@ export const CERTS: Certification[] = [
         category: "AI & Software",
         type: "Course",
         icon: Sparkles,
-        image: '/assets/certifications/AIFundamentalsFoundationsforUnderstandingAI.pdf',
-        gallery: ['/assets/certifications/AIFundamentalsFoundationsforUnderstandingAI.pdf'],
+        image: '/assets/certifications/AIFundamentalsFoundationsforUnderstandingAI.png',
+        gallery: [
+            '/assets/certifications/AIFundamentalsFoundationsforUnderstandingAI.png',
+            '/assets/certifications/AIFundamentalsFoundationsforUnderstandingAI.pdf'
+        ],
         isVerifiedBadge: true,
         credentialId: "IBM-AIF-2026",
         skills: ["AI Fundamentals", "Artificial Intelligence", "Machine Learning", "AI Ethics", "Generative AI"],
@@ -563,8 +650,11 @@ export const CERTS: Certification[] = [
         category: "AI & Software",
         type: "Professional",
         icon: Code,
-        image: '/assets/certifications/GitHub Foundations.pdf',
-        gallery: ['/assets/certifications/GitHub Foundations.pdf'],
+        image: '/assets/certifications/GitHub Foundations.png',
+        gallery: [
+            '/assets/certifications/GitHub Foundations.png',
+            '/assets/certifications/GitHub Foundations.pdf'
+        ],
         isVerifiedBadge: true,
         credentialId: "B2C10F1061A881DD",
         skills: ["Git", "GitHub", "GitHub Actions", "Version Control", "Repository Management", "CI/CD & Workflows"],
@@ -579,8 +669,11 @@ export const CERTS: Certification[] = [
         category: "Embedded & IoT",
         type: "Course",
         icon: Cpu,
-        image: '/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.pdf',
-        gallery: ['/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.pdf'],
+        image: '/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.png',
+        gallery: [
+            '/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.png',
+            '/assets/certifications/Certificate_quickSTEP_Basics_of_PLCs.pdf'
+        ],
         isVerifiedBadge: true,
         credentialId: "SIEMENS-SITRAIN-PLC-2026",
         skills: ["Siemens PLC", "Programmable Logic Controllers", "Ladder Logic", "Industrial Automation", "SITRAIN", "I/O Modules", "Control Systems"],
@@ -678,17 +771,19 @@ const CredentialRow: React.FC<CredentialRowProps> = ({
                 <div className="flex items-center gap-1.5">
                     <button
                         onClick={() => scroll('left')}
-                        className="p-1 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
+                        className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
                         title="Scroll Left"
+                        aria-label="Scroll credentials left"
                     >
-                        <ChevronLeft size={15} />
+                        <ChevronLeft size={16} />
                     </button>
                     <button
                         onClick={() => scroll('right')}
-                        className="p-1 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
+                        className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
                         title="Scroll Right"
+                        aria-label="Scroll credentials right"
                     >
-                        <ChevronRight size={15} />
+                        <ChevronRight size={16} />
                     </button>
                 </div>
             </div>
@@ -852,7 +947,16 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
 
     return (
         <div
-            className="group h-full transition-transform duration-300 hover:-translate-y-1.5"
+            className="group h-full transition-transform duration-300 hover:-translate-y-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded-xl"
+            tabIndex={0}
+            role="button"
+            aria-label={`View credential details for ${cert.title}`}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onClick();
+                }
+            }}
             onClick={onClick}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
@@ -868,13 +972,12 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                 glareOpacity={isPowered ? 0.12 : 0.05}
                 glareSize={200}
                 className={`relative p-4 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between cursor-pointer border min-h-[290px]
-                    ${isPowered && cert.isVerifiedBadge ? 'shadow-[0_0_15px_rgba(6,182,212,0.03)] border-cyan-500/25' : ''}
-                    ${!isPowered ? 'opacity-40 cursor-not-allowed pointer-events-none' : ''}`}
+                    ${isPowered && cert.isVerifiedBadge ? 'shadow-[0_0_15px_rgba(6,182,212,0.03)] border-cyan-500/25' : ''}`}
             >
                 {/* Translucent Watermark Year */}
                 <div
-                    className="absolute right-3 bottom-1 text-7xl font-black font-mono select-none tracking-tighter pointer-events-none opacity-[0.02] transition-all duration-500 group-hover:scale-105 group-hover:opacity-[0.05]"
-                    style={{ color: isPowered ? '#ffffff' : '#444444' }}
+                    className="absolute right-3 bottom-1 text-7xl font-black font-mono select-none tracking-tighter opacity-[0.02] transition-all duration-500 group-hover:scale-105 group-hover:opacity-[0.05]"
+                    style={{ color: isPowered ? '#ffffff' : '#444444', pointerEvents: 'none' }}
                 >
                     {cert.year}
                 </div>
@@ -929,7 +1032,7 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                                         className={`p-1.5 rounded-lg border transition-all duration-300
                                             ${isPowered
                                                 ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.08)]'
-                                                : 'bg-zinc-900 border-zinc-800 text-zinc-600'
+                                                : 'bg-zinc-900 border-zinc-800 text-zinc-400'
                                             }`}
                                     >
                                         <cert.icon size={16} strokeWidth={1.5} />
@@ -946,7 +1049,7 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                                 <div className={`flex items-center gap-1 text-[11px] font-mono font-medium px-2 py-0.5 rounded border
                                     ${isPowered
                                         ? 'bg-zinc-950/60 border-zinc-800 text-zinc-400'
-                                        : 'bg-zinc-100 border-zinc-300 text-zinc-700'
+                                        : 'bg-zinc-900 border-zinc-800 text-zinc-400'
                                     }`}
                                 >
                                     <Award size={12} strokeWidth={2} className="text-zinc-400" />
@@ -960,15 +1063,15 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                             <span className={`text-[11px] font-mono font-bold px-2 py-0.5 border rounded uppercase mb-1 inline-block
                                 ${isPowered
                                     ? 'text-amber-400 border-amber-500/30 bg-amber-950/20'
-                                    : 'text-zinc-700 border-zinc-300 bg-zinc-100'
+                                    : 'text-amber-400/90 border-amber-500/30 bg-amber-950/20'
                                 }`}
                             >
                                 {cert.category || 'Engineering'}
                             </span>
-                            <h4 className={`text-sm md:text-base font-bold tracking-tight leading-snug mb-0.5 line-clamp-2 ${isPowered ? 'text-white' : 'text-zinc-900'}`}>
+                            <h4 className={`text-sm md:text-base font-bold tracking-tight leading-snug mb-0.5 line-clamp-2 ${isPowered ? 'text-white' : 'text-zinc-300'}`}>
                                 {cert.title}
                             </h4>
-                            <p className={`text-xs font-mono uppercase tracking-wider ${isPowered ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                            <p className="text-xs font-mono uppercase tracking-wider text-zinc-400">
                                 {cert.issuer}
                             </p>
                         </div>
@@ -998,7 +1101,7 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
                             className={`flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 mt-2.5 relative z-10
                                 ${isPowered
                                     ? 'text-cyan-400 group-hover:text-cyan-300 group-hover:translate-x-1'
-                                    : 'text-zinc-700'
+                                    : 'text-cyan-400/90'
                                 }`}
                         >
                             <span>View Credential</span>
@@ -1013,15 +1116,45 @@ const CertificateCard: React.FC<{ cert: Certification; idx: number; isPowered: b
 
 const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPowered: boolean }> = ({ cert, onClose, isPowered }) => {
     const [activeImageIndex, setActiveImageIndex] = useState(0);
+    const modalRef = useRef<HTMLDivElement>(null);
 
     // Reset when cert changes
     useEffect(() => {
         setActiveImageIndex(0);
     }, [cert]);
 
-    // Close on Escape key
+    // Lock body scroll on mount, restore on unmount
     useEffect(() => {
-        const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, []);
+
+    // Close on Escape key & cycle focus (Tab containment)
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose();
+            if (e.key === 'Tab' && modalRef.current) {
+                const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+                    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+                );
+                if (focusableElements.length === 0) return;
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            }
+        };
         window.addEventListener('keydown', handler);
         return () => window.removeEventListener('keydown', handler);
     }, [onClose]);
@@ -1040,6 +1173,10 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
             onClick={onClose}
         >
             <motion.div
+                ref={modalRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label={cert.title}
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
@@ -1048,12 +1185,11 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                 className={`relative w-full max-w-6xl rounded-2xl border shadow-2xl flex flex-col
                     overflow-y-auto max-h-[95vh]
                     md:overflow-hidden md:h-[min(95vh,900px)]
-                    ${isPowered ? 'bg-[#09090b] border-zinc-800' : 'bg-white border-gray-200'}
+                    ${isPowered ? 'bg-[#09090b] border-zinc-800' : 'bg-[#09090b] border-zinc-800'}
                 `}
             >
                 {/* ── Header bar ── */}
-                <div className={`flex-shrink-0 flex items-center justify-between gap-3 px-4 py-3 border-b
-                    ${isPowered ? 'border-zinc-800 bg-zinc-950/80' : 'border-gray-100 bg-gray-50'}`}
+                <div className="flex-shrink-0 flex items-center justify-between gap-3 px-4 py-3 border-b border-zinc-800 bg-zinc-950/80"
                 >
                     <div className="flex items-center gap-3 min-w-0">
                         {modalIssuerLogos.length > 0 && (
@@ -1069,10 +1205,10 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                             </div>
                         )}
                         <div className="min-w-0">
-                            <h3 className={`text-sm md:text-base font-black tracking-tight truncate ${isPowered ? 'text-white' : 'text-gray-900'}`}>
+                            <h3 className={`text-sm md:text-base font-black tracking-tight truncate ${isPowered ? 'text-white' : 'text-zinc-200'}`}>
                                 {cert.title}
                             </h3>
-                            <p className={`text-[11px] font-mono uppercase tracking-widest truncate ${isPowered ? 'text-cyan-400' : 'text-blue-600'}`}>
+                            <p className="text-[11px] font-mono uppercase tracking-widest truncate text-cyan-400">
                                 {cert.issuer} · {cert.year}
                                 {cert.credentialId && <span className="ml-2 opacity-60">#{cert.credentialId}</span>}
                             </p>
@@ -1080,9 +1216,9 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                     </div>
                     
                     <div className="flex items-center gap-2 flex-shrink-0">
-                        {mainSrc && mainSrc.endsWith('.pdf') && (
+                        {(cert.gallery?.some(s => s.endsWith('.pdf')) || (mainSrc && mainSrc.endsWith('.pdf'))) && (
                             <a
-                                href={mainSrc}
+                                href={mainSrc && mainSrc.endsWith('.pdf') ? mainSrc : (cert.gallery?.find(s => s.endsWith('.pdf')) || mainSrc)}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/40 bg-cyan-950/40 text-cyan-300 hover:bg-cyan-500 hover:text-black text-xs font-mono font-bold transition-all shadow-[0_0_8px_rgba(0,242,255,0.15)]"
@@ -1094,8 +1230,8 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                         )}
                         <button
                             onClick={onClose}
-                            className={`flex-shrink-0 p-2 rounded-full transition-colors cursor-pointer
-                                ${isPowered ? 'hover:bg-zinc-800 text-zinc-400 hover:text-cyan-400' : 'hover:bg-gray-100 text-gray-500'}`}
+                            className={`flex-shrink-0 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors cursor-pointer
+                                ${isPowered ? 'hover:bg-zinc-800 text-zinc-400 hover:text-cyan-400' : 'hover:bg-zinc-800 text-zinc-400 hover:text-cyan-400'}`}
                             aria-label="Close"
                         >
                             <X size={20} />
@@ -1106,10 +1242,7 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                 {/* ── Main certificate display ── */}
                 {/* Mobile: content height, capped so it doesn't overflow */}
                 {/* Desktop: flex-1 fills all remaining space */}
-                <div className={`flex items-center justify-center overflow-hidden
-                    ${isPowered ? 'bg-black' : 'bg-gray-100'}
-                    md:flex-1 md:min-h-0
-                `}
+                <div className="flex items-center justify-center overflow-hidden bg-black md:flex-1 md:min-h-0"
                 >
                     {mainSrc ? (
                         mainSrc.endsWith('.mp4') ? (
@@ -1152,8 +1285,7 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
 
                 {/* ── Thumbnail strip — only shown when multiple gallery items ── */}
                 {hasMultiple && (
-                    <div className={`flex-shrink-0 flex gap-2 px-4 py-2.5 border-t overflow-x-auto
-                        ${isPowered ? 'border-zinc-800 bg-zinc-950/80' : 'border-gray-100 bg-gray-50'}`}
+                    <div className="flex-shrink-0 flex gap-2 px-4 py-2.5 border-t overflow-x-auto border-zinc-800 bg-zinc-950/80"
                     >
                         {cert.gallery!.map((src, i) => (
                             <button
@@ -1164,7 +1296,7 @@ const GalleryModal: React.FC<{ cert: Certification; onClose: () => void; isPower
                                         ? 'border-cyan-500 scale-105 opacity-100 shadow-[0_0_8px_rgba(6,182,212,0.3)]'
                                         : isPowered
                                             ? 'border-zinc-800 opacity-50 hover:opacity-80 hover:border-zinc-600'
-                                            : 'border-gray-300 opacity-60 hover:opacity-100'
+                                            : 'border-zinc-700 opacity-60 hover:opacity-100'
                                     }`}
                             >
                                 {src.endsWith('.mp4') ? (

@@ -183,12 +183,43 @@ const VideoThumbnail: React.FC<{ video: YouTubeVideo; compact?: boolean }> = ({ 
 const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }> = ({ project, onClose }) => {
   const [activeVideoIdx, setActiveVideoIdx] = useState(0);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const modalBoxRef = useRef<HTMLDivElement>(null);
 
   // Lock body scroll
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
   }, []);
+
+  // Escape key handler & focus trap
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+      if (e.key === 'Tab' && modalBoxRef.current) {
+        const focusableElements = modalBoxRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
 
   const handleOverlayClick = useCallback((e: React.MouseEvent) => {
     if (e.target === overlayRef.current) onClose();
@@ -206,6 +237,10 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
       onClick={handleOverlayClick}
     >
       <motion.div
+        ref={modalBoxRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={project.title}
         className="relative w-full max-w-4xl bg-[#0d0d0b] border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl"
         initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }}
         transition={{ duration: 0.25, ease: 'easeOut' }}
@@ -219,7 +254,7 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
                 <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[project.status]}`} />
                 {project.status}
               </span>
-              <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-zinc-800">
+              <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-zinc-800">
                 {project.category}
               </span>
             </div>
@@ -228,7 +263,8 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
           </div>
           <button
             onClick={onClose}
-            className="shrink-0 p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+            aria-label="Close project modal"
+            className="shrink-0 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
           >
             <X size={18} />
           </button>
@@ -443,7 +479,17 @@ const ProjectCard: React.FC<{ project: IndustrialProject; onClick: () => void }>
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.22 }}
-      className="group rounded-2xl border border-zinc-800 hover:border-zinc-700 bg-zinc-950/80 backdrop-blur-sm flex flex-col overflow-hidden transition-all hover:shadow-[0_4px_24px_rgba(0,0,0,0.5)] cursor-pointer"
+      tabIndex={0}
+      role="button"
+      aria-label={`View project details for ${project.title}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick();
+          trackInteraction('open_project', 'industrial', project.title);
+        }
+      }}
+      className="group rounded-2xl border border-zinc-800 hover:border-zinc-700 bg-zinc-950/80 backdrop-blur-sm flex flex-col overflow-hidden transition-all hover:shadow-[0_4px_24px_rgba(0,0,0,0.5)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
       onClick={() => { onClick(); trackInteraction('open_project', 'industrial', project.title); }}
     >
       {/* Thumbnail / video preview */}
@@ -505,8 +551,16 @@ const ProjectCard: React.FC<{ project: IndustrialProject; onClick: () => void }>
 
         {/* Footer */}
         <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between">
-          <button className="text-xs font-mono text-zinc-400 hover:text-cyan-300 uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors cursor-pointer">
-            <BookOpen size={12} /> View Details
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onClick();
+            }}
+            aria-label={`View Project: ${project.title}`}
+            className="text-xs font-mono text-zinc-400 hover:text-cyan-300 uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+          >
+            <BookOpen size={12} /> View Project
           </button>
           {primaryVideo && (
             <a
@@ -578,7 +632,10 @@ const IndustrialPortfolio: React.FC = () => {
 
   // Scroll-to-section helper
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const el = document.getElementById(id);
+    if (el && typeof el.scrollIntoView === 'function') {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
@@ -656,7 +713,7 @@ const IndustrialPortfolio: React.FC = () => {
           {/* Quick nav CTAs */}
           <div className="flex flex-wrap gap-3 mb-10">
             {[
-              { label: 'Explore Projects', id: SECTION.projects, icon: <Workflow size={13} /> },
+              { label: 'Featured Systems', id: SECTION.projects, icon: <Workflow size={13} /> },
               { label: 'Engineering Toolkit', id: SECTION.toolkit, icon: <Wrench size={13} /> },
               { label: 'Automation Roadmap', id: SECTION.roadmap, icon: <Activity size={13} /> },
               { label: 'Protocols', id: SECTION.protocols, icon: <Network size={13} /> },

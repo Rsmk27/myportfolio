@@ -313,7 +313,7 @@ const automationRoute = {
 const routes = [
   { dir: 'gallery', config: galleryRoute },
   { dir: 'automation', config: automationRoute },
-  { dir: 'videos', config: { ...automationRoute, url: 'https://rsmk.tech/videos' } }
+  { dir: 'videos', config: { ...automationRoute, url: 'https://rsmk.tech/automation' } }
 ];
 
 routes.forEach(({ dir, config }) => {

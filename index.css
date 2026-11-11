@@ -169,7 +169,7 @@ pre,
 #experience,
 #contact {
     content-visibility: auto;
-    contain-intrinsic-size: 1px 900px;
+    contain-intrinsic-size: auto 1200px;
 }
 
 /* Utility Classes for "Technical" look */

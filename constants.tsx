@@ -97,6 +97,32 @@ export const PROJECTS: Project[] = [
     keywords: 'firefighter monitoring system india, esp32 wearable safety device, mpu6050 fall detection, iot firefighter telemetry'
   },
   {
+    id: 'p2',
+    title: 'Industrial Automation & Control – CODESYS & Factory I/O Simulation',
+    description: 'PLC control logic and 3D plant simulation implementing CODESYS ladder logic, Factory I/O 3D environment, Modbus TCP communication, and HMI control screens for industrial sorting systems.',
+    tech: ['CODESYS', 'PLC Ladder Logic', 'Factory I/O', 'Modbus TCP', 'HMI', 'Structured Text'],
+    image: '/assets/gallery/ahacks/prize-ceremony.jpg',
+    link: 'https://rsmk.tech/automation',
+    details: "An advanced industrial automation project integrating CODESYS IEC 61131-3 PLC programming with a digital twin 3D factory simulation in Factory I/O. Implemented ladder logic, structured text routines, state-machine conveyor routing, pneumatic pushers, and automated multi-station sorting systems. Communicates via Modbus TCP client/server architecture with responsive HMI control screens and real-time sensor feedback.",
+    features: [
+      "IEC 61131-3 compliant PLC control logic written in Ladder Logic and Structured Text",
+      "Real-time 3D plant simulation and digital twin verification using Factory I/O",
+      "Modbus TCP communication protocol connecting virtual PLC and field devices",
+      "Automated part-sorting station with capacitive, inductive, and optical sensing",
+      "Custom HMI dashboard interface with emergency stop, auto/manual modes, and cycle counters"
+    ],
+    gallery: [
+      '/assets/gallery/ahacks/prize-ceremony.jpg',
+      '/assets/gallery/ahacks/demo-presentation.jpg',
+      '/assets/gallery/ahacks/ahacks-banner.jpg',
+      '/assets/gallery/ahacks/coding-session-1.jpg',
+      '/assets/gallery/ahacks/coding-session-2.jpg'
+    ],
+    award: '🏭 Industrial Automation',
+    awards: ['🏭 Industrial Automation', '⚡ PLC Simulation'],
+    keywords: 'plc automation codesys, factory io 3d simulation, modbus tcp industrial ethernet, ladder logic programming'
+  },
+  {
     id: 'p3',
     title: 'ColorOhm – Resistor Color Code Calculator App',
     description: 'A precision resistor color band decoder available as a published Android app (v1.0.0) and web utility, supporting 4-band, 5-band, and SMD resistor standards for engineering students.',
@@ -114,6 +140,31 @@ export const PROJECTS: Project[] = [
     award: '📱 Android App',
     awards: ['📱 Android App', '🌐 Web Utility'],
     keywords: 'resistor color code calculator, 4 band resistor calculator, color ohm app india, smd resistor calculator'
+  },
+  {
+    id: 'p4',
+    title: 'GridForge – Smart Energy Management System',
+    description: 'A MATLAB and Simulink based smart grid simulation platform designed for industrial energy monitoring, power system analysis, and ISO 50001 energy management compliance.',
+    tech: ['MATLAB', 'Simulink', 'Power Systems', 'ISO 50001', 'Data Analytics'],
+    image: '/assets/gridforge/web-dashboard-interface.png',
+    link: 'https://github.com/Rsmk27',
+    details: "GridForge is an intelligent energy management and smart grid simulation platform modeled in MATLAB and Simulink. Engineered to support industrial facilities in achieving ISO 50001 compliance, the system models high-voltage electrical distribution networks, load shedding dynamics, peak-demand shaving, and renewable energy integration (solar PV and wind). Integrates automated telemetry analytics and a responsive web monitoring dashboard.",
+    features: [
+      "Dynamic electrical power grid modeling and transient stability analysis in Simulink",
+      "Automated peak-shaving and load-shedding algorithms reducing energy expenditure",
+      "ISO 50001 compliant energy telemetry tracking and baseline consumption forecasting",
+      "Multi-source renewable generation integration with battery energy storage (BESS)",
+      "Interactive energy dashboard interface for real-time load profile visualization"
+    ],
+    gallery: [
+      '/assets/gridforge/web-dashboard-interface.png',
+      '/assets/gridforge/matlab-simulation-model.png',
+      '/assets/gridforge/simulation-results.png',
+      '/assets/gridforge/backend-api-code.png'
+    ],
+    award: '⚡ Smart Grid',
+    awards: ['⚡ Smart Grid', '📊 ISO 50001'],
+    keywords: 'matlab smart grid simulation, simulink power system analysis, iso 50001 energy management, gridforge telemetry'
   },
   {
     id: 'p5',
@@ -164,7 +215,7 @@ export const PROJECTS: Project[] = [
     title: 'SPDS – Solar Powered Dewatering System',
     description: 'A PM-KUSUM aligned solar-powered agricultural dewatering system replacing diesel pumps with solar PV power, soil moisture sensing, and light-driven pump switching.',
     tech: ['Arduino UNO', 'Solar PV', 'Soil Moisture Sensor', 'LDR', 'Relay Switching', 'C++'],
-    image: '/assets/ai-chatbot-interface-background.webp',
+    image: '/assets/solar-powered-dewatering-system.jpg',
     link: 'https://spds.rsmk.tech/',
     details: "The Solar-Powered Dewatering System (SPDS) is an engineering prototype designed for grid-independent agricultural irrigation aligned with India's PM-KUSUM initiative. Built around an Arduino controller, the system integrates soil moisture probes and ambient LDR sensing to control a DC water pump via relay logic, activating irrigation only when daylight conditions and soil dryness coincide.",
     features: [
@@ -173,6 +224,9 @@ export const PROJECTS: Project[] = [
       "LDR daylight detection ensuring daytime-only pump operation",
       "Relay switching interface for high-efficiency DC motor control",
       "Smart India Hackathon (SIH) college-level prototype presentation"
+    ],
+    gallery: [
+      '/assets/solar-powered-dewatering-system.jpg'
     ],
     award: '📐 SIH Prototype',
     awards: ['📐 SIH Project', '⚙️ Renewable Energy'],

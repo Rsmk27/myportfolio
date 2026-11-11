@@ -82,7 +82,7 @@ const SectionHeader: React.FC<{
                 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-none"
                 style={{
                     fontFamily: "'Space Grotesk', sans-serif",
-                    color: isPowered ? '#ffffff' : '#111111',
+                    color: isPowered ? '#ffffff' : '#a1a1aa',
                 }}
             >
                 {title}
@@ -248,38 +248,42 @@ const Home: React.FC = () => {
         }
     };
 
-    /* Typing animations */
-    const [heroIntro, setHeroIntro] = useState('');
-    const heroIntroText = "> Hello, I'm RSMK";
-    const [statusText, setStatusText] = useState('');
-    const fullText = 'INITIALIZING SYSTEM PROFILER...';
+    // Touch-to-scroll handlers for Projects
+    const touchStartXProjects = useRef(0);
+    const touchScrollLeftProjects = useRef(0);
+
+    const handleTouchStartProjects = (e: React.TouchEvent) => {
+        setIsHoveredProjects(true);
+        const container = projectsScrollRef.current;
+        if (!container) return;
+        touchStartXProjects.current = e.touches[0].clientX;
+        touchScrollLeftProjects.current = container.scrollLeft;
+    };
+
+    const handleTouchMoveProjects = (e: React.TouchEvent) => {
+        const container = projectsScrollRef.current;
+        if (!container) return;
+        const currentX = e.touches[0].clientX;
+        const delta = touchStartXProjects.current - currentX;
+        container.scrollLeft = touchScrollLeftProjects.current + delta;
+
+        const halfWidth = container.scrollWidth / 2;
+        if (container.scrollLeft >= halfWidth) {
+            container.scrollLeft -= halfWidth;
+            touchStartXProjects.current = currentX;
+            touchScrollLeftProjects.current = container.scrollLeft;
+        } else if (container.scrollLeft < 0) {
+            container.scrollLeft += halfWidth;
+            touchStartXProjects.current = currentX;
+            touchScrollLeftProjects.current = container.scrollLeft;
+        }
+    };
+
+    const handleTouchEndProjects = () => {
+        setIsHoveredProjects(false);
+    };
+
     const reduced = usePrefersReducedMotion();
-
-
-
-    useEffect(() => {
-        if (isPowered && !reduced) {
-            let i = 0;
-            const id = setInterval(() => {
-                if (i <= heroIntroText.length) { setHeroIntro(heroIntroText.slice(0, i)); i++; }
-                else clearInterval(id);
-            }, 65);
-            return () => clearInterval(id);
-        }
-        if (isPowered) setHeroIntro(heroIntroText);
-    }, [isPowered, reduced]);
-
-    useEffect(() => {
-        if (isPowered && !reduced) {
-            let i = 0;
-            const id = setInterval(() => {
-                if (i <= fullText.length) { setStatusText(fullText.slice(0, i)); i++; }
-                else clearInterval(id);
-            }, 45);
-            return () => clearInterval(id);
-        }
-        if (isPowered) setStatusText(fullText);
-    }, [isPowered, reduced]);
 
     /* Navbar scroll handling:
        - Show on scroll up at any section
@@ -432,7 +436,7 @@ const Home: React.FC = () => {
                     {/* Brand & Power Toggle */}
                     <div className="flex flex-col pointer-events-auto">
                         <span
-                            className={`text-xl font-black tracking-tighter transition-all duration-500 ${isPowered ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(0,242,255,0.7)]' : 'text-gray-600'}`}
+                            className={`text-xl font-black tracking-tighter transition-all duration-500 ${isPowered ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(0,242,255,0.7)]' : 'text-zinc-400'}`}
                             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                         >
                             RSMK
@@ -951,11 +955,14 @@ const Home: React.FC = () => {
                             </button>
                         </div>
 
-                        {/* Carousel Container - Infinite Scrolling Marquee (Full Viewport Breakout) */}
-                        <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden py-4 mt-4 select-none">
+                        {/* Carousel Container - Infinite Scrolling Marquee */}
+                        <div className="relative w-full overflow-hidden py-4 mt-4 select-none">
                             <div 
                                 ref={projectsScrollRef}
-                                className="flex gap-6 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-12 md:px-24"
+                                onTouchStart={handleTouchStartProjects}
+                                onTouchMove={handleTouchMoveProjects}
+                                onTouchEnd={handleTouchEndProjects}
+                                className="flex gap-6 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing px-4 md:px-8"
                                 onMouseEnter={() => setIsHoveredProjects(true)}
                                 onMouseLeave={() => {
                                     setIsHoveredProjects(false);
@@ -986,7 +993,7 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* ══ 5. CERTIFICATIONS ══════════════════════════════════ */}
-                    <section id="certifications" data-clarity-region="certifications" className="mb-24 md:mb-40">
+                    <section id="certifications" data-clarity-region="certifications" className="mb-24 md:mb-40 contain-paint" style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1200px' /* content-visibility contain-intrinsic-size */ }}>
                         <CertificationsBlock isPowered={isPowered} />
 
                     </section>
@@ -1015,7 +1022,7 @@ const Home: React.FC = () => {
                                 >
                                     RSMK
                                 </span>
-                                <span className="text-[10px] font-mono text-gray-600 tracking-[0.2em]">
+                                <span className="text-[10px] font-mono text-zinc-400 tracking-[0.2em]">
                                     SRINIVASA MANIKANTA // ENGINEER
                                 </span>
                             </div>
@@ -1028,20 +1035,20 @@ const Home: React.FC = () => {
                                         key={item}
                                         href={`#${item.toLowerCase()}`}
                                         onClick={(e) => handleNavClick(e, item)}
-                                        className="text-[10px] font-mono text-gray-600 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
+                                        className="text-[10px] font-mono text-zinc-400 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
                                     >
                                         {item}
                                     </a>
                                 ))}
                                 <Link
                                     to="/gallery"
-                                    className="text-[10px] font-mono text-gray-600 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
+                                    className="text-[10px] font-mono text-zinc-400 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
                                 >
                                     Gallery
                                 </Link>
                                 <Link
                                     to="/automation"
-                                    className="text-[10px] font-mono text-gray-600 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
+                                    className="text-[10px] font-mono text-zinc-400 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
                                 >
                                     Automation
                                 </Link>
@@ -1066,14 +1073,14 @@ const Home: React.FC = () => {
                                             className="text-yellow-400"
                                             style={{ filter: 'drop-shadow(0 0 6px rgba(250,204,21,0.7))' }}
                                         >⚡</span>
-                                        <span className="text-[9px] font-mono text-gray-600 tracking-widest uppercase">
+                                        <span className="text-[9px] font-mono text-zinc-400 tracking-widest uppercase">
                                             Energy Active
                                         </span>
                                     </motion.div>
                                 )}
                                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/60 border border-gray-800 rounded-full backdrop-blur-sm">
                                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-                                    <span className="text-[10px] text-gray-500 font-mono tracking-widest">
+                                    <span className="text-[10px] text-zinc-400 font-mono tracking-widest">
                                         SYSTEM_ONLINE // {new Date().getFullYear()}
                                     </span>
                                 </div>
@@ -1089,7 +1096,7 @@ const Home: React.FC = () => {
                                         ))}
                                     </div>
                                 )}
-                                <p className="text-[10px] text-gray-700 font-mono">
+                                <p className="text-[10px] text-zinc-400 font-mono">
                                     Built with precision &mdash; {PROFILE.location}
                                 </p>
                             </div>

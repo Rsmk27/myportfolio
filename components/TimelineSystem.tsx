@@ -2,14 +2,15 @@ import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Experience, Education } from '../types';
 import { Calendar, Briefcase, GraduationCap, ChevronRight } from 'lucide-react';
+import { EXPERIENCE, EDUCATION } from '../constants';
 
 interface TimelineSystemProps {
-    experience: Experience[];
-    education: Education[];
+    experience?: Experience[];
+    education?: Education[];
     isPowered: boolean;
 }
 
-export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, education, isPowered }) => {
+export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience = EXPERIENCE, education = EDUCATION, isPowered }) => {
     // Sort logic
     const combined = useMemo(() => {
         const getYear = (dateStr: string) => {
@@ -84,7 +85,7 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                                     className={`relative rounded-xl border p-6 md:p-8 backdrop-blur-sm transition-all duration-500
                                         ${isPowered
                                             ? 'bg-black/40 border-gray-900 hover:border-cyan-500/30 hover:bg-cyan-950/5'
-                                            : 'bg-white/5 border-gray-200'
+                                            : 'bg-zinc-950/60 border-zinc-800'
                                         }`}
                                 >
                                     {/* Tech details corner ornaments */}
@@ -101,16 +102,16 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                                             <div className={`p-2.5 rounded-lg border transition-colors
                                                 ${isPowered 
                                                     ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-400' 
-                                                    : 'bg-gray-100 border-gray-200 text-gray-600'
+                                                    : 'bg-zinc-900 border-zinc-800 text-zinc-400'
                                                 }`}
                                             >
                                                 {isExp ? <Briefcase size={16} strokeWidth={1.5} /> : <GraduationCap size={16} strokeWidth={1.5} />}
                                             </div>
                                             <div>
-                                                <h4 className={`text-lg font-black tracking-tight leading-tight ${isPowered ? 'text-white' : 'text-gray-900'}`}>
+                                                <h4 className={`text-lg font-black tracking-tight leading-tight ${isPowered ? 'text-white' : 'text-zinc-300'}`}>
                                                     {isExp ? expData.role : eduData.degree}
                                                 </h4>
-                                                <p className={`text-xs font-mono uppercase mt-0.5 tracking-wider ${isPowered ? 'text-cyan-500/80' : 'text-blue-600'}`}>
+                                                <p className={`text-xs font-mono uppercase mt-0.5 tracking-wider ${isPowered ? 'text-cyan-500/80' : 'text-cyan-400'}`}>
                                                     {isExp ? `at ${expData.company}` : `at ${eduData.institution}`}
                                                 </p>
                                             </div>
@@ -119,7 +120,7 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                                         <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono font-bold w-fit
                                             ${isPowered 
                                                 ? 'bg-cyan-950/20 border-cyan-900/30 text-cyan-300' 
-                                                : 'bg-gray-50 border-gray-200 text-gray-500'
+                                                : 'bg-zinc-900 border-zinc-800 text-zinc-400'
                                             }`}
                                         >
                                             <Calendar size={12} strokeWidth={2} />
@@ -132,7 +133,7 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                                         expData.description && (
                                             <ul className="space-y-3 mb-6 pl-1">
                                                 {expData.description.map((bullet, bi) => (
-                                                    <li key={bi} className="flex items-start gap-2.5 text-sm leading-relaxed text-gray-400">
+                                                    <li key={bi} className="flex items-start gap-2.5 text-sm leading-relaxed text-zinc-400">
                                                         <ChevronRight size={14} className="mt-1 shrink-0 text-cyan-500/80" />
                                                         <span>
                                                             {bullet.split(' ').map((word, wi) => {
@@ -150,11 +151,11 @@ export const TimelineSystem: React.FC<TimelineSystemProps> = ({ experience, educ
                                             </ul>
                                         )
                                     ) : (
-                                        <p className="text-sm leading-relaxed text-gray-400 pl-1 mb-2">
+                                        <p className="text-sm leading-relaxed text-zinc-400 pl-1 mb-2">
                                             Foundational studies in{' '}
-                                            <span className={isPowered ? 'text-cyan-300 font-semibold' : 'text-gray-800'}>electrical principles</span>{' '}
+                                            <span className={isPowered ? 'text-cyan-300 font-semibold' : 'text-zinc-300 font-semibold'}>electrical principles</span>{' '}
                                             and{' '}
-                                            <span className={isPowered ? 'text-cyan-300 font-semibold' : 'text-gray-800'}>practical applications</span>.
+                                            <span className={isPowered ? 'text-cyan-300 font-semibold' : 'text-zinc-300 font-semibold'}>practical applications</span>.
                                         </p>
                                     )}
 

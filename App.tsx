@@ -1,6 +1,6 @@
 
 import React, { useEffect, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
@@ -48,7 +48,7 @@ const AnimatedRoutes: React.FC = () => {
                         <Route path="/" element={<Home />} />
                         <Route path="/gallery" element={<Gallery />} />
                         <Route path="/automation" element={<IndustrialPortfolio />} />
-                        <Route path="/videos" element={<IndustrialPortfolio />} />
+                        <Route path="/videos" element={<Navigate to="/automation" replace />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Suspense>

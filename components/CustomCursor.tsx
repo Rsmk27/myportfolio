@@ -301,7 +301,7 @@ export const CustomCursor: React.FC = () => {
                                 exit={{ opacity: 0, scale: 0.7 }}
                                 transition={{ duration: 0.15 }}
                                 style={{
-                                    fontFamily: "'JetBrains Mono', monospace",
+                                    fontFamily: "'Space Mono', monospace",
                                     fontSize: 9,
                                     fontWeight: 700,
                                     letterSpacing: '0.14em',

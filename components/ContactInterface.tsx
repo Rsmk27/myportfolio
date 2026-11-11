@@ -9,7 +9,7 @@ import { AI_CHAT_API_URL, useChatbotWarmup } from '../utils/chatbotWarmup';
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const USAGE_KEY = 'rsmk_chat_usage';
-const MAX_MSGS = 999999;
+const MAX_MSGS = 20;
 const MAX_ATTEMPTS = 3;
 const RETRY_DELAY_MS = 6000;
 
@@ -86,12 +86,21 @@ const MiniMarkdown: React.FC<{ content: string }> = ({ content }) => {
                         flush();
                         const label = text.slice(j + 1, labelEnd);
                         const url = text.slice(labelEnd + 2, urlEnd);
-                        push(
-                            <a key={`${key}-l${j}`} href={url} target="_blank" rel="noopener noreferrer"
-                                className="text-cyan-400 underline hover:text-cyan-200 transition-colors">
-                                {label}
-                            </a>
-                        );
+                        const isSafe = /^(https?:\/\/|mailto:)/i.test(url.trim());
+                        if (isSafe) {
+                            push(
+                                <a key={`${key}-l${j}`} href={url.trim()} target="_blank" rel="noopener noreferrer"
+                                    className="text-cyan-400 underline hover:text-cyan-200 transition-colors">
+                                    {label}
+                                </a>
+                            );
+                        } else {
+                            push(
+                                <span key={`${key}-l${j}`}>
+                                    {label} ({url})
+                                </span>
+                            );
+                        }
                         j = urlEnd + 1;
                         continue;
                     }
@@ -333,7 +342,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
     // ── Core AI call ──────────────────────────────────────────────────────────
 
     const sendToAI = useCallback(async (text: string, retryClean?: TermMsg[]): Promise<void> => {
-        const trimmed = text.trim();
+        const trimmed = text.trim().slice(0, 500);
         if (!trimmed || isLoading) return;
 
         const cur = getCount();
@@ -444,11 +453,11 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
             <div className="space-y-6">
                 <div className="flex justify-between items-end pb-2 border-b border-gray-800">
                     <div>
-                        <h3 className={`text-xs font-mono tracking-[0.2em] mb-1 font-bold ${isPowered ? 'text-cyan-400' : 'text-gray-600'}`}>
+                        <h3 className={`text-xs font-mono tracking-[0.2em] mb-1 font-bold ${isPowered ? 'text-cyan-400' : 'text-zinc-400'}`}>
                             DIRECT CHANNELS &amp; COMMS
                         </h3>
                         <div className="flex items-center gap-2">
-                            <span className={`text-[11px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Signal:</span>
+                            <span className={`text-[11px] font-bold ${isPowered ? 'text-gray-300' : 'text-zinc-300'}`}>Signal:</span>
                             <div className="flex gap-0.5 items-end h-4">
                                 {[...Array(8)].map((_, i) => (
                                     <div
@@ -464,16 +473,16 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             </div>
                         </div>
                         <div className="flex items-center gap-2 mt-2">
-                            <span className={`text-[11px] font-bold ${isPowered ? 'text-gray-300' : 'text-gray-700'}`}>Status:</span>
+                            <span className={`text-[11px] font-bold ${isPowered ? 'text-gray-300' : 'text-zinc-300'}`}>Status:</span>
                             <span className={`text-xs font-mono font-bold ${uplinkStatus === 'TRANSMITTING' ? 'text-amber-400 animate-pulse' :
                                 uplinkStatus === 'ACKNOWLEDGED' ? 'text-emerald-400' :
-                                    isPowered ? 'text-cyan-400' : 'text-gray-600'
+                                    isPowered ? 'text-cyan-400' : 'text-zinc-400'
                                 }`}>
                                 {uplinkStatus === 'IDLE' ? (isPowered ? 'READY FOR UPLINK' : 'OFFLINE') : uplinkStatus}
                             </span>
                         </div>
                     </div>
-                    <Wifi size={18} className={isPowered ? 'text-cyan-400 animate-pulse' : 'text-gray-800'} />
+                    <Wifi size={18} className={isPowered ? 'text-cyan-400 animate-pulse' : 'text-zinc-600'} />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
@@ -489,17 +498,18 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             <button
                                 type="button"
                                 onClick={handleCopyEmail}
-                                className="flex items-center gap-1 px-2.5 py-1 rounded bg-black/60 border border-gray-700 hover:border-cyan-400 hover:text-cyan-300 text-gray-300 text-xs font-mono transition-all duration-200"
+                                className="min-h-[44px] min-w-[44px] px-3 py-2 flex items-center justify-center gap-1.5 rounded bg-black/60 border border-gray-700 hover:border-cyan-400 hover:text-cyan-300 text-gray-300 text-xs font-mono transition-all duration-200 cursor-pointer"
                                 title="Copy Email to Clipboard"
+                                aria-label="Copy Email to Clipboard"
                             >
                                 {copiedEmail ? (
                                     <>
-                                        <Check size={12} className="text-emerald-400" />
+                                        <Check size={14} className="text-emerald-400" />
                                         <span className="text-emerald-400 font-bold">COPIED</span>
                                     </>
                                 ) : (
                                     <>
-                                        <Copy size={12} />
+                                        <Copy size={14} />
                                         <span>COPY</span>
                                     </>
                                 )}
@@ -652,6 +662,7 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                             type="text"
                             value={consoleInput}
                             onChange={e => setConsoleInput(e.target.value)}
+                            maxLength={500}
                             placeholder={
                                 !isPowered ? 'Offline' :
                                     isLimitReached ? 'Session limit reached...' :
@@ -668,12 +679,13 @@ export const ContactInterface: React.FC<ContactInterfaceProps> = ({ profile, isP
                         <button
                             type="submit"
                             disabled={!isPowered || isLoading || isLimitReached || !consoleInput.trim()}
-                            className={`p-1.5 rounded transition-all ${isPowered && !isLoading && !isLimitReached && consoleInput.trim()
-                                ? 'text-cyan-400 hover:bg-cyan-900/30 hover:text-cyan-200'
-                                : 'text-gray-700'
+                            aria-label="Send message"
+                            className={`min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded transition-all ${isPowered && !isLoading && !isLimitReached && consoleInput.trim()
+                                ? 'text-cyan-400 hover:bg-cyan-900/30 hover:text-cyan-200 cursor-pointer'
+                                : 'text-zinc-600'
                                 }`}
                         >
-                            <Send size={16} />
+                            <Send size={18} />
                         </button>
                     </div>
                 </form>
@@ -745,7 +757,7 @@ const ContactCard: React.FC<{
                         />
                     )}
                 </div>
-                <p className={`font-bold text-sm md:text-base truncate transition-colors ${isPowered ? 'text-gray-200 group-hover:text-white' : 'text-gray-600'}`}>
+                <p className={`font-bold text-sm md:text-base truncate transition-colors ${isPowered ? 'text-gray-200 group-hover:text-white' : 'text-zinc-300'}`}>
                     {value}
                 </p>
             </div>

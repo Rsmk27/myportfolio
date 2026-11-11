@@ -1,0 +1,29 @@
+{
+  "name": "Srinivasa Manikanta Rajapantula | Portfolio",
+  "short_name": "RSMK",
+  "description": "Portfolio of Srinivasa Manikanta Rajapantula (RSMK) – Embedded Systems, Industrial Automation, IoT & Electrical Engineering",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#080806",
+  "background_color": "#080806",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/assets/srinivasa-manikanta-logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/srinivasa-manikanta-profile.webp",
+      "sizes": "192x192 512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}
