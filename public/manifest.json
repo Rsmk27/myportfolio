@@ -14,16 +14,10 @@
       "type": "image/x-icon"
     },
     {
-      "src": "/assets/srinivasa-manikanta-logo.webp",
-      "sizes": "512x512",
+      "src": "/assets/srinivasa-manikanta-profile.webp",
+      "sizes": "192x192 512x512 1024x1024",
       "type": "image/webp",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/assets/srinivasa-manikanta-profile.webp",
-      "sizes": "192x192 512x512",
-      "type": "image/webp",
-      "purpose": "any"
     }
   ]
 }
