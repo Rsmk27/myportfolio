@@ -2,18 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useInView, useScroll, useSpring, useTransform } from 'framer-motion';
 import { PCBBackground } from '../components/PCBBackground';
-import { ProjectChip } from '../components/ProjectChip';
+import { ProjectChip, ProjectDetailModal } from '../components/ProjectChip';
 import { SkillBreadboard } from '../components/SkillBreadboard';
 import { CertificationsBlock } from '../components/CertificationsBlock';
 import { TimelineSystem } from '../components/TimelineSystem';
 import { ContactInterface } from '../components/ContactInterface';
 import { EasterEgg } from '../components/EasterEgg';
 import { PROJECTS, PROFILE, EXPERIENCE, EDUCATION } from '../constants';
+import { Project } from '../types';
 import {
-    Zap, Code, Globe, Terminal, Mail, Github, Linkedin, Twitter,
-    Menu, X, ChevronDown, Activity, Cpu, Radio, BatteryMedium,
-    ArrowUpRight, MapPin, Briefcase, GraduationCap, Eye,
-    ChevronLeft, ChevronRight, Pause, Play
+    Zap, Code, Terminal, Menu, X, ChevronDown, Activity, Cpu, Radio,
+    BatteryMedium, ArrowUpRight, MapPin, Briefcase, GraduationCap, Eye,
+    ChevronLeft, ChevronRight, Pause, Play, Power
 } from 'lucide-react';
 import SEO from '../components/common/SEO';
 import { useSectionObserver, useScrollDepthTracking } from '../hooks/useAnalytics';
@@ -72,53 +72,105 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number; className?: 
     );
 };
 
-/* ─── Section Header ────────────────────────────────────────────── */
+/* ─── Silkscreen Section Header ─────────────────────────────────── */
 const SectionHeader: React.FC<{
-    title: string; subtitle: string; isPowered: boolean; flip?: boolean;
-}> = ({ title, subtitle, isPowered, flip }) => (
+    title: string; subtitle: string; isPowered: boolean; flip?: boolean; code?: string;
+}> = ({ title, subtitle, isPowered, flip, code }) => (
     <Reveal>
-        <div className={`flex items-center gap-4 mb-14 md:mb-20 max-w-7xl mx-auto px-4 ${flip ? 'flex-row-reverse' : ''}`}>
-            <h2
-                className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-none"
-                style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    color: isPowered ? '#ffffff' : '#a1a1aa',
-                }}
-            >
-                {title}
-            </h2>
-            <motion.div
-                className={`h-px flex-grow ${isPowered
-                    ? 'bg-gradient-to-r from-amber-500/60 via-amber-300/20 to-transparent'
-                    : 'bg-gray-300'}`}
-                initial={{ scaleX: 0.3, opacity: 0.45 }}
-                whileInView={{ scaleX: 1, opacity: [0.5, 1, 0.7] }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, ease: 'easeOut' }}
-                style={{ transformOrigin: flip ? 'right center' : 'left center' }}
-            />
+        <div className={`flex items-center gap-3 md:gap-4 mb-12 md:mb-16 max-w-7xl mx-auto px-4 ${flip ? 'flex-row-reverse' : ''}`}>
+            <div className={`flex items-center gap-3 shrink-0 ${flip ? 'flex-row-reverse' : ''}`}>
+                <span
+                    aria-hidden="true"
+                    className={`w-2.5 h-2.5 rounded-sm rotate-45 border shrink-0 transition-colors duration-300 ${
+                        isPowered
+                            ? 'border-cyan-400 bg-cyan-400/20 shadow-[0_0_8px_rgba(34,211,238,0.6)]'
+                            : 'border-amber-400 bg-amber-400/20'
+                    }`}
+                />
+                <div className={`flex flex-col ${flip ? 'items-end' : 'items-start'}`}>
+                    {code && (
+                        <span
+                            className={`text-[10px] font-mono tracking-[0.25em] uppercase mb-1 ${
+                                isPowered ? 'text-cyan-400' : 'text-amber-400'
+                            }`}
+                        >
+                            {code}
+                        </span>
+                    )}
+                    <h2
+                        className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight leading-none"
+                        style={{
+                            fontFamily: "'Space Grotesk', sans-serif",
+                            color: isPowered ? '#ffffff' : '#d4d4d8',
+                        }}
+                    >
+                        {title}
+                    </h2>
+                </div>
+            </div>
+
+            <div className={`flex items-center flex-grow gap-1.5 ${flip ? 'flex-row-reverse' : ''}`}>
+                <span
+                    aria-hidden="true"
+                    className={`w-2 h-2 rounded-full border shrink-0 ${
+                        isPowered ? 'border-cyan-400/70 bg-cyan-950' : 'border-amber-400/70 bg-amber-950'
+                    }`}
+                />
+                <motion.div
+                    className={`h-px flex-grow ${
+                        isPowered
+                            ? 'bg-gradient-to-r from-cyan-400/60 via-amber-400/35 to-transparent'
+                            : 'bg-gradient-to-r from-amber-400/60 via-zinc-500/35 to-transparent'
+                    }`}
+                    initial={{ scaleX: 0.3, opacity: 0.45 }}
+                    whileInView={{ scaleX: 1, opacity: [0.5, 1, 0.8] }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.55, ease: 'easeOut' }}
+                    style={{ transformOrigin: flip ? 'right center' : 'left center' }}
+                />
+            </div>
+
             {subtitle && (
                 <span
-                    className="text-[10px] font-mono tracking-[0.25em] uppercase shrink-0"
-                    style={{ color: isPowered ? '#22d3ee' : '#6b7280' }}
+                    className="text-[10px] font-mono tracking-[0.22em] uppercase shrink-0 px-2.5 py-1 rounded border border-zinc-800 bg-zinc-950/80"
+                    style={{ color: isPowered ? '#22d3ee' : '#fbbf24' }}
                 >
-            // {subtitle}
+                    // {subtitle}
                 </span>
             )}
         </div>
     </Reveal>
 );
 
-/* ─── Stat Chip (hero bento stats) ─────────────────────────────── */
-const StatChip: React.FC<{ icon: React.ReactNode; label: string; value: string; delay: number }> = ({
-    icon, label, value, delay
-}) => (
+/* ─── Stat Chip (hero/about hardware readout) ───────────────────── */
+const StatChip: React.FC<{
+    icon: React.ReactNode; label: string; value: string; delay: number; isPowered: boolean;
+}> = ({ icon, label, value, delay, isPowered }) => (
     <Reveal delay={delay}>
-        <div className="flex items-center gap-3 px-4 py-3 rounded-lg border border-amber-500/20 bg-black/40 backdrop-blur-sm hover:border-amber-500/50 hover:bg-amber-950/20 transition-all duration-300 cursor-default group">
-            <span className="text-amber-400 group-hover:text-amber-300 transition-colors duration-200">{icon}</span>
-            <div>
-                <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">{label}</p>
-                <p className="text-sm font-semibold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{value}</p>
+        <div
+            className={`relative flex items-center gap-3 px-4 py-3 rounded-lg border backdrop-blur-sm transition-all duration-300 cursor-default group text-left ${
+                isPowered
+                    ? 'border-cyan-500/20 bg-black/55 hover:border-cyan-400/50 hover:bg-cyan-950/20'
+                    : 'border-amber-500/25 bg-black/60 hover:border-amber-400/50 hover:bg-amber-950/20'
+            }`}
+        >
+            <span
+                className={`p-2 rounded-md border shrink-0 transition-colors duration-200 ${
+                    isPowered
+                        ? 'border-cyan-500/25 bg-cyan-950/30 text-cyan-300 group-hover:text-cyan-200'
+                        : 'border-amber-500/25 bg-amber-950/30 text-amber-400 group-hover:text-amber-300'
+                }`}
+            >
+                {icon}
+            </span>
+            <div className="min-w-0">
+                <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest truncate">{label}</p>
+                <p
+                    className={`text-sm font-semibold truncate ${isPowered ? 'text-white' : 'text-zinc-200'}`}
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                    {value}
+                </p>
             </div>
         </div>
     </Reveal>
@@ -137,7 +189,7 @@ const Home: React.FC = () => {
     const [statusTickerIndex, setStatusTickerIndex] = useState(0);
     const [navHoverIndex, setNavHoverIndex] = useState(-1);
     const [navDirection, setNavDirection] = useState<1 | -1>(1);
-    const isFirstMount = useRef(true);
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const { scrollYProgress } = useScroll();
     const scrollProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.2 });
     const ringOffset = useTransform(scrollProgress, [0, 1], [88, 0]);
@@ -285,12 +337,7 @@ const Home: React.FC = () => {
 
     const reduced = usePrefersReducedMotion();
 
-    /* Navbar scroll handling:
-       - Show on scroll up at any section
-       - Hide on scroll down past hero/top threshold
-       - Always show when near top or when mobile menu is open
-       - Trigger liquid glass past top threshold
-    */
+    /* Navbar scroll handling */
     useEffect(() => {
         let lastY = window.scrollY;
         let ticking = false;
@@ -302,21 +349,15 @@ const Home: React.FC = () => {
                     const diff = currentY - lastY;
                     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
-                    // Trigger liquid glass past top
                     setScrolled(currentY > 60);
-
-                    // Back to top button past hero (70vh)
                     setShowBackToTop(currentY > window.innerHeight * 0.7);
 
-                    // Always show navbar near top or if mobile menu is open
                     if (currentY <= 60 || mobileMenuOpen) {
                         setIsNavVisible(true);
                     } else if (currentY > 0 && currentY < maxScroll) {
                         if (diff > 10) {
-                            // Scrolling down -> hide navbar
                             setIsNavVisible(false);
                         } else if (diff < -5) {
-                            // Scrolling up at any section -> show navbar
                             setIsNavVisible(true);
                         }
                     }
@@ -332,7 +373,6 @@ const Home: React.FC = () => {
         return () => window.removeEventListener('scroll', onScroll);
     }, [mobileMenuOpen]);
 
-    // Automatically track scroll depth and section entry / dwell time for GA4 & Microsoft Clarity
     useSectionObserver();
     useScrollDepthTracking();
 
@@ -404,60 +444,94 @@ const Home: React.FC = () => {
             <div id="main-content" className="main-content visible">
                 <PCBBackground isPowered={isPowered} />
 
+                {/* Right-rail Oscilloscope Scroll Depth Gauge */}
                 {!reduced && !isMobile && (
-                    <div className="fixed right-4 bottom-10 z-40 hidden md:flex items-center gap-2 pointer-events-none">
-                        <span className="text-[9px] font-mono tracking-[0.2em] text-cyan-600/70 uppercase [writing-mode:vertical-rl]">
-                            scroll
+                    <div className="fixed right-4 bottom-10 z-40 hidden md:flex flex-col items-center gap-2 pointer-events-none">
+                        <span className={`text-[9px] font-mono tracking-[0.22em] uppercase [writing-mode:vertical-rl] ${isPowered ? 'text-cyan-400/80' : 'text-amber-400/80'}`}>
+                            depth
                         </span>
-                        <div className="h-28 w-1 rounded-full bg-cyan-950/70 border border-cyan-900/60 overflow-hidden origin-bottom">
+                        <div className={`h-28 w-1 rounded-full overflow-hidden origin-bottom border ${isPowered ? 'bg-cyan-950/70 border-cyan-900/60' : 'bg-amber-950/60 border-amber-900/50'}`}>
                             <motion.div
-                                className="w-full h-full bg-gradient-to-t from-cyan-400 via-cyan-300 to-white origin-bottom"
+                                className={`w-full h-full origin-bottom ${
+                                    isPowered
+                                        ? 'bg-gradient-to-t from-cyan-400 via-cyan-300 to-white'
+                                        : 'bg-gradient-to-t from-amber-500 via-amber-400 to-amber-200'
+                                }`}
                                 style={{ scaleY: scrollYProgress }}
                             />
                         </div>
                     </div>
                 )}
 
-                {/* ── Floating Navbar ─────────────────────────────────── */}
+                {/* ── Floating Telemetry Navbar ─────────────────────────── */}
                 <header
-                    className={`!fixed fixed top-4 left-4 right-4 z-50 flex justify-between items-center px-5 py-3 rounded-xl
-            ${isNavVisible || mobileMenuOpen
+                    className={`!fixed fixed top-3 md:top-4 left-3 right-3 md:left-4 md:right-4 z-50 flex justify-between items-center px-4 md:px-5 py-2.5 md:py-3 rounded-xl
+                        ${isNavVisible || mobileMenuOpen
                             ? 'translate-y-0 opacity-100'
                             : '-translate-y-28 opacity-0 pointer-events-none'
                         }
-            ${scrolled
+                        ${scrolled
                             ? 'liquid-glass-header pointer-events-none'
-                            : 'bg-transparent border border-transparent pointer-events-none'
+                            : 'bg-black/45 backdrop-blur-md border border-zinc-800/80 pointer-events-none'
                         }`}
                     style={{
                         transition: 'transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease'
                     }}
                 >
-                    {/* Brand & Power Toggle */}
-                    <div className="flex flex-col pointer-events-auto">
-                        <span
-                            className={`text-xl font-black tracking-tighter transition-all duration-500 ${isPowered ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(0,242,255,0.7)]' : 'text-zinc-400'}`}
-                            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                        >
-                            RSMK
-                        </span>
-                        <button
-                            onClick={() => {
-                                setIsPowered(!isPowered);
-                                trackInteraction('toggle_power_grid', 'header', isPowered ? 'OFFLINE' : 'ONLINE');
-                            }}
-                            className="flex items-center gap-1.5 mt-0.5 px-1 py-0.5 -ml-1 rounded hover:bg-cyan-500/10 transition-colors cursor-pointer group"
-                            title={`Click to switch power grid (Currently: ${isPowered ? 'ONLINE' : 'STANDBY'})`}
-                        >
-                            <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isPowered ? 'bg-cyan-400 animate-pulse' : 'bg-red-500'}`} />
-                            <span className="text-[10px] font-mono text-gray-400 group-hover:text-cyan-300 tracking-widest transition-colors">
-                                {isPowered ? 'ONLINE' : 'STANDBY'}
-                            </span>
-                        </button>
+                    {/* Brand & Power-Rail Toggle Switch */}
+                    <div className="flex items-center gap-3 pointer-events-auto">
+                        <div className="flex flex-col">
+                            <div className="flex items-center gap-2">
+                                <span
+                                    className={`text-xl font-black tracking-tighter transition-all duration-500 ${
+                                        isPowered
+                                            ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(0,242,255,0.65)]'
+                                            : 'text-amber-400'
+                                    }`}
+                                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                                >
+                                    RSMK
+                                </span>
+                                <span className="hidden sm:inline-block text-[9px] font-mono tracking-widest px-1.5 py-0.5 rounded border border-zinc-800 bg-black/70 text-zinc-400">
+                                    EEE-SYS
+                                </span>
+                            </div>
+
+                            <button
+                                type="button"
+                                aria-pressed={isPowered}
+                                onClick={() => {
+                                    setIsPowered(!isPowered);
+                                    trackInteraction('toggle_power_grid', 'header', isPowered ? 'OFFLINE' : 'ONLINE');
+                                }}
+                                className={`flex items-center gap-1.5 mt-0.5 px-2 py-0.5 -ml-1 rounded border transition-colors cursor-pointer group ${
+                                    isPowered
+                                        ? 'border-cyan-500/25 bg-cyan-950/30 hover:border-cyan-400/50 hover:bg-cyan-950/50'
+                                        : 'border-amber-500/35 bg-amber-950/30 hover:border-amber-400/60 hover:bg-amber-950/50'
+                                }`}
+                                title={`Click to switch power grid (Currently: ${isPowered ? 'ONLINE' : 'STANDBY'})`}
+                            >
+                                <span
+                                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                                        isPowered
+                                            ? 'bg-cyan-400 animate-pulse shadow-[0_0_6px_rgba(34,211,238,0.9)]'
+                                            : 'bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.7)]'
+                                    }`}
+                                />
+                                <Power size={10} className={isPowered ? 'text-cyan-300' : 'text-amber-300'} />
+                                <span
+                                    className={`text-[10px] font-mono tracking-widest transition-colors ${
+                                        isPowered ? 'text-cyan-300' : 'text-amber-300'
+                                    }`}
+                                >
+                                    {isPowered ? 'ONLINE' : 'STANDBY'}
+                                </span>
+                            </button>
+                        </div>
                     </div>
 
                     {/* Desktop nav */}
-                    <nav className="hidden lg:flex items-center gap-7 pointer-events-auto" aria-label="Main navigation">
+                    <nav className="hidden lg:flex items-center gap-6 pointer-events-auto" aria-label="Main navigation">
                         {navItems.map((item) => {
                             const sectionId = item.toLowerCase();
                             const isActive = activeSection === sectionId;
@@ -474,11 +548,17 @@ const Home: React.FC = () => {
                                         }
                                         setNavHoverIndex(currentIndex);
                                     }}
-                                    className={`relative text-[11px] font-semibold uppercase tracking-widest transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-0.5 ${isActive ? 'text-cyan-400' : 'text-gray-400 hover:text-cyan-400'}`}
+                                    className={`relative text-[11px] font-semibold uppercase tracking-widest transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-1 ${
+                                        isActive
+                                            ? isPowered
+                                                ? 'text-cyan-300'
+                                                : 'text-amber-300'
+                                            : 'text-zinc-300 hover:text-white'
+                                    }`}
                                 >
                                     {item}
                                     <motion.span
-                                        className="absolute bottom-0 left-0 h-px bg-cyan-400"
+                                        className={`absolute bottom-0 left-0 h-px ${isPowered ? 'bg-cyan-400' : 'bg-amber-400'}`}
                                         animate={{
                                             width: isActive ? '100%' : '0%',
                                             left: navDirection === 1 ? '0%' : 'auto',
@@ -491,28 +571,34 @@ const Home: React.FC = () => {
                         })}
                         <Link
                             to="/gallery"
-                            className="relative text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-cyan-400 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-0.5"
+                            className="relative text-[11px] font-semibold uppercase tracking-widest text-zinc-300 hover:text-white transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-1"
                         >
                             Gallery
                         </Link>
                         <Link
                             to="/automation"
-                            className="relative text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-cyan-400 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-0.5 flex items-center gap-1.5"
+                            className="relative text-[11px] font-semibold uppercase tracking-widest text-zinc-300 hover:text-white transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded cursor-pointer pb-1 flex items-center gap-1.5"
                         >
                             <span>Automation</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                            <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${isPowered ? 'bg-cyan-400' : 'bg-amber-400'}`} />
                         </Link>
-                        <div className="w-px h-6 bg-gray-800 mx-2" />
-                        <div className="flex items-center gap-1.5 pointer-events-auto">
+                        <div className="w-px h-5 bg-zinc-800 mx-1" />
+                        <div className="flex items-center gap-2.5 pointer-events-auto">
+                            {clockTime && (
+                                <span className="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-zinc-800 bg-black/60 text-[10px] font-mono text-zinc-300 tracking-wider">
+                                    <span className={`w-1.5 h-1.5 rounded-full ${isPowered ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+                                    {clockTime}
+                                </span>
+                            )}
                             <a
                                 href={PROFILE.resume}
                                 target="_blank"
                                 rel="noreferrer"
                                 title="View Resume"
                                 onClick={() => trackInteraction('view_resume', 'resume', 'Header')}
-                                className="flex items-center gap-1.5 px-3 py-1.5 border border-amber-500/40 text-amber-400 text-[11px] font-bold rounded-lg hover:bg-amber-500/10 hover:border-amber-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+                                className="flex items-center gap-1.5 px-3 py-1.5 border border-amber-500/45 bg-amber-950/20 text-amber-300 text-[11px] font-mono font-bold rounded-lg hover:bg-amber-400 hover:text-black hover:border-amber-400 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                             >
-                                <Eye size={11} />
+                                <Eye size={12} />
                                 <span>RESUME</span>
                             </a>
                         </div>
@@ -520,9 +606,10 @@ const Home: React.FC = () => {
 
                     {/* Mobile burger */}
                     <button
+                        type="button"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-                        className="lg:hidden pointer-events-auto p-2 text-gray-400 hover:text-cyan-400 transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded"
+                        className="lg:hidden pointer-events-auto p-2 text-zinc-300 hover:text-cyan-300 transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded"
                     >
                         {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
@@ -536,24 +623,22 @@ const Home: React.FC = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-2"
+                            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl lg:hidden flex flex-col items-center justify-center gap-2"
                         >
-                            {navItems.map((item, i) => {
-                                return (
-                                    <motion.a
-                                        key={item}
-                                        initial={reduced ? false : { opacity: 0, y: 16 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: i * 0.06, duration: 0.3 }}
-                                        href={`#${item.toLowerCase()}`}
-                                        onClick={(e) => handleNavClick(e, item)}
-                                        className="text-3xl font-black uppercase tracking-tight text-white hover:text-amber-400 transition-colors duration-200 py-3 cursor-pointer focus:outline-none focus-visible:text-amber-400"
-                                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                                    >
-                                        {item}
-                                    </motion.a>
-                                );
-                            })}
+                            {navItems.map((item, i) => (
+                                <motion.a
+                                    key={item}
+                                    initial={reduced ? false : { opacity: 0, y: 16 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: i * 0.06, duration: 0.3 }}
+                                    href={`#${item.toLowerCase()}`}
+                                    onClick={(e) => handleNavClick(e, item)}
+                                    className="text-3xl font-black uppercase tracking-tight text-white hover:text-amber-400 transition-colors duration-200 py-3 cursor-pointer focus:outline-none focus-visible:text-amber-400"
+                                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                                >
+                                    {item}
+                                </motion.a>
+                            ))}
                             <motion.div
                                 initial={reduced ? false : { opacity: 0, y: 16 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -585,7 +670,7 @@ const Home: React.FC = () => {
                             <motion.div
                                 initial={reduced ? false : { opacity: 0, y: 16 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: (navItems.length + 1) * 0.06, duration: 0.3 }}
+                                transition={{ delay: (navItems.length + 2) * 0.06, duration: 0.3 }}
                                 className="mt-4 flex items-center gap-3"
                             >
                                 <a
@@ -593,7 +678,7 @@ const Home: React.FC = () => {
                                     target="_blank"
                                     rel="noreferrer"
                                     onClick={() => trackInteraction('view_resume', 'resume', 'MobileMenu')}
-                                    className="flex items-center gap-2 px-6 py-3 border border-amber-500/50 text-amber-400 font-bold rounded-xl hover:bg-amber-500/10 transition-all duration-200 cursor-pointer"
+                                    className="flex items-center gap-2 px-6 py-3 border border-amber-500/50 text-amber-300 font-bold rounded-xl hover:bg-amber-500/10 transition-all duration-200 cursor-pointer"
                                 >
                                     <Eye size={16} />
                                     <span>VIEW RESUME</span>
@@ -612,7 +697,7 @@ const Home: React.FC = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 14 }}
                                 transition={{ duration: 0.2 }}
-                                className="fixed bottom-8 left-6 z-40 w-11 h-11 rounded-full border border-amber-700/60 bg-black/70 backdrop-blur-sm flex items-center justify-center text-amber-300 hover:text-amber-100 hover:border-amber-400 transition-colors"
+                                className="fixed bottom-8 left-6 z-40 w-11 h-11 rounded-full border border-amber-600/60 bg-black/80 backdrop-blur-sm flex items-center justify-center text-amber-300 hover:text-amber-100 hover:border-amber-400 transition-colors cursor-pointer"
                                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                                 aria-label="Scroll to top"
                                 type="button"
@@ -638,35 +723,73 @@ const Home: React.FC = () => {
                     </AnimatePresence>
 
                     {/* ══ 1. HERO ════════════════════════════════════════════ */}
-                    <section id="hero" data-clarity-region="hero" className="min-h-[100dvh] flex flex-col items-center justify-center relative pt-24 pb-16 text-center">
+                    <section id="hero" data-clarity-region="hero" className="min-h-[100dvh] flex flex-col items-center justify-center relative pt-24 pb-14 text-center">
+                        {/* Precision Hardware Fiducial Frame (Desktop) */}
+                        <div aria-hidden="true" className="pointer-events-none absolute inset-x-2 md:inset-x-6 top-24 bottom-10 hidden md:block">
+                            <div className={`absolute top-0 left-0 w-7 h-7 border-t-2 border-l-2 ${isPowered ? 'border-cyan-500/40' : 'border-amber-500/40'}`} />
+                            <div className={`absolute top-0 right-0 w-7 h-7 border-t-2 border-r-2 ${isPowered ? 'border-cyan-500/40' : 'border-amber-500/40'}`} />
+                            <div className={`absolute bottom-0 left-0 w-7 h-7 border-b-2 border-l-2 ${isPowered ? 'border-cyan-500/40' : 'border-amber-500/40'}`} />
+                            <div className={`absolute bottom-0 right-0 w-7 h-7 border-b-2 border-r-2 ${isPowered ? 'border-cyan-500/40' : 'border-amber-500/40'}`} />
+                            <span className="absolute top-1.5 left-9 text-[9px] font-mono tracking-[0.25em] text-zinc-400 uppercase">
+                                SYS.CORE // ALIET_EEE
+                            </span>
+                            <span className="absolute top-1.5 right-9 text-[9px] font-mono tracking-[0.25em] text-zinc-400 uppercase">
+                                {isPowered ? 'V_BUS: 24.0V DC' : 'V_BUS: 3.3V STBY'}
+                            </span>
+                        </div>
 
-                        <div className="relative z-10 flex flex-col items-center gap-8 max-w-4xl mx-auto w-full px-4">
+                        <div className="relative z-10 flex flex-col items-center gap-7 max-w-4xl mx-auto w-full px-4">
 
-                            {/* ── Avatar ── */}
+                            {/* Live Instrument Telemetry Strip */}
                             <motion.div
-                                initial={reduced ? false : { scale: 0.8, opacity: 0 }}
+                                initial={reduced ? false : { opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.45 }}
+                                className={`inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border backdrop-blur-md text-[10px] md:text-[11px] font-mono tracking-[0.18em] uppercase ${
+                                    isPowered
+                                        ? 'border-cyan-500/30 bg-black/65 text-cyan-300 shadow-[0_0_20px_rgba(0,242,255,0.1)]'
+                                        : 'border-amber-500/35 bg-black/75 text-amber-300'
+                                }`}
+                            >
+                                <span
+                                    className={`w-2 h-2 rounded-full ${
+                                        isPowered
+                                            ? 'bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.9)]'
+                                            : 'bg-amber-400'
+                                    }`}
+                                />
+                                <span>{isPowered ? statusTicker[statusTickerIndex] : 'STANDBY | LOW-POWER TELEMETRY RAIL'}</span>
+                            </motion.div>
+
+                            {/* ── Avatar Oscilloscope Assembly ── */}
+                            <motion.div
+                                initial={reduced ? false : { scale: 0.84, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                                className="relative flex items-center justify-center"
-                                style={{ width: 200, height: 200 }}
+                                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                                className="relative flex items-center justify-center my-1"
+                                style={{ width: 204, height: 204 }}
                             >
                                 {/* Outer dashed ring */}
                                 {!reduced && !isMobile && (
                                     <div
-                                        className="absolute rounded-full border-2 border-dashed border-cyan-500/20 pointer-events-none hidden md:block animate-[spin_28s_linear_infinite]"
-                                        style={{ width: 260, height: 260 }}
+                                        className={`absolute rounded-full border-2 border-dashed pointer-events-none hidden md:block animate-[spin_28s_linear_infinite] ${
+                                            isPowered ? 'border-cyan-500/25' : 'border-amber-500/25'
+                                        }`}
+                                        style={{ width: 264, height: 264 }}
                                     />
                                 )}
-                                {/* Inner ring with ticks */}
+                                {/* Inner ring with calibrated cardinal ticks */}
                                 {!reduced && !isMobile && (
                                     <div
-                                        className="absolute rounded-full border border-cyan-500/30 pointer-events-none hidden md:block animate-spin-reverse"
-                                        style={{ width: 226, height: 226, animationDuration: '14s' }}
+                                        className={`absolute rounded-full border pointer-events-none hidden md:block animate-spin-reverse ${
+                                            isPowered ? 'border-cyan-500/35' : 'border-amber-500/35'
+                                        }`}
+                                        style={{ width: 230, height: 230, animationDuration: '14s' }}
                                     >
                                         {[0, 90, 180, 270].map((deg) => (
                                             <div
                                                 key={deg}
-                                                className="absolute bg-cyan-400/60"
+                                                className={`absolute ${isPowered ? 'bg-cyan-400/75' : 'bg-amber-400/75'}`}
                                                 style={{
                                                     width: deg % 180 === 0 ? 2 : 10,
                                                     height: deg % 180 === 0 ? 10 : 2,
@@ -684,10 +807,17 @@ const Home: React.FC = () => {
                                 {!reduced && !isMobile && (
                                     <div
                                         className="absolute pointer-events-none hidden md:block animate-[spin_9s_linear_infinite]"
-                                        style={{ width: 240, height: 240 }}
+                                        style={{ width: 244, height: 244 }}
                                     >
                                         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                            <Zap size={18} className="text-cyan-400 fill-cyan-400/30 drop-shadow-[0_0_6px_rgba(0,242,255,0.8)]" />
+                                            <Zap
+                                                size={18}
+                                                className={
+                                                    isPowered
+                                                        ? 'text-cyan-400 fill-cyan-400/30 drop-shadow-[0_0_6px_rgba(0,242,255,0.8)]'
+                                                        : 'text-amber-400 fill-amber-400/30'
+                                                }
+                                            />
                                         </div>
                                     </div>
                                 )}
@@ -695,65 +825,66 @@ const Home: React.FC = () => {
                                 {/* Floating tech orbit icons */}
                                 {!reduced && !isMobile && isPowered && (
                                     <>
-                                        {/* CPU (0deg) */}
                                         <div
                                             className="absolute pointer-events-none hidden md:block animate-[spin_22s_linear_infinite]"
-                                            style={{ width: 290, height: 290 }}
+                                            style={{ width: 294, height: 294 }}
                                         >
                                             <div className="w-full h-full relative">
-                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-75">
                                                     <Cpu size={14} className="text-cyan-300" />
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* Radio (72deg) */}
                                         <div
                                             className="absolute pointer-events-none hidden md:block animate-[spin_17s_linear_infinite]"
-                                            style={{ width: 310, height: 310 }}
+                                            style={{ width: 314, height: 314 }}
                                         >
                                             <div className="w-full h-full relative" style={{ transform: 'rotate(72deg)' }}>
-                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-65">
                                                     <Radio size={13} className="text-purple-400" />
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* BatteryMedium (144deg) */}
                                         <div
                                             className="absolute pointer-events-none hidden md:block animate-[spin_25s_linear_infinite]"
-                                            style={{ width: 330, height: 330 }}
+                                            style={{ width: 334, height: 334 }}
                                         >
                                             <div className="w-full h-full relative" style={{ transform: 'rotate(144deg)' }}>
-                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-65">
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
                                                     <BatteryMedium size={13} className="text-emerald-400" />
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* Code (216deg) */}
                                         <div
                                             className="absolute pointer-events-none hidden md:block animate-[spin_14s_linear_infinite]"
-                                            style={{ width: 280, height: 280 }}
+                                            style={{ width: 284, height: 284 }}
                                         >
                                             <div className="w-full h-full relative" style={{ transform: 'rotate(216deg)' }}>
-                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70">
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-75">
                                                     <Code size={13} className="text-amber-400" />
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* Activity (288deg) */}
                                         <div
                                             className="absolute pointer-events-none hidden md:block animate-[spin_19s_linear_infinite]"
-                                            style={{ width: 350, height: 350 }}
+                                            style={{ width: 354, height: 354 }}
                                         >
                                             <div className="w-full h-full relative" style={{ transform: 'rotate(288deg)' }}>
-                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60">
-                                                    <Activity size={14} className="text-cyan-500" />
+                                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-65">
+                                                    <Activity size={14} className="text-cyan-400" />
                                                 </div>
                                             </div>
                                         </div>
                                     </>
                                 )}
                                 {/* Profile image */}
-                                <div className="relative w-48 h-48 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_60px_rgba(0,242,255,0.18),inset_0_0_30px_rgba(0,242,255,0.05)] bg-black z-10 hover:border-cyan-400/60 transition-colors duration-500 group">
+                                <div
+                                    className={`relative w-48 h-48 rounded-full overflow-hidden border-2 bg-black z-10 transition-colors duration-500 group ${
+                                        isPowered
+                                            ? 'border-cyan-400/45 shadow-[0_0_60px_rgba(0,242,255,0.2),inset_0_0_30px_rgba(0,242,255,0.08)] hover:border-cyan-300'
+                                            : 'border-amber-400/45 shadow-[0_0_40px_rgba(251,191,36,0.14)] hover:border-amber-300'
+                                    }`}
+                                >
                                     <img
                                         src={PROFILE.image}
                                         alt="Srinivasa Manikanta Rajapantula (RSMK) — Electrical & Electronics Engineering Student at ALIET, Embedded Systems, Industrial Automation & IoT"
@@ -769,47 +900,82 @@ const Home: React.FC = () => {
                             </motion.div>
 
                             {/* ── Name & Role ── */}
-                            <div className="space-y-3">
+                            <div className="space-y-3.5">
                                 <motion.div
                                     initial={reduced ? false : { opacity: 0, y: 24 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                    transition={{ delay: 0.15, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                                 >
                                     <h1
                                         className="w-fit text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.92] flex flex-col items-center justify-center mx-auto max-w-full px-2"
                                         style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                                         data-cursor-label="HELLO!"
                                     >
-                                        <div className="pb-1 sm:pb-2 text-white select-none">
+                                        <span className="pb-1 sm:pb-2 text-white select-none">
                                             SRINIVASA
-                                        </div>
-                                        <div className="pt-1 text-cyan-400 select-none" style={{ textShadow: '0 0 40px rgba(0,242,255,0.2)' }}>
+                                        </span>
+                                        <span
+                                            className={`pt-1 select-none transition-colors duration-500 ${
+                                                isPowered ? 'text-cyan-400' : 'text-amber-400'
+                                            }`}
+                                            style={{
+                                                textShadow: isPowered
+                                                    ? '0 0 40px rgba(0,242,255,0.22)'
+                                                    : '0 0 32px rgba(251,191,36,0.2)',
+                                            }}
+                                        >
                                             MANIKANTA
-                                        </div>
-                                        <div className="pt-1.5 sm:pt-2 text-white/90 text-3xl sm:text-5xl md:text-6xl lg:text-7xl opacity-80 select-none" style={{ textShadow: '0 0 40px rgba(255,255,255,0.1)' }}>
+                                        </span>
+                                        <span
+                                            className="pt-1.5 sm:pt-2 text-zinc-200 text-3xl sm:text-5xl md:text-6xl lg:text-7xl select-none"
+                                            style={{ textShadow: '0 0 36px rgba(255,255,255,0.08)' }}
+                                        >
                                             RAJAPANTULA
-                                        </div>
+                                        </span>
                                     </h1>
                                 </motion.div>
 
                                 <motion.div
                                     initial={reduced ? false : { opacity: 0, y: 16 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.35, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                                    className="flex flex-col items-center gap-2"
+                                    transition={{ delay: 0.3, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                                    className="flex flex-col items-center gap-2.5"
                                 >
-                                    <h2 className="text-base md:text-xl text-gray-300 font-mono tracking-[0.25em] uppercase">
+                                    <h2 className="text-sm sm:text-base md:text-xl text-zinc-200 font-mono tracking-[0.22em] uppercase">
                                         RSMK | Electrical &amp; Electronics Engineer
                                     </h2>
-                                    <motion.p
-                                        key={statusTickerIndex}
-                                        initial={reduced ? false : { opacity: 0, y: 5 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.35 }}
-                                        className="text-[10px] md:text-xs font-mono tracking-[0.16em] uppercase text-cyan-500/65"
+                                    <p className="text-xs md:text-sm text-zinc-400 max-w-xl leading-relaxed">
+                                        {PROFILE.heroSubtitle}
+                                    </p>
+                                </motion.div>
+
+                                {/* Hero Quick Actions */}
+                                <motion.div
+                                    initial={reduced ? false : { opacity: 0, y: 12 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.42, duration: 0.45 }}
+                                    className="flex flex-wrap items-center justify-center gap-3 pt-2"
+                                >
+                                    <a
+                                        href="#projects"
+                                        onClick={(e) => handleNavClick(e, 'Projects')}
+                                        className={`group flex items-center gap-2 px-5 py-2.5 text-black text-xs font-mono font-bold uppercase tracking-wider rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 ${
+                                            isPowered
+                                                ? 'bg-cyan-400 hover:bg-cyan-300 shadow-[0_0_24px_rgba(0,242,255,0.3)] focus-visible:ring-cyan-300'
+                                                : 'bg-amber-400 hover:bg-amber-300 shadow-[0_0_20px_rgba(251,191,36,0.25)] focus-visible:ring-amber-300'
+                                        }`}
                                     >
-                                        {statusTicker[statusTickerIndex]}
-                                    </motion.p>
+                                        <span>Inspect Hardware</span>
+                                        <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                                    </a>
+                                    <a
+                                        href="#contact"
+                                        onClick={(e) => handleNavClick(e, 'Contact')}
+                                        className="flex items-center gap-2 px-5 py-2.5 border border-zinc-700 bg-black/50 backdrop-blur-sm text-zinc-200 text-xs font-mono font-bold uppercase tracking-wider rounded-lg hover:border-amber-400/60 hover:text-amber-300 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                                    >
+                                        <Terminal size={13} />
+                                        <span>Open Comms</span>
+                                    </a>
                                 </motion.div>
                             </div>
 
@@ -818,56 +984,77 @@ const Home: React.FC = () => {
                                 <motion.button
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1, y: [0, 8, 0] }}
-                                    transition={{ opacity: { delay: 1.2, duration: 0.4 }, y: { delay: 1.5, duration: 2, repeat: Infinity, ease: 'easeInOut' } }}
-                                    className="flex flex-col items-center gap-2 mt-6 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded"
+                                    transition={{ opacity: { delay: 1.0, duration: 0.4 }, y: { delay: 1.3, duration: 2, repeat: Infinity, ease: 'easeInOut' } }}
+                                    className="flex flex-col items-center gap-1.5 mt-3 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded"
                                     aria-label="Scroll to about section"
                                     onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
                                     type="button"
                                     data-cursor-label="SCROLL"
                                 >
-                                    <span className="text-[9px] font-mono text-amber-500/50 tracking-[0.25em] uppercase">Scroll</span>
-                                    <div className="w-px h-8 bg-gradient-to-b from-amber-500/50 to-transparent" />
-                                    <ChevronDown size={14} className="text-amber-500/50" />
+                                    <span className="text-[9px] font-mono text-amber-400/80 tracking-[0.25em] uppercase">Scroll // CH_01</span>
+                                    <div className="w-px h-7 bg-gradient-to-b from-amber-400/70 to-transparent" />
+                                    <ChevronDown size={14} className="text-amber-400/80" />
                                 </motion.button>
                             )}
                         </div>
                     </section>
 
                     {/* ══ 2. ABOUT ═══════════════════════════════════════════ */}
-                    <section id="about" data-clarity-region="about" className="py-24 max-w-6xl mx-auto">
-                        <SectionHeader title="About Me" subtitle="" isPowered={isPowered} />
+                    <section id="about" data-clarity-region="about" className="py-20 md:py-24 max-w-6xl mx-auto">
+                        <SectionHeader title="About Me" subtitle="Engineer Dossier" code="SEC_01 // PROFILE" isPowered={isPowered} />
 
                         <Reveal>
-                            <div className={`flex flex-col items-center justify-center max-w-4xl mx-auto gap-0 rounded-2xl border overflow-hidden relative text-center
-                ${isPowered ? 'border-gray-800 bg-black/40 backdrop-blur-sm' : 'border-gray-200 bg-white/5'}`}
+                            <div
+                                className={`flex flex-col max-w-4xl mx-auto rounded-2xl border overflow-hidden relative backdrop-blur-md transition-colors duration-300 ${
+                                    isPowered
+                                        ? 'border-zinc-800 bg-[#0a0b0d]/85 shadow-[0_12px_40px_rgba(0,0,0,0.55)]'
+                                        : 'border-amber-500/25 bg-[#0a0a09]/90 shadow-[0_12px_36px_rgba(0,0,0,0.5)]'
+                                }`}
                             >
                                 {/* Circuit texture bg */}
-                                <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                                <div
+                                    aria-hidden="true"
+                                    className="absolute inset-0 opacity-[0.03] pointer-events-none"
                                     style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415-.828-.828-.828.828-1.415-1.415.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM22.485 0l.83.828-1.415 1.415-.828-.828-.828.828-1.415-1.415.828-.828-.828-.828 1.415 1.415-.828.828z' fill='%2306b6d4' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")` }}
                                 />
 
-                                {/* Bio Section Centered */}
-                                <div className="p-8 md:p-12 flex flex-col items-center justify-center w-full">
+                                {/* Chassis Header Strip with Mounting Pads */}
+                                <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 px-5 md:px-8 py-3 border-b border-zinc-800/90 bg-zinc-950/90 text-[10px] font-mono uppercase tracking-widest text-zinc-400">
+                                    <div className="flex items-center gap-2.5">
+                                        <span className="w-2 h-2 rounded-full border border-zinc-700 bg-zinc-900" aria-hidden="true" />
+                                        <span className={isPowered ? 'text-cyan-300' : 'text-amber-300'}>
+                                            MODULE: ENGINEER_PROFILE
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span>LOC: VIJAYAWADA_IN</span>
+                                        <span className="w-2 h-2 rounded-full border border-zinc-700 bg-zinc-900" aria-hidden="true" />
+                                    </div>
+                                </div>
+
+                                {/* Bio Content */}
+                                <div className="relative z-10 p-6 sm:p-8 md:p-10 flex flex-col items-center w-full space-y-8">
                                     <motion.div
-                                        initial={reduced ? false : { opacity: 0, y: 20 }}
+                                        initial={reduced ? false : { opacity: 0, y: 18 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.45, ease: 'easeOut' }}
-                                        className="mb-8 space-y-4 flex flex-col items-center w-full"
+                                        className="space-y-6 flex flex-col items-center w-full"
                                     >
-                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-2xl mx-auto">
-                                            <StatChip icon={<Cpu size={16} />} label="Specialty" value="Embedded / Automation" delay={0.05} />
-                                            <StatChip icon={<MapPin size={16} />} label="Location" value="Vijayawada, AP" delay={0.1} />
-                                            <StatChip icon={<Briefcase size={16} />} label="Experience" value="Industrial Intern" delay={0.15} />
-                                            <StatChip icon={<GraduationCap size={16} />} label="Degree" value="B.Tech EEE" delay={0.2} />
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full">
+                                            <StatChip icon={<Cpu size={16} />} label="Specialty" value="Embedded / Automation" delay={0.05} isPowered={isPowered} />
+                                            <StatChip icon={<MapPin size={16} />} label="Location" value="Vijayawada, AP" delay={0.1} isPowered={isPowered} />
+                                            <StatChip icon={<Briefcase size={16} />} label="Experience" value="Industrial Intern" delay={0.15} isPowered={isPowered} />
+                                            <StatChip icon={<GraduationCap size={16} />} label="Degree" value="B.Tech EEE" delay={0.2} isPowered={isPowered} />
                                         </div>
-                                        <div className="flex flex-wrap justify-center gap-3 pt-1">
+
+                                        <div className="flex flex-wrap justify-center gap-3">
                                             <a
                                                 href="#projects"
                                                 onClick={(e) => handleNavClick(e, 'Projects')}
-                                                className="btn-ripple group flex items-center gap-2 px-5 py-2.5 bg-amber-500 text-black text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-amber-300 hover:shadow-[0_0_30px_rgba(255,174,0,0.5)] transition-all duration-250 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                                                className="btn-ripple group flex items-center gap-2 px-5 py-2.5 bg-amber-400 text-black text-xs font-mono font-bold uppercase tracking-wider rounded-lg hover:bg-amber-300 hover:shadow-[0_0_26px_rgba(255,174,0,0.45)] transition-all duration-250 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                                             >
-                                                View Projects
+                                                <span>View Projects</span>
                                                 <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
                                             </a>
                                             <a
@@ -875,27 +1062,41 @@ const Home: React.FC = () => {
                                                 target="_blank"
                                                 rel="noreferrer"
                                                 onClick={() => trackInteraction('view_resume', 'resume', 'Hero')}
-                                                className="btn-ripple group flex items-center gap-2 px-5 py-2.5 border border-cyan-500/50 text-cyan-400 text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.15)] transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                                                className={`btn-ripple group flex items-center gap-2 px-5 py-2.5 border text-xs font-mono font-bold uppercase tracking-wider rounded-lg transition-all duration-250 backdrop-blur-sm bg-black/40 cursor-pointer focus:outline-none focus-visible:ring-2 ${
+                                                    isPowered
+                                                        ? 'border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/10 hover:border-cyan-400 focus-visible:ring-cyan-400'
+                                                        : 'border-amber-500/50 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400 focus-visible:ring-amber-400'
+                                                }`}
                                             >
                                                 <Eye size={13} className="group-hover:scale-110 transition-transform duration-200" />
-                                                View Resume
+                                                <span>View Resume</span>
                                             </a>
                                             <a
                                                 href="#contact"
                                                 onClick={(e) => handleNavClick(e, 'Contact')}
-                                                className="flex items-center gap-2 px-5 py-2.5 border border-gray-700 text-gray-300 text-xs font-bold uppercase tracking-wider rounded-lg hover:border-cyan-500/60 hover:text-cyan-400 hover:bg-cyan-950/20 transition-all duration-250 backdrop-blur-sm bg-black/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                                                className="flex items-center gap-2 px-5 py-2.5 border border-zinc-700 text-zinc-200 text-xs font-mono font-bold uppercase tracking-wider rounded-lg hover:border-cyan-400/60 hover:text-cyan-300 hover:bg-cyan-950/20 transition-all duration-250 backdrop-blur-sm bg-black/40 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
                                             >
                                                 <Terminal size={13} />
-                                                Initialize Comms
+                                                <span>Initialize Comms</span>
                                             </a>
                                         </div>
                                     </motion.div>
+
                                     <div
-                                        className="space-y-5 text-sm md:text-[15px] leading-relaxed text-gray-300 max-w-3xl"
+                                        className={`space-y-4 text-sm md:text-[15px] leading-relaxed text-zinc-200 max-w-3xl text-left pl-4 md:pl-5 border-l-2 ${
+                                            isPowered ? 'border-cyan-500/45' : 'border-amber-500/45'
+                                        }`}
                                         style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: 1.75 }}
                                     >
                                         <p>
-                                            I’m <span className="text-white font-semibold">Srinivasa Manikanta Rajapantula (RSMK)</span>, an Electrical &amp; Electronics Engineering student based in <span className="text-cyan-400 font-medium">Vijayawada, Andhra Pradesh, India</span> (with diploma education background from Government Polytechnic Srikakulam). My core engineering work focuses on <span className="text-cyan-400 font-medium">Electrical Engineering, Embedded Systems, Industrial Automation (PLC Programming, CODESYS, Factory I/O, Modbus TCP), IoT, Smart Energy Systems, and Control Engineering</span>.
+                                            I’m <span className="text-white font-semibold">Srinivasa Manikanta Rajapantula (RSMK)</span>, an Electrical &amp; Electronics Engineering student based in{' '}
+                                            <span className={isPowered ? 'text-cyan-300 font-medium' : 'text-amber-300 font-medium'}>
+                                                Vijayawada, Andhra Pradesh, India
+                                            </span>{' '}
+                                            (with diploma education background from Government Polytechnic Srikakulam). My core engineering work focuses on{' '}
+                                            <span className={isPowered ? 'text-cyan-300 font-medium' : 'text-amber-300 font-medium'}>
+                                                Electrical Engineering, Embedded Systems, Industrial Automation (PLC Programming, CODESYS, Factory I/O, Modbus TCP), IoT, Smart Energy Systems, and Control Engineering
+                                            </span>.
                                         </p>
                                         <p>
                                             Over the years, I have built real-world engineering hardware prototypes and control simulations ranging from wearable safety devices (SFMD) and 3D industrial sorting lines to solar trackers and agricultural robotics. I utilize Web Development as a supporting skill to create low-latency telemetry dashboards, responsive operator control interfaces, and calculation software for hardware systems.
@@ -910,54 +1111,79 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* ══ 3. PROJECTS ════════════════════════════════════════ */}
-                    <section id="projects" ref={projectsSectionRef} data-clarity-region="projects" className="mb-24 md:mb-40 relative">
-                        <SectionHeader title="Projects" subtitle="" isPowered={isPowered} />
-                        
-                        {/* Controls for Projects (Arrows + Pause/Play) */}
-                        <div className="flex justify-end items-center gap-2 max-w-7xl mx-auto px-4 -mt-16 mb-8 relative z-30">
-                            <button
-                                onClick={() => setIsProjectsPaused(!isProjectsPaused)}
-                                className={`p-2 border rounded-lg transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono
-                                    ${isProjectsPaused 
-                                        ? 'border-amber-500/50 bg-amber-950/20 text-amber-300' 
-                                        : 'border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400'
+                    <section id="projects" ref={projectsSectionRef} data-clarity-region="projects" className="mb-24 md:mb-36 relative">
+                        <SectionHeader title="Projects" subtitle="IC Module Showcase" code="SEC_02 // HARDWARE & SIM" isPowered={isPowered} />
+
+                        {/* Instrument Controls Bar (Telemetry + Pause/Play + Arrows) */}
+                        <div className="flex flex-wrap justify-between items-center gap-3 max-w-7xl mx-auto px-4 -mt-6 md:-mt-8 mb-6 relative z-30">
+                            <div className="flex items-center gap-2.5 text-[11px] font-mono uppercase tracking-widest text-zinc-300">
+                                <span
+                                    className={`w-2 h-2 rounded-full ${
+                                        !isPowered
+                                            ? 'bg-amber-400'
+                                            : isProjectsPaused
+                                                ? 'bg-amber-400'
+                                                : 'bg-cyan-400 animate-pulse'
                                     }`}
-                                title={isProjectsPaused ? "Resume Auto-Scroll" : "Pause Auto-Scroll"}
-                                aria-label={isProjectsPaused ? "Resume Auto-Scroll" : "Pause Auto-Scroll"}
-                            >
-                                {isProjectsPaused ? (
-                                    <>
-                                        <Play size={15} strokeWidth={2.5} />
-                                        <span className="hidden sm:inline">RESUME</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Pause size={15} strokeWidth={2.5} />
-                                        <span className="hidden sm:inline">PAUSE</span>
-                                    </>
-                                )}
-                            </button>
-                            <button
-                                onClick={() => scrollProjects('left')}
-                                className="p-2 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
-                                title="Scroll Left"
-                                aria-label="Scroll projects left"
-                            >
-                                <ChevronLeft size={16} strokeWidth={2.5} />
-                            </button>
-                            <button
-                                onClick={() => scrollProjects('right')}
-                                className="p-2 border border-zinc-800 hover:border-cyan-500/50 hover:bg-cyan-950/15 text-zinc-400 hover:text-cyan-400 rounded-lg transition-all cursor-pointer"
-                                title="Scroll Right"
-                                aria-label="Scroll projects right"
-                            >
-                                <ChevronRight size={16} strokeWidth={2.5} />
-                            </button>
+                                />
+                                <span>MODULES: {PROJECTS.length} UNITS</span>
+                                <span className="hidden sm:inline text-zinc-400">
+                                    // {!isPowered ? 'STANDBY_HOLD' : isProjectsPaused ? 'SCAN_PAUSED' : 'AUTO_SCAN_ACTIVE'}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center gap-2 ml-auto">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsProjectsPaused(!isProjectsPaused)}
+                                    className={`px-3 py-2 border rounded-lg transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono ${
+                                        isProjectsPaused
+                                            ? 'border-amber-500/50 bg-amber-950/30 text-amber-300 hover:border-amber-400'
+                                            : 'border-zinc-800 bg-black/60 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-300 hover:text-cyan-300'
+                                    }`}
+                                    title={isProjectsPaused ? "Resume Auto-Scroll" : "Pause Auto-Scroll"}
+                                    aria-label={isProjectsPaused ? "Resume Auto-Scroll" : "Pause Auto-Scroll"}
+                                >
+                                    {isProjectsPaused ? (
+                                        <>
+                                            <Play size={14} strokeWidth={2.5} />
+                                            <span className="hidden sm:inline">RESUME</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Pause size={14} strokeWidth={2.5} />
+                                            <span className="hidden sm:inline">PAUSE</span>
+                                        </>
+                                    )}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => scrollProjects('left')}
+                                    className="p-2 border border-zinc-800 bg-black/60 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-300 hover:text-cyan-300 rounded-lg transition-all cursor-pointer"
+                                    title="Scroll Left"
+                                    aria-label="Scroll projects left"
+                                >
+                                    <ChevronLeft size={16} strokeWidth={2.5} />
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => scrollProjects('right')}
+                                    className="p-2 border border-zinc-800 bg-black/60 hover:border-cyan-500/50 hover:bg-cyan-950/20 text-zinc-300 hover:text-cyan-300 rounded-lg transition-all cursor-pointer"
+                                    title="Scroll Right"
+                                    aria-label="Scroll projects right"
+                                >
+                                    <ChevronRight size={16} strokeWidth={2.5} />
+                                </button>
+                            </div>
                         </div>
 
                         {/* Carousel Container - Infinite Scrolling Marquee */}
-                        <div className="relative w-full overflow-hidden py-4 mt-4 select-none">
-                            <div 
+                        <div className="relative w-full overflow-hidden py-4 select-none">
+                            {/* Subtle Edge Vignettes */}
+                            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-8 md:w-14 bg-gradient-to-r from-[#080806] to-transparent z-20" />
+                            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-8 md:w-14 bg-gradient-to-l from-[#080806] to-transparent z-20" />
+
+                            <div
                                 ref={projectsScrollRef}
                                 onTouchStart={handleTouchStartProjects}
                                 onTouchMove={handleTouchMoveProjects}
@@ -972,15 +1198,15 @@ const Home: React.FC = () => {
                                 onMouseUp={handleMouseLeaveOrUpProjects}
                                 onMouseMove={handleMouseMoveProjects}
                             >
-                                {PROJECTS.map((proj, i) => (
+                                {PROJECTS.map((proj) => (
                                     <div key={`${proj.id}-1`} className="w-[310px] md:w-[380px] flex-shrink-0">
-                                        <ProjectChip project={proj} isPowered={isPowered} />
+                                        <ProjectChip project={proj} isPowered={isPowered} onOpenDetails={setSelectedProject} />
                                     </div>
                                 ))}
                                 {/* Duplicate for seamless infinite loop */}
-                                {PROJECTS.map((proj, i) => (
+                                {PROJECTS.map((proj) => (
                                     <div key={`${proj.id}-2`} className="w-[310px] md:w-[380px] flex-shrink-0">
-                                        <ProjectChip project={proj} isPowered={isPowered} />
+                                        <ProjectChip project={proj} isPowered={isPowered} onOpenDetails={setSelectedProject} />
                                     </div>
                                 ))}
                             </div>
@@ -988,37 +1214,48 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* ══ 4. SKILLS ══════════════════════════════════════════ */}
-                    <section id="skills" data-clarity-region="skills" className="mb-24 md:mb-40">
+                    <section id="skills" data-clarity-region="skills" className="mb-24 md:mb-36">
                         <SkillBreadboard isPowered={isPowered} />
                     </section>
 
                     {/* ══ 5. CERTIFICATIONS ══════════════════════════════════ */}
-                    <section id="certifications" data-clarity-region="certifications" className="mb-24 md:mb-40 contain-paint" style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1200px' /* content-visibility contain-intrinsic-size */ }}>
+                    <section id="certifications" data-clarity-region="certifications" className="mb-24 md:mb-36 contain-paint" style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1200px' /* content-visibility contain-intrinsic-size */ }}>
                         <CertificationsBlock isPowered={isPowered} />
-
                     </section>
 
                     {/* ══ 6. EXPERIENCE / TIMELINE ═══════════════════════════ */}
-                    <section id="experience" data-clarity-region="experience" className="mb-24 md:mb-40">
-                        <SectionHeader title="Timeline" subtitle="" isPowered={isPowered} flip />
+                    <section id="experience" data-clarity-region="experience" className="mb-24 md:mb-36">
+                        <SectionHeader title="Timeline" subtitle="Engineering Trajectory" code="SEC_05 // LOG" isPowered={isPowered} flip />
                         <TimelineSystem experience={EXPERIENCE} education={EDUCATION} isPowered={isPowered} />
                     </section>
 
                     {/* ══ 7. CONTACT ══════════════════════════════════════════ */}
                     <section id="contact" data-clarity-region="contact" className="mb-20 max-w-6xl mx-auto">
-                        <SectionHeader title="Contact" subtitle="Establish Uplink" isPowered={isPowered} />
+                        <SectionHeader title="Contact" subtitle="Establish Uplink" code="SEC_06 // UART" isPowered={isPowered} />
                         <ContactInterface profile={PROFILE} isPowered={isPowered} />
                     </section>
 
                     {/* ══ FOOTER ═══════════════════════════════════════════════ */}
-                    <footer className="py-14 border-t border-gray-900/80">
-                        <div className="flex flex-col items-center gap-8">
+                    <footer className="py-14 border-t border-zinc-800/80 relative">
+                        {/* Gold-finger bus termination accent strip */}
+                        <div aria-hidden="true" className="flex justify-center gap-1.5 -mt-14 mb-10">
+                            {[0, 1, 2, 3, 4, 5, 6, 7].map((pin) => (
+                                <span
+                                    key={pin}
+                                    className={`w-4 h-1 rounded-b ${isPowered ? 'bg-amber-400/50' : 'bg-amber-500/35'}`}
+                                />
+                            ))}
+                        </div>
 
+                        <div className="flex flex-col items-center gap-8">
                             {/* Brand mark */}
                             <div className="flex flex-col items-center gap-1">
                                 <span
-                                    className="text-2xl font-black tracking-tighter text-cyan-400"
-                                    style={{ fontFamily: "'Space Grotesk', sans-serif", textShadow: '0 0 20px rgba(0,242,255,0.4)' }}
+                                    className={`text-2xl font-black tracking-tighter ${isPowered ? 'text-cyan-400' : 'text-amber-400'}`}
+                                    style={{
+                                        fontFamily: "'Space Grotesk', sans-serif",
+                                        textShadow: isPowered ? '0 0 20px rgba(0,242,255,0.4)' : '0 0 16px rgba(251,191,36,0.25)',
+                                    }}
                                 >
                                     RSMK
                                 </span>
@@ -1027,7 +1264,6 @@ const Home: React.FC = () => {
                                 </span>
                             </div>
 
-
                             {/* Nav links */}
                             <nav className="flex items-center gap-5 flex-wrap justify-center" aria-label="Footer navigation">
                                 {['About', 'Projects', 'Skills', 'Experience', 'Contact'].map((item) => (
@@ -1035,53 +1271,59 @@ const Home: React.FC = () => {
                                         key={item}
                                         href={`#${item.toLowerCase()}`}
                                         onClick={(e) => handleNavClick(e, item)}
-                                        className="text-[10px] font-mono text-zinc-400 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
+                                        className="text-[10px] font-mono text-zinc-400 hover:text-cyan-400 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
                                     >
                                         {item}
                                     </a>
                                 ))}
                                 <Link
                                     to="/gallery"
-                                    className="text-[10px] font-mono text-zinc-400 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
+                                    className="text-[10px] font-mono text-zinc-400 hover:text-cyan-400 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
                                 >
                                     Gallery
                                 </Link>
                                 <Link
                                     to="/automation"
-                                    className="text-[10px] font-mono text-zinc-400 hover:text-cyan-500 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
+                                    className="text-[10px] font-mono text-zinc-400 hover:text-cyan-400 transition-colors duration-200 tracking-widest uppercase cursor-pointer focus:outline-none focus-visible:text-cyan-400"
                                 >
                                     Automation
                                 </Link>
                             </nav>
 
                             {/* Status pill */}
-                            <div className="flex flex-col items-center gap-2">
-                                {/* Live clock */}
+                            <div className="flex flex-col items-center gap-2.5">
                                 {isPowered && clockTime && (
-                                    <div className="font-mono text-[11px] text-cyan-500/60 tracking-[0.15em]">
+                                    <div className="font-mono text-[11px] text-cyan-300/80 tracking-[0.15em]">
                                         {clockTime}
                                     </div>
                                 )}
-                                {/* Energy pulse */}
                                 {isPowered && (
                                     <motion.div
-                                        animate={{ scale: [1, 1.08, 1] }}
+                                        animate={{ scale: [1, 1.06, 1] }}
                                         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
                                         className="flex items-center gap-1.5"
                                     >
                                         <span
-                                            className="text-yellow-400"
+                                            className="text-amber-400"
                                             style={{ filter: 'drop-shadow(0 0 6px rgba(250,204,21,0.7))' }}
-                                        >⚡</span>
-                                        <span className="text-[9px] font-mono text-zinc-400 tracking-widest uppercase">
+                                        >
+                                            ⚡
+                                        </span>
+                                        <span className="text-[9px] font-mono text-zinc-300 tracking-widest uppercase">
                                             Energy Active
                                         </span>
                                     </motion.div>
                                 )}
-                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/60 border border-gray-800 rounded-full backdrop-blur-sm">
-                                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-                                    <span className="text-[10px] text-zinc-400 font-mono tracking-widest">
-                                        SYSTEM_ONLINE // {new Date().getFullYear()}
+                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/70 border border-zinc-800 rounded-full backdrop-blur-sm">
+                                    <div
+                                        className={`w-2 h-2 rounded-full ${
+                                            isPowered
+                                                ? 'bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]'
+                                                : 'bg-amber-400'
+                                        }`}
+                                    />
+                                    <span className="text-[10px] text-zinc-300 font-mono tracking-widest">
+                                        {isPowered ? 'SYSTEM_ONLINE' : 'SYSTEM_STANDBY'} // {new Date().getFullYear()}
                                     </span>
                                 </div>
                                 {isPowered && (
@@ -1089,7 +1331,7 @@ const Home: React.FC = () => {
                                         {[0, 1, 2].map((i) => (
                                             <motion.div
                                                 key={i}
-                                                className="w-1 rounded-sm bg-cyan-500/70"
+                                                className="w-1 rounded-sm bg-cyan-400/75"
                                                 animate={{ height: [3, 8 + i * 2, 4] }}
                                                 transition={{ duration: 0.8 + i * 0.15, repeat: Infinity, repeatType: 'mirror' }}
                                             />
@@ -1105,6 +1347,17 @@ const Home: React.FC = () => {
 
                 </main>
             </div>
+
+            {/* Project Datasheet Modal Host */}
+            <AnimatePresence>
+                {selectedProject && (
+                    <ProjectDetailModal
+                        project={selectedProject}
+                        isPowered={isPowered}
+                        onClose={() => setSelectedProject(null)}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 };
