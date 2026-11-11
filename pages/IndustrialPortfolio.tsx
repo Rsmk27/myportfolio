@@ -129,10 +129,10 @@ const SECTION = { projects: 'projects', toolkit: 'toolkit', roadmap: 'roadmap', 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 /** Small YouTube embed thumbnail that plays inline on click */
-const VideoThumbnail: React.FC<{ video: YouTubeVideo; compact?: boolean }> = ({ video, compact }) => {
+const VideoThumbnail: React.FC<{ video: YouTubeVideo; compact?: boolean }> = ({ video }) => {
   const [playing, setPlaying] = useState(false);
   return (
-    <div className={`relative rounded-xl overflow-hidden bg-black border border-zinc-800 ${compact ? 'aspect-video' : 'aspect-video'}`}>
+    <div className="relative rounded-xl overflow-hidden bg-[#070706] border border-zinc-800/90 aspect-video">
       {playing ? (
         <iframe
           className="w-full h-full"
@@ -143,8 +143,9 @@ const VideoThumbnail: React.FC<{ video: YouTubeVideo; compact?: boolean }> = ({ 
         />
       ) : (
         <button
+          type="button"
           onClick={() => setPlaying(true)}
-          className="w-full h-full relative group cursor-pointer"
+          className="w-full h-full relative group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           aria-label={`Play ${video.label}`}
         >
           <img
@@ -153,22 +154,22 @@ const VideoThumbnail: React.FC<{ video: YouTubeVideo; compact?: boolean }> = ({ 
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          {/* Play button */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/20" />
+          {/* Play reticle */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-14 h-14 rounded-full bg-red-600/90 group-hover:bg-red-500 flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110">
+            <div className="relative w-14 h-14 rounded-full bg-red-600/90 group-hover:bg-red-500 border border-white/25 flex items-center justify-center shadow-[0_0_25px_rgba(220,38,38,0.55)] transition-transform group-hover:scale-110">
               <Play size={22} className="fill-white text-white ml-1" />
             </div>
           </div>
           {/* Label */}
-          <div className="absolute bottom-0 left-0 right-0 p-3">
-            <p className="text-xs font-mono text-zinc-200 line-clamp-1">{video.label}</p>
+          <div className="absolute bottom-0 left-0 right-0 p-3 text-left">
+            <p className="text-xs font-mono text-zinc-100 line-clamp-1">{video.label}</p>
             <a
               href={video.url}
               target="_blank"
               rel="noopener noreferrer"
               onClick={e => e.stopPropagation()}
-              className="mt-1 inline-flex items-center gap-1 text-[10px] text-red-400 hover:text-red-300 font-mono"
+              className="mt-1 inline-flex items-center gap-1 text-[10px] text-red-300 hover:text-red-200 font-mono"
             >
               <Youtube size={11} /> Watch on YouTube
             </a>
@@ -184,11 +185,21 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
   const [activeVideoIdx, setActiveVideoIdx] = useState(0);
   const overlayRef = useRef<HTMLDivElement>(null);
   const modalBoxRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
-  // Lock body scroll
+  // Lock body scroll & restore focus on unmount
   useEffect(() => {
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
+    closeBtnRef.current?.focus();
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      requestAnimationFrame(() => {
+        previousFocusRef.current?.focus();
+      });
+    };
   }, []);
 
   // Escape key handler & focus trap
@@ -232,7 +243,7 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
   return (
     <motion.div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/80 backdrop-blur-sm overflow-y-auto py-8 px-4"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-black/85 backdrop-blur-md overflow-y-auto py-6 sm:py-10 px-3 sm:px-4"
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       onClick={handleOverlayClick}
     >
@@ -241,42 +252,55 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
         role="dialog"
         aria-modal="true"
         aria-label={project.title}
-        className="relative w-full max-w-4xl bg-[#0d0d0b] border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl"
-        initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }}
-        transition={{ duration: 0.25, ease: 'easeOut' }}
+        className="relative w-full max-w-4xl bg-[#0d0d0b] border border-zinc-800 rounded-2xl overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.85)]"
+        initial={{ y: 36, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 36, opacity: 0 }}
+        transition={{ duration: 0.22, ease: 'easeOut' }}
         onClick={e => e.stopPropagation()}
       >
+        {/* Top HMI power rail */}
+        <div className="h-[2px] w-full bg-gradient-to-r from-cyan-400 via-amber-400/70 to-transparent" />
+
         {/* Header */}
-        <div className="flex items-start justify-between p-6 border-b border-zinc-800 bg-zinc-950/80">
-          <div className="space-y-1 pr-4">
+        <div className="relative flex items-start justify-between p-5 sm:p-6 border-b border-zinc-800/90 bg-[#111110]">
+          <div className="space-y-1.5 pr-4">
             <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest">
+                HMI MODULE //
+              </span>
               <span className={`inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full border ${STATUS_STYLES[project.status]}`}>
                 <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[project.status]}`} />
                 {project.status}
               </span>
-              <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-zinc-800">
+              <span className="text-[10px] font-mono text-zinc-300 uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-zinc-700/80 bg-zinc-900/60">
                 {project.category}
               </span>
             </div>
-            <h2 className="text-xl font-bold text-white uppercase tracking-tight">{project.title}</h2>
-            <p className="text-xs text-cyan-300/80 font-mono">{project.subtitle}</p>
+            <h2
+              className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              {project.title}
+            </h2>
+            <p className="text-xs text-cyan-300 font-mono">{project.subtitle}</p>
           </div>
           <button
+            ref={closeBtnRef}
+            type="button"
             onClick={onClose}
             aria-label="Close project modal"
-            className="shrink-0 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+            className="shrink-0 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg border border-zinc-700/70 bg-zinc-900/80 text-zinc-300 hover:text-white hover:border-cyan-400/60 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           >
             <X size={18} />
           </button>
         </div>
 
-        <div className="p-6 space-y-8 overflow-y-auto max-h-[75vh]">
+        <div className="p-5 sm:p-6 space-y-7 overflow-y-auto max-h-[76vh]">
 
           {/* ── Video Player(s) ── */}
           {sortedVideos.length > 0 && (
             <div className="space-y-3">
               <h3 className="text-xs font-mono uppercase tracking-widest text-cyan-400 flex items-center gap-2">
-                <Youtube size={14} /> Demo Videos
+                <Youtube size={14} /> 01 // Simulation &amp; Demo Telemetry
               </h3>
               <VideoThumbnail video={sortedVideos[activeVideoIdx]} />
               {sortedVideos.length > 1 && (
@@ -284,6 +308,7 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
                   {sortedVideos.map((v, i) => (
                     <button
                       key={v.id}
+                      type="button"
                       onClick={() => setActiveVideoIdx(i)}
                       className={`shrink-0 rounded-lg overflow-hidden border transition-all cursor-pointer ${i === activeVideoIdx ? 'border-cyan-400 ring-1 ring-cyan-400/40' : 'border-zinc-800 hover:border-zinc-600'}`}
                     >
@@ -293,12 +318,11 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
                           <Play size={14} className="fill-white text-white" />
                         </div>
                       </div>
-                      <p className="px-2 py-1 text-[9px] font-mono text-zinc-400 line-clamp-1 w-32">{v.label}</p>
+                      <p className="px-2 py-1 text-[9px] font-mono text-zinc-300 line-clamp-1 w-32">{v.label}</p>
                     </button>
                   ))}
                 </div>
               )}
-              {/* All YouTube links */}
               <div className="flex flex-wrap gap-2">
                 {sortedVideos.map(v => (
                   <a
@@ -306,7 +330,7 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
                     href={v.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600/15 hover:bg-red-600/25 border border-red-500/30 text-red-300 text-[11px] font-mono transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600/15 hover:bg-red-600/25 border border-red-500/35 text-red-200 text-[11px] font-mono transition-colors"
                   >
                     <Youtube size={12} /> {v.label}
                   </a>
@@ -317,13 +341,13 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
 
           {/* ── Software & protocols ── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Software & Tools</p>
+            <div className="p-4 rounded-xl bg-[#111110] border border-zinc-800/90 space-y-2.5">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Software &amp; Tools</p>
               <div className="flex flex-wrap gap-1.5">
                 {project.software.map(s => {
                   const logo = TECH_LOGO_MAP[s];
                   return (
-                    <span key={s} className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-300">
+                    <span key={s} className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-md bg-[#080806] border border-zinc-800 text-zinc-200">
                       {logo && <img src={logo} alt={s} className="w-3.5 h-3.5 object-contain" />}
                       <span>{s}</span>
                     </span>
@@ -332,13 +356,13 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
               </div>
             </div>
             {project.protocol && (
-              <div className="space-y-2">
-                <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Protocols</p>
+              <div className="p-4 rounded-xl bg-[#111110] border border-zinc-800/90 space-y-2.5">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Fieldbus &amp; Protocols</p>
                 <div className="flex flex-wrap gap-1.5">
                   {project.protocol.map(p => {
                     const logo = TECH_LOGO_MAP[p];
                     return (
-                      <span key={p} className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/30 text-cyan-300">
+                      <span key={p} className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-md bg-cyan-950/60 border border-cyan-500/35 text-cyan-200">
                         {logo && <img src={logo} alt={p} className="w-3.5 h-3.5 object-contain" />}
                         <span>{p}</span>
                       </span>
@@ -350,25 +374,25 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
           </div>
 
           {/* ── Status note ── */}
-          <div className="flex items-start gap-2 p-3 rounded-lg bg-zinc-900/60 border border-zinc-800">
-            <Info size={14} className="text-zinc-400 shrink-0 mt-0.5" />
-            <p className="text-xs text-zinc-400 font-sans">{project.statusNote}</p>
+          <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-[#111110] border border-amber-500/25">
+            <Info size={15} className="text-amber-400 shrink-0 mt-0.5" />
+            <p className="text-xs text-zinc-300 font-sans leading-relaxed">{project.statusNote}</p>
           </div>
 
           {/* ── Problem statement ── */}
           <div className="space-y-2">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Problem Statement</p>
-            <p className="text-sm text-zinc-300 font-sans leading-relaxed">{project.problemStatement}</p>
+            <p className="text-[10px] font-mono uppercase tracking-widest text-cyan-400">Problem Statement</p>
+            <p className="text-sm text-zinc-200 font-sans leading-relaxed">{project.problemStatement}</p>
           </div>
 
           {/* ── Objectives ── */}
           <div className="space-y-2">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Objectives</p>
-            <ul className="space-y-1.5">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-cyan-400">Engineering Objectives</p>
+            <ul className="space-y-2">
               {project.objectives.map((o, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-zinc-300 font-sans">
-                  <ChevronRight size={14} className="text-cyan-400 shrink-0 mt-0.5" />
-                  {o}
+                <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-300 font-sans">
+                  <ChevronRight size={14} className="text-cyan-400 shrink-0 mt-1" />
+                  <span>{o}</span>
                 </li>
               ))}
             </ul>
@@ -376,12 +400,12 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
 
           {/* ── Highlights ── */}
           <div className="space-y-2">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Technical Highlights</p>
-            <ul className="space-y-1.5">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">Technical Highlights</p>
+            <ul className="space-y-2">
               {project.highlights.map((h, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-zinc-300 font-sans">
-                  <Check size={14} className="text-emerald-400 shrink-0 mt-0.5" />
-                  {h}
+                <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-300 font-sans">
+                  <Check size={14} className="text-emerald-400 shrink-0 mt-1" />
+                  <span>{h}</span>
                 </li>
               ))}
             </ul>
@@ -390,14 +414,14 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
           {/* ── Feature matrix (for in-progress projects) ── */}
           {project.featureMatrix && (
             <div className="space-y-2">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Implementation Status</p>
-              <div className="divide-y divide-zinc-800/60 rounded-xl border border-zinc-800 overflow-hidden">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-amber-400">Implementation Status</p>
+              <div className="divide-y divide-zinc-800/70 rounded-xl border border-zinc-800 overflow-hidden">
                 {project.featureMatrix.map((f, i) => {
                   const Icon = FEATURE_ICONS[f.status];
                   return (
-                    <div key={i} className="flex items-center gap-3 px-4 py-2.5 bg-zinc-950/40">
+                    <div key={i} className="flex items-center gap-3 px-4 py-2.5 bg-[#111110]">
                       <Icon size={14} className={FEATURE_STYLES[f.status]} />
-                      <span className="text-xs text-zinc-300 font-sans flex-1">{f.label}</span>
+                      <span className="text-xs text-zinc-200 font-sans flex-1">{f.label}</span>
                       <span className={`text-[10px] font-mono ${FEATURE_STYLES[f.status]}`}>{f.status}</span>
                     </div>
                   );
@@ -409,12 +433,12 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
           {/* ── Challenges ── */}
           {project.challenges && (
             <div className="space-y-2">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Challenges & Lessons Learned</p>
-              <ul className="space-y-1.5">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-amber-400">Challenges &amp; Lessons Learned</p>
+              <ul className="space-y-2">
                 {project.challenges.map((c, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-zinc-400 font-sans">
+                  <li key={i} className="flex items-start gap-2 text-xs text-zinc-300 font-sans">
                     <TriangleAlert size={13} className="text-amber-400 shrink-0 mt-0.5" />
-                    {c}
+                    <span>{c}</span>
                   </li>
                 ))}
               </ul>
@@ -424,12 +448,12 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
           {/* ── Future work ── */}
           {project.futureWork && (
             <div className="space-y-2">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Future Improvements</p>
-              <ul className="space-y-1.5">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-violet-300">Future Improvements</p>
+              <ul className="space-y-2">
                 {project.futureWork.map((f, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-zinc-400 font-sans">
+                  <li key={i} className="flex items-start gap-2 text-xs text-zinc-300 font-sans">
                     <CircleDashed size={13} className="text-violet-400 shrink-0 mt-0.5" />
-                    {f}
+                    <span>{f}</span>
                   </li>
                 ))}
               </ul>
@@ -437,26 +461,26 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
           )}
 
           {/* ── Files & documentation ── */}
-          <div className="space-y-2">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Project Files & Documentation</p>
+          <div className="space-y-2.5">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Project Files &amp; Documentation</p>
             <div className="space-y-2">
               {project.files.map((file, i) => (
-                <div key={i} className={`flex items-center justify-between px-4 py-3 rounded-lg border ${file.available ? 'bg-emerald-950/20 border-emerald-800/40' : 'bg-zinc-900/40 border-zinc-800/60'}`}>
+                <div key={i} className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl border ${file.available ? 'bg-emerald-950/20 border-emerald-700/40' : 'bg-[#111110] border-zinc-800/80'}`}>
                   <div>
                     <p className="text-xs font-mono text-zinc-200">{file.label}</p>
-                    <p className="text-[10px] text-zinc-500 mt-0.5">{file.description}</p>
+                    <p className="text-[11px] text-zinc-400 mt-0.5">{file.description}</p>
                   </div>
                   {file.available && file.url ? (
                     <a
                       href={file.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/40 text-cyan-300 text-[11px] font-mono transition-colors shrink-0"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-cyan-200 text-[11px] font-mono transition-colors shrink-0"
                     >
                       <ExternalLink size={11} /> View
                     </a>
                   ) : (
-                    <span className="text-[10px] font-mono text-zinc-600 px-2">Pending</span>
+                    <span className="text-[10px] font-mono text-zinc-400 px-2.5 py-1 rounded border border-zinc-800 bg-[#080806] shrink-0">Pending</span>
                   )}
                 </div>
               ))}
@@ -469,11 +493,16 @@ const ProjectModal: React.FC<{ project: IndustrialProject; onClose: () => void }
 };
 
 // ─── Project Card ─────────────────────────────────────────────────────────────
-const ProjectCard: React.FC<{ project: IndustrialProject; onClick: () => void }> = ({ project, onClick }) => {
+const ProjectCard = React.forwardRef<
+  HTMLDivElement,
+  { project: IndustrialProject; index: number; onClick: () => void }
+>(({ project, index, onClick }, ref) => {
   const primaryVideo = project.videos?.find(v => v.id === project.primaryVideoId) ?? project.videos?.[0];
+  const moduleCode = `MOD-${String(index + 1).padStart(2, '0')}`;
 
   return (
     <motion.div
+      ref={ref}
       layout
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
@@ -489,31 +518,41 @@ const ProjectCard: React.FC<{ project: IndustrialProject; onClick: () => void }>
           trackInteraction('open_project', 'industrial', project.title);
         }
       }}
-      className="group rounded-2xl border border-zinc-800 hover:border-zinc-700 bg-zinc-950/80 backdrop-blur-sm flex flex-col overflow-hidden transition-all hover:shadow-[0_4px_24px_rgba(0,0,0,0.5)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+      className="group relative rounded-2xl border border-zinc-800 hover:border-cyan-500/50 bg-[#0d0d0b]/95 backdrop-blur-sm flex flex-col overflow-hidden transition-all duration-300 hover:shadow-[0_12px_36px_rgba(0,0,0,0.65),0_0_24px_rgba(0,242,255,0.08)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
       onClick={() => { onClick(); trackInteraction('open_project', 'industrial', project.title); }}
     >
+      {/* Top HMI bezel strip */}
+      <div className="h-[2px] w-full bg-gradient-to-r from-cyan-500/60 via-amber-400/40 to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
+      <div className="flex items-center justify-between px-4 py-2 border-b border-zinc-800/80 bg-[#111110] text-[10px] font-mono">
+        <span className="text-zinc-300 font-bold tracking-wider">{moduleCode}</span>
+        <span className={`inline-flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full border ${STATUS_STYLES[project.status]}`}>
+          <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[project.status]}`} />
+          {project.status}
+        </span>
+      </div>
+
       {/* Thumbnail / video preview */}
-      <div className="relative aspect-video bg-zinc-900 overflow-hidden" onClick={e => e.stopPropagation()}>
+      <div className="relative aspect-video bg-[#070706] overflow-hidden border-b border-zinc-800/70" onClick={e => e.stopPropagation()}>
         {primaryVideo ? (
           <VideoThumbnail video={primaryVideo} compact />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-900 via-zinc-950 to-black">
-            <div className="text-zinc-700 opacity-40 scale-150">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#111110] via-[#0b0b09] to-[#060605]">
+            <div className="text-cyan-500/25 group-hover:text-cyan-400/45 transition-colors scale-150">
               {getIcon(project.thumbnailPlaceholder, 48)}
             </div>
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293720_1px,transparent_1px),linear-gradient(to_bottom,#1f293720_1px,transparent_1px)] bg-[size:2rem_2rem]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e1e16_1px,transparent_1px),linear-gradient(to_bottom,#1e1e16_1px,transparent_1px)] bg-[size:24px_24px] opacity-60" />
           </div>
         )}
         {/* Category badge */}
-        <div className="absolute top-2 left-2 z-10">
-          <span className="px-2 py-0.5 rounded text-[9px] font-mono uppercase tracking-wider bg-black/75 border border-zinc-700/50 text-zinc-300 backdrop-blur-sm">
+        <div className="absolute top-2 left-2 z-10 pointer-events-none">
+          <span className="px-2 py-0.5 rounded text-[9px] font-mono uppercase tracking-wider bg-black/80 border border-zinc-700/70 text-zinc-200 backdrop-blur-sm">
             {project.category.split('&')[0].trim()}
           </span>
         </div>
         {/* Video count badge */}
         {(project.videos?.length ?? 0) > 0 && (
-          <div className="absolute top-2 right-2 z-10">
-            <span className="flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-mono bg-black/75 border border-red-500/30 text-red-300 backdrop-blur-sm">
+          <div className="absolute top-2 right-2 z-10 pointer-events-none">
+            <span className="flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-mono bg-black/80 border border-red-500/40 text-red-300 backdrop-blur-sm">
               <Youtube size={9} /> {project.videos!.length} {project.videos!.length === 1 ? 'video' : 'videos'}
             </span>
           </div>
@@ -522,29 +561,27 @@ const ProjectCard: React.FC<{ project: IndustrialProject; onClick: () => void }>
 
       {/* Body */}
       <div className="p-5 flex-1 flex flex-col justify-between gap-4">
-        <div className="space-y-2">
-          {/* Status */}
-          <span className={`inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full border ${STATUS_STYLES[project.status]}`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[project.status]}`} />
-            {project.status}
-          </span>
-          <h3 className="text-sm font-bold text-white uppercase tracking-tight group-hover:text-cyan-300 transition-colors leading-snug">
+        <div className="space-y-2.5">
+          <h3
+            className="text-base font-bold text-white uppercase tracking-tight group-hover:text-cyan-300 transition-colors leading-snug"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+          >
             {project.title}
           </h3>
-          <p className="text-[11px] text-zinc-400 font-sans line-clamp-2 leading-relaxed">{project.description}</p>
+          <p className="text-xs text-zinc-300 font-sans line-clamp-2 leading-relaxed">{project.description}</p>
           {/* Software tags */}
           <div className="flex flex-wrap gap-1.5 pt-1">
             {project.software.slice(0, 3).map(s => {
               const logo = TECH_LOGO_MAP[s];
               return (
-                <span key={s} className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
+                <span key={s} className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded bg-[#111110] border border-zinc-800 text-zinc-300">
                   {logo && <img src={logo} alt={s} className="w-3 h-3 object-contain" />}
                   <span>{s}</span>
                 </span>
               );
             })}
             {project.software.length > 3 && (
-              <span className="text-[10px] font-mono text-zinc-600">+{project.software.length - 3}</span>
+              <span className="text-[10px] font-mono text-zinc-400 self-center">+{project.software.length - 3}</span>
             )}
           </div>
         </div>
@@ -558,7 +595,7 @@ const ProjectCard: React.FC<{ project: IndustrialProject; onClick: () => void }>
               onClick();
             }}
             aria-label={`View Project: ${project.title}`}
-            className="text-xs font-mono text-zinc-400 hover:text-cyan-300 uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="text-xs font-mono text-cyan-300 hover:text-white uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors cursor-pointer"
           >
             <BookOpen size={12} /> View Project
           </button>
@@ -568,7 +605,7 @@ const ProjectCard: React.FC<{ project: IndustrialProject; onClick: () => void }>
               target="_blank"
               rel="noopener noreferrer"
               onClick={e => e.stopPropagation()}
-              className="inline-flex items-center gap-1.5 text-[10px] font-mono text-red-400 hover:text-red-300 transition-colors"
+              className="inline-flex items-center gap-1.5 text-[10px] font-mono text-red-300 hover:text-red-200 transition-colors"
             >
               <Youtube size={11} /> YouTube
             </a>
@@ -577,7 +614,8 @@ const ProjectCard: React.FC<{ project: IndustrialProject; onClick: () => void }>
       </div>
     </motion.div>
   );
-};
+});
+ProjectCard.displayName = 'ProjectCard';
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 const IndustrialPortfolio: React.FC = () => {
@@ -651,97 +689,127 @@ const IndustrialPortfolio: React.FC = () => {
         schema={jsonLd}
       />
 
-      {/* ── Background grid ── */}
-      <div className="fixed inset-0 pointer-events-none opacity-20 z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_60%,transparent_100%)]" />
+      {/* ── Background blueprint grid & ambient field ── */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e1e16_1px,transparent_1px),linear-gradient(to_bottom,#1e1e16_1px,transparent_1px)] bg-[size:48px_48px] opacity-35 [mask-image:radial-gradient(ellipse_75%_60%_at_50%_0%,#000_60%,transparent_100%)]" />
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/8 rounded-full blur-3xl" />
         <div className="absolute top-1/3 right-10 w-80 h-80 bg-amber-500/8 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-14">
 
-        {/* ── Top Nav ── */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-zinc-800/80">
+        {/* ── Top HMI Nav Rack ── */}
+        <nav
+          aria-label="Industrial portfolio navigation"
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-800/80"
+        >
           <div className="flex items-center gap-3 flex-wrap">
             <Link
               to="/"
               onClick={() => trackInteraction('nav_home_from_industrial', 'navigation', 'Home')}
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-cyan-400 transition-colors group px-3 py-1.5 rounded-lg border border-zinc-800 hover:border-cyan-500/40 bg-zinc-900/60"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-300 hover:text-cyan-300 transition-colors group px-3.5 py-2 rounded-lg border border-zinc-800 hover:border-cyan-500/40 bg-[#0d0d0b]"
             >
-              <ArrowLeft size={13} className="group-hover:-translate-x-1 transition-transform" />
+              <ArrowLeft size={13} className="group-hover:-translate-x-1 transition-transform text-cyan-400" />
               <span>Home</span>
             </Link>
             <Link
               to="/gallery"
               onClick={() => trackInteraction('nav_gallery_from_industrial', 'navigation', 'Gallery')}
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-cyan-400 transition-colors px-3 py-1.5 rounded-lg border border-zinc-800 hover:border-cyan-500/40 bg-zinc-900/60"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-300 hover:text-cyan-300 transition-colors px-3.5 py-2 rounded-lg border border-zinc-800 hover:border-cyan-500/40 bg-[#0d0d0b]"
             >
               Gallery
             </Link>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             <button
+              type="button"
               onClick={handleCopyLink}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-mono text-zinc-400 hover:text-cyan-300 bg-zinc-800/60 hover:bg-cyan-500/10 border border-zinc-700/60 rounded-md transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono text-zinc-300 hover:text-cyan-300 bg-[#0d0d0b] hover:bg-cyan-500/10 border border-zinc-700/70 rounded-lg transition-colors cursor-pointer"
             >
               {copiedLink ? <Check size={12} className="text-emerald-400" /> : <Share2 size={12} />}
               <span>{copiedLink ? 'Copied!' : 'Share'}</span>
             </button>
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono tracking-wider uppercase text-cyan-300 bg-cyan-950/60 border border-cyan-500/30">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(0,242,255,0.8)]" />
-              Engineering Lab // Active
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-mono tracking-wider uppercase text-cyan-300 bg-cyan-950/60 border border-cyan-500/35">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+              PLC_BUS // RUN · 24VDC
             </span>
           </div>
-        </div>
+        </nav>
 
-        {/* ── Hero ── */}
-        <section className="pt-10 pb-12">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-4">
-            <Workflow size={16} />
-            <span>Industrial Automation & Control Engineering</span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white uppercase tracking-tight leading-none mb-6">
-            My Industrial<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-400">
-              Automation Journey
-            </span>
-          </h1>
-          <p className="max-w-3xl text-sm sm:text-base text-zinc-400 font-sans leading-relaxed mb-8">
-            From electrical schematics and PLC programming to industrial networking, SCADA, and predictive maintenance — documenting my hands-on engineering journey through designs, simulations, and practical automation projects.
-          </p>
+        {/* ── Hero Control Cabinet Panel ── */}
+        <section className="pt-8 pb-12">
+          <div className="relative rounded-2xl border border-zinc-800 bg-[#0d0d0b]/90 p-6 sm:p-8 md:p-10 backdrop-blur-md overflow-hidden shadow-[0_16px_50px_rgba(0,0,0,0.6)]">
+            {/* Top copper/cyan power rail */}
+            <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-cyan-400 via-amber-400/70 to-transparent" />
+            {/* Corner fiducials */}
+            <span aria-hidden="true" className="pointer-events-none absolute top-2.5 left-2.5 w-2.5 h-2.5 border-t border-l border-cyan-500/50" />
+            <span aria-hidden="true" className="pointer-events-none absolute top-2.5 right-2.5 w-2.5 h-2.5 border-t border-r border-cyan-500/50" />
+            <span aria-hidden="true" className="pointer-events-none absolute bottom-2.5 left-2.5 w-2.5 h-2.5 border-b border-l border-amber-500/50" />
+            <span aria-hidden="true" className="pointer-events-none absolute bottom-2.5 right-2.5 w-2.5 h-2.5 border-b border-r border-amber-500/50" />
 
-          {/* Quick nav CTAs */}
-          <div className="flex flex-wrap gap-3 mb-10">
-            {[
-              { label: 'Featured Systems', id: SECTION.projects, icon: <Workflow size={13} /> },
-              { label: 'Engineering Toolkit', id: SECTION.toolkit, icon: <Wrench size={13} /> },
-              { label: 'Automation Roadmap', id: SECTION.roadmap, icon: <Activity size={13} /> },
-              { label: 'Protocols', id: SECTION.protocols, icon: <Network size={13} /> },
-              { label: 'Documentation', id: SECTION.docs, icon: <BookOpen size={13} /> },
-            ].map(cta => (
-              <button
-                key={cta.id}
-                onClick={() => scrollTo(cta.id)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-900/60 hover:border-cyan-500/40 hover:text-cyan-300 text-zinc-300 text-xs font-mono uppercase tracking-wider transition-all cursor-pointer"
-              >
-                {cta.icon} {cta.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Summary stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {[
-              { label: 'Completed Projects', value: INDUSTRIAL_PROJECTS.filter(p => p.status === 'Completed').length, color: 'text-emerald-400' },
-              { label: 'In Progress', value: INDUSTRIAL_PROJECTS.filter(p => p.status === 'In Progress').length, color: 'text-amber-400' },
-              { label: 'Video Demos', value: INDUSTRIAL_PROJECTS.reduce((n, p) => n + (p.videos?.length ?? 0), 0), color: 'text-red-400' },
-              { label: 'Protocols Studied', value: INDUSTRIAL_PROTOCOLS.length, color: 'text-violet-400' },
-            ].map(s => (
-              <div key={s.label} className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-                <p className={`text-2xl font-black ${s.color}`}>{s.value}</p>
-                <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mt-1">{s.label}</p>
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase">
+                <Workflow size={16} />
+                <span>SYS.01 // Industrial Automation &amp; Control Engineering</span>
               </div>
-            ))}
+              <span className="text-[10px] font-mono text-amber-300 bg-amber-950/40 border border-amber-500/30 px-2.5 py-0.5 rounded uppercase tracking-widest">
+                HMI-CABINET // CODESYS · EPLAN · CCW
+              </span>
+            </div>
+
+            <h1
+              className="text-4xl sm:text-5xl md:text-7xl font-black text-white uppercase tracking-tight leading-none mb-5"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              My Industrial<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-400">
+                Automation Journey
+              </span>
+            </h1>
+            <p className="max-w-3xl text-sm sm:text-base text-zinc-300 font-sans leading-relaxed mb-7">
+              From electrical schematics and PLC programming to industrial networking, SCADA, and predictive maintenance — documenting my hands-on engineering journey through designs, simulations, and practical automation projects.
+            </p>
+
+            {/* Quick nav HMI softkeys */}
+            <div className="flex flex-wrap gap-2.5 mb-8">
+              {[
+                { key: '01', label: 'Featured Systems', id: SECTION.projects, icon: <Workflow size={13} /> },
+                { key: '02', label: 'Engineering Toolkit', id: SECTION.toolkit, icon: <Wrench size={13} /> },
+                { key: '03', label: 'Automation Roadmap', id: SECTION.roadmap, icon: <Activity size={13} /> },
+                { key: '04', label: 'Protocols', id: SECTION.protocols, icon: <Network size={13} /> },
+                { key: '05', label: 'Documentation', id: SECTION.docs, icon: <BookOpen size={13} /> },
+              ].map(cta => (
+                <button
+                  key={cta.id}
+                  type="button"
+                  onClick={() => scrollTo(cta.id)}
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-zinc-700/80 bg-[#111110] hover:border-cyan-400/60 hover:bg-cyan-500/10 hover:text-cyan-200 text-zinc-200 text-xs font-mono uppercase tracking-wider transition-all cursor-pointer"
+                >
+                  <span className="text-[10px] text-amber-400">{cta.key}</span>
+                  {cta.icon}
+                  <span>{cta.label}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* DIN-rail Telemetry Readouts */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+              {[
+                { tag: 'SYS_DONE', label: 'Completed Projects', value: INDUSTRIAL_PROJECTS.filter(p => p.status === 'Completed').length, color: 'text-emerald-400', dot: 'bg-emerald-400' },
+                { tag: 'SYS_RUN', label: 'In Progress', value: INDUSTRIAL_PROJECTS.filter(p => p.status === 'In Progress').length, color: 'text-amber-400', dot: 'bg-amber-400 animate-pulse' },
+                { tag: 'VID_SIM', label: 'Video Demos', value: INDUSTRIAL_PROJECTS.reduce((n, p) => n + (p.videos?.length ?? 0), 0), color: 'text-red-400', dot: 'bg-red-400' },
+                { tag: 'BUS_NET', label: 'Protocols Studied', value: INDUSTRIAL_PROTOCOLS.length, color: 'text-cyan-400', dot: 'bg-cyan-400' },
+              ].map(s => (
+                <div key={s.label} className="rounded-xl border border-zinc-800 bg-[#111110] p-4 flex flex-col justify-between">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[9px] font-mono text-zinc-400 tracking-widest uppercase">{s.tag}</span>
+                    <span className={`w-2 h-2 rounded-full ${s.dot}`} />
+                  </div>
+                  <p className={`text-2xl sm:text-3xl font-black leading-none ${s.color}`}>{s.value}</p>
+                  <p className="text-[10px] font-mono text-zinc-300 uppercase tracking-wider mt-1.5">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -749,12 +817,20 @@ const IndustrialPortfolio: React.FC = () => {
             SECTION 1 — Project Gallery
         ══════════════════════════════════════════════ */}
         <section id={SECTION.projects} className="scroll-mt-8 mb-24">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-2">
-            <Workflow size={14} /> Project Portfolio
+          <div className="flex items-center gap-4 mb-8">
+            <div>
+              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-1.5">
+                <Workflow size={14} /> 01 // Project Portfolio
+              </div>
+              <h2
+                className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Engineering Projects
+              </h2>
+            </div>
+            <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-cyan-500/40 via-amber-500/20 to-transparent" />
           </div>
-          <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-8">
-            Engineering Projects
-          </h2>
 
           {/* Filter + Search */}
           <div className="mb-8 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -765,30 +841,32 @@ const IndustrialPortfolio: React.FC = () => {
                 return (
                   <button
                     key={cat}
+                    type="button"
                     onClick={() => { setSelectedCategory(cat); trackInteraction('filter_industrial', 'industrial', cat); }}
                     className={`px-3 py-1.5 rounded-xl text-[10px] font-mono tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
                       active
-                        ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400 shadow-[0_0_12px_rgba(0,242,255,0.25)]'
-                        : 'bg-zinc-900/80 text-zinc-400 hover:text-zinc-200 border border-zinc-800 hover:border-zinc-700'
+                        ? 'bg-cyan-500/20 text-cyan-200 border border-cyan-400 shadow-[0_0_12px_rgba(0,242,255,0.22)]'
+                        : 'bg-[#0d0d0b] text-zinc-300 hover:text-white border border-zinc-800 hover:border-zinc-600'
                     }`}
                   >
                     {cat === 'All' ? 'All' : cat.split('&')[0].trim()}
-                    <span className={`text-[9px] px-1.5 py-0.5 rounded-full ${active ? 'bg-cyan-400/30 text-cyan-200' : 'bg-zinc-800 text-zinc-500'}`}>{count}</span>
+                    <span className={`text-[9px] px-1.5 py-0.5 rounded-full ${active ? 'bg-cyan-400/30 text-cyan-100' : 'bg-zinc-800 text-zinc-300'}`}>{count}</span>
                   </button>
                 );
               })}
             </div>
             <div className="relative min-w-[260px]">
-              <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+              <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
+                aria-label="Search automation projects"
                 placeholder="Search CODESYS, EPLAN, Modbus..."
-                className="w-full pl-8 pr-8 py-1.5 rounded-xl bg-zinc-900/90 border border-zinc-800 focus:border-cyan-500/60 focus:outline-none focus:ring-1 focus:ring-cyan-500/30 text-xs font-mono text-zinc-200 placeholder-zinc-600 transition-all"
+                className="w-full pl-8 pr-8 py-2 rounded-xl bg-[#0d0d0b] border border-zinc-800 focus:border-cyan-400/70 focus:outline-none focus:ring-1 focus:ring-cyan-500/30 text-xs font-mono text-zinc-200 placeholder-zinc-400 transition-all"
               />
               {searchQuery && (
-                <button onClick={() => setSearchQuery('')} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 cursor-pointer">
+                <button type="button" onClick={() => setSearchQuery('')} aria-label="Clear search" className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white cursor-pointer">
                   <X size={12} />
                 </button>
               )}
@@ -796,18 +874,18 @@ const IndustrialPortfolio: React.FC = () => {
           </div>
 
           {filteredProjects.length === 0 ? (
-            <div className="p-12 text-center rounded-2xl border border-zinc-800 bg-zinc-950/60">
-              <Filter size={28} className="mx-auto text-zinc-600 mb-3" />
-              <p className="text-sm text-zinc-400 font-mono">No projects match the current filters.</p>
-              <button onClick={() => { setSelectedCategory('All'); setSearchQuery(''); }} className="mt-4 px-4 py-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 border border-cyan-500/40 rounded-lg hover:bg-cyan-500/10 transition-colors cursor-pointer">
+            <div className="p-12 text-center rounded-2xl border border-zinc-800 bg-[#0d0d0b]">
+              <Filter size={28} className="mx-auto text-zinc-400 mb-3" />
+              <p className="text-sm text-zinc-300 font-mono">No projects match the current filters.</p>
+              <button type="button" onClick={() => { setSelectedCategory('All'); setSearchQuery(''); }} className="mt-4 px-4 py-1.5 text-xs font-mono text-cyan-300 hover:text-white border border-cyan-500/40 rounded-lg hover:bg-cyan-500/15 transition-colors cursor-pointer">
                 Reset Filters
               </button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <AnimatePresence mode="popLayout">
-                {filteredProjects.map(p => (
-                  <ProjectCard key={p.id} project={p} onClick={() => setActiveProject(p)} />
+                {filteredProjects.map((p, idx) => (
+                  <ProjectCard key={p.id} project={p} index={idx} onClick={() => setActiveProject(p)} />
                 ))}
               </AnimatePresence>
             </div>
@@ -818,16 +896,26 @@ const IndustrialPortfolio: React.FC = () => {
             SECTION 2 — Engineering Toolkit
         ══════════════════════════════════════════════ */}
         <section id={SECTION.toolkit} className="scroll-mt-8 mb-24">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-2">
-            <Wrench size={14} /> Engineering Toolkit
+          <div className="flex items-center gap-4 mb-2">
+            <div>
+              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-1.5">
+                <Wrench size={14} /> 02 // Engineering Toolkit
+              </div>
+              <h2
+                className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Software &amp; Tools
+              </h2>
+            </div>
+            <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-amber-500/40 via-cyan-500/20 to-transparent" />
           </div>
-          <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-2">Software & Tools</h2>
-          <p className="text-sm text-zinc-400 font-sans mb-8">
+          <p className="text-sm text-zinc-300 font-sans mb-6">
             Tools are labelled by actual experience level — not aspirational claims.
           </p>
 
           {/* Level legend */}
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-2 mb-8">
             {Object.entries(LEVEL_STYLES).map(([level, cls]) => (
               <span key={level} className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border ${cls}`}>{level}</span>
             ))}
@@ -838,7 +926,7 @@ const IndustrialPortfolio: React.FC = () => {
             const tools = ENGINEERING_TOOLS.filter(t => t.category === cat);
             return (
               <div key={cat} className="mb-8">
-                <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 mb-3 flex items-center gap-2">
                   <span className="flex-1 h-px bg-zinc-800" />
                   {cat}
                   <span className="flex-1 h-px bg-zinc-800" />
@@ -847,10 +935,10 @@ const IndustrialPortfolio: React.FC = () => {
                   {tools.map(tool => {
                     const logoSrc = tool.logo || TECH_LOGO_MAP[tool.name];
                     return (
-                      <div key={tool.id} className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 hover:border-zinc-700 transition-colors">
+                      <div key={tool.id} className="rounded-xl border border-zinc-800 bg-[#0d0d0b]/90 p-4 hover:border-cyan-500/40 transition-colors">
                         <div className="flex items-start justify-between gap-3 mb-3">
                           <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 p-1.5 flex items-center justify-center shrink-0">
+                            <div className="w-9 h-9 rounded-lg bg-[#111110] border border-zinc-800 p-1.5 flex items-center justify-center shrink-0">
                               {logoSrc ? (
                                 <img src={logoSrc} alt={tool.name} className="w-full h-full object-contain" />
                               ) : (
@@ -859,12 +947,12 @@ const IndustrialPortfolio: React.FC = () => {
                             </div>
                             <div>
                               <p className="text-sm font-bold text-white leading-tight">{tool.name}</p>
-                              <p className="text-[10px] text-zinc-500 mt-0.5">{tool.vendor}</p>
+                              <p className="text-[10px] text-zinc-400 mt-0.5">{tool.vendor}</p>
                             </div>
                           </div>
                           <span className={`shrink-0 text-[9px] font-mono px-2 py-0.5 rounded-full border ${LEVEL_STYLES[tool.level]}`}>{tool.level}</span>
                         </div>
-                        <p className="text-xs text-zinc-400 font-sans leading-relaxed">{tool.description}</p>
+                        <p className="text-xs text-zinc-300 font-sans leading-relaxed">{tool.description}</p>
                       </div>
                     );
                   })}
@@ -878,16 +966,24 @@ const IndustrialPortfolio: React.FC = () => {
             SECTION 3 — Automation Roadmap
         ══════════════════════════════════════════════ */}
         <section id={SECTION.roadmap} className="scroll-mt-8 mb-24">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-2">
-            <Activity size={14} /> Learning Progression
+          <div className="flex items-center gap-4 mb-8">
+            <div>
+              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-1.5">
+                <Activity size={14} /> 03 // Learning Progression
+              </div>
+              <h2
+                className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Automation Roadmap
+              </h2>
+            </div>
+            <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-cyan-500/40 via-emerald-500/20 to-transparent" />
           </div>
-          <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-8">
-            Automation Roadmap
-          </h2>
 
           <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-5 top-0 bottom-0 w-px bg-zinc-800 hidden sm:block" />
+            {/* Vertical bus conduit */}
+            <div className="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/50 via-zinc-700 to-zinc-800 hidden sm:block" />
 
             <div className="space-y-4">
               {AUTOMATION_ROADMAP.map(stage => {
@@ -895,23 +991,25 @@ const IndustrialPortfolio: React.FC = () => {
                 const isOpen = expandedRoadmapId === stage.id;
                 return (
                   <div key={stage.id} className="relative sm:pl-14">
-                    {/* Stage dot */}
-                    <div className={`hidden sm:flex absolute left-2.5 top-4 w-5 h-5 rounded-full border-2 border-zinc-900 ${palette.dot.replace('animate-pulse', '')} items-center justify-center`}>
-                      <span className="text-[8px] font-black text-zinc-900">{stage.order}</span>
+                    {/* Stage bus node */}
+                    <div className={`hidden sm:flex absolute left-2.5 top-4 w-5 h-5 rounded-full border-2 border-[#080806] ${palette.dot.replace('animate-pulse', '')} items-center justify-center shadow-[0_0_10px_rgba(0,0,0,0.6)]`}>
+                      <span className="text-[8px] font-black text-zinc-950">{stage.order}</span>
                     </div>
 
                     <button
+                      type="button"
                       onClick={() => setExpandedRoadmapId(isOpen ? null : stage.id)}
-                      className="w-full text-left rounded-xl border border-zinc-800 hover:border-zinc-700 bg-zinc-950/60 p-4 transition-colors cursor-pointer group"
+                      aria-expanded={isOpen}
+                      className="w-full text-left rounded-xl border border-zinc-800 hover:border-cyan-500/40 bg-[#0d0d0b]/90 p-4 transition-colors cursor-pointer group"
                     >
                       <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-3">
-                          <span className={`hidden sm:inline text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full border ${LEVEL_STYLES[stage.status === 'Completed' ? 'Project Experience' : stage.status === 'In Progress' || stage.status === 'Practiced' || stage.status === 'Practicing' ? 'Practiced' : stage.status === 'Exploring' ? 'Exploring' : 'Familiar'] ?? ''} ${palette.label}`}>
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <span className={`hidden sm:inline text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full border ${LEVEL_STYLES[stage.status === 'Completed' ? 'Project Experience' : stage.status === 'In Progress' || stage.status === 'Practiced' || stage.status === 'Practicing' ? 'Practiced' : stage.status === 'Exploring' ? 'Exploring' : 'Familiar'] ?? 'border-zinc-700 bg-zinc-900'} ${palette.label}`}>
                             {stage.status}
                           </span>
                           <span className="font-bold text-white group-hover:text-cyan-300 transition-colors text-sm">{stage.title}</span>
                         </div>
-                        <ChevronDown size={16} className={`text-zinc-500 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
+                        <ChevronDown size={16} className={`text-zinc-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-cyan-300' : ''}`} />
                       </div>
                     </button>
 
@@ -924,29 +1022,29 @@ const IndustrialPortfolio: React.FC = () => {
                           transition={{ duration: 0.22, ease: 'easeInOut' }}
                           className="overflow-hidden"
                         >
-                          <div className="mt-2 p-4 rounded-xl border border-zinc-800/60 bg-zinc-900/30 space-y-4 text-xs font-sans">
+                          <div className="mt-2 p-4 rounded-xl border border-zinc-800 bg-[#111110] space-y-4 text-xs font-sans">
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                               <div>
-                                <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1.5">Tools</p>
+                                <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-1.5">Tools</p>
                                 <div className="flex flex-wrap gap-1.5">
                                   {stage.tools.map(t => (
-                                    <span key={t} className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-[10px] font-mono">{t}</span>
+                                    <span key={t} className="px-2 py-0.5 rounded bg-[#080806] border border-zinc-700 text-zinc-200 text-[10px] font-mono">{t}</span>
                                   ))}
                                 </div>
                               </div>
                               <div>
-                                <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1.5">Related Projects</p>
+                                <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-1.5">Related Projects</p>
                                 <div className="flex flex-wrap gap-1.5">
                                   {stage.projects.map(pr => (
-                                    <span key={pr} className="px-2 py-0.5 rounded bg-cyan-950/50 border border-cyan-900/60 text-cyan-300/80 text-[10px] font-mono">{pr}</span>
+                                    <span key={pr} className="px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/35 text-cyan-200 text-[10px] font-mono">{pr}</span>
                                   ))}
                                 </div>
                               </div>
                               <div>
-                                <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1.5">Skills Practiced</p>
-                                <ul className="space-y-0.5">
+                                <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-1.5">Skills Practiced</p>
+                                <ul className="space-y-1">
                                   {stage.skills.map(sk => (
-                                    <li key={sk} className="text-[11px] text-zinc-400 flex items-center gap-1">
+                                    <li key={sk} className="text-[11px] text-zinc-300 flex items-center gap-1.5">
                                       <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${palette.dot.split(' ')[0]}`} />
                                       {sk}
                                     </li>
@@ -954,7 +1052,7 @@ const IndustrialPortfolio: React.FC = () => {
                                 </ul>
                               </div>
                             </div>
-                            <div className="pt-2 border-t border-zinc-800 flex items-start gap-2 text-zinc-400">
+                            <div className="pt-2.5 border-t border-zinc-800 flex items-start gap-2 text-zinc-300">
                               <ChevronRight size={13} className="text-amber-400 shrink-0 mt-0.5" />
                               <span className="text-[11px]"><span className="text-amber-300 font-mono">Next milestone:</span> {stage.nextMilestone}</span>
                             </div>
@@ -973,13 +1071,21 @@ const IndustrialPortfolio: React.FC = () => {
             SECTION 4 — Industrial Communication Protocols
         ══════════════════════════════════════════════ */}
         <section id={SECTION.protocols} className="scroll-mt-8 mb-24">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-2">
-            <Network size={14} /> Industrial Networking
+          <div className="flex items-center gap-4 mb-2">
+            <div>
+              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-1.5">
+                <Network size={14} /> 04 // Industrial Networking
+              </div>
+              <h2
+                className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Communication Protocols
+              </h2>
+            </div>
+            <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-cyan-500/40 via-amber-500/20 to-transparent" />
           </div>
-          <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-2">
-            Communication Protocols
-          </h2>
-          <p className="text-sm text-zinc-400 font-sans mb-8">
+          <p className="text-sm text-zinc-300 font-sans mb-6">
             Protocols used in working projects are clearly distinguished from those studied theoretically or planned for future implementation.
           </p>
 
@@ -997,23 +1103,25 @@ const IndustrialPortfolio: React.FC = () => {
               return (
                 <div key={proto.id}>
                   <button
+                    type="button"
                     onClick={() => setExpandedProtocolId(isOpen ? null : proto.id)}
-                    className="w-full text-left rounded-xl border border-zinc-800 hover:border-zinc-700 bg-zinc-950/60 p-4 transition-colors cursor-pointer group"
+                    aria-expanded={isOpen}
+                    className="w-full text-left rounded-xl border border-zinc-800 hover:border-cyan-500/40 bg-[#0d0d0b]/90 p-4 transition-colors cursor-pointer group"
                   >
                     <div className="flex items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full border shrink-0 ${PROTOCOL_STYLES[proto.status]}`}>{proto.status}</span>
+                        <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border shrink-0 ${PROTOCOL_STYLES[proto.status]}`}>{proto.status}</span>
                         {logoSrc && (
-                          <div className="w-7 h-7 rounded-md bg-zinc-900 border border-zinc-800 p-1 flex items-center justify-center shrink-0">
+                          <div className="w-7 h-7 rounded-md bg-[#111110] border border-zinc-800 p-1 flex items-center justify-center shrink-0">
                             <img src={logoSrc} alt={proto.shortName} className="w-full h-full object-contain" />
                           </div>
                         )}
                         <div>
                           <span className="font-bold text-white group-hover:text-cyan-300 transition-colors text-sm">{proto.shortName}</span>
-                          <span className="text-zinc-500 text-xs ml-2 hidden sm:inline">— {proto.purpose.substring(0, 60)}…</span>
+                          <span className="text-zinc-400 text-xs ml-2 hidden sm:inline">— {proto.purpose.substring(0, 60)}…</span>
                         </div>
                       </div>
-                      <ChevronDown size={15} className={`text-zinc-500 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown size={15} className={`text-zinc-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-cyan-300' : ''}`} />
                     </div>
                   </button>
 
@@ -1026,27 +1134,27 @@ const IndustrialPortfolio: React.FC = () => {
                         transition={{ duration: 0.2, ease: 'easeInOut' }}
                         className="overflow-hidden"
                       >
-                        <div className="mt-2 p-4 rounded-xl border border-zinc-800/60 bg-zinc-900/30 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div className="mt-2 p-4 rounded-xl border border-zinc-800 bg-[#111110] grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                           <div>
-                            <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Full Name</p>
-                            <p className="text-zinc-300">{proto.name}</p>
+                            <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-1">Full Name</p>
+                            <p className="text-zinc-200">{proto.name}</p>
                           </div>
                           <div>
-                            <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Communication Model</p>
-                            <p className="text-zinc-300">{proto.model}</p>
+                            <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-1">Communication Model</p>
+                            <p className="text-zinc-200">{proto.model}</p>
                           </div>
                           <div>
-                            <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Purpose</p>
+                            <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-1">Purpose</p>
                             <p className="text-zinc-300 font-sans leading-relaxed">{proto.purpose}</p>
                           </div>
                           <div>
-                            <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Typical Use Case</p>
+                            <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-1">Typical Use Case</p>
                             <p className="text-zinc-300 font-sans leading-relaxed">{proto.useCase}</p>
                           </div>
                           {proto.relatedProject && (
                             <div className="sm:col-span-2">
-                              <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Related Project</p>
-                              <span className="px-2 py-0.5 rounded bg-cyan-950/50 border border-cyan-900/60 text-cyan-300 text-[11px] font-mono">{proto.relatedProject}</span>
+                              <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-1">Related Project</p>
+                              <span className="px-2.5 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/35 text-cyan-200 text-[11px] font-mono">{proto.relatedProject}</span>
                             </div>
                           )}
                         </div>
@@ -1063,17 +1171,25 @@ const IndustrialPortfolio: React.FC = () => {
             SECTION 5 — Skills Dashboard
         ══════════════════════════════════════════════ */}
         <section id={SECTION.skills} className="scroll-mt-8 mb-24">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-2">
-            <Cpu size={14} /> Technical Competencies
+          <div className="flex items-center gap-4 mb-8">
+            <div>
+              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-1.5">
+                <Cpu size={14} /> 05 // Technical Competencies
+              </div>
+              <h2
+                className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Skills Dashboard
+              </h2>
+            </div>
+            <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-cyan-500/40 via-amber-500/20 to-transparent" />
           </div>
-          <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-8">
-            Skills Dashboard
-          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {SKILL_GROUPS.map(group => (
-              <div key={group.category} className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-5">
-                <div className="flex items-center gap-2 mb-4">
+              <div key={group.category} className="rounded-xl border border-zinc-800 bg-[#0d0d0b]/90 p-5">
+                <div className="flex items-center gap-2 mb-4 pb-2.5 border-b border-zinc-800/80">
                   <span className="text-cyan-400">{getIcon(group.icon, 16)}</span>
                   <p className="text-sm font-bold text-white uppercase tracking-tight">{group.category}</p>
                 </div>
@@ -1081,16 +1197,16 @@ const IndustrialPortfolio: React.FC = () => {
                   {group.skills.map(skill => {
                     const logoSrc = TECH_LOGO_MAP[skill.name];
                     return (
-                      <div key={skill.name} className="flex items-center justify-between gap-2 py-1 border-b border-zinc-900/60 last:border-0">
+                      <div key={skill.name} className="flex items-center justify-between gap-2 py-1.5 border-b border-zinc-800/60 last:border-0">
                         <div className="flex items-center gap-2">
                           {logoSrc ? (
                             <img src={logoSrc} alt={skill.name} className="w-4 h-4 object-contain shrink-0" />
                           ) : (
-                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/60 shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/70 shrink-0" />
                           )}
                           <div>
-                            <p className="text-xs text-zinc-300 font-mono">{skill.name}</p>
-                            {skill.note && <p className="text-[10px] text-zinc-600">{skill.note}</p>}
+                            <p className="text-xs text-zinc-200 font-mono">{skill.name}</p>
+                            {skill.note && <p className="text-[10px] text-zinc-400">{skill.note}</p>}
                           </div>
                         </div>
                         <span className={`shrink-0 text-[9px] font-mono px-2 py-0.5 rounded-full border ${LEVEL_STYLES[skill.level]}`}>
@@ -1109,13 +1225,21 @@ const IndustrialPortfolio: React.FC = () => {
             SECTION 6 — Documentation Library
         ══════════════════════════════════════════════ */}
         <section id={SECTION.docs} className="scroll-mt-8 mb-24">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-2">
-            <BookOpen size={14} /> Engineering Docs
+          <div className="flex items-center gap-4 mb-2">
+            <div>
+              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-1.5">
+                <BookOpen size={14} /> 06 // Engineering Docs
+              </div>
+              <h2
+                className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Documentation Library
+              </h2>
+            </div>
+            <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-amber-500/40 via-cyan-500/20 to-transparent" />
           </div>
-          <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-2">
-            Documentation Library
-          </h2>
-          <p className="text-sm text-zinc-400 font-sans mb-8">
+          <p className="text-sm text-zinc-300 font-sans mb-6">
             Available documents open directly. Pending items will be added as files are prepared and uploaded.
           </p>
 
@@ -1124,11 +1248,12 @@ const IndustrialPortfolio: React.FC = () => {
             {docCategories.map(cat => (
               <button
                 key={cat}
+                type="button"
                 onClick={() => setActiveDocCategory(cat)}
                 className={`px-3 py-1.5 rounded-xl text-[10px] font-mono tracking-wider uppercase transition-all cursor-pointer ${
                   activeDocCategory === cat
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400'
-                    : 'bg-zinc-900/80 text-zinc-400 border border-zinc-800 hover:border-zinc-700'
+                    ? 'bg-cyan-500/20 text-cyan-200 border border-cyan-400'
+                    : 'bg-[#0d0d0b] text-zinc-300 border border-zinc-800 hover:border-zinc-600'
                 }`}
               >
                 {cat}
@@ -1142,32 +1267,32 @@ const IndustrialPortfolio: React.FC = () => {
                 key={doc.id}
                 className={`rounded-xl border p-4 flex flex-col justify-between gap-3 ${
                   doc.available
-                    ? 'border-emerald-800/40 bg-emerald-950/10'
-                    : 'border-zinc-800 bg-zinc-950/50'
+                    ? 'border-emerald-700/45 bg-emerald-950/15'
+                    : 'border-zinc-800 bg-[#0d0d0b]/85'
                 }`}
               >
-                <div className="space-y-1">
+                <div className="space-y-1.5">
                   <div className="flex items-center gap-2">
-                    <span className={`text-[9px] font-mono uppercase px-2 py-0.5 rounded-full border ${doc.available ? 'text-emerald-300 border-emerald-700/50 bg-emerald-950/40' : 'text-zinc-500 border-zinc-700 bg-zinc-900/40'}`}>
+                    <span className={`text-[9px] font-mono uppercase px-2 py-0.5 rounded-full border ${doc.available ? 'text-emerald-300 border-emerald-700/50 bg-emerald-950/40' : 'text-zinc-300 border-zinc-700 bg-zinc-900/60'}`}>
                       {doc.available ? 'Available' : 'Pending'}
                     </span>
-                    <span className="text-[9px] font-mono text-zinc-600 uppercase">{doc.category}</span>
+                    <span className="text-[9px] font-mono text-zinc-400 uppercase">{doc.category}</span>
                   </div>
-                  <p className="text-xs font-bold text-zinc-200">{doc.title}</p>
-                  <p className="text-[11px] text-zinc-500 font-sans leading-relaxed">{doc.description}</p>
-                  <p className="text-[10px] font-mono text-zinc-600 italic">{doc.previewNote}</p>
+                  <p className="text-xs font-bold text-white">{doc.title}</p>
+                  <p className="text-[11px] text-zinc-300 font-sans leading-relaxed">{doc.description}</p>
+                  <p className="text-[10px] font-mono text-zinc-400 italic">{doc.previewNote}</p>
                 </div>
                 {doc.available && doc.url ? (
                   <a
                     href={doc.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/40 text-cyan-300 text-[11px] font-mono transition-colors self-start"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-cyan-200 text-[11px] font-mono transition-colors self-start"
                   >
                     {doc.url.includes('youtube') ? <><Youtube size={11} /> Watch Video</> : <><ExternalLink size={11} /> View</>}
                   </a>
                 ) : (
-                  <span className="text-[10px] font-mono text-zinc-700 self-start px-3 py-1.5 rounded-lg border border-zinc-800">Awaiting upload</span>
+                  <span className="text-[10px] font-mono text-zinc-400 self-start px-3 py-1.5 rounded-lg border border-zinc-800 bg-[#111110]">Awaiting upload</span>
                 )}
               </div>
             ))}
@@ -1175,20 +1300,24 @@ const IndustrialPortfolio: React.FC = () => {
         </section>
 
         {/* ── Bottom cross-nav ── */}
-        <div className="rounded-2xl border border-zinc-800 bg-gradient-to-r from-zinc-950 via-zinc-900/60 to-zinc-950 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="relative rounded-2xl border border-zinc-800 bg-gradient-to-r from-[#0d0d0b] via-[#111110] to-[#0d0d0b] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
+          <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-cyan-400/70 via-amber-400/50 to-transparent" />
           <div className="space-y-1 text-center md:text-left">
-            <h3 className="text-base font-bold text-white uppercase tracking-tight flex items-center justify-center md:justify-start gap-2">
+            <h3
+              className="text-base font-bold text-white uppercase tracking-tight flex items-center justify-center md:justify-start gap-2"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
               <Zap size={16} className="text-cyan-400" /> Explore More
             </h3>
-            <p className="text-xs text-zinc-400 font-sans max-w-md">
+            <p className="text-xs text-zinc-300 font-sans max-w-md">
               Embedded IoT hardware prototypes, hackathon build photos, and academic certifications in the photo gallery.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Link to="/gallery" className="px-4 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-mono uppercase tracking-wider transition-all inline-flex items-center gap-2">
+            <Link to="/gallery" className="px-4 py-2 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/45 text-cyan-200 text-xs font-mono uppercase tracking-wider transition-all inline-flex items-center gap-2">
               Photo Gallery
             </Link>
-            <Link to="/#projects" className="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 text-xs font-mono uppercase tracking-wider transition-all inline-flex items-center gap-2">
+            <Link to="/#projects" className="px-4 py-2 rounded-xl bg-[#111110] hover:bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs font-mono uppercase tracking-wider transition-all inline-flex items-center gap-2">
               <Cpu size={13} /> All Projects
             </Link>
           </div>
